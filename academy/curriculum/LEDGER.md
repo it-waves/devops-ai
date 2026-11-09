@@ -11,7 +11,7 @@ Published videos are "Learning" at most. Nothing is Practiced or Mastered until 
 | Lesson | Objectives | Topic | "Next" line it must end with | Status |
 |---|---|---|---|---|
 | L1 | O03 (phases), O04 (partly) | What is the SDLC (v1 published 4:27; v2 >=5 min planned) | Next lesson: requirements, in depth | Published v1 (Learning) |
-| L2 | O01, O02 | Requirements, user stories, acceptance criteria, MoSCoW, non-functional | Next lesson: Waterfall, Agile, Scrum, and Kanban | Rendered 5:16, upload pending |
+| L2 | O01, O02 | Requirements, user stories, acceptance criteria, MoSCoW, non-functional | Next lesson: Waterfall, Agile, Scrum, and Kanban | Published Public 5:18 (WeIneBelLD0), Learning |
 | L3 | O03 | SDLC phases vs Waterfall, Agile, Scrum, Kanban, DevOps | Next lesson: the parts of an application | Not started |
 | L4 | O04 | Frontend, backend, API, database, source control, build, release, deployment, operations | Next lesson: who does what | Not started |
 | L5 | O05 | Responsibilities: developer, QA, product, security, operations, DevOps | Next lesson: tracing one change | Not started |

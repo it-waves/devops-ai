@@ -25,3 +25,4 @@ Owner reverted the academy narrator to the RHCSA voice: Kokoro `af_heart`, speed
 ## UPDATE 2026-11-09 - Bootcamp rules (owner)
 - Every bootcamp video is at least 5 minutes unless the strategist proposes otherwise (overview/orientation videos excepted).
 - Curriculum baseline is curriculum/CHECKLIST.md (48 masterclasses, objective IDs MCnn-Onn). Lessons map to objective IDs; progress tracked in curriculum/LEDGER.md. No objective is added or silently dropped.
+- Published: Lesson 2 requirements, video WeIneBelLD0 (5:18), Public, playlist DevOps Engineering Bootcamp, objectives MC01-O01/O02.
