@@ -21,3 +21,10 @@ Owner reverted the academy narrator to the RHCSA voice: Kokoro `af_heart`, speed
 - Verb "lives" ("code lives in Git") must be /livz/, not /laivz/: pipe.do_tts phonemizes each cue and rewrites lˈaɪvz -> lˈɪvz for any cue containing the word "lives". Add new heteronyms to pronunciation.json and handle them the same way.
 - Welcome (INTRO) now explains the program flow: 9 stages, 48 masterclasses (planned), 5 levels, ~5 min lessons, a project per level, stage exams, CloudCart journey, routes, requirements.
 - New standalone video: loop/ "The DevOps Loop" (infinity symbol, 8 stages).
+
+## Published (2026-11-09, Public, playlist DevOps Engineering Bootcamp (Full Course), order: Intro, Loop, Lesson 1)
+- INTRO: g17YyNgX0Y4  (5:00)
+- The DevOps Loop: hbDYFo_t-Zw  (1:26)
+- LESSON 1 SDLC: 09EBDVIryE8  (4:27)
+- Thumbnails: academy/thumbs/*.jpg; English captions: academy/captions/*.srt (uploaded as SRT).
+- Pronunciation (sonar cube, "lives" as livz) verified in phonemes only; owner to listen.
