@@ -144,7 +144,7 @@ def s_kanban(C, D, dur):
         x = 100 + k * 570
         E.append(Pop(card(540, 420, col, n, [], 42), x, 340, C[cid] + dl))
         for i, it in enumerate(items):
-            E.append(Pop(card(480, 90, col, '', [(it, TXT)], 4, 32), x + 30, 430 + i * 110, C[cid] + dl + 0.4))
+            E.append(Pop(card(480, 90, col, '', [(it, TXT)], 4, 32), x + 30, 455 + i * 110, C[cid] + dl + 0.4))
     E.append(Pop(badge('Limit: 2', F('b', 32), INK, BAD, padx=20, pady=10, r=20), 940, 352, C['kb4']))
     E.append(Pop(badge('Doing is full: finish something first', F('b', 32), INK, WARN, padx=24, pady=12, r=22), 670, 800, C['kb5']))
     E.append(takeaway('Work keeps flowing, and bottlenecks show early.', 930, C['kb6'], GOOD, 1600))
@@ -152,14 +152,15 @@ def s_kanban(C, D, dur):
 def s_devops(C, D, dur):
     E = head('DevOps', 'Carry the code to a running, healthy system.', C['dv1'])
     st = ['Plan', 'Code', 'Build', 'Test', 'Release', 'Deploy', 'Operate', 'Monitor']; cl = [ACC, VIO, GOOD, WARN, PINK, ACC, VIO, GOOD]
-    for i, n in enumerate(st):
-        E.append(Pop(badge(n, F('b', 30), INK, cl[i], padx=20, pady=10, r=20), 100 + i * 225, 340, C['dv3'] + i * 0.4))
+    bs = [badge(n, F('b', 30), INK, cl[i], padx=20, pady=10, r=20) for i, n in enumerate(st)]; gap = (1720 - sum(b.width for b in bs)) / (len(bs) - 1); bx = 100
+    for i, b in enumerate(bs):
+        E.append(Pop(b, int(bx), 340, C['dv3'] + i * 0.4)); bx += b.width + gap
     ideas = [('Shared ownership', 'Developers and operations as one team', ACC, 'dv5'), ('Automation', 'Pipelines build, test, and deploy', VIO, 'dv6'), ('Fast feedback', 'Monitoring shows what users experience', GOOD, 'dv7')]
     for i, (n, t_, col, cid) in enumerate(ideas):
         E.append(Pop(card(540, 190, col, n, [(t_, TXT)], 40, 30), 100 + i * 590, 460, C[cid]))
     E.append(takeaway('A way of working, supported by tools.', 700, C['dv8'], WARN, 1500))
     for i, (nm, lb) in enumerate([('git', 'Git'), ('actions', 'GitHub Actions'), ('docker', 'Docker'), ('kubernetes', 'Kubernetes'), ('prometheus', 'Prometheus')]):
-        E.append(logo(nm, 100 + i * 215, 790, C['dv9'] + i * 0.3, 100, lb))
+        E.append(logo_c(nm, 160 + i * 215, 790, C['dv9'] + i * 0.3, 100, lb))
     E.append(pill('LATER IN THE BOOTCAMP', 1240, 830, C['dv9'] + 1.6, WARN, INK, 28, 18, 10))
     return E
 def s_compare(C, D, dur):
@@ -218,3 +219,11 @@ def s_recap(C, D, dur):
     E.append(El(T('Next: The parts of an application', 'x', 50, ACC), 100, 960, C['z6'])); E.append(Pop(badge('SUBSCRIBE', F('b', 34), INK, GOOD, padx=26, pady=14), 1500, 960, C['z7']))
     return E
 FN = dict(hook=s_hook, layers=s_layers, waterfall=s_waterfall, agile=s_agile, scrum=s_scrum, kanban=s_kanban, devops=s_devops, compare=s_compare, cloudcart=s_cloudcart, choose=s_choose, myths=s_myths, recap=s_recap)
+
+_GL3 = dict(layers=('grid', ACC), waterfall=('steps', WARN), agile=('loop', ACC), scrum=('people', VIO), kanban=('board', GOOD), devops=('gear', PINK), compare=('swap', ACC), cloudcart=('rocket', WARN), choose=('question', VIO), myths=('eye', GOOD))
+def _wrap3(name, fn):
+    first = dict(SCENES)[name][0][0]
+    def w(C, D, dur):
+        E = fn(C, D, dur); g, col = _GL3[name]; E.append(Pop(glyph(g, 120, col, True), 1230, 105, C[first] + 0.3)); return E
+    return w
+for _n in _GL3: FN[_n] = _wrap3(_n, FN[_n])

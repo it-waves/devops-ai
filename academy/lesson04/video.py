@@ -108,11 +108,11 @@ def s_groups(C, D, dur):
     return E
 def s_frontend(C, D, dur):
     E = head('Frontend', 'What the user sees and touches.', C['f1'])
-    E.append(Pop(card(840, 400, ACC, 'CloudCart in the browser', [], 40), 100, 340, C['f2']))
-    for i, n in enumerate(['Product pages', 'The cart', 'Checkout form']): E.append(Pop(card(760, 92, ACC, '', [(n, TXT)], 4, 34), 140, 420 + i * 108, C['f3'] + i * 0.7))
+    E.append(Pop(card(840, 430, ACC, 'CloudCart in the browser', [], 40), 100, 340, C['f2']))
+    for i, n in enumerate(['Product pages', 'The cart', 'Checkout form']): E.append(Pop(card(760, 92, ACC, '', [(n, TXT)], 4, 34), 140, 445 + i * 108, C['f3'] + i * 0.7))
     for i, n in enumerate(['HTML', 'CSS', 'JavaScript']): E.append(Pop(badge(n, F('x', 40), INK, [WARN, VIO, GOOD][i], padx=28, pady=14, r=26), 1040 + i * 250 - (40 if i == 2 else 0), 380, C['f4'] + i * 0.5))
     E.append(Pop(card(780, 220, WARN, 'Remember', [('Users can inspect the frontend, so it must never hide secrets.', TXT)], 38, 32), 1040, 500, C['f6']))
-    E.append(takeaway('Shows information, and sends actions onward.', 800, C['f5'], GOOD, 1500))
+    E.append(takeaway('Shows information, and sends actions onward.', 830, C['f5'], GOOD, 1500))
     return E
 def s_backend(C, D, dur):
     E = head('Backend', 'Code on a server that applies the rules.', C['b1'])
@@ -166,10 +166,12 @@ def s_source(C, D, dur):
 def s_build(C, D, dur):
     E = head('Build', 'Turn source code into something that runs.', C['u1'])
     steps = ['Compile', 'Get dependencies', 'Run tests']
-    for i, n in enumerate(steps): E.append(Pop(badge(n, F('x', 38), INK, [ACC, VIO, GOOD][i], padx=28, pady=14, r=26), 100 + i * 480, 340, C['u2'] + i * 0.7))
+    bx = 100
+    for i, n in enumerate(steps):
+        b = badge(n, F('x', 38), INK, [ACC, VIO, GOOD][i], padx=28, pady=14, r=26); E.append(Pop(b, bx, 340, C['u2'] + i * 0.7)); bx += b.width + 70
     E.append(Pop(card(840, 150, WARN, 'Artifact', [('A package or a container image, ready to deploy.', TXT)], 42, 32), 100, 480, C['u3']))
     E.append(Pop(card(840, 150, ACC, 'Repeatable', [('The same code gives the same result.', TXT)], 42, 32), 980, 480, C['u4']))
-    for i, (nm, lb) in enumerate([('maven', 'Maven'), ('docker', 'Docker')]): E.append(logo(nm, 100 + i * 300, 700, C['u5'] + i * 0.5, 120, lb))
+    for i, (nm, lb) in enumerate([('maven', 'Maven'), ('docker', 'Docker')]): E.append(logo_c(nm, 160 + i * 220, 700, C['u5'] + i * 0.5, 120, lb))
     E.append(takeaway('The artifact is what moves to the next stage.', 920, C['u5'] + 1.6, GOOD, 1500))
     return E
 def s_release(C, D, dur):
@@ -214,3 +216,11 @@ def s_recap(C, D, dur):
     E.append(El(T('Next: Who does what', 'x', 50, ACC), 100, 960, C['z6'])); E.append(Pop(badge('SUBSCRIBE', F('b', 34), INK, GOOD, padx=26, pady=14), 1500, 960, C['z7']))
     return E
 FN = dict(hook=s_hook, groups=s_groups, frontend=s_frontend, backend=s_backend, api=s_api, database=s_database, trace=s_trace, source=s_source, build=s_build, release=s_release, ops=s_ops, map=s_map, myths=s_myths, recap=s_recap)
+
+_GL4 = dict(groups=('grid', ACC), frontend=('screen', WARN), backend=('server', VIO), api=('swap', ACC), database=('db', GOOD), trace=('link', PINK), source=('branch', VIO), build=('gear', WARN), release=('tag', PINK), ops=('eye', GOOD), map=('grid', ACC), myths=('question', VIO))
+def _wrap4(name, fn):
+    first = dict(SCENES)[name][0][0]
+    def w(C, D, dur):
+        E = fn(C, D, dur); g, col = _GL4[name]; E.append(Pop(glyph(g, 120, col, True), 1230, 105, C[first] + 0.3)); return E
+    return w
+for _n in _GL4: FN[_n] = _wrap4(_n, FN[_n])

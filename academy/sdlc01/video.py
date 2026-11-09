@@ -58,13 +58,20 @@ SCENES = [
   c('o6', "Tools like Prometheus and Grafana help us watch a running system."), c('o7', "DevOps is about making this loop fast, and safe."),
   c('o8', "Along the way, you will learn"), c('o9', "Git,"), c('o10', "Maven,"), c('o11', "Jenkins,"), c('o12', "Docker,"), c('o13', "Kubernetes,"), c('o14', "Terraform,", "terra form,"), c('o15', "and much more."),
  ]),
+ ('handoffs', [
+  c('g1', "Before we finish, notice what each stage hands to the next."), c('g2', "Plan hands over a clear goal."), c('g3', "Requirements hand over rules the team can test."),
+  c('g4', "Design hands over a picture of the parts."), c('g5', "Build hands over working code."), c('g6', "Test hands over proof that it works."),
+  c('g7', "Deploy hands over a running version."), c('g8', "And operate hands back what we learned."),
+  c('g9', "If one stage hands over something vague, the next stage struggles."), c('g10', "That is why the stages exist: each one makes the next one easier."),
+ ]),
  ('recap', [
-  c('z1', "Quick check."), c('z2', "Which stage decides what the system must do?"), c('z3', "Which stage catches a bad change before customers do?"), c('z4', "Which two checks prove an app really works?"),
+  c('z1', "Quick check."), c('z2', "Which stage decides what the system must do?"), c('z3', "Which stage catches a bad change before customers do?"), c('z4', "Which two checks prove an app really works?"), c('z8', "What does each stage hand to the next?"),
+  c('z9', "Objective covered: MC01-O03.", "Objective covered: number three, in the S D L C masterclass."),
   c('z5', "Pause the video, and answer out loud."), c('z6', "Next lesson: requirements, in depth."), c('z7', "Subscribe, so you do not miss it."),
  ]),
 ]
-EXTRA = {'z5': 6.0, 'o5': 1.0, 'r11': 0.6, 'y11': 0.5, 'p10': 0.5, 'q9': 0.5, 'd12': 0.5, 'b9': 0.4}
-CHAP = {'roadmap': 'Overview', 'plan': 'Plan', 'req': 'Requirements', 'design': 'Design', 'build': 'Build', 'test': 'Test', 'deploy': 'Deploy', 'operate': 'Operate', 'recap': 'Quick check'}
+EXTRA = {'z5': 12.0, 'g10': 0.5, 'o5': 1.0, 'r11': 0.6, 'y11': 0.5, 'p10': 0.5, 'q9': 0.5, 'd12': 0.5, 'b9': 0.4}
+CHAP = {'roadmap': 'Overview', 'plan': 'Plan', 'req': 'Requirements', 'design': 'Design', 'build': 'Build', 'test': 'Test', 'deploy': 'Deploy', 'operate': 'Operate', 'handoffs': 'What each stage hands over', 'recap': 'Quick check'}
 STAGES = ['Plan', 'Requirements', 'Design', 'Build', 'Test', 'Deploy', 'Operate']
 SC = [ACC, VIO, GOOD, WARN, PINK, ACC, VIO]
 def tracker(active, t):
@@ -144,12 +151,12 @@ def s_req(C, D, dur):
     E = [tracker(1, C['q1'])] + head(2, 'Requirements', 'Turn the plan into precise statements.', C['q1']) + [ill(C['q1'])]
     cols = [(100, ACC, 'Functional', 'What it does', ['Show the product list', 'Place an order'], ['q3', 'q4', 'q5']), (990, VIO, 'Non-functional', 'How well it does it', ['Answer within 1 second', 'Keep passwords safe'], ['q6', 'q7', 'q8'])]
     for x, col, title, sub, rows, cids in cols:
-        E.append(Pop(card(830, 440, col, title, [(sub, MUTED)], 46, 30), x, 400, C[cids[0]]))
+        E.append(Pop(card(830, 380, col, title, [(sub, MUTED)], 46, 30, top=True), x, 400, C[cids[0]]))
         for i, r in enumerate(rows):
             y = 540 + i * 110; tt = C[cids[1 + i]]
             E.append(El(rrect(770, 90, 14, fill=(26, 58, 66), outline=EN.EDGE, width=2), x + 30, y, tt, anim='fade'))
             E.append(Pop(icon('check', 52, TXT, col), x + 52, y + 19, tt + 0.15)); E.append(El(T(r, 'b', 36), x + 130, y + 21, tt + 0.1, anim='fade'))
-    E.append(takeaway('Vague requirements are why projects drift.', 900, C['q9'], WARN, 1500))
+    E.append(takeaway('Vague requirements are why projects drift.', 860, C['q9'], WARN, 1500))
     return E
 def s_design(C, D, dur):
     E = [tracker(2, C['d1'])] + head(3, 'Design', 'Decide the parts and how they talk.', C['d1']) + [ill(C['d1'], 1400, 100)]
@@ -169,9 +176,9 @@ def s_design(C, D, dur):
     E.append(Move(cube, [(C['d9'], SX - 34, gap[1][0] - 4), (C['d9'] + 0.7, SX - 34, gap[1][1] + 6)], C['d9'] + 1.2))
     E.append(El(T('asks', 'm', 28, ACC), SX + 70, gap[0][0] + 10, C['d7'] + 0.2, anim='fade')); E.append(El(T('answers', 'm', 28, GOOD), SX + 70, gap[0][0] + 42, C['d8'] + 0.2, anim='fade'))
     E.append(El(T('remembers', 'm', 28, GOOD), SX + 70, gap[1][0] + 26, C['d9'] + 0.2, anim='fade'))
-    E.append(logo('java', 1700, 470, C['d10'], 100, 'Java')); E.append(logo('tomcat', 1700, 620, C['d10'] + 1.0, 100, 'Tomcat'))
-    E.append(El(T('v0: data in memory', 'm', 26, MUTED, maxw=200), 1700, 770, C['d10'] + 2.0, anim='fade'))
-    E.append(logo('postgresql', 1700, 850, C['d11'], 100, 'Postgres')); E.append(pill('LATER', 1700, 990, C['d11'] + 0.8, EN.WARN, INK, 24, 16, 6))
+    E.append(logo('java', 1700, 415, C['d10'], 84, 'Java')); E.append(logo('tomcat', 1697, 565, C['d10'] + 1.0, 84, 'Tomcat'))
+    E.append(El(T('v0: data in memory', 'm', 24, MUTED, maxw=190), 1700, 705, C['d10'] + 2.0, anim='fade'))
+    E.append(logo('postgresql', 1691, 800, C['d11'], 84, 'Postgres')); E.append(pill('LATER', 1700, 930, C['d11'] + 0.8, EN.WARN, INK, 24, 16, 6))
     for (n, col, cid, sub), y in zip([('Browser', ACC, 'd4', 'what the customer sees'), ('API', VIO, 'd5', 'the rules and the logic'), ('Data store', GOOD, 'd6', 'where information lives')], [400, 545, 690]):
         E.append(Pop(card(780, 118, col, n, [(sub, TXT)], 36, 28), 100, y, C[cid]))
     E.append(takeaway('Fix problems on paper, while they are cheap.', 880, C['d12'], WARN, 900))
@@ -202,8 +209,8 @@ def s_test(C, D, dur):
         if i < 3: E.append(Pop(icon('check', 40, TXT, GOOD), 1800, y - 4, C[cid] + 0.3))
     E.append(Pop(badge('  PASS  ', F('x', 56), INK, GOOD, padx=36, pady=14, r=26), 1500, 545, C['t9'] + 0.4)); E.append(Ripple(1590, 570, C['t9'] + 0.6, GOOD, 120))
     E.append(El(T('Sample of the real log', 'm', 24, MUTED), 910, 645, C['t9'] + 0.2, anim='fade'))
-    E.append(Pop(badge('ONE FAILURE  →  CHANGE STOPPED', F('x', 40), INK, EN.BAD, padx=30, pady=16, r=22), 100, 800, C['t10'] + 0.5)); E.append(ill(C['t10'], 100, 890))
-    E.append(El(T('before any customer sees it', 'b', 38, WARN), 100, 940, C['t11']))
+    E.append(Pop(badge('ONE FAILURE  →  CHANGE STOPPED', F('x', 40), INK, EN.BAD, padx=30, pady=16, r=22), 100, 800, C['t10'] + 0.5)); E.append(El(T('before any customer sees it', 'b', 38, WARN), 100, 890, C['t11']))
+    E.append(ill(C['t1'], 1400, 130))
     return E
 def s_deploy(C, D, dur):
     E = [tracker(5, C['y1'])] + head(6, 'Release and deploy', 'Put the tested package on a server and start it.', C['y1'])
@@ -236,11 +243,25 @@ def s_operate(C, D, dur):
     for i, (n, cid) in enumerate([('git', 'o9'), ('maven', 'o10'), ('jenkins', 'o11'), ('docker', 'o12'), ('kubernetes', 'o13'), ('terraform', 'o14')]): E.append(Pop(LG.chip(n, 100, LG.PRETTY[n], F('b', 20)), 100 + i * 150, 830, C[cid]))
     E.append(El(T('+ more', 'x', 40, ACC), 1010, 880, C['o15'], anim='fade'))
     return E
+def s_handoffs(C, D, dur):
+    E = [El(T('What each stage hands over', 'x', 64), 100, 130, C['g1']), ill(C['g1'], 1400, 130)]
+    it = [('1  Plan', 'A clear goal', ACC, 'doc', 'g2'), ('2  Requirements', 'Rules we can test', VIO, 'test', 'g3'), ('3  Design', 'A picture of the parts', GOOD, 'link', 'g4'), ('4  Build', 'Working code', WARN, 'code', 'g5'),
+          ('5  Test', 'Proof it works', PINK, 'eye', 'g6'), ('6  Deploy', 'A running version', ACC, 'rocket', 'g7'), ('7  Operate', 'What we learned', VIO, 'loop', 'g8')]
+    for i, (n, t_, col, g, cid) in enumerate(it):
+        x = 100 + (i % 4) * 440; y = 270 + (i // 4) * 250
+        E.append(Pop(card(410, 210, col, n, [(t_, TXT)], 36, 34), x, y, C[cid]))
+        E.append(Pop(glyph(g, 56, col, True), x + 410 - 56 - 18, y + 18, C[cid] + 0.25))
+    E.append(Pop(card(410, 210, GOOD, 'Next loop', [('Back to Plan', TXT)], 36, 34), 100 + 3 * 440, 520, C['g8'] + 0.8)); E.append(Pop(glyph('loop', 56, GOOD, True), 100 + 3 * 440 + 410 - 56 - 18, 538, C['g8'] + 1.0))
+    E.append(takeaway('Clear handoffs make every stage easier.', 840, C['g10'], GOOD, 1500))
+    return E
 def s_recap(C, D, dur):
     E = [El(T('Quick check', 'x', 72), 100, 130, C['z1'])]
-    for i, (q, cid) in enumerate([('Which stage decides what the system must do?', 'z2'), ('Which stage catches a bad change before customers do?', 'z3'), ('Which two checks prove an app really works?', 'z4')]):
-        E.append(Pop(card(1720, 110, [ACC, VIO, GOOD][i], f'{i + 1}', [], 36), 100, 290 + i * 140, C[cid])); E.append(El(T(q, 'm', 38, maxw=1500), 190, 316 + i * 140, C[cid] + 0.1, anim='fade'))
-    E.append(Pop(badge('PAUSE  ·  answer out loud', F('b', 34), INK, PINK, padx=26, pady=14), 100, 760, C['z5']))
-    E.append(El(T('Next: Requirements, in depth', 'x', 56, ACC), 100, 880, C['z6'])); E.append(Pop(badge('SUBSCRIBE', F('b', 34), INK, GOOD, padx=26, pady=14), 1450, 890, C['z7']))
+    for i, (q, cid) in enumerate([('Which stage decides what the system must do?', 'z2'), ('Which stage catches a bad change before customers do?', 'z3'), ('Which two checks prove an app really works?', 'z4'), ('What does each stage hand to the next?', 'z8')]):
+        E.append(Pop(card(1720, 90, [ACC, VIO, GOOD, WARN][i], f'{i + 1}', [], 36), 100, 250 + i * 110, C[cid])); E.append(El(T(q, 'm', 38, maxw=1500), 190, 278 + i * 110, C[cid] + 0.1, anim='fade'))
+    E.append(Pop(card(1720, 100, GOOD, '', [], 4), 100, 710, C['z9']))
+    E.append(Pop(icon('check', 56, TXT, GOOD), 130, 732, C['z9'] + 0.2))
+    E.append(El(T('Objective covered: MC01-O03  ·  The SDLC phases', 'b', 32, TXT, maxw=1560), 220, 744, C['z9'] + 0.3, anim='wipe', d=1.6))
+    E.append(Pop(badge('PAUSE  ·  answer out loud', F('b', 34), INK, PINK, padx=26, pady=14), 100, 860, C['z5']))
+    E.append(El(T('Next: Requirements, in depth', 'x', 50, ACC), 100, 960, C['z6'])); E.append(Pop(badge('SUBSCRIBE', F('b', 34), INK, GOOD, padx=26, pady=14), 1500, 960, C['z7']))
     return E
-FN = dict(hook=s_hook, roadmap=s_roadmap, plan=s_plan, req=s_req, design=s_design, build=s_build, test=s_test, deploy=s_deploy, operate=s_operate, recap=s_recap)
+FN = dict(hook=s_hook, roadmap=s_roadmap, plan=s_plan, req=s_req, design=s_design, build=s_build, test=s_test, deploy=s_deploy, operate=s_operate, handoffs=s_handoffs, recap=s_recap)

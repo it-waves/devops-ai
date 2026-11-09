@@ -10,10 +10,10 @@ Published videos are "Learning" at most. Nothing is Practiced or Mastered until 
 
 | Lesson | Objectives | Topic | "Next" line it must end with | Status |
 |---|---|---|---|---|
-| L1 | O03 (phases), O04 (partly) | What is the SDLC (v1 published 4:27; v2 >=5 min planned) | Next lesson: requirements, in depth | Published v1 (Learning) |
-| L2 | O01, O02 | Requirements, user stories, acceptance criteria, MoSCoW, non-functional | Next lesson: Waterfall, Agile, Scrum, and Kanban | Rendered 5:16, upload pending |
-| L3 | O03 | SDLC phases vs Waterfall, Agile, Scrum, Kanban, DevOps | Next lesson: the parts of an application | Published Public 6:15 (-ESjf8NRNng), Learning |
-| L4 | O04 | Frontend, backend, API, database, source control, build, release, deployment, operations | Next lesson: who does what | Published Public 6:12 (E5VgT6n5e7E), Learning |
+| L1 | O03 (phases), O04 (partly) | What is the SDLC (v1 published 4:27; v2 >=5 min planned) | Next lesson: requirements, in depth | v2 rendered 5:11 (QA'd), upload pending; v1 09EBDVIryE8 to be replaced |
+| L2 | O01, O02 | Requirements, user stories, acceptance criteria, MoSCoW, non-functional | Next lesson: Waterfall, Agile, Scrum, and Kanban | Published WeIneBelLD0, Learning |
+| L3 | O03 | SDLC phases vs Waterfall, Agile, Scrum, Kanban, DevOps | Next lesson: the parts of an application | v2 re-rendered 6:14 (centred layout, icons, QA'd), upload pending; v1 -ESjf8NRNng to be replaced |
+| L4 | O04 | Frontend, backend, API, database, source control, build, release, deployment, operations | Next lesson: who does what | v2 re-rendered 6:11 (centred layout, icons, QA'd), upload pending; v1 E5VgT6n5e7E to be replaced |
 | L5 | O05 | Responsibilities: developer, QA, product, security, operations, DevOps | Next lesson: tracing one change | Published Public 5:30 (IbxM4p_vSoY), Learning |
 | L6 | O06 | Trace a change: requirement to code, test, release, deploy, feedback | Next lesson: environments and releases | Published Public EQD7e4ZnWxM (5:01), captions published, playlist order verified |
 | L7 | O07 | Environments, approvals, release risk, rollback, maintenance | Next lesson: the CloudCart workflow | Not started |

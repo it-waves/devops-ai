@@ -1,0 +1,483 @@
+1
+00:00:00,500 --> 00:00:01,844
+You tap the Buy button.
+
+2
+00:00:02,394 --> 00:00:04,293
+Seconds later, an order exists,
+
+3
+00:00:04,423 --> 00:00:06,023
+and a package is on its way.
+
+4
+00:00:06,573 --> 00:00:08,066
+But before that button worked,
+
+5
+00:00:08,196 --> 00:00:09,604
+somebody had to plan it,
+
+6
+00:00:09,734 --> 00:00:10,630
+design it,
+
+7
+00:00:10,760 --> 00:00:11,549
+build it,
+
+8
+00:00:11,679 --> 00:00:12,511
+test it,
+
+9
+00:00:12,641 --> 00:00:13,793
+and put it online.
+
+10
+00:00:14,343 --> 00:00:19,037
+That journey has a name: the software development life cycle, or SDLC.
+
+11
+00:00:19,587 --> 00:00:22,637
+In this lesson, you will walk through all seven stages.
+
+12
+00:00:24,187 --> 00:00:27,387
+We will follow one small online shop, called CloudCart,
+
+13
+00:00:27,517 --> 00:00:29,778
+from first idea to real customer.
+
+14
+00:00:30,328 --> 00:00:31,480
+Seven stages.
+
+15
+00:00:32,030 --> 00:00:32,777
+Plan,
+
+16
+00:00:32,907 --> 00:00:33,824
+requirements,
+
+17
+00:00:33,954 --> 00:00:34,786
+design,
+
+18
+00:00:34,916 --> 00:00:35,663
+build,
+
+19
+00:00:35,793 --> 00:00:36,518
+test,
+
+20
+00:00:36,648 --> 00:00:37,438
+deploy,
+
+21
+00:00:37,568 --> 00:00:38,528
+and operate.
+
+22
+00:00:39,078 --> 00:00:41,766
+Then the loop starts again, with everything we learned.
+
+23
+00:00:42,916 --> 00:00:47,865
+By the end, you can name every stage, say what happens in it, and see where DevOps fits.
+
+24
+00:00:49,415 --> 00:00:50,823
+Stage one: plan.
+
+25
+00:00:51,373 --> 00:00:52,888
+Before anyone writes code,
+
+26
+00:00:53,018 --> 00:00:54,810
+the team agrees on the problem.
+
+27
+00:00:55,360 --> 00:00:57,152
+The owner wants to sell online.
+
+28
+00:00:57,702 --> 00:00:59,707
+Customers want to find things fast.
+
+29
+00:01:00,257 --> 00:01:01,878
+Developers need a clear goal.
+
+30
+00:01:02,428 --> 00:01:04,391
+For CloudCart, the goal is simple:
+
+31
+00:01:04,941 --> 00:01:07,501
+customers browse products, and place an order.
+
+32
+00:01:08,051 --> 00:01:10,888
+Teams often track this work in a tool like GitHub.
+
+33
+00:01:11,438 --> 00:01:13,870
+A written plan stops you building the wrong thing.
+
+34
+00:01:15,920 --> 00:01:17,584
+Stage two: requirements.
+
+35
+00:01:18,134 --> 00:01:20,801
+Now the plan becomes a list of precise statements.
+
+36
+00:01:21,351 --> 00:01:23,932
+Functional requirements say what the system does:
+
+37
+00:01:24,482 --> 00:01:25,783
+show the product list,
+
+38
+00:01:25,913 --> 00:01:26,959
+place an order.
+
+39
+00:01:27,509 --> 00:01:30,325
+Non-functional requirements say how well it does it:
+
+40
+00:01:30,875 --> 00:01:32,304
+answer within one second,
+
+41
+00:01:32,434 --> 00:01:33,757
+keep passwords safe.
+
+42
+00:01:34,307 --> 00:01:36,781
+Vague requirements are why projects drift.
+
+43
+00:01:38,831 --> 00:01:40,367
+Stage three: design.
+
+44
+00:01:40,917 --> 00:01:43,349
+Here the team decides the parts of the system,
+
+45
+00:01:43,479 --> 00:01:45,100
+and how they talk to each other.
+
+46
+00:01:45,650 --> 00:01:47,208
+CloudCart has a browser,
+
+47
+00:01:47,338 --> 00:01:48,234
+an API,
+
+48
+00:01:48,364 --> 00:01:49,494
+and a data store.
+
+49
+00:01:50,044 --> 00:01:51,239
+The browser asks,
+
+50
+00:01:51,369 --> 00:01:52,628
+the API answers,
+
+51
+00:01:52,758 --> 00:01:54,379
+and the data store remembers.
+
+52
+00:01:54,929 --> 00:02:00,604
+In our first version, the API is Java, running on Tomcat, and the data lives in memory.
+
+53
+00:02:01,154 --> 00:02:04,695
+A real database, Postgres, comes in a later lesson.
+
+54
+00:02:05,245 --> 00:02:09,704
+Drawing this first lets people spot problems while they are still cheap to fix.
+
+55
+00:02:11,754 --> 00:02:13,226
+Stage four: build.
+
+56
+00:02:13,776 --> 00:02:15,845
+Developers turn the design into code.
+
+57
+00:02:16,395 --> 00:02:18,230
+This is real CloudCart source,
+
+58
+00:02:18,360 --> 00:02:20,707
+the function that calculates an order total.
+
+59
+00:02:21,257 --> 00:02:22,537
+It checks the quantity,
+
+60
+00:02:22,667 --> 00:02:23,861
+finds the product,
+
+61
+00:02:23,991 --> 00:02:25,314
+and adds up the price.
+
+62
+00:02:25,864 --> 00:02:28,275
+Code lives in version control, called Git,
+
+63
+00:02:28,405 --> 00:02:31,029
+so every change is tracked, and can be undone.
+
+64
+00:02:31,979 --> 00:02:34,261
+Then a build tool, Maven, packages it.
+
+65
+00:02:35,811 --> 00:02:37,326
+Stage five: test.
+
+66
+00:02:37,876 --> 00:02:41,140
+Automated tests check the code every time it changes.
+
+67
+00:02:41,690 --> 00:02:43,396
+Ours are written with J Unit,
+
+68
+00:02:43,526 --> 00:02:45,169
+and run on GitHub Actions.
+
+69
+00:02:45,719 --> 00:02:47,810
+This is a real run from our pipeline.
+
+70
+00:02:48,360 --> 00:02:50,002
+Seven API tests pass,
+
+71
+00:02:50,132 --> 00:02:51,562
+four order tests pass,
+
+72
+00:02:51,692 --> 00:02:53,953
+eleven in total, zero failures,
+
+73
+00:02:54,083 --> 00:02:55,363
+and the build succeeds.
+
+74
+00:02:55,913 --> 00:02:58,900
+If even one test failed, the change would stop here,
+
+75
+00:02:59,030 --> 00:03:00,608
+before any customer sees it.
+
+76
+00:03:02,158 --> 00:03:04,355
+Stage six: release and deploy.
+
+77
+00:03:04,905 --> 00:03:07,679
+The tested package goes onto a server, and starts.
+
+78
+00:03:08,229 --> 00:03:10,106
+Our pipeline starts it on Tomcat,
+
+79
+00:03:10,236 --> 00:03:12,284
+then checks it again while it is running.
+
+80
+00:03:12,834 --> 00:03:14,733
+The health check answers: up.
+
+81
+00:03:15,283 --> 00:03:18,205
+An order for two items totals seven thousand cents.
+
+82
+00:03:18,755 --> 00:03:20,206
+Runtime checks passed.
+
+83
+00:03:20,756 --> 00:03:21,887
+Passing tests,
+
+84
+00:03:22,017 --> 00:03:23,425
+and a working deployment,
+
+85
+00:03:23,555 --> 00:03:24,856
+are two different checks.
+
+86
+00:03:25,406 --> 00:03:26,366
+You need both.
+
+87
+00:03:27,416 --> 00:03:30,808
+Later, Docker and Kubernetes will do this job at scale.
+
+88
+00:03:32,358 --> 00:03:34,449
+Stage seven: operate and learn.
+
+89
+00:03:34,999 --> 00:03:36,279
+We watch the system,
+
+90
+00:03:36,409 --> 00:03:37,710
+listen to customers,
+
+91
+00:03:37,840 --> 00:03:39,440
+and plan the next improvement.
+
+92
+00:03:39,990 --> 00:03:41,611
+Then the cycle starts again.
+
+93
+00:03:43,161 --> 00:03:47,065
+Tools like Prometheus and Grafana help us watch a running system.
+
+94
+00:03:47,615 --> 00:03:50,474
+DevOps is about making this loop fast, and safe.
+
+95
+00:03:51,024 --> 00:03:52,624
+Along the way, you will learn
+
+96
+00:03:52,754 --> 00:03:53,437
+Git,
+
+97
+00:03:53,567 --> 00:03:54,313
+Maven,
+
+98
+00:03:54,443 --> 00:03:55,318
+Jenkins,
+
+99
+00:03:55,448 --> 00:03:56,216
+Docker,
+
+100
+00:03:56,346 --> 00:03:57,327
+Kubernetes,
+
+101
+00:03:57,457 --> 00:03:58,396
+Terraform,
+
+102
+00:03:58,526 --> 00:03:59,486
+and much more.
+
+103
+00:04:01,036 --> 00:04:04,300
+Before we finish, notice what each stage hands to the next.
+
+104
+00:04:04,850 --> 00:04:06,535
+Plan hands over a clear goal.
+
+105
+00:04:07,085 --> 00:04:09,944
+Requirements hand over rules the team can test.
+
+106
+00:04:10,494 --> 00:04:12,862
+Design hands over a picture of the parts.
+
+107
+00:04:13,412 --> 00:04:15,204
+Build hands over working code.
+
+108
+00:04:15,754 --> 00:04:17,610
+Test hands over proof that it works.
+
+109
+00:04:18,160 --> 00:04:20,357
+Deploy hands over a running version.
+
+110
+00:04:20,907 --> 00:04:22,827
+And operate hands back what we learned.
+
+111
+00:04:23,377 --> 00:04:27,025
+If one stage hands over something vague, the next stage struggles.
+
+112
+00:04:27,575 --> 00:04:31,437
+That is why the stages exist: each one makes the next one easier.
+
+113
+00:04:33,487 --> 00:04:34,362
+Quick check.
+
+114
+00:04:34,912 --> 00:04:37,344
+Which stage decides what the system must do?
+
+115
+00:04:37,894 --> 00:04:41,051
+Which stage catches a bad change before customers do?
+
+116
+00:04:41,601 --> 00:04:43,670
+Which two checks prove an app really works?
+
+117
+00:04:44,220 --> 00:04:46,076
+What does each stage hand to the next?
+
+118
+00:04:46,626 --> 00:04:50,680
+Objective covered: MC01-O03.
+
+119
+00:04:51,230 --> 00:04:53,299
+Pause the video, and answer out loud.
+
+120
+00:05:05,849 --> 00:05:08,196
+Next lesson: requirements, in depth.
+
+121
+00:05:08,746 --> 00:05:10,623
+Subscribe, so you do not miss it.

@@ -26,6 +26,8 @@ class Pop(El):
         base.alpha_composite(im, (int(self.x + (self.img.width - w) / 2), int(self.y + (self.img.height - h) / 2)))
 def logo(name, x, y, t, size=110, label=None, ring=None, d=0.5):
     return Pop(LG.chip(name, size, label, F('b', 24) if label else None, ring), x, y, t, d=d)
+def logo_c(name, cx, y, t, size=100, label=None, d=0.5):
+    im = LG.chip(name, size, label, F('b', 24) if label else None, None); return Pop(im, cx - im.width // 2, y, t, d=d)
 def pill(s, x, y, t, col, fg=INK, size=30, padx=22, pady=11, anim='pop'):
     im = badge(s, F('b', size), fg, col, padx=padx, pady=pady, r=int(size * 0.8)); return Pop(im, x, y, t) if anim == 'pop' else El(im, x, y, t, anim='fade')
 def ill(t, x=1400, y=170): return El(badge('ILLUSTRATION  ·  not a capture', F('b', 24), INK, EN.WARN, padx=16, pady=8), x, y, t, anim='fade')
@@ -111,13 +113,13 @@ def glass(w, h, col, r=22):
     d.rounded_rectangle([P, P, P + w - 1, P + h - 1], radius=r, outline=tuple(col[:3]) + (200,), width=2)
     d.line([(P + r, P + 2), (P + w - r, P + 2)], fill=(255, 255, 255, 50), width=2); d.rounded_rectangle([P + 26, P - 1, P + 96, P + 5], radius=3, fill=tuple(col[:3]) + (255,))
     im.info['pad'] = P; return im
-def card(w, h, col, title, lines, tsize=36, lsize=30):
+def card(w, h, col, title, lines, tsize=36, lsize=30, top=False):
     im = glass(w, h, col); d = ImageDraw.Draw(im); P = PADC
     ts = [T(s, 'm', lsize, c, maxw=w - 40) for s, c in lines]
     lh = sum(t.height + 8 for t in ts) - (8 if ts else 0)
     th = tsize if title else 0
     ch = th + (20 if (title and ts) else 0) + lh
-    y = P + (max(20, (h - ch) // 2) if (title or lines) else 20)
+    y = P + (24 if (top or (title and not lines)) else (max(20, (h - ch) // 2) if (title or lines) else 20))
     if title: d.text((P + 28, y), title, font=F('b', tsize), fill=col); y += tsize + 20
     for t in ts: im.alpha_composite(t, (P + 28, y)); y += t.height + 8
     im.info['pad'] = P; return im
@@ -266,4 +268,37 @@ def glyph(kind, size, col, bg=None):
     elif kind == 'link':
         d.rounded_rectangle([s*.08, s*.36, s*.54, s*.64], radius=s*.14, outline=col, width=lw)
         d.rounded_rectangle([s*.46, s*.36, s*.92, s*.64], radius=s*.14, outline=col, width=lw)
+    elif kind == 'screen':
+        d.rounded_rectangle([s*.10, s*.16, s*.90, s*.70], radius=s*.06, outline=col, width=lw); d.line([s*.36, s*.86, s*.64, s*.86], fill=col, width=lw); d.line([s*.50, s*.70, s*.50, s*.86], fill=col, width=lw)
+    elif kind == 'server':
+        for i in range(2):
+            y = s*.16 + i*s*.38; d.rounded_rectangle([s*.14, y, s*.86, y + s*.30], radius=s*.05, outline=col, width=lw); d.ellipse([s*.24, y + s*.10, s*.32, y + s*.18], fill=col)
+    elif kind == 'swap':
+        d.line([s*.14, s*.34, s*.80, s*.34], fill=col, width=lw); d.polygon([(s*.88, s*.34), (s*.72, s*.22), (s*.72, s*.46)], fill=col)
+        d.line([s*.86, s*.66, s*.20, s*.66], fill=col, width=lw); d.polygon([(s*.12, s*.66), (s*.28, s*.54), (s*.28, s*.78)], fill=col)
+    elif kind == 'db':
+        d.ellipse([s*.18, s*.12, s*.82, s*.32], outline=col, width=lw); d.arc([s*.18, s*.36, s*.82, s*.56], 0, 180, fill=col, width=lw); d.arc([s*.18, s*.60, s*.82, s*.80], 0, 180, fill=col, width=lw)
+        d.line([s*.18, s*.22, s*.18, s*.70], fill=col, width=lw); d.line([s*.82, s*.22, s*.82, s*.70], fill=col, width=lw)
+    elif kind == 'branch':
+        d.line([s*.30, s*.18, s*.30, s*.82], fill=col, width=lw); d.line([s*.30, s*.58, s*.70, s*.38], fill=col, width=lw)
+        for cx, cy in ((.30, .18), (.30, .82), (.70, .38)): d.ellipse([s*(cx-.09), s*(cy-.09), s*(cx+.09), s*(cy+.09)], fill=col)
+    elif kind == 'gear':
+        d.ellipse([s*.30, s*.30, s*.70, s*.70], outline=col, width=lw)
+        for a in range(0, 360, 45):
+            r = math.radians(a); d.line([s*.5 + s*.28*math.cos(r), s*.5 + s*.28*math.sin(r), s*.5 + s*.40*math.cos(r), s*.5 + s*.40*math.sin(r)], fill=col, width=lw)
+    elif kind == 'steps':
+        d.line([s*.12, s*.84, s*.12, s*.64, s*.34, s*.64, s*.34, s*.46, s*.56, s*.46, s*.56, s*.28, s*.80, s*.28, s*.80, s*.14], fill=col, width=lw, joint='curve')
+    elif kind == 'board':
+        for i in range(3):
+            x = s*.12 + i*s*.28; d.rounded_rectangle([x, s*.16, x + s*.22, s*.84], radius=s*.04, outline=col, width=lw)
+        d.rectangle([s*.16, s*.28, s*.30, s*.40], fill=col); d.rectangle([s*.44, s*.28, s*.58, s*.40], fill=col)
+    elif kind == 'people':
+        for cx, r, top in ((.26, .10, .30), (.74, .10, .30), (.50, .13, .22)):
+            d.ellipse([s*(cx-r), s*top, s*(cx+r), s*(top+2*r)], fill=col)
+            d.pieslice([s*(cx-r*2.1), s*(top+2*r+.04), s*(cx+r*2.1), s*(top+2*r+.04+r*4.2)], 180, 360, fill=col)
+    elif kind == 'grid':
+        for i in range(3):
+            for j in range(3): d.rounded_rectangle([s*(.14+i*.27), s*(.14+j*.27), s*(.14+i*.27+.20), s*(.14+j*.27+.20)], radius=s*.03, outline=col, width=lw)
+    elif kind == 'question':
+        d.arc([s*.28, s*.14, s*.72, s*.54], 180, 40, fill=col, width=lw); d.line([s*.56, s*.46, s*.50, s*.62], fill=col, width=lw); d.ellipse([s*.45, s*.74, s*.55, s*.84], fill=col)
     return im.resize((size, size), Image.LANCZOS)
