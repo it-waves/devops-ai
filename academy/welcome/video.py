@@ -1,7 +1,7 @@
 import sys, random; sys.path.insert(0, '/home/claude/academy/common')
 from kit import *
 ACC, GOOD, WARN, TXT, MUTED, PANEL = EN.ACC, EN.GOOD, EN.WARN, EN.TXT, EN.MUTED, EN.PANEL
-LABEL = 'DEVOPS ENGINEERING BOOTCAMP'
+LABEL = 'INTRO  ·  DEVOPS BOOTCAMP'
 def c(cid, cap, say=None, gap=None): return (cid, cap, say, gap) if gap is not None else (cid, cap, say)
 SCENES = [
  ('hook', [
@@ -43,13 +43,7 @@ CHAP = {'promise': 'How we teach', 'path': 'The roadmap', 'lesson': 'Every lesso
 ALL = ['git', 'docker', 'kubernetes', 'jenkins', 'terraform', 'ansible', 'prometheus', 'grafana', 'maven', 'java', 'tomcat', 'postgresql', 'ubuntu', 'python', 'actions', 'sonarqube', 'argocd', 'helm', 'github', 'bash', 'trivy', 'vault']
 def s_hook(C, D, dur):
     q = El(T('Where do I even start?', 'x', 66, PINK, maxw=640), 100, 250, C['a1']); q.t1 = C['a4'] - 0.1; E = [q]
-    rnd = random.Random(7); pos = []
-    while len(pos) < len(ALL):
-        x, y = rnd.randint(760, 1760), rnd.randint(170, 800)
-        if all(abs(x - a) > 125 or abs(y - b) > 125 for a, b in pos): pos.append((x, y))
-    t0, t1 = C['a1'], C['a3'] + 1.0
-    for i, (n, (x, y)) in enumerate(zip(ALL, pos)):
-        tt = t0 + (t1 - t0) * i / len(ALL); e = Pop(LG.chip(n, 104), x, y, tt); e.t1 = C['a4'] + 0.15; E.append(e)
+    E.append(Tilt(ALL, 1290, 500, C['a1'] - 0.2, C['a4'] - 0.1, C['a1'], C['a3'] + 1.0, cols=6, chip=118, gap=34))
     q2 = El(T('Too many tools. No order.', 'b', 36, MUTED), 100, 440, C['a3'], anim='fade'); q2.t1 = C['a4'] - 0.1; E.append(q2)
     row = ['ubuntu', 'git', 'maven', 'jenkins', 'docker', 'kubernetes', 'terraform', 'prometheus']
     for i, n in enumerate(row): E.append(logo(n, 150 + i * 215, 150, C['a4'] + 0.25 + i * 0.28, 110))
@@ -57,7 +51,7 @@ def s_hook(C, D, dur):
     E.append(El(T('DevOps Engineering', 'x', 96), 100, 430, C['a5']))
     E.append(El(T('Bootcamp', 'x', 96, ACC), 100, 540, C['a5'] + 0.25))
     E.append(El(T('Zero to production  ·  step by step', 'm', 40, MUTED), 100, 690, C['a6']))
-    for i, (s, col) in enumerate([('Real labs', GOOD), ('Real output', ACC), ('Clear explanations', VIO)]): E.append(pill(s, 100 + i * 330, 800, C['a6'] + 2.0 + i * 1.3, col, INK, 30, 22, 12))
+    for i, (s_, col) in enumerate([('Real labs', GOOD), ('Real output', ACC), ('Clear explanations', VIO)]): E.append(pill(s_, 100 + i * 330, 800, C['a6'] + 2.0 + i * 1.3, col, INK, 30, 22, 12))
     return E
 def s_promise(C, D, dur):
     E = [El(T('Learn it. Build it. Break it. Fix it. Operate it.', 'x', 54, maxw=1700), 100, 140, C['b1'])]

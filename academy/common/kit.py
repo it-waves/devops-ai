@@ -91,3 +91,75 @@ def house(size=220, col=None):
     return im.resize((size, size), Image.LANCZOS)
 def phone(w=430, h=760):
     return rrect(w, h, 56, fill=(14, 34, 40), outline=EN.EDGE, width=6)
+
+# ---------- design system v2 ----------
+import numpy as np, cv2
+from PIL import ImageFilter
+PADC = 22
+_oi = El.__init__
+def _ni(self, img, x, y, *a, **k):
+    p = getattr(img, 'info', {}).get('pad', 0); _oi(self, img, x - p, y - p, *a, **k)
+El.__init__ = _ni
+def glass(w, h, col, r=22):
+    P = PADC; im = Image.new('RGBA', (w + 2 * P, h + 2 * P), (0, 0, 0, 0))
+    sh = Image.new('RGBA', im.size, (0, 0, 0, 0)); ImageDraw.Draw(sh).rounded_rectangle([P, P + 12, P + w, P + h + 12], radius=r, fill=(0, 0, 0, 130)); im.alpha_composite(sh.filter(ImageFilter.GaussianBlur(15)))
+    pn = EN.PANEL[:3]; top = [min(255, int(c * 1.55) + 6) for c in pn]; t = np.linspace(0, 1, h)[:, None]
+    arr = np.zeros((h, w, 4), np.uint8)
+    for i in range(3): arr[..., i] = (top[i] * (1 - t) + pn[i] * t).astype(np.uint8)
+    arr[..., 3] = 255; mask = Image.new('L', (w, h), 0); ImageDraw.Draw(mask).rounded_rectangle([0, 0, w - 1, h - 1], radius=r, fill=255)
+    im.paste(Image.fromarray(arr, 'RGBA'), (P, P), mask); d = ImageDraw.Draw(im)
+    d.rounded_rectangle([P, P, P + w - 1, P + h - 1], radius=r, outline=tuple(col[:3]) + (200,), width=2)
+    d.line([(P + r, P + 2), (P + w - r, P + 2)], fill=(255, 255, 255, 50), width=2); d.rounded_rectangle([P + 26, P - 1, P + 96, P + 5], radius=3, fill=tuple(col[:3]) + (255,))
+    im.info['pad'] = P; return im
+def card(w, h, col, title, lines, tsize=36, lsize=30):
+    im = glass(w, h, col); d = ImageDraw.Draw(im); P = PADC
+    d.text((P + 28, P + 20), title, font=F('b', tsize), fill=col); y = P + 20 + tsize + 20
+    for s, c in lines:
+        t = T(s, 'm', lsize, c, maxw=w - 40); im.alpha_composite(t, (P + 28, y)); y += t.height + 8
+    im.info['pad'] = P; return im
+def row(w, h, col): return glass(w, h, col, 18)
+
+# ---------- 3D scene helpers ----------
+import iso
+class Drop(El):
+    """drops in from above with a soft landing."""
+    def __init__(self, img, x, y, t0, t1=None, d=0.6, h=90): self.h = h; super().__init__(img, x, y, t0, t1, anim='fade', d=d)
+    def draw(self, base, t, k):
+        p, o = k; e = ease_back(p) if p < 1 else 1; a = min(1, p * 2.5) * o; y = self.y - (1 - e) * self.h; im = self.img
+        if a < 0.999: im = im.copy(); im.putalpha(im.getchannel('A').point(lambda v: int(v * a)))
+        base.alpha_composite(im, (int(self.x), int(y)))
+class GrowBox(Dyn):
+    """isometric box that rises from the ground; (sx,sy) = screen pos of world corner A(0,0,0)."""
+    def __init__(self, sx, sy, w, d, h, col, label, t0, dur=0.7, glow=None):
+        self.a = (sx, sy, w, d, h, col, label); self.t0, self.dur = t0, dur; self.cache = {}
+        super().__init__(lambda t: None if t < t0 else round(min(1, (t - t0) / dur) * 20) / 20, self._d)
+    def _d(self, base, t, k):
+        sx, sy, w, d, h, col, label = self.a; f = ease_back(k) if k < 1 else 1; f = max(0.02, min(1.12, f)); q = round(f * 25) / 25
+        if q not in self.cache: self.cache[q] = iso.box(w, d, max(2, h * q), col, label if q >= 0.99 else None)
+        im, ox, oy = self.cache[q]; base.alpha_composite(im, (int(sx - ox), int(sy - oy)))
+def isoimg(*a, **k): return iso.box(*a, **k)
+class Tilt(Dyn):
+    """perspective-tilted plane of logo chips that slowly sways; each chip pops at its own time."""
+    def __init__(self, names, cx, cy, t0, t_out, t_start, t_end, cols=6, chip=104, gap=26):
+        self.names, self.cx, self.cy, self.t0, self.t_out = names, cx, cy, t0, t_out; rows = -(-len(names) // cols)
+        self.cols, self.rows, self.chip, self.gap = cols, rows, chip, gap; self.w = cols * (chip + gap); self.h = rows * (chip + gap)
+        self.ts = [t_start + (t_end - t_start) * i / len(names) for i in range(len(names))]; self.chips = [LG.chip(n, chip) for n in names]
+        super().__init__(lambda t: None if t < t0 or t > t_out + 0.6 else round(t, 2), self._d)
+    def _d(self, base, t, k):
+        wall = Image.new('RGBA', (self.w, self.h), (0, 0, 0, 0))
+        for i, (c, ts) in enumerate(zip(self.chips, self.ts)):
+            p = min(1, max(0, (t - ts) / 0.45)) if t >= ts else 0
+            if p <= 0: continue
+            s = 0.5 + 0.5 * ease_back(p); cw = max(2, int(self.chip * s)); im = c.resize((cw, cw), Image.LANCZOS)
+            wall.alpha_composite(im, ((i % self.cols) * (self.chip + self.gap) + (self.chip - cw) // 2 + self.gap // 2, (i // self.cols) * (self.chip + self.gap) + (self.chip - cw) // 2 + self.gap // 2))
+        yaw = math.radians(-26 + 7 * math.sin(t * .6)); pit = math.radians(10 + 3 * math.sin(t * .45 + 1)); f, dist = 1500, 320
+        pts = []
+        for X, Y in [(-self.w / 2, -self.h / 2), (self.w / 2, -self.h / 2), (self.w / 2, self.h / 2), (-self.w / 2, self.h / 2)]:
+            x1 = X * math.cos(yaw); z1 = X * math.sin(yaw); y1 = Y * math.cos(pit) - z1 * math.sin(pit); z2 = Y * math.sin(pit) + z1 * math.cos(pit)
+            s = f / (f + dist + z2); pts.append((x1 * s * 1.0 + self.cx, y1 * s + self.cy))
+        sc = 1.0; a = max(0, 1 - (t - self.t_out) / 0.5) if t > self.t_out else 1.0
+        if t > self.t_out: u = (t - self.t_out) / 0.5; sc = 1 + 0.35 * u; pts = [(self.cx + (x - self.cx) * sc, self.cy + (y - self.cy) * sc) for x, y in pts]
+        M = cv2.getPerspectiveTransform(np.float32([[0, 0], [self.w, 0], [self.w, self.h], [0, self.h]]), np.float32(pts))
+        warped = cv2.warpPerspective(np.asarray(wall), M, (W, H), flags=cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0))
+        if a < 1: warped[..., 3] = (warped[..., 3] * a).astype(np.uint8)
+        base.alpha_composite(Image.fromarray(warped, 'RGBA'))

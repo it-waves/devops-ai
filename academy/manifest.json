@@ -56,7 +56,8 @@
     "voice naturalness and pronunciation (Claude cannot listen; owner review needed)",
     "learner comprehension (PENDING)",
     "real-world pacing"
-   ]
+   ],
+   "tag": "LESSON 1"
   },
   {
    "id": "BLUEPRINT-V3",
@@ -73,7 +74,8 @@
     "voice naturalness (owner listening)",
     "comprehension"
    ],
-   "next": "owner approval, then publish as first video of the bootcamp playlist"
+   "next": "owner approval, then publish as first video of the bootcamp playlist",
+   "tag": "INTRO"
   }
  ],
  "standards": {
@@ -86,6 +88,7 @@
    "use pronunciation.json"
   ],
   "linux_platform": "Ubuntu 24.04 LTS for all Linux/Bash material and labs (RHCSA series remains Rocky/RHEL)",
-  "theme": "teal ink + gold/seafoam/periwinkle (owner asked for a look different from RHCSA navy/cyan; directive v4.0 says navy/cyan, owner instruction followed)"
+  "theme": "teal ink + gold/seafoam/periwinkle (owner asked for a look different from RHCSA navy/cyan; directive v4.0 says navy/cyan, owner instruction followed)",
+  "design": "v2: glass cards, camera drift, scene transitions, isometric 3D (software renderer), real tool logos (Simple Icons); Welcome tagged INTRO, SDLC tagged LESSON 1"
  }
 }

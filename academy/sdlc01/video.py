@@ -1,7 +1,7 @@
 import sys; sys.path.insert(0, '/home/claude/academy/common')
 from kit import *
 ACC, GOOD, WARN, TXT, MUTED, PANEL = EN.ACC, EN.GOOD, EN.WARN, EN.TXT, EN.MUTED, EN.PANEL
-LABEL = 'DEVOPS ENGINEERING BOOTCAMP'
+LABEL = 'LESSON 1  ·  DEVOPS BOOTCAMP'
 def c(cid, cap, say=None, gap=None): return (cid, cap, say, gap) if gap is not None else (cid, cap, say)
 SCENES = [
  ('hook', [
@@ -82,41 +82,54 @@ def takeaway(s, y, t, col=None, w=800, size=38): return El(T(s, 'b', size, col o
 
 def s_hook(C, D, dur):
     E = []; fade = C['h4'] - 0.1
-    ph = Pop(phone(), 260, 190, C['h1'] - 0.3); ph.t1 = fade; E.append(ph)
-    btn = badge('   Buy   ', F('x', 76), INK, GOOD, padx=56, pady=30, r=30); bx, by = 260 + (430 - btn.width) // 2, 560
+    ph = Pop(phone(), 200, 190, C['h1'] - 0.3); ph.t1 = fade; E.append(ph)
+    btn = badge('   Buy   ', F('x', 76), INK, GOOD, padx=56, pady=30, r=30); bx, by = 200 + (430 - btn.width) // 2, 560
     e = Pop(btn, bx, by, C['h1'] - 0.1); e.t1 = fade; E.append(e); E.append(Ripple(bx + btn.width // 2, by + btn.height // 2, C['h1'] + 0.55, GOOD, 150))
-    e = El(T('Your phone', 'b', 30, MUTED), 330, 880, C['h1'], anim='fade'); e.t1 = fade; E.append(e)
-    hs = Pop(house(300), 1380, 380, C['h2']); hs.t1 = fade; E.append(hs); e = El(T('Customer', 'b', 36, GOOD), 1450, 690, C['h2'] + 0.3, anim='fade'); e.t1 = fade; E.append(e)
-    E.append(Move(parcel(170), [(C['h2'], bx + btn.width // 2, by + 40), (C['h2'] + 0.9, 900, 330), (C['h3'] + 2.0, 1530, 520)], fade + 0.3, 6))
-    e = El(T('Order placed', 'x', 46, GOOD), 760, 640, C['h2'] + 0.5, anim='fade'); e.t1 = fade; E.append(e)
-    e = El(T('On its way', 'x', 46, ACC), 760, 720, C['h3'], anim='fade'); e.t1 = fade; E.append(e)
+    e = El(T('Your phone', 'b', 30, MUTED), 270, 880, C['h1'], anim='fade'); e.t1 = fade; E.append(e)
+    WX, WY, L = 760, 430, 700
+    belt, ox, oy = iso.box(L, 100, 22, (46, 84, 92)); be = Pop(belt, WX - ox, WY - oy, C['h2'] - 0.2); be.t1 = fade; E.append(be)
+    hs = iso.house(); e = Drop(hs, 1390, 470, C['h2'] - 0.1); e.t1 = fade; E.append(e)
+    e = El(T('Customer', 'b', 36, GOOD), 1450, 790, C['h2'] + 0.4, anim='fade'); e.t1 = fade; E.append(e)
+    def bp(x): return (WX + iso.P(x, 50, 22 + 34)[0], WY + iso.P(x, 50, 22 + 34)[1])
+    pk, _, _ = iso.box(78, 78, 66, ACC, tape=(255, 246, 220))
+    for i, (tt, dl) in enumerate([(C['h2'], 0), (C['h3'] - 0.3, 0.0), (C['h3'] + 0.6, 0.0)]):
+        x0 = bp(0); x1 = bp(L - 130)
+        E.append(Move(pk, [(tt, bx + btn.width // 2 - 40, by + 20), (tt + 0.7, x0[0], x0[1] - 60), (tt + 1.0, x0[0], x0[1]), (tt + 3.0, x1[0], x1[1])], fade + 0.3, 3))
+    e = El(T('Order placed', 'x', 46, GOOD), 760, 700, C['h2'] + 0.5, anim='fade'); e.t1 = fade; E.append(e)
+    e = El(T('On its way', 'x', 46, ACC), 760, 770, C['h3'], anim='fade'); e.t1 = fade; E.append(e)
     e = ill(C['h1'], 1400, 130); e.t1 = fade; E.append(e)
     E.append(El(T('Before that button worked…', 'x', 70), 100, 190, C['h4']))
     items = [('Plan it', ACC, 'h5'), ('Design it', VIO, 'h6'), ('Build it', GOOD, 'h7'), ('Test it', PINK, 'h8'), ('Put it online', WARN, 'h9')]
     x = 100
     for n, col, cid in items:
         p = pill(n, x, 380, C[cid] - 0.05, col, INK, 54, 36, 20); E.append(p); x += p.img.width + 30
-    E.append(Pop(badge('SDLC', F('x', 190), INK, ACC, padx=90, pady=34, r=56), 100, 600, C['h10'] + 0.9)); E.append(Ripple(330, 700, C['h10'] + 1.2, ACC, 220, 1.1))
+    E.append(Pop(badge('SDLC', F('x', 190), INK, ACC, padx=90, pady=34, r=56), 100, 600, C['h10'] + 0.9)); E.append(Ripple(330, 700, C['h10'] + 1.2, ACC, 120, 1.0))
     E.append(El(T('Software Development', 'x', 54), 860, 620, C['h10'] + 0.3)); E.append(El(T('Life Cycle', 'x', 54), 860, 690, C['h10'] + 0.5))
     E.append(El(T('7 stages', 'x', 64, GOOD), 860, 800, C['h11']))
     return E
 def s_roadmap(C, D, dur):
-    E = [El(T('One shop. Seven stages.', 'x', 60), 100, 130, C['r3']), ill(C['r3'], 1400, 140)]
-    E.append(Pop(card(900, 120, GOOD, 'CloudCart', [], 44), 100, 250, C['r1']))
-    E.append(El(T('our example online shop', 'm', 32, MUTED), 400, 288, C['r1'] + 0.5, anim='fade'))
-    cw, gap, y = 205, 47, 480; ids = ['r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10']
-    E.append(El(rrect(1720, 10, 5, fill=EN.EDGE, outline=EN.EDGE), 100, y - 60, C['r3'], anim='wipe', d=1.0))
-    E.append(Pop(bulb(110), 85, 345, C['r2']))
-    way = [(C['r2'], 140, 410)]
-    for i, cid in enumerate(ids):
-        x = 100 + i * (cw + gap); E.append(Pop(card(cw, 230, SC[i], f'{i + 1}', [(STAGES[i], TXT)], 80, 23), x, y, C[cid] - 0.05))
-        way.append((C[cid] + 0.1, x + cw // 2, 410))
-    E.append(Move(parcel(110), way, None, 4))
-    E.append(Move(bulb(110), [(C['r2'], 140, 400), (C['r4'] - 0.1, 140, 400)], C['r4'] + 0.1))
-    E.append(El(T('Then the loop starts again.', 'b', 40, MUTED), 640, 800, C['r11']))
-    E.append(A([(1700, 740), (1700, 780), (180, 780), (180, 730)], C['r11'] + 0.3, MUTED, 5, 18, 0.9))
-    for i, s in enumerate(['Name each stage', 'Say what happens in it', 'See where DevOps fits']):
-        E.append(pill(s, 100 + i * 560, 920, C['r12'] + 0.3 + i * 1.5, [ACC, VIO, GOOD][i], INK, 34, 26, 14))
+    E = [El(T('One shop. Seven stages.', 'x', 64), 100, 130, C['r3']), El(badge('ILLUSTRATION  ·  not a capture', F('b', 24), INK, EN.WARN, padx=16, pady=8), 100, 990, C['r3'], anim='fade')]
+    E.append(Pop(card(900, 120, GOOD, 'CloudCart', [], 44), 100, 250, C['r1'])); E.append(El(T('our example online shop', 'm', 32, MUTED), 400, 288, C['r1'] + 0.5, anim='fade'))
+    S0, W0 = 224, 120; SX, SY = 330, 840; ids = ['r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10']
+    def scr(wx, wy, wz=0): p = iso.P(wx, wy, wz); return SX + p[0], SY + p[1]
+    road, ox, oy = iso.box(180, 6 * S0 + 260, 12, (30, 62, 70)); rx, ry = scr(-90, -(6 * S0 + 130)); E.append(Pop(road, rx - 0 * ox, ry + 0, C['r3'], d=0.8)) if False else None
+    rd = Pop(road, rx - ox + ox, ry - oy + oy - 0, C['r3'], d=0.8)
+    rd.x, rd.y = scr(-90, -(6 * S0 + 130))[0] - ox, scr(-90, -(6 * S0 + 130))[1] - oy; E.append(rd)
+    tops = []
+    for i in reversed(range(7)):
+        h = 46 + i * 12; cx, cy = scr(0, -i * S0); lab = iso.face_label(str(i + 1), W0, W0, 120)
+        ax, ay = scr(-W0 / 2, -i * S0 - W0 / 2); E.append(GrowBox(ax, ay, W0, W0, h, SC[i], lab, C[ids[i]] - 0.05))
+        tp = scr(0, -i * S0, h); tops.append(tp)
+        E.append(Pop(badge(STAGES[i], F('b', 27), INK, SC[i], padx=18, pady=8, r=18), tp[0] - 80, tp[1] - 165, C[ids[i]] + 0.15))
+    tops = tops[::-1]
+    E.append(Pop(bulb(110), tops[0][0] - 190, tops[0][1] - 110, C['r2']))
+    pk, _, _ = iso.box(60, 60, 52, ACC, tape=(255, 246, 220)); way = []
+    for i, cid in enumerate(ids): way += [(C[cid] - 0.35, tops[i][0], tops[i][1] - 74), (C[cid] + 0.1, tops[i][0], tops[i][1] - 38)] if i else [(C[cid] - 0.05, tops[0][0], tops[0][1] - 38)]
+    E.append(Move(pk, [(C['r4'] - 0.6, tops[0][0] - 135, tops[0][1] - 80)] + way, None, 4))
+    E.append(El(T('Then the loop starts again.', 'b', 40, MUTED), 640, 965, C['r11'])) if False else None
+    E.append(A([(1700, 900), (1700, 960), (330, 960), (330, 915)], C['r11'] + 0.3, MUTED, 5, 18, 0.9)); E.append(El(T('Then the loop starts again.', 'b', 36, MUTED), 640, 905, C['r11']))
+    for i, s_ in enumerate(['Name each stage', 'Say what happens in it', 'See where DevOps fits']):
+        E.append(pill(s_, 100, 392 + i * 58, C['r12'] + 0.3 + i * 1.5, [ACC, VIO, GOOD][i], INK, 27, 20, 9))
     return E
 def s_plan(C, D, dur):
     E = [tracker(0, C['p1'])] + head(1, 'Plan', 'Agree on the problem before writing code.', C['p1']) + [ill(C['p1'])]
@@ -139,24 +152,29 @@ def s_req(C, D, dur):
     E.append(takeaway('Vague requirements are why projects drift.', 900, C['q9'], WARN, 1500))
     return E
 def s_design(C, D, dur):
-    E = [tracker(2, C['d1'])] + head(3, 'Design', 'Decide the parts and how they talk.', C['d1']) + [ill(C['d1'])]
-    X, Wd, Ht = 1000, 440, 130; ys = [270, 520, 770]; names = [('Browser', 'browser', ACC, 'd4'), ('API', 'server', VIO, 'd5'), ('Data store', 'server', GOOD, 'd6')]
-    for (n, ic, col, cid), y in zip(names, ys):
-        E.append(Pop(rrect(Wd, Ht, 18, fill=PANEL, outline=col, width=3), X, y, C[cid] - 0.05)); E.append(Pop(icon(ic, 84, TXT, col), X + 24, y + 23, C[cid])); E.append(El(T(n, 'b', 42, col), X + 140, y + 40, C[cid] + 0.15, anim='fade'))
-    mid = X + Wd // 2
+    E = [tracker(2, C['d1'])] + head(3, 'Design', 'Decide the parts and how they talk.', C['d1']) + [ill(C['d1'], 1400, 100)]
+    SX, W0 = 1400, 240; ys = [330, 610, 890]; names = [('BROWSER', ACC, 'd4'), ('API', VIO, 'd5'), ('DATA STORE', GOOD, 'd6')]; HS = 40
+    def apex(cy): return (SX, cy - (W0 + W0) * iso.SA / 2 - HS)
+    for (n, col, cid), cy in zip(names, ys):
+        lab = iso.face_label(n, W0, W0, 120); ax, ay = SX, cy - (W0 + W0) * iso.SA / 2 - 0   # world A at top apex of top face (z=h) -> sy shifted by h
+        E.append(Drop(iso.box(W0, W0, HS, col, lab)[0], 0, 0, C[cid] - 0.05, h=110)) if False else None
+        img, ox, oy = iso.box(W0, W0, HS, col, lab); e = Drop(img, SX - ox, cy - (W0 + W0) * iso.SA / 2 - HS + 0 - (oy - 0) + 0, C[cid] - 0.05, h=110)
+        # place so A'(0,0,h) apex sits at (SX, cy - W0*iso.SA)
+        e.x = SX - ox; e.y = (cy - W0 * iso.SA) - (oy + iso.P(0, 0, HS)[1]); E.append(e)
+    gap = [(ys[0] + W0 * iso.SA + 6, ys[1] - W0 * iso.SA - HS - 4), (ys[1] + W0 * iso.SA + 6, ys[2] - W0 * iso.SA - HS - 4)]
     for i, cid in enumerate(['d5', 'd6']):
-        y0 = ys[i] + Ht + 8; y1 = ys[i + 1] - 8
-        E.append(A([(mid - 40, y0), (mid - 40, y1)], C[cid] + 0.3, ACC, 7, 26)); E.append(A([(mid + 40, y1), (mid + 40, y0)], C[cid] + 0.5, GOOD, 7, 26))
-    pk = lambda s, col: badge(s, F('b', 24), INK, col, padx=14, pady=6, r=14)
-    E.append(Move(pk('GET /api/products', ACC), [(C['d7'], mid - 40, ys[0] + Ht + 20), (C['d7'] + 0.8, mid - 40, ys[1] - 20)], C['d7'] + 1.5))
-    E.append(Move(pk('products (JSON)', GOOD), [(C['d8'], mid + 40, ys[1] - 20), (C['d8'] + 0.8, mid + 40, ys[0] + Ht + 20)], C['d8'] + 1.6))
-    E.append(Move(pk('look up', ACC), [(C['d9'], mid - 40, ys[1] + Ht + 20), (C['d9'] + 0.7, mid - 40, ys[2] - 20)], C['d9'] + 1.2))
-    E.append(El(T('asks', 'm', 28, ACC), X - 230, ys[0] + Ht + 36, C['d7'] + 0.2, anim='fade')); E.append(El(T('answers', 'm', 28, GOOD), X - 230, ys[0] + Ht + 76, C['d8'] + 0.2, anim='fade'))
-    E.append(El(T('remembers', 'm', 28, GOOD), X - 230, ys[1] + Ht + 56, C['d9'] + 0.2, anim='fade'))
-    E.append(logo('java', 1520, 440, C['d10'], 100, 'Java')); E.append(logo('tomcat', 1650, 440, C['d10'] + 1.0, 100, 'Tomcat'))
-    E.append(El(T('v0: data in memory', 'm', 24, MUTED), 1520, 590, C['d10'] + 2.0, anim='fade'))
-    E.append(logo('postgresql', 1520, 780, C['d11'], 100, 'Postgres')); E.append(pill('LATER', 1650, 800, C['d11'] + 0.8, EN.WARN, INK, 26, 18, 8))
-    E.append(takeaway('Fix problems on paper, while they are cheap.', 520, C['d12'], WARN, 800))
+        y0, y1 = gap[i]; E.append(A([(SX - 34, y0), (SX - 34, y1)], C[cid] + 0.3, ACC, 6, 20)); E.append(A([(SX + 34, y1), (SX + 34, y0)], C[cid] + 0.5, GOOD, 6, 20))
+    cube, _, _ = iso.box(30, 30, 30, (250, 210, 130), edge=False)
+    E.append(Move(cube, [(C['d7'], SX - 34, gap[0][0] - 4), (C['d7'] + 0.8, SX - 34, gap[0][1] + 6)], C['d7'] + 1.4)); E.append(Move(iso.box(30, 30, 30, (110, 215, 190), edge=False)[0], [(C['d8'], SX + 34, gap[0][1] + 6), (C['d8'] + 0.8, SX + 34, gap[0][0] - 4)], C['d8'] + 1.5))
+    E.append(Move(cube, [(C['d9'], SX - 34, gap[1][0] - 4), (C['d9'] + 0.7, SX - 34, gap[1][1] + 6)], C['d9'] + 1.2))
+    E.append(El(T('asks', 'm', 28, ACC), SX + 70, gap[0][0] + 10, C['d7'] + 0.2, anim='fade')); E.append(El(T('answers', 'm', 28, GOOD), SX + 70, gap[0][0] + 42, C['d8'] + 0.2, anim='fade'))
+    E.append(El(T('remembers', 'm', 28, GOOD), SX + 70, gap[1][0] + 26, C['d9'] + 0.2, anim='fade'))
+    E.append(logo('java', 1700, 470, C['d10'], 100, 'Java')); E.append(logo('tomcat', 1700, 620, C['d10'] + 1.0, 100, 'Tomcat'))
+    E.append(El(T('v0: data in memory', 'm', 26, MUTED, maxw=200), 1700, 770, C['d10'] + 2.0, anim='fade'))
+    E.append(logo('postgresql', 1700, 850, C['d11'], 100, 'Postgres')); E.append(pill('LATER', 1700, 990, C['d11'] + 0.8, EN.WARN, INK, 24, 16, 6))
+    for (n, col, cid, sub), y in zip([('Browser', ACC, 'd4', 'what the customer sees'), ('API', VIO, 'd5', 'the rules and the logic'), ('Data store', GOOD, 'd6', 'where information lives')], [400, 545, 690]):
+        E.append(Pop(card(780, 118, col, n, [(sub, TXT)], 36, 28), 100, y, C[cid]))
+    E.append(takeaway('Fix problems on paper, while they are cheap.', 880, C['d12'], WARN, 900))
     return E
 SRC = [('public Order place(List<Line> lines) {', TXT), ('  int total = 0;', TXT), ('  for (Line l : lines) {', TXT),
        ('    if (l.quantity() < 1 || l.quantity() > 100) {', WARN), ('      throw new IllegalArgumentException(', WARN), ('        "quantity must be 1 to 100");', WARN), ('    }', TXT),
