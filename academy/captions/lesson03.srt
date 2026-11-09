@@ -1,0 +1,387 @@
+1
+00:00:00,500 --> 00:00:03,252
+Two teams must build the same shop, CloudCart.
+
+2
+00:00:03,802 --> 00:00:06,746
+Team A plans everything first, then builds, then ships.
+
+3
+00:00:07,296 --> 00:00:10,539
+Team B builds a small version, shows it, and improves it.
+
+4
+00:00:11,089 --> 00:00:14,097
+Both teams follow the software development life cycle.
+
+5
+00:00:14,647 --> 00:00:17,740
+But they arrange the stages in time very differently.
+
+6
+00:00:18,290 --> 00:00:21,789
+Those arrangements have names, and knowing them is today's goal.
+
+7
+00:00:22,339 --> 00:00:27,096
+By the end, you will tell Waterfall, Agile, Scrum, Kanban, and DevOps apart.
+
+8
+00:00:29,146 --> 00:00:30,597
+Start with one distinction.
+
+9
+00:00:31,147 --> 00:00:36,949
+The life cycle lists the stages: plan, design, build, test, release, deploy, and operate.
+
+10
+00:00:37,499 --> 00:00:41,915
+Waterfall and Agile describe how those stages are arranged over time.
+
+11
+00:00:42,465 --> 00:00:45,815
+Scrum and Kanban are ways of organizing the daily work.
+
+12
+00:00:46,365 --> 00:00:51,634
+And DevOps extends the cycle, so delivery and operations are part of the team's job.
+
+13
+00:00:52,184 --> 00:00:54,253
+Each level answers a different question.
+
+14
+00:00:56,303 --> 00:00:59,439
+Waterfall is the oldest, and simplest, arrangement.
+
+15
+00:00:59,989 --> 00:01:04,170
+The stages run in order, and each one finishes before the next begins.
+
+16
+00:01:04,720 --> 00:01:09,136
+Requirements, then design, then build, then test, then release, then operate.
+
+17
+00:01:09,686 --> 00:01:13,633
+It works well when requirements are clear, stable, and well understood.
+
+18
+00:01:14,183 --> 00:01:16,956
+For example, a fixed contract, or strict rules.
+
+19
+00:01:17,506 --> 00:01:19,256
+The weakness is late feedback.
+
+20
+00:01:19,806 --> 00:01:22,600
+Users may not see working software until the end.
+
+21
+00:01:23,150 --> 00:01:25,838
+And a change late in the project is expensive.
+
+22
+00:01:27,888 --> 00:01:31,899
+Agile arranges the same stages in small, repeated cycles.
+
+23
+00:01:32,449 --> 00:01:35,478
+Each cycle delivers a small piece of working software.
+
+24
+00:01:36,028 --> 00:01:41,233
+Cycle one: browse products. Cycle two: search. Cycle three: place an order.
+
+25
+00:01:41,783 --> 00:01:45,239
+After every cycle, the team shows the result, and listens.
+
+26
+00:01:45,789 --> 00:01:51,208
+Agile began as a set of values, written in 2001, called the Agile Manifesto.
+
+27
+00:01:51,758 --> 00:01:56,579
+It prefers collaboration, working software, and a readiness to respond to change.
+
+28
+00:01:57,129 --> 00:02:00,095
+Agile is a way of thinking, not one fixed method.
+
+29
+00:02:00,645 --> 00:02:03,759
+Scrum and Kanban are two popular ways to practice it.
+
+30
+00:02:05,809 --> 00:02:08,241
+Scrum is a framework for doing Agile work.
+
+31
+00:02:08,791 --> 00:02:12,674
+Work happens in sprints: fixed time boxes of one month or less.
+
+32
+00:02:13,224 --> 00:02:14,909
+A Scrum team has three roles.
+
+33
+00:02:15,459 --> 00:02:18,488
+The product owner decides what is most valuable.
+
+34
+00:02:19,038 --> 00:02:21,257
+The developers build and test the increment.
+
+35
+00:02:21,807 --> 00:02:25,690
+The Scrum master helps the team follow Scrum, and removes blockers.
+
+36
+00:02:26,240 --> 00:02:28,734
+Each sprint has four events: planning,
+
+37
+00:02:28,734 --> 00:02:30,309
+a 15-minute daily scrum,
+
+38
+00:02:30,309 --> 00:02:30,900
+a review,
+
+39
+00:02:30,900 --> 00:02:32,213
+and a retrospective.
+
+40
+00:02:32,763 --> 00:02:36,347
+The result is a usable increment, at the end of every sprint.
+
+41
+00:02:38,397 --> 00:02:40,936
+Kanban is a different way to organize the work.
+
+42
+00:02:41,486 --> 00:02:44,536
+Work is shown on a board, with a column for each step.
+
+43
+00:02:45,086 --> 00:02:46,452
+To do, doing, and done.
+
+44
+00:02:47,002 --> 00:02:49,732
+The key rule is a limit on work in progress.
+
+45
+00:02:50,282 --> 00:02:54,250
+If doing is full, the team finishes something before starting anything new.
+
+46
+00:02:54,800 --> 00:02:57,638
+That keeps work flowing, and shows bottlenecks early.
+
+47
+00:02:58,188 --> 00:03:02,262
+Kanban has no fixed sprints, so work can arrive and finish at any time.
+
+48
+00:03:02,812 --> 00:03:05,308
+It suits support and operations work well.
+
+49
+00:03:07,358 --> 00:03:09,193
+DevOps goes one step further.
+
+50
+00:03:09,743 --> 00:03:11,961
+Agile gets code written in small steps.
+
+51
+00:03:12,511 --> 00:03:16,799
+DevOps carries that code all the way to a running system, and keeps it healthy.
+
+52
+00:03:17,349 --> 00:03:18,757
+Three ideas stand out.
+
+53
+00:03:19,307 --> 00:03:23,147
+Shared ownership: developers and operations work as one team.
+
+54
+00:03:23,697 --> 00:03:27,836
+Automation: building, testing, and deploying are done by pipelines.
+
+55
+00:03:28,386 --> 00:03:32,119
+Fast feedback: monitoring shows what users really experience.
+
+56
+00:03:32,669 --> 00:03:38,365
+DevOps is not a tool, and not a job title. It is a way of working, supported by tools.
+
+57
+00:03:38,915 --> 00:03:41,305
+You will learn those tools later in this bootcamp.
+
+58
+00:03:43,355 --> 00:03:45,211
+Let us compare them side by side.
+
+59
+00:03:45,761 --> 00:03:50,838
+Waterfall: stages in strict order. Best when requirements are clear and stable.
+
+60
+00:03:51,388 --> 00:03:56,103
+Agile: small cycles with steady feedback. Best when needs are still changing.
+
+61
+00:03:56,653 --> 00:04:01,368
+Scrum: sprints, roles, and events. Best when one team builds one product.
+
+62
+00:04:01,918 --> 00:04:06,120
+Kanban: a board with work limits. Best for a steady flow of requests.
+
+63
+00:04:06,670 --> 00:04:09,819
+DevOps: development and operations as one team,
+
+64
+00:04:09,819 --> 00:04:10,891
+with automation.
+
+65
+00:04:10,891 --> 00:04:13,169
+Best for keeping software running,
+
+66
+00:04:13,169 --> 00:04:14,308
+and improving it.
+
+67
+00:04:14,858 --> 00:04:17,972
+Notice they are not rivals. Many teams combine them.
+
+68
+00:04:20,022 --> 00:04:22,177
+Here is CloudCart, built both ways.
+
+69
+00:04:22,727 --> 00:04:27,313
+With Waterfall, the team spends months on requirements, design, build, and test.
+
+70
+00:04:27,863 --> 00:04:30,487
+Customers see the shop for the first time at the end.
+
+71
+00:04:31,037 --> 00:04:34,664
+With Agile, a small piece is ready every month, or even sooner.
+
+72
+00:04:35,214 --> 00:04:37,497
+Browse first, then search, then ordering.
+
+73
+00:04:38,047 --> 00:04:41,524
+Customers can react early, and the team can change direction.
+
+74
+00:04:42,074 --> 00:04:44,591
+Same stages, same goal, different rhythm.
+
+75
+00:04:46,641 --> 00:04:48,646
+Now match situations to methods.
+
+76
+00:04:49,196 --> 00:04:54,295
+Fixed, well understood requirements, and strict sign-off? Waterfall-style planning fits.
+
+77
+00:04:54,845 --> 00:04:58,600
+A new product where needs are unclear? Agile, often with Scrum.
+
+78
+00:04:59,150 --> 00:05:02,627
+A team handling a steady stream of support requests? Kanban.
+
+79
+00:05:03,177 --> 00:05:08,105
+Keeping a live shop healthy, with frequent, safe releases? DevOps practices.
+
+80
+00:05:08,655 --> 00:05:11,514
+Real teams mix these, and adjust as they learn.
+
+81
+00:05:13,564 --> 00:05:15,420
+Watch out for four common myths.
+
+82
+00:05:15,970 --> 00:05:21,730
+Myth one: Agile means no planning. In fact, Agile plans all the time, in smaller steps.
+
+83
+00:05:22,280 --> 00:05:27,080
+Myth two: Scrum and Agile are the same. Scrum is one way to practice Agile.
+
+84
+00:05:27,630 --> 00:05:32,110
+Myth three: DevOps is a tool, or a job title. It is a way of working.
+
+85
+00:05:32,660 --> 00:05:34,932
+Myth four: Waterfall is always wrong.
+
+86
+00:05:34,932 --> 00:05:36,959
+It can still fit work with fixed,
+
+87
+00:05:36,959 --> 00:05:38,740
+well understood requirements.
+
+88
+00:05:39,290 --> 00:05:41,829
+Choose by the situation, not by fashion.
+
+89
+00:05:43,879 --> 00:05:44,754
+Quick check.
+
+90
+00:05:45,304 --> 00:05:47,373
+How is Waterfall different from Agile?
+
+91
+00:05:47,923 --> 00:05:49,864
+What are the three roles in a Scrum team?
+
+92
+00:05:50,414 --> 00:05:52,100
+What is the key rule in Kanban?
+
+93
+00:05:52,650 --> 00:05:54,676
+Is DevOps a tool? Explain.
+
+94
+00:05:55,226 --> 00:05:59,280
+Objective covered: MC01-O03.
+
+95
+00:05:59,830 --> 00:06:01,899
+Pause the video, and answer out loud.
+
+96
+00:06:08,449 --> 00:06:10,966
+Next lesson: the parts of an application.
+
+97
+00:06:11,516 --> 00:06:13,394
+Subscribe, so you do not miss it.
