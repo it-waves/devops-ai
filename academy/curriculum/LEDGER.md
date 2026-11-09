@@ -17,7 +17,7 @@ Published videos are "Learning" at most. Nothing is Practiced or Mastered until 
 | L5 | O05 | Responsibilities: developer, QA, product, security, operations, DevOps | Next lesson: tracing one change | Published Public 5:30 (IbxM4p_vSoY), Learning |
 | L6 | O06 | Trace a change: requirement to code, test, release, deploy, feedback | Next lesson: environments and releases | Published Public EQD7e4ZnWxM (5:01), captions published, playlist order verified |
 | L7 | O07 | Environments, approvals, release risk, rollback, maintenance | Next lesson: the CloudCart workflow | Published Public H4rLyJlUcOE (6:19, captions published, end screen), Learning |
-| L8 | O08 | Mastery scenario: CloudCart SDLC workflow with artifacts and handoffs | Next masterclass: MC02 IT and computer fundamentals | Rendered 5:52, QA'd, upload pending |
+| L8 | O08 | Mastery scenario: CloudCart SDLC workflow with artifacts and handoffs | Next masterclass: MC02 IT and computer fundamentals | Published Public H2htKZboJ6A (5:53, captions published, end screen), Learning |
 
 Open items: Lesson 1 v2 (>=5 min, ends with the L2 line above); Intro and DevOps Loop are orientation videos, not mapped to objectives; L2 lab sheet (backlog practice for O02).
 Rules in force: each lesson >=5 min, shows "Objectives covered" in description and recap, has a demonstration, an independent task and a pass/fail rubric; cloud labs UNVERIFIED unless run with evidence; version-specific facts checked against vendor docs before teaching.
