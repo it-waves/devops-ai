@@ -1,0 +1,391 @@
+1
+00:00:00,500 --> 00:00:02,505
+You tap Add to cart in CloudCart.
+
+2
+00:00:03,055 --> 00:00:05,509
+In under a second, many parts work together.
+
+3
+00:00:06,059 --> 00:00:08,811
+Some parts run when a customer uses the shop.
+
+4
+00:00:09,361 --> 00:00:13,243
+Others carry the code from a developer's laptop to that running shop.
+
+5
+00:00:13,793 --> 00:00:16,524
+Today you learn all nine parts, and how they fit.
+
+6
+00:00:17,074 --> 00:00:20,018
+By the end, you will explain each one in plain words.
+
+7
+00:00:22,068 --> 00:00:24,137
+Split the nine parts into two groups.
+
+8
+00:00:24,687 --> 00:00:30,597
+The first four run when customers use the shop: frontend, backend, API, and database.
+
+9
+00:00:31,147 --> 00:00:35,211
+The other five move the code to that running shop: source control,
+
+10
+00:00:35,211 --> 00:00:35,581
+build,
+
+11
+00:00:35,581 --> 00:00:36,073
+release,
+
+12
+00:00:36,073 --> 00:00:36,751
+deployment,
+
+13
+00:00:36,751 --> 00:00:37,675
+and operations.
+
+14
+00:00:38,225 --> 00:00:42,875
+DevOps work lives mostly in the second group, but you must understand the first.
+
+15
+00:00:43,425 --> 00:00:45,004
+We start with the first group.
+
+16
+00:00:47,054 --> 00:00:49,934
+The frontend is what the user sees and touches.
+
+17
+00:00:50,484 --> 00:00:52,937
+It runs in the browser, or in a mobile app.
+
+18
+00:00:53,487 --> 00:00:57,391
+In CloudCart: the product pages, the cart, and the checkout form.
+
+19
+00:00:57,941 --> 00:01:02,571
+Web frontends are built with HTML, CSS, and JavaScript.
+
+20
+00:01:03,121 --> 00:01:07,217
+The frontend shows information, and sends the user's actions onward.
+
+21
+00:01:07,767 --> 00:01:11,308
+Never trust it to hide secrets, because users can inspect it.
+
+22
+00:01:13,358 --> 00:01:16,003
+The backend is the code that runs on a server.
+
+23
+00:01:16,553 --> 00:01:18,537
+It applies the rules of the business.
+
+24
+00:01:19,087 --> 00:01:22,650
+For example: is the item in stock, and is the price correct?
+
+25
+00:01:23,200 --> 00:01:25,760
+It also decides who is allowed to do what.
+
+26
+00:01:26,310 --> 00:01:29,062
+It talks to the database, and to other services.
+
+27
+00:01:29,612 --> 00:01:34,561
+Backends are written in languages like Java, Python, or JavaScript on Node.
+
+28
+00:01:35,111 --> 00:01:38,695
+Users never see it directly, but every action depends on it.
+
+29
+00:01:40,745 --> 00:01:44,094
+How do the frontend and the backend talk? Through an API.
+
+30
+00:01:44,644 --> 00:01:51,620
+API means application programming interface: a defined way for one program to ask another for something.
+
+31
+00:01:52,170 --> 00:01:57,461
+Most web A P Is use H T T P requests, and return data, often as JSON.
+
+32
+00:01:58,011 --> 00:02:01,126
+For example, a request to get the cart, and the reply.
+
+33
+00:02:01,676 --> 00:02:06,774
+A good API is a contract: both sides agree on the requests and the responses.
+
+34
+00:02:07,324 --> 00:02:10,439
+If the contract changes carelessly, the frontend breaks.
+
+35
+00:02:12,489 --> 00:02:14,814
+A database stores data that must last.
+
+36
+00:02:15,364 --> 00:02:18,756
+Servers can restart, but orders and accounts must remain.
+
+37
+00:02:19,306 --> 00:02:22,762
+In CloudCart: products, customers, carts, and orders.
+
+38
+00:02:23,312 --> 00:02:27,643
+A relational database keeps data in tables, such as PostgreSQL.
+
+39
+00:02:28,193 --> 00:02:33,164
+The backend reads and writes the database. The frontend should never touch it directly.
+
+40
+00:02:33,714 --> 00:02:37,490
+Data needs backups, because losing it is the costliest failure.
+
+41
+00:02:39,540 --> 00:02:40,884
+Now trace one click.
+
+42
+00:02:41,434 --> 00:02:43,994
+The customer taps Add to cart in the frontend.
+
+43
+00:02:44,544 --> 00:02:47,488
+The frontend sends an API request to the backend.
+
+44
+00:02:48,038 --> 00:02:51,558
+The backend checks stock and price, then writes to the database.
+
+45
+00:02:52,108 --> 00:02:56,865
+The database confirms, the backend replies, and the frontend updates the cart.
+
+46
+00:02:57,415 --> 00:02:59,805
+Four parts, one click, well under a second.
+
+47
+00:03:01,855 --> 00:03:04,735
+Now the second group: how code reaches the shop.
+
+48
+00:03:05,285 --> 00:03:08,997
+Source control stores every version of the code, and who changed it.
+
+49
+00:03:09,547 --> 00:03:13,771
+Git is the standard tool, and GitHub and GitLab host the code online.
+
+50
+00:03:14,321 --> 00:03:18,993
+It lets teams work in parallel, review changes, and go back if something breaks.
+
+51
+00:03:19,543 --> 00:03:21,804
+It is the single source of truth for the code.
+
+52
+00:03:23,854 --> 00:03:26,755
+A build turns source code into something that can run.
+
+53
+00:03:27,305 --> 00:03:31,593
+It compiles code, downloads dependencies, and runs automated tests.
+
+54
+00:03:32,143 --> 00:03:36,602
+The result is called an artifact, such as a package or a container image.
+
+55
+00:03:37,152 --> 00:03:40,821
+A build should be repeatable: the same code gives the same result.
+
+56
+00:03:41,371 --> 00:03:45,766
+Tools include Maven, for Java, and Docker, for container images.
+
+57
+00:03:47,816 --> 00:03:51,507
+A release is a specific, versioned build, approved to go live.
+
+58
+00:03:52,057 --> 00:03:55,449
+For example, CloudCart version one point four point two.
+
+59
+00:03:55,999 --> 00:04:00,223
+Deployment is the act of putting that version onto a running environment.
+
+60
+00:04:00,773 --> 00:04:06,213
+A deployment can go to a test environment, or to production, which a later lesson covers.
+
+61
+00:04:06,763 --> 00:04:11,285
+Release and deployment are related, but teams use the words a little differently.
+
+62
+00:04:11,835 --> 00:04:13,755
+So always ask what a team means.
+
+63
+00:04:15,805 --> 00:04:18,365
+Operations keeps the running system healthy.
+
+64
+00:04:18,915 --> 00:04:21,688
+It watches performance, errors, and availability.
+
+65
+00:04:22,238 --> 00:04:25,865
+It responds when something fails, and applies updates and fixes.
+
+66
+00:04:26,415 --> 00:04:30,127
+Monitoring shows problems, often before customers report them.
+
+67
+00:04:30,677 --> 00:04:34,901
+In DevOps, developers and operations share this responsibility.
+
+68
+00:04:36,951 --> 00:04:39,362
+Here is every part, mapped to CloudCart.
+
+69
+00:04:39,912 --> 00:04:42,301
+Frontend: the product and cart pages.
+
+70
+00:04:42,851 --> 00:04:45,518
+Backend: the stock, price, and order rules.
+
+71
+00:04:46,068 --> 00:04:48,180
+API: the requests between them.
+
+72
+00:04:48,730 --> 00:04:50,948
+Database: the products and the orders.
+
+73
+00:04:51,498 --> 00:04:53,589
+Source control: the code, in Git.
+
+74
+00:04:54,139 --> 00:04:56,336
+Build: package the code into an image.
+
+75
+00:04:56,886 --> 00:04:59,276
+Release: version one point four point two.
+
+76
+00:04:59,826 --> 00:05:01,852
+Deployment: put it on the servers.
+
+77
+00:05:02,402 --> 00:05:05,026
+Operations: watch it, and keep it healthy.
+
+78
+00:05:07,076 --> 00:05:08,932
+Watch out for four common myths.
+
+79
+00:05:09,482 --> 00:05:11,931
+Myth one: the database is the backend.
+
+80
+00:05:11,931 --> 00:05:12,447
+In fact,
+
+81
+00:05:12,447 --> 00:05:13,736
+the backend is code,
+
+82
+00:05:13,736 --> 00:05:15,605
+and the database stores data.
+
+83
+00:05:16,155 --> 00:05:21,765
+Myth two: an API is only for outside developers. Your own frontend uses one too.
+
+84
+00:05:22,315 --> 00:05:26,016
+Myth three: release and deployment are always the same thing.
+
+85
+00:05:26,016 --> 00:05:27,047
+They are related,
+
+86
+00:05:27,047 --> 00:05:28,139
+but not identical.
+
+87
+00:05:28,689 --> 00:05:32,042
+Myth four: operations begins after the project ends.
+
+88
+00:05:32,042 --> 00:05:34,492
+It begins when the first version runs.
+
+89
+00:05:35,042 --> 00:05:38,413
+Knowing the right words prevents expensive misunderstandings.
+
+90
+00:05:40,463 --> 00:05:41,338
+Quick check.
+
+91
+00:05:41,888 --> 00:05:44,405
+What is the difference between frontend and backend?
+
+92
+00:05:44,955 --> 00:05:46,256
+What does an API do?
+
+93
+00:05:46,806 --> 00:05:48,918
+Name the five delivery parts, in order.
+
+94
+00:05:49,468 --> 00:05:52,199
+What is the difference between a release and a deployment?
+
+95
+00:05:52,749 --> 00:05:56,802
+Objective covered: MC01-O04.
+
+96
+00:05:57,352 --> 00:05:59,422
+Pause the video, and answer out loud.
+
+97
+00:06:05,972 --> 00:06:07,700
+Next lesson: who does what.
+
+98
+00:06:08,250 --> 00:06:10,127
+Subscribe, so you do not miss it.
