@@ -43,14 +43,20 @@
   },
   {
    "id": "MC01-SDLC-PILOT",
-   "state": "DESIGNED (storyboard v1)",
+   "state": "VIDEO PRODUCED (Gate D partial)",
    "depends": [
     "BLUEPRINT-V3",
     "VOICE"
    ],
-   "next": "script_sdlc01 + am_eric TTS + render pipeline for the new scenes",
-   "path": "/home/claude/academy/sdlc_pilot_storyboard.md",
-   "blockers": []
+   "next": "owner listens; if approved, publish to Studio and add to a new playlist; then lesson 2",
+   "path": "/home/claude/academy/sdlc01/build/DevOps_Bootcamp_SDLC01_Idea_to_Customer.mp4",
+   "blockers": [],
+   "evidence": "3:55, 1080p30, am_eric narration, captions from audio timings, loudness -15.4 LUFS / peak -1.5 dBFS, frame review of all 10 scenes; real CI evidence on screen (run 42607279375 / 42608889904)",
+   "unverified": [
+    "voice naturalness and pronunciation (Claude cannot listen; owner review needed)",
+    "learner comprehension (PENDING)",
+    "real-world pacing"
+   ]
   },
   {
    "id": "BLUEPRINT-V3",

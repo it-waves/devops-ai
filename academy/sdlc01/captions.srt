@@ -1,0 +1,171 @@
+1
+00:00:00,400 --> 00:00:03,559
+Every app you use started as an idea in someone's head.
+
+2
+00:00:04,029 --> 00:00:07,630
+So how does an idea become something a customer can actually use?
+
+3
+00:00:07,650 --> 00:00:10,081
+That is the software development life cycle.
+
+4
+00:00:10,101 --> 00:00:12,755
+In this lesson, you will learn all seven stages.
+
+5
+00:00:19,275 --> 00:00:23,564
+We will follow one small online shop, called CloudCart, from idea to customer.
+
+6
+00:00:24,034 --> 00:00:27,215
+By the end, you can name every stage, say what happens in it,
+
+7
+00:00:27,235 --> 00:00:28,580
+and see where DevOps fits.
+
+8
+00:00:33,100 --> 00:00:36,905
+Stage one: plan. Before anyone writes code, the team agrees on the problem.
+
+9
+00:00:36,925 --> 00:00:38,691
+Who is it for, and what must it do?
+
+10
+00:00:42,161 --> 00:00:46,599
+For CloudCart, the goal is simple: customers browse products and place an order.
+
+11
+00:00:50,069 --> 00:00:52,519
+A written plan avoids building the wrong thing,
+
+12
+00:00:52,539 --> 00:00:55,041
+which is the most expensive mistake in software.
+
+13
+00:00:58,561 --> 00:01:02,914
+Stage two: requirements. Now the plan becomes a list of precise statements.
+
+14
+00:01:03,384 --> 00:01:07,439
+Functional requirements say what the system does, like show a list of products.
+
+15
+00:01:10,909 --> 00:01:15,450
+Non-functional requirements say how well it does it, like answer within one second.
+
+16
+00:01:15,470 --> 00:01:17,758
+Vague requirements are why projects drift.
+
+17
+00:01:24,278 --> 00:01:27,593
+Stage three: design. Here the team decides the parts of the system,
+
+18
+00:01:27,613 --> 00:01:29,186
+and how they talk to each other.
+
+19
+00:01:29,656 --> 00:01:32,588
+CloudCart has a browser, an A P I, and a data store.
+
+20
+00:01:32,608 --> 00:01:36,335
+The browser asks, the A P I answers, and the data store remembers.
+
+21
+00:01:42,805 --> 00:01:46,966
+Drawing this first lets people spot problems while they are still cheap to fix.
+
+22
+00:01:48,486 --> 00:01:51,744
+Stage four: build. Developers turn the design into code.
+
+23
+00:01:51,764 --> 00:01:53,501
+This is real CloudCart source.
+
+24
+00:01:53,971 --> 00:01:56,047
+This function calculates an order total.
+
+25
+00:01:56,067 --> 00:01:59,455
+It checks the quantity, finds the product, and adds up the price.
+
+26
+00:02:07,925 --> 00:02:11,851
+Code lives in version control, so every change is tracked and can be undone.
+
+27
+00:02:16,371 --> 00:02:20,746
+Stage five: test. Automated tests check the code every time it changes.
+
+28
+00:02:21,216 --> 00:02:26,017
+This is a real run from our pipeline: eleven tests, zero failures, build success.
+
+29
+00:02:29,487 --> 00:02:33,776
+If even one test failed, the change would stop here, before any customer sees it.
+
+30
+00:02:37,296 --> 00:02:42,140
+Stage six: release and deploy. The tested package is placed on a server and started.
+
+31
+00:02:42,610 --> 00:02:44,757
+Then we check it again while it is running.
+
+32
+00:02:44,777 --> 00:02:48,990
+The health check answers up, and an order for two items totals seven thousand cents.
+
+33
+00:02:54,460 --> 00:02:58,643
+Passing tests and a working deployment are two different checks. You need both.
+
+34
+00:03:03,163 --> 00:03:04,813
+Stage seven: operate and learn.
+
+35
+00:03:04,833 --> 00:03:08,370
+We watch the system, collect feedback, and the cycle starts again.
+
+36
+00:03:08,840 --> 00:03:11,373
+DevOps is about making this loop fast and safe,
+
+37
+00:03:11,393 --> 00:03:13,655
+using tools you will learn in this course:
+
+38
+00:03:13,675 --> 00:03:16,372
+Git, Maven, Jenkins, Docker, Kubernetes, and more.
+
+39
+00:03:23,892 --> 00:03:26,831
+Quick check. Which stage decides what the system must do?
+
+40
+00:03:26,851 --> 00:03:29,582
+Which stage catches a bad change before customers do?
+
+41
+00:03:29,602 --> 00:03:32,021
+And which two checks prove an app really works?
+
+42
+00:03:40,491 --> 00:03:43,351
+Pause the video, answer out loud, then keep going.
+
+43
+00:03:46,821 --> 00:03:50,855
+Next lesson: requirements, in depth. Subscribe so you do not miss it.
