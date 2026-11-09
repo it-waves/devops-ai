@@ -16,11 +16,14 @@ def do_tts():
     k = Kokoro('/home/claude/tts/kokoro-v1.0.onnx', '/home/claude/tts/voices-v1.0.bin'); dur = {}
     for scene, cues in SCENES:
         for c in cues:
-            cid, cap, say, gap = norm(c); s, sr = k.create(say, voice='af_heart', speed=1.0, lang='en-us'); sf.write(f'{VO}/{cid}.wav', s, sr); dur[cid] = sf.info(f'{VO}/{cid}.wav').duration
+            cid, cap, say, gap = norm(c)
+            if not os.path.exists(f'{VO}/{cid}.wav'):
+                s, sr = k.create(say, voice='af_heart', speed=1.0, lang='en-us'); sf.write(f'{VO}/{cid}.wav', s, sr)
+            dur[cid] = sf.info(f'{VO}/{cid}.wav').duration
     json.dump(dur, open(VO + '/dur.json', 'w'), indent=1); print(round(sum(dur.values()), 1), 's speech')
 dur = json.load(open(VO + '/dur.json')) if os.path.exists(VO + '/dur.json') else {}
 TAIL = 0.9; TL = []; gt = 0.0
-if dur:
+if dur and all(norm(c)[0] in dur for _, cs in SCENES for c in cs):
     for name, cues in SCENES:
         t = LEAD.get(name, 0.5); C = {}
         for c in cues:

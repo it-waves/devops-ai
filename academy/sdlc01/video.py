@@ -137,7 +137,7 @@ def s_plan(C, D, dur):
     for i, (who, say, col, cid) in enumerate(notes):
         x = 100 + i * 590; E.append(Pop(card(540, 150, col, who, [(say, TXT)], 34), x, 400, C[cid])); E.append(A([(x + 270, 565), (x + 270, 625)], C[cid] + 0.8, col, 6, 24))
     E.append(Pop(card(1720, 160, GOOD, 'The goal', [('Customers browse products and place an order.', TXT)], 38), 100, 640, C['p7']))
-    E.append(logo('github', 1670, 655, C['p9'], 110)); E.append(El(T('Teams track plans with issues and boards, for example in GitHub', 'm', 30, MUTED, maxw=1300), 100, 830, C['p9'] + 0.5, anim='fade'))
+    E.append(Pop(LG.chip('github', 110), 1670, 655, C['p9'])); E.append(El(T('Teams track plans with issues and boards, for example in GitHub', 'm', 30, MUTED, maxw=1300), 100, 830, C['p9'] + 0.5, anim='fade'))
     E.append(takeaway('A written plan stops you building the wrong thing.', 910, C['p10'], WARN, 1500))
     return E
 def s_req(C, D, dur):
@@ -233,7 +233,7 @@ def s_operate(C, D, dur):
     E.append(logo('prometheus', 100, 470, C['o6'], 110, 'Prometheus')); E.append(logo('grafana', 270, 470, C['o6'] + 1.5, 110, 'Grafana')); E.append(pill('LATER', 420, 490, C['o6'] + 2.4, EN.WARN, INK, 26, 18, 8))
     E.append(takeaway('DevOps = a faster, safer loop', 680, C['o7'], GOOD, 800, 46))
     E.append(El(T('Tools you will learn:', 'b', 30, MUTED), 100, 790, C['o8']))
-    for i, (n, cid) in enumerate([('git', 'o9'), ('maven', 'o10'), ('jenkins', 'o11'), ('docker', 'o12'), ('kubernetes', 'o13'), ('terraform', 'o14')]): E.append(logo(n, 100 + i * 150, 840, C[cid], 112))
+    for i, (n, cid) in enumerate([('git', 'o9'), ('maven', 'o10'), ('jenkins', 'o11'), ('docker', 'o12'), ('kubernetes', 'o13'), ('terraform', 'o14')]): E.append(Pop(LG.chip(n, 100, LG.PRETTY[n], F('b', 20)), 100 + i * 150, 830, C[cid]))
     E.append(El(T('+ more', 'x', 40, ACC), 1010, 880, C['o15'], anim='fade'))
     return E
 def s_recap(C, D, dur):

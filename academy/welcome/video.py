@@ -17,8 +17,8 @@ SCENES = [
   c('c3', "Foundations:"), c('c4', "Linux,", "Linux,"), c('c5', "Bash,"), c('c6', "Python,"), c('c7', "and Git."),
   c('c8', "Applications and build tools:"), c('c9', "Java,"), c('c10', "Maven,"), c('c11', "Tomcat,"), c('c12', "and databases."),
   c('c13', "Then C I C D:", "Then C I C D:"), c('c14', "Jenkins,"), c('c15', "SonarQube,", "sonar cube,"), c('c16', "and containers with Docker."),
-  c('c17', "Then the cloud,"), c('c18', "Terraform,", "terra form,"), c('c19', "Ansible,"), c('c20', "and Kubernetes,"), c('c21', "with Helm and Argo CD.", "with Helm and Argo C D."),
-  c('c22', "Then security, monitoring, and reliability,"), c('c23', "and a final capstone project."),
+  c('c17', "Then the cloud,"), c('c17a', "AWS,", "A W S,"), c('c17b', "and Azure,"), c('c18', "Terraform,", "terra form,"), c('c19', "Ansible,"), c('c20', "and Kubernetes,"), c('c21', "with Helm and Argo CD.", "with Helm and Argo C D."),
+  c('c22', "Then security,"), c('c22b', "monitoring, and reliability,"), c('c23', "and a final capstone project."),
   c('c24', "This is the plan. Lessons are published stage by stage, in order."),
  ]),
  ('lesson', [
@@ -50,7 +50,7 @@ def s_hook(C, D, dur):
     E.append(Tilt(ALL, 1290, 500, C['a1'] - 0.2, t_out, C['a1'], C['a3'] + 1.0, cols=6, chip=118, gap=34))
     q2 = El(T('Too many tools. No order.', 'b', 34, MUTED, maxw=300), 620, 820, C['a3'], anim='fade'); q2.t1 = t_out; E.append(q2)
     row = ['ubuntu', 'git', 'maven', 'jenkins', 'docker', 'kubernetes', 'terraform', 'prometheus']
-    for i, n in enumerate(row): E.append(logo(n, 150 + i * 215, 150, C['a4'] + 0.25 + i * 0.28, 110))
+    for i, n in enumerate(row): E.append(Pop(LG.chip(n, 110, LG.PRETTY[n], F('b', 22)), 150 + i * 215, 150, C['a4'] + 0.25 + i * 0.28))
     for i in range(7): E.append(A([(150 + i * 215 + 118, 205), (150 + i * 215 + 205, 205)], C['a4'] + 0.6 + i * 0.28, MUTED, 5, 16, 0.3))
     E.append(El(T('DevOps Engineering', 'x', 96), 100, 430, C['a5']))
     E.append(El(T('Bootcamp', 'x', 96, ACC), 100, 540, C['a5'] + 0.25))
@@ -69,11 +69,11 @@ def s_promise(C, D, dur):
     return E
 def tchip(s, w, h=84):
     im = rrect(w, h, 16, fill=(28, 52, 60), outline=EN.EDGE, width=2); t = T(s, 'b', 24, TXT); im.alpha_composite(t, ((w - t.width) // 2, (h - t.height) // 2)); return im
-PATH = [('A', 'Foundations', ACC, [('ubuntu', 'c4'), ('bash', 'c5'), ('python', 'c6'), ('git', 'c7')]), ('B', 'Applications', VIO, [('java', 'c9'), ('maven', 'c10'), ('tomcat', 'c11'), ('postgresql', 'c12')]),
-        ('C', 'CI/CD', GOOD, [('jenkins', 'c14'), ('sonarqube', 'c15'), ('docker', 'c16')]), ('D', 'Cloud', PINK, [('AWS', 'c17'), ('Azure', 'c17')]),
+PATH = [('A', 'Foundations', ACC, [('linux', 'c4'), ('bash', 'c5'), ('python', 'c6'), ('git', 'c7')]), ('B', 'Applications', VIO, [('java', 'c9'), ('maven', 'c10'), ('tomcat', 'c11'), ('postgresql', 'c12')]),
+        ('C', 'CI/CD', GOOD, [('jenkins', 'c14'), ('sonarqube', 'c15'), ('docker', 'c16')]), ('D', 'Cloud', PINK, [('aws', 'c17a'), ('azure', 'c17b')]),
         ('E', 'Automation', ACC, [('terraform', 'c18'), ('ansible', 'c19')]), ('F', 'Kubernetes', VIO, [('kubernetes', 'c20'), ('helm', 'c21'), ('argocd', 'c21')]),
-        ('G', 'Security', GOOD, [('trivy', 'c22'), ('vault', 'c22')]), ('H', 'Reliability', WARN, [('prometheus', 'c22'), ('grafana', 'c22')]), ('I', 'Capstone', PINK, [])]
-TITLE_AT = {'A': 'c3', 'B': 'c8', 'C': 'c13', 'D': 'c17', 'E': 'c18', 'F': 'c20', 'G': 'c22', 'H': 'c22', 'I': 'c23'}
+        ('G', 'Security', GOOD, [('trivy', 'c22'), ('vault', 'c22')]), ('H', 'Reliability', WARN, [('prometheus', 'c22b'), ('grafana', 'c22b')]), ('I', 'Capstone', PINK, [])]
+TITLE_AT = {'A': 'c3', 'B': 'c8', 'C': 'c13', 'D': 'c17', 'E': 'c18', 'F': 'c20', 'G': 'c22', 'H': 'c22b', 'I': 'c23'}
 def s_path(C, D, dur):
     E = [El(T('Nine stages. Each builds on the last.', 'x', 56, maxw=1500), 100, 130, C['c1']), ill(C['c1'], 1480, 140)]
     cw, ch = 560, 226
@@ -83,8 +83,7 @@ def s_path(C, D, dur):
         if k == 'I': E.append(Pop(icon('check', 90, TXT, col), x + 30, y + 100, C['c23'] + 0.4)); E.append(El(T('build and run it all', 'm', 28, MUTED), x + 140, y + 130, C['c23'] + 0.6, anim='fade'))
         for j, (nm, cid) in enumerate(lg):
             lx = x + 26 + j * 132; ly = y + 96
-            if nm in ('AWS', 'Azure'): E.append(Pop(tchip(nm, 100, 84), lx, ly, C[cid] + 0.3 + (0.7 if nm == 'Azure' else 0)))
-            else: E.append(Pop(LG.chip(nm, 84), lx, ly, C[cid] + 0.05 + (0.25 * j if cid in ('c21', 'c22') else 0)))
+            E.append(Pop(LG.chip(nm, 84, LG.PRETTY[nm], F('b', 19)), lx, ly - 4, C[cid] + 0.05 + (0.25 * j if cid in ('c21', 'c22', 'c22b') else 0)))
     E.append(pill('Published stage by stage, in order', 1100, 150, C['c24'], WARN, INK, 28, 20, 10)) if False else None
     E.append(El(T('Published stage by stage, in order. This is the plan.', 'b', 32, WARN, maxw=1300), 100, 985, C['c24']))
     return E
@@ -104,7 +103,7 @@ def s_expect(C, D, dur):
     for i, (n, sub, c1, c2, col, lg) in enumerate(items):
         y = 270 + i * 135; E.append(Pop(rrect(1500, 112, 18, fill=PANEL, outline=col, width=3), 100, y, C[c1]))
         E.append(Pop(icon('check', 56, TXT, col), 130, y + 28, C[c1] + 0.15)); E.append(El(T(n, 'b', 40, col), 220, y + 12, C[c1] + 0.15, anim='fade')); E.append(El(T(sub, 'm', 30, MUTED), 220, y + 62, C[c2] + 0.1, anim='fade'))
-        if lg: E.append(logo(lg, 1620, y + 4, C[c1] + 0.3, 104))
+        if lg: E.append(Pop(LG.chip(lg, 100), 1620, y + 6, C[c1] + 0.3))
     return E
 def s_start(C, D, dur):
     E = [El(T('Start here', 'b', 36, ACC), 100, 150, C['f1']), El(T('Lesson 1', 'x', 110), 100, 200, C['f1'] + 0.1)]
