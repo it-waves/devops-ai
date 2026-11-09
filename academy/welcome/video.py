@@ -43,10 +43,10 @@ CHAP = {'promise': 'How we teach', 'path': 'The roadmap', 'lesson': 'Every lesso
 ALL = ['git', 'docker', 'kubernetes', 'jenkins', 'terraform', 'ansible', 'prometheus', 'grafana', 'maven', 'java', 'tomcat', 'postgresql', 'ubuntu', 'python', 'actions', 'sonarqube', 'argocd', 'helm', 'github', 'bash', 'trivy', 'vault']
 def s_hook(C, D, dur):
     t_out = C['a4'] - 0.1
-    E = [Char(130, 440, C['a1'] - 0.2, t_out, C['a2'] + 0.1, C['a4'])]
-    bub = bubble(T('Where do I even start?', 'x', 54, TXT, maxw=560), (150, 0)); bq = Pop(bub, 100, 190, C['a2'] + 0.15); bq.t1 = t_out; E.append(bq)
-    for i, (qx, qy, col, dl) in enumerate([(70, 560, ACC, 0.45), (590, 520, PINK, 0.85), (560, 700, GOOD, 1.25)]):
-        qm = Pop(T('?', 'x', 96, col), qx, qy, C['a2'] + dl); qm.t1 = t_out; E.append(qm)
+    E = [FloatEm('Person shrugging', 150, 470, 400, C['a1'] - 0.2, t_out, bob=8, sway=4, speed=2.2)]
+    bub = bubble(T('Where do I even start?', 'x', 54, TXT, maxw=560), (200, 0)); bq = Pop(bub, 100, 190, C['a2'] + 0.15); bq.t1 = t_out; E.append(bq)
+    for nm, qx, qy, sz, dl, ph in [('Thinking face', 560, 520, 130, 0.45, 0.0), ('Red question mark', 90, 520, 110, 0.85, 1.5), ('Confused face', 575, 700, 120, 1.25, 3.0), ('Anxious face with sweat', 60, 760, 110, 1.7, 4.5)]:
+        E.append(FloatEm(nm, qx, qy, sz, C['a2'] + dl, t_out, bob=12, sway=8, speed=2.6, phase=ph, spin_in=True))
     E.append(Tilt(ALL, 1290, 500, C['a1'] - 0.2, t_out, C['a1'], C['a3'] + 1.0, cols=6, chip=118, gap=34))
     q2 = El(T('Too many tools. No order.', 'b', 34, MUTED, maxw=300), 620, 820, C['a3'], anim='fade'); q2.t1 = t_out; E.append(q2)
     row = ['ubuntu', 'git', 'maven', 'jenkins', 'docker', 'kubernetes', 'terraform', 'prometheus']
@@ -112,6 +112,7 @@ def s_start(C, D, dur):
     E.append(Pop(bulb(120), 160, 620, C['f3'])); E.append(Move(parcel(120), [(C['f3'] + 0.4, 220, 680), (C['f3'] + 2.6, 1500, 680)], None, 5))
     E.append(A([(330, 700), (1380, 700)], C['f3'] + 0.5, MUTED, 5, 22, 1.5)) if False else None
     E.append(El(T('IDEA', 'x', 40, ACC), 160, 760, C['f3'], anim='fade')); E.append(El(T('CUSTOMER', 'x', 40, GOOD), 1400, 760, C['f3'] + 2.2, anim='fade'))
+    E.append(FloatEm('Rocket', 1560, 190, 200, C['f1'] + 0.3, None, bob=14, sway=5, speed=1.8)); E.append(FloatEm('Thumbs up', 1480, 420, 190, C['f5'] - 0.1, None, bob=8, sway=6, speed=2.4, spin_in=True)); E.append(FloatEm('Party popper', 1700, 440, 170, C['f5'] + 0.2, None, bob=10, sway=10, speed=2.8, phase=1.0, spin_in=True))
     E.append(Pop(card(900, 150, GOOD, 'Follow the playlist in order', [('Each lesson builds on the one before.', TXT)], 38), 100, 880, C['f4'])); E.append(Pop(badge('SUBSCRIBE', F('b', 40), INK, ACC, padx=40, pady=20), 1250, 900, C['f4'] + 0.8))
     return E
 FN = dict(hook=s_hook, promise=s_promise, path=s_path, lesson=s_lesson, expect=s_expect, start=s_start)

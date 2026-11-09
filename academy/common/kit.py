@@ -209,3 +209,25 @@ def bubble(text_img, tail_to):
     w, h = text_img.width + 70, text_img.height + 50; im = glass(w, h, PINK, 30); P = PADC; d = ImageDraw.Draw(im); tx, ty = tail_to[0] + P, h + P - 2
     d.polygon([(tx - 26, ty - 6), (tx + 26, ty - 6), (tx + 6, ty + 46)], fill=(34, 62, 70, 255)); d.line([(tx - 26, ty - 6), (tx + 6, ty + 46), (tx + 26, ty - 6)], fill=PINK + (200,), width=2)
     d.rectangle([tx - 24, ty - 10, tx + 24, ty - 3], fill=(32, 58, 66, 255)); im.alpha_composite(text_img, (P + 35, P + 25)); im.info['pad'] = P; return im
+
+# ---------- 3D emoji (Microsoft Fluent Emoji, MIT licence) ----------
+import os
+_EM = '/home/claude/academy/emoji/fl/assets'; _emc = {}
+def emoji_img(name, size):
+    k = (name, size)
+    if k not in _emc:
+        folder = os.path.join(_EM, name); sub = os.path.join(folder, 'Default', '3D') if os.path.isdir(os.path.join(folder, 'Default')) else os.path.join(folder, '3D')
+        f = sorted(os.listdir(sub))[0]; im = Image.open(os.path.join(sub, f)).convert('RGBA'); _emc[k] = im.resize((size, size), Image.LANCZOS)
+    return _emc[k]
+class FloatEm(Dyn):
+    """3D emoji that springs in, bobs/sways, and leaves."""
+    def __init__(self, name, x, y, size, t0, t1=None, bob=10, sway=0, speed=2.0, phase=0.0, spin_in=False):
+        self.im, self.x, self.y, self.t0, self.t1, self.bob, self.sway, self.sp, self.ph, self.spin = emoji_img(name, size), x, y, t0, t1, bob, sway, speed, phase, spin_in
+        super().__init__(lambda t: None if t < t0 or (t1 is not None and t > t1 + 0.4) else round(t, 2), self._d)
+    def _d(self, base, t, k):
+        p = min(1, (t - self.t0) / 0.5); s = 0.4 + 0.6 * ease_back(p); a = min(1, p * 2.5)
+        if self.t1 is not None and t > self.t1: a *= max(0, 1 - (t - self.t1) / 0.4); s *= 1 + 0.2 * (t - self.t1) / 0.4
+        w = max(2, int(self.im.width * s)); im = self.im.resize((w, w), Image.LANCZOS)
+        if self.sway: im = im.rotate(self.sway * math.sin(t * self.sp + self.ph) + (360 * (1 - ease(p)) if self.spin else 0), resample=Image.BICUBIC)
+        if a < 0.999: im.putalpha(im.getchannel('A').point(lambda v: int(v * a)))
+        base.alpha_composite(im, (int(self.x + (self.im.width - im.width) / 2), int(self.y + (self.im.height - im.height) / 2 + self.bob * math.sin(t * self.sp + self.ph))))
