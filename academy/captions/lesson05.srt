@@ -1,0 +1,371 @@
+1
+00:00:00,500 --> 00:00:03,060
+CloudCart wants a new feature: a wish list.
+
+2
+00:00:03,610 --> 00:00:06,490
+One feature, but six kinds of people will touch it.
+
+3
+00:00:07,040 --> 00:00:09,024
+Each one cares about something different.
+
+4
+00:00:09,574 --> 00:00:11,771
+Product asks: is this worth building?
+
+5
+00:00:12,321 --> 00:00:14,391
+Developers ask: how do we build it?
+
+6
+00:00:14,941 --> 00:00:19,485
+QA, security, operations, and DevOps each ask their own question.
+
+7
+00:00:20,035 --> 00:00:22,595
+Today you learn who does what, and why it matters.
+
+8
+00:00:24,645 --> 00:00:25,968
+Why do roles matter?
+
+9
+00:00:26,518 --> 00:00:28,246
+Clear roles mean clear ownership.
+
+10
+00:00:28,796 --> 00:00:32,188
+Without them, important work is done twice, or not at all.
+
+11
+00:00:32,738 --> 00:00:35,767
+In a small team, one person may wear several hats.
+
+12
+00:00:36,317 --> 00:00:40,178
+But the responsibilities still exist, and someone must own each one.
+
+13
+00:00:42,228 --> 00:00:44,425
+Product decides what to build, and why.
+
+14
+00:00:44,975 --> 00:00:47,621
+They listen to customers, and set priorities.
+
+15
+00:00:48,171 --> 00:00:50,624
+They keep a backlog: an ordered list of work.
+
+16
+00:00:51,174 --> 00:00:53,138
+And they describe what done means,
+
+17
+00:00:53,138 --> 00:00:54,236
+using requirements,
+
+18
+00:00:54,236 --> 00:00:56,721
+like the ones from the requirements lesson.
+
+19
+00:00:57,271 --> 00:00:59,447
+Their question: is this worth building?
+
+20
+00:01:01,497 --> 00:01:03,118
+Developers build the software.
+
+21
+00:01:03,668 --> 00:01:06,484
+They write the code, and review each other's changes.
+
+22
+00:01:07,034 --> 00:01:10,128
+They fix bugs, and write unit tests for their own code.
+
+23
+00:01:10,678 --> 00:01:13,451
+In many teams, they also help run what they build.
+
+24
+00:01:14,001 --> 00:01:16,177
+Their question: how do we build this well?
+
+25
+00:01:18,227 --> 00:01:20,979
+QA, or quality assurance, protects quality.
+
+26
+00:01:21,529 --> 00:01:24,878
+They plan tests, and run them, by hand and by automation.
+
+27
+00:01:25,428 --> 00:01:27,604
+They find defects before customers do.
+
+28
+00:01:28,154 --> 00:01:32,058
+Good QA also improves the process, so fewer defects appear.
+
+29
+00:01:32,608 --> 00:01:36,363
+Quality is a team responsibility, not only QA's job.
+
+30
+00:01:36,913 --> 00:01:39,601
+Their question: does it really work, in every case?
+
+31
+00:01:41,651 --> 00:01:44,168
+Security protects the system, and the data.
+
+32
+00:01:44,718 --> 00:01:48,089
+They assess risks, and set rules for access and secrets.
+
+33
+00:01:48,639 --> 00:01:51,668
+They scan code and dependencies for known weaknesses.
+
+34
+00:01:52,218 --> 00:01:56,016
+The modern goal is to build security in early, not add it at the end.
+
+35
+00:01:56,566 --> 00:01:58,870
+Security is also everyone's job.
+
+36
+00:01:59,420 --> 00:02:02,342
+Their question: what could go wrong, and who could abuse it?
+
+37
+00:02:04,392 --> 00:02:06,547
+Operations runs the live system.
+
+38
+00:02:07,097 --> 00:02:10,723
+They monitor health, respond to incidents, and manage capacity.
+
+39
+00:02:11,273 --> 00:02:13,300
+They keep backups, and apply updates.
+
+40
+00:02:13,850 --> 00:02:16,175
+They are often the first to know when something breaks.
+
+41
+00:02:16,725 --> 00:02:19,520
+Their question: is it healthy, and can it keep running?
+
+42
+00:02:21,570 --> 00:02:23,234
+DevOps connects all of this.
+
+43
+00:02:23,784 --> 00:02:27,304
+A DevOps engineer builds and improves the delivery path.
+
+44
+00:02:27,854 --> 00:02:30,905
+That means pipelines, automation, and environments.
+
+45
+00:02:31,455 --> 00:02:35,337
+They help developers ship safely, and operations run reliably.
+
+46
+00:02:35,887 --> 00:02:40,133
+DevOps is also a culture: shared goals, and shared responsibility.
+
+47
+00:02:40,683 --> 00:02:43,584
+Their question: how do we deliver faster, and safer?
+
+48
+00:02:45,634 --> 00:02:47,554
+Look at how many teams used to work.
+
+49
+00:02:48,104 --> 00:02:51,944
+Developers wrote code, then threw it over a wall to operations.
+
+50
+00:02:52,494 --> 00:02:56,035
+Developers wanted change. Operations wanted stability.
+
+51
+00:02:56,585 --> 00:02:59,167
+When something broke, each side blamed the other.
+
+52
+00:02:59,717 --> 00:03:03,215
+DevOps tears down the wall, with shared goals, and shared tools.
+
+53
+00:03:03,765 --> 00:03:06,603
+Everyone cares about both speed, and stability.
+
+54
+00:03:08,653 --> 00:03:10,978
+Here are the six roles, side by side.
+
+55
+00:03:11,528 --> 00:03:12,915
+Product: what, and why.
+
+56
+00:03:13,465 --> 00:03:14,830
+Developers: build.
+
+57
+00:03:15,380 --> 00:03:16,596
+QA: verify.
+
+58
+00:03:17,146 --> 00:03:18,597
+Security: protect.
+
+59
+00:03:19,147 --> 00:03:20,640
+Operations: run.
+
+60
+00:03:21,190 --> 00:03:23,132
+DevOps: connect, and automate.
+
+61
+00:03:25,182 --> 00:03:27,294
+Follow the wish list feature through the team.
+
+62
+00:03:27,844 --> 00:03:31,919
+Product writes the story: customers can save products to a wish list.
+
+63
+00:03:32,469 --> 00:03:34,837
+Developers build it, and add unit tests.
+
+64
+00:03:35,387 --> 00:03:37,157
+QA tests it, in every case.
+
+65
+00:03:37,707 --> 00:03:41,889
+Security checks that one customer cannot see another customer's list.
+
+66
+00:03:42,439 --> 00:03:44,871
+A DevOps pipeline builds and deploys it.
+
+67
+00:03:45,421 --> 00:03:48,535
+Operations monitors it, and watches for problems.
+
+68
+00:03:49,085 --> 00:03:50,877
+Every role touched one feature.
+
+69
+00:03:52,927 --> 00:03:55,210
+Now try it: who owns each problem?
+
+70
+00:03:55,760 --> 00:03:57,829
+What should we build next? Product.
+
+71
+00:03:58,379 --> 00:04:03,136
+Checkout is slow at two in the morning? Operations responds, with the developers.
+
+72
+00:04:03,686 --> 00:04:08,913
+A library has a known vulnerability? Security flags it, and developers upgrade it.
+
+73
+00:04:09,463 --> 00:04:13,431
+Deploying takes two hours of manual steps? DevOps automates it.
+
+74
+00:04:13,981 --> 00:04:18,717
+Does the discount code work in every case? QA tests it, and developers fix it.
+
+75
+00:04:19,267 --> 00:04:22,360
+Notice that many problems involve more than one role.
+
+76
+00:04:24,410 --> 00:04:26,266
+Watch out for four common myths.
+
+77
+00:04:26,816 --> 00:04:31,084
+Myth one: a DevOps engineer is a renamed system administrator.
+
+78
+00:04:31,084 --> 00:04:31,635
+In fact,
+
+79
+00:04:31,635 --> 00:04:35,008
+the work centers on automation and collaboration.
+
+80
+00:04:35,558 --> 00:04:39,505
+Myth two: only QA owns quality. In fact, the whole team does.
+
+81
+00:04:40,055 --> 00:04:45,729
+Myth three: security slows teams down. Late security does. Early security saves time.
+
+82
+00:04:46,279 --> 00:04:49,535
+Myth four: developers never need to know operations.
+
+83
+00:04:49,535 --> 00:04:52,039
+Knowing how code runs makes better code.
+
+84
+00:04:52,589 --> 00:04:54,680
+Roles differ, but the goal is shared.
+
+85
+00:04:56,730 --> 00:04:57,605
+Quick check.
+
+86
+00:04:58,155 --> 00:05:00,437
+Which role decides what to build, and why?
+
+87
+00:05:00,987 --> 00:05:02,566
+Who runs the live system?
+
+88
+00:05:03,116 --> 00:05:06,743
+What problem did the wall between developers and operations cause?
+
+89
+00:05:07,293 --> 00:05:09,831
+Name two things a DevOps engineer builds.
+
+90
+00:05:10,381 --> 00:05:14,392
+Objective covered: MC01-O05.
+
+91
+00:05:14,942 --> 00:05:17,011
+Pause the video, and answer out loud.
+
+92
+00:05:23,561 --> 00:05:25,673
+Next lesson: tracing one change.
+
+93
+00:05:26,223 --> 00:05:28,101
+Subscribe, so you do not miss it.

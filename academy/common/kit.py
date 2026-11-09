@@ -113,9 +113,13 @@ def glass(w, h, col, r=22):
     im.info['pad'] = P; return im
 def card(w, h, col, title, lines, tsize=36, lsize=30):
     im = glass(w, h, col); d = ImageDraw.Draw(im); P = PADC
-    d.text((P + 28, P + 20), title, font=F('b', tsize), fill=col); y = P + 20 + tsize + 20
-    for s, c in lines:
-        t = T(s, 'm', lsize, c, maxw=w - 40); im.alpha_composite(t, (P + 28, y)); y += t.height + 8
+    ts = [T(s, 'm', lsize, c, maxw=w - 40) for s, c in lines]
+    lh = sum(t.height + 8 for t in ts) - (8 if ts else 0)
+    th = tsize if title else 0
+    ch = th + (20 if (title and ts) else 0) + lh
+    y = P + (max(20, (h - ch) // 2) if (title or lines) else 20)
+    if title: d.text((P + 28, y), title, font=F('b', tsize), fill=col); y += tsize + 20
+    for t in ts: im.alpha_composite(t, (P + 28, y)); y += t.height + 8
     im.info['pad'] = P; return im
 def row(w, h, col): return glass(w, h, col, 18)
 
