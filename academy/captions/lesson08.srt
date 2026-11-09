@@ -1,0 +1,419 @@
+1
+00:00:00,500 --> 00:00:03,423
+This is the last lesson of the first masterclass.
+
+2
+00:00:03,973 --> 00:00:06,874
+So today, you stop watching, and start designing.
+
+3
+00:00:07,424 --> 00:00:10,283
+CloudCart wants a new feature: save for later.
+
+4
+00:00:10,833 --> 00:00:14,523
+Your job is to plan how it travels from idea to customers.
+
+5
+00:00:15,073 --> 00:00:17,655
+You will use everything from lessons one to seven.
+
+6
+00:00:19,705 --> 00:00:21,006
+Here is the scenario.
+
+7
+00:00:21,556 --> 00:00:25,247
+Customers want to move an item out of the cart, and save it for later.
+
+8
+00:00:25,797 --> 00:00:27,866
+The ticket is C A R T, two ten.
+
+9
+00:00:28,416 --> 00:00:31,019
+You must produce one page, a workflow table.
+
+10
+00:00:31,569 --> 00:00:35,388
+It shows each stage, who owns it, what it produces, and who receives it.
+
+11
+00:00:35,938 --> 00:00:38,775
+It also shows the approvals, and the rollback plan.
+
+12
+00:00:40,825 --> 00:00:42,425
+Start with the table itself.
+
+13
+00:00:42,975 --> 00:00:44,618
+The first column is the stage.
+
+14
+00:00:45,168 --> 00:00:48,624
+The second is the owner, one named role, never everyone.
+
+15
+00:00:49,174 --> 00:00:52,459
+The third is the artifact, the thing that stage produces.
+
+16
+00:00:53,009 --> 00:00:56,316
+The fourth is the handoff, which says who receives it next.
+
+17
+00:00:56,866 --> 00:00:59,511
+If any cell is empty, the workflow has a gap.
+
+18
+00:01:01,561 --> 00:01:03,460
+Now fill it in for save for later.
+
+19
+00:01:04,010 --> 00:01:04,808
+Requirement.
+
+20
+00:01:04,808 --> 00:01:05,873
+Product owns it,
+
+21
+00:01:05,873 --> 00:01:09,135
+and produces the ticket with acceptance criteria.
+
+22
+00:01:09,135 --> 00:01:10,666
+It goes to a developer.
+
+23
+00:01:11,216 --> 00:01:11,533
+Code.
+
+24
+00:01:11,533 --> 00:01:12,804
+A developer owns it,
+
+25
+00:01:12,804 --> 00:01:14,202
+and produces a branch,
+
+26
+00:01:14,202 --> 00:01:14,710
+commits,
+
+27
+00:01:14,710 --> 00:01:15,663
+and unit tests.
+
+28
+00:01:15,663 --> 00:01:17,061
+It goes to a reviewer.
+
+29
+00:01:17,611 --> 00:01:18,054
+Review.
+
+30
+00:01:18,054 --> 00:01:19,256
+A teammate owns it,
+
+31
+00:01:19,256 --> 00:01:21,660
+and produces an approved pull request.
+
+32
+00:01:21,660 --> 00:01:23,179
+It goes to the pipeline.
+
+33
+00:01:23,729 --> 00:01:24,046
+Test.
+
+34
+00:01:24,046 --> 00:01:25,820
+The pipeline and Q A own it,
+
+35
+00:01:25,820 --> 00:01:28,228
+and produce a build and a test report.
+
+36
+00:01:28,228 --> 00:01:30,065
+It goes to the release owner.
+
+37
+00:01:30,615 --> 00:01:34,071
+Notice that every row ends by naming the next receiver.
+
+38
+00:01:36,121 --> 00:01:37,550
+Three stages remain.
+
+39
+00:01:38,100 --> 00:01:38,650
+Release.
+
+40
+00:01:38,650 --> 00:01:42,837
+The release owner produces version one point five point zero,
+
+41
+00:01:42,837 --> 00:01:44,142
+with release notes.
+
+42
+00:01:44,142 --> 00:01:45,652
+It goes to operations.
+
+43
+00:01:46,202 --> 00:01:51,237
+Deployment. DevOps produces the deployment record, and hands over to monitoring.
+
+44
+00:01:51,787 --> 00:01:56,182
+Feedback. Product and operations read the metrics, and produce new tickets.
+
+45
+00:01:56,732 --> 00:01:59,932
+Those tickets go back to Product, and the loop continues.
+
+46
+00:02:01,982 --> 00:02:03,966
+Handoffs are where work gets lost.
+
+47
+00:02:04,516 --> 00:02:06,265
+A good handoff has four parts.
+
+48
+00:02:06,815 --> 00:02:10,229
+First, a clear input: what exactly is being passed on.
+
+49
+00:02:10,779 --> 00:02:13,765
+Second, a done rule: what must be true before it moves.
+
+50
+00:02:14,315 --> 00:02:17,558
+Third, evidence, such as a test report, or an approval.
+
+51
+00:02:18,108 --> 00:02:21,073
+Fourth, a named receiver, who knows it is now theirs.
+
+52
+00:02:21,623 --> 00:02:24,183
+Miss one, and work waits, or gets repeated.
+
+53
+00:02:26,233 --> 00:02:28,324
+Now add what you learned in lesson seven.
+
+54
+00:02:28,874 --> 00:02:33,930
+Which environments does this change pass through? Development, then test, then production.
+
+55
+00:02:34,480 --> 00:02:39,066
+Which approvals sit in between? Code review, Q A sign-off, and a release approval.
+
+56
+00:02:39,616 --> 00:02:40,535
+Rate the risk.
+
+57
+00:02:40,535 --> 00:02:42,636
+Saving an item is low to medium,
+
+58
+00:02:42,636 --> 00:02:44,474
+because it touches the cart,
+
+59
+00:02:44,474 --> 00:02:45,590
+but not payments.
+
+60
+00:02:46,140 --> 00:02:50,257
+Write the rollback plan: the trigger, the previous version, and who decides.
+
+61
+00:02:50,807 --> 00:02:53,850
+For example: if errors stay high for five minutes,
+
+62
+00:02:53,850 --> 00:02:56,588
+return to version one point four point three.
+
+63
+00:02:58,638 --> 00:03:00,281
+A good workflow can be traced.
+
+64
+00:03:00,831 --> 00:03:03,433
+Start at the ticket: C A R T, two ten.
+
+65
+00:03:03,983 --> 00:03:06,309
+It links to a pull request, and its review.
+
+66
+00:03:06,859 --> 00:03:08,629
+Then to the build, and the version.
+
+67
+00:03:09,179 --> 00:03:10,950
+Then to the deployment record.
+
+68
+00:03:11,500 --> 00:03:15,255
+If customers report a problem, you can follow this chain backwards.
+
+69
+00:03:15,805 --> 00:03:18,365
+No chain, no trace, and no quick answers.
+
+70
+00:03:20,415 --> 00:03:24,276
+How do you know your workflow is good? Use this pass or fail rubric.
+
+71
+00:03:24,826 --> 00:03:27,173
+One: every stage has one named owner.
+
+72
+00:03:27,723 --> 00:03:30,667
+Two: every stage produces a named artifact.
+
+73
+00:03:31,217 --> 00:03:33,692
+Three: every handoff names who receives it.
+
+74
+00:03:34,242 --> 00:03:38,359
+Four: each move toward production has an approval that matches the risk.
+
+75
+00:03:38,909 --> 00:03:42,472
+Five: the rollback plan names a trigger, and a previous version.
+
+76
+00:03:43,022 --> 00:03:45,411
+Six: feedback returns as a new ticket.
+
+77
+00:03:45,961 --> 00:03:48,052
+You pass only when all six are true.
+
+78
+00:03:50,102 --> 00:03:51,958
+Watch for four common mistakes.
+
+79
+00:03:52,508 --> 00:03:55,239
+No owner. If everyone owns it, nobody does.
+
+80
+00:03:55,789 --> 00:03:59,671
+A vague artifact, like the code, instead of pull request sixty-one.
+
+81
+00:04:00,221 --> 00:04:03,613
+No rollback plan, so the first failure becomes a crisis.
+
+82
+00:04:04,163 --> 00:04:06,681
+No feedback loop, so the team never learns.
+
+83
+00:04:07,231 --> 00:04:09,044
+Check your own table for all four.
+
+84
+00:04:11,094 --> 00:04:12,310
+Now it is your turn.
+
+85
+00:04:12,860 --> 00:04:16,743
+The new feature is order tracking: customers see where their parcel is.
+
+86
+00:04:17,293 --> 00:04:21,047
+Create your own workflow table for it, with all seven stages.
+
+87
+00:04:21,597 --> 00:04:25,224
+Add the environments, approvals, risk rating, and rollback plan.
+
+88
+00:04:25,774 --> 00:04:28,313
+Then mark yourself against the six-point rubric.
+
+89
+00:04:28,863 --> 00:04:31,721
+Pause the video now, and do it before you continue.
+
+90
+00:04:48,271 --> 00:04:50,724
+Before we close, look at the whole masterclass.
+
+91
+00:04:51,274 --> 00:04:53,429
+You met requirements, and user stories.
+
+92
+00:04:53,979 --> 00:04:58,758
+You compared the phases with Waterfall, Agile, Scrum, Kanban, and DevOps.
+
+93
+00:04:59,308 --> 00:05:02,273
+You learned the parts of an application, and who does what.
+
+94
+00:05:02,823 --> 00:05:06,748
+You traced a change, and learned environments, approvals, and rollback.
+
+95
+00:05:07,298 --> 00:05:09,773
+And today, you designed a complete workflow.
+
+96
+00:05:10,323 --> 00:05:13,672
+Passing the rubric on your own is how you show you have mastered it.
+
+97
+00:05:15,722 --> 00:05:16,597
+Quick check.
+
+98
+00:05:17,147 --> 00:05:19,728
+What four columns does a workflow table need?
+
+99
+00:05:20,278 --> 00:05:22,219
+What are the four parts of a good handoff?
+
+100
+00:05:22,769 --> 00:05:24,284
+What does a rollback plan name?
+
+101
+00:05:24,834 --> 00:05:26,839
+Which six things does the rubric check?
+
+102
+00:05:27,389 --> 00:05:31,485
+Objective covered: MC01-O08.
+
+103
+00:05:32,035 --> 00:05:34,894
+Pause the video, and check your table against the rubric.
+
+104
+00:05:45,444 --> 00:05:48,729
+Next masterclass: I T and computer fundamentals.
+
+105
+00:05:49,279 --> 00:05:51,157
+Subscribe, so you do not miss it.
