@@ -43,12 +43,16 @@
   },
   {
    "id": "MC01-SDLC-PILOT",
-   "state": "PLANNED",
+   "state": "DESIGNED (storyboard v1)",
    "depends": [
     "BLUEPRINT-V3",
     "VOICE"
    ],
-   "next": "storyboard"
+   "next": "script_sdlc01 + am_eric TTS + render pipeline for the new scenes",
+   "path": "/home/claude/academy/sdlc_pilot_storyboard.md",
+   "blockers": [
+    "devops-ai repo push needs GitHub App access"
+   ]
   },
   {
    "id": "BLUEPRINT-V3",

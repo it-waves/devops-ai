@@ -1,0 +1,24 @@
+# MC01 L1 Lesson 1 (PILOT): From Idea to Customer. Storyboard v1
+State: DESIGNED. Voice: Kokoro am_eric, speed 0.97, pronunciation.json. Target length 5:30 to 6:30. 1920x1080, navy/cyan.
+Learning objectives: (1) name the 7 stages of the software development life cycle; (2) say what happens in each; (3) trace one change through them; (4) recognize where DevOps tools plug in later.
+Running example: CloudCart, a small online shop. Authentic evidence: the real CI run 42607279375 (11 tests pass, deployment checks pass). Everything else is labelled ILLUSTRATION.
+
+| # | Time | Visual (animation) | Exact narration | Evidence type | Caption/transition |
+|---|---|---|---|---|---|
+| S1 | 0:00-0:20 | Cold open: a customer taps "Buy" on a shop page; the screen shows "Who built this? How did it get here?" | "Every app you use started as an idea in someone's head. So how does an idea become something a customer can actually use? That is the software development life cycle, and in this lesson you will learn all seven stages." | ILLUSTRATION | cut |
+| S2 | 0:20-0:50 | Title card; roadmap of 7 stage icons in a row, lighting up one by one | "We will follow one small shop, called CloudCart, from idea to customer. By the end you can name every stage, say what happens in it, and see where DevOps fits." | ILLUSTRATION | build-in |
+| S3 | 0:50-1:30 | Stage 1 Plan: sticky notes from owner, customer, developer merge into one goal line "Customers can browse products and place an order" | "Stage one: plan. Before anyone writes code, the team agrees on the problem. Who is it for, and what must it do? For CloudCart: customers browse products and place an order. A written plan avoids building the wrong thing, which is the most expensive mistake." | ILLUSTRATION | slide-left |
+| S4 | 1:30-2:10 | Stage 2 Requirements: list builds with two columns, "What it does" (functional) and "How well it does it" (non-functional: fast, secure) | "Stage two: requirements. Functional requirements say what the system does, like list products. Non-functional requirements say how well, like answering within one second. Vague requirements are why projects drift." | ILLUSTRATION | slide-left |
+| S5 | 2:10-2:50 | Stage 3 Design: boxes appear: browser, API, data store, arrows animate | "Stage three: design. Here the team decides the parts and how they talk. CloudCart has a browser, an API, and a data store. Drawing it first lets people spot problems while they are still cheap to fix." | ILLUSTRATION | slide-left |
+| S6 | 2:50-3:30 | Stage 4 Build: file tree of the real CloudCart source (Api.java, OrderService.java), cursor highlights a function | "Stage four: build. Developers turn the design into code. This is real CloudCart source. This file calculates an order total. Code lives in version control, so every change is tracked." | Real file from repo | zoom |
+| S7 | 3:30-4:20 | Stage 5 Test: real CI log lines scroll: "Tests run: 11, Failures: 0", "BUILD SUCCESS" with highlight | "Stage five: test. Automated tests check the code every time it changes. This is a real run from our pipeline: eleven tests, zero failures, build success. If one failed, the change would stop here, before any customer sees it." | Real CI transcript | zoom |
+| S8 | 4:20-5:00 | Stage 6 Release/deploy: the WAR file moves into a server box; real log "RUNTIME CHECKS PASSED" and health JSON `{"status":"UP"}` | "Stage six: release and deploy. The tested package is placed on a server and started. Notice we checked it again while running: the health check answers UP, and an order for two items totals 7000 cents. Passing tests and a working deployment are two different checks." | Real CI transcript (deploy job) | slide-left |
+| S9 | 5:00-5:25 | Stage 7 Operate and feedback: loop arrow from customers back to Plan; badge "DevOps = shortening this loop" | "Stage seven: operate and learn. We watch the system, collect feedback, and the loop starts again. DevOps is about making this loop fast and safe, using tools you will learn in this course: Git, Maven, Jenkins, Docker, Kubernetes and more." | ILLUSTRATION | build |
+| S10 | 5:25-5:50 | Recap strip of 7 stages + 3 self-check questions on screen | "Quick check. Which stage decides what the system must do? Which stage caught a bad change before customers? And which two checks prove an app really works? Pause and answer, then keep going. Next lesson: requirements in depth." | Text | fade |
+
+## Production notes
+- Narration is stored per scene in `script_sdlc01.py` with phonetic "say" overrides taken from pronunciation.json; captions come from audio durations.
+- Disclosures on screen: "Illustration" badge on S1 to S5, S9; "Real CI run" badge on S6 to S8.
+- Gate D checks before approval: frame sheet, loudness, pronunciation, caption sync.
+- Comprehension validation: PENDING (no learner test yet).
+- Known limit: CloudCart code on screen is v0.1.0 with in-memory data; the lesson does not claim production readiness.
