@@ -1,0 +1,347 @@
+1
+00:00:00,500 --> 00:00:02,527
+One small change. Many steps.
+
+2
+00:00:03,077 --> 00:00:06,533
+CloudCart wants free shipping on orders over fifty dollars.
+
+3
+00:00:07,083 --> 00:00:11,840
+It sounds simple. But a change passes through many hands before customers see it.
+
+4
+00:00:12,390 --> 00:00:15,291
+Tracing it shows how the whole life cycle connects.
+
+5
+00:00:15,841 --> 00:00:18,849
+Today you follow one change, from idea to feedback.
+
+6
+00:00:20,899 --> 00:00:23,054
+Here is the journey, in seven steps.
+
+7
+00:00:23,604 --> 00:00:25,993
+First, a requirement says what is needed.
+
+8
+00:00:26,543 --> 00:00:28,015
+Then code makes it happen.
+
+9
+00:00:28,565 --> 00:00:29,930
+Reviewers check the code.
+
+10
+00:00:30,480 --> 00:00:31,739
+Tests prove it works.
+
+11
+00:00:32,289 --> 00:00:36,193
+A release packages the approved version, and deployment puts it live.
+
+12
+00:00:36,743 --> 00:00:38,258
+Feedback shows how it went.
+
+13
+00:00:38,808 --> 00:00:40,258
+Then the loop starts again.
+
+14
+00:00:42,308 --> 00:00:43,972
+Step one: the requirement.
+
+15
+00:00:44,522 --> 00:00:47,679
+Product writes a ticket: C A R T, one forty-two.
+
+16
+00:00:48,229 --> 00:00:50,213
+It includes acceptance criteria.
+
+17
+00:00:50,763 --> 00:00:54,411
+Given a cart of fifty dollars or more, shipping shows zero dollars.
+
+18
+00:00:54,961 --> 00:00:58,609
+Acceptance criteria turn an idea into something testable.
+
+19
+00:01:00,659 --> 00:01:01,875
+Step two: the code.
+
+20
+00:01:02,425 --> 00:01:05,945
+A developer creates a branch, a separate copy of the main code.
+
+21
+00:01:06,495 --> 00:01:09,311
+They change the shipping rule, and write a unit test.
+
+22
+00:01:09,861 --> 00:01:13,232
+Each saved change is a commit, with its own identifier.
+
+23
+00:01:13,782 --> 00:01:16,662
+In this example, the commit links back to the ticket.
+
+24
+00:01:18,712 --> 00:01:19,949
+Step three: review.
+
+25
+00:01:20,499 --> 00:01:22,547
+The developer opens a pull request.
+
+26
+00:01:23,097 --> 00:01:25,913
+A teammate reads the change, and asks questions.
+
+27
+00:01:26,463 --> 00:01:29,087
+Review catches mistakes, and shares knowledge.
+
+28
+00:01:29,637 --> 00:01:33,157
+Only after approval does the change merge into the main code.
+
+29
+00:01:35,207 --> 00:01:36,508
+Step four: test.
+
+30
+00:01:37,058 --> 00:01:40,237
+When the change merges, a pipeline starts automatically.
+
+31
+00:01:40,787 --> 00:01:44,008
+It builds the application, and runs the automated tests.
+
+32
+00:01:44,558 --> 00:01:47,204
+In this example, build three eighteen passes.
+
+33
+00:01:47,754 --> 00:01:50,762
+QA also checks the change in a test environment.
+
+34
+00:01:51,312 --> 00:01:54,384
+If a test fails, the change goes back to the developer.
+
+35
+00:01:56,434 --> 00:01:57,799
+Step five: release.
+
+36
+00:01:58,349 --> 00:02:02,040
+The approved build gets a version number: one point four point three.
+
+37
+00:02:02,590 --> 00:02:04,595
+Release notes explain what changed.
+
+38
+00:02:05,145 --> 00:02:09,049
+The version number lets everyone say exactly which code is running.
+
+39
+00:02:11,099 --> 00:02:12,614
+Step six: deployment.
+
+40
+00:02:13,164 --> 00:02:16,940
+The release goes to a test environment first, then to production.
+
+41
+00:02:17,490 --> 00:02:20,455
+The deployment is recorded: what, when, and by whom.
+
+42
+00:02:21,005 --> 00:02:24,376
+A safe deployment can be repeated, and reversed if needed.
+
+43
+00:02:24,926 --> 00:02:27,934
+Environments and rollback get their own lesson next.
+
+44
+00:02:29,984 --> 00:02:31,477
+Step seven: feedback.
+
+45
+00:02:32,027 --> 00:02:34,673
+Monitoring shows errors, speed, and traffic.
+
+46
+00:02:35,223 --> 00:02:38,572
+Customers react: orders, comments, and support tickets.
+
+47
+00:02:39,122 --> 00:02:42,045
+Did free shipping increase orders? Did anything break?
+
+48
+00:02:42,595 --> 00:02:45,965
+Feedback becomes the next requirement, and the loop continues.
+
+49
+00:02:48,015 --> 00:02:50,084
+Notice that every step left a trail.
+
+50
+00:02:50,634 --> 00:02:51,214
+The ticket,
+
+51
+00:02:51,214 --> 00:02:51,794
+the commit,
+
+52
+00:02:51,794 --> 00:02:52,690
+the pull request,
+
+53
+00:02:52,690 --> 00:02:53,218
+the build,
+
+54
+00:02:53,218 --> 00:02:53,850
+the release,
+
+55
+00:02:53,850 --> 00:02:55,221
+and the deployment record.
+
+56
+00:02:55,771 --> 00:02:57,392
+This is called traceability.
+
+57
+00:02:57,942 --> 00:03:01,441
+If something breaks, you can follow the trail backwards to the cause.
+
+58
+00:03:01,991 --> 00:03:04,295
+Good teams make every step leave evidence.
+
+59
+00:03:06,345 --> 00:03:09,438
+Now suppose customers report a wrong shipping price.
+
+60
+00:03:09,988 --> 00:03:13,252
+Start from the symptom, and ask: which version is running?
+
+61
+00:03:13,802 --> 00:03:16,405
+That points to the release, and the build behind it.
+
+62
+00:03:16,955 --> 00:03:19,131
+Then to the pull request, and its review.
+
+63
+00:03:19,681 --> 00:03:22,198
+And finally to the ticket, to see what was asked.
+
+64
+00:03:22,748 --> 00:03:25,778
+Tracing backwards turns a mystery into a short search.
+
+65
+00:03:27,828 --> 00:03:31,049
+Where does the problem start? Match each symptom to a step.
+
+66
+00:03:31,599 --> 00:03:35,397
+Nobody agrees what free shipping means? The requirement was unclear.
+
+67
+00:03:35,947 --> 00:03:38,827
+The change broke another page? The tests missed it.
+
+68
+00:03:39,377 --> 00:03:43,195
+A bug went unnoticed for a week? Monitoring and feedback were weak.
+
+69
+00:03:43,745 --> 00:03:48,332
+Nobody knows which version is live? The release and deployment records are missing.
+
+70
+00:03:48,882 --> 00:03:52,146
+Problems often show up late, but they usually start early.
+
+71
+00:03:54,196 --> 00:03:56,052
+Watch out for four common myths.
+
+72
+00:03:56,602 --> 00:03:59,784
+Myth one: a change is finished when the code is written.
+
+73
+00:03:59,784 --> 00:04:00,239
+In fact,
+
+74
+00:04:00,239 --> 00:04:02,682
+it is finished when it works for customers.
+
+75
+00:04:03,232 --> 00:04:07,776
+Myth two: testing is one step at the end. In fact, testing happens throughout.
+
+76
+00:04:08,326 --> 00:04:11,910
+Myth three: feedback is optional. Without it, the team is guessing.
+
+77
+00:04:12,460 --> 00:04:17,303
+Myth four: small changes do not need the full path. Small changes break things too.
+
+78
+00:04:17,853 --> 00:04:19,858
+Follow the whole path, every time.
+
+79
+00:04:21,908 --> 00:04:22,783
+Quick check.
+
+80
+00:04:23,333 --> 00:04:25,082
+Name the seven steps, in order.
+
+81
+00:04:25,632 --> 00:04:27,573
+What are acceptance criteria for?
+
+82
+00:04:28,123 --> 00:04:29,446
+What is traceability?
+
+83
+00:04:29,996 --> 00:04:33,836
+Why is feedback the last step, and also the first of the next change?
+
+84
+00:04:34,386 --> 00:04:38,439
+Objective covered: MC01-O06.
+
+85
+00:04:38,989 --> 00:04:42,509
+Pause the video, and write the seven steps for a change of your own.
+
+86
+00:04:55,059 --> 00:04:57,641
+Next lesson: environments and releases.
+
+87
+00:04:58,191 --> 00:05:00,068
+Subscribe, so you do not miss it.

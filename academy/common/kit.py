@@ -235,3 +235,35 @@ class FloatEm(Dyn):
         if self.sway: im = im.rotate(self.sway * math.sin(t * self.sp + self.ph) + (360 * (1 - ease(p)) if self.spin else 0), resample=Image.BICUBIC)
         if a < 0.999: im.putalpha(im.getchannel('A').point(lambda v: int(v * a)))
         base.alpha_composite(im, (int(self.x + (self.im.width - im.width) / 2), int(self.y + (self.im.height - im.height) / 2 + self.bob * math.sin(t * self.sp + self.ph))))
+
+
+def glyph(kind, size, col, bg=None):
+    """Custom flat glyphs (requirement doc, code, review, test, release tag, deploy rocket-arrow, feedback loop)."""
+    S = 4; s = size * S
+    im = Image.new('RGBA', (s, s), (0, 0, 0, 0)); d = ImageDraw.Draw(im); lw = max(3, int(s * .07))
+    if bg: d.ellipse([0, 0, s - 1, s - 1], fill=tint(col, 45) if 'tint' in globals() else (*col[:3], 50))
+    if kind == 'doc':
+        d.rounded_rectangle([s*.24, s*.14, s*.76, s*.86], radius=s*.06, outline=col, width=lw)
+        for i, w in enumerate((.44, .44, .30)): d.line([s*.34, s*.34 + i*s*.15, s*.34 + s*w, s*.34 + i*s*.15], fill=col, width=lw)
+    elif kind == 'code':
+        d.line([s*.38, s*.28, s*.16, s*.50, s*.38, s*.72], fill=col, width=lw, joint='curve')
+        d.line([s*.62, s*.28, s*.84, s*.50, s*.62, s*.72], fill=col, width=lw, joint='curve')
+        d.line([s*.56, s*.22, s*.44, s*.78], fill=col, width=lw)
+    elif kind == 'eye':
+        d.ellipse([s*.10, s*.28, s*.90, s*.72], outline=col, width=lw); d.ellipse([s*.38, s*.38, s*.62, s*.62], fill=col)
+    elif kind == 'test':
+        d.polygon([(s*.50, s*.10), (s*.84, s*.24), (s*.80, s*.62), (s*.50, s*.90), (s*.20, s*.62), (s*.16, s*.24)], outline=col, width=lw)
+        d.line([s*.34, s*.50, s*.46, s*.62, s*.68, s*.36], fill=col, width=lw, joint='curve')
+    elif kind == 'tag':
+        d.polygon([(s*.14, s*.20), (s*.56, s*.20), (s*.88, s*.52), (s*.56, s*.84), (s*.14, s*.52)][:0] or [(s*.12, s*.16), (s*.52, s*.16), (s*.88, s*.52), (s*.52, s*.88), (s*.12, s*.48)], outline=col, width=lw)
+        d.ellipse([s*.24, s*.26, s*.36, s*.38], fill=col)
+    elif kind == 'rocket':
+        d.line([s*.50, s*.84, s*.50, s*.22], fill=col, width=lw); d.polygon([(s*.50, s*.10), (s*.28, s*.38), (s*.72, s*.38)], fill=col)
+        d.line([s*.22, s*.88, s*.78, s*.88], fill=col, width=lw)
+    elif kind == 'loop':
+        d.arc([s*.14, s*.14, s*.86, s*.86], 40, 320, fill=col, width=lw)
+        d.polygon([(s*.80, s*.20), (s*.90, s*.46), (s*.60, s*.40)], fill=col)
+    elif kind == 'link':
+        d.rounded_rectangle([s*.08, s*.36, s*.54, s*.64], radius=s*.14, outline=col, width=lw)
+        d.rounded_rectangle([s*.46, s*.36, s*.92, s*.64], radius=s*.14, outline=col, width=lw)
+    return im.resize((size, size), Image.LANCZOS)
