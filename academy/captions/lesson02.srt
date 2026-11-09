@@ -1,0 +1,287 @@
+1
+00:00:00,500 --> 00:00:01,844
+Imagine your boss says,
+
+2
+00:00:01,974 --> 00:00:03,745
+build me a fast online shop.
+
+3
+00:00:04,295 --> 00:00:05,233
+Sounds simple.
+
+4
+00:00:05,783 --> 00:00:07,170
+But what does fast mean?
+
+5
+00:00:07,720 --> 00:00:10,429
+One developer hears: pages load in a blink.
+
+6
+00:00:10,979 --> 00:00:13,411
+Another hears: orders ship the same day.
+
+7
+00:00:13,961 --> 00:00:15,199
+Both build something.
+
+8
+00:00:15,749 --> 00:00:17,775
+And neither is what the owner wanted.
+
+9
+00:00:18,825 --> 00:00:20,745
+This is why requirements exist.
+
+10
+00:00:21,295 --> 00:00:25,541
+In this lesson, you will write requirements that everyone reads the same way.
+
+11
+00:00:27,091 --> 00:00:29,011
+First, ask who needs the system.
+
+12
+00:00:29,561 --> 00:00:31,524
+These people are called stakeholders.
+
+13
+00:00:32,074 --> 00:00:33,332
+The owner wants sales.
+
+14
+00:00:33,882 --> 00:00:35,696
+Shoppers want it quick, and easy.
+
+15
+00:00:36,246 --> 00:00:38,507
+Support staff want clear order records.
+
+16
+00:00:39,057 --> 00:00:42,428
+The operations team wants something they can run, and fix.
+
+17
+00:00:42,978 --> 00:00:44,834
+Each group cares about different things.
+
+18
+00:00:45,384 --> 00:00:48,626
+So a good requirement starts with a conversation, not a guess.
+
+19
+00:00:50,676 --> 00:00:53,428
+Teams often write requirements as user stories.
+
+20
+00:00:53,978 --> 00:00:55,791
+A user story has three parts:
+
+21
+00:00:56,341 --> 00:00:57,003
+who,
+
+22
+00:00:57,133 --> 00:00:57,751
+what,
+
+23
+00:00:57,881 --> 00:00:58,692
+and why.
+
+24
+00:00:59,242 --> 00:01:00,245
+As a shopper,
+
+25
+00:01:00,375 --> 00:01:02,081
+I want to search for a product,
+
+26
+00:01:02,211 --> 00:01:03,790
+so that I can find it fast.
+
+27
+00:01:04,340 --> 00:01:05,385
+The why matters.
+
+28
+00:01:05,935 --> 00:01:08,815
+It tells developers what the feature is really for.
+
+29
+00:01:10,865 --> 00:01:12,572
+A story says what is wanted.
+
+30
+00:01:13,122 --> 00:01:16,044
+Acceptance criteria say how we know it is done.
+
+31
+00:01:16,594 --> 00:01:19,538
+A popular way to write them is: given, when, then.
+
+32
+00:01:20,088 --> 00:01:21,987
+Given a shopper on the product page,
+
+33
+00:01:22,117 --> 00:01:23,717
+when they search for the word mug,
+
+34
+00:01:23,847 --> 00:01:25,938
+then they see only products named mug.
+
+35
+00:01:26,488 --> 00:01:29,368
+Now anyone can check it, and a test can automate it.
+
+36
+00:01:29,918 --> 00:01:32,734
+If you cannot check it, it is not a requirement yet.
+
+37
+00:01:34,784 --> 00:01:35,915
+Now, the how well.
+
+38
+00:01:36,465 --> 00:01:39,345
+Words like fast, easy, and secure are traps.
+
+39
+00:01:39,895 --> 00:01:43,201
+They sound clear, but they mean different things to different people.
+
+40
+00:01:43,751 --> 00:01:45,138
+So make them measurable.
+
+41
+00:01:45,688 --> 00:01:49,187
+Fast becomes: the product list loads in under one second.
+
+42
+00:01:49,737 --> 00:01:53,299
+Secure becomes: passwords are never stored as plain text.
+
+43
+00:01:53,849 --> 00:01:56,623
+Now there is a number to check, and a rule to test.
+
+44
+00:01:58,673 --> 00:02:00,529
+You cannot build everything at once.
+
+45
+00:02:01,079 --> 00:02:02,508
+So we rank requirements.
+
+46
+00:02:03,058 --> 00:02:05,106
+A simple method is called MoSCoW.
+
+47
+00:02:05,656 --> 00:02:06,446
+Must have,
+
+48
+00:02:06,576 --> 00:02:07,408
+should have,
+
+49
+00:02:07,538 --> 00:02:08,306
+could have,
+
+50
+00:02:08,436 --> 00:02:09,908
+and will not have, for now.
+
+51
+00:02:10,458 --> 00:02:12,954
+For CloudCart, placing an order is a must.
+
+52
+00:02:13,504 --> 00:02:15,210
+A wish list is only a could.
+
+53
+00:02:15,760 --> 00:02:18,470
+Ranking keeps the first release small, and shippable.
+
+54
+00:02:20,520 --> 00:02:23,080
+Good requirements connect to the rest of the cycle.
+
+55
+00:02:23,630 --> 00:02:25,955
+Remember this rule from the CloudCart code?
+
+56
+00:02:26,505 --> 00:02:28,511
+Quantity must be one to a hundred.
+
+57
+00:02:29,061 --> 00:02:31,941
+A rule like this should start as a written requirement.
+
+58
+00:02:32,491 --> 00:02:35,840
+Design plans for it, code enforces it, and tests check it.
+
+59
+00:02:36,390 --> 00:02:39,441
+When a requirement changes, you know what else must change.
+
+60
+00:02:41,491 --> 00:02:43,347
+Watch for four common mistakes.
+
+61
+00:02:43,897 --> 00:02:45,177
+One: vague words.
+
+62
+00:02:45,727 --> 00:02:47,882
+Two: no owner, to make the decision.
+
+63
+00:02:48,432 --> 00:02:52,080
+Three: listing features, but forgetting how well they must work.
+
+64
+00:02:52,630 --> 00:02:54,806
+Four: changing requirements silently.
+
+65
+00:02:55,356 --> 00:02:57,617
+Write changes down, and tell everyone.
+
+66
+00:02:59,667 --> 00:03:00,542
+Quick check.
+
+67
+00:03:01,092 --> 00:03:03,012
+What three parts make a user story?
+
+68
+00:03:03,562 --> 00:03:05,631
+What do given, when, and then describe?
+
+69
+00:03:06,181 --> 00:03:08,869
+How do you turn the word fast into something you can test?
+
+70
+00:03:09,419 --> 00:03:11,488
+Pause the video, and answer out loud.
+
+71
+00:03:18,038 --> 00:03:19,702
+Next lesson: design.
+
+72
+00:03:20,252 --> 00:03:22,130
+Subscribe, so you do not miss it.
