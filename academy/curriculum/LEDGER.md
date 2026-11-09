@@ -14,7 +14,7 @@ Published videos are "Learning" at most. Nothing is Practiced or Mastered until 
 | L2 | O01, O02 | Requirements, user stories, acceptance criteria, MoSCoW, non-functional | Next lesson: Waterfall, Agile, Scrum, and Kanban | Rendered 5:16, upload pending |
 | L3 | O03 | SDLC phases vs Waterfall, Agile, Scrum, Kanban, DevOps | Next lesson: the parts of an application | Published Public 6:15 (-ESjf8NRNng), Learning |
 | L4 | O04 | Frontend, backend, API, database, source control, build, release, deployment, operations | Next lesson: who does what | Published Public 6:12 (E5VgT6n5e7E), Learning |
-| L5 | O05 | Responsibilities: developer, QA, product, security, operations, DevOps | Next lesson: tracing one change | Not started |
+| L5 | O05 | Responsibilities: developer, QA, product, security, operations, DevOps | Next lesson: tracing one change | Published Public 5:30 (IbxM4p_vSoY), Learning |
 | L6 | O06 | Trace a change: requirement to code, test, release, deploy, feedback | Next lesson: environments and releases | Not started |
 | L7 | O07 | Environments, approvals, release risk, rollback, maintenance | Next lesson: the CloudCart workflow | Not started |
 | L8 | O08 | Mastery scenario: CloudCart SDLC workflow with artifacts and handoffs | Next masterclass: MC02 IT and computer fundamentals | Not started |
