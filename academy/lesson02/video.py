@@ -68,7 +68,7 @@ SCENES = [
  ]),
  ('recap', [
   c('z1', "Quick check."), c('z2', "What three parts make a user story?"), c('z3', "What do given, when, and then describe?"), c('z4', "How do you turn the word fast into something you can test?"), c('z8', "Name two kinds of non-functional requirement."),
-  c('z5', "Pause the video, and answer out loud."), c('z6', "Next lesson: Waterfall, Agile, and Kanban."), c('z7', "Subscribe, so you do not miss it."),
+  c('z5', "Pause the video, and answer out loud."), c('z6', "Next lesson: Waterfall, Agile, Scrum, and Kanban."), c('z7', "Subscribe, so you do not miss it."),
  ]),
 ]
 EXTRA = {'k8': 0.5, 'x7': 0.5, 'v7': 0.5, 'f7': 0.5, 'z5': 6.0, 'h8': 0.5, 'w8': 0.5, 's10': 0.5, 'a8': 0.5, 'n7': 0.5, 'm10': 0.5, 'l6': 0.5, 'e6': 0.5}
@@ -218,6 +218,6 @@ def s_recap(C, D, dur):
     for i, (q, cid) in enumerate([('What three parts make a user story?', 'z2'), ('What do given, when, and then describe?', 'z3'), ('How do you turn "fast" into something you can test?', 'z4'), ('Name two kinds of non-functional requirement.', 'z8')]):
         E.append(Pop(card(1720, 100, [ACC, VIO, GOOD, WARN][i], f'{i + 1}', [], 36), 100, 270 + i * 125, C[cid])); E.append(El(T(q, 'm', 38, maxw=1500), 190, 292 + i * 125, C[cid] + 0.1, anim='fade'))
     E.append(Pop(badge('PAUSE  ·  answer out loud', F('b', 34), INK, PINK, padx=26, pady=14), 100, 800, C['z5']))
-    E.append(El(T('Next: Waterfall, Agile, Kanban', 'x', 56, ACC), 100, 910, C['z6'])); E.append(Pop(badge('SUBSCRIBE', F('b', 34), INK, GOOD, padx=26, pady=14), 1450, 920, C['z7']))
+    E.append(El(T('Next: Agile, Scrum, Kanban', 'x', 56, ACC), 100, 910, C['z6'])); E.append(Pop(badge('SUBSCRIBE', F('b', 34), INK, GOOD, padx=26, pady=14), 1450, 920, C['z7']))
     return E
 FN = dict(types=s_types, example=s_example, devops=s_devops, review=s_review, hook=s_hook, who=s_who, story=s_story, accept=s_accept, nfr=s_nfr, rank=s_rank, link=s_link, mistakes=s_mistakes, recap=s_recap)

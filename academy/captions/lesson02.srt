@@ -423,9 +423,9 @@ Name two kinds of non-functional requirement.
 Pause the video, and answer out loud.
 
 107
-00:05:10,650 --> 00:05:13,402
-Next lesson: Waterfall, Agile, and Kanban.
+00:05:10,650 --> 00:05:13,850
+Next lesson: Waterfall, Agile, Scrum, and Kanban.
 
 108
-00:05:13,952 --> 00:05:15,830
+00:05:14,400 --> 00:05:16,278
 Subscribe, so you do not miss it.
