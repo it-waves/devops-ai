@@ -171,117 +171,261 @@ Secure becomes: passwords are never stored as plain text.
 Now there is a number to check, and a rule to test.
 
 44
-00:01:58,673 --> 00:02:00,529
-You cannot build everything at once.
+00:01:58,673 --> 00:02:01,553
+Non-functional requirements deserve a closer look.
 
 45
-00:02:01,079 --> 00:02:02,508
-So we rank requirements.
+00:02:02,103 --> 00:02:04,642
+Here are five kinds you will meet again and again.
 
 46
-00:02:03,058 --> 00:02:05,106
-A simple method is called MoSCoW.
+00:02:05,192 --> 00:02:07,282
+Performance: how fast it responds.
 
 47
-00:02:05,656 --> 00:02:06,446
-Must have,
+00:02:07,832 --> 00:02:11,160
+Security: who can do what, and how data is protected.
 
 48
-00:02:06,576 --> 00:02:07,408
-should have,
+00:02:11,710 --> 00:02:14,932
+Reliability: how often it works, and how it recovers.
 
 49
-00:02:07,538 --> 00:02:08,306
-could have,
+00:02:15,482 --> 00:02:17,786
+Usability: how easy it is to use.
 
 50
-00:02:08,436 --> 00:02:09,908
-and will not have, for now.
+00:02:18,336 --> 00:02:21,493
+Maintainability: how easy it is to change, safely.
 
 51
-00:02:10,458 --> 00:02:12,954
-For CloudCart, placing an order is a must.
+00:02:22,043 --> 00:02:25,371
+Each one needs a measurable target, agreed with the owner.
 
 52
-00:02:13,504 --> 00:02:15,210
-A wish list is only a could.
+00:02:27,421 --> 00:02:29,277
+You cannot build everything at once.
 
 53
-00:02:15,760 --> 00:02:18,470
-Ranking keeps the first release small, and shippable.
+00:02:29,827 --> 00:02:31,256
+So we rank requirements.
 
 54
-00:02:20,520 --> 00:02:23,080
-Good requirements connect to the rest of the cycle.
+00:02:31,806 --> 00:02:33,854
+A simple method is called MoSCoW.
 
 55
-00:02:23,630 --> 00:02:25,955
-Remember this rule from the CloudCart code?
+00:02:34,404 --> 00:02:35,194
+Must have,
 
 56
-00:02:26,505 --> 00:02:28,511
-Quantity must be one to a hundred.
+00:02:35,324 --> 00:02:36,156
+should have,
 
 57
-00:02:29,061 --> 00:02:31,941
-A rule like this should start as a written requirement.
+00:02:36,286 --> 00:02:37,054
+could have,
 
 58
-00:02:32,491 --> 00:02:35,840
-Design plans for it, code enforces it, and tests check it.
+00:02:37,184 --> 00:02:38,656
+and will not have, for now.
 
 59
-00:02:36,390 --> 00:02:39,441
-When a requirement changes, you know what else must change.
+00:02:39,206 --> 00:02:41,702
+For CloudCart, placing an order is a must.
 
 60
-00:02:41,491 --> 00:02:43,347
-Watch for four common mistakes.
+00:02:42,252 --> 00:02:43,958
+A wish list is only a could.
 
 61
-00:02:43,897 --> 00:02:45,177
-One: vague words.
+00:02:44,508 --> 00:02:47,218
+Ranking keeps the first release small, and shippable.
 
 62
-00:02:45,727 --> 00:02:47,882
-Two: no owner, to make the decision.
+00:02:49,268 --> 00:02:52,084
+Let us follow one requirement, from vague to ready.
 
 63
-00:02:48,432 --> 00:02:52,080
-Three: listing features, but forgetting how well they must work.
+00:02:52,634 --> 00:02:56,261
+Step one. It starts vague: customers should check out quickly.
 
 64
-00:02:52,630 --> 00:02:54,806
-Four: changing requirements silently.
+00:02:56,811 --> 00:02:57,383
+Step two.
 
 65
-00:02:55,356 --> 00:02:57,617
-Write changes down, and tell everyone.
+00:02:57,383 --> 00:02:59,607
+Turn it into a story: as a shopper,
 
 66
-00:02:59,667 --> 00:03:00,542
-Quick check.
+00:02:59,607 --> 00:03:01,260
+I want to pay in one step,
 
 67
-00:03:01,092 --> 00:03:03,012
-What three parts make a user story?
+00:03:01,260 --> 00:03:02,912
+so that I finish my order.
 
 68
-00:03:03,562 --> 00:03:05,631
-What do given, when, and then describe?
+00:03:03,462 --> 00:03:04,177
+Step three.
 
 69
-00:03:06,181 --> 00:03:08,869
-How do you turn the word fast into something you can test?
+00:03:04,177 --> 00:03:06,583
+Add criteria: given items in my cart,
 
 70
-00:03:09,419 --> 00:03:11,488
-Pause the video, and answer out loud.
+00:03:06,583 --> 00:03:08,469
+when I pay with a valid card,
 
 71
-00:03:18,038 --> 00:03:19,702
-Next lesson: design.
+00:03:08,469 --> 00:03:10,225
+then I get an order number.
 
 72
-00:03:20,252 --> 00:03:22,130
+00:03:10,775 --> 00:03:15,020
+Step four. Add a target: the confirmation appears within two seconds.
+
+73
+00:03:15,570 --> 00:03:18,130
+Step five. Rank it. This one is a must.
+
+74
+00:03:18,680 --> 00:03:21,432
+Now the team can design it, build it, and test it.
+
+75
+00:03:23,482 --> 00:03:26,042
+Good requirements connect to the rest of the cycle.
+
+76
+00:03:26,592 --> 00:03:28,917
+Remember this rule from the CloudCart code?
+
+77
+00:03:29,467 --> 00:03:31,473
+Quantity must be one to a hundred.
+
+78
+00:03:32,023 --> 00:03:34,903
+A rule like this should start as a written requirement.
+
+79
+00:03:35,453 --> 00:03:38,802
+Design plans for it, code enforces it, and tests check it.
+
+80
+00:03:39,352 --> 00:03:42,403
+When a requirement changes, you know what else must change.
+
+81
+00:03:44,453 --> 00:03:46,565
+DevOps cares about requirements too.
+
+82
+00:03:47,115 --> 00:03:50,720
+Some requirements are about running the system, not only using it.
+
+83
+00:03:51,270 --> 00:03:53,894
+Can we deploy it without taking the shop offline?
+
+84
+00:03:54,444 --> 00:03:56,108
+Can we see it when something breaks?
+
+85
+00:03:56,658 --> 00:03:58,322
+Can we roll back a bad release?
+
+86
+00:03:58,872 --> 00:04:00,984
+Can we recover if a server is lost?
+
+87
+00:04:01,534 --> 00:04:06,270
+Ask the operations team early, and these become requirements, not surprises.
+
+88
+00:04:08,320 --> 00:04:10,176
+Watch for four common mistakes.
+
+89
+00:04:10,726 --> 00:04:12,006
+One: vague words.
+
+90
+00:04:12,556 --> 00:04:14,711
+Two: no owner, to make the decision.
+
+91
+00:04:15,261 --> 00:04:18,909
+Three: listing features, but forgetting how well they must work.
+
+92
+00:04:19,459 --> 00:04:21,635
+Four: changing requirements silently.
+
+93
+00:04:22,185 --> 00:04:24,446
+Write changes down, and tell everyone.
+
+94
+00:04:26,496 --> 00:04:29,120
+Before you accept a requirement, run a quick check.
+
+95
+00:04:29,670 --> 00:04:32,294
+Is it clear? Would two people read it the same way?
+
+96
+00:04:32,844 --> 00:04:35,127
+Is it testable? Can you prove it is met?
+
+97
+00:04:35,677 --> 00:04:38,834
+Is it one thing, not three requirements in one sentence?
+
+98
+00:04:39,384 --> 00:04:41,283
+Does it have an owner who agreed to it?
+
+99
+00:04:41,833 --> 00:04:44,115
+Is it written down where everyone can find it?
+
+100
+00:04:44,665 --> 00:04:47,183
+If any answer is no, fix it before building.
+
+101
+00:04:49,233 --> 00:04:50,108
+Quick check.
+
+102
+00:04:50,658 --> 00:04:52,578
+What three parts make a user story?
+
+103
+00:04:53,128 --> 00:04:55,197
+What do given, when, and then describe?
+
+104
+00:04:55,747 --> 00:04:58,435
+How do you turn the word fast into something you can test?
+
+105
+00:04:58,985 --> 00:05:01,481
+Name two kinds of non-functional requirement.
+
+106
+00:05:02,031 --> 00:05:04,100
+Pause the video, and answer out loud.
+
+107
+00:05:10,650 --> 00:05:13,402
+Next lesson: Waterfall, Agile, and Kanban.
+
+108
+00:05:13,952 --> 00:05:15,830
 Subscribe, so you do not miss it.

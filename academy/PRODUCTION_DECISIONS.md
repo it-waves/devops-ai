@@ -22,9 +22,6 @@ Owner reverted the academy narrator to the RHCSA voice: Kokoro `af_heart`, speed
 - Welcome (INTRO) now explains the program flow: 9 stages, 48 masterclasses (planned), 5 levels, ~5 min lessons, a project per level, stage exams, CloudCart journey, routes, requirements.
 - New standalone video: loop/ "The DevOps Loop" (infinity symbol, 8 stages).
 
-## Published (2026-11-09, Public, playlist DevOps Engineering Bootcamp (Full Course), order: Intro, Loop, Lesson 1)
-- INTRO: g17YyNgX0Y4  (5:00)
-- The DevOps Loop: hbDYFo_t-Zw  (1:26)
-- LESSON 1 SDLC: 09EBDVIryE8  (4:27)
-- Thumbnails: academy/thumbs/*.jpg; English captions: academy/captions/*.srt (uploaded as SRT).
-- Pronunciation (sonar cube, "lives" as livz) verified in phonemes only; owner to listen.
+## UPDATE 2026-11-09 - Bootcamp rules (owner)
+- Every bootcamp video is at least 5 minutes unless the strategist proposes otherwise (overview/orientation videos excepted).
+- Curriculum baseline is curriculum/CHECKLIST.md (48 masterclasses, objective IDs MCnn-Onn). Lessons map to objective IDs; progress tracked in curriculum/LEDGER.md. No objective is added or silently dropped.

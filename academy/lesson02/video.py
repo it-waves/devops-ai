@@ -31,26 +31,48 @@ SCENES = [
   c('n4', "So make them measurable."), c('n5', "Fast becomes: the product list loads in under one second."), c('n6', "Secure becomes: passwords are never stored as plain text."),
   c('n7', "Now there is a number to check, and a rule to test."),
  ]),
+ ('types', [
+  c('k1', "Non-functional requirements deserve a closer look."), c('k2', "Here are five kinds you will meet again and again."),
+  c('k3', "Performance: how fast it responds."), c('k4', "Security: who can do what, and how data is protected."), c('k5', "Reliability: how often it works, and how it recovers."),
+  c('k6', "Usability: how easy it is to use."), c('k7', "Maintainability: how easy it is to change, safely."), c('k8', "Each one needs a measurable target, agreed with the owner."),
+ ]),
  ('rank', [
   c('m1', "You cannot build everything at once."), c('m2', "So we rank requirements."), c('m3', "A simple method is called MoSCoW.", "A simple method is called moss cow."),
   c('m4', "Must have,"), c('m5', "should have,"), c('m6', "could have,"), c('m7', "and will not have, for now."),
   c('m8', "For CloudCart, placing an order is a must."), c('m9', "A wish list is only a could."), c('m10', "Ranking keeps the first release small, and shippable."),
  ]),
+ ('example', [
+  c('x1', "Let us follow one requirement, from vague to ready."), c('x2', "Step one. It starts vague: customers should check out quickly."),
+  c('x3', "Step two. Turn it into a story: as a shopper, I want to pay in one step, so that I finish my order."),
+  c('x4', "Step three. Add criteria: given items in my cart, when I pay with a valid card, then I get an order number."),
+  c('x5', "Step four. Add a target: the confirmation appears within two seconds."), c('x6', "Step five. Rank it. This one is a must."),
+  c('x7', "Now the team can design it, build it, and test it."),
+ ]),
  ('link', [
   c('l1', "Good requirements connect to the rest of the cycle."), c('l2', "Remember this rule from the CloudCart code?"), c('l3', "Quantity must be one to a hundred."),
   c('l4', "A rule like this should start as a written requirement."), c('l5', "Design plans for it, code enforces it, and tests check it."), c('l6', "When a requirement changes, you know what else must change."),
+ ]),
+ ('devops', [
+  c('v1', "DevOps cares about requirements too."), c('v2', "Some requirements are about running the system, not only using it."),
+  c('v3', "Can we deploy it without taking the shop offline?"), c('v4', "Can we see it when something breaks?"), c('v5', "Can we roll back a bad release?"), c('v6', "Can we recover if a server is lost?"),
+  c('v7', "Ask the operations team early, and these become requirements, not surprises."),
  ]),
  ('mistakes', [
   c('e1', "Watch for four common mistakes."), c('e2', "One: vague words."), c('e3', "Two: no owner, to make the decision."),
   c('e4', "Three: listing features, but forgetting how well they must work."), c('e5', "Four: changing requirements silently."), c('e6', "Write changes down, and tell everyone."),
  ]),
+ ('review', [
+  c('f1', "Before you accept a requirement, run a quick check."), c('f2', "Is it clear? Would two people read it the same way?"), c('f3', "Is it testable? Can you prove it is met?"),
+  c('f4', "Is it one thing, not three requirements in one sentence?"), c('f5', "Does it have an owner who agreed to it?"), c('f6', "Is it written down where everyone can find it?"),
+  c('f7', "If any answer is no, fix it before building."),
+ ]),
  ('recap', [
-  c('z1', "Quick check."), c('z2', "What three parts make a user story?"), c('z3', "What do given, when, and then describe?"), c('z4', "How do you turn the word fast into something you can test?"),
-  c('z5', "Pause the video, and answer out loud."), c('z6', "Next lesson: design."), c('z7', "Subscribe, so you do not miss it."),
+  c('z1', "Quick check."), c('z2', "What three parts make a user story?"), c('z3', "What do given, when, and then describe?"), c('z4', "How do you turn the word fast into something you can test?"), c('z8', "Name two kinds of non-functional requirement."),
+  c('z5', "Pause the video, and answer out loud."), c('z6', "Next lesson: Waterfall, Agile, and Kanban."), c('z7', "Subscribe, so you do not miss it."),
  ]),
 ]
-EXTRA = {'z5': 6.0, 'h8': 0.5, 'w8': 0.5, 's10': 0.5, 'a8': 0.5, 'n7': 0.5, 'm10': 0.5, 'l6': 0.5, 'e6': 0.5}
-CHAP = {'who': 'Stakeholders', 'story': 'User stories', 'accept': 'Acceptance criteria', 'nfr': 'Measurable requirements', 'rank': 'Ranking', 'link': 'Connect to the cycle', 'mistakes': 'Common mistakes', 'recap': 'Quick check'}
+EXTRA = {'k8': 0.5, 'x7': 0.5, 'v7': 0.5, 'f7': 0.5, 'z5': 6.0, 'h8': 0.5, 'w8': 0.5, 's10': 0.5, 'a8': 0.5, 'n7': 0.5, 'm10': 0.5, 'l6': 0.5, 'e6': 0.5}
+CHAP = {'types': 'Kinds of non-functional', 'example': 'A worked example', 'devops': 'Requirements and DevOps', 'review': 'The quick check', 'who': 'Stakeholders', 'story': 'User stories', 'accept': 'Acceptance criteria', 'nfr': 'Measurable requirements', 'rank': 'Ranking', 'link': 'Connect to the cycle', 'mistakes': 'Common mistakes', 'recap': 'Quick check'}
 def head2(title, sub, t):
     return [El(T('Requirements  ·  Lesson 2', 'b', 30, ACC), 100, 120, t), El(T(title, 'x', 64), 100, 160, t + 0.1), El(T(sub, 'm', 32, MUTED, maxw=1200), 100, 245, t + 0.4)]
 def takeaway(s, y, t, col=None, w=1500, size=38): return El(T(s, 'b', size, col or WARN, maxw=w), 100, y, t)
@@ -148,11 +170,54 @@ def s_mistakes(C, D, dur):
         E.append(Pop(card(840, 180, col, f'{n}   {t}', [(s, TXT)], 40, 32), x, y, C[cid]))
     E.append(takeaway('Write changes down, and tell everyone.', 840, C['e6'], GOOD, 1500))
     return E
+
+def s_types(C, D, dur):
+    E = head2('Five kinds of "how well"', 'Each needs a target you can measure.', C['k1'])
+    E.append(ill(C['k3'], 1400, 130))
+    it = [('Performance', 'List loads in under 1 second', ACC, 'k3'), ('Security', 'Passwords never stored as plain text', VIO, 'k4'), ('Reliability', 'Checkout works 99.9% of the month', GOOD, 'k5'),
+          ('Usability', 'A shopper can order in 3 steps', WARN, 'k6'), ('Maintainability', 'Every change runs automated tests', PINK, 'k7')]
+    for i, (n, ex, col, cid) in enumerate(it):
+        x = 100 + (i % 3) * 590; y = 360 + (i // 3) * 250
+        E.append(Pop(card(560, 220, col, n, [(ex, TXT)], 40, 32), x, y, C[cid]))
+    E.append(Pop(badge('Example targets for CloudCart', F('b', 30), INK, EN.WARN, padx=22, pady=10, r=20), 1190 - 0, 640, C['k8'] - 1.0)) if False else None
+    E.append(takeaway('Agree a measurable target with the owner.', 880, C['k8'], GOOD, 1500))
+    return E
+def s_example(C, D, dur):
+    E = head2('One requirement, start to finish', 'From vague to ready to build.', C['x1'])
+    E.append(ill(C['x2'], 1400, 130))
+    rows = [('1  Vague', 'Customers should check out quickly.', WARN, 'x2'), ('2  Story', 'As a shopper, I want to pay in one step, so that I finish my order.', ACC, 'x3'),
+            ('3  Criteria', 'Given items in my cart, when I pay with a valid card, then I get an order number.', VIO, 'x4'), ('4  Target', 'The confirmation appears within 2 seconds.', GOOD, 'x5'),
+            ('5  Rank', 'MUST have', PINK, 'x6')]
+    for i, (n, t_, col, cid) in enumerate(rows):
+        y = 320 + i * 125
+        E.append(Pop(badge(n, F('x', 38), INK, col, padx=26, pady=12, r=24), 100, y + 6, C[cid]))
+        E.append(Pop(card(1330, 100, col, '', [(t_, TXT)], 4, 32), 470, y, C[cid] + 0.2))
+    E.append(takeaway('Now the team can design it, build it, and test it.', 960, C['x7'], WARN, 1600))
+    return E
+def s_devops(C, D, dur):
+    E = head2('Requirements and DevOps', 'Some requirements are about running the system.', C['v1'])
+    E.append(Pop(badge('OPERATIONAL REQUIREMENTS', F('x', 44), INK, ACC, padx=30, pady=14, r=26), 100, 340, C['v2']))
+    it = [('Deploy', 'without taking the shop offline?', ACC, 'v3'), ('Monitor', 'can we see it when something breaks?', VIO, 'v4'), ('Roll back', 'can we undo a bad release?', WARN, 'v5'), ('Recover', 'can we recover if a server is lost?', GOOD, 'v6')]
+    for i, (n, q, col, cid) in enumerate(it):
+        x = 100 + (i % 2) * 880; y = 470 + (i // 2) * 210
+        E.append(Pop(card(840, 180, col, n, [(q, TXT)], 42, 32), x, y, C[cid]))
+    E.append(takeaway('Ask operations early. No surprises.', 920, C['v7'], GOOD, 1500))
+    return E
+def s_review(C, D, dur):
+    E = head2('The quick check', 'Run it on every requirement.', C['f1'])
+    qs = [('Clear', 'Would two people read it the same way?', ACC, 'f2'), ('Testable', 'Can you prove it is met?', VIO, 'f3'), ('One thing', 'Not three requirements in one sentence', GOOD, 'f4'),
+          ('Owned', 'Someone agreed to it', WARN, 'f5'), ('Written down', 'Where everyone can find it', PINK, 'f6')]
+    for i, (n, q, col, cid) in enumerate(qs):
+        y = 330 + i * 115
+        E.append(Pop(card(1720, 95, col, '', [], 4), 100, y, C[cid]))
+        E.append(Pop(icon('check', 52, TXT, col), 130, y + 20, C[cid] + 0.15)); E.append(El(T(n, 'x', 38, col), 220, y + 24, C[cid] + 0.1, anim='fade')); E.append(El(T(q, 'm', 34, TXT), 620, y + 26, C[cid] + 0.2, anim='fade'))
+    E.append(takeaway('Any answer is no? Fix it before building.', 930, C['f7'], WARN, 1500))
+    return E
 def s_recap(C, D, dur):
     E = [El(T('Quick check', 'x', 72), 100, 130, C['z1'])]
-    for i, (q, cid) in enumerate([('What three parts make a user story?', 'z2'), ('What do given, when, and then describe?', 'z3'), ('How do you turn "fast" into something you can test?', 'z4')]):
-        E.append(Pop(card(1720, 110, [ACC, VIO, GOOD][i], f'{i + 1}', [], 36), 100, 290 + i * 140, C[cid])); E.append(El(T(q, 'm', 38, maxw=1500), 190, 316 + i * 140, C[cid] + 0.1, anim='fade'))
-    E.append(Pop(badge('PAUSE  ·  answer out loud', F('b', 34), INK, PINK, padx=26, pady=14), 100, 760, C['z5']))
-    E.append(El(T('Next: Design', 'x', 56, ACC), 100, 880, C['z6'])); E.append(Pop(badge('SUBSCRIBE', F('b', 34), INK, GOOD, padx=26, pady=14), 1450, 890, C['z7']))
+    for i, (q, cid) in enumerate([('What three parts make a user story?', 'z2'), ('What do given, when, and then describe?', 'z3'), ('How do you turn "fast" into something you can test?', 'z4'), ('Name two kinds of non-functional requirement.', 'z8')]):
+        E.append(Pop(card(1720, 100, [ACC, VIO, GOOD, WARN][i], f'{i + 1}', [], 36), 100, 270 + i * 125, C[cid])); E.append(El(T(q, 'm', 38, maxw=1500), 190, 292 + i * 125, C[cid] + 0.1, anim='fade'))
+    E.append(Pop(badge('PAUSE  ·  answer out loud', F('b', 34), INK, PINK, padx=26, pady=14), 100, 800, C['z5']))
+    E.append(El(T('Next: Waterfall, Agile, Kanban', 'x', 56, ACC), 100, 910, C['z6'])); E.append(Pop(badge('SUBSCRIBE', F('b', 34), INK, GOOD, padx=26, pady=14), 1450, 920, C['z7']))
     return E
-FN = dict(hook=s_hook, who=s_who, story=s_story, accept=s_accept, nfr=s_nfr, rank=s_rank, link=s_link, mistakes=s_mistakes, recap=s_recap)
+FN = dict(types=s_types, example=s_example, devops=s_devops, review=s_review, hook=s_hook, who=s_who, story=s_story, accept=s_accept, nfr=s_nfr, rank=s_rank, link=s_link, mistakes=s_mistakes, recap=s_recap)
