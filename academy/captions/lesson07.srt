@@ -1,0 +1,419 @@
+1
+00:00:00,500 --> 00:00:02,953
+CloudCart has a new version, ready to ship.
+
+2
+00:00:03,503 --> 00:00:05,658
+Would you send it straight to every customer?
+
+3
+00:00:06,208 --> 00:00:09,323
+Of course not. It travels through safe stages first.
+
+4
+00:00:09,873 --> 00:00:14,523
+Today you learn those stages, who approves each move, and how to undo a mistake.
+
+5
+00:00:15,073 --> 00:00:19,148
+That is environments, approvals, release risk, rollback, and maintenance.
+
+6
+00:00:21,198 --> 00:00:23,011
+First, what is an environment?
+
+7
+00:00:23,561 --> 00:00:27,081
+An environment is a separate place where the application runs.
+
+8
+00:00:27,631 --> 00:00:29,317
+Each one has its own servers.
+
+9
+00:00:29,867 --> 00:00:30,912
+Its own data.
+
+10
+00:00:31,462 --> 00:00:32,571
+Its own settings.
+
+11
+00:00:33,121 --> 00:00:35,105
+And its own list of who may access it.
+
+12
+00:00:35,655 --> 00:00:39,218
+Separation means a mistake in one place cannot hurt another.
+
+13
+00:00:41,268 --> 00:00:43,465
+The first environment is development.
+
+14
+00:00:44,015 --> 00:00:47,685
+Developers run and try the code here, often on their own machines.
+
+15
+00:00:48,235 --> 00:00:50,965
+Breaking things is normal, and nobody is harmed.
+
+16
+00:00:51,515 --> 00:00:53,649
+The data is fake, or a small sample.
+
+17
+00:00:54,199 --> 00:00:57,911
+Development answers one question: does my change work at all?
+
+18
+00:00:59,961 --> 00:01:03,246
+Next comes the test environment, often called staging.
+
+19
+00:01:03,796 --> 00:01:06,826
+It is built to look as much like production as possible.
+
+20
+00:01:07,376 --> 00:01:10,064
+Automated tests and Q A check the release here.
+
+21
+00:01:10,614 --> 00:01:13,686
+The data is test data, never real customer data.
+
+22
+00:01:14,236 --> 00:01:17,649
+Test answers a different question: will it work when it is live?
+
+23
+00:01:19,699 --> 00:01:21,022
+Then there is production.
+
+24
+00:01:21,572 --> 00:01:26,308
+Production is the live shop, with real customers, real orders, and real money.
+
+25
+00:01:26,858 --> 00:01:29,588
+Access is limited to a few trusted people.
+
+26
+00:01:30,138 --> 00:01:33,146
+Every change here is approved, recorded, and watched.
+
+27
+00:01:33,696 --> 00:01:36,086
+A mistake here costs customers, and trust.
+
+28
+00:01:38,136 --> 00:01:40,781
+Here is a rule that prevents many surprises.
+
+29
+00:01:41,331 --> 00:01:44,766
+Build once, then move the same build through every environment.
+
+30
+00:01:45,316 --> 00:01:49,177
+If you rebuild for each stage, you are no longer testing what you ship.
+
+31
+00:01:49,727 --> 00:01:54,463
+What changes between environments is the settings, such as the database address.
+
+32
+00:01:55,013 --> 00:02:00,048
+Secrets, like passwords, are supplied to each environment, never written into the code.
+
+33
+00:02:02,098 --> 00:02:03,229
+Now, approvals.
+
+34
+00:02:03,779 --> 00:02:07,725
+An approval is a recorded decision that a change may move forward.
+
+35
+00:02:08,275 --> 00:02:11,561
+Code review comes first: a teammate approves the change.
+
+36
+00:02:12,111 --> 00:02:16,057
+Q A signs off that it behaves as the acceptance criteria say.
+
+37
+00:02:16,607 --> 00:02:19,274
+Risky changes also get a security check.
+
+38
+00:02:19,824 --> 00:02:24,197
+Production needs a final release approval, from product or a release owner.
+
+39
+00:02:24,747 --> 00:02:28,715
+Some gates are automatic, like tests. Others need human judgment.
+
+40
+00:02:29,265 --> 00:02:32,103
+The amount of approval should match the amount of risk.
+
+41
+00:02:34,153 --> 00:02:38,420
+Release risk is the chance a release causes harm, times how much harm.
+
+42
+00:02:38,970 --> 00:02:40,932
+Ask four questions before you ship.
+
+43
+00:02:41,482 --> 00:02:42,805
+How big is the change?
+
+44
+00:02:43,355 --> 00:02:44,934
+Who is affected if it fails?
+
+45
+00:02:45,484 --> 00:02:46,828
+Can we undo it quickly?
+
+46
+00:02:47,378 --> 00:02:48,807
+How well was it tested?
+
+47
+00:02:49,357 --> 00:02:53,880
+Fixing a typo is low risk. Changing how payments work is high risk.
+
+48
+00:02:54,430 --> 00:02:57,715
+Higher risk means more checks, more care, and a better plan.
+
+49
+00:02:59,765 --> 00:03:02,389
+Good teams do not just fear risk. They shrink it.
+
+50
+00:03:02,939 --> 00:03:06,651
+Small changes are easier to understand, and easier to undo.
+
+51
+00:03:07,201 --> 00:03:10,572
+Automated tests catch known problems before customers do.
+
+52
+00:03:11,122 --> 00:03:15,815
+A gradual rollout starts with a few customers, then grows if all looks healthy.
+
+53
+00:03:16,365 --> 00:03:20,120
+Choose quiet times, when the team is present and traffic is low.
+
+54
+00:03:20,670 --> 00:03:24,104
+Each of these makes a failure smaller, and recovery faster.
+
+55
+00:03:26,154 --> 00:03:29,589
+Even so, things go wrong. That is why rollback exists.
+
+56
+00:03:30,139 --> 00:03:33,616
+A rollback returns production to the last known good version.
+
+57
+00:03:34,166 --> 00:03:34,472
+Here,
+
+58
+00:03:34,472 --> 00:03:37,288
+version one point four point three misbehaves,
+
+59
+00:03:37,288 --> 00:03:39,798
+so we return to one point four point two.
+
+60
+00:03:40,348 --> 00:03:42,631
+Rollback only works if you prepared for it.
+
+61
+00:03:43,181 --> 00:03:45,165
+Keep the previous version available.
+
+62
+00:03:45,715 --> 00:03:49,960
+Make deployment repeatable, so going back is as easy as going forward.
+
+63
+00:03:50,510 --> 00:03:55,033
+And be careful with data: some database changes cannot simply be reversed.
+
+64
+00:03:55,583 --> 00:03:57,929
+Rollback is a plan you prepare, not a hope.
+
+65
+00:03:59,979 --> 00:04:02,432
+Let us walk through a rollback, step by step.
+
+66
+00:04:02,982 --> 00:04:05,585
+At ten o'clock, the team deploys the new version.
+
+67
+00:04:06,135 --> 00:04:09,164
+Six minutes later, monitoring shows errors rising.
+
+68
+00:04:09,714 --> 00:04:12,936
+The agreed rule says: if errors stay high, roll back.
+
+69
+00:04:13,486 --> 00:04:17,134
+At ten fourteen, the old version is serving customers again.
+
+70
+00:04:17,684 --> 00:04:22,014
+Only now does the team investigate, in a test environment, without pressure.
+
+71
+00:04:22,564 --> 00:04:27,428
+Sometimes a fast fix is safer than a rollback. The team decides using the risk.
+
+72
+00:04:27,978 --> 00:04:31,946
+Notice the deployment record: it says exactly what happened, and when.
+
+73
+00:04:33,996 --> 00:04:37,943
+A release is not the end. Software needs care for as long as it runs.
+
+74
+00:04:38,493 --> 00:04:40,114
+That care is called maintenance.
+
+75
+00:04:40,664 --> 00:04:43,992
+Corrective maintenance fixes bugs that customers find.
+
+76
+00:04:44,542 --> 00:04:48,915
+Adaptive maintenance keeps up with change, such as new browsers or new rules.
+
+77
+00:04:49,465 --> 00:04:52,559
+Perfective maintenance improves speed, and usability.
+
+78
+00:04:53,109 --> 00:04:58,101
+Preventive maintenance tidies code, and applies security patches before they are needed.
+
+79
+00:04:58,651 --> 00:05:03,301
+Ignored maintenance turns into technical debt, which slows every future change.
+
+80
+00:05:03,851 --> 00:05:07,009
+Planned maintenance is cheaper than emergency repair.
+
+81
+00:05:09,059 --> 00:05:10,915
+Watch out for four common myths.
+
+82
+00:05:11,465 --> 00:05:13,500
+Myth one: if it passed in test,
+
+83
+00:05:13,500 --> 00:05:14,223
+it is safe.
+
+84
+00:05:14,223 --> 00:05:14,748
+In fact,
+
+85
+00:05:14,748 --> 00:05:15,864
+test lowers risk,
+
+86
+00:05:15,864 --> 00:05:17,374
+but differences remain.
+
+87
+00:05:17,924 --> 00:05:22,575
+Myth two: you can always roll back. In fact, data changes can make that hard.
+
+88
+00:05:23,125 --> 00:05:25,780
+Myth three: approvals only slow us down.
+
+89
+00:05:25,780 --> 00:05:26,311
+In fact,
+
+90
+00:05:26,311 --> 00:05:29,098
+the right ones prevent expensive mistakes.
+
+91
+00:05:29,648 --> 00:05:32,254
+Myth four: maintenance is leftover work.
+
+92
+00:05:32,254 --> 00:05:32,775
+In fact,
+
+93
+00:05:32,775 --> 00:05:35,707
+it is where software spends most of its life.
+
+94
+00:05:36,257 --> 00:05:37,452
+Plan for all four.
+
+95
+00:05:39,502 --> 00:05:40,377
+Quick check.
+
+96
+00:05:40,927 --> 00:05:43,572
+Name the three environments, and what each is for.
+
+97
+00:05:44,122 --> 00:05:46,319
+Why build once, and move the same build?
+
+98
+00:05:46,869 --> 00:05:49,045
+What four questions measure release risk?
+
+99
+00:05:49,595 --> 00:05:51,814
+What must be ready before a rollback can work?
+
+100
+00:05:52,364 --> 00:05:56,524
+Objective covered: MC01-O07.
+
+101
+00:05:57,074 --> 00:05:57,980
+Pause the video,
+
+102
+00:05:57,980 --> 00:05:59,453
+and plan the environments,
+
+103
+00:05:59,453 --> 00:06:02,173
+approvals and rollback for a change of your own.
+
+104
+00:06:12,723 --> 00:06:15,069
+Next lesson: the CloudCart workflow.
+
+105
+00:06:15,619 --> 00:06:17,497
+Subscribe, so you do not miss it.
