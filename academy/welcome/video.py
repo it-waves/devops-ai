@@ -21,10 +21,36 @@ SCENES = [
   c('c22', "Then security,"), c('c22b', "monitoring, and reliability,"), c('c23', "and a final capstone project."),
   c('c24', "This is the plan. Lessons are published stage by stage, in order."),
  ]),
+ ('flow', [
+  c('g1', "Now, how the program flows."), c('g2', "The course is planned in nine stages,"), c('g3', "with forty eight masterclasses in total."),
+  c('g4', "A masterclass covers one tool, or one topic, such as Git, or Docker."), c('g5', "Each masterclass has five levels:"),
+  c('g6', "Beginner,"), c('g7', "Intermediate,"), c('g8', "Advanced,"), c('g9', "Production,"), c('g10', "and Mastery."),
+  c('g11', "Each level is a few short lessons, about five minutes each."), c('g12', "And each level ends with a project, that you build yourself."),
+  c('g13', "At Mastery, you get only the requirements, and no steps."), c('g14', "Every stage ends with an exam, on a scenario you have not seen before."),
+ ]),
+ ('cart', [
+  c('h1', "One project follows you through the whole course."), c('h2', "It is called CloudCart, an online shop."),
+  c('h3', "First, a simple Java application,"), c('h3b', "running on Tomcat, with a PostgreSQL database.", "running on Tom cat, with a post gress Q L database."),
+  c('h4a', "Then we automate it with Jenkins,"), c('h4b', "and check its quality with SonarQube.", "and check its quality with sonar cube."),
+  c('h5', "Then we put it in a container, with Docker."), c('h6', "Then we create its servers with Terraform.", "Then we create its servers with terra form."),
+  c('h7', "Then we run it on Kubernetes, with Helm."), c('h8', "And finally, we add monitoring, with Prometheus and Grafana."),
+  c('h9', "By the end, you have built, secured, and run a real system."),
+ ]),
+ ('route', [
+  c('i1', "You do not have to start at the beginning."), c('i2', "Complete beginner:"), c('i3', "start at lesson one, and follow the order."),
+  c('i4', "Experienced administrator:"), c('i5', "pass a placement check, and skip the basics."),
+  c('i6', "Developer moving into DevOps:"), c('i7', "skip the application topics, and focus on C I C D, containers, and the cloud."),
+  c('i8', "Every skip is earned, by passing that masterclass's final challenge."),
+ ]),
  ('lesson', [
   c('d1', "Every lesson follows the same shape."), c('d2', "First, why:"), c('d3', "the problem the tool solves."), c('d4', "Then the concept, in plain words."),
   c('d5', "Then a demonstration,"), c('d6', "with real commands, and real output."), c('d7', "No made up results."),
-  c('d8', "Then practice,"), c('d9', "which you do yourself,"), c('d10', "and a checker that tells you if you got it right."), c('d11', "Each Masterclass ends with five hands-on projects."),
+  c('d8', "Then practice,"), c('d9', "which you do yourself,"), c('d10', "and a checker that tells you if you got it right."), c('d10b', "Every lesson also comes with a kit: notes, a practice exercise, a solution, and a command reference."), c('d11', "Each Masterclass ends with five hands-on projects."),
+ ]),
+ ('need', [
+  c('n1', "What do you need to start?"), c('n2', "A computer that can run a virtual machine, or Docker."), c('n3', "We recommend eight gigabytes of memory, or more."),
+  c('n4', "A free GitHub account, from the Git lessons onward."), c('n5', "A steady pace: one or two lessons a day works well."),
+  c('n6', "And the habit of practising. Watching alone will not make you a DevOps engineer."),
  ]),
  ('expect', [
   c('e1', "A few promises about what to expect."), c('e2', "No experience needed."), c('e3', "We explain every new term and command the first time it appears."),
@@ -38,8 +64,8 @@ SCENES = [
   c('f4', "Subscribe, and follow the playlist in order."), c('f5', "See you in lesson one."),
  ]),
 ]
-EXTRA = {'a3': 0.4, 'b6': 1.5, 'c24': 1.5, 'd11': 1.0, 'e10': 1.0, 'f3': 0.3, 'a4': 0.3}
-CHAP = {'promise': 'How we teach', 'path': 'The roadmap', 'lesson': 'Every lesson', 'expect': 'What to expect', 'start': 'Start here'}
+EXTRA = {'g1': 0.2, 'g5': 0.2, 'g10': 0.6, 'g14': 1.0, 'h2': 0.3, 'h3b': 0.3, 'h8': 0.6, 'h9': 1.2, 'i3': 0.4, 'i5': 0.4, 'i7': 0.4, 'i8': 1.2, 'n3': 0.4, 'n6': 1.0, 'd10b': 0.8, 'a3': 0.4, 'b6': 1.5, 'c24': 1.5, 'd11': 1.0, 'e10': 1.0, 'f3': 0.3, 'a4': 0.3}
+CHAP = {'flow': 'How the program flows', 'cart': 'One project, six upgrades', 'route': 'Your route', 'need': 'What you need', 'promise': 'How we teach', 'path': 'The roadmap', 'lesson': 'Every lesson', 'expect': 'What to expect', 'start': 'Start here'}
 ALL = ['git', 'docker', 'kubernetes', 'jenkins', 'terraform', 'ansible', 'prometheus', 'grafana', 'maven', 'java', 'tomcat', 'postgresql', 'ubuntu', 'python', 'actions', 'sonarqube', 'argocd', 'helm', 'github', 'bash', 'trivy', 'vault']
 def s_hook(C, D, dur):
     t_out = C['a4'] - 0.1
@@ -94,7 +120,8 @@ def s_lesson(C, D, dur):
     for i, (n, sub, col, cid, ic) in enumerate(items):
         x = 100 + i * (cw + gap); E.append(Pop(card(cw, 330, col, n, [(sub, TXT)], 40, 26), x, 340, C[cid])); E.append(Pop(icon(ic, 100, TXT, col), x + 28, 560, C[cid] + 0.3))
     E.append(pill('REAL OUTPUT  ·  never invented', 100 + 2 * (cw + gap), 720, C['d7'], GOOD, INK, 30, 22, 12))
-    E.append(El(T('You do the practice, the checker tells you the truth.', 'b', 36, MUTED), 100, 860, C['d10'] + 1.5))
+    for k_, nm_ in enumerate(['Notes', 'Practice', 'Solution', 'Command reference']): E.append(pill(nm_, 100 + [0, 190, 440, 690][k_], 800, C['d10b'] + 1.5 + k_ * 0.9, [ACC, VIO, GOOD, WARN][k_], INK, 28, 20, 10))
+    E.append(El(T('You do the practice, the checker tells you the truth.', 'b', 36, MUTED), 100, 930, C['d10'] + 1.5))
     return E
 def s_expect(C, D, dur):
     E = [El(T('What to expect', 'x', 66), 100, 130, C['e1'])]
@@ -114,4 +141,59 @@ def s_start(C, D, dur):
     E.append(FloatEm('Rocket', 1560, 190, 200, C['f1'] + 0.3, None, bob=14, sway=5, speed=1.8)); E.append(FloatEm('Thumbs up', 1480, 420, 190, C['f5'] - 0.1, None, bob=8, sway=6, speed=2.4, spin_in=True)); E.append(FloatEm('Party popper', 1700, 440, 170, C['f5'] + 0.2, None, bob=10, sway=10, speed=2.8, phase=1.0, spin_in=True))
     E.append(Pop(card(900, 150, GOOD, 'Follow the playlist in order', [('Each lesson builds on the one before.', TXT)], 38), 100, 880, C['f4'])); E.append(Pop(badge('SUBSCRIBE', F('b', 40), INK, ACC, padx=40, pady=20), 1250, 900, C['f4'] + 0.8))
     return E
-FN = dict(hook=s_hook, promise=s_promise, path=s_path, lesson=s_lesson, expect=s_expect, start=s_start)
+
+LEV = [('Beginner', ACC), ('Intermediate', VIO), ('Advanced', GOOD), ('Production', WARN), ('Mastery', PINK)]
+def s_flow(C, D, dur):
+    E = [El(T('How the program flows', 'x', 60, maxw=1500), 100, 120, C['g1'])]
+    x = 100
+    for i, (s_, col, cid) in enumerate([('9 stages', ACC, 'g2'), ('48 masterclasses', VIO, 'g3'), ('5 levels', GOOD, 'g5'), ('short lessons', WARN, 'g11')]):
+        im = badge(s_, F('b', 34), INK, col, padx=24, pady=12, r=26); E.append(Pop(im, x, 215, C[cid]))
+        if i < 3: E.append(A([(x + im.width + 12, 244), (x + im.width + 62, 244)], C[cid] + 0.3, MUTED, 5, 16, 0.3))
+        x += im.width + 74
+    E.append(El(T('One tool or topic each: Git, Docker, Kubernetes ...', 'm', 30, MUTED), 100, 296, C['g4'], anim='fade'))
+    S0, W0 = 210, 130; SX, SY = 800, 905; ids = ['g6', 'g7', 'g8', 'g9', 'g10']
+    def scr(wx, wy, wz=0): p = iso.P(wx, wy, wz); return SX + p[0], SY + p[1]
+    tops = []
+    for i in reversed(range(5)):
+        h = 38 + i * 28; lab = iso.face_label(str(i + 1), W0, W0, 120); ax, ay = scr(-W0 / 2, -i * S0 - W0 / 2)
+        E.append(GrowBox(ax, ay, W0, W0, h, LEV[i][1], lab, C[ids[i]] - 0.05)); tp = scr(0, -i * S0, h); tops.append((i, tp))
+        E.append(Pop(badge(LEV[i][0], F('b', 27), INK, LEV[i][1], padx=18, pady=8, r=18), tp[0] - 80, tp[1] - 165, C[ids[i]] + 0.15))
+    tops = dict(tops)
+    for i in range(5): E.append(Pop(badge(f'Project {i + 1}', F('b', 22), TXT, PANEL, padx=14, pady=6, r=14), tops[i][0] - 62, tops[i][1] - 112, C['g12'] + 0.15 * i))
+    E.append(FloatEm('Bullseye', tops[4][0] + 90, tops[4][1] - 215, 120, C['g13'], None, bob=8, sway=6, speed=2.2, spin_in=True))
+    for k_, (s_, col, cid) in enumerate([('About five minutes per lesson', ACC, 'g11'), ('A project at the end of every level', GOOD, 'g12'), ('Mastery: requirements only', PINK, 'g13'), ('Stage exam: a scenario you have not seen', WARN, 'g14')]):
+        E.append(pill(s_, 100, 400 + k_ * 62, C[cid] + 0.2, col, INK, 26, 18, 9))
+    return E
+GEN = [('v0', 'Java app', ACC, [('java', 'h3'), ('tomcat', 'h3b'), ('postgresql', 'h3b')]), ('v1', 'Automated', VIO, [('jenkins', 'h4a'), ('sonarqube', 'h4b')]),
+       ('v2', 'Containers', GOOD, [('docker', 'h5')]), ('v3', 'Cloud servers', WARN, [('terraform', 'h6')]), ('v4', 'Kubernetes', PINK, [('kubernetes', 'h7'), ('helm', 'h7')]),
+       ('v5', 'Monitoring', ACC, [('prometheus', 'h8'), ('grafana', 'h8')])]
+def s_cart(C, D, dur):
+    E = [El(T('One project, six upgrades', 'x', 60, maxw=1500), 100, 120, C['h1']), ill(C['h1'], 1400, 140)]
+    E.append(Pop(card(560, 100, GOOD, 'CloudCart', [], 44), 100, 200, C['h2'])); E.append(El(T('our example online shop', 'm', 32, MUTED), 400, 232, C['h2'] + 0.4, anim='fade'))
+    cw, gap, x0, y0 = 270, 20, 100, 400; way = []
+    for i, (v, nm, col, tools) in enumerate(GEN):
+        x = x0 + i * (cw + gap); t0 = C[tools[0][1]]
+        E.append(Pop(card(cw, 470, col, v, [(nm, TXT)], 56, 30), x, y0, t0 - 0.1))
+        way += [(t0 - 0.5, x + cw // 2, 358)] if i else [(t0 - 0.3, x + cw // 2, 358)]
+        for j, (tn, cid) in enumerate(tools): E.append(Pop(LG.chip(tn, 76, LG.PRETTY[tn], F('b', 18)), x + (cw - 76) // 2, y0 + 150 + j * 105, C[cid] + (0.0 if j == 0 else 0.15)))
+    pk, _, _ = iso.box(60, 60, 52, ACC, tape=(255, 246, 220)); E.append(Move(pk, way, None, 4))
+    E.append(Pop(badge('A real system, built step by step', F('b', 38), INK, ACC, padx=30, pady=14, r=28), 100, 920, C['h9']))
+    return E
+def s_route(C, D, dur):
+    E = [El(T('You do not have to start at the beginning', 'x', 56, maxw=1700), 100, 120, C['i1'])]
+    R = [('Complete beginner', 'Start at lesson one, and follow the order.', ACC, 'Light bulb', 'i2', 'i3'), ('Experienced admin', 'Pass a placement check, and skip the basics.', VIO, 'Wrench', 'i4', 'i5'),
+         ('Developer to DevOps', 'Skip the application topics. Focus on CI/CD, containers, and the cloud.', GOOD, 'Laptop', 'i6', 'i7')]
+    for k_, (n, line, col, em, c1, c2) in enumerate(R):
+        x = 100 + k_ * 600; E.append(Pop(card(560, 400, col, n, [], 44), x, 300, C[c1]))
+        E.append(El(T(line, 'm', 34, TXT, maxw=500), x + 28, 400, C[c2], anim='fade')); E.append(FloatEm(em, x + 330, 530, 160, C[c1] + 0.2, None, bob=8, sway=6, speed=2.2, phase=k_, spin_in=True))
+    E.append(Pop(badge('Every skip is earned: pass the final challenge', F('b', 38), INK, WARN, padx=30, pady=14, r=28), 100, 790, C['i8']))
+    return E
+def s_need(C, D, dur):
+    E = [El(T('What you need', 'x', 66), 100, 130, C['n1'])]
+    items = [('A computer', 'that can run a virtual machine or Docker. 8 GB of memory or more is recommended', 'n2', 'n3', ACC), ('A free GitHub account', 'from the Git lessons onward', 'n4', 'n4', VIO),
+             ('A steady pace', 'one or two lessons a day works well', 'n5', 'n5', GOOD), ('The habit of practice', 'watching alone will not make you an engineer', 'n6', 'n6', PINK)]
+    for i, (n, sub, c1, c2, col) in enumerate(items):
+        y = 270 + i * 165; E.append(Pop(rrect(1500, 135, 18, fill=PANEL, outline=col, width=3), 100, y, C[c1]))
+        E.append(Pop(icon('check', 56, TXT, col), 130, y + 38, C[c1] + 0.15)); E.append(El(T(n, 'b', 42, col), 220, y + 16, C[c1] + 0.15, anim='fade')); E.append(El(T(sub, 'm', 30, MUTED, maxw=1200), 220, y + 76, C[c2] + 0.1, anim='fade'))
+    return E
+FN = dict(flow=s_flow, cart=s_cart, route=s_route, need=s_need, hook=s_hook, promise=s_promise, path=s_path, lesson=s_lesson, expect=s_expect, start=s_start)

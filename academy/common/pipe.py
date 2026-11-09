@@ -18,7 +18,9 @@ def do_tts():
         for c in cues:
             cid, cap, say, gap = norm(c)
             if not os.path.exists(f'{VO}/{cid}.wav'):
-                s, sr = k.create(say, voice='af_heart', speed=1.0, lang='en-us'); sf.write(f'{VO}/{cid}.wav', s, sr)
+                ph = k.tokenizer.phonemize(say, 'en-us')
+                if re.search(r'\blives\b', say, re.I): ph = ph.replace('lˈaɪvz', 'lˈɪvz')   # verb 'lives' = /livz/, not /laivz/
+                s, sr = k.create(ph, voice='af_heart', speed=1.0, lang='en-us', is_phonemes=True); sf.write(f'{VO}/{cid}.wav', s, sr)
             dur[cid] = sf.info(f'{VO}/{cid}.wav').duration
     json.dump(dur, open(VO + '/dur.json', 'w'), indent=1); print(round(sum(dur.values()), 1), 's speech')
 dur = json.load(open(VO + '/dur.json')) if os.path.exists(VO + '/dur.json') else {}

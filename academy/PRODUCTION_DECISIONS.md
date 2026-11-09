@@ -15,3 +15,9 @@
 
 ## UPDATE 2026-11-09 - Voice
 Owner reverted the academy narrator to the RHCSA voice: Kokoro `af_heart`, speed 1.0. This supersedes the earlier `am_eric` (0.97) decision. Welcome and SDLC 1 are re-rendered with it. Do not ask again.
+
+## UPDATE 2026-11-09 - Pronunciation (owner feedback)
+- SonarQube is spoken "sonar cube" (say-text), JUnit "J Unit".
+- Verb "lives" ("code lives in Git") must be /livz/, not /laivz/: pipe.do_tts phonemizes each cue and rewrites lˈaɪvz -> lˈɪvz for any cue containing the word "lives". Add new heteronyms to pronunciation.json and handle them the same way.
+- Welcome (INTRO) now explains the program flow: 9 stages, 48 masterclasses (planned), 5 levels, ~5 min lessons, a project per level, stage exams, CloudCart journey, routes, requirements.
+- New standalone video: loop/ "The DevOps Loop" (infinity symbol, 8 stages).

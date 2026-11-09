@@ -14,7 +14,7 @@ SCENES = [
   c('p1', "Plan.", None, 0.2), c('p2', "Decide what to build, and why.", None, 0.2), c('p3', "Track the work in GitHub."),
   c('k1', "Code.", None, 0.2), c('k2', "Developers write it,", None, 0.1), c('k3', "and track every change in Git."),
   c('b1', "Build.", None, 0.2), c('b2', "Turn the code into a program,", None, 0.1), c('b3', "with a tool like Maven."),
-  c('t1', "Test.", None, 0.2), c('t2', "Let automated checks catch bugs first,", None, 0.1), c('t3', "with JUnit and SonarQube."),
+  c('t1', "Test.", None, 0.2), c('t2', "Let automated checks catch bugs first,", None, 0.1), c('t3', "with JUnit and SonarQube.", "with J Unit, and sonar cube."),
   c('x1', "That is the Dev side."), c('x2', "Now, the Ops side."),
   c('r1', "Release.", None, 0.2), c('r2', "Package the program so it can ship,", None, 0.1), c('r3', "as a Docker image."),
   c('d1', "Deploy.", None, 0.2), c('d2', "Run it for real users,", None, 0.1), c('d3', "on Kubernetes, installed with Helm.", "on Kubernetes, installed with Helm."),
