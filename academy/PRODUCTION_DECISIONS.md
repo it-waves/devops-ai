@@ -12,3 +12,6 @@
    - Prompts and outputs on screen come from real Ubuntu runs; label "Ubuntu 24.04 LTS".
    - The 62 published RHCSA EX200 videos stay on Rocky/RHEL because that exam is RHEL-specific. They are not redone.
    - Tomcat, Jenkins, Docker, etc. install on Ubuntu in later Masterclasses.
+
+## UPDATE 2026-11-09 - Voice
+Owner reverted the academy narrator to the RHCSA voice: Kokoro `af_heart`, speed 1.0. This supersedes the earlier `am_eric` (0.97) decision. Welcome and SDLC 1 are re-rendered with it. Do not ask again.

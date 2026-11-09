@@ -77,7 +77,7 @@
   }
  ],
  "standards": {
-  "voice": "am_eric",
+  "voice": "af_heart (Kokoro), speed 1.0 - same voice as the RHCSA videos; owner switched back from am_eric on 2026-11-09",
   "speed": 0.97,
   "rules": [
    "show exact command syntax on screen; do not spell long commands character by character",
