@@ -42,9 +42,13 @@ EXTRA = {'a3': 0.4, 'b6': 1.5, 'c24': 1.5, 'd11': 1.0, 'e10': 1.0, 'f3': 0.3, 'a
 CHAP = {'promise': 'How we teach', 'path': 'The roadmap', 'lesson': 'Every lesson', 'expect': 'What to expect', 'start': 'Start here'}
 ALL = ['git', 'docker', 'kubernetes', 'jenkins', 'terraform', 'ansible', 'prometheus', 'grafana', 'maven', 'java', 'tomcat', 'postgresql', 'ubuntu', 'python', 'actions', 'sonarqube', 'argocd', 'helm', 'github', 'bash', 'trivy', 'vault']
 def s_hook(C, D, dur):
-    q = El(T('Where do I even start?', 'x', 66, PINK, maxw=640), 100, 250, C['a1']); q.t1 = C['a4'] - 0.1; E = [q]
-    E.append(Tilt(ALL, 1290, 500, C['a1'] - 0.2, C['a4'] - 0.1, C['a1'], C['a3'] + 1.0, cols=6, chip=118, gap=34))
-    q2 = El(T('Too many tools. No order.', 'b', 36, MUTED), 100, 440, C['a3'], anim='fade'); q2.t1 = C['a4'] - 0.1; E.append(q2)
+    t_out = C['a4'] - 0.1
+    E = [Char(130, 440, C['a1'] - 0.2, t_out, C['a2'] + 0.1, C['a4'])]
+    bub = bubble(T('Where do I even start?', 'x', 54, TXT, maxw=560), (150, 0)); bq = Pop(bub, 100, 190, C['a2'] + 0.15); bq.t1 = t_out; E.append(bq)
+    for i, (qx, qy, col, dl) in enumerate([(70, 560, ACC, 0.45), (590, 520, PINK, 0.85), (560, 700, GOOD, 1.25)]):
+        qm = Pop(T('?', 'x', 96, col), qx, qy, C['a2'] + dl); qm.t1 = t_out; E.append(qm)
+    E.append(Tilt(ALL, 1290, 500, C['a1'] - 0.2, t_out, C['a1'], C['a3'] + 1.0, cols=6, chip=118, gap=34))
+    q2 = El(T('Too many tools. No order.', 'b', 34, MUTED, maxw=300), 620, 820, C['a3'], anim='fade'); q2.t1 = t_out; E.append(q2)
     row = ['ubuntu', 'git', 'maven', 'jenkins', 'docker', 'kubernetes', 'terraform', 'prometheus']
     for i, n in enumerate(row): E.append(logo(n, 150 + i * 215, 150, C['a4'] + 0.25 + i * 0.28, 110))
     for i in range(7): E.append(A([(150 + i * 215 + 118, 205), (150 + i * 215 + 205, 205)], C['a4'] + 0.6 + i * 0.28, MUTED, 5, 16, 0.3))

@@ -163,3 +163,49 @@ class Tilt(Dyn):
         warped = cv2.warpPerspective(np.asarray(wall), M, (W, H), flags=cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0))
         if a < 1: warped[..., 3] = (warped[..., 3] * a).astype(np.uint8)
         base.alpha_composite(Image.fromarray(warped, 'RGBA'))
+
+# ---------- original illustrated character (confused learner) ----------
+def char_confused(p, t, S=2):
+    """p: shrug amount 0..1; t: time for idle motion. returns RGBA 440x520."""
+    Wc, Hc = 440, 520; im = Image.new('RGBA', (Wc * S, Hc * S), (0, 0, 0, 0)); d = ImageDraw.Draw(im); k = lambda *v: [x * S for x in v]
+    skin = (238, 196, 160); skin_d = (214, 168, 132); shirt = (120, 140, 230); shirt_d = (92, 110, 200); hair = (46, 34, 38)
+    lift = p * 16; bob = math.sin(t * 2.2) * 3 * (1 - p)
+    # arms (behind torso edges): down -> shrug (elbows out, palms up)
+    def lerp(a, b): return (a[0] + (b[0] - a[0]) * p, a[1] + (b[1] - a[1]) * p)
+    for sgn in (-1, 1):
+        cx = 220 + sgn * 112; sh = (cx, 385 - lift); el = lerp((220 + sgn * 128, 470), (220 + sgn * 190, 440)); hd = lerp((220 + sgn * 128, 540), (220 + sgn * 176, 335 - 10 * math.sin(t * 5) * p))
+        d.line(k(sh[0], sh[1], el[0], el[1]), fill=shirt_d, width=52 * S); d.ellipse(k(el[0] - 26, el[1] - 26, el[0] + 26, el[1] + 26), fill=shirt_d)
+        d.line(k(el[0], el[1], hd[0], hd[1]), fill=shirt_d, width=44 * S); d.ellipse(k(hd[0] - 26, hd[1] - 26, hd[0] + 26, hd[1] + 26), fill=skin)
+        d.ellipse(k(hd[0] - 16, hd[1] - 30, hd[0] + 16, hd[1] - 6), fill=skin_d)
+    # torso
+    d.rounded_rectangle(k(100, 372 - lift, 340, 640), radius=70 * S, fill=shirt); d.rounded_rectangle(k(100, 372 - lift, 340, 440), radius=60 * S, fill=tuple(min(255, c + 14) for c in shirt))
+    d.rectangle(k(190, 340 - lift, 250, 386 - lift), fill=skin_d)
+    # head (rotated separately)
+    hw = 260; head = Image.new('RGBA', (hw * S, hw * S), (0, 0, 0, 0)); h = ImageDraw.Draw(head); hk = lambda *v: [x * S for x in v]
+    h.ellipse(hk(30, 20, 230, 230), fill=skin); h.ellipse(hk(14, 110, 46, 160), fill=skin); h.ellipse(hk(214, 110, 246, 160), fill=skin)
+    h.pieslice(hk(24, 6, 236, 190), 180, 360, fill=hair); h.rectangle(hk(30, 98, 60, 118), fill=hair); h.rectangle(hk(200, 98, 230, 118), fill=hair)
+    # eyes looking up-left
+    for ex in (92, 168):
+        h.ellipse(hk(ex - 22, 112, ex + 22, 158), fill=(250, 250, 252)); h.ellipse(hk(ex - 17, 114, ex - 1, 138), fill=(40, 40, 52)); h.ellipse(hk(ex - 13, 118, ex - 8, 123), fill=(255, 255, 255))
+    # brows: left raised, right low and slanted (puzzled)
+    h.line(hk(66, 100 - 16 * p, 116, 88 - 22 * p), fill=hair, width=9 * S); h.line(hk(146, 98, 196, 108), fill=hair, width=9 * S)
+    # wavy unsure mouth
+    pts = [(98 + i * 5, 190 + 5 * math.sin(i * .9)) for i in range(0, 14)]; h.line(hk(*[c for q in pts for c in q]), fill=(150, 80, 80), width=6 * S)
+    # sweat drop
+    sy = 70 + ((t * 40) % 60); h.polygon(hk(228, sy - 16, 218, sy + 4, 238, sy + 4), fill=(150, 205, 255)); h.ellipse(hk(218, sy - 2, 238, sy + 18), fill=(150, 205, 255))
+    ang = 5 * math.sin(t * 1.7) + 7 * p; head = head.rotate(ang, resample=Image.BICUBIC, center=(hw * S // 2, hw * S)); im.alpha_composite(head, (int(90 * S), int((86 + bob - lift * .6) * S)))
+    return im.resize((Wc, Hc), Image.LANCZOS)
+class Char(Dyn):
+    def __init__(self, x, y, t0, t1, ts, te):
+        self.x, self.y, self.t0, self.t1, self.ts, self.te = x, y, t0, t1, ts, te
+        super().__init__(lambda t: None if t < t0 or t > t1 + 0.4 else round(t, 2), self._d)
+    def _d(self, base, t, k):
+        p = ease(min(1, max(0, (t - self.ts) / 0.7))) if t >= self.ts else 0.0
+        a = min(1, (t - self.t0) / 0.4) * (1 - max(0, (t - self.t1) / 0.4)); e = ease(min(1, (t - self.t0) / 0.5))
+        im = char_confused(p, t)
+        if a < 0.999: im.putalpha(im.getchannel('A').point(lambda v: int(v * a)))
+        base.alpha_composite(im, (int(self.x), int(self.y + (1 - e) * 60)))
+def bubble(text_img, tail_to):
+    w, h = text_img.width + 70, text_img.height + 50; im = glass(w, h, PINK, 30); P = PADC; d = ImageDraw.Draw(im); tx, ty = tail_to[0] + P, h + P - 2
+    d.polygon([(tx - 26, ty - 6), (tx + 26, ty - 6), (tx + 6, ty + 46)], fill=(34, 62, 70, 255)); d.line([(tx - 26, ty - 6), (tx + 6, ty + 46), (tx + 26, ty - 6)], fill=PINK + (200,), width=2)
+    d.rectangle([tx - 24, ty - 10, tx + 24, ty - 3], fill=(32, 58, 66, 255)); im.alpha_composite(text_img, (P + 35, P + 25)); im.info['pad'] = P; return im
