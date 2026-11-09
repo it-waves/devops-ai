@@ -67,6 +67,7 @@
    "natural pauses during demos",
    "captions generated from the same audio timings",
    "use pronunciation.json"
-  ]
+  ],
+  "linux_platform": "Ubuntu 24.04 LTS for all Linux/Bash material and labs (RHCSA series remains Rocky/RHEL)"
  }
 }

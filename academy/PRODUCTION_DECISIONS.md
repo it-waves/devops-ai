@@ -5,3 +5,10 @@
 3. VISUALS: animated diagrams + genuine terminal/software demonstrations; navy/cyan identity; no static slideshows; no fabricated output; 3D only where it aids comprehension.
 4. CLOUD: build Terraform-based labs now; label every lab VERIFIED / PARTIALLY VERIFIED / UNVERIFIED; local emulation never counts as proof of AWS/Azure; no billable deployment without cost estimate, permissions, spend guard, cleanup and owner approval.
 5. EXECUTION: proceed without repeated preference questions. Interrupt only for: missing external account/permission, financial commitment, unresolvable critical decision, platform authorization, blocker.
+
+6. LINUX PLATFORM (owner, 2026-11-09): all Linux, Bash and Linux-related academy material (MC02, MC04, MC05 and every lab that needs a Linux host) uses UBUNTU (current LTS, 24.04, GitHub runner `ubuntu-24.04` for CI labs). Consequences:
+   - Package management is `apt`; firewall is `ufw` (with nftables underneath); mandatory access control is AppArmor (SELinux is no longer taught in MC04; mention it only as a comparison).
+   - Service, user, permission, SSH, LVM, systemd, networking content is the same ideas on Ubuntu.
+   - Prompts and outputs on screen come from real Ubuntu runs; label "Ubuntu 24.04 LTS".
+   - The 62 published RHCSA EX200 videos stay on Rocky/RHEL because that exam is RHEL-specific. They are not redone.
+   - Tomcat, Jenkins, Docker, etc. install on Ubuntu in later Masterclasses.

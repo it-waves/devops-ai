@@ -9,7 +9,7 @@ Full 21-field specs (directive section 12) are written per Masterclass when it e
 | 01 SDLC | Requirements doc for CloudCart | Architecture + user stories | Plan sprints, Kanban board | Release plan with test/rollback gates | Audit a flawed project plan |
 | 02 IT fundamentals | Inspect hardware/OS of a VM | Processes, memory, storage tour | Build and resize a VM | Capacity report for a server | Diagnose a slow server |
 | 03 Networking | Map a small network | Subnet a plan, configure DNS/DHCP | Routing, NAT, firewall rules | TLS + load-balanced site | Find a multi-fault network failure |
-| 04 Linux | Users, files, permissions | Services, SSH, storage | LVM, SELinux, firewall | Hardened server baseline | Repair a broken server (RHCSA done) |
+| 04 Linux (Ubuntu 24.04) | Users, files, permissions | Services, SSH, storage | LVM, AppArmor, ufw | Hardened server baseline | Repair a broken server (RHCSA exam track already done on Rocky) |
 | 05 Bash | System info and backup | User/service toolkit | Log analysis and health monitor | Deploy + rollback script | Repair a broken automation set |
 | 06 Python | File/JSON tool | REST API client | YAML/log automation with tests | Cloud SDK automation | Debug a failing automation service |
 | 07 Git | Versioned app | Branch, merge, PR, conflicts | Release tags and recovery | Protected branches, required checks | Recover a damaged repo |
@@ -67,6 +67,7 @@ Full 21-field specs (directive section 12) are written per Masterclass when it e
 G1 Git → Maven → WAR → Tomcat · G2 Git → Jenkins → Maven → tests → SonarQube gate → Nexus → Tomcat deploy · G3 CI → image build → registry → Docker run · G4 Terraform → cloud infra → automated deploy · G5 Kubernetes + Helm + Argo CD + security + observability · G6 monitoring → incident → recovery → optimization. Each lesson states why the next generation exists and what it costs; older approaches are not called obsolete.
 
 ## 10. Lab platform
+- **Linux platform decision:** Ubuntu 24.04 LTS for all Linux/Bash labs (owner decision 2026-11-09); CI runner `ubuntu-24.04`.
 - **Runner:** the existing `rhcsa-lab-ok` pattern (GitHub Actions VM, `phase1.sh`/`phase2.sh`, `check.sh`) extends to new repo `academy-labs`, one folder per lab with a manifest (`lab.yaml`: id, tools+versions, cost, verification level, cleanup).
 - **Local learner path:** Docker/Compose or a VM; no cloud needed except MC26/27/34/35.
 - **Cloud labs:** Terraform with a spend budget alarm, `terraform destroy` cleanup script, estimated cost in the manifest, never run without the owner's approval and an account the owner supplies. Verification level starts UNVERIFIED; local emulation (for example LocalStack) can reach PARTIALLY VERIFIED at best.
