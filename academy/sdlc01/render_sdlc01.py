@@ -2,6 +2,7 @@ import json, math, os, re, subprocess, sys
 import numpy as np, soundfile as sf
 from PIL import Image, ImageDraw
 sys.path.insert(0, '/home/claude/osi'); sys.path.insert(0, '/home/claude/academy/sdlc01')
+import theme
 from engine import *
 from script_sdlc01 import SCENES
 import scenes_sdlc01 as S
@@ -18,14 +19,13 @@ for name, cues in SCENES:
     D = round(t - GAP + TAIL, 3); TL.append(dict(name=name, C=C, D=D, start=gt, cues=cues)); gt += D
 TOTAL = gt
 def chrome(name):
-    g = np.linspace(0, 1, H)[:, None]
-    arr = (np.array(BG0)[None, None, :] * (1 - g[..., None]) + np.array(BG1)[None, None, :] * g[..., None])
-    im = Image.fromarray(np.repeat(arr, W, axis=1).astype(np.uint8), 'RGB').convert('RGBA'); d = ImageDraw.Draw(im); f = F('s', 22)
-    d.ellipse([60, 46, 72, 58], fill=ACC); lab = 'DevOps Engineering Bootcamp  ·  SDLC'; d.text((86, 38), lab, font=f, fill=TXT)
-    x = 86 + f.getlength(lab); s = '   ·   Lesson 1'; d.text((x, 38), s, font=F('m', 22), fill=MUTED)
-    if CHAP.get(name): d.text((x + F('m', 22).getlength(s), 38), '   ·   ' + CHAP[name], font=F('m', 22), fill=ACC)
-    s2 = 'DevOps Simplified'; d.text((W - 60 - f.getlength(s2), 38), s2, font=f, fill=MUTED)
-    d.rectangle([0, H - 5, W, H], fill=(28, 40, 62)); return im
+    im = theme.backdrop(); d = ImageDraw.Draw(im); f = F('b', 20)
+    lab = 'DEVOPS ENGINEERING BOOTCAMP'; w = int(f.getlength(lab)) + 44
+    d.rounded_rectangle([60, 30, 60 + w, 70], radius=20, fill=ACC); d.text((82, 38), lab, font=f, fill=(8, 24, 26))
+    x = 60 + w + 24
+    if CHAP.get(name): d.text((x, 38), CHAP[name], font=F('m', 22), fill=ACC)
+    s2 = 'DevOps Simplified'; d.text((W - 60 - F('s', 22).getlength(s2), 38), s2, font=F('s', 22), fill=MUTED)
+    d.rectangle([0, H - 6, W, H], fill=(30, 62, 68)); return im
 def build_scene(sc):
     E = S.FN[sc['name']](sc['C'], sc['D'], dur); E = [e for e in E if e is not None]
     for e in E:

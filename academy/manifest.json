@@ -51,7 +51,7 @@
    "next": "owner listens; if approved, publish to Studio and add to a new playlist; then lesson 2",
    "path": "/home/claude/academy/sdlc01/build/DevOps_Bootcamp_SDLC01_Idea_to_Customer.mp4",
    "blockers": [],
-   "evidence": "3:55, 1080p30, am_eric narration, captions from audio timings, loudness -15.4 LUFS / peak -1.5 dBFS, frame review of all 10 scenes; real CI evidence on screen (run 42607279375 / 42608889904)",
+   "evidence": "3:55, 1080p30, am_eric narration, captions from audio timings, loudness -15.4 LUFS / peak -1.5 dBFS, frame review of all 10 scenes; real CI evidence on screen (run 42607279375 / 42608889904); re-rendered with new academy theme (teal/gold), arrows fixed so they no longer overlap text",
    "unverified": [
     "voice naturalness and pronunciation (Claude cannot listen; owner review needed)",
     "learner comprehension (PENDING)",
@@ -63,6 +63,17 @@
    "state": "DESIGNED",
    "path": "/home/claude/academy/blueprint_vol3.md",
    "next": "owner review"
+  },
+  {
+   "id": "MC00-WELCOME",
+   "state": "VIDEO PRODUCED (Gate D partial)",
+   "path": "/home/claude/academy/welcome/build/final.mp4",
+   "evidence": "3:00, 1080p30, am_eric, -15.3 LUFS; roadmap labelled ILLUSTRATION; plan stated as plan, not as published",
+   "unverified": [
+    "voice naturalness (owner listening)",
+    "comprehension"
+   ],
+   "next": "owner approval, then publish as first video of the bootcamp playlist"
   }
  ],
  "standards": {
@@ -74,6 +85,7 @@
    "captions generated from the same audio timings",
    "use pronunciation.json"
   ],
-  "linux_platform": "Ubuntu 24.04 LTS for all Linux/Bash material and labs (RHCSA series remains Rocky/RHEL)"
+  "linux_platform": "Ubuntu 24.04 LTS for all Linux/Bash material and labs (RHCSA series remains Rocky/RHEL)",
+  "theme": "teal ink + gold/seafoam/periwinkle (owner asked for a look different from RHCSA navy/cyan; directive v4.0 says navy/cyan, owner instruction followed)"
  }
 }

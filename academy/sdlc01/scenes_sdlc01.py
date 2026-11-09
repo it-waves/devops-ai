@@ -1,14 +1,15 @@
-import sys; sys.path.insert(0, '/home/claude/osi')
+import sys; sys.path.insert(0, '/home/claude/osi'); sys.path.insert(0, '/home/claude/academy/sdlc01')
+import theme
 from engine import *
 from PIL import Image, ImageDraw
-PINK = (244, 114, 182); VIO = (167, 139, 250)
+PINK = (198, 172, 240); VIO = (140, 164, 240)
 def T(s, w='m', size=34, color=TXT, maxw=None, align='left', lh=1.32): return text_img(s, F(w, size), color, maxw, lh, align)
 STAGES = ['Plan', 'Requirements', 'Design', 'Build', 'Test', 'Deploy', 'Operate']
-def card(w, h, col, title, lines, tsize=36):
+def card(w, h, col, title, lines, tsize=36, lsize=30):
     im = rrect(w, h, 18, fill=PANEL, outline=col, width=3); d = ImageDraw.Draw(im)
     d.text((28, 22), title, font=F('b', tsize), fill=col); y = 22 + tsize + 22
     for s, c in lines:
-        t = T(s, 'm', 30, c, maxw=w - 56); im.alpha_composite(t, (28, y)); y += t.height + 8
+        t = T(s, 'm', lsize, c, maxw=w - 40); im.alpha_composite(t, (28, y)); y += t.height + 8
     return im
 def tracker(active):
     x = 100; E = []
@@ -42,6 +43,29 @@ def lines_el(lines, x, y, fs=27, lh=None):
         out.append(El(T(txt, 'mono', fs, col, maxw=None), x, y + i * lh, t, anim='fade', d=0.25))
     return out
 
+
+import math
+def arrow2(pts, col=ACC, lw=7, head=30):
+    """polyline arrow with a filled triangular head that follows the last segment."""
+    pad = head + lw
+    xs = [q[0] for q in pts]; ys = [q[1] for q in pts]
+    x0, y0 = min(xs) - pad, min(ys) - pad; w = int(max(xs) - min(xs) + 2 * pad); h = int(max(ys) - min(ys) + 2 * pad)
+    S = 3; im = canvas(w * S, h * S); d = ImageDraw.Draw(im)
+    P = [((q[0] - x0) * S, (q[1] - y0) * S) for q in pts]
+    (ax, ay), (bx, by) = P[-2], P[-1]; ang = math.atan2(by - ay, bx - ax); hl = head * S
+    base = (bx - hl * 0.9 * math.cos(ang), by - hl * 0.9 * math.sin(ang))
+    d.line(P[:-1] + [base], fill=col, width=lw * S, joint='curve')
+    wing = hl * 0.52
+    tri = [(bx, by), (base[0] + wing * math.sin(ang), base[1] - wing * math.cos(ang)), (base[0] - wing * math.sin(ang), base[1] + wing * math.cos(ang))]
+    d.polygon(tri, fill=col)
+    return El(im.resize((w, h), Image.LANCZOS), 0, 0, 0), x0, y0
+def A(pts, t, col=ACC, lw=7, head=30, anim='fade', d=0.5):
+    e, x0, y0 = arrow2(pts, col, lw, head); return El(e.img, x0, y0, t, anim=anim, d=d)
+def arc_pts(cx, cy, r, a0, a1, n=24):
+    return [(cx + r * math.cos(math.radians(a0 + (a1 - a0) * i / n)), cy + r * math.sin(math.radians(a0 + (a1 - a0) * i / n))) for i in range(n + 1)]
+def outside(pt, boxes, m=14):
+    return all(not (b[0] - m <= pt[0] <= b[2] + m and b[1] - m <= pt[1] <= b[3] + m) for b in boxes)
+
 def s_hook(C, D, dur):
     t = C['h1']; E = []
     E.append(El(icon('browser', 300, TXT, ACC), 1050, 250, t, anim='fade'))
@@ -54,21 +78,29 @@ def s_hook(C, D, dur):
     return E
 def s_roadmap(C, D, dur):
     t = C['r1']; E = [El(T('One shop. Seven stages.', 'x', 64), 100, 130, t), ill(t, 1400, 140)]
-    xs = [100, 540, 980, 1420]; ys = [300, 560]; cols = [ACC, VIO, GOOD, WARN, PINK, ACC, VIO]
+    cols = [ACC, VIO, GOOD, WARN, PINK, ACC, VIO]; cw, gap, y = 205, 47, 330
     for i, n in enumerate(STAGES):
-        x = xs[i % 4]; y = ys[i // 4]
-        E.append(El(card(400, 210, cols[i], f'{i + 1}', [(n, TXT)], 64), x, y, t + 1.5 + i * 0.9, anim='fade'))
-    E.append(El(card(400, 210, GOOD, 'CloudCart', [('our example shop', MUTED)], 40), xs[3], ys[1], C['r2'], anim='fade'))
-    E.append(El(T('Name each stage  ·  say what happens  ·  see where DevOps fits', 'm', 34, MUTED), 100, 850, C['r2'] + 1.0))
-    return E
+        x = 100 + i * (cw + gap); tt = t + 1.5 + i * 0.9
+        E.append(El(card(cw, 190, cols[i], f'{i + 1}', [(n, TXT)], 60, 22), x, y, tt, anim='fade'))
+        if i < 6: E.append(A([(x + cw + 6, y + 95), (x + cw + gap - 6, y + 95)], tt + 0.5, MUTED, 5, 18))
+    E.append(El(T('Then the cycle repeats.', 'b', 34, MUTED), 640, 585, t + 8.0))
+    E.append(A([(1940 - 100, 540), (1940 - 100, 540)], 999)) if False else None
+    E.append(A([(1700, 540), (1700, 560), (180, 560), (180, 530)], t + 8.2, MUTED, 5, 18))
+    E.append(El(card(900, 190, GOOD, 'CloudCart', [('our example online shop, from idea to customer', MUTED)], 44), 100, 640, C['r2']))
+    E.append(El(T('Name each stage  ·  say what happens  ·  see where DevOps fits', 'm', 34, MUTED, maxw=760), 1050, 680, C['r2'] + 1.0))
+    return [e for e in E if e is not None]
+
 def s_plan(C, D, dur):
     t = C['p1']; E = [tracker(0)] + stage_title(1, 'Plan', 'Agree on the problem before writing code.', t) + [ill(t)]
     notes = [('Owner', '"I want to sell online."', WARN), ('Customer', '"I want to find things fast."', ACC), ('Developer', '"I need a clear goal."', VIO)]
     for i, (who, say, col) in enumerate(notes):
-        E.append(El(card(520, 150, col, who, [(say, TXT)], 32), 1100, 250 + i * 175, t + 3.0 + i * 1.6, anim='left'))
-    E.append(El(card(860, 190, GOOD, 'The goal', [('Customers browse products and place an order.', TXT)], 38), 100, 520, C['p2'] + 0.5))
+        tt = t + 3.0 + i * 1.6; y = 250 + i * 175
+        E.append(El(card(520, 150, col, who, [(say, TXT)], 32), 1300, y, tt, anim='left'))
+        E.append(A([(1290, y + 75), (1090, 610)], tt + 0.6, col, 6, 26))
+    E.append(El(card(980, 190, GOOD, 'The goal', [('Customers browse products and place an order.', TXT)], 38), 100, 520, C['p2'] + 0.5))
     E.append(El(T('A written plan avoids building the wrong thing.', 'b', 38, WARN, maxw=860), 100, 760, C['p3'] + 0.3))
     return E
+
 def s_req(C, D, dur):
     t = C['q1']; E = [tracker(1)] + stage_title(2, 'Requirements', 'Turn the plan into precise statements.', t) + [ill(t)]
     E.append(El(card(620, 300, ACC, 'Functional', [('What it does', MUTED), ('Show the product list', TXT), ('Place an order', TXT)], 40), 100, 440, C['q2']))
@@ -77,18 +109,18 @@ def s_req(C, D, dur):
     return E
 def s_design(C, D, dur):
     t = C['d1']; E = [tracker(2)] + stage_title(3, 'Design', 'Decide the parts and how they talk.', t) + [ill(t)]
-    bx = [(1000, 'Browser', 'browser', ACC), (1360, 'API', 'server', VIO), (1700, 'Data store', 'server', GOOD)]
-    # three parts in a column layout on the right half
-    pos = [(980, 330, 'Browser', 'browser', ACC), (980, 560, 'API', 'server', VIO), (980, 790, 'Data store', 'server', GOOD)]
-    for i, (x, y, n, ic, col) in enumerate(pos):
-        tt = [C['d2'], C['d2'] + 3.5, C['d2'] + 7.0][i]
-        E.append(El(icon(ic, 120, TXT, col), x, y, tt, anim='fade')); E.append(El(T(n, 'b', 40, col), x + 160, y + 36, tt + 0.2, anim='fade'))
-    for i, (txt, tt) in enumerate([('asks', C['d2'] + 2.0), ('reads and writes', C['d2'] + 5.5)]):
-        y0 = 330 + 120 + 6 + i * 230
-        im, ax, ay = arrow(1040, y0, 1040, y0 + 90, ACC)
-        E.append(El(im, ax, ay, tt, anim='wipedown')); E.append(El(T(txt, 'm', 28, MUTED), 1100, y0 + 24, tt + 0.2, anim='fade'))
+    parts = [(1000, 280, 'Browser', 'browser', ACC, C['d2']), (1000, 560, 'API', 'server', VIO, C['d2'] + 3.5), (1000, 840, 'Data store', 'server', GOOD, C['d2'] + 7.0)]
+    for x, y, n, ic, col, tt in parts:
+        E.append(El(rrect(460, 150, 18, fill=PANEL, outline=col, width=3), x, y, tt, anim='fade'))
+        E.append(El(icon(ic, 100, TXT, col), x + 24, y + 25, tt + 0.1, anim='fade')); E.append(El(T(n, 'b', 44, col), x + 150, y + 48, tt + 0.2, anim='fade'))
+    mid = 1000 + 150
+    for i, (up, down) in enumerate([('asks', 'answers'), ('reads and writes', 'returns data')]):
+        y0 = 280 + 150 + 12 + i * 280; y1 = y0 + 280 - 150 - 24; tt = C['d2'] + 2.0 + i * 3.5
+        E.append(A([(mid - 40, y0), (mid - 40, y1)], tt, ACC, 7, 28)); E.append(A([(mid + 40, y1), (mid + 40, y0)], tt + 0.6, GOOD, 7, 28))
+        E.append(El(T(up, 'm', 28, ACC), 1000 + 230, y0 + 18, tt + 0.2, anim='fade')); E.append(El(T(down, 'm', 28, GOOD), 1000 + 230, y0 + 58, tt + 0.8, anim='fade'))
     E.append(El(T('Fix problems on paper, while they are cheap.', 'b', 36, WARN, maxw=800), 100, 520, C['d3']))
     return E
+
 SRC = [('public Order place(List<Line> lines) {', TXT), ('  int total = 0;', TXT), ('  for (Line l : lines) {', TXT),
        ('    if (l.quantity() < 1 || l.quantity() > 100) {', WARN), ('      throw new IllegalArgumentException(', WARN), ('        "quantity must be 1 to 100");', WARN), ('    }', TXT),
        ('    Product p = catalog.find(l.productId())...', TXT), ('    total += p.priceCents() * l.quantity();', GOOD), ('  }', TXT), ('  return new Order(total, count);', TXT)]
@@ -123,15 +155,23 @@ def s_deploy(C, D, dur):
     return E
 def s_operate(C, D, dur):
     t = C['o1']; E = [tracker(6)] + stage_title(7, 'Operate and learn', 'Watch it, listen to customers, improve.', t) + [ill(t)]
-    cx, cy = 1350, 560; nodes = [(cx, cy - 210, 'Plan', ACC), (cx + 260, cy, 'Build', VIO), (cx, cy + 210, 'Deploy', GOOD), (cx - 260, cy, 'Operate', WARN)]
-    for i, (x, y, n, col) in enumerate(nodes):
-        E.append(El(card(220, 100, col, n, [], 36), x - 110, y - 50, t + 2.0 + i * 1.2, anim='fade'))
-    for (a, b, tt) in [((cx + 40, cy - 190), (cx + 190, cy - 60), 3.2), ((cx + 190, cy + 60), (cx + 40, cy + 190), 4.4), ((cx - 40, cy + 190), (cx - 190, cy + 60), 5.6), ((cx - 190, cy - 60), (cx - 40, cy - 190), 6.8)]:
-        im, ax, ay = arrow(a[0], a[1], b[0], b[1], ACC, 5); E.append(El(im, ax, ay, t + tt, anim='fade'))
+    cx, cy, R = 1380, 590, 235; bw, bh = 210, 92
+    nodes = [(-90, 'Plan', ACC), (0, 'Build', VIO), (90, 'Deploy', GOOD), (180, 'Operate', WARN)]
+    boxes = []
+    for a, n, col in nodes:
+        x = cx + R * math.cos(math.radians(a)); y = cy + R * math.sin(math.radians(a)); boxes.append((x - bw / 2, y - bh / 2, x + bw / 2, y + bh / 2))
+    for i, ((a, n, col), b) in enumerate(zip(nodes, boxes)):
+        E.append(El(card(bw, bh, col, n, [], 36), b[0], b[1], t + 2.0 + i * 1.2, anim='fade'))
+    for i, (a, n, col) in enumerate(nodes):
+        a0 = a; a1 = a + 90
+        s0 = next(x for x in range(0, 60) if outside(arc_pts(cx, cy, R, a0 + x, a0 + x, 1)[0], boxes)); s1 = next(x for x in range(0, 60) if outside(arc_pts(cx, cy, R, a1 - x, a1 - x, 1)[0], boxes))
+        E.append(A(arc_pts(cx, cy, R, a0 + s0, a1 - s1, 28), t + 3.4 + i * 1.2, ACC, 7, 30, d=0.7))
+    E.append(El(T('keep learning', 'm', 30, MUTED, align='center'), cx - 110, cy - 20, t + 8.0, anim='fade'))
     E.append(El(T('DevOps = a faster, safer loop', 'x', 46, GOOD, maxw=700), 100, 520, C['o2']))
     for i, n in enumerate(['Git', 'Maven', 'Jenkins', 'Docker', 'Kubernetes']):
         E.append(El(badge(n, F('b', 30), (12, 18, 28), [ACC, VIO, GOOD, WARN, PINK][i], padx=20, pady=10), 100 + i * 190, 700, C['o2'] + 3.0 + i * 1.2, anim='fade'))
     return E
+
 def s_recap(C, D, dur):
     t = C['z1']; E = [El(T('Quick check', 'x', 72), 100, 130, t)]
     qs = ['Which stage decides what the system must do?', 'Which stage catches a bad change before customers do?', 'Which two checks prove an app really works?']
