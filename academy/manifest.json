@@ -1,0 +1,70 @@
+{
+ "version": "1.0",
+ "updated": "2026-11-09",
+ "deliverables": [
+  {
+   "id": "BLUEPRINT-V1",
+   "state": "DESIGNED",
+   "path": "/home/claude/rhcsa/academy_blueprint_vol1.md",
+   "next": "Volume 3"
+  },
+  {
+   "id": "BLUEPRINT-V2",
+   "state": "DESIGNED",
+   "path": "/home/claude/academy/blueprint_vol2.md",
+   "next": "Volume 3"
+  },
+  {
+   "id": "VOICE",
+   "state": "APPROVED_PENDING_PILOT_VALIDATION",
+   "note": "Owner approved am_eric (Kokoro) as primary male narrator, 2026-11-09. Final academy-wide audio standard confirmed only after the SDLC pilot lesson validates it. Legacy RHCSA videos keep af_heart.",
+   "next": "validate in SDLC pilot; grow pronunciation.json"
+  },
+  {
+   "id": "MC04-RHCSA",
+   "state": "PUBLISHED",
+   "note": "62 videos; legacy voice af_heart"
+  },
+  {
+   "id": "CLOUDCART-V0",
+   "state": "TESTED (CI) / DEPLOY-SMOKE VERIFIED on Tomcat 10.1.34",
+   "evidence": "run 42607279375 in it-waves/rhcsa-lab-ok: build job 11 tests pass, WAR sha256 b56c276c...; deploy-smoke job: checksum-verified Tomcat, real HTTP checks (health, products, order total 7000, 404, 400) passed. Logs in /home/claude/academy/evidence/cloudcart-ci-42607279375",
+   "blockers": [
+    "artifact zip download blocked by sandbox proxy (logs retrieved instead; WAR/surefire files remain in the GitHub run)",
+    "new repo creation denied; code lives in cloudcart/ inside rhcsa-lab-ok",
+    "local mvn build impossible (no Maven Central access)"
+   ],
+   "unverified": [
+    "PostgreSQL, auth, metrics, tracing (not in v0)",
+    "Java versions other than 17",
+    "Production readiness"
+   ],
+   "next": "storyboard SDLC pilot"
+  },
+  {
+   "id": "MC01-SDLC-PILOT",
+   "state": "PLANNED",
+   "depends": [
+    "BLUEPRINT-V3",
+    "VOICE"
+   ],
+   "next": "storyboard"
+  },
+  {
+   "id": "BLUEPRINT-V3",
+   "state": "DESIGNED",
+   "path": "/home/claude/academy/blueprint_vol3.md",
+   "next": "owner review"
+  }
+ ],
+ "standards": {
+  "voice": "am_eric",
+  "speed": 0.97,
+  "rules": [
+   "show exact command syntax on screen; do not spell long commands character by character",
+   "natural pauses during demos",
+   "captions generated from the same audio timings",
+   "use pronunciation.json"
+  ]
+ }
+}
