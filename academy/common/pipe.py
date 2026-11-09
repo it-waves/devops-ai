@@ -83,11 +83,15 @@ def render_scene(sc, only=None):
 def fmt(t):
     h = int(t // 3600); m = int(t % 3600 // 60); s = t % 60
     return f'{h:02d}:{m:02d}:{int(s):02d},{min(999, int(round((s - int(s)) * 1000))):03d}'
+_CF = [(r'\bS D L C\b', 'SDLC'), (r'\bA P I\b', 'API'), (r'\bC I C D\b', 'CI/CD'), (r'\bA W S\b', 'AWS'), (r'\bC I\b', 'CI'), (r'\bC D\b', 'CD')]
+def CAPFIX(t):
+    for a, b in _CF: t = re.sub(a, b, t)
+    return t
 def build_av():
     sr = 24000; buf = np.zeros(int((TOTAL + 1) * sr), dtype=np.float32); out = []; k = 1
     for sc in TL:
         for c in sc['cues']:
-            cid, cap = c[0], c[1]; a, r = sf.read(f'{VO}/{cid}.wav', dtype='float32'); t0 = sc['start'] + sc['C'][cid]; i = int(t0 * sr); buf[i:i + len(a)] += a
+            cid, cap = c[0], CAPFIX(c[1]); a, r = sf.read(f'{VO}/{cid}.wav', dtype='float32'); t0 = sc['start'] + sc['C'][cid]; i = int(t0 * sr); buf[i:i + len(a)] += a
             parts = [cap] if len(cap) <= 90 else [p for p in re.split(r'(?<=[.?!,])\s+', cap)]; tot = sum(len(p) for p in parts); t = t0
             for p in parts: dd = dur[cid] * len(p) / tot; out.append(f'{k}\n{fmt(t)} --> {fmt(t + dd)}\n{p}\n'); k += 1; t += dd
     buf = buf / np.max(np.abs(buf)) * 0.89; sf.write(f'{OUTD}/voice.wav', buf[:int(TOTAL * sr)], sr); open(f'{OUTD}/captions.srt', 'w').write('\n'.join(out))
