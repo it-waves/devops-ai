@@ -22,4 +22,18 @@ Published videos are "Learning" at most. Nothing is Practiced or Mastered until 
 Open items: Lesson 1 v2 (>=5 min, ends with the L2 line above); Intro and DevOps Loop are orientation videos, not mapped to objectives; L2 lab sheet (backlog practice for O02).
 Rules in force: each lesson >=5 min, shows "Objectives covered" in description and recap, has a demonstration, an independent task and a pass/fail rubric; cloud labs UNVERIFIED unless run with evidence; version-specific facts checked against vendor docs before teaching.
 
-## MC02-MC48: Not started (see CHECKLIST.md). A lesson-order table like the one above is written before each masterclass begins.
+## MC02 IT & Computer Fundamentals (8 objectives) - locked lesson order
+Lesson numbers continue from MC01 (global numbering, L9-L16). One lesson per objective, in checklist order.
+
+| Lesson | Objectives | Topic | "Next" line it must end with | Status |
+|---|---|---|---|---|
+| L9 | O01 | Client, server, application, operating system, network | Next lesson: CPU, memory, storage, and processes | Not started |
+| L10 | O02 | CPU, memory, storage, processes, threads, resource contention | Next lesson: the command line and the filesystem | Not started |
+| L11 | O03 | Command-line and filesystem navigation | Next lesson: virtualization and containers | Not started |
+| L12 | O04 | Virtualization, virtual machines, containers, and their differences | Next lesson: your own Linux virtual machine | Not started |
+| L13 | O05 | Install and access a disposable Linux VM | Next lesson: files, text, encodings, and paths | Not started |
+| L14 | O06 | Binary, text, encodings, files, environment variables, paths | Next lesson: server components and failure symptoms | Not started |
+| L15 | O07 | Common server components and their failure symptoms | Next lesson: tracing one web request | Not started |
+| L16 | O08 | Trace an HTTP request from browser to application server | Next masterclass: MC03 Computer networking | Not started |
+
+## MC03-MC48: Not started (see CHECKLIST.md). A lesson-order table like the one above is written before each masterclass begins.
