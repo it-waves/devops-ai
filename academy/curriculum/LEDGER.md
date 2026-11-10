@@ -38,4 +38,4 @@ Lesson numbers continue from MC01 (global numbering, L9-L16). One lesson per obj
 | L17 | MC03-O01 | Explain IP addresses, private/public IP, CIDR, subnet, gateway, and DNS | Next: MC03-O02 TCP, UDP, ports | Published Public AqUkNak5Ezs (9:51, Learning; captions, end screen, playlist; router is an illustration, real photo pending a working download) |
 
 ## MC03-MC48: Not started (see CHECKLIST.md). A lesson-order table like the one above is written before each masterclass begins.
-| L18 | MC03-O02 | Ports, TCP, UDP, states | Built, delivered to Downloads (9:10), awaiting upload; door art is an illustration; live demos real; task unverified |
+| L18 | MC03-O02 | Ports, TCP, UDP, states | Published Public Wgk24aRIPH4 (9:10, Learning; captions, end screen, playlist; door art is an illustration) |
