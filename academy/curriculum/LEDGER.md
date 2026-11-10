@@ -32,7 +32,7 @@ Lesson numbers continue from MC01 (global numbering, L9-L16). One lesson per obj
 | L11 | O03 | Command-line and filesystem navigation | Next lesson: virtualization and containers | Published Public 9x_11bcLkd8 (5:13, captions published, end screen, CC0 photo credited), Learning |
 | L12 | O04 | Virtualization, virtual machines, containers, and their differences | Next lesson: your own Linux virtual machine | Published Public -A6QOWIphU4 (5:24, captions published, end screen, CC0 photo credited), Learning |
 | L13 | O05 | Install and access a disposable Linux VM | Next lesson: files, text, encodings, and paths | Published (Learning; rev 2 live wizard, QEMU stand-in labelled) https://youtu.be/Cccuj7dxwS4 |
-| L14 | O06 | Binary, text, encodings, files, environment variables, paths | Next lesson: server components and failure symptoms | Built (live terminal demos), awaiting upload |
+| L14 | O06 | Binary, text, encodings, files, environment variables, paths | Next lesson: server components and failure symptoms | Published Public vbSVwbOrqG8 (12:29, Learning; captions published, end screen, playlist) https://youtu.be/vbSVwbOrqG8 |
 | L15 | O07 | Common server components and their failure symptoms | Next lesson: tracing one web request | Not started |
 | L16 | O08 | Trace an HTTP request from browser to application server | Next masterclass: MC03 Computer networking | Not started |
 
