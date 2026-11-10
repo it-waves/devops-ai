@@ -1,0 +1,38 @@
+Lesson 14 of the DevOps Engineering Bootcamp. Learn what a computer actually stores and how Linux reads it, with every idea shown live in a real terminal: bits and bytes, hexadecimal, how bytes become text (ASCII and UTF-8), telling a text file from a program, bytes versus characters, the hidden Windows line-ending bug (CRLF), absolute and relative paths, environment variables and export, and the PATH variable (fixing "command not found"). Includes a pass/fail rubric and a hands-on task to repeat in the virtual machine from Lesson 13.
+
+Chapters
+0:00 Everything is bytes
+0:17 Bits and bytes
+0:36 Live: real bytes
+1:24 From bytes to text
+1:52 Live: text or program
+2:46 Encodings and UTF-8
+3:20 Live: bytes vs characters
+4:18 Line endings
+4:38 Live: hidden CR bug
+5:52 Absolute and relative paths
+6:18 Live: walk a path
+7:00 Environment variables
+7:25 Live: export
+8:08 The PATH variable
+8:31 Live: fix command not found
+9:31 Symptoms and causes
+10:02 Common myths
+10:35 Pass or fail rubric
+11:05 Your turn
+11:49 Quick check
+
+Objectives covered: MC02-O06
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, recorded in a real terminal with their real output (the typing is timed to the narration). The tool xxd colours its output on some systems, so yours may look slightly different. Commands are shown exactly as typed; the demo user is called student. The hands-on task is unverified until you run it yourself.
+
+Previous lesson: https://youtu.be/Cccuj7dxwS4
+Next lesson: server components and failure symptoms.
+
+All lesson files: https://github.com/it-waves/devops-ai
+
+Photo: punch cards in storage, U.S. National Archives, public domain, via Wikimedia Commons.
+
+Subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #linux #utf8 #terminal #devopsbootcamp

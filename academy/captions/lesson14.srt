@@ -1,0 +1,735 @@
+1
+00:00:00,500 --> 00:00:02,975
+Every file on a computer is just numbers.
+
+2
+00:00:03,525 --> 00:00:06,277
+Text, pictures, programs: all of it is bytes.
+
+3
+00:00:06,827 --> 00:00:09,621
+And many server bugs come from mixing those bytes up.
+
+4
+00:00:10,171 --> 00:00:11,890
+Today we look at real bytes,
+
+5
+00:00:11,890 --> 00:00:12,503
+encodings,
+
+6
+00:00:12,503 --> 00:00:12,871
+paths,
+
+7
+00:00:12,871 --> 00:00:14,467
+and environment variables,
+
+8
+00:00:14,467 --> 00:00:15,633
+live in a terminal.
+
+9
+00:00:17,683 --> 00:00:19,816
+First, the smallest piece: the bit.
+
+10
+00:00:20,366 --> 00:00:22,798
+A bit is one switch, either zero or one.
+
+11
+00:00:23,348 --> 00:00:24,842
+Eight bits make one byte.
+
+12
+00:00:25,392 --> 00:00:28,707
+One byte holds two hundred fifty-six different values,
+
+13
+00:00:28,707 --> 00:00:30,917
+from zero to two hundred fifty-five.
+
+14
+00:00:31,467 --> 00:00:35,264
+Files, memory, and network traffic are all counted in bytes.
+
+15
+00:00:37,314 --> 00:00:38,871
+Let us look at a real byte.
+
+16
+00:00:39,421 --> 00:00:41,683
+The tool xxd shows raw bytes.
+
+17
+00:00:42,233 --> 00:00:45,689
+Type: echo -n A | xxd -b
+
+18
+00:00:45,819 --> 00:00:49,531
+Eight bits: zero one zero zero zero zero zero one.
+
+19
+00:00:50,081 --> 00:00:54,091
+That pattern is the number sixty-five, and sixty-five is the letter A.
+
+20
+00:00:54,641 --> 00:00:59,697
+Now the same, without dash b: echo -n A | xxd
+
+21
+00:00:59,827 --> 00:01:03,027
+Forty-one. That is sixty-five written in hexadecimal.
+
+22
+00:01:03,577 --> 00:01:04,377
+Hexadecimal,
+
+23
+00:01:04,377 --> 00:01:04,843
+or hex,
+
+24
+00:01:04,843 --> 00:01:07,576
+writes one byte with just two characters.
+
+25
+00:01:07,576 --> 00:01:09,508
+Developers use it everywhere.
+
+26
+00:01:10,058 --> 00:01:15,093
+One more, with two letters. Type: echo -n Hi | xxd
+
+27
+00:01:15,223 --> 00:01:19,745
+Hex forty-eight is H, and hex sixty-nine is i. Two letters, two bytes.
+
+28
+00:01:20,295 --> 00:01:22,962
+That is all a text file is: bytes, in a row.
+
+29
+00:01:25,012 --> 00:01:28,319
+But a byte is only a number. How does a number become a letter?
+
+30
+00:01:28,869 --> 00:01:32,453
+By agreement. A table says which number means which character.
+
+31
+00:01:33,003 --> 00:01:37,376
+The oldest common table is ASCII, with one hundred twenty-eight characters.
+
+32
+00:01:37,926 --> 00:01:43,857
+In it, sixty-five is capital A, sixty-six is capital B, and ninety-seven is lowercase a.
+
+33
+00:01:44,407 --> 00:01:48,012
+So a text file is simply bytes, plus a table to read them with.
+
+34
+00:01:48,562 --> 00:01:51,314
+Without the right table, the bytes are just numbers.
+
+35
+00:01:52,864 --> 00:01:56,277
+Is a file text, or a program? The file command tells you.
+
+36
+00:01:56,827 --> 00:02:03,270
+First, make a small text file. Type: echo "hello" > hello.txt
+
+37
+00:02:03,400 --> 00:02:05,875
+Now type: file hello.txt
+
+38
+00:02:06,005 --> 00:02:09,439
+ASCII text. Just bytes that follow the ASCII table.
+
+39
+00:02:09,989 --> 00:02:22,320
+Now a real program. Type: file -b /bin/ls | cut -d, -f1-2
+
+40
+00:02:22,450 --> 00:02:26,951
+An ELF executable. That is the standard Linux program format.
+
+41
+00:02:27,501 --> 00:02:33,965
+Last, look inside it. Type: head -c 16 /bin/ls | xxd
+
+42
+00:02:34,095 --> 00:02:40,175
+The first bytes are seven f, then E, L, F. Every Linux program starts with that signature.
+
+43
+00:02:40,725 --> 00:02:44,629
+A program and a text file are both bytes. Only the meaning differs.
+
+44
+00:02:46,679 --> 00:02:51,308
+A table of one hundred twenty-eight characters cannot hold the world's languages.
+
+45
+00:02:51,858 --> 00:02:57,661
+So Unicode gives every character its own number: letters, accents, symbols, even emoji.
+
+46
+00:02:58,211 --> 00:03:01,795
+UTF-8 is the way those numbers are stored as bytes.
+
+47
+00:03:02,345 --> 00:03:04,232
+English letters take one byte.
+
+48
+00:03:04,232 --> 00:03:06,875
+An accented letter like e acute takes two.
+
+49
+00:03:06,875 --> 00:03:08,510
+Others take three or four.
+
+50
+00:03:09,060 --> 00:03:13,306
+UTF-8 is the default on almost every modern Linux server.
+
+51
+00:03:13,856 --> 00:03:18,421
+Keep two words apart: a character is what you see, and a byte is what is stored.
+
+52
+00:03:20,471 --> 00:03:24,119
+Let us prove it. First, the plain word cafe, with no accent.
+
+53
+00:03:24,669 --> 00:03:27,229
+Type: printf 'cafe' | xxd
+
+54
+00:03:27,359 --> 00:03:28,831
+Four letters, four bytes.
+
+55
+00:03:29,381 --> 00:03:34,928
+Now with the accent. Type: printf 'café' | xxd
+
+56
+00:03:35,058 --> 00:03:38,663
+Five bytes! The e acute became two bytes: c three, a nine.
+
+57
+00:03:39,213 --> 00:03:43,586
+Count the bytes. Type: printf 'café' | wc -c
+
+58
+00:03:43,716 --> 00:03:47,898
+Five bytes. Now count characters. Type: printf 'café' | wc -m
+
+59
+00:03:48,028 --> 00:03:50,929
+Four characters, five bytes. They are different things.
+
+60
+00:03:51,479 --> 00:03:57,067
+Now the classic bug: read these bytes with the wrong table.
+
+61
+00:03:57,067 --> 00:04:00,951
+Type: echo café | iconv -f latin1 -t utf8
+
+62
+00:04:01,081 --> 00:04:05,049
+Garbled! Instead of e acute, we see A tilde and a copyright sign.
+
+63
+00:04:05,599 --> 00:04:08,761
+That is the broken text you may have seen on websites.
+
+64
+00:04:08,761 --> 00:04:09,932
+The bytes were fine.
+
+65
+00:04:09,932 --> 00:04:11,103
+The table was wrong.
+
+66
+00:04:11,653 --> 00:04:17,093
+The fix is to use the matching encoding. In practice, use UTF-8 everywhere.
+
+67
+00:04:19,143 --> 00:04:21,831
+Next: how a text file marks the end of a line.
+
+68
+00:04:22,381 --> 00:04:24,621
+Linux uses one byte, called L F.
+
+69
+00:04:25,171 --> 00:04:27,923
+Windows uses two bytes: C R, then L F.
+
+70
+00:04:28,473 --> 00:04:32,846
+A file made on Windows can carry hidden C R bytes onto your Linux server.
+
+71
+00:04:33,396 --> 00:04:37,066
+The result: scripts that refuse to run, with confusing errors.
+
+72
+00:04:39,116 --> 00:04:42,444
+Let us create a Windows-style file, and see for ourselves.
+
+73
+00:04:42,994 --> 00:04:50,695
+Type: printf 'one\r\ntwo\r\n' > win.txt
+
+74
+00:04:50,825 --> 00:04:53,321
+Now type: file win.txt
+
+75
+00:04:53,451 --> 00:04:57,227
+The file command spots them: C R L F line terminators.
+
+76
+00:04:57,777 --> 00:05:00,764
+Type: cat -A win.txt
+
+77
+00:05:00,894 --> 00:05:02,953
+Dash A shows hidden characters.
+
+78
+00:05:02,953 --> 00:05:04,680
+Caret M is the hidden C R,
+
+79
+00:05:04,680 --> 00:05:07,337
+and the dollar sign marks each line end.
+
+80
+00:05:07,887 --> 00:05:11,023
+Now a script with the same problem. First, make it.
+
+81
+00:05:11,573 --> 00:05:18,143
+Type: printf '#!/bin/bash\r\necho hi\r\n' > run.sh
+
+82
+00:05:18,273 --> 00:05:22,945
+Make it executable. Type: chmod +x run.sh
+
+83
+00:05:23,075 --> 00:05:26,403
+Now run it. Type: ./run.sh
+
+84
+00:05:26,533 --> 00:05:29,840
+Required file not found. But the file is right there!
+
+85
+00:05:30,390 --> 00:05:35,574
+The system looks for an interpreter named bash plus a hidden C R, and that does not exist.
+
+86
+00:05:36,124 --> 00:05:44,124
+The fix: s e d removes the C R at the end of every line. Type: sed -i 's/\r$//' run.sh
+
+87
+00:05:44,254 --> 00:05:45,150
+Run it again.
+
+88
+00:05:46,400 --> 00:05:50,773
+It prints hi. Remember this one: it is a very common real-world error.
+
+89
+00:05:52,823 --> 00:05:55,490
+Now paths: how you tell Linux where a file is.
+
+90
+00:05:56,040 --> 00:05:59,389
+An absolute path starts with a slash, and works from anywhere.
+
+91
+00:05:59,939 --> 00:06:04,206
+A relative path does not start with a slash. It starts from where you are now.
+
+92
+00:06:04,756 --> 00:06:06,329
+Four shortcuts matter.
+
+93
+00:06:06,329 --> 00:06:07,545
+Slash is the top.
+
+94
+00:06:07,545 --> 00:06:08,404
+Dot is here.
+
+95
+00:06:08,404 --> 00:06:10,192
+Dot dot is one folder up.
+
+96
+00:06:10,192 --> 00:06:12,052
+Tilde is your home folder.
+
+97
+00:06:12,602 --> 00:06:16,698
+Rule of thumb: in scripts and on servers, absolute paths are safer.
+
+98
+00:06:18,748 --> 00:06:25,553
+Let us walk a path. First, make two folders at once. Type: mkdir -p project/docs
+
+99
+00:06:25,683 --> 00:06:30,419
+Move in, using a relative path. Type: cd project/docs
+
+100
+00:06:30,549 --> 00:06:32,768
+Where are we? Type: pwd
+
+101
+00:06:32,898 --> 00:06:34,925
+It prints the full, absolute path.
+
+102
+00:06:35,475 --> 00:06:39,400
+Now dot dot, one folder up. Type: cd ..
+
+103
+00:06:39,950 --> 00:06:42,169
+Check again. Type: pwd
+
+104
+00:06:42,299 --> 00:06:46,565
+Now tilde, which takes us home from anywhere. Type: cd ~
+
+105
+00:06:46,695 --> 00:06:50,066
+List with a relative path. Type: ls project
+
+106
+00:06:50,196 --> 00:06:55,465
+And with an absolute path. Type: ls /home/student/project
+
+107
+00:06:55,595 --> 00:06:59,393
+Same folder, same answer. Choose by where the command will run.
+
+108
+00:07:01,443 --> 00:07:05,496
+Now environment variables: named values that programs can read.
+
+109
+00:07:06,046 --> 00:07:10,910
+Your shell has variables. When you export one, it becomes an environment variable.
+
+110
+00:07:11,460 --> 00:07:16,047
+Child programs, such as scripts you start, inherit only the exported ones.
+
+111
+00:07:16,597 --> 00:07:19,157
+Common ones are HOME, USER, SHELL, and PATH.
+
+112
+00:07:19,707 --> 00:07:23,526
+Servers use them for settings, such as which database to talk to.
+
+113
+00:07:25,576 --> 00:07:27,112
+Let us watch this happen.
+
+114
+00:07:27,662 --> 00:07:31,715
+Type: echo $HOME. The dollar sign means: give me the value.
+
+115
+00:07:32,265 --> 00:07:38,431
+Now make our own variable. Type: GREETING=hello. No spaces around the equals sign.
+
+116
+00:07:38,981 --> 00:07:41,733
+Read it back. Type: echo $GREETING
+
+117
+00:07:41,863 --> 00:07:49,841
+Now start a child shell, and ask it to print the variable.
+
+118
+00:07:50,391 --> 00:07:53,975
+Empty! The child cannot see it, because we have not exported it.
+
+119
+00:07:54,525 --> 00:07:57,107
+So export it. Type: export GREETING
+
+120
+00:07:57,237 --> 00:08:01,439
+Press the up arrow twice, to repeat the child shell command, then Enter.
+
+121
+00:08:01,989 --> 00:08:06,811
+Now the child sees hello. Exported variables flow down to child programs.
+
+122
+00:08:08,861 --> 00:08:12,744
+One environment variable deserves special attention: PATH.
+
+123
+00:08:13,294 --> 00:08:16,366
+PATH is a list of folders, separated by colons.
+
+124
+00:08:16,916 --> 00:08:21,204
+When you type a command name, the shell searches those folders, from left to right.
+
+125
+00:08:21,754 --> 00:08:25,082
+If the program is in none of them, you get: command not found.
+
+126
+00:08:25,632 --> 00:08:30,368
+The fix: put the program in a folder on the path, or add its folder to the path.
+
+127
+00:08:32,418 --> 00:08:35,618
+Let us see our own path. Type: echo $PATH
+
+128
+00:08:35,748 --> 00:08:37,881
+Each folder is separated by a colon.
+
+129
+00:08:38,431 --> 00:08:41,525
+Which command was found where? Type: which ls
+
+130
+00:08:41,655 --> 00:08:44,023
+The which command prints the file that would run.
+
+131
+00:08:44,573 --> 00:08:50,717
+Now our own script. First, a folder for it. Type: mkdir -p ~/bin
+
+132
+00:08:50,847 --> 00:08:57,183
+Create a one-line script. Type: printf '#!/bin/bash\necho "Hello!"\n' > ~/bin/hello
+
+133
+00:08:57,313 --> 00:09:02,753
+Make it executable. Type: chmod +x ~/bin/hello
+
+134
+00:09:02,883 --> 00:09:05,123
+Now run it by name. Type: hello
+
+135
+00:09:05,253 --> 00:09:08,410
+Command not found. The folder is not on the path yet.
+
+136
+00:09:08,960 --> 00:09:14,592
+Add it. Type: export PATH="$HOME/bin:$PATH"
+
+137
+00:09:14,722 --> 00:09:16,621
+Run it again. Type: hello
+
+138
+00:09:16,751 --> 00:09:20,292
+It works! And which shows where it was found. Type: which hello
+
+139
+00:09:20,422 --> 00:09:23,061
+This is how every installed command works.
+
+140
+00:09:23,061 --> 00:09:26,579
+A change like this lasts only for this terminal session.
+
+141
+00:09:26,579 --> 00:09:29,595
+Saving it permanently comes later in the course.
+
+142
+00:09:31,645 --> 00:09:34,546
+Let us connect all this to the errors you will really meet.
+
+143
+00:09:35,096 --> 00:09:38,083
+Command not found: check the path, and check the spelling.
+
+144
+00:09:38,633 --> 00:09:43,348
+Strange characters like A tilde: an encoding mismatch. Use UTF-8.
+
+145
+00:09:43,898 --> 00:09:49,508
+Required file not found, or caret M: hidden C R bytes. Convert the line endings.
+
+146
+00:09:50,058 --> 00:09:53,711
+No such file or directory: usually a wrong path.
+
+147
+00:09:53,711 --> 00:09:56,069
+Check relative versus absolute,
+
+148
+00:09:56,069 --> 00:09:56,906
+with p w d.
+
+149
+00:09:57,456 --> 00:10:00,827
+A variable is empty in a script: you forgot to export it.
+
+150
+00:10:02,877 --> 00:10:04,733
+Watch out for four common myths.
+
+151
+00:10:05,283 --> 00:10:10,318
+Myth one: all text files are the same. In fact, encoding and line endings differ.
+
+152
+00:10:10,868 --> 00:10:16,244
+Myth two: a character is one byte. In fact, in UTF-8 it can take up to four.
+
+153
+00:10:16,794 --> 00:10:21,187
+Myth three: a variable set in the terminal reaches every program.
+
+154
+00:10:21,187 --> 00:10:21,728
+In fact,
+
+155
+00:10:21,728 --> 00:10:24,431
+only exported ones reach child programs.
+
+156
+00:10:24,981 --> 00:10:28,935
+Myth four: command not found means the program is not installed.
+
+157
+00:10:28,935 --> 00:10:29,430
+In fact,
+
+158
+00:10:29,430 --> 00:10:31,530
+it may simply be outside the path.
+
+159
+00:10:32,080 --> 00:10:33,424
+Check before you assume.
+
+160
+00:10:35,474 --> 00:10:37,799
+Here is how you check your own understanding.
+
+161
+00:10:38,349 --> 00:10:41,549
+Imagine a colleague asks you to explain a broken script.
+
+162
+00:10:42,099 --> 00:10:44,617
+Explain bits, bytes, and hex for one byte.
+
+163
+00:10:45,167 --> 00:10:48,431
+Tell a text file from a program, using the file command.
+
+164
+00:10:48,981 --> 00:10:51,775
+Show bytes versus characters in UTF-8.
+
+165
+00:10:52,325 --> 00:10:54,992
+Find and remove hidden C R line endings.
+
+166
+00:10:55,542 --> 00:10:58,038
+Use absolute and relative paths correctly.
+
+167
+00:10:58,588 --> 00:11:02,001
+Export a variable, and fix a command that is not on the path.
+
+168
+00:11:02,551 --> 00:11:04,173
+To pass, you need all six.
+
+169
+00:11:06,223 --> 00:11:09,124
+Your turn, in the virtual machine you built last time.
+
+170
+00:11:09,674 --> 00:11:13,322
+One: use x x d to show the bytes of your own first name.
+
+171
+00:11:13,872 --> 00:11:17,670
+Two: pick a word with an accent. Show its bytes, then its characters.
+
+172
+00:11:18,220 --> 00:11:22,614
+Three: make a file with C R L F endings, find them, and remove them.
+
+173
+00:11:23,164 --> 00:11:26,876
+Four: export a variable, and prove that a child shell can see it.
+
+174
+00:11:27,426 --> 00:11:30,562
+Five: put a script in your bin folder, and run it by name.
+
+175
+00:11:31,112 --> 00:11:34,419
+Mark yourself on the rubric. Pause the video, and do it now.
+
+176
+00:11:49,969 --> 00:11:50,844
+Quick check.
+
+177
+00:11:51,394 --> 00:11:53,783
+How many bits make a byte, and what is hex?
+
+178
+00:11:54,333 --> 00:11:56,914
+Why can a word have more bytes than characters?
+
+179
+00:11:57,464 --> 00:11:59,768
+What does command not found usually mean?
+
+180
+00:12:00,318 --> 00:12:03,689
+What is the difference between a variable and an exported variable?
+
+181
+00:12:04,239 --> 00:12:08,634
+Objective covered: MC02-O06.
+
+182
+00:12:09,184 --> 00:12:11,253
+Pause the video, and answer out loud.
+
+183
+00:12:21,803 --> 00:12:24,960
+Next lesson: server components and failure symptoms.
+
+184
+00:12:25,510 --> 00:12:27,388
+Subscribe, so you do not miss it.
