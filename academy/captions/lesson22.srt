@@ -1,0 +1,523 @@
+1
+00:00:00,500 --> 00:00:04,916
+Your laptop has a private address, yet it reaches the whole internet. How?
+
+2
+00:00:05,466 --> 00:00:06,970
+Five ideas make that work,
+
+3
+00:00:06,970 --> 00:00:10,671
+and you will meet them in every cloud and every company network.
+
+4
+00:00:11,221 --> 00:00:13,868
+Routing decides where a packet goes next.
+
+5
+00:00:13,868 --> 00:00:16,450
+N A T rewrites addresses on the way out.
+
+6
+00:00:16,450 --> 00:00:18,709
+A firewall decides what is allowed.
+
+7
+00:00:19,259 --> 00:00:24,230
+A load balancer shares the traffic, and a reverse proxy stands in front of your servers.
+
+8
+00:00:24,780 --> 00:00:29,367
+Today you see all five work, live, on a small network built on this computer.
+
+9
+00:00:31,417 --> 00:00:34,638
+Start with routing. A router joins networks together.
+
+10
+00:00:35,188 --> 00:00:36,404
+When a packet arrives,
+
+11
+00:00:36,404 --> 00:00:38,834
+the router looks at the destination address,
+
+12
+00:00:38,834 --> 00:00:40,436
+and checks its routing table.
+
+13
+00:00:40,986 --> 00:00:45,573
+The table says which network is reachable through which door, and who the next hop is.
+
+14
+00:00:46,123 --> 00:00:51,051
+If nothing matches, the packet goes to the default route, the way out to everything else.
+
+15
+00:00:51,601 --> 00:00:55,548
+No router knows the whole path. Each one only knows the next step.
+
+16
+00:00:57,598 --> 00:00:59,707
+Let us look at a real router.
+
+17
+00:00:59,707 --> 00:01:00,579
+In this lab,
+
+18
+00:01:00,579 --> 00:01:04,724
+the letters R T mean: run the next command on the router.
+
+19
+00:01:04,724 --> 00:01:05,961
+Type: rt ip route
+
+20
+00:01:06,091 --> 00:01:08,251
+The router sits on two networks,
+
+21
+00:01:08,251 --> 00:01:09,669
+ten dot zero dot one,
+
+22
+00:01:09,669 --> 00:01:11,357
+and ten dot zero dot two.
+
+23
+00:01:11,357 --> 00:01:13,451
+That is what makes it a router.
+
+24
+00:01:14,001 --> 00:01:21,617
+One setting turns it on. Type: rt sysctl net.ipv4.ip_forward
+
+25
+00:01:21,747 --> 00:01:25,779
+A one means forwarding is on: it passes packets between its networks.
+
+26
+00:01:26,329 --> 00:01:35,331
+Now switch it off. Type: rt sysctl -w net.ipv4.ip_forward=0
+
+27
+00:01:35,461 --> 00:01:43,163
+Then try to reach the server. Type: ping -c 1 -W 1 10.0.2.2
+
+28
+00:01:43,293 --> 00:01:43,867
+No reply.
+
+29
+00:01:43,867 --> 00:01:45,461
+One hundred percent loss.
+
+30
+00:01:45,461 --> 00:01:47,437
+The router received the packet,
+
+31
+00:01:47,437 --> 00:01:49,095
+but refused to pass it on.
+
+32
+00:01:49,645 --> 00:01:58,989
+Switch forwarding back on. Type: rt sysctl -w net.ipv4.ip_forward=1
+
+33
+00:02:00,619 --> 00:02:03,414
+Next, N A T, network address translation.
+
+34
+00:02:03,964 --> 00:02:05,083
+Private addresses,
+
+35
+00:02:05,083 --> 00:02:06,513
+like ten dot something,
+
+36
+00:02:06,513 --> 00:02:08,876
+or one ninety-two dot one sixty-eight,
+
+37
+00:02:08,876 --> 00:02:11,238
+cannot be used on the public internet.
+
+38
+00:02:11,788 --> 00:02:15,478
+So the router swaps your private source address for its own public one,
+
+39
+00:02:15,478 --> 00:02:16,674
+and remembers the swap.
+
+40
+00:02:17,224 --> 00:02:21,469
+When the reply comes back, it swaps the address back, and hands the answer to you.
+
+41
+00:02:22,019 --> 00:02:24,590
+Many machines can share one public address,
+
+42
+00:02:24,590 --> 00:02:27,459
+and the outside world only ever sees the router.
+
+43
+00:02:29,509 --> 00:02:35,966
+A small web server here can tell us who is calling.
+
+44
+00:02:35,966 --> 00:02:41,157
+Type: curl -s http://10.0.2.2:8080/whoami
+
+45
+00:02:41,287 --> 00:02:46,450
+You are ten dot zero dot one dot two. The server sees my real, private address.
+
+46
+00:02:46,999 --> 00:02:55,192
+Now turn on N A T on the router. Type: rt iptables -t nat -A POSTROUTING -j MASQUERADE
+
+47
+00:02:55,322 --> 00:03:05,220
+Same request again. Type: curl -s http://10.0.2.2:8080/whoami
+
+48
+00:03:05,350 --> 00:03:09,298
+Now the server sees ten dot zero dot two dot one: the router.
+
+49
+00:03:09,298 --> 00:03:11,174
+My private address is hidden.
+
+50
+00:03:11,724 --> 00:03:17,570
+Look at the rule. Type: rt iptables -t nat -S POSTROUTING
+
+51
+00:03:17,700 --> 00:03:23,097
+Masquerade: rewrite the source address to the router's own. That one line is home N A T.
+
+52
+00:03:25,147 --> 00:03:29,414
+Now the firewall. A firewall is a list of rules, checked from the top.
+
+53
+00:03:29,964 --> 00:03:34,636
+The first rule that matches wins, and that rule says accept, drop, or reject.
+
+54
+00:03:35,186 --> 00:03:39,879
+Drop throws the packet away in silence. The sender waits, and then times out.
+
+55
+00:03:40,429 --> 00:03:44,504
+Reject throws it away, and tells the sender. The sender fails at once.
+
+56
+00:03:45,054 --> 00:03:49,768
+Remember the last lesson? A time out and a refusal point to different problems.
+
+57
+00:03:51,818 --> 00:03:55,448
+Let us block the web server's port,
+
+58
+00:03:55,448 --> 00:03:57,211
+with a drop rule.
+
+59
+00:03:57,211 --> 00:04:03,018
+Type: rt iptables -A FORWARD -p tcp --dport 8080 -j DROP
+
+60
+00:04:03,148 --> 00:04:15,095
+Now try the page, and give up after two seconds. Type: curl -sS -m 2 http://10.0.2.2:8080
+
+61
+00:04:15,225 --> 00:04:19,811
+Operation timed out. Silence. That is what a drop looks like from outside.
+
+62
+00:04:20,361 --> 00:04:24,884
+Remove the rule. Type: rt iptables -F FORWARD
+
+63
+00:04:25,014 --> 00:04:27,228
+Now the same block,
+
+64
+00:04:27,228 --> 00:04:29,093
+but with reject.
+
+65
+00:04:29,093 --> 00:04:35,851
+Type: rt iptables -A FORWARD -p tcp --dport 8080 -j REJECT
+
+66
+00:04:35,981 --> 00:04:46,264
+And try the page again. Type: curl -sS -m 2 http://10.0.2.2:8080
+
+67
+00:04:46,394 --> 00:04:51,514
+Failed to connect, straight away. The sender is told no. Same block, different symptom.
+
+68
+00:04:52,064 --> 00:04:56,587
+List the rules. Type: rt iptables -S FORWARD
+
+69
+00:04:56,717 --> 00:05:02,199
+The first line is the default policy: accept. Then our rule, with the port, and reject.
+
+70
+00:05:04,249 --> 00:05:07,150
+Last, the reverse proxy, and the load balancer.
+
+71
+00:05:07,700 --> 00:05:10,447
+A reverse proxy stands in front of your servers.
+
+72
+00:05:10,447 --> 00:05:11,535
+Clients talk to it,
+
+73
+00:05:11,535 --> 00:05:13,652
+and it talks to the servers for them.
+
+74
+00:05:14,202 --> 00:05:18,853
+That hides the servers, and it can add security, caching, and secure connections.
+
+75
+00:05:19,403 --> 00:05:23,074
+A load balancer spreads the requests across several servers,
+
+76
+00:05:23,074 --> 00:05:24,971
+so no single one is overloaded.
+
+77
+00:05:25,521 --> 00:05:26,675
+If a server dies,
+
+78
+00:05:26,675 --> 00:05:29,660
+a good balancer stops sending traffic to it.
+
+79
+00:05:29,660 --> 00:05:31,696
+Often one tool does both jobs,
+
+80
+00:05:31,696 --> 00:05:32,646
+like engine X.
+
+81
+00:05:34,696 --> 00:05:40,120
+Here the proxy listens on ten dot zero dot one dot one.
+
+82
+00:05:40,120 --> 00:05:42,685
+Behind it are two servers.
+
+83
+00:05:42,685 --> 00:05:47,517
+Type: for i in 1 2 3 4; do curl -s 10.0.1.1; done
+
+84
+00:05:47,647 --> 00:05:53,365
+Four requests, to one address. Backend A, backend B, A, B. The proxy takes turns.
+
+85
+00:05:53,915 --> 00:05:58,139
+The client never learns the servers' addresses. It only knows the proxy.
+
+86
+00:05:58,689 --> 00:06:02,998
+Where does the proxy live? Type: rt ss -ltn
+
+87
+00:06:03,128 --> 00:06:04,642
+Listening on port eighty,
+
+88
+00:06:04,642 --> 00:06:06,459
+on the router's front address.
+
+89
+00:06:06,459 --> 00:06:07,549
+That is the proxy,
+
+90
+00:06:07,549 --> 00:06:08,760
+waiting for clients.
+
+91
+00:06:10,810 --> 00:06:12,453
+Match the symptom to the cause.
+
+92
+00:06:13,003 --> 00:06:17,269
+Times out, only through the router: forwarding is off, or a route is missing.
+
+93
+00:06:17,819 --> 00:06:20,507
+Times out on one port only: a drop rule.
+
+94
+00:06:21,057 --> 00:06:24,641
+Refused at once: a reject rule, or nothing is listening.
+
+95
+00:06:25,191 --> 00:06:29,053
+Every client shows the router's address in the logs: that is N A T.
+
+96
+00:06:29,603 --> 00:06:32,867
+Bad gateway: the proxy cannot reach the server behind it.
+
+97
+00:06:33,417 --> 00:06:36,681
+One server overloaded, one idle: check the balancing.
+
+98
+00:06:38,731 --> 00:06:39,990
+Four myths to drop.
+
+99
+00:06:40,540 --> 00:06:46,086
+Myth one: N A T is a firewall. It hides addresses, but it does not decide what is allowed.
+
+100
+00:06:46,636 --> 00:06:49,108
+Myth two: a blocked port is invisible.
+
+101
+00:06:49,108 --> 00:06:50,800
+A reject announces itself,
+
+102
+00:06:50,800 --> 00:06:53,207
+and a drop still shows as a time out.
+
+103
+00:06:53,757 --> 00:06:58,536
+Myth three: a load balancer only does round robin. There are many strategies.
+
+104
+00:06:59,086 --> 00:07:04,696
+Myth four: a reverse proxy is a proxy for users. It serves the servers, not the users.
+
+105
+00:07:05,246 --> 00:07:07,166
+Name the job, then pick the tool.
+
+106
+00:07:09,216 --> 00:07:11,541
+Here is how you check your own understanding.
+
+107
+00:07:12,091 --> 00:07:15,185
+Explain what a routing table and a default route do.
+
+108
+00:07:15,735 --> 00:07:18,231
+Explain N A T, and what the server sees.
+
+109
+00:07:18,781 --> 00:07:22,941
+Explain accept, drop, and reject, and how each looks from outside.
+
+110
+00:07:23,491 --> 00:07:25,496
+Explain what a load balancer does.
+
+111
+00:07:26,046 --> 00:07:29,843
+Explain a reverse proxy, and how it differs from a load balancer.
+
+112
+00:07:30,393 --> 00:07:34,063
+Match a symptom to routing, N A T, firewall, or proxy.
+
+113
+00:07:34,613 --> 00:07:36,234
+To pass, you need all six.
+
+114
+00:07:38,284 --> 00:07:40,567
+Your turn, in the virtual machine you built.
+
+115
+00:07:41,117 --> 00:07:44,146
+One: run ip route, and find the default route.
+
+116
+00:07:44,696 --> 00:07:51,224
+Two: run sysctl net.ipv4.ip_forward. Is your machine a router?
+
+117
+00:07:51,774 --> 00:07:56,958
+Three: run sudo iptables dash S, and read the rules you already have.
+
+118
+00:07:57,508 --> 00:08:00,676
+Four: run curl dash s i f config dot me,
+
+119
+00:08:00,676 --> 00:08:03,528
+and compare it with ip dash br addr.
+
+120
+00:08:03,528 --> 00:08:04,953
+That gap is N A T.
+
+121
+00:08:05,503 --> 00:08:09,237
+Five: for each symptom in the table, write the cause in one line.
+
+122
+00:08:09,787 --> 00:08:13,093
+Mark yourself on the rubric. Pause the video, and do it now.
+
+123
+00:08:28,643 --> 00:08:29,518
+Quick check.
+
+124
+00:08:30,068 --> 00:08:31,668
+What does the default route do?
+
+125
+00:08:32,218 --> 00:08:33,604
+What does N A T change?
+
+126
+00:08:34,154 --> 00:08:36,053
+How do drop and reject differ?
+
+127
+00:08:36,603 --> 00:08:39,824
+Load balancer or reverse proxy: what is the difference?
+
+128
+00:08:40,374 --> 00:08:44,492
+Objective covered: MC03-O06.
+
+129
+00:08:45,042 --> 00:08:47,111
+Pause the video, and answer out loud.
+
+130
+00:08:57,661 --> 00:09:02,141
+Next: network boundaries, clients, servers, containers and cloud subnets.
+
+131
+00:09:02,691 --> 00:09:04,568
+Subscribe, so you do not miss it.

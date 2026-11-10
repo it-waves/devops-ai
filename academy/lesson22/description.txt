@@ -1,0 +1,30 @@
+Lesson 22 of the DevOps Engineering Bootcamp, in the computer networking masterclass. Learn five ideas that sit between your laptop and the internet: routing (the routing table and the default route), NAT (how a router swaps private addresses), firewalls (accept, drop and reject), load balancers and reverse proxies. Each one is shown live in a real terminal: a router with forwarding switched off, a server that sees a different source address once NAT is on, a drop rule that times out versus a reject rule that is refused, and a reverse proxy that alternates between two servers. Includes a symptom-to-cause table, common myths, a pass/fail rubric and a hands-on task to repeat in the virtual machine from Lesson 13.
+
+Chapters
+0:00 Private address, whole internet
+0:30 Routing
+0:57 Live: a router
+2:00 NAT
+2:29 Live: NAT
+3:24 Firewalls
+3:51 Live: drop vs reject
+5:03 Proxies and load balancers
+5:34 Live: a reverse proxy
+6:10 Symptoms and causes
+6:38 Common myths
+7:08 Pass or fail rubric
+7:37 Your turn
+8:28 Quick check
+
+Objectives covered: MC03-O06
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 (the typing is timed to the narration, and the yellow highlights were added afterwards). The network is a small lab on one computer: three isolated network namespaces (a client, a router and a server) joined by virtual links, with small web servers behind an nginx reverse proxy on the router, and the 10.0.x.x addresses invented for the lesson. In the lab, the word rt is a shortcut we defined that runs the next command on the router; it is not a standard command. The router, NAT, firewall and proxy output is genuine output from that lab. On your own network the addresses and output will differ. The hands-on task is unverified until you run it yourself.
+
+Previous lesson: https://youtu.be/z3PCHJeU7BI
+Next: network boundaries, clients, servers, containers and cloud subnets.
+
+All lesson files, including the lab scripts: https://github.com/it-waves/devops-ai
+
+Subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #networking #nat #firewall #devopsbootcamp

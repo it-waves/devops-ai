@@ -9,6 +9,7 @@ class H(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         p = self.path
         if p == '/': self._send(200, 'hello from the lab\n')
+        elif p == '/whoami': self._send(200, 'you are ' + self.client_address[0] + '\n')
         elif p == '/old': self._send(301, '', [('Location', '/')])
         elif p == '/boom': self._send(500, 'server error\n')
         else: self._send(404, 'not found\n')
