@@ -20,7 +20,7 @@ Published videos are "Learning" at most. Nothing is Practiced or Mastered until 
 | L8 | O08 | Mastery scenario: CloudCart SDLC workflow with artifacts and handoffs | Next masterclass: MC02 IT and computer fundamentals | Published Public H2htKZboJ6A (5:53, captions published, end screen), Learning |
 
 Open items: Lesson 1 v2 (>=5 min, ends with the L2 line above); Intro and DevOps Loop are orientation videos, not mapped to objectives; L2 lab sheet (backlog practice for O02).
-Rules in force: each lesson >=5 min, shows "Objectives covered" in description and recap, has a demonstration, an independent task and a pass/fail rubric; cloud labs UNVERIFIED unless run with evidence; version-specific facts checked against vendor docs before teaching.
+Rules in force: from Lesson 11 on, thumbnails (and lesson visuals where useful) use real, clean, openly licensed photos of the subject, with credits in the description (owner request 2026-11-09);  each lesson >=5 min, shows "Objectives covered" in description and recap, has a demonstration, an independent task and a pass/fail rubric; cloud labs UNVERIFIED unless run with evidence; version-specific facts checked against vendor docs before teaching.
 
 ## MC02 IT & Computer Fundamentals (8 objectives) - locked lesson order
 Lesson numbers continue from MC01 (global numbering, L9-L16). One lesson per objective, in checklist order.
@@ -28,7 +28,7 @@ Lesson numbers continue from MC01 (global numbering, L9-L16). One lesson per obj
 | Lesson | Objectives | Topic | "Next" line it must end with | Status |
 |---|---|---|---|---|
 | L9 | O01 | Client, server, application, operating system, network | Next lesson: CPU, memory, storage, and processes | Published Public ibqI_dKshYU (6:30, captions published, end screen, playlist order verified), Learning |
-| L10 | O02 | CPU, memory, storage, processes, threads, resource contention | Next lesson: the command line and the filesystem | Not started |
+| L10 | O02 | CPU, memory, storage, processes, threads, resource contention | Next lesson: the command line and the filesystem | Rendered 5:41, QA'd, upload pending |
 | L11 | O03 | Command-line and filesystem navigation | Next lesson: virtualization and containers | Not started |
 | L12 | O04 | Virtualization, virtual machines, containers, and their differences | Next lesson: your own Linux virtual machine | Not started |
 | L13 | O05 | Install and access a disposable Linux VM | Next lesson: files, text, encodings, and paths | Not started |
