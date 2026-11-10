@@ -1,0 +1,359 @@
+1
+00:00:00,500 --> 00:00:03,103
+One physical server, and ten applications.
+
+2
+00:00:03,653 --> 00:00:07,194
+If they all share everything, one crash can take them all down.
+
+3
+00:00:07,744 --> 00:00:10,539
+Virtualization and containers keep them apart.
+
+4
+00:00:11,089 --> 00:00:15,057
+Today: the problem, virtual machines, containers, and how they differ.
+
+5
+00:00:17,107 --> 00:00:18,344
+First, the problem.
+
+6
+00:00:18,894 --> 00:00:22,798
+A physical server is expensive, and it often sits mostly idle.
+
+7
+00:00:23,348 --> 00:00:27,700
+Put every application on it, and they fight over the same libraries and settings.
+
+8
+00:00:28,250 --> 00:00:31,856
+So we need isolation: separate spaces on shared hardware.
+
+9
+00:00:33,906 --> 00:00:36,061
+Solution one: the virtual machine.
+
+10
+00:00:36,611 --> 00:00:41,816
+A hypervisor is software that splits one physical machine into several virtual ones.
+
+11
+00:00:42,366 --> 00:00:46,697
+Each virtual machine gets its own virtual processor, memory, and disk.
+
+12
+00:00:47,247 --> 00:00:50,617
+And its own complete operating system, with its own kernel.
+
+13
+00:00:51,167 --> 00:00:54,687
+Strong isolation, but each one is heavy, and slower to start.
+
+14
+00:00:56,737 --> 00:00:58,721
+One word matters here: the kernel.
+
+15
+00:00:59,271 --> 00:01:03,324
+The kernel is the core of the operating system, and it talks to the hardware.
+
+16
+00:01:03,874 --> 00:01:06,072
+A virtual machine has its own kernel.
+
+17
+00:01:06,622 --> 00:01:09,011
+Remember this, because it is the key difference.
+
+18
+00:01:11,061 --> 00:01:12,896
+Solution two: the container.
+
+19
+00:01:13,446 --> 00:01:19,142
+A container is an isolated process, with its own view of files, processes, and network.
+
+20
+00:01:19,692 --> 00:01:21,548
+Containers share the host's kernel.
+
+21
+00:01:22,098 --> 00:01:24,743
+So there is no extra operating system to boot.
+
+22
+00:01:25,293 --> 00:01:26,178
+They are light,
+
+23
+00:01:26,178 --> 00:01:27,771
+and often start in seconds,
+
+24
+00:01:27,771 --> 00:01:30,840
+but the isolation is thinner than a virtual machine.
+
+25
+00:01:32,890 --> 00:01:34,085
+Let us compare them.
+
+26
+00:01:34,635 --> 00:01:38,645
+A virtual machine has its own kernel. A container shares the host's.
+
+27
+00:01:39,195 --> 00:01:42,054
+Virtual machines are heavier, and slower to start.
+
+28
+00:01:42,604 --> 00:01:44,631
+Containers are lighter, and faster.
+
+29
+00:01:45,181 --> 00:01:49,405
+Virtual machines isolate more strongly. Containers isolate less.
+
+30
+00:01:49,955 --> 00:01:52,621
+Neither is better. They solve different problems.
+
+31
+00:01:54,671 --> 00:01:58,938
+Now let us see isolation for real, in a disposable Linux sandbox.
+
+32
+00:01:59,488 --> 00:02:02,688
+These outputs are real captures, not an illustration.
+
+33
+00:02:03,238 --> 00:02:08,550
+First: this machine is called vm, and runs one kernel, version six point eighteen.
+
+34
+00:02:09,100 --> 00:02:12,214
+We count its running processes: sixty-seven lines.
+
+35
+00:02:12,764 --> 00:02:18,055
+Now the unshare command starts a new, isolated space, and renames the host to box.
+
+36
+00:02:18,605 --> 00:02:20,510
+Inside: the host name is box,
+
+37
+00:02:20,510 --> 00:02:23,203
+only four lines of processes are visible,
+
+38
+00:02:23,203 --> 00:02:25,240
+and the kernel is the same one.
+
+39
+00:02:25,790 --> 00:02:28,264
+Back outside, the host name is still vm.
+
+40
+00:02:28,814 --> 00:02:33,486
+Isolation, without a second kernel. That is the idea behind containers.
+
+41
+00:02:35,536 --> 00:02:37,243
+These ideas are real tools.
+
+42
+00:02:37,793 --> 00:02:42,849
+Virtual machines run on a hypervisor, such as KVM or VirtualBox.
+
+43
+00:02:43,399 --> 00:02:47,623
+Containers are run by a container runtime, and Docker made them popular.
+
+44
+00:02:48,173 --> 00:02:51,671
+Later in the bootcamp, we build and run containers ourselves.
+
+45
+00:02:53,721 --> 00:02:55,065
+So when do you use which?
+
+46
+00:02:55,615 --> 00:03:00,266
+Need a different operating system, or strong isolation? Use a virtual machine.
+
+47
+00:03:00,816 --> 00:03:04,762
+Need many small, fast, identical services? Use containers.
+
+48
+00:03:05,312 --> 00:03:08,982
+In the cloud, containers often run inside virtual machines.
+
+49
+00:03:09,532 --> 00:03:10,876
+Choose by the problem.
+
+50
+00:03:12,926 --> 00:03:14,782
+Watch out for four common myths.
+
+51
+00:03:15,332 --> 00:03:18,673
+Myth one: a container is a small virtual machine.
+
+52
+00:03:18,673 --> 00:03:19,219
+In fact,
+
+53
+00:03:19,219 --> 00:03:20,992
+it is an isolated process,
+
+54
+00:03:20,992 --> 00:03:22,628
+sharing the host kernel.
+
+55
+00:03:23,178 --> 00:03:26,055
+Myth two: containers are always more secure.
+
+56
+00:03:26,055 --> 00:03:26,578
+In fact,
+
+57
+00:03:26,578 --> 00:03:29,194
+they isolate less than virtual machines.
+
+58
+00:03:29,744 --> 00:03:32,345
+Myth three: virtual machines are obsolete.
+
+59
+00:03:32,345 --> 00:03:32,840
+In fact,
+
+60
+00:03:32,840 --> 00:03:34,079
+they are everywhere,
+
+61
+00:03:34,079 --> 00:03:36,123
+and containers often run on them.
+
+62
+00:03:36,673 --> 00:03:39,733
+Myth four: Docker and a container are the same.
+
+63
+00:03:39,733 --> 00:03:40,254
+In fact,
+
+64
+00:03:40,254 --> 00:03:42,859
+Docker is one tool that runs containers.
+
+65
+00:03:43,409 --> 00:03:45,009
+Know the difference, then choose.
+
+66
+00:03:47,059 --> 00:03:49,384
+Here is how you check your own understanding.
+
+67
+00:03:49,934 --> 00:03:53,433
+Imagine a colleague asks: virtual machine or container?
+
+68
+00:03:53,983 --> 00:03:55,903
+Explain why we need isolation.
+
+69
+00:03:56,453 --> 00:03:59,034
+Explain a hypervisor, and a virtual machine.
+
+70
+00:03:59,584 --> 00:04:00,758
+Explain the kernel.
+
+71
+00:04:01,308 --> 00:04:02,588
+Explain a container.
+
+72
+00:04:03,138 --> 00:04:04,823
+Compare the two on four points.
+
+73
+00:04:05,373 --> 00:04:07,741
+Choose one for a scenario, and say why.
+
+74
+00:04:08,291 --> 00:04:09,912
+To pass, you need all six.
+
+75
+00:04:11,962 --> 00:04:12,837
+Your turn.
+
+76
+00:04:13,387 --> 00:04:18,571
+On paper, draw a table with four rows: kernel, size, start time, and isolation.
+
+77
+00:04:19,121 --> 00:04:23,110
+One: fill it in for virtual machines and for containers, from memory.
+
+78
+00:04:23,660 --> 00:04:27,500
+Two: imagine hosting a website made of twenty small services.
+
+79
+00:04:28,050 --> 00:04:31,378
+Three: choose one approach, and defend it in two sentences.
+
+80
+00:04:31,928 --> 00:04:33,528
+Mark yourself on the rubric.
+
+81
+00:04:34,078 --> 00:04:35,806
+Pause the video, and do it now.
+
+82
+00:04:49,356 --> 00:04:50,231
+Quick check.
+
+83
+00:04:50,781 --> 00:04:52,295
+What does a hypervisor do?
+
+84
+00:04:52,845 --> 00:04:53,912
+What is the kernel?
+
+85
+00:04:54,462 --> 00:04:57,086
+Why are containers lighter than virtual machines?
+
+86
+00:04:57,636 --> 00:04:59,492
+When would you choose a virtual machine?
+
+87
+00:05:00,042 --> 00:05:04,437
+Objective covered: MC02-O04.
+
+88
+00:05:04,987 --> 00:05:07,248
+Pause the video, and compare them out loud.
+
+89
+00:05:17,798 --> 00:05:20,486
+Next lesson: your own Linux virtual machine.
+
+90
+00:05:21,036 --> 00:05:22,913
+Subscribe, so you do not miss it.
