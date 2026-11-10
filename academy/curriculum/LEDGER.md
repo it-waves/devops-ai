@@ -39,4 +39,4 @@ Lesson numbers continue from MC01 (global numbering, L9-L16). One lesson per obj
 
 ## MC03-MC48: Not started (see CHECKLIST.md). A lesson-order table like the one above is written before each masterclass begins.
 | L18 | MC03-O02 | Ports, TCP, UDP, states | Published Public Wgk24aRIPH4 (9:10, Learning; captions, end screen, playlist; door art is an illustration) |
-| L19 | MC03-O03 | HTTP, status codes, HTTPS, TLS | Built, delivered to Downloads (8:09), awaiting upload; thumbnail uses real terminal frames; live demos real; task unverified |
+| L19 | MC03-O03 | HTTP, status codes, HTTPS, TLS | Published Public E41pEPJsl14 (8:09, Learning; captions, end screen, playlist; thumbnail uses real terminal frames) |
