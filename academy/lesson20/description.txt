@@ -1,0 +1,30 @@
+Lesson 20 of the DevOps Engineering Bootcamp, in the computer networking masterclass. Learn how a name becomes a page: why we use names, the DNS name tree, record types (A, CNAME, MX, TXT), resolvers and TTL, and how a browser or curl gets from www.example to a web server. Every idea is checked live in a real terminal with dig, getent and curl: an A and CNAME answer, an MX answer, an NXDOMAIN failure, and one full request from name to page. Includes a symptom checklist, a pass/fail rubric and a hands-on task to repeat in the virtual machine from Lesson 13.
+
+Chapters
+0:00 Names, addresses and the page
+0:25 Why names
+0:45 The name tree
+1:07 Record types
+1:32 Resolvers and TTL
+2:00 Live: dig
+2:57 Name to page: the journey
+3:29 Live: one request, end to end
+4:15 Which tool for which layer
+4:37 Symptoms and causes
+5:04 Common myths
+5:28 Pass or fail rubric
+5:56 Your turn
+6:40 Quick check
+
+Objectives covered: MC03-O04
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 (the typing is timed to the narration, and the yellow highlights were added afterwards). The DNS server and the small web server on port 8080 were written and started on this computer just before recording, and the lab.test names and records are invented for the lesson. The resolver was pointed at that lab server temporarily for the recording and restored afterwards, so the dig answers are real output from it, not from the public internet. Output on your machine will differ. The hands-on task is unverified until you run it yourself.
+
+Previous lesson: https://youtu.be/E41pEPJsl14
+Next: ping, traceroute and diagnosis.
+
+All lesson files, including the demo servers: https://github.com/it-waves/devops-ai
+
+Subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #networking #dns #devopsbootcamp
