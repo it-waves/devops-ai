@@ -33,7 +33,7 @@ Lesson numbers continue from MC01 (global numbering, L9-L16). One lesson per obj
 | L12 | O04 | Virtualization, virtual machines, containers, and their differences | Next lesson: your own Linux virtual machine | Published Public -A6QOWIphU4 (5:24, captions published, end screen, CC0 photo credited), Learning |
 | L13 | O05 | Install and access a disposable Linux VM | Next lesson: files, text, encodings, and paths | Published (Learning; rev 2 live wizard, QEMU stand-in labelled) https://youtu.be/Cccuj7dxwS4 |
 | L14 | O06 | Binary, text, encodings, files, environment variables, paths | Next lesson: server components and failure symptoms | Published Public vbSVwbOrqG8 (12:29, Learning; captions published, end screen, playlist) https://youtu.be/vbSVwbOrqG8 |
-| L15 | O07 | Common server components and their failure symptoms | Next lesson: tracing one web request | Built, awaiting upload (10:32; live demos: CPU, memory cap, 10 MB tmpfs disk, http.server, logs) |
+| L15 | O07 | Common server components and their failure symptoms | Next lesson: tracing one web request | Published Public d-rZpuwyomc (10:33, Learning; captions published, end screen, playlist) https://youtu.be/d-rZpuwyomc |
 | L16 | O08 | Trace an HTTP request from browser to application server | Next masterclass: MC03 Computer networking | Not started |
 
 ## MC03-MC48: Not started (see CHECKLIST.md). A lesson-order table like the one above is written before each masterclass begins.
