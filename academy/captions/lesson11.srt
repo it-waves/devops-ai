@@ -1,0 +1,343 @@
+1
+00:00:00,500 --> 00:00:03,103
+You open a terminal, and see a blinking cursor.
+
+2
+00:00:03,653 --> 00:00:06,447
+No icons. No buttons. Only a prompt.
+
+3
+00:00:06,997 --> 00:00:10,261
+Most servers have no screen at all, so this is how you work.
+
+4
+00:00:10,811 --> 00:00:13,280
+Today you learn to move around: the shell,
+
+5
+00:00:13,280 --> 00:00:14,456
+the filesystem tree,
+
+6
+00:00:14,456 --> 00:00:14,808
+paths,
+
+7
+00:00:14,808 --> 00:00:16,337
+and a handful of commands.
+
+8
+00:00:18,387 --> 00:00:20,136
+First, the terminal and the shell.
+
+9
+00:00:20,686 --> 00:00:24,249
+The terminal is the window. The shell is the program inside it.
+
+10
+00:00:24,799 --> 00:00:26,356
+The shell reads what you type.
+
+11
+00:00:26,906 --> 00:00:29,914
+You type a command, press enter, and the shell runs it.
+
+12
+00:00:30,464 --> 00:00:33,238
+On most Linux servers, the shell is called bash.
+
+13
+00:00:35,288 --> 00:00:36,632
+Next, the filesystem.
+
+14
+00:00:37,182 --> 00:00:40,361
+Linux organizes everything as one tree of folders.
+
+15
+00:00:40,911 --> 00:00:43,769
+At the top is the root, written as a single slash.
+
+16
+00:00:44,319 --> 00:00:48,266
+Inside it are folders such as home, etc, var, and tmp.
+
+17
+00:00:48,816 --> 00:00:51,589
+Every file has exactly one place in this tree.
+
+18
+00:00:53,639 --> 00:00:54,578
+Now, paths.
+
+19
+00:00:55,128 --> 00:00:57,432
+A path is the address of a file in the tree.
+
+20
+00:00:57,982 --> 00:01:02,014
+An absolute path starts at the root, with a slash. It works from anywhere.
+
+21
+00:01:02,564 --> 00:01:04,846
+A relative path starts from where you are now.
+
+22
+00:01:05,396 --> 00:01:08,874
+Two dots mean the parent folder. One dot means this folder.
+
+23
+00:01:09,424 --> 00:01:11,322
+A tilde means your home folder.
+
+24
+00:01:13,372 --> 00:01:15,825
+Three commands do most of the navigating.
+
+25
+00:01:16,375 --> 00:01:18,274
+pwd prints where you are.
+
+26
+00:01:18,824 --> 00:01:20,275
+ls lists what is here.
+
+27
+00:01:20,825 --> 00:01:22,446
+cd takes you somewhere else.
+
+28
+00:01:22,996 --> 00:01:25,343
+Where am I, what is here, and take me there.
+
+29
+00:01:27,393 --> 00:01:29,121
+Four more commands change things.
+
+30
+00:01:29,671 --> 00:01:31,335
+mkdir creates a folder.
+
+31
+00:01:31,885 --> 00:01:33,421
+touch creates an empty file.
+
+32
+00:01:33,971 --> 00:01:36,766
+cp copies, and mv moves or renames.
+
+33
+00:01:37,316 --> 00:01:40,174
+rm removes, and there is no recycle bin.
+
+34
+00:01:40,724 --> 00:01:42,388
+Check twice before you remove.
+
+35
+00:01:44,438 --> 00:01:46,870
+Commands take options, written with a dash.
+
+36
+00:01:47,420 --> 00:01:50,940
+ls dash l gives a long listing, with sizes and dates.
+
+37
+00:01:51,490 --> 00:01:55,501
+ls dash a also shows hidden files, whose names start with a dot.
+
+38
+00:01:56,051 --> 00:01:58,717
+When you forget, the man command shows the manual.
+
+39
+00:02:00,767 --> 00:02:04,394
+Now let us see this for real, in a disposable Linux sandbox.
+
+40
+00:02:04,944 --> 00:02:08,144
+These outputs are real captures, not an illustration.
+
+41
+00:02:08,694 --> 00:02:13,024
+First: pwd shows where we are, and ls shows three items.
+
+42
+00:02:13,574 --> 00:02:18,460
+Next, cd projects slash app goes down two levels, using a relative path.
+
+43
+00:02:19,010 --> 00:02:24,471
+Then cd dot dot, dot dot, slash logs goes up two levels and into logs.
+
+44
+00:02:25,021 --> 00:02:30,781
+Last, a wrong path. The shell says: no such file or directory, and the exit status is two.
+
+45
+00:02:31,331 --> 00:02:33,934
+A clear error message, and a number you can check.
+
+46
+00:02:35,984 --> 00:02:37,883
+Three errors you will meet on day one.
+
+47
+00:02:38,433 --> 00:02:43,211
+No such file or directory: the path is wrong, or you are in a different folder.
+
+48
+00:02:43,761 --> 00:02:48,412
+Permission denied: you are not allowed, so check who you are, and who owns the file.
+
+49
+00:02:48,962 --> 00:02:52,717
+Command not found: a typo, or the program is not installed.
+
+50
+00:02:53,267 --> 00:02:56,595
+First run pwd, then read the message slowly.
+
+51
+00:02:58,645 --> 00:03:00,501
+Watch out for four common myths.
+
+52
+00:03:01,051 --> 00:03:03,987
+Myth one: the terminal and the shell are the same.
+
+53
+00:03:03,987 --> 00:03:04,456
+In fact,
+
+54
+00:03:04,456 --> 00:03:06,042
+the terminal is the window,
+
+55
+00:03:06,042 --> 00:03:07,920
+and the shell runs the commands.
+
+56
+00:03:08,470 --> 00:03:13,868
+Myth two: cd moves a file. In fact, cd changes your location, and nothing else.
+
+57
+00:03:14,418 --> 00:03:17,272
+Myth three: a leading slash does not matter.
+
+58
+00:03:17,272 --> 00:03:17,791
+In fact,
+
+59
+00:03:17,791 --> 00:03:20,775
+it turns a relative path into an absolute one.
+
+60
+00:03:21,325 --> 00:03:25,826
+Myth four: rm sends files to a recycle bin. In fact, they are gone.
+
+61
+00:03:26,376 --> 00:03:27,998
+Read before you press enter.
+
+62
+00:03:30,048 --> 00:03:32,373
+Here is how you check your own understanding.
+
+63
+00:03:32,923 --> 00:03:35,249
+Imagine a teammate is lost in a terminal.
+
+64
+00:03:35,799 --> 00:03:37,527
+Explain the terminal and the shell.
+
+65
+00:03:38,077 --> 00:03:39,826
+Describe the tree, and the root.
+
+66
+00:03:40,376 --> 00:03:44,259
+Explain absolute and relative paths, with one example each.
+
+67
+00:03:44,809 --> 00:03:48,307
+Use pwd, ls, and cd to move around.
+
+68
+00:03:48,857 --> 00:03:50,457
+Create a folder and a file.
+
+69
+00:03:51,007 --> 00:03:53,077
+Read a no such file error, and fix it.
+
+70
+00:03:53,627 --> 00:03:55,248
+To pass, you need all six.
+
+71
+00:03:57,298 --> 00:03:58,173
+Your turn.
+
+72
+00:03:58,723 --> 00:04:02,349
+Open a terminal on Linux or Mac, or use a Linux sandbox.
+
+73
+00:04:02,899 --> 00:04:06,462
+One: run pwd, then ls, and note where you are.
+
+74
+00:04:07,012 --> 00:04:10,788
+Two: make a folder called practice, go inside, and create a file.
+
+75
+00:04:11,338 --> 00:04:16,522
+Three: return to your home folder using a relative path, then using an absolute path.
+
+76
+00:04:17,072 --> 00:04:18,672
+Mark yourself on the rubric.
+
+77
+00:04:19,222 --> 00:04:20,950
+Pause the video, and do it now.
+
+78
+00:04:34,500 --> 00:04:35,375
+Quick check.
+
+79
+00:04:35,925 --> 00:04:38,378
+What is the difference between the terminal and the shell?
+
+80
+00:04:38,928 --> 00:04:42,192
+What is the difference between an absolute and a relative path?
+
+81
+00:04:42,742 --> 00:04:45,217
+Which three commands do most of the navigating?
+
+82
+00:04:45,767 --> 00:04:48,092
+What does a no such file error usually mean?
+
+83
+00:04:48,642 --> 00:04:53,101
+Objective covered: MC02-O03.
+
+84
+00:04:53,651 --> 00:04:56,424
+Pause the video, and describe where you are in the tree.
+
+85
+00:05:06,974 --> 00:05:09,939
+Next lesson: virtualization and containers.
+
+86
+00:05:10,489 --> 00:05:12,367
+Subscribe, so you do not miss it.
