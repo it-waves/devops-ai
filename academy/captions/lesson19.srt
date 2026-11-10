@@ -1,0 +1,491 @@
+1
+00:00:00,500 --> 00:00:02,425
+Every time you open a web page,
+
+2
+00:00:02,425 --> 00:00:04,225
+your browser asks a question,
+
+3
+00:00:04,225 --> 00:00:06,025
+and a server gives an answer.
+
+4
+00:00:06,575 --> 00:00:08,769
+That conversation has strict rules.
+
+5
+00:00:08,769 --> 00:00:09,959
+A request goes out.
+
+6
+00:00:09,959 --> 00:00:11,338
+A response comes back,
+
+7
+00:00:11,338 --> 00:00:13,594
+with a number that says how it went.
+
+8
+00:00:14,144 --> 00:00:16,819
+Today you learn those rules: methods,
+
+9
+00:00:16,819 --> 00:00:17,758
+status codes,
+
+10
+00:00:17,758 --> 00:00:18,337
+headers,
+
+11
+00:00:18,337 --> 00:00:21,589
+and how HTTPS keeps the conversation private.
+
+12
+00:00:22,139 --> 00:00:27,089
+You will send real requests, read real answers, and inspect a real certificate.
+
+13
+00:00:29,139 --> 00:00:31,464
+First, the shape of a web conversation.
+
+14
+00:00:32,014 --> 00:00:35,726
+The client sends a request. It has a method, a path, and headers.
+
+15
+00:00:36,276 --> 00:00:40,543
+The server sends a response. It has a status code, headers, and a body.
+
+16
+00:00:41,093 --> 00:00:44,122
+The body is the page, or the data, that you asked for.
+
+17
+00:00:44,672 --> 00:00:49,280
+Everything in web work, from browsers to API calls, is this same exchange.
+
+18
+00:00:51,330 --> 00:00:53,079
+The method says what you want to do.
+
+19
+00:00:53,629 --> 00:00:56,509
+GET: read something. It should never change anything.
+
+20
+00:00:57,059 --> 00:00:59,769
+POST: send new data, like submitting a form.
+
+21
+00:01:00,319 --> 00:01:02,708
+PUT: replace something that already exists.
+
+22
+00:01:03,258 --> 00:01:04,751
+DELETE: remove something.
+
+23
+00:01:05,301 --> 00:01:09,653
+Safe reading is GET. Anything that changes data uses another method.
+
+24
+00:01:11,703 --> 00:01:17,335
+Let us send a real request to a small web server on this computer.
+
+25
+00:01:17,335 --> 00:01:19,724
+Type: curl -i localhost:8080
+
+26
+00:01:19,854 --> 00:01:25,572
+The first line is the status line. H T T P one point one, status two hundred, O K.
+
+27
+00:01:26,122 --> 00:01:30,516
+Then the headers: the server name, the date, and the type and size of the body.
+
+28
+00:01:31,066 --> 00:01:34,416
+And below, a blank line, then the body: hello from the lab.
+
+29
+00:01:34,966 --> 00:01:45,099
+Now a POST that sends data. Type: curl -s -X POST -d name=ana localhost:8080/form
+
+30
+00:01:45,229 --> 00:01:50,712
+The server answers: created name equals ana. The data went in the body of the request.
+
+31
+00:01:52,762 --> 00:01:54,973
+The status code tells you how it went.
+
+32
+00:01:54,973 --> 00:01:56,544
+It is a three-digit number,
+
+33
+00:01:56,544 --> 00:01:58,522
+and the first digit is the family.
+
+34
+00:01:59,072 --> 00:02:02,357
+Two hundred family: success. Two hundred is O K.
+
+35
+00:02:02,907 --> 00:02:07,473
+Three hundred family: go somewhere else. Three oh one means moved permanently.
+
+36
+00:02:08,023 --> 00:02:10,746
+Four hundred family: your request was wrong.
+
+37
+00:02:10,746 --> 00:02:11,550
+Four oh four,
+
+38
+00:02:11,550 --> 00:02:12,169
+not found.
+
+39
+00:02:12,169 --> 00:02:13,036
+Four oh three,
+
+40
+00:02:13,036 --> 00:02:13,655
+forbidden.
+
+41
+00:02:14,205 --> 00:02:18,621
+Five hundred family: the server failed. Five hundred is a server error.
+
+42
+00:02:19,171 --> 00:02:21,240
+Remember: four is you, five is them.
+
+43
+00:02:23,290 --> 00:02:32,975
+Let us ask for a page that does not exist. Type: curl -sI localhost:8080/missing | head -1
+
+44
+00:02:33,105 --> 00:02:37,180
+Four oh four, not found. The server is fine. The request was wrong.
+
+45
+00:02:37,730 --> 00:02:50,210
+Now a page that has moved. Type: curl -sI localhost:8080/old | grep -i "^HTTP\|^loc"
+
+46
+00:02:50,340 --> 00:02:54,927
+Three oh one, with a Location header. It tells the browser where to go next.
+
+47
+00:02:55,477 --> 00:03:03,711
+And a server that fails. Type: curl -sI localhost:8080/boom | head -1
+
+48
+00:03:03,841 --> 00:03:07,233
+Five hundred. This time the problem is on the server side.
+
+49
+00:03:09,283 --> 00:03:13,699
+Headers are small labelled notes that travel with every request and response.
+
+50
+00:03:14,249 --> 00:03:18,345
+Content-Type says what the body is: text, a web page, or data.
+
+51
+00:03:18,895 --> 00:03:21,199
+Content-Length says how big the body is.
+
+52
+00:03:21,749 --> 00:03:24,629
+Location says where to go next, after a redirect.
+
+53
+00:03:25,179 --> 00:03:29,552
+Authorization carries your proof of identity, and Cookie carries your session.
+
+54
+00:03:30,102 --> 00:03:32,982
+When something fails, the headers often tell you why.
+
+55
+00:03:35,032 --> 00:03:37,080
+Plain H T T P has a problem.
+
+56
+00:03:37,630 --> 00:03:41,662
+Anyone on the path between you and the server can read it, or change it.
+
+57
+00:03:42,212 --> 00:03:47,865
+H T T P S adds a lock. It runs the same conversation inside T L S.
+
+58
+00:03:48,415 --> 00:03:53,386
+T L S does two jobs. It encrypts the traffic, and it proves who the server is.
+
+59
+00:03:53,936 --> 00:03:59,269
+The padlock in your browser means the connection is encrypted and the server was verified.
+
+60
+00:03:59,269 --> 00:04:01,403
+It does not mean the site is honest.
+
+61
+00:04:03,453 --> 00:04:06,376
+How does the server prove who it is? With a certificate.
+
+62
+00:04:06,926 --> 00:04:10,318
+A certificate says: this public key belongs to this name.
+
+63
+00:04:10,868 --> 00:04:14,964
+It is signed by a certificate authority that your computer already trusts.
+
+64
+00:04:15,514 --> 00:04:17,631
+Your computer checks three things.
+
+65
+00:04:17,631 --> 00:04:18,690
+The name matches.
+
+66
+00:04:18,690 --> 00:04:20,247
+The signature is trusted.
+
+67
+00:04:20,247 --> 00:04:21,679
+And it has not expired.
+
+68
+00:04:22,229 --> 00:04:26,048
+If any check fails, the connection is refused. That is a good thing.
+
+69
+00:04:28,098 --> 00:04:32,212
+Now a secure server on this computer,
+
+70
+00:04:32,212 --> 00:04:36,327
+with a certificate we made ourselves.
+
+71
+00:04:36,327 --> 00:04:42,221
+Type: curl -sSI https://localhost:8443 2>&1 | head -1
+
+72
+00:04:42,351 --> 00:04:44,683
+Certificate problem: self-signed.
+
+73
+00:04:44,683 --> 00:04:46,873
+No trusted authority signed it,
+
+74
+00:04:46,873 --> 00:04:48,004
+so curl refuses.
+
+75
+00:04:48,004 --> 00:04:49,135
+Exit code sixty.
+
+76
+00:04:49,685 --> 00:04:52,384
+To look at the page anyway,
+
+77
+00:04:52,384 --> 00:04:56,383
+we can switch the check off with dash k.
+
+78
+00:04:56,383 --> 00:04:58,582
+Only do that in a lab.
+
+79
+00:04:58,582 --> 00:05:03,381
+Type: curl -skI https://localhost:8443 | head -1
+
+80
+00:05:03,511 --> 00:05:07,436
+Two hundred, O K. The connection works, but we skipped the safety check.
+
+81
+00:05:07,986 --> 00:05:11,733
+Now read the certificate itself.
+
+82
+00:05:11,733 --> 00:05:18,525
+Type: openssl x509 -in tls/cert.pem -noout -subject -dates
+
+83
+00:05:18,655 --> 00:05:21,134
+The subject is the name it vouches for.
+
+84
+00:05:21,134 --> 00:05:22,787
+And two dates: not before,
+
+85
+00:05:22,787 --> 00:05:23,677
+and not after.
+
+86
+00:05:23,677 --> 00:05:25,012
+That is its lifetime.
+
+87
+00:05:27,062 --> 00:05:28,705
+Match the symptom to the cause.
+
+88
+00:05:29,255 --> 00:05:32,391
+Four oh four: wrong path. Check the address you typed.
+
+89
+00:05:32,941 --> 00:05:36,119
+Five hundred: the server broke. Read the server logs.
+
+90
+00:05:36,669 --> 00:05:40,509
+Certificate problem: the name, the date, or the signer is wrong.
+
+91
+00:05:41,059 --> 00:05:44,046
+Too many redirects: two rules send you back and forth.
+
+92
+00:05:44,596 --> 00:05:48,661
+Connection refused or timed out: that is not H T T P at all.
+
+93
+00:05:48,661 --> 00:05:50,761
+Go back to ports and firewalls.
+
+94
+00:05:52,811 --> 00:05:54,240
+Watch out for four myths.
+
+95
+00:05:54,790 --> 00:05:59,548
+Myth one: the padlock means the site is safe. It means the connection is private.
+
+96
+00:06:00,098 --> 00:06:05,196
+Myth two: a four hundred error is the server's fault. Four hundred is the request's fault.
+
+97
+00:06:05,746 --> 00:06:09,672
+Myth three: dash k fixes certificate errors. It only hides them.
+
+98
+00:06:10,222 --> 00:06:14,979
+Myth four: GET and POST are just two names for the same thing. They have different rules.
+
+99
+00:06:15,529 --> 00:06:17,193
+Read the status code first.
+
+100
+00:06:19,243 --> 00:06:21,568
+Here is how you check your own understanding.
+
+101
+00:06:22,118 --> 00:06:24,572
+Name the parts of a request and a response.
+
+102
+00:06:25,122 --> 00:06:26,978
+Choose the right method for a job.
+
+103
+00:06:27,528 --> 00:06:29,405
+Say what each status family means.
+
+104
+00:06:29,955 --> 00:06:32,280
+Read a status line and a header with curl.
+
+105
+00:06:32,830 --> 00:06:35,966
+Explain what H T T P S and a certificate add.
+
+106
+00:06:36,516 --> 00:06:38,607
+Explain why a certificate can fail.
+
+107
+00:06:39,157 --> 00:06:40,778
+To pass, you need all six.
+
+108
+00:06:42,828 --> 00:06:45,111
+Your turn, in the virtual machine you built.
+
+109
+00:06:45,661 --> 00:06:51,719
+One: pick any public site, and run curl -I on its address. Read the status line.
+
+110
+00:06:52,269 --> 00:06:55,896
+Two: add a path that does not exist, and find the four oh four.
+
+111
+00:06:56,446 --> 00:07:02,825
+Three: run curl -v on an H T T P S address, and find the line about the certificate.
+
+112
+00:07:03,375 --> 00:07:07,727
+Four: use curl with dash L, to follow a redirect, and see where it ends.
+
+113
+00:07:08,277 --> 00:07:14,058
+Five: find the expiry date with openssl s client, or in your browser's padlock.
+
+114
+00:07:14,608 --> 00:07:17,915
+Mark yourself on the rubric. Pause the video, and do it now.
+
+115
+00:07:33,465 --> 00:07:34,340
+Quick check.
+
+116
+00:07:34,890 --> 00:07:37,279
+What are the parts of a request and a response?
+
+117
+00:07:37,829 --> 00:07:39,578
+What does each status family mean?
+
+118
+00:07:40,128 --> 00:07:42,091
+What two jobs does T L S do?
+
+119
+00:07:42,641 --> 00:07:44,476
+Why would a certificate be refused?
+
+120
+00:07:45,026 --> 00:07:49,228
+Objective covered: MC03-O03.
+
+121
+00:07:49,778 --> 00:07:51,848
+Pause the video, and answer out loud.
+
+122
+00:08:02,398 --> 00:08:06,067
+Next: names, D N S, and a request from start to finish.
+
+123
+00:08:06,617 --> 00:08:08,494
+Subscribe, so you do not miss it.

@@ -1,0 +1,31 @@
+Lesson 19 of the DevOps Engineering Bootcamp, in the computer networking masterclass. Learn how a web conversation works: requests and responses, HTTP methods (GET, POST, PUT, DELETE), status codes (200, 301, 404, 500), headers, and how HTTPS and TLS certificates keep traffic private and prove who a server is. Every idea is checked live in a real terminal with curl and openssl: a GET, a POST, a 404, a redirect, a server error, a refused self-signed certificate, and a certificate's name and dates. Includes a symptom checklist, a pass/fail rubric and a hands-on task to repeat in the virtual machine from Lesson 13.
+
+Chapters
+0:00 Every web page is a question and an answer
+0:28 Requests and responses
+0:50 Methods
+1:11 Live: GET and POST
+1:52 Status codes
+2:22 Live: 404, 301, 500
+3:08 Headers
+3:34 HTTPS and TLS
+4:03 Certificates
+4:27 Live: a certificate
+5:26 Symptoms and causes
+5:52 Common myths
+6:18 Pass or fail rubric
+6:42 Your turn
+7:33 Quick check
+
+Objectives covered: MC03-O03
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 (the typing is timed to the narration, and the yellow highlights were added afterwards). The small web server on port 8080 and the secure server on port 8443 were written and started on this computer just before recording; the certificate was made by us with openssl and is self-signed on purpose, which is why curl refuses it until we use the dash k option, something to do only in a lab. Dates and numbers on your machine will differ. The hands-on task is unverified until you run it yourself.
+
+Previous lesson: https://youtu.be/Wgk24aRIPH4
+Next: names, DNS and a request end to end.
+
+All lesson files, including the demo server script: https://github.com/it-waves/devops-ai
+
+Subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #networking #http #https #tls #devopsbootcamp
