@@ -35,6 +35,6 @@ Lesson numbers continue from MC01 (global numbering, L9-L16). One lesson per obj
 | L14 | O06 | Binary, text, encodings, files, environment variables, paths | Next lesson: server components and failure symptoms | Published Public vbSVwbOrqG8 (12:29, Learning; captions published, end screen, playlist) https://youtu.be/vbSVwbOrqG8 |
 | L15 | O07 | Common server components and their failure symptoms | Next lesson: tracing one web request | Published Public d-rZpuwyomc (10:33, Learning; captions published, end screen, playlist) https://youtu.be/d-rZpuwyomc |
 | L16 | O08 | Trace an HTTP request from browser to application server | Next masterclass: MC03 Computer networking | Published Public SbkjVUt2wAY (8:17, Learning; captions, end screen, playlist; live demos: DNS via curl --resolve, request/response lines, 200/404/500, timing report) |
-| L17 | MC03-O01 | Explain IP addresses, private/public IP, CIDR, subnet, gateway, and DNS | Next: MC03-O02 TCP, UDP, ports | Built, awaiting upload (9:50; live demos: ip addr/route, private vs public, subnet maths, direct-or-gateway; router is an illustration, real photo pending a working download) |
+| L17 | MC03-O01 | Explain IP addresses, private/public IP, CIDR, subnet, gateway, and DNS | Next: MC03-O02 TCP, UDP, ports | Published Public AqUkNak5Ezs (9:51, Learning; captions, end screen, playlist; router is an illustration, real photo pending a working download) |
 
 ## MC03-MC48: Not started (see CHECKLIST.md). A lesson-order table like the one above is written before each masterclass begins.
