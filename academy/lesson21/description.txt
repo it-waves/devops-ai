@@ -1,0 +1,28 @@
+Lesson 21 of the DevOps Engineering Bootcamp, in the computer networking masterclass. Learn to diagnose a network problem one layer at a time with six tools: ip, ping, traceroute, dig, ss and curl. You climb a diagnosis ladder (setup, name, reach, path, port) and use every tool live in a real terminal: ip addr and ip route, ping replies and packet loss, a "net unreachable" error, traceroute hops, ss on the server, and a full incident from a typo in a name to a refused connection. Includes an error-message-to-layer table, common myths, a pass/fail rubric and a hands-on task to repeat in the virtual machine from Lesson 13.
+
+Chapters
+0:00 The page will not load
+0:21 The diagnosis ladder
+1:00 Live: ip
+1:31 Live: ping
+2:17 Live: traceroute
+2:55 Live: ss on the server
+3:25 Live: a real incident
+4:34 Messages and rungs
+5:08 Common myths
+5:39 Pass or fail rubric
+6:07 Your turn
+6:58 Quick check
+
+Objectives covered: MC03-O05
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 (the typing is timed to the narration, and the yellow highlights were added afterwards). The network is a small lab built on one computer: three isolated network namespaces (a client, a router and a server) joined by virtual links, with a small web server and a small DNS server on the server side, and the lab.test names and 10.0.x.x addresses invented for the lesson. The traceroute hops, the packet counts and the errors are genuine output from that lab. Because everything is on one machine, the ping times are tiny; across the internet you will see much larger numbers, and on your own network the output will differ. The hands-on task is unverified until you run it yourself.
+
+Previous lesson: https://youtu.be/Rxx1Q-6tyFs
+Next: routing, NAT and firewalls.
+
+All lesson files, including the lab scripts: https://github.com/it-waves/devops-ai
+
+Subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #networking #troubleshooting #devopsbootcamp

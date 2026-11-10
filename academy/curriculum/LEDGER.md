@@ -41,3 +41,4 @@ Lesson numbers continue from MC01 (global numbering, L9-L16). One lesson per obj
 | L18 | MC03-O02 | Ports, TCP, UDP, states | Published Public Wgk24aRIPH4 (9:10, Learning; captions, end screen, playlist; door art is an illustration) |
 | L19 | MC03-O03 | HTTP, status codes, HTTPS, TLS | Published Public E41pEPJsl14 (8:09, Learning; captions, end screen, playlist; thumbnail uses real terminal frames) |
 | L20 | MC03-O04 | DNS, records, name to page end to end | Published Public Rxx1Q-6tyFs (7:17, Learning; captions, end screen, playlist; real dig/getent/curl against a local lab DNS server; thumbnail uses real terminal frames) |
+| L21 | MC03-O05 | ip, ping, traceroute, dig, ss, curl diagnosis | Built, awaiting upload (7:33; real output from a 3-namespace lab on one computer; thumbnail uses real terminal frames) |

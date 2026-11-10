@@ -1,0 +1,547 @@
+1
+00:00:00,500 --> 00:00:03,188
+The page will not load. Where do you even start?
+
+2
+00:00:03,738 --> 00:00:08,303
+Most people refresh, restart, and hope. A good engineer does something different.
+
+3
+00:00:08,853 --> 00:00:10,441
+You test one layer at a time,
+
+4
+00:00:10,441 --> 00:00:13,781
+and the first test that fails tells you where the problem is.
+
+5
+00:00:14,331 --> 00:00:16,315
+Today you learn six tools for that,
+
+6
+00:00:16,315 --> 00:00:17,562
+and you use them live,
+
+7
+00:00:17,562 --> 00:00:19,942
+on a small network built on this computer.
+
+8
+00:00:21,992 --> 00:00:25,192
+Here is the diagnosis ladder. One question per rung.
+
+9
+00:00:25,742 --> 00:00:30,734
+Rung one: is this machine set up? The ip command shows your address, and your way out.
+
+10
+00:00:31,284 --> 00:00:33,307
+Rung two: does the name work?
+
+11
+00:00:33,307 --> 00:00:34,353
+Dig asks D N S.
+
+12
+00:00:34,353 --> 00:00:37,492
+N s lookup is an older tool for the same job.
+
+13
+00:00:38,042 --> 00:00:42,714
+Rung three: can I reach the machine? Ping sends a message, and waits for the reply.
+
+14
+00:00:43,264 --> 00:00:47,659
+Rung four: where does the path stop? Trace route lists every router on the way.
+
+15
+00:00:48,209 --> 00:00:51,040
+Rung five: is anything listening on the port?
+
+16
+00:00:51,040 --> 00:00:52,550
+S s shows the listeners,
+
+17
+00:00:52,550 --> 00:00:54,438
+and curl tries the connection.
+
+18
+00:00:54,988 --> 00:00:58,615
+The first rung that fails is your suspect. You do not need to guess.
+
+19
+00:01:00,665 --> 00:01:04,505
+First, know your own setup. Type: ip -br addr
+
+20
+00:01:04,635 --> 00:01:06,522
+Each line is an interface.
+
+21
+00:01:06,522 --> 00:01:07,175
+This one,
+
+22
+00:01:07,175 --> 00:01:07,683
+c zero,
+
+23
+00:01:07,683 --> 00:01:08,118
+is up,
+
+24
+00:01:08,118 --> 00:01:11,457
+with the address ten dot zero dot one dot two,
+
+25
+00:01:11,457 --> 00:01:12,763
+slash twenty-four.
+
+26
+00:01:13,313 --> 00:01:15,681
+Now the way out. Type: ip route
+
+27
+00:01:15,811 --> 00:01:18,238
+The first line is the default route.
+
+28
+00:01:18,238 --> 00:01:22,889
+Anything not on my own network goes via ten dot zero dot one dot one.
+
+29
+00:01:22,889 --> 00:01:24,238
+That is the gateway.
+
+30
+00:01:24,788 --> 00:01:29,481
+No address, or no default route? Stop here. Nothing above this rung will work.
+
+31
+00:01:31,531 --> 00:01:32,896
+Now reach out.
+
+32
+00:01:32,896 --> 00:01:35,529
+Ping sends a small message,
+
+33
+00:01:35,529 --> 00:01:37,675
+and waits for a reply.
+
+34
+00:01:37,675 --> 00:01:38,260
+First,
+
+35
+00:01:38,260 --> 00:01:39,430
+the gateway.
+
+36
+00:01:39,430 --> 00:01:41,771
+Type: ping -c 3 10.0.1.1
+
+37
+00:01:41,901 --> 00:01:42,622
+Three sent,
+
+38
+00:01:42,622 --> 00:01:43,540
+three replies.
+
+39
+00:01:43,540 --> 00:01:45,310
+The time is the round trip,
+
+40
+00:01:45,310 --> 00:01:46,359
+in milliseconds.
+
+41
+00:01:46,359 --> 00:01:47,408
+It is tiny here,
+
+42
+00:01:47,408 --> 00:01:49,965
+because everything runs on one machine.
+
+43
+00:01:50,515 --> 00:01:55,592
+Now the server. Type: ping -c 3 10.0.2.2
+
+44
+00:01:55,722 --> 00:02:01,056
+Zero percent packet loss. Loss is the number to watch. Any loss means a flaky link.
+
+45
+00:02:01,606 --> 00:02:09,648
+Now an address with no route. Type: ping -c 2 -W 1 10.0.3.9
+
+46
+00:02:09,778 --> 00:02:11,553
+Destination net unreachable,
+
+47
+00:02:11,553 --> 00:02:13,075
+reported by the gateway.
+
+48
+00:02:13,075 --> 00:02:16,434
+The router is saying: I do not know how to get there.
+
+49
+00:02:17,984 --> 00:02:25,685
+Ping tells you if you can reach it. Trace route shows how. Type: traceroute -n 10.0.2.2
+
+50
+00:02:25,815 --> 00:02:27,222
+Each line is one hop,
+
+51
+00:02:27,222 --> 00:02:28,763
+one router on the path.
+
+52
+00:02:28,763 --> 00:02:31,242
+The dash n option skips name lookups,
+
+53
+00:02:31,242 --> 00:02:32,983
+so the output stays clean.
+
+54
+00:02:33,533 --> 00:02:35,211
+Hop one is the gateway,
+
+55
+00:02:35,211 --> 00:02:37,326
+ten dot zero dot one dot one.
+
+56
+00:02:37,326 --> 00:02:39,441
+Hop two is the server itself.
+
+57
+00:02:39,441 --> 00:02:40,098
+Two hops,
+
+58
+00:02:40,098 --> 00:02:41,192
+and we arrived.
+
+59
+00:02:41,742 --> 00:02:42,620
+On a long path,
+
+60
+00:02:42,620 --> 00:02:44,201
+a hop where the time jumps,
+
+61
+00:02:44,201 --> 00:02:45,665
+or where the stars begin,
+
+62
+00:02:45,665 --> 00:02:47,481
+shows where the trouble starts.
+
+63
+00:02:48,031 --> 00:02:53,620
+It works by sending packets with a tiny time to live, so each router in turn reports back.
+
+64
+00:02:55,670 --> 00:03:02,497
+Now the server side. This terminal is on the server. Is anything listening? Type: ss -ltn
+
+65
+00:03:02,627 --> 00:03:03,763
+L is listening,
+
+66
+00:03:03,763 --> 00:03:04,595
+T is T C P,
+
+67
+00:03:04,595 --> 00:03:06,110
+and N shows numbers.
+
+68
+00:03:06,110 --> 00:03:08,609
+One listener: port eighty eighty,
+
+69
+00:03:08,609 --> 00:03:11,032
+on ten dot zero dot two dot two.
+
+70
+00:03:11,582 --> 00:03:18,259
+What about port 9090? Type: ss -ltn sport = :9090
+
+71
+00:03:18,389 --> 00:03:19,916
+Only the header comes back.
+
+72
+00:03:19,916 --> 00:03:21,838
+Nothing is listening on that port,
+
+73
+00:03:21,838 --> 00:03:24,213
+so a client that tries it will be refused.
+
+74
+00:03:26,263 --> 00:03:28,181
+Now a real incident.
+
+75
+00:03:28,181 --> 00:03:30,195
+A page will not load,
+
+76
+00:03:30,195 --> 00:03:32,401
+so we climb the ladder.
+
+77
+00:03:32,401 --> 00:03:32,977
+First,
+
+78
+00:03:32,977 --> 00:03:34,799
+a typo in the name.
+
+79
+00:03:34,799 --> 00:03:37,484
+Type: ping -c 1 wbe.lab.test
+
+80
+00:03:37,614 --> 00:03:42,734
+Name or service not known. The name rung failed, so stop there, and fix the spelling.
+
+81
+00:03:43,284 --> 00:03:48,874
+With the right name, ask D N S. Type: dig +short web.lab.test
+
+82
+00:03:49,004 --> 00:03:53,804
+An address comes back: ten dot zero dot two dot two. The name rung is fine.
+
+83
+00:03:54,354 --> 00:03:59,431
+Can we reach it? Type: ping -c 1 10.0.2.2
+
+84
+00:03:59,561 --> 00:04:02,270
+One reply. The address and the path are fine.
+
+85
+00:04:02,820 --> 00:04:13,594
+Now the page, on port 9090. Type: curl -sS -m 3 http://web.lab.test:9090
+
+86
+00:04:13,724 --> 00:04:14,843
+Failed to connect.
+
+87
+00:04:14,843 --> 00:04:16,334
+Everything below worked,
+
+88
+00:04:16,334 --> 00:04:18,013
+so the problem is the port.
+
+89
+00:04:18,013 --> 00:04:19,318
+Nothing is listening,
+
+90
+00:04:19,318 --> 00:04:20,934
+just as the server showed.
+
+91
+00:04:21,484 --> 00:04:29,506
+Try the right port. Type: curl -s http://web.lab.test:8080
+
+92
+00:04:29,636 --> 00:04:33,305
+Hello from the lab. Fixed in five commands, with no guessing.
+
+93
+00:04:35,355 --> 00:04:36,891
+Match the message to the rung.
+
+94
+00:04:37,441 --> 00:04:42,156
+Name or service not known: D N S. Check the spelling, and the resolver.
+
+95
+00:04:42,706 --> 00:04:46,716
+Network is unreachable: I P. Check your address, and your gateway.
+
+96
+00:04:47,266 --> 00:04:52,600
+Destination net unreachable: a router has no route. Trace route shows which one.
+
+97
+00:04:53,150 --> 00:04:57,630
+No answer at all, or only stars: a firewall, or a machine that is down.
+
+98
+00:04:58,180 --> 00:05:02,297
+Connection refused: the machine answers, but nothing listens on that port.
+
+99
+00:05:02,847 --> 00:05:06,922
+Connection timed out: often a firewall quietly dropping the packets.
+
+100
+00:05:08,972 --> 00:05:10,401
+Watch out for four myths.
+
+101
+00:05:10,951 --> 00:05:16,071
+Myth one: if ping fails, the server is down. Many servers block ping on purpose.
+
+102
+00:05:16,621 --> 00:05:18,054
+Myth two: if ping works,
+
+103
+00:05:18,054 --> 00:05:19,129
+the website works.
+
+104
+00:05:19,129 --> 00:05:21,337
+Ping only proves the machine answers,
+
+105
+00:05:21,337 --> 00:05:23,427
+not that the web server is running.
+
+106
+00:05:23,977 --> 00:05:27,284
+Myth three: stars in trace route mean a broken router.
+
+107
+00:05:27,284 --> 00:05:30,163
+Many routers just do not reply to those probes.
+
+108
+00:05:30,713 --> 00:05:35,727
+Myth four: restart first, investigate later. Restarting can erase the evidence.
+
+109
+00:05:36,277 --> 00:05:37,791
+Test one layer at a time.
+
+110
+00:05:39,841 --> 00:05:42,166
+Here is how you check your own understanding.
+
+111
+00:05:42,716 --> 00:05:45,063
+Explain the ladder, and what each rung checks.
+
+112
+00:05:45,613 --> 00:05:49,602
+Read ip addr and ip route: address, network, and gateway.
+
+113
+00:05:50,152 --> 00:05:53,416
+Run and read a ping: replies, time, and packet loss.
+
+114
+00:05:53,966 --> 00:05:57,017
+Run and read a trace route: the hops, and where it stops.
+
+115
+00:05:57,567 --> 00:06:01,428
+Use dig, curl, and s s to check a name, a port, and a listener.
+
+116
+00:06:01,978 --> 00:06:03,856
+Match an error message to its rung.
+
+117
+00:06:04,406 --> 00:06:06,027
+To pass, you need all six.
+
+118
+00:06:08,077 --> 00:06:10,360
+Your turn, in the virtual machine you built.
+
+119
+00:06:10,910 --> 00:06:14,387
+One: run ip -br addr, and find your address.
+
+120
+00:06:14,937 --> 00:06:18,158
+Two: run ip route, and find your default gateway.
+
+121
+00:06:18,708 --> 00:06:22,740
+Three: ping your gateway, then ping a public site, and compare the times.
+
+122
+00:06:23,290 --> 00:06:25,699
+Four: run trace route to a public site,
+
+123
+00:06:25,699 --> 00:06:26,872
+and count the hops.
+
+124
+00:06:26,872 --> 00:06:27,922
+If it is missing,
+
+125
+00:06:27,922 --> 00:06:29,157
+install it with apt.
+
+126
+00:06:29,707 --> 00:06:34,272
+Five: run s s dash l t n, and list what is listening on your machine.
+
+127
+00:06:34,822 --> 00:06:39,494
+Six: break something on purpose. Ping a made-up name, and say which rung failed.
+
+128
+00:06:40,044 --> 00:06:43,351
+Mark yourself on the rubric. Pause the video, and do it now.
+
+129
+00:06:58,901 --> 00:06:59,776
+Quick check.
+
+130
+00:07:00,326 --> 00:07:02,459
+Which tool lists every hop on the path?
+
+131
+00:07:03,009 --> 00:07:04,929
+What does connection refused tell you?
+
+132
+00:07:05,479 --> 00:07:06,951
+What does packet loss mean?
+
+133
+00:07:07,501 --> 00:07:09,357
+Which command shows what is listening?
+
+134
+00:07:09,907 --> 00:07:14,110
+Objective covered: MC03-O05.
+
+135
+00:07:14,660 --> 00:07:16,729
+Pause the video, and answer out loud.
+
+136
+00:07:27,279 --> 00:07:29,711
+Next: routing, N A T, and firewalls.
+
+137
+00:07:30,261 --> 00:07:32,138
+Subscribe, so you do not miss it.
