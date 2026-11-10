@@ -1,0 +1,631 @@
+1
+00:00:00,500 --> 00:00:04,873
+Every device on a network needs an address, just like every house needs one.
+
+2
+00:00:05,423 --> 00:00:09,035
+Today you learn to read that address: what the four numbers mean,
+
+3
+00:00:09,035 --> 00:00:10,647
+what slash twenty-four means,
+
+4
+00:00:10,647 --> 00:00:12,314
+and where the gateway fits in.
+
+5
+00:00:12,864 --> 00:00:16,939
+You will check them live, in a real terminal, and work out the maths yourself.
+
+6
+00:00:17,489 --> 00:00:21,393
+After this, a network address will never look like a secret code again.
+
+7
+00:00:23,443 --> 00:00:25,064
+First, the I P address.
+
+8
+00:00:25,614 --> 00:00:29,134
+An I P address identifies one device on a network.
+
+9
+00:00:29,684 --> 00:00:33,222
+I P version four uses four numbers,
+
+10
+00:00:33,222 --> 00:00:37,365
+each from zero to two hundred fifty-five,
+
+11
+00:00:37,365 --> 00:00:39,184
+separated by dots.
+
+12
+00:00:39,184 --> 00:00:41,610
+Like this: 192.168.1.25.
+
+13
+00:00:42,160 --> 00:00:46,682
+Part of the address names the network. The rest names the device on that network.
+
+14
+00:00:47,232 --> 00:00:52,203
+Think of a street and a house number. The street is the network. The house is the device.
+
+15
+00:00:52,753 --> 00:00:56,230
+Two devices on the same street can talk to each other directly.
+
+16
+00:00:58,280 --> 00:01:03,593
+Let us look at the address of this computer's network card.
+
+17
+00:01:03,593 --> 00:01:05,395
+It is called enp0s3,
+
+18
+00:01:05,395 --> 00:01:09,898
+the usual name in a VirtualBox machine like yours.
+
+19
+00:01:09,898 --> 00:01:12,509
+Type: ip -br addr show enp0s3
+
+20
+00:01:12,639 --> 00:01:15,178
+The state says U P, so the card is working.
+
+21
+00:01:15,728 --> 00:01:22,597
+And here is the address: 192.168.1.25, then slash twenty-four.
+
+22
+00:01:23,147 --> 00:01:28,139
+That slash twenty-four says how much of the address names the network. We decode it soon.
+
+23
+00:01:28,689 --> 00:01:33,468
+Now the routes. Type: ip route show dev enp0s3
+
+24
+00:01:33,598 --> 00:01:42,878
+The second line says: the network 192.168.1.0/24 is directly reachable from this card.
+
+25
+00:01:43,428 --> 00:01:51,321
+The first line says: for everything else, go via 192.168.1.1. That is the gateway.
+
+26
+00:01:51,871 --> 00:01:56,821
+Your numbers will differ, but the shape is the same: an address, a network, and a gateway.
+
+27
+00:01:58,871 --> 00:02:00,812
+Not every address works everywhere.
+
+28
+00:02:01,362 --> 00:02:06,738
+Some ranges are private: reserved for use inside homes, offices and cloud networks.
+
+29
+00:02:07,288 --> 00:02:08,385
+There are three.
+
+30
+00:02:08,385 --> 00:02:09,551
+Ten dot anything.
+
+31
+00:02:09,551 --> 00:02:14,006
+One seventy-two dot sixteen up to one seventy-two dot thirty-one.
+
+32
+00:02:14,006 --> 00:02:17,571
+And one ninety-two dot one sixty-eight dot anything.
+
+33
+00:02:18,121 --> 00:02:20,869
+Anyone can use them inside their own network,
+
+34
+00:02:20,869 --> 00:02:24,350
+so the same private address exists in millions of places.
+
+35
+00:02:24,900 --> 00:02:30,020
+Everything else is public. A public address is unique, and reachable from the internet.
+
+36
+00:02:30,570 --> 00:02:33,039
+Your home router has one public address,
+
+37
+00:02:33,039 --> 00:02:36,124
+and shares it with every private device behind it.
+
+38
+00:02:36,124 --> 00:02:36,926
+We cover how,
+
+39
+00:02:36,926 --> 00:02:38,037
+in a later lesson.
+
+40
+00:02:38,587 --> 00:02:44,091
+Careful: one seventy-two dot thirty-two is public. The private range stops at thirty-one.
+
+41
+00:02:46,141 --> 00:02:48,441
+Let us ask the computer.
+
+42
+00:02:48,441 --> 00:02:52,083
+We wrote a small helper called ipwhat,
+
+43
+00:02:52,083 --> 00:02:55,820
+with Python's standard address library.
+
+44
+00:02:55,820 --> 00:02:58,216
+Type: ipwhat 192.168.1.25
+
+45
+00:02:58,346 --> 00:03:00,095
+Private. A home-style address.
+
+46
+00:03:00,645 --> 00:03:05,530
+Next. Type: ipwhat 172.20.5.9
+
+47
+00:03:05,660 --> 00:03:09,372
+Also private, because twenty sits between sixteen and thirty-one.
+
+48
+00:03:09,922 --> 00:03:14,637
+Now a famous one. Type: ipwhat 8.8.8.8
+
+49
+00:03:14,767 --> 00:03:17,028
+Public. A real address on the internet.
+
+50
+00:03:19,078 --> 00:03:23,131
+Now the slash. This is called CIDR notation, said like cider.
+
+51
+00:03:23,681 --> 00:03:28,417
+An address is thirty-two bits. Here is ours in binary, in four groups of eight.
+
+52
+00:03:28,967 --> 00:03:31,732
+The number after the slash says how many bits,
+
+53
+00:03:31,732 --> 00:03:33,054
+counted from the left,
+
+54
+00:03:33,054 --> 00:03:34,075
+name the network.
+
+55
+00:03:34,075 --> 00:03:36,839
+Slash twenty-four: the first twenty-four bits.
+
+56
+00:03:37,389 --> 00:03:42,723
+The last eight bits are left for devices. Eight bits give two hundred fifty-six addresses.
+
+57
+00:03:43,273 --> 00:03:46,491
+Two are reserved: the first names the network itself,
+
+58
+00:03:46,491 --> 00:03:48,798
+and the last is the broadcast address.
+
+59
+00:03:49,348 --> 00:03:52,383
+A bigger slash number means a smaller network.
+
+60
+00:03:52,383 --> 00:03:54,560
+Slash twenty-six leaves six bits,
+
+61
+00:03:54,560 --> 00:03:56,143
+so sixty-four addresses.
+
+62
+00:03:56,143 --> 00:03:58,386
+Slash sixteen leaves sixteen bits,
+
+63
+00:03:58,386 --> 00:04:01,487
+so sixty-five thousand five hundred thirty-six.
+
+64
+00:04:02,037 --> 00:04:04,298
+A subnet is just one of these slices.
+
+65
+00:04:04,848 --> 00:04:13,915
+The subnet mask says the same thing in another way: 255.255.255.0 means slash twenty-four.
+
+66
+00:04:15,965 --> 00:04:19,988
+Let us do the maths with the computer.
+
+67
+00:04:19,988 --> 00:04:21,682
+A second helper,
+
+68
+00:04:21,682 --> 00:04:23,164
+called subnet,
+
+69
+00:04:23,164 --> 00:04:24,435
+lays it out.
+
+70
+00:04:24,435 --> 00:04:27,293
+Type: subnet 192.168.1.0/24
+
+71
+00:04:27,423 --> 00:04:33,460
+The network, and the mask: 255.255.255.0.
+
+72
+00:04:34,010 --> 00:04:37,322
+Devices live from dot one to dot two fifty-four.
+
+73
+00:04:37,322 --> 00:04:39,805
+Dot two fifty-five is the broadcast.
+
+74
+00:04:39,805 --> 00:04:42,565
+That makes two hundred fifty-four hosts.
+
+75
+00:04:43,115 --> 00:04:46,827
+Now cut it smaller. Type: subnet 192.168.1.0/26
+
+76
+00:04:46,957 --> 00:04:49,432
+The mask now ends in one ninety-two,
+
+77
+00:04:49,432 --> 00:04:51,425
+and only sixty-two hosts fit,
+
+78
+00:04:51,425 --> 00:04:53,144
+dot one to dot sixty-two.
+
+79
+00:04:53,694 --> 00:04:59,326
+And a big one. Type: subnet 10.0.0.0/16
+
+80
+00:04:59,456 --> 00:05:07,498
+The mask is 255.255.0.0, and sixty-five thousand five hundred thirty-four hosts fit.
+
+81
+00:05:08,048 --> 00:05:12,443
+Same method every time. A smaller slash number means a bigger network.
+
+82
+00:05:14,493 --> 00:05:15,581
+Now the gateway.
+
+83
+00:05:16,131 --> 00:05:18,244
+When your computer sends a packet,
+
+84
+00:05:18,244 --> 00:05:21,848
+it asks one question: is the destination on my own subnet?
+
+85
+00:05:22,398 --> 00:05:25,406
+If yes, it sends the packet directly to that device.
+
+86
+00:05:25,956 --> 00:05:26,306
+If no,
+
+87
+00:05:26,306 --> 00:05:28,348
+it hands the packet to the gateway.
+
+88
+00:05:28,348 --> 00:05:29,456
+That is the router,
+
+89
+00:05:29,456 --> 00:05:31,439
+and it forwards the packet onward.
+
+90
+00:05:31,989 --> 00:05:34,094
+The gateway must sit on your own subnet,
+
+91
+00:05:34,094 --> 00:05:36,725
+because it is the one door you can reach directly.
+
+92
+00:05:37,275 --> 00:05:40,710
+Your computer decides using your address and your slash number.
+
+93
+00:05:42,760 --> 00:05:46,296
+Let us ask the same question.
+
+94
+00:05:46,296 --> 00:05:48,125
+A third helper,
+
+95
+00:05:48,125 --> 00:05:49,832
+called inside,
+
+96
+00:05:49,832 --> 00:05:54,465
+checks a destination against a subnet.
+
+97
+00:05:54,465 --> 00:05:59,464
+Type: inside 192.168.1.0/24 192.168.1.200
+
+98
+00:05:59,594 --> 00:06:01,791
+Inside. So it is sent directly.
+
+99
+00:06:02,341 --> 00:06:07,333
+Now an internet address. Type: inside 192.168.1.0/24 8.8.8.8
+
+100
+00:06:07,463 --> 00:06:09,533
+Outside. So it goes to the gateway.
+
+101
+00:06:10,083 --> 00:06:16,163
+One more thing: names. Type: grep nameserver /etc/resolv.conf
+
+102
+00:06:16,293 --> 00:06:19,442
+These are the D N S servers this computer asks.
+
+103
+00:06:19,442 --> 00:06:21,252
+They are I P addresses too.
+
+104
+00:06:21,252 --> 00:06:22,056
+Public ones,
+
+105
+00:06:22,056 --> 00:06:22,927
+in this case.
+
+106
+00:06:24,977 --> 00:06:28,006
+Every working network connection needs four settings.
+
+107
+00:06:28,556 --> 00:06:31,074
+One: an I P address, which says who you are.
+
+108
+00:06:31,624 --> 00:06:35,400
+Two: a subnet mask, or slash number, which says who is local.
+
+109
+00:06:35,950 --> 00:06:38,211
+Three: a gateway, which is the way out.
+
+110
+00:06:38,761 --> 00:06:42,388
+Four: a D N S server, which turns names into addresses.
+
+111
+00:06:42,938 --> 00:06:47,546
+Check these four, in this order, and most basic network problems become simple.
+
+112
+00:06:49,596 --> 00:06:51,239
+Match the symptom to the setting.
+
+113
+00:06:51,789 --> 00:06:55,728
+An address starting 169.254 means that D H C P,
+
+114
+00:06:55,728 --> 00:06:58,830
+the service that hands out addresses,
+
+115
+00:06:58,830 --> 00:07:00,087
+did not answer.
+
+116
+00:07:00,637 --> 00:07:04,648
+Network is unreachable: there is no route, often a missing gateway.
+
+117
+00:07:05,198 --> 00:07:09,038
+Local devices work but the internet does not: check the gateway.
+
+118
+00:07:09,588 --> 00:07:13,172
+An address works but a name fails: check the D N S server.
+
+119
+00:07:13,722 --> 00:07:16,730
+Random drops: two devices may share one address.
+
+120
+00:07:18,780 --> 00:07:20,636
+Watch out for four common myths.
+
+121
+00:07:21,186 --> 00:07:23,525
+Myth one: private addresses are secure.
+
+122
+00:07:23,525 --> 00:07:25,983
+They are only not routed on the internet.
+
+123
+00:07:25,983 --> 00:07:27,842
+That is not a security feature.
+
+124
+00:07:28,392 --> 00:07:31,328
+Myth two: every network is slash twenty-four.
+
+125
+00:07:31,328 --> 00:07:35,048
+Any size from slash zero to slash thirty-two is possible.
+
+126
+00:07:35,598 --> 00:07:39,267
+Myth three: all two hundred fifty-six addresses are usable.
+
+127
+00:07:39,267 --> 00:07:40,324
+Two are reserved,
+
+128
+00:07:40,324 --> 00:07:42,190
+so two hundred fifty-four are.
+
+129
+00:07:42,740 --> 00:07:47,497
+Myth four: the gateway can be any device. It must be a router on your own subnet.
+
+130
+00:07:48,047 --> 00:07:49,839
+Know the real size, then count.
+
+131
+00:07:51,889 --> 00:07:54,214
+Here is how you check your own understanding.
+
+132
+00:07:54,764 --> 00:07:58,476
+Explain the network part and the host part of an I P address.
+
+133
+00:07:59,026 --> 00:08:01,394
+Say whether an address is private or public.
+
+134
+00:08:01,944 --> 00:08:04,291
+Read slash notation and name the mask.
+
+135
+00:08:04,841 --> 00:08:06,974
+Work out how many hosts fit in a subnet.
+
+136
+00:08:07,524 --> 00:08:09,466
+Say when traffic goes to the gateway.
+
+137
+00:08:10,016 --> 00:08:12,640
+Name the four settings a working network needs.
+
+138
+00:08:13,190 --> 00:08:14,811
+To pass, you need all six.
+
+139
+00:08:16,861 --> 00:08:19,144
+Your turn, in the virtual machine you built.
+
+140
+00:08:19,694 --> 00:08:24,643
+One: run ip -br addr, and find your own address and slash number.
+
+141
+00:08:25,193 --> 00:08:26,861
+Two: run ip route,
+
+142
+00:08:26,861 --> 00:08:28,899
+and find your gateway.
+
+143
+00:08:28,899 --> 00:08:37,609
+With the default VirtualBox network you will probably see 10.0.2.15 and a gateway of 10.0.2.2.
+
+144
+00:08:38,159 --> 00:08:42,767
+Three: decide whether your address is private or public, using the three ranges.
+
+145
+00:08:43,317 --> 00:08:46,240
+Four: work out how many hosts your slash number allows.
+
+146
+00:08:46,790 --> 00:08:50,122
+Five: read your D N S server with grep nameserver.
+
+147
+00:08:50,122 --> 00:08:52,654
+On Ubuntu it may show a local address,
+
+148
+00:08:52,654 --> 00:08:53,787
+and that is fine.
+
+149
+00:08:54,337 --> 00:08:57,644
+Mark yourself on the rubric. Pause the video, and do it now.
+
+150
+00:09:13,194 --> 00:09:14,069
+Quick check.
+
+151
+00:09:14,619 --> 00:09:17,755
+What do the network part and the host part of an address mean?
+
+152
+00:09:18,305 --> 00:09:20,054
+Which three ranges are private?
+
+153
+00:09:20,604 --> 00:09:23,697
+What does slash twenty-six mean, and how many hosts fit?
+
+154
+00:09:24,247 --> 00:09:26,103
+When does a computer use the gateway?
+
+155
+00:09:26,653 --> 00:09:30,749
+Objective covered: MC03-O01.
+
+156
+00:09:31,299 --> 00:09:33,369
+Pause the video, and answer out loud.
+
+157
+00:09:43,919 --> 00:09:46,564
+Next: T C P, U D P, and ports.
+
+158
+00:09:47,114 --> 00:09:48,991
+Subscribe, so you do not miss it.

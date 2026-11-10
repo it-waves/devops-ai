@@ -1,0 +1,31 @@
+Lesson 17 of the DevOps Engineering Bootcamp, and the start of the computer networking masterclass. Learn to read a network address: the four numbers of an IPv4 address, private and public ranges, CIDR slash notation (/24, /26, /16), subnets and masks, and the gateway that carries traffic off your network. Every idea is checked live in a real terminal: your address and routes with ip, private or public, subnet maths, and direct-or-gateway decisions. Includes the four settings a working network needs, a symptom checklist, a pass/fail rubric and a hands-on task to repeat in the virtual machine from Lesson 13.
+
+Chapters
+0:00 Every device needs an address
+0:22 The IP address
+0:57 Live: your address and gateway
+1:58 Private and public
+2:45 Live: private or public
+3:18 CIDR: the slash
+4:15 Live: subnet maths
+5:13 The gateway
+5:42 Live: direct or gateway
+6:24 The four settings
+6:49 Symptoms and causes
+7:18 Common myths
+7:51 Pass or fail rubric
+8:16 Your turn
+9:12 Quick check
+
+Objectives covered: MC03-O01
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 (the typing is timed to the narration, and the yellow highlights were added afterwards). The network card enp0s3 and its address 192.168.1.25/24 were set up by us on this computer for the demo, so the numbers match a typical home network; your own numbers will differ. The three small helpers (ipwhat, subnet, inside) are scripts we wrote with Python's standard ipaddress library, so the answers are real calculations. The router in the opening is an illustration, not a photo. The hands-on task is unverified until you run it yourself.
+
+Previous lesson: https://youtu.be/SbkjVUt2wAY
+Next: TCP, UDP, ports and sockets.
+
+All lesson files, including the helper scripts: https://github.com/it-waves/devops-ai
+
+Subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #networking #ipaddress #cidr #devopsbootcamp
