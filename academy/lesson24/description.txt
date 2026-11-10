@@ -1,0 +1,28 @@
+Lesson 24 of the DevOps Engineering Bootcamp, in the computer networking masterclass. Learn to diagnose five kinds of network failure by reading the exact words of the error: a missing DNS name ("could not resolve host"), a stopped service ("connection refused"), a firewall drop ("timed out"), a certificate problem (unknown issuer, wrong name) and a routing fault ("network is unreachable", then stars from the first hop). Each fault is shown live in a real terminal, with the clue, the commands that confirm it (dig, ss, iptables, openssl, ip route, traceroute) and the fix. Includes a clue-to-cause table, common myths, a pass/fail rubric and a hands-on task to repeat in the virtual machine from Lesson 13.
+
+Chapters
+0:00 Five outages, five messages
+0:19 The method
+0:57 Fault 1: the name (DNS)
+1:45 Fault 2: the port
+2:33 Fault 3: the firewall
+3:44 Fault 4: the certificate (TLS)
+5:24 Fault 5: the route
+6:55 Clue to cause table
+7:24 Common myths
+7:59 Pass or fail rubric
+8:26 Your turn
+9:32 Quick check
+
+Objectives covered: MC03-O08
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04. The network is a small lab built on one computer: three isolated network namespaces (a client, a router and a server) joined by virtual links, with a small web server, an HTTPS server and a small DNS server on the server side. I broke each thing in advance with a script so you can see the fault, the clue and the fix; the typing is timed to the narration and the yellow highlights were added afterwards. The names (lab.test) and 10.0.x.x addresses are invented for the lesson, the HTTPS certificate comes from a private "Lab Root CA" made for this lab, and "sv", "rt", "cert" and "get" are short names I made for longer commands (they are in the lab files). Because everything runs on one machine the ping times are tiny; on your own network the output will differ. The hands-on task is unverified until you run it yourself, and only break things in your own virtual machine.
+
+Previous lesson: https://youtu.be/QQujGd_dKY4
+Next: your networking mastery scenario.
+
+All lesson files, including the lab scripts: https://github.com/it-waves/devops-ai
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #networking #troubleshooting #devopsbootcamp

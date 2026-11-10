@@ -1,0 +1,663 @@
+1
+00:00:00,500 --> 00:00:03,359
+Five outages. Five different error messages.
+
+2
+00:00:03,909 --> 00:00:07,706
+Today you break a small network five ways, and fix every one of them.
+
+3
+00:00:08,256 --> 00:00:13,397
+A name, a port, a firewall, a certificate, and a route. Each one leaves its own clue.
+
+4
+00:00:13,947 --> 00:00:17,766
+Learn to read the clue, and you can find the fault in minutes, not hours.
+
+5
+00:00:19,816 --> 00:00:24,509
+Here is the method. Every failure arrives as a message. Read the exact words.
+
+6
+00:00:25,059 --> 00:00:29,113
+Could not resolve host. That is the name. D N S has no answer.
+
+7
+00:00:29,663 --> 00:00:33,972
+Connection refused. The machine answered, but nothing is listening on that port.
+
+8
+00:00:34,522 --> 00:00:39,066
+Timed out. Nobody answered at all. Often a firewall is dropping the packets.
+
+9
+00:00:39,616 --> 00:00:44,395
+Certificate problem. The connection worked, but T L S does not trust the server.
+
+10
+00:00:44,945 --> 00:00:48,955
+Network is unreachable. Your own machine has no route to get there.
+
+11
+00:00:49,505 --> 00:00:50,784
+We meet each one live.
+
+12
+00:00:50,784 --> 00:00:53,166
+I broke the lab in advance with a script,
+
+13
+00:00:53,166 --> 00:00:54,386
+so you see the fault,
+
+14
+00:00:54,386 --> 00:00:54,909
+the clue,
+
+15
+00:00:54,909 --> 00:00:55,607
+and the fix.
+
+16
+00:00:57,657 --> 00:01:08,729
+Fault one: the name. A page will not open. Type: curl -sS -m 3 http://shop.lab.test:8080
+
+17
+00:01:08,859 --> 00:01:10,261
+Could not resolve host.
+
+18
+00:01:10,261 --> 00:01:12,455
+The request never left this machine,
+
+19
+00:01:12,455 --> 00:01:14,406
+because the name has no address.
+
+20
+00:01:14,956 --> 00:01:20,353
+Ask D N S directly. Type: dig +short shop.lab.test
+
+21
+00:01:20,483 --> 00:01:25,112
+Nothing comes back. The name is not in the zone: a typo, or a missing record.
+
+22
+00:01:25,662 --> 00:01:31,017
+Compare with a name that exists. Type: dig +short web.lab.test
+
+23
+00:01:31,147 --> 00:01:34,255
+That one returns ten dot zero dot two dot two.
+
+24
+00:01:34,255 --> 00:01:35,268
+So D N S works,
+
+25
+00:01:35,268 --> 00:01:37,632
+and the record for shop is missing.
+
+26
+00:01:38,182 --> 00:01:39,384
+The fix is a record,
+
+27
+00:01:39,384 --> 00:01:40,465
+or the right name.
+
+28
+00:01:40,465 --> 00:01:41,727
+Check the name first,
+
+29
+00:01:41,727 --> 00:01:44,070
+because every other test depends on it.
+
+30
+00:01:46,120 --> 00:01:56,957
+Fault two: the port. The name works now. Type: curl -sS -m 3 http://web.lab.test:8080
+
+31
+00:01:57,087 --> 00:01:58,165
+Failed to connect,
+
+32
+00:01:58,165 --> 00:01:59,541
+after two milliseconds.
+
+33
+00:01:59,541 --> 00:02:00,918
+That speed is the clue.
+
+34
+00:02:00,918 --> 00:02:02,534
+Something answered at once,
+
+35
+00:02:02,534 --> 00:02:03,253
+and said no.
+
+36
+00:02:03,803 --> 00:02:09,051
+Go to the server, and ask who is listening. Type: sv ss -ltn
+
+37
+00:02:09,181 --> 00:02:10,988
+Port eighty eighty is missing.
+
+38
+00:02:10,988 --> 00:02:13,518
+Only eighty four forty three is listening.
+
+39
+00:02:13,518 --> 00:02:15,325
+The web server is not running.
+
+40
+00:02:15,875 --> 00:02:18,691
+Start it again. Type: sv startweb
+
+41
+00:02:18,821 --> 00:02:27,098
+Try the page once more. Type: curl -s http://web.lab.test:8080
+
+42
+00:02:27,228 --> 00:02:31,964
+Hello from the lab. Refused means the machine is fine, and the service is not.
+
+43
+00:02:34,014 --> 00:02:37,367
+Fault three: the firewall.
+
+44
+00:02:37,367 --> 00:02:38,656
+Same page,
+
+45
+00:02:38,656 --> 00:02:39,946
+same port.
+
+46
+00:02:39,946 --> 00:02:45,619
+Type: curl -sS -m 3 http://web.lab.test:8080
+
+47
+00:02:46,749 --> 00:02:52,147
+Watch the difference. It was not refused. It waited three seconds, and gave up. Timed out.
+
+48
+00:02:52,697 --> 00:02:57,795
+Nobody said no. The packets just vanished. That is what a firewall drop looks like.
+
+49
+00:02:58,345 --> 00:03:03,828
+Is the server alive? Type: ping -c 1 10.0.2.2
+
+50
+00:03:03,958 --> 00:03:08,950
+It replies, so the machine is up, and the path is fine. Only this one port is blocked.
+
+51
+00:03:09,500 --> 00:03:15,559
+On the server, list the firewall rules. Type: sv iptables -S INPUT
+
+52
+00:03:15,689 --> 00:03:21,406
+There it is. A rule for T C P, destination port eighty eighty, with the action drop.
+
+53
+00:03:21,956 --> 00:03:27,353
+Delete rule number one. Type: sv iptables -D INPUT 1
+
+54
+00:03:27,483 --> 00:03:35,654
+Try the page again. Type: curl -s http://web.lab.test:8080
+
+55
+00:03:35,784 --> 00:03:36,970
+Refused is instant.
+
+56
+00:03:36,970 --> 00:03:38,093
+A timeout is slow.
+
+57
+00:03:38,093 --> 00:03:39,279
+Remember that pair,
+
+58
+00:03:39,279 --> 00:03:42,461
+and you can tell a stopped service from a firewall.
+
+59
+00:03:44,511 --> 00:03:46,162
+Fault four: T L S.
+
+60
+00:03:46,162 --> 00:03:47,996
+Now the secure page,
+
+61
+00:03:47,996 --> 00:03:50,931
+on port eighty four forty three.
+
+62
+00:03:50,931 --> 00:03:54,232
+Type: get https://web.lab.test:8443.
+
+63
+00:03:54,232 --> 00:03:56,984
+Get is my short name for curl,
+
+64
+00:03:56,984 --> 00:03:59,552
+keeping only the first line,
+
+65
+00:03:59,552 --> 00:04:02,303
+because T L S errors are long.
+
+66
+00:04:02,853 --> 00:04:06,557
+Certificate problem: unable to get local issuer certificate.
+
+67
+00:04:06,557 --> 00:04:07,545
+The name worked,
+
+68
+00:04:07,545 --> 00:04:08,780
+and the port worked.
+
+69
+00:04:08,780 --> 00:04:09,829
+The trust failed.
+
+70
+00:04:10,379 --> 00:04:13,008
+Read the certificate itself.
+
+71
+00:04:13,008 --> 00:04:15,731
+Type: cert web.lab.test:8443.
+
+72
+00:04:15,731 --> 00:04:21,366
+That is a short name I made for a longer open S S L command.
+
+73
+00:04:21,916 --> 00:04:24,399
+The subject is web dot lab dot test,
+
+74
+00:04:24,399 --> 00:04:25,778
+so the name matches.
+
+75
+00:04:25,778 --> 00:04:27,641
+The issuer is Lab Root C A,
+
+76
+00:04:27,641 --> 00:04:30,952
+a private authority this computer does not know.
+
+77
+00:04:30,952 --> 00:04:32,883
+The dates cover a full year,
+
+78
+00:04:32,883 --> 00:04:34,332
+so it is not expired.
+
+79
+00:04:34,882 --> 00:04:46,850
+Tell curl to trust that authority. Type: get --cacert ca.pem https://web.lab.test:8443
+
+80
+00:04:46,980 --> 00:04:49,604
+Hello from the lab. Trusted, and encrypted.
+
+81
+00:04:50,154 --> 00:04:54,952
+A second mistake: the right certificate,
+
+82
+00:04:54,952 --> 00:04:57,231
+but the wrong name.
+
+83
+00:04:57,231 --> 00:05:00,110
+Use the address instead.
+
+84
+00:05:00,110 --> 00:05:05,748
+Type: get --cacert ca.pem https://10.0.2.2:8443
+
+85
+00:05:05,878 --> 00:05:09,011
+No alternative certificate subject name matches.
+
+86
+00:05:09,011 --> 00:05:11,296
+A certificate is issued for a name,
+
+87
+00:05:11,296 --> 00:05:12,536
+not for an address.
+
+88
+00:05:12,536 --> 00:05:14,625
+Use the name on the certificate.
+
+89
+00:05:15,175 --> 00:05:17,269
+You will see advice to add dash k.
+
+90
+00:05:17,269 --> 00:05:18,439
+It skips the check.
+
+91
+00:05:18,439 --> 00:05:21,456
+It hides the very problem you are trying to find,
+
+92
+00:05:21,456 --> 00:05:23,303
+so never use it in production.
+
+93
+00:05:25,353 --> 00:05:33,950
+Fault five: the route. Now even ping fails. Type: ping -c 1 -W 1 10.0.2.2
+
+94
+00:05:34,080 --> 00:05:39,392
+Network is unreachable. Not a timeout. This machine already knows it has no way out.
+
+95
+00:05:39,942 --> 00:05:42,822
+Look at the routing table. Type: ip route
+
+96
+00:05:42,952 --> 00:05:48,499
+One line only: my own network. There is no default route, so nothing outside has a path.
+
+97
+00:05:49,049 --> 00:05:57,070
+Add the default route, through the gateway. Type: sudo ip route add default via 10.0.1.1
+
+98
+00:05:57,200 --> 00:06:03,643
+Ping again. Type: ping -c 1 -W 1 10.0.2.2
+
+99
+00:06:03,773 --> 00:06:04,351
+No reply,
+
+100
+00:06:04,351 --> 00:06:06,277
+and this time it is a timeout,
+
+101
+00:06:06,277 --> 00:06:07,305
+not unreachable.
+
+102
+00:06:07,305 --> 00:06:08,910
+The first fault is fixed.
+
+103
+00:06:08,910 --> 00:06:10,322
+There is a second one.
+
+104
+00:06:10,872 --> 00:06:19,790
+Where does the path stop? Type: traceroute -n -w 1 -q 1 -m 3 10.0.2.2
+
+105
+00:06:19,920 --> 00:06:24,314
+Stars from the very first hop. Even the gateway is not passing traffic on.
+
+106
+00:06:24,864 --> 00:06:31,670
+Ask the router. Type: rt sysctl net.ipv4.ip_forward
+
+107
+00:06:31,800 --> 00:06:42,829
+Zero. Forwarding is switched off. Switch it on. Type: rt sysctl -w net.ipv4.ip_forward=1
+
+108
+00:06:42,959 --> 00:06:50,170
+Ping one last time. Type: ping -c 1 -W 1 10.0.2.2
+
+109
+00:06:50,300 --> 00:06:53,926
+Two faults, found one at a time, just by reading each message.
+
+110
+00:06:55,976 --> 00:06:59,005
+Keep this table. It is the whole lesson in six rows.
+
+111
+00:06:59,555 --> 00:07:02,435
+Could not resolve host: name. Check with dig.
+
+112
+00:07:02,985 --> 00:07:06,057
+Connection refused: no listener. Check with s s.
+
+113
+00:07:06,607 --> 00:07:09,274
+Timed out: a firewall drop. Check the rules.
+
+114
+00:07:09,824 --> 00:07:14,496
+Certificate problem: trust, name, or dates. Check with open S S L.
+
+115
+00:07:15,046 --> 00:07:18,459
+Network is unreachable: no route. Check I P route.
+
+116
+00:07:19,009 --> 00:07:23,041
+Stars from hop one: a router not forwarding. Check with trace route.
+
+117
+00:07:25,091 --> 00:07:26,520
+Watch out for four myths.
+
+118
+00:07:27,070 --> 00:07:29,120
+Myth one: add dash k and move on.
+
+119
+00:07:29,120 --> 00:07:31,605
+That switches the certificate check off.
+
+120
+00:07:31,605 --> 00:07:34,089
+It hides the fault instead of fixing it.
+
+121
+00:07:34,639 --> 00:07:38,069
+Myth two: refused and timed out mean the same thing.
+
+122
+00:07:38,069 --> 00:07:39,718
+Refused is an instant no.
+
+123
+00:07:39,718 --> 00:07:41,103
+A timeout is silence.
+
+124
+00:07:41,653 --> 00:07:43,748
+Myth three: if the name resolves,
+
+125
+00:07:43,748 --> 00:07:44,954
+the page will load.
+
+126
+00:07:44,954 --> 00:07:46,795
+An address is only the start.
+
+127
+00:07:46,795 --> 00:07:49,397
+The port and the firewall can still fail.
+
+128
+00:07:49,947 --> 00:07:52,515
+Myth four: change several things at once.
+
+129
+00:07:52,515 --> 00:07:53,579
+Change one thing,
+
+130
+00:07:53,579 --> 00:07:53,892
+test,
+
+131
+00:07:53,892 --> 00:07:55,771
+and only then change the next.
+
+132
+00:07:56,321 --> 00:07:57,622
+One fault at a time.
+
+133
+00:07:59,672 --> 00:08:01,997
+Here is how you check your own understanding.
+
+134
+00:08:02,547 --> 00:08:05,513
+Tell refused from timed out, and say what each means.
+
+135
+00:08:06,063 --> 00:08:08,751
+Check a name with dig, and a listener with s s.
+
+136
+00:08:09,301 --> 00:08:12,437
+Read a certificate: the name, the issuer, and the dates.
+
+137
+00:08:12,987 --> 00:08:15,909
+Read I P route, and spot a missing default route.
+
+138
+00:08:16,459 --> 00:08:18,657
+Use trace route to see where a path stops.
+
+139
+00:08:19,207 --> 00:08:22,940
+Fix a fault, changing one thing at a time, and test after each.
+
+140
+00:08:23,490 --> 00:08:25,111
+To pass, you need all six.
+
+141
+00:08:27,161 --> 00:08:27,717
+Your turn,
+
+142
+00:08:27,717 --> 00:08:29,552
+in the virtual machine you built.
+
+143
+00:08:29,552 --> 00:08:32,110
+Only break things in your own virtual machine.
+
+144
+00:08:32,660 --> 00:08:38,655
+One: run curl against a made-up name, like shop dot example dot invalid. Read the message.
+
+145
+00:08:39,205 --> 00:08:41,378
+Two: run curl against local host,
+
+146
+00:08:41,378 --> 00:08:42,958
+port nine thousand nine.
+
+147
+00:08:42,958 --> 00:08:44,406
+Nothing listens there.
+
+148
+00:08:44,406 --> 00:08:45,328
+Is it instant?
+
+149
+00:08:45,878 --> 00:08:51,555
+Three: start a server with python three dash m h t t p dot server eight thousand eighty,
+
+150
+00:08:51,555 --> 00:08:53,814
+and curl it from a second terminal.
+
+151
+00:08:54,364 --> 00:08:59,676
+Four: block that port with sudo I P tables, watch curl time out, then delete the rule.
+
+152
+00:09:00,226 --> 00:09:06,306
+Five: read a real certificate, with open S S L s client, against example dot com.
+
+153
+00:09:06,856 --> 00:09:09,586
+Six: write down your gateway from I P route,
+
+154
+00:09:09,586 --> 00:09:11,137
+remove the default route,
+
+155
+00:09:11,137 --> 00:09:12,626
+see network unreachable,
+
+156
+00:09:12,626 --> 00:09:13,618
+and add it back.
+
+157
+00:09:14,168 --> 00:09:17,475
+Mark yourself on the rubric. Pause the video, and do it now.
+
+158
+00:09:33,025 --> 00:09:33,900
+Quick check.
+
+159
+00:09:34,450 --> 00:09:37,650
+Which message means a firewall may be dropping packets?
+
+160
+00:09:38,200 --> 00:09:40,120
+What does connection refused tell you?
+
+161
+00:09:40,670 --> 00:09:42,803
+Which command checks that a name resolves?
+
+162
+00:09:43,353 --> 00:09:45,081
+Why is dash k a bad fix?
+
+163
+00:09:45,631 --> 00:09:49,812
+Objective covered: MC03-O08.
+
+164
+00:09:50,362 --> 00:09:52,432
+Pause the video, and answer out loud.
+
+165
+00:10:02,982 --> 00:10:07,120
+Next: your mastery scenario, where you fix a broken network on your own.
+
+166
+00:10:07,670 --> 00:10:10,998
+If this helped, like, share and subscribe, so you do not miss it.
