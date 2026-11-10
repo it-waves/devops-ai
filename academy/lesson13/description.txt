@@ -1,4 +1,4 @@
-Lesson 13 of the DevOps Engineering Bootcamp. Set up a disposable Linux virtual machine you can break, delete and rebuild: your options (VirtualBox, Multipass, WSL 2, cloud), sizing, how to download VirtualBox and the Ubuntu Server image, a live screen recording of the VirtualBox new-machine wizard, logging in over SSH with a key, real SSH output, common errors, and snapshots. Includes a pass/fail rubric and a hands-on task.
+Lesson 13 of the DevOps Engineering Bootcamp. Set up a disposable Linux virtual machine you can break, delete and rebuild: your options (VirtualBox, Multipass, WSL 2, cloud), sizing, how to download VirtualBox and the Ubuntu Server image, a live screen recording of the VirtualBox new-machine wizard, then a hands-on lab: power on, log in, walk around, save a file, power off, take a snapshot, break the machine on purpose, and restore it, logging in over SSH with a key, real SSH output, common errors, and snapshots. Includes a pass/fail rubric and a hands-on task.
 
 Chapters
 0:00 A safe place to practice
@@ -6,21 +6,34 @@ Chapters
 0:34 Your options
 1:04 Size and release
 1:30 Download VirtualBox
-1:52 Download Ubuntu Server
-2:26 The install
-3:02 VirtualBox wizard
-4:06 Console and SSH
-4:33 Real demo
-5:19 Common errors
-5:47 Snapshot and rebuild
-6:11 Common myths
-6:43 Pass or fail rubric
-7:07 Your turn
-7:53 Quick check
+1:58 Download Ubuntu Server
+2:32 The install
+3:08 VirtualBox wizard
+4:18 The Ubuntu installer
+5:16 Power on the VM
+5:56 Log in
+6:43 Walk around
+8:01 Save a file, power off
+8:53 What is a snapshot
+9:16 Snapshot in VirtualBox
+9:39 Snapshot, command line
+10:04 Power on again
+10:17 Break it on purpose
+11:05 Restore the snapshot
+11:27 Power on once more
+11:40 Is everything back
+12:14 Console and SSH
+12:41 Real demo
+13:27 Common errors
+13:55 Snapshot and rebuild
+14:18 Common myths
+14:51 Pass or fail rubric
+15:15 Your turn
+16:03 Quick check
 
 Objectives covered: MC02-O05
 
-Honest notes: the download pages are real screenshots; the VirtualBox wizard is a real screen recording and the SSH output is real, both from a Linux sandbox (VirtualBox 7.0, Linux build; the website now offers a newer version, so yours will differ slightly). The sandbox cannot start virtual machines, so the walkthrough stops after the machine is created. The Windows VirtualBox installer, the Multipass commands and the "Connection timed out" message are not captured here. The hands-on task is unverified until you run it yourself.
+Honest notes: the download pages are real screenshots. The VirtualBox wizard and its Snapshots tab are real screen recordings from a Linux sandbox (VirtualBox 7.0, so yours will look slightly newer). That sandbox cannot start VirtualBox machines, so the power-on, login, walk-around, power-off, break and restore steps are recorded on a real Ubuntu 24.04 system running in an emulator (QEMU), and the snapshot commands shown there are QEMU's equivalents of VirtualBox's Take and Restore buttons. The Ubuntu installer checklist, the Windows VirtualBox installer, the Multipass commands and the Connection timed out message are drawn or described, not captured. The hands-on task is unverified until you run it yourself.
 
 Previous lesson: https://youtu.be/-A6QOWIphU4
 Next lesson: files, text, encodings, and paths.

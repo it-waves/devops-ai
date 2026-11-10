@@ -91,569 +91,1149 @@ Never give it more than your computer can spare.
 Choose a long term support release of Ubuntu Server, because it is widely documented.
 
 24
-00:01:23,840 --> 00:01:28,448
-Server means no desktop, just the command line, which is exactly what we want.
+00:01:23,840 --> 00:01:26,044
+In my emulator it is one command: qemu-img snapshot -c,
 
 25
+00:01:26,044 --> 00:01:26,324
+a name,
+
+26
+00:01:26,324 --> 00:01:27,046
+and the disk file.
+
+27
+00:01:27,046 --> 00:01:28,448
+The -l option lists your snapshots.
+
+28
 00:01:30,498 --> 00:01:34,701
 Before the wizard, you need two downloads. First, VirtualBox itself.
 
-26
-00:01:35,251 --> 00:01:36,738
-Open virtualbox.org,
-
-27
-00:01:36,738 --> 00:01:38,225
-and go to Downloads.
-
-28
-00:01:38,225 --> 00:01:39,043
-On Windows,
-
 29
-00:01:39,043 --> 00:01:40,604
-choose Windows hosts.
+00:01:35,251 --> 00:01:39,304
+Step one: open your web browser and go to virtualbox.org.
 
 30
-00:01:40,604 --> 00:01:41,943
-On a Mac or Linux,
+00:01:39,854 --> 00:01:42,201
+Step two: click the big Download button.
 
 31
-00:01:41,943 --> 00:01:42,909
-choose yours.
+00:01:42,751 --> 00:01:44,767
+Step three: choose your computer.
 
 32
-00:01:43,459 --> 00:01:47,683
-Run the file you download. You do not need the Extension Pack for this lab.
-
-33
-00:01:48,233 --> 00:01:51,369
-Your version number will be newer than mine, and that is fine.
-
-34
-00:01:53,419 --> 00:01:55,382
-Second, the Ubuntu Server image.
-
-35
-00:01:55,932 --> 00:01:59,648
-Open ubuntu.com slash download slash server,
-
-36
-00:01:59,648 --> 00:02:01,253
-and press Download.
-
-37
-00:02:01,253 --> 00:02:04,209
-Choose the Intel or AMD 64 bit one.
-
-38
-00:02:04,759 --> 00:02:07,980
-It is about three gigabytes, so start it on a good connection.
-
-39
-00:02:08,530 --> 00:02:09,865
-The file ends in ISO.
-
-40
-00:02:09,865 --> 00:02:12,788
-That is a disk image the installer boots from.
-
-41
-00:02:12,788 --> 00:02:14,568
-Remember where you saved it.
-
-42
-00:02:15,118 --> 00:02:21,176
-At recording time, the latest long term support release was Ubuntu 26.04.1.
-
-43
-00:02:21,726 --> 00:02:25,332
-Yours may be newer. Choose the current long term support release.
-
-44
-00:02:27,382 --> 00:02:29,302
-Now the install, in two ways.
-
-45
-00:02:29,852 --> 00:02:33,804
-With VirtualBox on Windows: run the installer you downloaded,
-
-46
-00:02:33,804 --> 00:02:35,360
-and accept the defaults.
-
-47
-00:02:35,360 --> 00:02:37,822
-It may briefly interrupt your network,
-
-48
-00:02:37,822 --> 00:02:39,571
-and ask to install drivers.
-
-49
-00:02:39,571 --> 00:02:40,284
-Allow them.
-
-50
-00:02:40,834 --> 00:02:44,461
-Then open VirtualBox, and create the machine. We do that next.
-
-51
-00:02:45,011 --> 00:02:45,436
-Later,
-
-52
-00:02:45,436 --> 00:02:47,419
-inside the Ubuntu installer,
-
-53
-00:02:47,419 --> 00:02:50,041
-choose a throwaway user and password,
-
-54
-00:02:50,041 --> 00:02:52,520
-and tick the OpenSSH server option.
-
-55
-00:02:53,070 --> 00:02:55,566
-With Multipass, one command does all of it.
-
-56
-00:02:56,116 --> 00:02:57,673
-Launch creates the machine,
-
-57
-00:02:57,673 --> 00:02:59,576
-shell opens a terminal inside it,
-
-58
-00:02:59,576 --> 00:03:01,364
-and list shows what is running.
-
-59
-00:03:03,414 --> 00:03:05,654
-Let us walk through the VirtualBox wizard.
-
-60
-00:03:06,204 --> 00:03:10,727
-These are real screenshots, captured from VirtualBox running in the sandbox.
-
-61
-00:03:11,277 --> 00:03:13,010
-Step one: name the machine,
-
-62
-00:03:13,010 --> 00:03:13,845
-choose Linux,
-
-63
-00:03:13,845 --> 00:03:15,321
-and the Ubuntu version.
-
-64
-00:03:15,321 --> 00:03:18,018
-This is also where you pick your ISO file.
-
-65
-00:03:22,568 --> 00:03:26,813
-Step two: memory and processors. Two gigabytes, and two processors.
-
-66
-00:03:29,363 --> 00:03:31,129
-Step three: the virtual disk.
-
-67
-00:03:31,129 --> 00:03:32,163
-Twenty gigabytes.
-
-68
-00:03:32,163 --> 00:03:33,563
-It grows as you use it,
-
-69
-00:03:33,563 --> 00:03:35,998
-so it does not take all of that at once.
-
-70
-00:03:39,048 --> 00:03:41,907
-Step four: the summary. Check it, then press Finish.
-
-71
-00:03:44,957 --> 00:03:47,150
-The machine now appears in the list,
-
-72
-00:03:47,150 --> 00:03:47,881
-powered off.
-
-73
-00:03:47,881 --> 00:03:48,612
-Press Start,
-
-74
-00:03:48,612 --> 00:03:50,866
-and the installer boots from the ISO.
-
-75
-00:03:52,916 --> 00:03:56,820
-Here, we stop, because the sandbox cannot start virtual machines.
-
-76
-00:03:57,370 --> 00:03:58,055
+00:01:44,767 --> 00:01:45,440
 On Windows,
 
+33
+00:01:45,440 --> 00:01:46,723
+choose Windows hosts.
+
+34
+00:01:46,723 --> 00:01:47,823
+On a Mac or Linux,
+
+35
+00:01:47,823 --> 00:01:48,617
+choose yours.
+
+36
+00:01:49,167 --> 00:01:53,391
+Run the file you download. You do not need the Extension Pack for this lab.
+
+37
+00:01:53,941 --> 00:01:57,077
+Your version number will be newer than mine, and that is fine.
+
+38
+00:01:59,127 --> 00:02:01,090
+Second, the Ubuntu Server image.
+
+39
+00:02:01,640 --> 00:02:05,356
+Open ubuntu.com slash download slash server,
+
+40
+00:02:05,356 --> 00:02:06,961
+and press Download.
+
+41
+00:02:06,961 --> 00:02:09,917
+Choose the Intel or AMD 64 bit one.
+
+42
+00:02:10,467 --> 00:02:13,688
+It is about three gigabytes, so start it on a good connection.
+
+43
+00:02:14,238 --> 00:02:15,573
+The file ends in ISO.
+
+44
+00:02:15,573 --> 00:02:18,496
+That is a disk image the installer boots from.
+
+45
+00:02:18,496 --> 00:02:20,276
+Remember where you saved it.
+
+46
+00:02:20,826 --> 00:02:26,884
+At recording time, the latest long term support release was Ubuntu 26.04.1.
+
+47
+00:02:27,434 --> 00:02:31,040
+Yours may be newer. Choose the current long term support release.
+
+48
+00:02:33,090 --> 00:02:35,010
+Now the install, in two ways.
+
+49
+00:02:35,560 --> 00:02:39,512
+With VirtualBox on Windows: run the installer you downloaded,
+
+50
+00:02:39,512 --> 00:02:41,068
+and accept the defaults.
+
+51
+00:02:41,068 --> 00:02:43,530
+It may briefly interrupt your network,
+
+52
+00:02:43,530 --> 00:02:45,279
+and ask to install drivers.
+
+53
+00:02:45,279 --> 00:02:45,992
+Allow them.
+
+54
+00:02:46,542 --> 00:02:50,169
+Then open VirtualBox, and create the machine. We do that next.
+
+55
+00:02:50,719 --> 00:02:51,144
+Later,
+
+56
+00:02:51,144 --> 00:02:53,127
+inside the Ubuntu installer,
+
+57
+00:02:53,127 --> 00:02:55,749
+choose a throwaway user and password,
+
+58
+00:02:55,749 --> 00:02:58,228
+and tick the OpenSSH server option.
+
+59
+00:02:58,778 --> 00:03:01,274
+With Multipass, one command does all of it.
+
+60
+00:03:01,824 --> 00:03:03,381
+Launch creates the machine,
+
+61
+00:03:03,381 --> 00:03:05,284
+shell opens a terminal inside it,
+
+62
+00:03:05,284 --> 00:03:07,072
+and list shows what is running.
+
+63
+00:03:09,122 --> 00:03:11,362
+Let us walk through the VirtualBox wizard.
+
+64
+00:03:11,912 --> 00:03:16,883
+This is a real screen recording of VirtualBox. Follow along on your own computer.
+
+65
+00:03:17,433 --> 00:03:19,166
+Step one: name the machine,
+
+66
+00:03:19,166 --> 00:03:20,001
+choose Linux,
+
+67
+00:03:20,001 --> 00:03:21,477
+and the Ubuntu version.
+
+68
+00:03:21,477 --> 00:03:24,174
+This is also where you pick your ISO file.
+
+69
+00:03:28,724 --> 00:03:32,969
+Step two: memory and processors. Two gigabytes, and two processors.
+
+70
+00:03:35,519 --> 00:03:37,285
+Step three: the virtual disk.
+
+71
+00:03:37,285 --> 00:03:38,319
+Twenty gigabytes.
+
+72
+00:03:38,319 --> 00:03:39,719
+It grows as you use it,
+
+73
+00:03:39,719 --> 00:03:42,154
+so it does not take all of that at once.
+
+74
+00:03:45,204 --> 00:03:48,063
+Step four: the summary. Check it, then press Finish.
+
+75
+00:03:51,113 --> 00:03:53,306
+The machine now appears in the list,
+
+76
+00:03:53,306 --> 00:03:54,037
+powered off.
+
 77
-00:03:58,055 --> 00:04:00,484
-you first run the VirtualBox installer.
+00:03:54,037 --> 00:03:54,768
+Press Start,
 
 78
-00:04:00,484 --> 00:04:02,352
-I have not captured that part,
+00:03:54,768 --> 00:03:57,022
+and the installer boots from the ISO.
 
 79
-00:04:02,352 --> 00:04:05,093
-but the wizard you just saw is very similar.
+00:03:59,072 --> 00:04:01,702
+On your computer you would now press Start.
 
 80
-00:04:07,143 --> 00:04:08,572
-Now: how do you get in?
+00:04:01,702 --> 00:04:04,393
+My workspace cannot run VirtualBox machines,
 
 81
-00:04:09,122 --> 00:04:13,410
-The console is the machine's own screen. It always works, but it is awkward.
+00:04:04,393 --> 00:04:08,245
+so next I will show you the same Ubuntu running in an emulator.
 
 82
-00:04:13,960 --> 00:04:17,608
-SSH lets you log in from your own terminal, over the network.
+00:04:08,795 --> 00:04:09,480
+On Windows,
 
 83
-00:04:18,158 --> 00:04:23,257
-SSH needs three things: an address, a user name, and a way to prove who you are.
+00:04:09,480 --> 00:04:11,909
+you first run the VirtualBox installer.
 
 84
-00:04:23,807 --> 00:04:27,411
-The best proof is a key pair: a private key that stays secret,
+00:04:11,909 --> 00:04:13,778
+I have not captured that part,
 
 85
-00:04:27,411 --> 00:04:30,143
-and a public key that you place on the machine.
+00:04:13,778 --> 00:04:16,518
+but the wizard you just saw is very similar.
 
 86
-00:04:30,693 --> 00:04:32,229
-Never share the private key.
+00:04:18,568 --> 00:04:19,922
+Before the first start,
 
 87
-00:04:34,279 --> 00:04:39,015
-Now let us do the SSH part for real, in a disposable Linux sandbox.
+00:04:19,922 --> 00:04:21,511
+a word about the installer.
 
 88
-00:04:39,565 --> 00:04:41,834
-These outputs are real captures.
+00:04:21,511 --> 00:04:22,983
+I cannot capture it here,
 
 89
-00:04:41,834 --> 00:04:42,189
-Here,
+00:04:22,983 --> 00:04:24,748
+so this is a checklist I drew,
 
 90
-00:04:42,189 --> 00:04:44,954
-the sandbox plays your virtual machine,
+00:04:24,748 --> 00:04:26,632
+in the order the screens appear.
 
 91
-00:04:44,954 --> 00:04:47,224
-and SSH connects back to itself.
+00:04:28,182 --> 00:04:33,515
+It is all text menus. Use the arrow keys, Tab, and Enter. The mouse will not work.
 
 92
-00:04:47,774 --> 00:04:51,528
-First, we create a key pair. The command stays quiet when it works.
+00:04:34,065 --> 00:04:34,882
+Pick English,
 
 93
-00:04:52,078 --> 00:04:57,070
-The fingerprint identifies the key, and it is safe to share. The private file is not.
+00:04:34,882 --> 00:04:36,202
+your keyboard layout,
 
 94
-00:04:57,620 --> 00:04:59,168
-Now we log in with the key,
+00:04:36,202 --> 00:04:38,024
+and the Ubuntu Server option.
 
 95
-00:04:59,168 --> 00:05:01,345
-and run three commands: the host name,
+00:04:38,024 --> 00:04:39,783
+Accept the network defaults,
 
 96
-00:05:01,345 --> 00:05:02,148
-the user name,
+00:04:39,783 --> 00:04:42,108
+and leave the proxy and mirror alone.
 
 97
-00:05:02,148 --> 00:05:03,466
-and the kernel version.
+00:04:44,658 --> 00:04:45,393
+For storage,
 
 98
-00:05:04,016 --> 00:05:09,136
-The answers come from the machine we logged in to: its name, its user, and its kernel.
+00:04:45,393 --> 00:04:46,556
+use the whole disk.
 
 99
-00:05:09,686 --> 00:05:13,355
-If we try the wrong port, nothing answers: connection refused.
+00:04:46,556 --> 00:04:48,577
+That is the virtual disk we made,
 
 100
-00:05:13,905 --> 00:05:18,044
-In your own machine, you use its address, and the port is usually twenty-two.
+00:04:48,577 --> 00:04:51,271
+so nothing on your real computer is touched.
 
 101
-00:05:20,094 --> 00:05:21,651
-Three messages you will meet.
+00:04:51,821 --> 00:04:53,124
+On the profile screen,
 
 102
-00:05:22,201 --> 00:05:24,745
-Connection refused: the machine answered,
+00:04:53,124 --> 00:04:54,723
+choose the server name lab,
 
 103
-00:05:24,745 --> 00:05:27,102
-but nothing is listening on that port.
+00:04:54,723 --> 00:04:56,203
+a user name like student,
 
 104
-00:05:27,102 --> 00:05:28,901
-Is SSH installed and running,
+00:04:56,203 --> 00:04:58,157
+and a password you will remember.
 
 105
-00:05:28,901 --> 00:05:30,265
-and is the port right?
+00:05:00,207 --> 00:05:02,325
+Tick install OpenSSH server.
 
 106
-00:05:30,815 --> 00:05:33,177
-Permission denied: the server is there,
+00:05:02,325 --> 00:05:06,030
+You will need it for the SSH part of this lesson.
 
 107
-00:05:33,177 --> 00:05:35,781
-but it rejected your key or your user name.
+00:05:06,030 --> 00:05:07,845
+Skip the extra packages.
 
 108
-00:05:35,781 --> 00:05:36,447
-Check both.
+00:05:08,395 --> 00:05:10,318
+Wait for the install to finish,
 
 109
-00:05:36,997 --> 00:05:39,203
-Connection timed out: no answer at all.
+00:05:10,318 --> 00:05:11,745
+then choose Reboot now.
 
 110
-00:05:39,203 --> 00:05:41,125
-Check that the machine is running,
+00:05:11,745 --> 00:05:14,785
+If it asks you to remove the installation medium,
 
 111
-00:05:41,125 --> 00:05:42,821
-and that the address is right.
+00:05:14,785 --> 00:05:15,840
+just press Enter.
 
 112
-00:05:43,371 --> 00:05:46,017
-Read the message, then check one thing at a time.
+00:05:17,390 --> 00:05:19,570
+Now let us bring a machine to life.
 
 113
-00:05:48,067 --> 00:05:49,688
-Now the disposable part.
+00:05:19,570 --> 00:05:23,619
+Everything from here is a real Ubuntu twenty four oh four server.
 
 114
-00:05:50,238 --> 00:05:51,859
-Before a risky experiment,
+00:05:24,169 --> 00:05:25,284
+One honest note.
 
 115
-00:05:51,859 --> 00:05:52,857
-take a snapshot.
+00:05:25,284 --> 00:05:28,349
+My workspace cannot run VirtualBox machines,
 
 116
-00:05:52,857 --> 00:05:55,350
-VirtualBox can save the machine's state,
+00:05:28,349 --> 00:05:31,204
+so I run this same Ubuntu in an emulator.
 
 117
-00:05:55,350 --> 00:05:56,660
-and restore it later.
+00:05:31,204 --> 00:05:35,732
+The console inside your VirtualBox window will look very similar.
 
 118
-00:05:57,210 --> 00:06:00,708
-With Multipass, delete the machine, purge it, and launch it again.
+00:05:36,282 --> 00:05:38,360
+Pressing Start is the power button.
 
 119
-00:06:01,258 --> 00:06:05,525
-Keep anything valuable outside the virtual machine, such as scripts in Git.
+00:05:38,360 --> 00:05:41,982
+Lines of text scroll by while the system starts its services.
 
 120
-00:06:06,075 --> 00:06:09,488
-If you can rebuild it in minutes, you can experiment without fear.
+00:05:41,982 --> 00:05:43,526
+This takes about a minute,
 
 121
-00:06:11,538 --> 00:06:13,394
-Watch out for four common myths.
+00:05:43,526 --> 00:05:44,773
+so I have sped it up.
 
 122
-00:06:13,944 --> 00:06:17,476
-Myth one: a virtual machine puts my computer at risk.
+00:05:45,323 --> 00:05:48,928
+When you see the word login, the machine is ready and waiting for you.
 
 123
-00:06:17,476 --> 00:06:18,009
-In fact,
+00:05:56,478 --> 00:06:01,726
+Time to log in. Type the user name you created during the install. I will use student.
 
 124
-00:06:18,009 --> 00:06:20,408
-it is the safer place to experiment.
+00:06:05,276 --> 00:06:06,384
+Now the password.
 
 125
-00:06:20,958 --> 00:06:23,532
-Myth two: I need a powerful computer.
+00:06:06,384 --> 00:06:08,991
+Notice that nothing appears as you type.
 
 126
-00:06:23,532 --> 00:06:24,088
-In fact,
+00:06:08,991 --> 00:06:09,968
+That is normal,
 
 127
-00:06:24,088 --> 00:06:27,358
-a small Ubuntu Server runs on modest resources.
+00:06:09,968 --> 00:06:11,402
+Linux hides passwords.
 
 128
-00:06:27,908 --> 00:06:33,049
-Myth three: a password is just as good as a key. In fact, keys are much harder to guess.
+00:06:11,402 --> 00:06:12,575
+Type it carefully,
 
 129
-00:06:33,599 --> 00:06:36,941
-Myth four: a disposable machine can hold my real work.
+00:06:12,575 --> 00:06:13,617
+and press Enter.
 
 130
-00:06:36,941 --> 00:06:37,436
-In fact,
+00:06:17,667 --> 00:06:18,333
+You are in.
 
 131
-00:06:37,436 --> 00:06:38,736
-if you might need it,
+00:06:18,333 --> 00:06:19,481
+Look at the prompt.
 
 132
-00:06:38,736 --> 00:06:39,850
-keep it elsewhere.
+00:06:19,481 --> 00:06:21,840
+It says student at lab: your user name,
 
 133
-00:06:40,400 --> 00:06:42,235
-Disposable means replaceable.
+00:06:21,840 --> 00:06:23,170
+then the machine name.
 
 134
-00:06:44,285 --> 00:06:46,013
-Here is how you check your own work.
+00:06:23,170 --> 00:06:26,073
+The dollar sign means: I am ready for a command.
 
 135
-00:06:46,563 --> 00:06:49,742
-Imagine a teammate asks you to set up a practice machine.
+00:06:27,623 --> 00:06:32,444
+Let us ask the machine who we are. The command is who am I, written as one word.
 
 136
-00:06:50,292 --> 00:06:52,190
-Explain why it is disposable.
+00:06:35,494 --> 00:06:39,355
+It answers: student. Now ask for the machine's name: hostname.
 
 137
-00:06:52,740 --> 00:06:54,596
-Choose a platform, and say why.
+00:06:43,905 --> 00:06:45,550
+Now let us walk around.
 
 138
-00:06:55,146 --> 00:06:56,981
-Create it with sensible sizes.
+00:06:45,550 --> 00:06:47,481
+First question: where am I?
 
 139
-00:06:57,531 --> 00:06:59,600
-Log in over SSH, with a key.
+00:06:47,481 --> 00:06:48,840
+The command is pwd,
 
 140
-00:07:00,150 --> 00:07:01,878
-Verify it with three commands.
+00:06:48,840 --> 00:06:51,414
+which means print working directory.
 
 141
-00:07:02,428 --> 00:07:03,964
-Delete it, and rebuild it.
+00:06:55,464 --> 00:06:57,038
+That is your home folder.
 
 142
-00:07:04,514 --> 00:07:06,136
-To pass, you need all six.
+00:06:57,038 --> 00:06:59,052
+Now list what is inside with ls.
 
 143
-00:07:08,186 --> 00:07:09,061
-Your turn.
+00:06:59,052 --> 00:06:59,807
+Nothing yet,
 
 144
-00:07:09,611 --> 00:07:12,571
-This lab is unverified until you run it yourself,
+00:06:59,807 --> 00:07:01,822
+because this is a fresh machine.
 
 145
-00:07:12,571 --> 00:07:15,712
-because I cannot install a machine on your computer.
+00:07:05,372 --> 00:07:08,956
+Now look at the very top of the file system: ls,
 
 146
-00:07:16,262 --> 00:07:18,780
-One: create a machine with two processors,
+00:07:08,956 --> 00:07:09,553
+a space,
 
 147
-00:07:18,780 --> 00:07:20,219
-two gigabytes of memory,
+00:07:09,553 --> 00:07:10,449
+and a slash.
 
 148
-00:07:20,219 --> 00:07:21,958
-and twenty gigabytes of disk.
+00:07:10,449 --> 00:07:12,241
+The slash means the top.
 
 149
-00:07:22,508 --> 00:07:24,897
-Two: log in over SSH, with a key.
+00:07:12,241 --> 00:07:13,286
+These folders,
 
 150
-00:07:25,447 --> 00:07:26,999
-Three: run the host name,
+00:07:13,286 --> 00:07:13,958
+like etc,
 
 151
-00:07:26,999 --> 00:07:27,621
-user name,
+00:07:13,958 --> 00:07:14,929
+home and var,
 
 152
-00:07:27,621 --> 00:07:29,360
-and kernel version commands,
+00:07:14,929 --> 00:07:17,020
+exist on every Linux system.
 
 153
-00:07:29,360 --> 00:07:31,037
-and write down the answers.
+00:07:21,070 --> 00:07:26,595
+Which Linux is this? Show the start of the file os-release, in the etc folder.
 
 154
-00:07:31,587 --> 00:07:36,216
-Four: break something inside it on purpose, then delete the machine, and rebuild it.
+00:07:30,645 --> 00:07:36,298
+Ubuntu, twenty four oh four. Does the machine have a network? Type ip -br a.
 
 155
-00:07:36,766 --> 00:07:38,366
-Mark yourself on the rubric.
+00:07:40,348 --> 00:07:45,630
+The address starting with 10.0.2 is the machine's own network address.
 
 156
-00:07:38,916 --> 00:07:40,644
-Pause the video, and do it now.
+00:07:45,630 --> 00:07:47,893
+One more: how much disk space?
 
 157
-00:07:54,194 --> 00:07:55,069
-Quick check.
+00:07:47,893 --> 00:07:49,628
+Type df -h and a slash.
 
 158
-00:07:55,619 --> 00:07:57,453
-Why use a disposable machine?
+00:07:53,678 --> 00:07:55,278
+About three gigabytes here,
 
 159
-00:07:58,003 --> 00:07:59,539
-Name two ways to get one.
+00:07:55,278 --> 00:07:57,767
+because I made a small disk for this demo.
 
 160
-00:08:00,089 --> 00:08:01,327
-What does a key pair do?
+00:07:57,767 --> 00:07:59,012
+Yours will be twenty.
 
 161
-00:08:01,877 --> 00:08:03,754
-What does connection refused mean?
+00:08:01,562 --> 00:08:02,849
+Before we power down,
 
 162
-00:08:04,304 --> 00:08:08,805
-Objective covered: MC02-O05.
+00:08:02,849 --> 00:08:05,115
+let us create something worth saving.
 
 163
-00:08:09,355 --> 00:08:11,425
-Pause the video, and answer out loud.
+00:08:05,115 --> 00:08:05,728
+Type echo,
 
 164
-00:08:21,975 --> 00:08:25,175
-Next lesson: files, text, encodings, and paths.
+00:08:05,728 --> 00:08:07,321
+then a sentence in quotes,
 
 165
-00:08:25,725 --> 00:08:27,602
+00:08:07,321 --> 00:08:08,852
+then a greater than sign,
+
+166
+00:08:08,852 --> 00:08:09,894
+then a file name.
+
+167
+00:08:09,894 --> 00:08:13,018
+The greater than sign sends the text into the file.
+
+168
+00:08:18,568 --> 00:08:21,683
+Check it with cat, and the file name. There is our sentence.
+
+169
+00:08:25,233 --> 00:08:26,708
+Now shut down properly.
+
+170
+00:08:26,708 --> 00:08:28,503
+Never just close the window,
+
+171
+00:08:28,503 --> 00:08:30,427
+that is like pulling the plug.
+
+172
+00:08:30,427 --> 00:08:31,645
+Type sudo poweroff.
+
+173
+00:08:31,645 --> 00:08:34,274
+Sudo means: do this as the administrator,
+
+174
+00:08:34,274 --> 00:08:36,134
+so it asks for your password.
+
+175
+00:08:41,684 --> 00:08:43,967
+Messages scroll as the services stop,
+
+176
+00:08:43,967 --> 00:08:46,065
+and then the machine switches off.
+
+177
+00:08:46,065 --> 00:08:47,977
+That is what powered off means.
+
+178
+00:08:53,527 --> 00:08:56,770
+Now the part many beginners have never seen: a snapshot.
+
+179
+00:08:57,320 --> 00:08:59,594
+Think of a save point in a video game.
+
+180
+00:08:59,594 --> 00:09:01,450
+You save before the hard level.
+
+181
+00:09:01,450 --> 00:09:02,168
+If you fail,
+
+182
+00:09:02,168 --> 00:09:03,245
+you load the save,
+
+183
+00:09:03,245 --> 00:09:05,640
+and you are back as if nothing happened.
+
+184
+00:09:06,190 --> 00:09:08,556
+A snapshot does the same for a machine.
+
+185
+00:09:08,556 --> 00:09:11,408
+It records the disk exactly as it is right now.
+
+186
+00:09:11,408 --> 00:09:14,745
+A clean one is easiest when the machine is powered off,
+
+187
+00:09:14,745 --> 00:09:15,534
+so we waited.
+
+188
+00:09:17,084 --> 00:09:19,336
+In VirtualBox: select your machine,
+
+189
+00:09:19,336 --> 00:09:20,816
+open the Snapshots tab,
+
+190
+00:09:20,816 --> 00:09:21,781
+and press Take.
+
+191
+00:09:21,781 --> 00:09:23,968
+Give it a name you will recognise,
+
+192
+00:09:23,968 --> 00:09:25,191
+like clean install.
+
+193
+00:09:31,741 --> 00:09:35,047
+The snapshot appears in the list, with the current state below it.
+
+194
+00:09:39,597 --> 00:09:44,505
+In my emulator it is one command: qemu-img snapshot -c,
+
+195
+00:09:44,505 --> 00:09:45,129
+a name,
+
+196
+00:09:45,129 --> 00:09:46,735
+and the disk file.
+
+197
+00:09:46,735 --> 00:09:49,858
+The -l option lists your snapshots.
+
+198
+00:09:57,408 --> 00:10:01,483
+There it is: clean install, saved. Now we are free to experiment.
+
+199
+00:10:05,033 --> 00:10:07,337
+Power on again. I have sped up the start.
+
+200
+00:10:17,887 --> 00:10:19,551
+Log in again, the same way.
+
+201
+00:10:25,101 --> 00:10:30,925
+Now let us make a mistake a beginner might make by accident: delete an important system folder.
+
+202
+00:10:33,475 --> 00:10:37,360
+The command removes the folder that holds the SSH settings.
+
+203
+00:10:37,360 --> 00:10:39,534
+Never run this on a real machine.
+
+204
+00:10:46,084 --> 00:10:49,817
+Look inside it now. No such file or directory. We broke it.
+
+205
+00:10:54,367 --> 00:10:57,588
+Power off again. Same command: sudo poweroff.
+
+206
+00:11:06,138 --> 00:11:08,473
+Here is why we took the snapshot.
+
+207
+00:11:08,473 --> 00:11:09,464
+We restore it.
+
+208
+00:11:09,464 --> 00:11:10,455
+In VirtualBox,
+
+209
+00:11:10,455 --> 00:11:13,144
+select the snapshot and press Restore.
+
+210
+00:11:13,144 --> 00:11:14,205
+In my emulator,
+
+211
+00:11:14,205 --> 00:11:17,036
+it is the same snapshot command with -a,
+
+212
+00:11:17,036 --> 00:11:17,743
+for apply.
+
+213
+00:11:28,293 --> 00:11:30,341
+Power on once more. Sped up again.
+
+214
+00:11:40,891 --> 00:11:43,899
+Log in, and check. Is the SSH folder back?
+
+215
+00:11:51,449 --> 00:11:54,052
+It is back. And is our note still there? Show it.
+
+216
+00:11:59,602 --> 00:12:00,821
+Everything is back.
+
+217
+00:12:00,821 --> 00:12:03,323
+Both existed when we took the snapshot,
+
+218
+00:12:03,323 --> 00:12:05,698
+and anything we did after it is gone.
+
+219
+00:12:05,698 --> 00:12:07,751
+That is the power of a snapshot.
+
+220
+00:12:09,301 --> 00:12:13,056
+Break things, learn, restore. That is how you practice without fear.
+
+221
+00:12:14,606 --> 00:12:16,035
+Now: how do you get in?
+
+222
+00:12:16,585 --> 00:12:20,873
+The console is the machine's own screen. It always works, but it is awkward.
+
+223
+00:12:21,423 --> 00:12:25,071
+SSH lets you log in from your own terminal, over the network.
+
+224
+00:12:25,621 --> 00:12:30,720
+SSH needs three things: an address, a user name, and a way to prove who you are.
+
+225
+00:12:31,270 --> 00:12:34,874
+The best proof is a key pair: a private key that stays secret,
+
+226
+00:12:34,874 --> 00:12:37,606
+and a public key that you place on the machine.
+
+227
+00:12:38,156 --> 00:12:39,692
+Never share the private key.
+
+228
+00:12:41,742 --> 00:12:46,478
+Now let us do the SSH part for real, in a disposable Linux sandbox.
+
+229
+00:12:47,028 --> 00:12:49,297
+These outputs are real captures.
+
+230
+00:12:49,297 --> 00:12:49,652
+Here,
+
+231
+00:12:49,652 --> 00:12:52,417
+the sandbox plays your virtual machine,
+
+232
+00:12:52,417 --> 00:12:54,687
+and SSH connects back to itself.
+
+233
+00:12:55,237 --> 00:12:58,991
+First, we create a key pair. The command stays quiet when it works.
+
+234
+00:12:59,541 --> 00:13:04,533
+The fingerprint identifies the key, and it is safe to share. The private file is not.
+
+235
+00:13:05,083 --> 00:13:06,631
+Now we log in with the key,
+
+236
+00:13:06,631 --> 00:13:08,808
+and run three commands: the host name,
+
+237
+00:13:08,808 --> 00:13:09,611
+the user name,
+
+238
+00:13:09,611 --> 00:13:10,929
+and the kernel version.
+
+239
+00:13:11,479 --> 00:13:16,599
+The answers come from the machine we logged in to: its name, its user, and its kernel.
+
+240
+00:13:17,149 --> 00:13:20,818
+If we try the wrong port, nothing answers: connection refused.
+
+241
+00:13:21,368 --> 00:13:25,507
+In your own machine, you use its address, and the port is usually twenty-two.
+
+242
+00:13:27,557 --> 00:13:29,114
+Three messages you will meet.
+
+243
+00:13:29,664 --> 00:13:32,208
+Connection refused: the machine answered,
+
+244
+00:13:32,208 --> 00:13:34,565
+but nothing is listening on that port.
+
+245
+00:13:34,565 --> 00:13:36,364
+Is SSH installed and running,
+
+246
+00:13:36,364 --> 00:13:37,728
+and is the port right?
+
+247
+00:13:38,278 --> 00:13:40,640
+Permission denied: the server is there,
+
+248
+00:13:40,640 --> 00:13:43,244
+but it rejected your key or your user name.
+
+249
+00:13:43,244 --> 00:13:43,910
+Check both.
+
+250
+00:13:44,460 --> 00:13:46,666
+Connection timed out: no answer at all.
+
+251
+00:13:46,666 --> 00:13:48,588
+Check that the machine is running,
+
+252
+00:13:48,588 --> 00:13:50,284
+and that the address is right.
+
+253
+00:13:50,834 --> 00:13:53,480
+Read the message, then check one thing at a time.
+
+254
+00:13:55,530 --> 00:13:57,151
+Now the disposable part.
+
+255
+00:13:57,701 --> 00:13:59,322
+Before a risky experiment,
+
+256
+00:13:59,322 --> 00:14:00,320
+take a snapshot.
+
+257
+00:14:00,320 --> 00:14:02,813
+VirtualBox can save the machine's state,
+
+258
+00:14:02,813 --> 00:14:04,123
+and restore it later.
+
+259
+00:14:04,673 --> 00:14:08,171
+With Multipass, delete the machine, purge it, and launch it again.
+
+260
+00:14:08,721 --> 00:14:12,988
+Keep anything valuable outside the virtual machine, such as scripts in Git.
+
+261
+00:14:13,538 --> 00:14:16,951
+If you can rebuild it in minutes, you can experiment without fear.
+
+262
+00:14:19,001 --> 00:14:20,857
+Watch out for four common myths.
+
+263
+00:14:21,407 --> 00:14:24,939
+Myth one: a virtual machine puts my computer at risk.
+
+264
+00:14:24,939 --> 00:14:25,472
+In fact,
+
+265
+00:14:25,472 --> 00:14:27,871
+it is the safer place to experiment.
+
+266
+00:14:28,421 --> 00:14:30,995
+Myth two: I need a powerful computer.
+
+267
+00:14:30,995 --> 00:14:31,551
+In fact,
+
+268
+00:14:31,551 --> 00:14:34,821
+a small Ubuntu Server runs on modest resources.
+
+269
+00:14:35,371 --> 00:14:40,512
+Myth three: a password is just as good as a key. In fact, keys are much harder to guess.
+
+270
+00:14:41,062 --> 00:14:44,404
+Myth four: a disposable machine can hold my real work.
+
+271
+00:14:44,404 --> 00:14:44,899
+In fact,
+
+272
+00:14:44,899 --> 00:14:46,199
+if you might need it,
+
+273
+00:14:46,199 --> 00:14:47,313
+keep it elsewhere.
+
+274
+00:14:47,863 --> 00:14:49,698
+Disposable means replaceable.
+
+275
+00:14:51,748 --> 00:14:53,476
+Here is how you check your own work.
+
+276
+00:14:54,026 --> 00:14:57,205
+Imagine a teammate asks you to set up a practice machine.
+
+277
+00:14:57,755 --> 00:14:59,653
+Explain why it is disposable.
+
+278
+00:15:00,203 --> 00:15:02,059
+Choose a platform, and say why.
+
+279
+00:15:02,609 --> 00:15:04,444
+Create it with sensible sizes.
+
+280
+00:15:04,994 --> 00:15:07,063
+Log in over SSH, with a key.
+
+281
+00:15:07,613 --> 00:15:09,341
+Verify it with three commands.
+
+282
+00:15:09,891 --> 00:15:11,427
+Delete it, and rebuild it.
+
+283
+00:15:11,977 --> 00:15:13,599
+To pass, you need all six.
+
+284
+00:15:15,649 --> 00:15:16,524
+Your turn.
+
+285
+00:15:17,074 --> 00:15:20,034
+This lab is unverified until you run it yourself,
+
+286
+00:15:20,034 --> 00:15:23,175
+because I cannot install a machine on your computer.
+
+287
+00:15:23,725 --> 00:15:26,243
+One: create a machine with two processors,
+
+288
+00:15:26,243 --> 00:15:27,682
+two gigabytes of memory,
+
+289
+00:15:27,682 --> 00:15:29,421
+and twenty gigabytes of disk.
+
+290
+00:15:29,971 --> 00:15:32,360
+Two: log in over SSH, with a key.
+
+291
+00:15:32,910 --> 00:15:34,463
+Three: run the host name,
+
+292
+00:15:34,463 --> 00:15:35,084
+user name,
+
+293
+00:15:35,084 --> 00:15:36,823
+and kernel version commands,
+
+294
+00:15:36,823 --> 00:15:38,500
+and write down the answers.
+
+295
+00:15:39,050 --> 00:15:41,005
+Four: with the machine powered off,
+
+296
+00:15:41,005 --> 00:15:41,898
+take a snapshot.
+
+297
+00:15:41,898 --> 00:15:43,407
+Break something on purpose,
+
+298
+00:15:43,407 --> 00:15:44,859
+then restore the snapshot,
+
+299
+00:15:44,859 --> 00:15:46,367
+and check that it is fixed.
+
+300
+00:15:46,917 --> 00:15:48,517
+Mark yourself on the rubric.
+
+301
+00:15:49,067 --> 00:15:50,795
+Pause the video, and do it now.
+
+302
+00:16:04,345 --> 00:16:05,220
+Quick check.
+
+303
+00:16:05,770 --> 00:16:07,604
+Why use a disposable machine?
+
+304
+00:16:08,154 --> 00:16:09,690
+Name two ways to get one.
+
+305
+00:16:10,240 --> 00:16:11,478
+What does a key pair do?
+
+306
+00:16:12,028 --> 00:16:13,905
+What does connection refused mean?
+
+307
+00:16:14,455 --> 00:16:18,956
+Objective covered: MC02-O05.
+
+308
+00:16:19,506 --> 00:16:21,576
+Pause the video, and answer out loud.
+
+309
+00:16:32,126 --> 00:16:35,326
+Next lesson: files, text, encodings, and paths.
+
+310
+00:16:35,876 --> 00:16:37,753
 Subscribe, so you do not miss it.

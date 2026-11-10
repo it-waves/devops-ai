@@ -41,11 +41,13 @@ SCENES = [
   c('s2', "For practice, two processors, two gigabytes of memory, and twenty gigabytes of disk are a comfortable start."),
   c('s3', "Never give it more than your computer can spare."),
   c('s4', "Choose a long term support release of Ubuntu Server, because it is widely documented.", "Choose an L T S, long term support, release of Ubuntu Server, because it is widely documented."),
-  c('s5', "Server means no desktop, just the command line, which is exactly what we want."),
+  c('s5', 'In my emulator it is one command: qemu-img snapshot -c, a name, and the disk file. The -l option lists your snapshots.', 'In my emulator it is one command: q e m u dash i m g, snapshot, dash c, a name, and the disk file. The dash l option lists your snapshots.'),
  ]),
  ('dlvbox', [
   c('d1', "Before the wizard, you need two downloads. First, VirtualBox itself."),
-  c('d2', "Open virtualbox.org, and go to Downloads. On Windows, choose Windows hosts. On a Mac or Linux, choose yours.", "Open virtualbox dot org, and go to Downloads. On Windows, choose Windows hosts. On a Mac or Linux, choose yours."),
+  c('dv1', "Step one: open your web browser and go to virtualbox.org.", "Step one: open your web browser and go to virtualbox dot org."),
+  c('dv2', "Step two: click the big Download button."),
+  c('dv3', "Step three: choose your computer. On Windows, choose Windows hosts. On a Mac or Linux, choose yours."),
   c('d3', "Run the file you download. You do not need the Extension Pack for this lab."),
   c('d4', "Your version number will be newer than mine, and that is fine."),
  ]),
@@ -67,14 +69,86 @@ SCENES = [
  ]),
  ('vbox', [
   c('b1', "Let us walk through the VirtualBox wizard."),
-  c('b2', "These are real screenshots, captured from VirtualBox running in the sandbox."),
+  c('b2', "This is a real screen recording of VirtualBox. Follow along on your own computer."),
   c('b3', "Step one: name the machine, choose Linux, and the Ubuntu version. This is also where you pick your ISO file."),
   c('b4', "Step two: memory and processors. Two gigabytes, and two processors."),
   c('b5', "Step three: the virtual disk. Twenty gigabytes. It grows as you use it, so it does not take all of that at once."),
   c('b6', "Step four: the summary. Check it, then press Finish."),
   c('b7', "The machine now appears in the list, powered off. Press Start, and the installer boots from the ISO."),
-  c('b8', "Here, we stop, because the sandbox cannot start virtual machines."),
+  c('b8', "On your computer you would now press Start. My workspace cannot run VirtualBox machines, so next I will show you the same Ubuntu running in an emulator."),
   c('b9', "On Windows, you first run the VirtualBox installer. I have not captured that part, but the wizard you just saw is very similar."),
+ ]),
+ ('installer', [
+  c('ui1', "Before the first start, a word about the installer. I cannot capture it here, so this is a checklist I drew, in the order the screens appear."),
+  c('ui2', "It is all text menus. Use the arrow keys, Tab, and Enter. The mouse will not work."),
+  c('ui3', "Pick English, your keyboard layout, and the Ubuntu Server option. Accept the network defaults, and leave the proxy and mirror alone."),
+  c('ui4', "For storage, use the whole disk. That is the virtual disk we made, so nothing on your real computer is touched."),
+  c('ui5', "On the profile screen, choose the server name lab, a user name like student, and a password you will remember."),
+  c('ui6', "Tick install OpenSSH server. You will need it for the SSH part of this lesson. Skip the extra packages."),
+  c('ui7', "Wait for the install to finish, then choose Reboot now. If it asks you to remove the installation medium, just press Enter."),
+ ]),
+ ('bootvm', [
+  c('p1', "Now let us bring a machine to life. Everything from here is a real Ubuntu twenty four oh four server."),
+  c('p2', "One honest note. My workspace cannot run VirtualBox machines, so I run this same Ubuntu in an emulator. The console inside your VirtualBox window will look very similar."),
+  c('p3', "Pressing Start is the power button. Lines of text scroll by while the system starts its services. This takes about a minute, so I have sped it up."),
+  c('p4', "When you see the word login, the machine is ready and waiting for you."),
+ ]),
+ ('login', [
+  c('l1', "Time to log in. Type the user name you created during the install. I will use student."),
+  c('l2', "Now the password. Notice that nothing appears as you type. That is normal, Linux hides passwords. Type it carefully, and press Enter."),
+  c('l3', "You are in. Look at the prompt. It says student at lab: your user name, then the machine name. The dollar sign means: I am ready for a command."),
+  c('l4', "Let us ask the machine who we are. The command is who am I, written as one word."),
+  c('l5', "It answers: student. Now ask for the machine's name: hostname."),
+ ]),
+ ('walk', [
+  c('k1', 'Now let us walk around. First question: where am I? The command is pwd, which means print working directory.', 'Now let us walk around. First question: where am I? The command is p w d, which means print working directory.'),
+  c('k2', 'That is your home folder. Now list what is inside with ls. Nothing yet, because this is a fresh machine.', 'That is your home folder. Now list what is inside with l s. Nothing yet, because this is a fresh machine.'),
+  c('k3', 'Now look at the very top of the file system: ls, a space, and a slash. The slash means the top. These folders, like etc, home and var, exist on every Linux system.', 'Now look at the very top of the file system: l s, a space, and a slash. The slash means the top. These folders, like e t c, home and var, exist on every Linux system.'),
+  c('k4', 'Which Linux is this? Show the start of the file os-release, in the etc folder.', 'Which Linux is this? Show the start of the file os dash release, in the e t c folder.'),
+  c('k5', 'Ubuntu, twenty four oh four. Does the machine have a network? Type ip -br a.', 'Ubuntu, twenty four oh four. Does the machine have a network? Type i p, dash b r, a.'),
+  c('k6', "The address starting with 10.0.2 is the machine's own network address. One more: how much disk space? Type df -h and a slash.", "The address starting with ten dot zero dot two is the machine's own network address. One more: how much disk space? d f, dash h, and a slash."),
+  c('k7', "About three gigabytes here, because I made a small disk for this demo. Yours will be twenty."),
+ ]),
+ ('notes', [
+  c('n1', "Before we power down, let us create something worth saving. Type echo, then a sentence in quotes, then a greater than sign, then a file name. The greater than sign sends the text into the file."),
+  c('n2', "Check it with cat, and the file name. There is our sentence."),
+  c('n3', "Now shut down properly. Never just close the window, that is like pulling the plug. Type sudo poweroff. Sudo means: do this as the administrator, so it asks for your password."),
+  c('n4', "Messages scroll as the services stop, and then the machine switches off. That is what powered off means."),
+ ]),
+ ('snap', [
+  c('sn1', "Now the part many beginners have never seen: a snapshot."),
+  c('sn2', "Think of a save point in a video game. You save before the hard level. If you fail, you load the save, and you are back as if nothing happened."),
+  c('sn3', "A snapshot does the same for a machine. It records the disk exactly as it is right now. A clean one is easiest when the machine is powered off, so we waited."),
+ ]),
+ ('snapvb', [
+  c('sv1', "In VirtualBox: select your machine, open the Snapshots tab, and press Take. Give it a name you will recognise, like clean install."),
+  c('sv2', "The snapshot appears in the list, with the current state below it."),
+ ]),
+ ('snaphost', [
+  c('sh1', "In my emulator it is one command: qemu-img snapshot -c, a name, and the disk file. The -l option lists your snapshots.", "In my emulator it is one command: q e m u dash i m g, snapshot, dash c, a name, and the disk file. The dash l option lists your snapshots."),
+  c('sh2', "There it is: clean install, saved. Now we are free to experiment."),
+ ]),
+ ('boot2', [
+  c('bt2', "Power on again. I have sped up the start."),
+ ]),
+ ('breakit', [
+  c('q1', "Log in again, the same way."),
+  c('q2', "Now let us make a mistake a beginner might make by accident: delete an important system folder."),
+  c('q3', "The command removes the folder that holds the SSH settings. Never run this on a real machine."),
+  c('q4', "Look inside it now. No such file or directory. We broke it."),
+  c('q5', "Power off again. Same command: sudo poweroff."),
+ ]),
+ ('resthost', [
+  c('rh1', "Here is why we took the snapshot. We restore it. In VirtualBox, select the snapshot and press Restore. In my emulator, it is the same snapshot command with -a, for apply.", "Here is why we took the snapshot. We restore it. In VirtualBox, select the snapshot and press Restore. In my emulator, it is the same snapshot command with dash a, for apply."),
+ ]),
+ ('boot3', [
+  c('bt3', "Power on once more. Sped up again."),
+ ]),
+ ('verify', [
+  c('vf1', "Log in, and check. Is the SSH folder back?"),
+  c('vf2', "It is back. And is our note still there? Show it."),
+  c('vf3', "Everything is back. Both existed when we took the snapshot, and anything we did after it is gone. That is the power of a snapshot."),
+  c('vf4', "Break things, learn, restore. That is how you practice without fear."),
  ]),
  ('access', [
   c('a1', "Now: how do you get in?"),
@@ -128,7 +202,7 @@ SCENES = [
   c('y3', "One: create a machine with two processors, two gigabytes of memory, and twenty gigabytes of disk."),
   c('y4', "Two: log in over SSH, with a key."),
   c('y5', "Three: run the host name, user name, and kernel version commands, and write down the answers."),
-  c('y6', "Four: break something inside it on purpose, then delete the machine, and rebuild it."),
+  c('y6b', "Four: with the machine powered off, take a snapshot. Break something on purpose, then restore the snapshot, and check that it is fixed."),
   c('y7', "Mark yourself on the rubric."), c('y8', "Pause the video, and do it now."),
  ]),
  ('recap', [
@@ -138,8 +212,8 @@ SCENES = [
   c('z5', "Pause the video, and answer out loud."), c('z6', "Next lesson: files, text, encodings, and paths."), c('z7', "Subscribe, so you do not miss it."),
  ]),
 ]
-EXTRA = {'b3': 4.0, 'b4': 2.0, 'b5': 2.5, 'b6': 2.5, 'b7': 1.5, 'd4': 0.5, 'u6': 0.5, 'b9': 0.5, 'h4': 0.5, 'w5': 0.5, 'o7': 0.5, 's5': 0.5, 'i6': 0.5, 'a6': 0.5, 'e8': 0.5, 'x5': 0.5, 't5': 0.5, 'm6': 0.5, 'r9': 0.5, 'y8': 12.0, 'z5': 10.0}
-CHAP = {'why': 'Why disposable', 'options': 'Your options', 'size': 'Size and release', 'dlvbox': 'Download VirtualBox', 'dlubuntu': 'Download Ubuntu Server', 'install': 'The install', 'vbox': 'VirtualBox wizard', 'access': 'Console and SSH', 'demo': 'Real demo', 'errors': 'Common errors',
+EXTRA = {'ui1': 1.0, 'ui3': 2.0, 'ui5': 1.5, 'bt2': 9.0, 'bt3': 9.0, 'p4': 6.0, 'l1': 3.0, 'l2': 3.5, 'l3': 1.0, 'l4': 2.5, 'l5': 3.0, 'k1': 3.5, 'k2': 3.0, 'k3': 3.5, 'k4': 3.5, 'k5': 3.5, 'k6': 3.5, 'k7': 1.0, 'n1': 5.0, 'n2': 3.0, 'n3': 5.0, 'n4': 4.0, 'sv1': 6.0, 'sv2': 3.0, 'sh1': 7.0, 'sh2': 2.0, 'q1': 5.0, 'q2': 2.0, 'q3': 6.0, 'q4': 4.0, 'q5': 7.0, 'rh1': 9.0, 'vf1': 7.0, 'vf2': 5.0, 'vf3': 1.0, 'b3': 4.0, 'b4': 2.0, 'b5': 2.5, 'b6': 2.5, 'b7': 1.5, 'd4': 0.5, 'u6': 0.5, 'b9': 0.5, 'h4': 0.5, 'w5': 0.5, 'o7': 0.5, 's5': 0.5, 'i6': 0.5, 'a6': 0.5, 'e8': 0.5, 'x5': 0.5, 't5': 0.5, 'm6': 0.5, 'r9': 0.5, 'y8': 12.0, 'z5': 10.0}
+CHAP = {'why': 'Why disposable', 'options': 'Your options', 'size': 'Size and release', 'dlvbox': 'Download VirtualBox', 'dlubuntu': 'Download Ubuntu Server', 'install': 'The install', 'vbox': 'VirtualBox wizard', 'installer': 'The Ubuntu installer', 'bootvm': 'Power on the VM', 'login': 'Log in', 'walk': 'Walk around', 'notes': 'Save a file, power off', 'snap': 'What is a snapshot', 'snapvb': 'Snapshot in VirtualBox', 'snaphost': 'Snapshot, command line', 'boot2': 'Power on again', 'breakit': 'Break it on purpose', 'resthost': 'Restore the snapshot', 'boot3': 'Power on once more', 'verify': 'Is everything back', 'access': 'Console and SSH', 'demo': 'Real demo', 'errors': 'Common errors',
         'reset': 'Snapshot and rebuild', 'myths': 'Common myths', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}
 def head(title, sub, t): return [El(T('Fundamentals  ·  Lesson 13', 'b', 30, ACC), 100, 120, t), El(T(title, 'x', 64), 100, 160, t + 0.1), El(T(sub, 'm', 32, MUTED, maxw=1200), 100, 245, t + 0.4)]
 def takeaway(s, y, t, col=None, w=1500, size=38): return El(T(s, 'b', size, col or WARN, maxw=w), 100, y, t)
@@ -196,10 +270,11 @@ def s_install(C, D, dur):
     E.append(El(T('Launch creates it, shell opens it, list shows it.', 'm', 28, MUTED, maxw=700), 1070, 660, C['i6'], anim='fade'))
     E.append(takeaway('Either way: a Linux machine you can throw away.', 900, C['i6'] + 0.8, GOOD, 1700)); return E
 def s_dlvbox(C, D, dur):
-    E = head('Download VirtualBox', 'Download one of two.', C['d1']); E.append(real(C['d2'], 'REAL SCREENSHOT  ·  the official website', 1260, 296))
-    E.append(Pop(photo('/home/claude/academy/lesson13/assets/dl/ann_vbox.jpg', 1100, 584, ACC), 100, 336, C['d2']))
-    it = [('Website', 'virtualbox.org, then Downloads', ACC, 'd2'), ('Click', 'Your computer: Windows hosts', WARN, 'd2'), ('Then', 'Run the file you download', GOOD, 'd3')]
-    for i, (n, t_, col, cid) in enumerate(it): E.append(Pop(card(560, 130, col, n, [(t_, TXT)], 36, 28), 1260, 370 + i * 150 + (0.0), C[cid] + 0.4 * i))
+    E = head('Download VirtualBox', 'Follow along, step by step.', C['d1']); E.append(real(C['dv1'], 'REAL SCREENSHOT  ·  the official website', 1260, 296))
+    E.append(Pop(photo('/home/claude/academy/lesson13/assets/dl/ann_home.jpg', 1100, 497, ACC), 100, 336, C['dv1']))
+    E.append(Pop(photo('/home/claude/academy/lesson13/assets/dl/ann_vbox.jpg', 1100, 584, ACC), 100, 336, C['dv3']))
+    it = [('1  Open the site', 'virtualbox.org', ACC, 'dv1'), ('2  Click Download', 'The big blue button', VIO, 'dv2'), ('3  Pick your system', 'Windows hosts, macOS or Linux', WARN, 'dv3'), ('4  Run the file', 'Accept the defaults', GOOD, 'd3')]
+    for i, (n, t_, col, cid) in enumerate(it): E.append(Pop(card(560, 120, col, n, [(t_, TXT)], 34, 28), 1260, 340 + i * 135, C[cid] + 0.2))
     E.append(takeaway('No Extension Pack needed for this lab.', 960, C['d3'] + 0.5, GOOD, 1100, 34)); return E
 def s_dlubuntu(C, D, dur):
     E = head('Download Ubuntu Server', 'The disk image for your machine.', C['u1']); E.append(real(C['u2'], 'REAL SCREENSHOT  ·  the official website', 1260, 296))
@@ -278,9 +353,9 @@ def s_rubric(C, D, dur):
         E.append(Pop(icon('check', 48, TXT, GOOD), x + 770, y + 36, C[cid] + (i % 2) * 0.5 + 0.4))
     E.append(Pop(badge('Pass = all six', F('x', 48), INK, GOOD, padx=34, pady=16, r=30), 100, 830, C['r9'])); return E
 def s_yourturn(C, D, dur):
-    E = head('Your turn', 'Build one, log in, and rebuild it.', C['y1'])
+    E = head('Your turn', 'Build one, log in, snapshot, and restore it.', C['y1'])
     E.append(Pop(card(1720, 130, WARN, 'Lab status: UNVERIFIED', [('I have not run this on your computer. Run it, and mark the rubric.', TXT)], 44, 32), 100, 330, C['y2']))
-    it = [('1  Create', ['2 CPUs, 2 GB, 20 GB', 'Any platform you chose'], ACC, 'y3'), ('2  Log in', ['Over SSH', 'With a key, not a password'], VIO, 'y4'), ('3  Check', ['Host name, user, kernel', 'Write the answers down'], GOOD, 'y5'), ('4  Rebuild', ['Break it on purpose', 'Delete it, then rebuild'], PINK, 'y6')]
+    it = [('1  Create', ['2 CPUs, 2 GB, 20 GB', 'Any platform you chose'], ACC, 'y3'), ('2  Log in', ['Over SSH', 'With a key, not a password'], VIO, 'y4'), ('3  Check', ['Host name, user, kernel', 'Write the answers down'], GOOD, 'y5'), ('4  Snapshot', ['Take one, break it', 'Restore, and check'], PINK, 'y6b')]
     for i, (n, ls, col, cid) in enumerate(it): E.append(Pop(card(410, 250, col, n, [(l, TXT) for l in ls], 40, 28, True), 100 + i * 437, 500, C[cid]))
     E.append(Pop(badge('PAUSE  ·  do it before you continue', F('b', 38), INK, PINK, padx=30, pady=16), 100, 820, C['y8'])); return E
 def s_recap(C, D, dur):
@@ -293,7 +368,44 @@ def s_recap(C, D, dur):
     pb = badge('PAUSE  ·  answer aloud', F('b', 34), INK, PINK, padx=26, pady=14); E.append(Pop(pb, 100, 860, C['z5']))
     E.append(El(T('Next: files, text, encodings, and paths', 'x', 46, ACC, maxw=1500), 100, 960, C['z6'])); E.append(Pop(badge('SUBSCRIBE', F('b', 34), INK, GOOD, padx=26, pady=14), 100 + pb.width + 40, 860, C['z7']))
     return E
-FN = dict(hook=s_hook, why=s_why, options=s_options, size=s_size, install=s_install, dlvbox=s_dlvbox, dlubuntu=s_dlubuntu, vbox=s_vbox, access=s_access, demo=s_demo, errors=s_errors, reset=s_reset, myths=s_myths, rubric=s_rubric, yourturn=s_yourturn, recap=s_recap)
+
+def _lab(title, sub, first, badge, steps):
+    def f(C, D, dur):
+        E = head(title, sub, C[first]); E.append(real(C[first] + 0.2, badge, 1260, 286))
+        E.append(Pop(card(1100, 640, ACC, '', [], 4), 100, 330, C[first]))
+        for i, (cid, t, sb, col) in enumerate(steps): E.append(Pop(card(560, 108, col, t, [(sb, TXT)], 32, 26), 1260, 345 + i * 120, C[cid] + 0.2))
+        return E
+    return f
+RB = 'REAL RECORDING  ·  Ubuntu 24.04 in an emulator'
+s_bootvm = _lab('Power on the VM', 'Press Start and wait for login.', 'p1', 'REAL RECORDING  ·  emulator, sped up', [('p1', '1  Power on', 'Press Start', ACC), ('p3', '2  Boot', 'Services start, text scrolls', VIO), ('p4', '3  login:', 'Ready for you', GOOD)])
+s_login = _lab('Log in', 'User name, then password.', 'l1', RB, [('l1', 'User name', 'student', ACC), ('l2', 'Password', 'Hidden as you type', WARN), ('l3', 'The prompt', 'student@lab:~$', VIO), ('l4', 'whoami', 'Who am I?', GOOD), ('l5', 'hostname', 'The machine name', PINK)])
+s_walk = _lab('Walk around', 'Six small commands.', 'k1', RB, [('k1', 'pwd', 'Where am I?', ACC), ('k2', 'ls', 'What is in this folder?', VIO), ('k3', 'ls /', 'The top of the system', GOOD), ('k4', 'os-release', 'Which Linux is this?', WARN), ('k5', 'ip -br a', 'The network address', PINK), ('k6', 'df -h /', 'The disk space', ACC)])
+s_notes = _lab('Save something, then power off', 'Make a file, shut down properly.', 'n1', RB, [('n1', 'echo "..." > file', 'Put text in a file', ACC), ('n2', 'cat notes.txt', 'Read it back', VIO), ('n3', 'sudo poweroff', 'Shut down properly', WARN), ('n4', 'Powered off', 'Safe to snapshot', GOOD)])
+def s_snap(C, D, dur):
+    E = head('What is a snapshot?', 'A save point for your machine.', C['sn1']); E.append(ill(C['sn2'], 1400, 130))
+    trio(E, C, [('1  Save', 'Record the disk as it is', ACC), ('2  Break it', 'Experiment freely', WARN), ('3  Load the save', 'Back to the moment you saved', GOOD)], ['sn2', 'sn2', 'sn3'], y=330, h=230)
+    E.append(Pop(card(1100, 250, VIO, 'Like a video game', [('Save before the hard level. If you fail, load the save.', TXT)], 40, 32), 100, 600, C['sn2'] + 0.5))
+    E.append(Pop(card(560, 250, GOOD, 'Best when powered off', [('A clean, quiet moment to save', TXT)], 38, 30), 1260, 600, C['sn3']))
+    E.append(takeaway('A snapshot is an undo button for the whole machine.', 900, C['sn3'] + 3, GOOD, 1700)); return E
+s_snapvb = _lab('Snapshot in VirtualBox', 'Snapshots tab, then Take.', 'sv1', 'REAL RECORDING  ·  VirtualBox 7.0', [('sv1', '1  Snapshots tab', 'Next to your machine', ACC), ('sv1', '2  Take', 'Name it: clean-install', GOOD), ('sv2', '3  Listed', 'Current state sits below it', VIO)])
+s_snaphost = _lab('Snapshot, on the command line', 'One command, one list.', 'sh1', 'REAL RECORDING  ·  command line', [('sh1', 'snapshot -c', 'Create a snapshot', ACC), ('sh1', 'snapshot -l', 'List snapshots', VIO), ('sh2', 'clean-install', 'Saved', GOOD)])
+s_boot2 = _lab('Power on again', 'Same start, sped up.', 'bt2', 'REAL RECORDING  ·  emulator, sped up', [('bt2', 'Power on', 'Press Start again', ACC)])
+s_breakit = _lab('Break it on purpose', 'Safe, because we can restore.', 'q1', RB, [('q1', 'Log in', 'Same user, same password', ACC), ('q2', 'A big mistake', 'Delete a system folder', WARN), ('q3', 'sudo rm -rf /etc/ssh', 'Never on a real machine', BAD), ('q4', 'ls /etc/ssh', 'No such file or directory', WARN), ('q5', 'sudo poweroff', 'Shut down again', ACC)])
+s_resthost = _lab('Restore the snapshot', 'Back to the save point.', 'rh1', 'REAL RECORDING  ·  command line', [('rh1', 'Restore', 'Select it, press Restore', GOOD), ('rh1', 'snapshot -a', 'Apply the saved state', ACC)])
+s_boot3 = _lab('Power on once more', 'Sped up again.', 'bt3', 'REAL RECORDING  ·  emulator, sped up', [('bt3', 'Power on', 'Start the restored machine', ACC)])
+s_verify = _lab('Is everything back?', 'Check the folder and the note.', 'vf1', RB, [('vf1', 'ls /etc/ssh', 'The folder is back', GOOD), ('vf2', 'cat notes.txt', 'The note is back', VIO), ('vf3', 'Restored', 'Everything from the save point', ACC)])
+
+def s_installer(C, D, dur):
+    E = head('The Ubuntu installer', 'The screens, in order.', C['ui1']); E.append(ill(C['ui1'], 1400, 130))
+    steps = [('ui3', '1  Language, keyboard', 'English, your layout', ACC), ('ui3', '2  Install type', 'Ubuntu Server', VIO), ('ui3', '3  Network, proxy, mirror', 'Keep the defaults', MUTED),
+             ('ui4', '4  Storage', 'Use the whole virtual disk', GOOD), ('ui5', '5  Profile', 'Name lab, user student, a password', WARN), ('ui6', '6  SSH', 'Tick: install OpenSSH server', PINK),
+             ('ui6', '7  Extra packages', 'Skip them', MUTED), ('ui7', '8  Finish', 'Reboot now, press Enter', GOOD)]
+    for i, (cid, n, t_, col) in enumerate(steps):
+        x, y = 100 + (i // 4) * 900, 320 + (i % 4) * 138
+        E.append(Pop(card(860, 118, col, n, [(t_, TXT)], 34, 28), x, y, C[cid] + (i % 3) * 0.5))
+    E.append(Pop(card(1720, 118, WARN, 'Keys, not mouse', [('Arrow keys move, Tab jumps between buttons, Enter chooses.', TXT)], 34, 28), 100, 890, C['ui2']))
+    return E
+FN = dict(hook=s_hook, why=s_why, options=s_options, size=s_size, install=s_install, dlvbox=s_dlvbox, dlubuntu=s_dlubuntu, vbox=s_vbox, installer=s_installer, bootvm=s_bootvm, login=s_login, walk=s_walk, notes=s_notes, snap=s_snap, snapvb=s_snapvb, snaphost=s_snaphost, boot2=s_boot2, breakit=s_breakit, resthost=s_resthost, boot3=s_boot3, verify=s_verify, access=s_access, demo=s_demo, errors=s_errors, reset=s_reset, myths=s_myths, rubric=s_rubric, yourturn=s_yourturn, recap=s_recap)
 _GL = dict(why=('eye', GOOD), options=('swap', VIO), size=('gear', WARN), install=('steps', ACC), vbox=('screen', ACC), dlvbox=('link', ACC), dlubuntu=('link', GOOD), access=('link', ACC), demo=('eye', GOOD), errors=('question', WARN), reset=('loop', GOOD), myths=('question', VIO), rubric=('test', GOOD), yourturn=('board', VIO))
 def _wrap(name, fn):
     first = dict(SCENES)[name][0][0]
