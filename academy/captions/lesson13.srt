@@ -1,0 +1,495 @@
+1
+00:00:00,500 --> 00:00:03,956
+You want to learn Linux, but you do not want to break your own computer.
+
+2
+00:00:04,506 --> 00:00:07,493
+The answer is a disposable Linux virtual machine.
+
+3
+00:00:08,043 --> 00:00:10,539
+Break it, delete it, and start fresh in minutes.
+
+4
+00:00:11,089 --> 00:00:14,481
+Today: why, your options, the install, and how to log in.
+
+5
+00:00:16,531 --> 00:00:18,088
+First, why disposable?
+
+6
+00:00:18,638 --> 00:00:23,332
+A virtual machine is separate from your real computer, so a mistake stays inside it.
+
+7
+00:00:23,882 --> 00:00:27,082
+It is the same for everyone, so your steps match the lesson.
+
+8
+00:00:27,632 --> 00:00:29,936
+And if it breaks, you delete it, and rebuild.
+
+9
+00:00:30,486 --> 00:00:32,491
+Treat it like a sandbox, not a home.
+
+10
+00:00:34,541 --> 00:00:36,418
+Where does the virtual machine come from?
+
+11
+00:00:36,968 --> 00:00:41,491
+On your own computer, VirtualBox gives you a window, and a normal installer.
+
+12
+00:00:42,041 --> 00:00:45,220
+Multipass starts an Ubuntu machine with one command.
+
+13
+00:00:45,770 --> 00:00:49,866
+On Windows, WSL 2 gives you a light Linux environment.
+
+14
+00:00:50,416 --> 00:00:55,920
+Or rent one in the cloud, from a provider such as AWS, Azure, or Google Cloud.
+
+15
+00:00:56,470 --> 00:00:59,883
+Cloud machines can cost money, so delete them when you are done.
+
+16
+00:01:00,433 --> 00:01:02,886
+Any of them works. Pick one, and stay with it.
+
+17
+00:01:04,936 --> 00:01:06,557
+Next: how big should it be?
+
+18
+00:01:07,107 --> 00:01:07,892
+For practice,
+
+19
+00:01:07,892 --> 00:01:08,797
+two processors,
+
+20
+00:01:08,797 --> 00:01:10,245
+two gigabytes of memory,
+
+21
+00:01:10,245 --> 00:01:13,443
+and twenty gigabytes of disk are a comfortable start.
+
+22
+00:01:13,993 --> 00:01:16,319
+Never give it more than your computer can spare.
+
+23
+00:01:16,869 --> 00:01:23,290
+Choose a long term support release of Ubuntu Server, because it is widely documented.
+
+24
+00:01:23,840 --> 00:01:28,448
+Server means no desktop, just the command line, which is exactly what we want.
+
+25
+00:01:30,498 --> 00:01:32,418
+Here is the install, in two ways.
+
+26
+00:01:32,968 --> 00:01:36,419
+With VirtualBox: download the Ubuntu Server ISO,
+
+27
+00:01:36,419 --> 00:01:38,864
+create a machine with those sizes,
+
+28
+00:01:38,864 --> 00:01:40,733
+and start it from the ISO.
+
+29
+00:01:41,283 --> 00:01:43,155
+The installer asks for a disk,
+
+30
+00:01:43,155 --> 00:01:43,904
+a user name,
+
+31
+00:01:43,904 --> 00:01:44,840
+and a password.
+
+32
+00:01:44,840 --> 00:01:46,337
+Choose a throwaway user,
+
+33
+00:01:46,337 --> 00:01:47,897
+and a throwaway password.
+
+34
+00:01:48,447 --> 00:01:53,844
+Tick the option to install the OpenSSH server, so you can log in remotely later.
+
+35
+00:01:54,394 --> 00:01:56,890
+With Multipass, one command does all of it.
+
+36
+00:01:57,440 --> 00:01:58,997
+Launch creates the machine,
+
+37
+00:01:58,997 --> 00:02:00,900
+shell opens a terminal inside it,
+
+38
+00:02:00,900 --> 00:02:02,688
+and list shows what is running.
+
+39
+00:02:04,738 --> 00:02:06,167
+Now: how do you get in?
+
+40
+00:02:06,717 --> 00:02:11,005
+The console is the machine's own screen. It always works, but it is awkward.
+
+41
+00:02:11,555 --> 00:02:15,203
+SSH lets you log in from your own terminal, over the network.
+
+42
+00:02:15,753 --> 00:02:20,852
+SSH needs three things: an address, a user name, and a way to prove who you are.
+
+43
+00:02:21,402 --> 00:02:25,006
+The best proof is a key pair: a private key that stays secret,
+
+44
+00:02:25,006 --> 00:02:27,738
+and a public key that you place on the machine.
+
+45
+00:02:28,288 --> 00:02:29,824
+Never share the private key.
+
+46
+00:02:31,874 --> 00:02:36,610
+Now let us do the SSH part for real, in a disposable Linux sandbox.
+
+47
+00:02:37,160 --> 00:02:39,429
+These outputs are real captures.
+
+48
+00:02:39,429 --> 00:02:39,784
+Here,
+
+49
+00:02:39,784 --> 00:02:42,549
+the sandbox plays your virtual machine,
+
+50
+00:02:42,549 --> 00:02:44,819
+and SSH connects back to itself.
+
+51
+00:02:45,369 --> 00:02:49,123
+First, we create a key pair. The command stays quiet when it works.
+
+52
+00:02:49,673 --> 00:02:54,665
+The fingerprint identifies the key, and it is safe to share. The private file is not.
+
+53
+00:02:55,215 --> 00:02:56,763
+Now we log in with the key,
+
+54
+00:02:56,763 --> 00:02:58,940
+and run three commands: the host name,
+
+55
+00:02:58,940 --> 00:02:59,743
+the user name,
+
+56
+00:02:59,743 --> 00:03:01,061
+and the kernel version.
+
+57
+00:03:01,611 --> 00:03:06,731
+The answers come from the machine we logged in to: its name, its user, and its kernel.
+
+58
+00:03:07,281 --> 00:03:10,950
+If we try the wrong port, nothing answers: connection refused.
+
+59
+00:03:11,500 --> 00:03:15,639
+In your own machine, you use its address, and the port is usually twenty-two.
+
+60
+00:03:17,689 --> 00:03:19,246
+Three messages you will meet.
+
+61
+00:03:19,796 --> 00:03:22,340
+Connection refused: the machine answered,
+
+62
+00:03:22,340 --> 00:03:24,697
+but nothing is listening on that port.
+
+63
+00:03:24,697 --> 00:03:26,496
+Is SSH installed and running,
+
+64
+00:03:26,496 --> 00:03:27,860
+and is the port right?
+
+65
+00:03:28,410 --> 00:03:30,772
+Permission denied: the server is there,
+
+66
+00:03:30,772 --> 00:03:33,376
+but it rejected your key or your user name.
+
+67
+00:03:33,376 --> 00:03:34,042
+Check both.
+
+68
+00:03:34,592 --> 00:03:36,798
+Connection timed out: no answer at all.
+
+69
+00:03:36,798 --> 00:03:38,720
+Check that the machine is running,
+
+70
+00:03:38,720 --> 00:03:40,416
+and that the address is right.
+
+71
+00:03:40,966 --> 00:03:43,612
+Read the message, then check one thing at a time.
+
+72
+00:03:45,662 --> 00:03:47,283
+Now the disposable part.
+
+73
+00:03:47,833 --> 00:03:49,454
+Before a risky experiment,
+
+74
+00:03:49,454 --> 00:03:50,452
+take a snapshot.
+
+75
+00:03:50,452 --> 00:03:52,945
+VirtualBox can save the machine's state,
+
+76
+00:03:52,945 --> 00:03:54,255
+and restore it later.
+
+77
+00:03:54,805 --> 00:03:58,303
+With Multipass, delete the machine, purge it, and launch it again.
+
+78
+00:03:58,853 --> 00:04:03,120
+Keep anything valuable outside the virtual machine, such as scripts in Git.
+
+79
+00:04:03,670 --> 00:04:07,083
+If you can rebuild it in minutes, you can experiment without fear.
+
+80
+00:04:09,133 --> 00:04:10,989
+Watch out for four common myths.
+
+81
+00:04:11,539 --> 00:04:15,071
+Myth one: a virtual machine puts my computer at risk.
+
+82
+00:04:15,071 --> 00:04:15,604
+In fact,
+
+83
+00:04:15,604 --> 00:04:18,003
+it is the safer place to experiment.
+
+84
+00:04:18,553 --> 00:04:21,127
+Myth two: I need a powerful computer.
+
+85
+00:04:21,127 --> 00:04:21,683
+In fact,
+
+86
+00:04:21,683 --> 00:04:24,953
+a small Ubuntu Server runs on modest resources.
+
+87
+00:04:25,503 --> 00:04:30,644
+Myth three: a password is just as good as a key. In fact, keys are much harder to guess.
+
+88
+00:04:31,194 --> 00:04:34,536
+Myth four: a disposable machine can hold my real work.
+
+89
+00:04:34,536 --> 00:04:35,031
+In fact,
+
+90
+00:04:35,031 --> 00:04:36,331
+if you might need it,
+
+91
+00:04:36,331 --> 00:04:37,445
+keep it elsewhere.
+
+92
+00:04:37,995 --> 00:04:39,830
+Disposable means replaceable.
+
+93
+00:04:41,880 --> 00:04:43,608
+Here is how you check your own work.
+
+94
+00:04:44,158 --> 00:04:47,337
+Imagine a teammate asks you to set up a practice machine.
+
+95
+00:04:47,887 --> 00:04:49,785
+Explain why it is disposable.
+
+96
+00:04:50,335 --> 00:04:52,191
+Choose a platform, and say why.
+
+97
+00:04:52,741 --> 00:04:54,576
+Create it with sensible sizes.
+
+98
+00:04:55,126 --> 00:04:57,195
+Log in over SSH, with a key.
+
+99
+00:04:57,745 --> 00:04:59,473
+Verify it with three commands.
+
+100
+00:05:00,023 --> 00:05:01,559
+Delete it, and rebuild it.
+
+101
+00:05:02,109 --> 00:05:03,731
+To pass, you need all six.
+
+102
+00:05:05,781 --> 00:05:06,656
+Your turn.
+
+103
+00:05:07,206 --> 00:05:10,166
+This lab is unverified until you run it yourself,
+
+104
+00:05:10,166 --> 00:05:13,307
+because I cannot install a machine on your computer.
+
+105
+00:05:13,857 --> 00:05:16,375
+One: create a machine with two processors,
+
+106
+00:05:16,375 --> 00:05:17,814
+two gigabytes of memory,
+
+107
+00:05:17,814 --> 00:05:19,553
+and twenty gigabytes of disk.
+
+108
+00:05:20,103 --> 00:05:22,492
+Two: log in over SSH, with a key.
+
+109
+00:05:23,042 --> 00:05:24,595
+Three: run the host name,
+
+110
+00:05:24,595 --> 00:05:25,216
+user name,
+
+111
+00:05:25,216 --> 00:05:26,955
+and kernel version commands,
+
+112
+00:05:26,955 --> 00:05:28,632
+and write down the answers.
+
+113
+00:05:29,182 --> 00:05:33,811
+Four: break something inside it on purpose, then delete the machine, and rebuild it.
+
+114
+00:05:34,361 --> 00:05:35,961
+Mark yourself on the rubric.
+
+115
+00:05:36,511 --> 00:05:38,239
+Pause the video, and do it now.
+
+116
+00:05:51,789 --> 00:05:52,664
+Quick check.
+
+117
+00:05:53,214 --> 00:05:55,048
+Why use a disposable machine?
+
+118
+00:05:55,598 --> 00:05:57,134
+Name two ways to get one.
+
+119
+00:05:57,684 --> 00:05:58,922
+What does a key pair do?
+
+120
+00:05:59,472 --> 00:06:01,349
+What does connection refused mean?
+
+121
+00:06:01,899 --> 00:06:06,400
+Objective covered: MC02-O05.
+
+122
+00:06:06,950 --> 00:06:09,020
+Pause the video, and answer out loud.
+
+123
+00:06:19,570 --> 00:06:22,770
+Next lesson: files, text, encodings, and paths.
+
+124
+00:06:23,320 --> 00:06:25,197
+Subscribe, so you do not miss it.
