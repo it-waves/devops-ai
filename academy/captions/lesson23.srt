@@ -1,0 +1,947 @@
+1
+00:00:00,500 --> 00:00:05,833
+Your app runs in a container, on a server, inside a cloud network. So who can reach whom?
+
+2
+00:00:06,383 --> 00:00:09,455
+The answer is always the same: find the boundaries.
+
+3
+00:00:10,005 --> 00:00:13,512
+A boundary is a place where the rules change: the address range,
+
+4
+00:00:13,512 --> 00:00:14,060
+the route,
+
+5
+00:00:14,060 --> 00:00:15,595
+and what is allowed through.
+
+6
+00:00:16,145 --> 00:00:19,049
+Today you cross four of them: client to server,
+
+7
+00:00:19,049 --> 00:00:20,161
+host to container,
+
+8
+00:00:20,161 --> 00:00:21,520
+container to internet,
+
+9
+00:00:21,520 --> 00:00:22,694
+and a cloud subnet.
+
+10
+00:00:23,244 --> 00:00:28,023
+First on a small network built on this computer, then live in a real cloud account.
+
+11
+00:00:30,073 --> 00:00:34,041
+Start with one question: where does one network end, and another begin?
+
+12
+00:00:34,591 --> 00:00:35,744
+Inside one network,
+
+13
+00:00:35,744 --> 00:00:37,869
+machines reach each other directly.
+
+14
+00:00:37,869 --> 00:00:38,597
+To leave it,
+
+15
+00:00:38,597 --> 00:00:39,751
+they need a router,
+
+16
+00:00:39,751 --> 00:00:40,479
+the gateway.
+
+17
+00:00:41,029 --> 00:00:42,066
+At every boundary,
+
+18
+00:00:42,066 --> 00:00:44,544
+three things can change: the address range,
+
+19
+00:00:44,544 --> 00:00:45,120
+the route,
+
+20
+00:00:45,120 --> 00:00:47,194
+and the rules about what is allowed.
+
+21
+00:00:47,744 --> 00:00:49,660
+So when something cannot connect,
+
+22
+00:00:49,660 --> 00:00:50,415
+do not guess.
+
+23
+00:00:50,415 --> 00:00:52,446
+Ask: which boundary is it crossing,
+
+24
+00:00:52,446 --> 00:00:53,782
+and what changed there?
+
+25
+00:00:54,332 --> 00:00:55,348
+Here is the lab.
+
+26
+00:00:55,348 --> 00:00:55,919
+A client,
+
+27
+00:00:55,919 --> 00:00:56,491
+a router,
+
+28
+00:00:56,491 --> 00:00:57,888
+and behind the router,
+
+29
+00:00:57,888 --> 00:00:59,921
+a host that runs two containers,
+
+30
+00:00:59,921 --> 00:01:02,652
+plus a server standing in for the internet.
+
+31
+00:01:04,702 --> 00:01:06,327
+You are the client,
+
+32
+00:01:06,327 --> 00:01:08,808
+ten dot zero dot one dot two.
+
+33
+00:01:08,808 --> 00:01:11,032
+How do I reach the router?
+
+34
+00:01:11,032 --> 00:01:13,342
+Type: ip route get 10.0.1.1
+
+35
+00:01:13,472 --> 00:01:18,421
+Directly, on dev c zero, with no via. The router sits on my own network.
+
+36
+00:01:18,971 --> 00:01:24,646
+Now the host, on the other side. Type: ip route get 10.0.2.2
+
+37
+00:01:24,776 --> 00:01:28,192
+This time it says via ten dot zero dot one dot one.
+
+38
+00:01:28,192 --> 00:01:30,269
+The host is on another network,
+
+39
+00:01:30,269 --> 00:01:33,082
+so my packets must go through the gateway.
+
+40
+00:01:33,082 --> 00:01:34,355
+That is a boundary.
+
+41
+00:01:34,905 --> 00:01:37,083
+And the container,
+
+42
+00:01:37,083 --> 00:01:42,651
+one seventy-two dot eighteen dot zero dot two?
+
+43
+00:01:42,651 --> 00:01:46,403
+Type: ping -c 1 -W 1 172.18.0.2
+
+44
+00:01:46,533 --> 00:01:48,290
+Destination net unreachable,
+
+45
+00:01:48,290 --> 00:01:49,294
+from the router.
+
+46
+00:01:49,294 --> 00:01:51,302
+It has no route to that network.
+
+47
+00:01:51,302 --> 00:01:52,180
+From out here,
+
+48
+00:01:52,180 --> 00:01:53,999
+the container does not exist.
+
+49
+00:01:56,050 --> 00:01:57,054
+Now containers.
+
+50
+00:01:57,054 --> 00:01:59,866
+A container is not a tiny virtual machine.
+
+51
+00:01:59,866 --> 00:02:01,607
+It is an ordinary process,
+
+52
+00:02:01,607 --> 00:02:04,285
+with its own private view of the system.
+
+53
+00:02:04,835 --> 00:02:07,097
+One part of that view is the network.
+
+54
+00:02:07,097 --> 00:02:11,011
+The container gets its own network namespace: its own addresses,
+
+55
+00:02:11,011 --> 00:02:12,173
+and its own routes.
+
+56
+00:02:12,723 --> 00:02:13,708
+A virtual cable,
+
+57
+00:02:13,708 --> 00:02:14,877
+called a veth pair,
+
+58
+00:02:14,877 --> 00:02:18,139
+joins that namespace to a virtual switch on the host,
+
+59
+00:02:18,139 --> 00:02:19,123
+called a bridge.
+
+60
+00:02:19,673 --> 00:02:21,703
+Docker names its bridge docker0.
+
+61
+00:02:21,703 --> 00:02:24,239
+The host acts as the container's router,
+
+62
+00:02:24,239 --> 00:02:26,649
+and the bridge address is its gateway.
+
+63
+00:02:27,199 --> 00:02:28,950
+No Docker is installed here.
+
+64
+00:02:28,950 --> 00:02:30,950
+I built the same pieces by hand,
+
+65
+00:02:30,950 --> 00:02:33,450
+so you can see what Docker does for you.
+
+66
+00:02:35,500 --> 00:02:36,547
+In this lab,
+
+67
+00:02:36,547 --> 00:02:42,307
+the letters C T R mean: run the next command inside the container.
+
+68
+00:02:42,307 --> 00:02:44,140
+Type: ctr ip -br addr
+
+69
+00:02:44,270 --> 00:02:45,330
+One interface,
+
+70
+00:02:45,330 --> 00:02:46,163
+E T H zero,
+
+71
+00:02:46,163 --> 00:02:50,251
+address one seventy-two dot eighteen dot zero dot two.
+
+72
+00:02:50,251 --> 00:02:51,613
+A private network,
+
+73
+00:02:51,613 --> 00:02:52,825
+inside the host.
+
+74
+00:02:53,375 --> 00:02:56,276
+Its routes. Type: ctr ip route
+
+75
+00:02:56,406 --> 00:02:58,902
+The default route points at the bridge,
+
+76
+00:02:58,902 --> 00:03:01,846
+one seventy-two dot eighteen dot zero dot one.
+
+77
+00:03:01,846 --> 00:03:03,894
+That is the container's gateway.
+
+78
+00:03:04,444 --> 00:03:12,444
+Reach the other container. Type: ctr ping -c 1 172.18.0.3
+
+79
+00:03:12,574 --> 00:03:14,175
+Same bridge,
+
+80
+00:03:14,175 --> 00:03:15,777
+so it works.
+
+81
+00:03:15,777 --> 00:03:18,713
+Now the outside world.
+
+82
+00:03:18,713 --> 00:03:24,585
+Type: ctr curl -sS -m 2 10.0.3.2:8080/whoami
+
+83
+00:03:24,715 --> 00:03:29,728
+Timed out. The request left, but nobody outside knows how to answer a private address.
+
+84
+00:03:30,278 --> 00:03:32,187
+The fix is N A T,
+
+85
+00:03:32,187 --> 00:03:33,534
+on the host.
+
+86
+00:03:33,534 --> 00:03:34,882
+In this lab,
+
+87
+00:03:34,882 --> 00:03:37,352
+H nat means: iptables,
+
+88
+00:03:37,352 --> 00:03:39,261
+in the nat table,
+
+89
+00:03:39,261 --> 00:03:40,609
+on the host.
+
+90
+00:03:40,609 --> 00:03:46,897
+Type: hnat -A POSTROUTING -s 172.18.0.0/24 -j MASQUERADE
+
+91
+00:03:47,027 --> 00:03:57,203
+Same request again. Type: ctr curl -sS -m 2 10.0.3.2:8080/whoami
+
+92
+00:03:57,333 --> 00:03:59,752
+You are ten dot zero dot two dot two.
+
+93
+00:03:59,752 --> 00:04:01,387
+The server sees the host,
+
+94
+00:04:01,387 --> 00:04:02,563
+not the container.
+
+95
+00:04:02,563 --> 00:04:04,917
+The container hides behind the host,
+
+96
+00:04:04,917 --> 00:04:07,402
+like your laptop behind a home router.
+
+97
+00:04:09,452 --> 00:04:14,231
+One more direction. Someone outside wants to reach a service inside the container.
+
+98
+00:04:14,781 --> 00:04:16,871
+The container's address is private,
+
+99
+00:04:16,871 --> 00:04:18,663
+so outsiders cannot aim at it.
+
+100
+00:04:18,663 --> 00:04:20,455
+They can only aim at the host.
+
+101
+00:04:21,005 --> 00:04:22,748
+So the host listens on a port,
+
+102
+00:04:22,748 --> 00:04:25,187
+and forwards the traffic to the container.
+
+103
+00:04:25,187 --> 00:04:27,277
+Docker calls this publishing a port.
+
+104
+00:04:27,827 --> 00:04:28,521
+Underneath,
+
+105
+00:04:28,521 --> 00:04:30,475
+it is a destination N A T rule.
+
+106
+00:04:30,475 --> 00:04:32,933
+Masquerade rewrites the source address.
+
+107
+00:04:32,933 --> 00:04:34,825
+This rewrites the destination.
+
+108
+00:04:36,875 --> 00:04:38,835
+Back on the client.
+
+109
+00:04:38,835 --> 00:04:43,063
+The host is ten dot zero dot two dot two.
+
+110
+00:04:43,063 --> 00:04:46,570
+Is anything on port eighty eighty?
+
+111
+00:04:46,570 --> 00:04:49,974
+Type: curl -sS -m 2 10.0.2.2:8080
+
+112
+00:04:50,104 --> 00:04:54,285
+Failed to connect. The host is there, but nothing is listening on that port.
+
+113
+00:04:54,835 --> 00:04:55,955
+Now publish it,
+
+114
+00:04:55,955 --> 00:04:57,523
+the way Docker would.
+
+115
+00:04:57,523 --> 00:04:58,419
+In this lab,
+
+116
+00:04:58,419 --> 00:05:02,078
+publish forwards a host port to a container port.
+
+117
+00:05:02,078 --> 00:05:03,795
+Type: publish 8080 8000
+
+118
+00:05:03,925 --> 00:05:10,666
+Ask again. Type: curl -s 10.0.2.2:8080/whoami
+
+119
+00:05:10,796 --> 00:05:13,306
+You are ten dot zero dot one dot two.
+
+120
+00:05:13,306 --> 00:05:14,865
+The container answered,
+
+121
+00:05:14,865 --> 00:05:16,764
+and it sees the real client.
+
+122
+00:05:16,764 --> 00:05:19,138
+Only the destination was rewritten.
+
+123
+00:05:19,688 --> 00:05:24,189
+Look at the rule behind it. Type: hnat -S PREROUTING
+
+124
+00:05:24,319 --> 00:05:24,723
+D nat,
+
+125
+00:05:24,723 --> 00:05:28,025
+to one seventy-two dot eighteen dot zero dot two,
+
+126
+00:05:28,025 --> 00:05:29,373
+port eight thousand.
+
+127
+00:05:29,373 --> 00:05:31,530
+That is all a published port is.
+
+128
+00:05:33,580 --> 00:05:35,879
+Now the same ideas in the cloud.
+
+129
+00:05:35,879 --> 00:05:37,172
+In Amazon's cloud,
+
+130
+00:05:37,172 --> 00:05:39,472
+your private network is a V P C,
+
+131
+00:05:39,472 --> 00:05:41,196
+a virtual private cloud.
+
+132
+00:05:41,746 --> 00:05:48,701
+You choose its address range, like 10.20.0.0/16, and cut it into subnets.
+
+133
+00:05:49,251 --> 00:05:54,520
+A public subnet has a route to an internet gateway. A private subnet has no such route.
+
+134
+00:05:55,070 --> 00:05:57,176
+That route is the only difference.
+
+135
+00:05:57,176 --> 00:06:00,026
+A subnet is public because of its route table,
+
+136
+00:06:00,026 --> 00:06:01,513
+not because of its name.
+
+137
+00:06:02,063 --> 00:06:07,225
+A security group is the firewall around each server. By default, it lets nothing in.
+
+138
+00:06:07,775 --> 00:06:11,346
+A private server that must reach out needs a N A T gateway.
+
+139
+00:06:11,346 --> 00:06:12,616
+That one costs money,
+
+140
+00:06:12,616 --> 00:06:14,069
+so we will not build it.
+
+141
+00:06:14,619 --> 00:06:15,794
+Now watch it live,
+
+142
+00:06:15,794 --> 00:06:16,969
+in a real account.
+
+143
+00:06:16,969 --> 00:06:19,123
+These are real screen recordings.
+
+144
+00:06:19,123 --> 00:06:21,147
+My account details are blurred.
+
+145
+00:06:23,197 --> 00:06:25,867
+The console builds the network: a V P C,
+
+146
+00:06:25,867 --> 00:06:26,668
+two subnets,
+
+147
+00:06:26,668 --> 00:06:27,803
+two route tables,
+
+148
+00:06:27,803 --> 00:06:29,405
+and an internet gateway.
+
+149
+00:06:29,955 --> 00:06:32,274
+Here is the public route table.
+
+150
+00:06:32,274 --> 00:06:35,341
+Ten dot twenty slash sixteen stays local.
+
+151
+00:06:35,341 --> 00:06:41,027
+And zero dot zero dot zero dot zero slash zero goes to the internet gateway.
+
+152
+00:06:41,577 --> 00:06:46,761
+That second line is the whole definition of public: everything else leaves through the gateway.
+
+153
+00:06:47,311 --> 00:06:48,911
+Now the private route table.
+
+154
+00:06:49,461 --> 00:06:51,024
+One route only: local.
+
+155
+00:06:51,024 --> 00:06:53,155
+Nothing leads to the internet.
+
+156
+00:06:53,155 --> 00:06:55,997
+A server here can talk inside the V P C,
+
+157
+00:06:55,997 --> 00:06:57,205
+and nowhere else.
+
+158
+00:06:57,755 --> 00:07:02,939
+The resource map draws it for you. One subnet routes to the internet. The other does not.
+
+159
+00:07:04,989 --> 00:07:06,431
+Now two real servers,
+
+160
+00:07:06,431 --> 00:07:07,736
+one in each subnet.
+
+161
+00:07:07,736 --> 00:07:09,315
+Both are T three micro,
+
+162
+00:07:09,315 --> 00:07:12,200
+marked free tier eligible in this account.
+
+163
+00:07:12,750 --> 00:07:15,715
+Look at the security group: no inbound rules at all.
+
+164
+00:07:15,715 --> 00:07:18,851
+Nothing from the internet can connect to either server.
+
+165
+00:07:19,401 --> 00:07:20,660
+Here they are, running.
+
+166
+00:07:21,210 --> 00:07:23,615
+The public server has a public address.
+
+167
+00:07:23,615 --> 00:07:25,342
+The private server has none.
+
+168
+00:07:25,342 --> 00:07:26,143
+Same account,
+
+169
+00:07:26,143 --> 00:07:26,945
+same network,
+
+170
+00:07:26,945 --> 00:07:27,994
+different subnet.
+
+171
+00:07:28,544 --> 00:07:35,690
+The private server's own page shows only a private address: ten dot twenty dot one thirty-three dot one fourteen.
+
+172
+00:07:36,240 --> 00:07:37,982
+Now the most important step.
+
+173
+00:07:37,982 --> 00:07:39,724
+When you finish a cloud lab,
+
+174
+00:07:39,724 --> 00:07:41,092
+delete what you built.
+
+175
+00:07:41,092 --> 00:07:41,466
+First,
+
+176
+00:07:41,466 --> 00:07:42,896
+terminate both servers.
+
+177
+00:07:43,446 --> 00:07:47,841
+Then delete the V P C. The console lists everything that goes with it.
+
+178
+00:07:48,391 --> 00:07:48,701
+Gone.
+
+179
+00:07:48,701 --> 00:07:50,744
+Only the default network is left.
+
+180
+00:07:50,744 --> 00:07:51,921
+Do this every time,
+
+181
+00:07:51,921 --> 00:07:53,469
+so nothing keeps running,
+
+182
+00:07:53,469 --> 00:07:54,831
+and nothing is billed.
+
+183
+00:07:54,831 --> 00:07:57,308
+Check your own free tier before you try.
+
+184
+00:07:59,658 --> 00:08:01,429
+Match the symptom to the boundary.
+
+185
+00:08:01,979 --> 00:08:06,366
+A container cannot be reached from another machine: the port is not published,
+
+186
+00:08:06,366 --> 00:08:07,547
+or there is no route.
+
+187
+00:08:08,097 --> 00:08:12,513
+A container cannot reach the internet: no N A T, or no default route.
+
+188
+00:08:13,063 --> 00:08:17,393
+Refused on the published port: nothing is listening inside the container.
+
+189
+00:08:17,943 --> 00:08:22,760
+A cloud server is unreachable from the internet: no internet gateway route,
+
+190
+00:08:22,760 --> 00:08:24,109
+or no public address.
+
+191
+00:08:24,659 --> 00:08:30,333
+A private server cannot download updates: it needs a N A T gateway, or a different design.
+
+192
+00:08:30,883 --> 00:08:35,235
+Times out only in the cloud: check the security group, then the route table.
+
+193
+00:08:37,285 --> 00:08:38,544
+Four myths to drop.
+
+194
+00:08:39,094 --> 00:08:41,651
+Myth one: a container is its own computer.
+
+195
+00:08:41,651 --> 00:08:43,356
+It shares the host's kernel.
+
+196
+00:08:43,356 --> 00:08:44,939
+Only its view is separate.
+
+197
+00:08:45,489 --> 00:08:48,638
+Myth two: a private subnet is secure by itself.
+
+198
+00:08:48,638 --> 00:08:52,657
+It is only unreachable until someone adds a route or a rule.
+
+199
+00:08:53,207 --> 00:08:56,481
+Myth three: every server in a public subnet is public.
+
+200
+00:08:56,481 --> 00:08:58,360
+It also needs a public address,
+
+201
+00:08:58,360 --> 00:09:00,482
+and a rule that allows the traffic.
+
+202
+00:09:01,032 --> 00:09:04,361
+Myth four: a container's address works outside the host.
+
+203
+00:09:04,361 --> 00:09:05,907
+It is private to the host,
+
+204
+00:09:05,907 --> 00:09:07,453
+unless you publish a port.
+
+205
+00:09:08,003 --> 00:09:11,480
+Find the boundary, then check the address, the route, and the rule.
+
+206
+00:09:13,530 --> 00:09:15,855
+Here is how you check your own understanding.
+
+207
+00:09:16,405 --> 00:09:19,968
+Explain what a network boundary is, and what can change at one.
+
+208
+00:09:20,518 --> 00:09:22,589
+Read the output of ip route get,
+
+209
+00:09:22,589 --> 00:09:26,406
+and say whether the destination is direct or via a gateway.
+
+210
+00:09:26,956 --> 00:09:29,516
+Explain how a container reaches the internet.
+
+211
+00:09:30,066 --> 00:09:32,114
+Explain what publishing a port does.
+
+212
+00:09:32,664 --> 00:09:35,779
+Explain the difference between a public and a private subnet.
+
+213
+00:09:36,329 --> 00:09:39,017
+Delete your cloud resources, and explain why.
+
+214
+00:09:39,567 --> 00:09:41,188
+To pass, you need all six.
+
+215
+00:09:43,238 --> 00:09:45,521
+Your turn, in the virtual machine you built.
+
+216
+00:09:46,071 --> 00:09:51,084
+One: run ip route get 8.8.8.8, and find your gateway.
+
+217
+00:09:51,634 --> 00:09:56,114
+Two: if Docker is installed, run docker network ls, and find the bridge.
+
+218
+00:09:56,664 --> 00:09:57,770
+Three: on paper,
+
+219
+00:09:57,770 --> 00:10:00,257
+draw a V P C with one public subnet,
+
+220
+00:10:00,257 --> 00:10:01,570
+one private subnet,
+
+221
+00:10:01,570 --> 00:10:03,021
+and two route tables.
+
+222
+00:10:03,571 --> 00:10:06,157
+Four: if you build it in a free account,
+
+223
+00:10:06,157 --> 00:10:07,709
+use free resources only,
+
+224
+00:10:07,709 --> 00:10:10,166
+and delete everything when you finish.
+
+225
+00:10:10,166 --> 00:10:11,071
+Servers first,
+
+226
+00:10:11,071 --> 00:10:12,041
+then the V P C.
+
+227
+00:10:12,591 --> 00:10:16,473
+Five: for each symptom in the table, write the boundary and the cause.
+
+228
+00:10:17,023 --> 00:10:20,330
+Mark yourself on the rubric. Pause the video, and do it now.
+
+229
+00:10:35,880 --> 00:10:36,755
+Quick check.
+
+230
+00:10:37,305 --> 00:10:38,862
+What can change at a boundary?
+
+231
+00:10:39,412 --> 00:10:41,460
+How does a container reach the internet?
+
+232
+00:10:42,010 --> 00:10:43,503
+What makes a subnet public?
+
+233
+00:10:44,053 --> 00:10:45,973
+What must you do when a cloud lab ends?
+
+234
+00:10:46,523 --> 00:10:50,790
+Objective covered: MC03-O07.
+
+235
+00:10:51,340 --> 00:10:53,409
+Pause the video, and answer out loud.
+
+236
+00:11:03,959 --> 00:11:09,826
+Next: diagnosing D N S, port, firewall, T L S and routing failures in a lab.
+
+237
+00:11:10,376 --> 00:11:13,704
+If this helped, like, share and subscribe, so you do not miss it.

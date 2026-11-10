@@ -1,0 +1,31 @@
+Lesson 23 of the DevOps Engineering Bootcamp, in the computer networking masterclass. Where does one network end and another begin? Learn to find the boundaries between clients, servers, containers and cloud subnets, and to ask the same three questions at each one: what changed in the address, the route and the rules. You will see it live: a client that reaches a router directly but a host through a gateway, a container with its own private network, the one NAT rule that lets it reach the internet, a published port that forwards traffic in, and then the same ideas in a real AWS account: a public subnet with a route to an internet gateway, a private subnet with none, two servers, and the cleanup. Includes a symptom-to-boundary table, common myths, a pass/fail rubric and a hands-on task.
+
+Chapters
+0:00 Where does one network end?
+0:29 Network boundaries
+1:04 Live: client, router, host
+1:55 Containers
+2:35 Live: a container's network
+4:09 Publishing a port
+4:36 Live: publish a port
+5:33 Cloud subnets
+6:22 Live in AWS: public vs private
+7:04 Live in AWS: two servers, then clean up
+7:59 Symptoms and causes
+8:36 Common myths
+9:13 Pass or fail rubric
+9:42 Your turn
+10:35 Quick check
+
+Objectives covered: MC03-O07
+
+Honest notes: the terminal segments are real recordings of real commands on Ubuntu 24.04 (the typing is timed to the narration, and the yellow highlights were added afterwards). The network is a small lab on one computer: network namespaces for a client, a router, a host, two containers and a server, joined by virtual links and a bridge, with invented 10.x and 172.18.x addresses. No Docker is installed: the container network is built by hand with the same pieces Docker uses (a network namespace, a veth pair and a bridge). In the lab, ctr (run inside the container), hnat (iptables, nat table, on the host) and publish (forward a host port to a container port) are shortcuts we defined; they are not standard commands. The AWS segments are real screen recordings of a real account, with the account name and number blurred; they come from two builds of the same small design, so some resource IDs differ between screens. The two servers were t3.micro instances that the console marked free tier eligible in that account; free tier rules vary by account and change over time, so check your own before you try this, never open inbound ports you do not need, skip NAT gateways (they are billed), and delete everything when you finish: terminate the servers first, then delete the VPC. The hands-on task is unverified until you run it yourself.
+
+Previous lesson: https://youtu.be/NWnBPb-BS2o
+Next: diagnosing DNS, port, firewall, TLS and routing failures in a lab.
+
+All lesson files, including the lab scripts: https://github.com/it-waves/devops-ai
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #networking #containers #aws #devopsbootcamp
