@@ -28,7 +28,7 @@ Lesson numbers continue from MC01 (global numbering, L9-L16). One lesson per obj
 | Lesson | Objectives | Topic | "Next" line it must end with | Status |
 |---|---|---|---|---|
 | L9 | O01 | Client, server, application, operating system, network | Next lesson: CPU, memory, storage, and processes | Published Public ibqI_dKshYU (6:30, captions published, end screen, playlist order verified), Learning |
-| L10 | O02 | CPU, memory, storage, processes, threads, resource contention | Next lesson: the command line and the filesystem | Rendered 5:41, QA'd, upload pending |
+| L10 | O02 | CPU, memory, storage, processes, threads, resource contention | Next lesson: the command line and the filesystem | Published Public JLNkuPloShY (5:41, captions published, end screen), Learning |
 | L11 | O03 | Command-line and filesystem navigation | Next lesson: virtualization and containers | Not started |
 | L12 | O04 | Virtualization, virtual machines, containers, and their differences | Next lesson: your own Linux virtual machine | Not started |
 | L13 | O05 | Install and access a disposable Linux VM | Next lesson: files, text, encodings, and paths | Not started |
