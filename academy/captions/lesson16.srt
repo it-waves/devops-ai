@@ -1,0 +1,467 @@
+1
+00:00:00,500 --> 00:00:04,959
+Every time you open a website, a request travels across the internet and back.
+
+2
+00:00:05,509 --> 00:00:09,135
+It takes less than a second, but it happens in several clear steps.
+
+3
+00:00:09,685 --> 00:00:14,229
+Today you trace one request, step by step, and watch the steps happen live.
+
+4
+00:00:14,779 --> 00:00:18,577
+Then, when a page will not load, you will know exactly where to look.
+
+5
+00:00:20,627 --> 00:00:22,078
+Here is the whole journey.
+
+6
+00:00:22,628 --> 00:00:26,020
+One: you type a name, like shop dot example dot com.
+
+7
+00:00:26,570 --> 00:00:29,663
+Two: DNS turns that name into an IP address.
+
+8
+00:00:30,213 --> 00:00:34,650
+Three: your browser opens a TCP connection to that address, on a port.
+
+9
+00:00:35,200 --> 00:00:37,675
+Four: it sends an HTTP request.
+
+10
+00:00:38,225 --> 00:00:42,492
+Five: the server builds a response, often by asking an application.
+
+11
+00:00:43,042 --> 00:00:46,306
+Six: the response travels back, and the page appears.
+
+12
+00:00:46,856 --> 00:00:49,693
+Each step can fail, and each failure looks different.
+
+13
+00:00:51,743 --> 00:00:53,642
+Step two: from a name to a number.
+
+14
+00:00:54,192 --> 00:00:57,221
+Computers connect by IP address, not by name.
+
+15
+00:00:57,771 --> 00:01:01,568
+DNS is the phone book. It turns a name into an address.
+
+16
+00:01:02,118 --> 00:01:05,126
+If DNS fails, you see: could not resolve host.
+
+17
+00:01:05,676 --> 00:01:07,938
+The first check: can the name be resolved?
+
+18
+00:01:09,988 --> 00:01:12,996
+Let us try a name that this computer has never heard of.
+
+19
+00:01:13,546 --> 00:01:16,767
+Type: curl web:5000/health
+
+20
+00:01:16,897 --> 00:01:21,932
+Could not resolve host. The name has no address, so the request never even starts.
+
+21
+00:01:22,482 --> 00:01:28,306
+Now we hand curl the address ourselves.
+
+22
+00:01:28,306 --> 00:01:36,519
+Type: curl --resolve web:5000:127.0.0.1 web:5000/health
+
+23
+00:01:36,649 --> 00:01:39,743
+That option says: when you look for web, use this address.
+
+24
+00:01:40,293 --> 00:01:45,263
+A reply, ok! Once the name had an address, the request reached our application.
+
+25
+00:01:45,813 --> 00:01:51,232
+Your computer already knows one name by itself. Type: getent hosts localhost
+
+26
+00:01:51,362 --> 00:01:53,963
+Localhost always means this computer.
+
+27
+00:01:53,963 --> 00:01:58,039
+Its address is one twenty-seven dot zero dot zero dot one.
+
+28
+00:02:00,089 --> 00:02:02,436
+Step four: the HTTP request.
+
+29
+00:02:02,986 --> 00:02:05,631
+A request has a method, a path, and headers.
+
+30
+00:02:06,181 --> 00:02:11,386
+The method says what to do. GET reads something. POST sends data.
+
+31
+00:02:11,936 --> 00:02:13,600
+The path says which thing you want.
+
+32
+00:02:14,150 --> 00:02:16,838
+Headers add details, such as which host you mean.
+
+33
+00:02:17,388 --> 00:02:21,122
+The response comes back with a status code, headers, and a body.
+
+34
+00:02:23,172 --> 00:02:28,633
+Let us catch a real request. We ask for the health page, and show only the lines we send.
+
+35
+00:02:29,183 --> 00:02:38,143
+Type: curl -sv localhost:5000/health 2>&1 | grep '^>'
+
+36
+00:02:38,273 --> 00:02:44,353
+The first line is the request: method GET, path slash health, protocol HTTP.
+
+37
+00:02:44,903 --> 00:02:47,378
+Next, the host header: which server we mean.
+
+38
+00:02:47,928 --> 00:02:53,624
+Now the lines that came back. Type: curl -sv localhost:5000/health 2>&1 | grep '^<'
+
+39
+00:02:53,754 --> 00:02:56,655
+The first line is the status: two hundred, O K.
+
+40
+00:02:57,205 --> 00:03:00,171
+The content type header says what kind of data follows.
+
+41
+00:03:00,721 --> 00:03:06,865
+And the body itself. Type: curl -s localhost:5000/health
+
+42
+00:03:06,995 --> 00:03:10,177
+A small piece of data that says the status is ok.
+
+43
+00:03:10,177 --> 00:03:12,904
+That is one complete request and response.
+
+44
+00:03:14,954 --> 00:03:16,746
+Step five: the status code.
+
+45
+00:03:17,296 --> 00:03:20,325
+Read the first digit. It tells you who has the problem.
+
+46
+00:03:20,875 --> 00:03:22,710
+Two hundred range: success.
+
+47
+00:03:23,260 --> 00:03:25,372
+Three hundred range: go somewhere else.
+
+48
+00:03:25,922 --> 00:03:30,594
+Four hundred range: the request is wrong, such as a page that does not exist.
+
+49
+00:03:31,144 --> 00:03:33,491
+Five hundred range: the server failed.
+
+50
+00:03:35,541 --> 00:03:39,827
+Let us ask our application three questions.
+
+51
+00:03:39,827 --> 00:03:41,921
+First: is it healthy?
+
+52
+00:03:41,921 --> 00:03:46,506
+Type: curl -si localhost:5000/health | head -1
+
+53
+00:03:46,636 --> 00:03:47,959
+Two hundred, O K.
+
+54
+00:03:48,509 --> 00:03:52,541
+Now a page that does not exist. Type: curl -si localhost:5000/nope | head -1
+
+55
+00:03:52,671 --> 00:03:54,847
+Four oh four. The request was wrong.
+
+56
+00:03:55,397 --> 00:03:58,293
+Now a request that makes the application itself fail.
+
+57
+00:03:58,293 --> 00:04:00,752
+Type: curl -si localhost:5000/crash | head -1
+
+58
+00:04:00,882 --> 00:04:05,767
+Five hundred. The server failed. Different first digit, different owner of the problem.
+
+59
+00:04:07,817 --> 00:04:09,182
+Who builds the response?
+
+60
+00:04:09,732 --> 00:04:14,596
+A web server, like nginx, hands out files and passes other requests along.
+
+61
+00:04:15,146 --> 00:04:19,626
+An application server runs your code. It looks up data and builds the page.
+
+62
+00:04:20,176 --> 00:04:25,126
+Often they sit in a chain: browser, web server, application server, database.
+
+63
+00:04:25,676 --> 00:04:30,113
+A five oh two or five oh three often means the chain is broken in the middle.
+
+64
+00:04:32,163 --> 00:04:35,180
+We can measure each step of the journey.
+
+65
+00:04:35,180 --> 00:04:38,121
+A small file tells curl what to report.
+
+66
+00:04:38,121 --> 00:04:39,630
+Type: cat timing.txt
+
+67
+00:04:39,760 --> 00:04:44,794
+Name lookup, connect, first byte, and total. The backslash n just means a new line.
+
+68
+00:04:45,344 --> 00:04:49,460
+Now run the request with that report.
+
+69
+00:04:49,460 --> 00:04:56,246
+Type: curl -so /dev/null -w @timing.txt localhost:5000/health
+
+70
+00:04:56,376 --> 00:05:00,685
+Every step took a tiny fraction of a second. This is a healthy request.
+
+71
+00:05:01,235 --> 00:05:04,883
+Now a page that is slow. Type: curl -so /dev/null -w @timing.txt localhost:5000/slow
+
+72
+00:05:06,513 --> 00:05:10,054
+Look at first byte. Two seconds! But connect was still tiny.
+
+73
+00:05:10,604 --> 00:05:12,049
+So the network was fine.
+
+74
+00:05:12,049 --> 00:05:14,215
+The delay is inside the application.
+
+75
+00:05:14,215 --> 00:05:16,322
+The timing tells you where to look.
+
+76
+00:05:18,372 --> 00:05:20,825
+Use the trace as a checklist, from the start.
+
+77
+00:05:21,375 --> 00:05:24,085
+Name not found? That is a DNS problem.
+
+78
+00:05:24,635 --> 00:05:27,707
+Connection refused? Nothing is listening on that port.
+
+79
+00:05:28,257 --> 00:05:30,817
+A four hundred range code? Fix the request.
+
+80
+00:05:31,367 --> 00:05:35,100
+A five hundred range code? Look at the application and its logs.
+
+81
+00:05:35,650 --> 00:05:39,490
+Slow? Compare connect with first byte, to find which side is slow.
+
+82
+00:05:41,540 --> 00:05:43,119
+Match the symptom to the step.
+
+83
+00:05:43,669 --> 00:05:45,845
+Could not resolve host: DNS.
+
+84
+00:05:46,395 --> 00:05:49,168
+Connection refused: no service on that port.
+
+85
+00:05:49,718 --> 00:05:51,361
+Four oh four: wrong path.
+
+86
+00:05:51,911 --> 00:05:54,215
+Five hundred: the application failed.
+
+87
+00:05:54,765 --> 00:05:59,351
+Five oh two or five oh three: the web server cannot reach the application.
+
+88
+00:06:01,401 --> 00:06:03,257
+Watch out for four common myths.
+
+89
+00:06:03,807 --> 00:06:08,394
+Myth one: four oh four means the site is down. It means the server answered.
+
+90
+00:06:08,944 --> 00:06:13,296
+Myth two: five hundred errors are the browser's fault. They come from the server.
+
+91
+00:06:13,846 --> 00:06:19,158
+Myth three: slow always means a slow network. The timing may show a slow application.
+
+92
+00:06:19,708 --> 00:06:24,081
+Myth four: one error code means one cause. Always confirm in the logs.
+
+93
+00:06:24,631 --> 00:06:26,316
+Trace first, then conclude.
+
+94
+00:06:28,366 --> 00:06:30,691
+Here is how you check your own understanding.
+
+95
+00:06:31,241 --> 00:06:33,609
+List the six steps of a request, in order.
+
+96
+00:06:34,159 --> 00:06:37,509
+Explain what DNS does, and show a resolve failure.
+
+97
+00:06:38,059 --> 00:06:41,621
+Read a request line and a response line with curl dash v.
+
+98
+00:06:42,171 --> 00:06:45,478
+Say who is at fault from the first digit of a status code.
+
+99
+00:06:46,028 --> 00:06:48,503
+Use the timing report to find a slow step.
+
+100
+00:06:49,053 --> 00:06:51,357
+Name the first check for each kind of failure.
+
+101
+00:06:51,907 --> 00:06:53,528
+To pass, you need all six.
+
+102
+00:06:55,578 --> 00:06:57,861
+Your turn, in the virtual machine you built.
+
+103
+00:06:58,411 --> 00:07:03,168
+One: start the Python web server from last time, and fetch it with curl dash v.
+
+104
+00:07:03,718 --> 00:07:07,302
+Two: find the request line and the status line in the output.
+
+105
+00:07:07,852 --> 00:07:11,799
+Three: ask for a page that does not exist, and read the four oh four.
+
+106
+00:07:12,349 --> 00:07:16,018
+Four: try curl on a made-up name, and read the DNS error.
+
+107
+00:07:16,568 --> 00:07:19,853
+Five: use the timing report, and write down each number.
+
+108
+00:07:20,403 --> 00:07:23,710
+Mark yourself on the rubric. Pause the video, and do it now.
+
+109
+00:07:39,260 --> 00:07:40,135
+Quick check.
+
+110
+00:07:40,685 --> 00:07:42,733
+Name the six steps of a web request.
+
+111
+00:07:43,283 --> 00:07:44,691
+What does DNS do?
+
+112
+00:07:45,241 --> 00:07:47,950
+What does the first digit of a status code tell you?
+
+113
+00:07:48,500 --> 00:07:51,935
+How can timing show whether the network or the application is slow?
+
+114
+00:07:52,485 --> 00:07:56,943
+Objective covered: MC02-O08.
+
+115
+00:07:57,493 --> 00:07:59,563
+Pause the video, and answer out loud.
+
+116
+00:08:10,113 --> 00:08:12,779
+Next: a new masterclass, computer networking.
+
+117
+00:08:13,329 --> 00:08:15,207
+Subscribe, so you do not miss it.

@@ -1,0 +1,34 @@
+Lesson 16 of the DevOps Engineering Bootcamp. Follow one web request from browser to application server in six steps: name, DNS, TCP connection, HTTP request, server response, and the reply. Every step is shown live in a real terminal with curl: a DNS failure and fix, the request and response lines, status codes 200, 404 and 500, and a timing report that shows whether the network or the application is slow. Includes a failure checklist, a pass/fail rubric and a hands-on task to repeat in the virtual machine from Lesson 13.
+
+Chapters
+0:00 Follow one request
+0:20 The whole journey
+0:51 DNS: names to numbers
+1:09 Live: DNS
+1:59 Request and response
+2:22 Live: catch a request
+3:14 Status codes
+3:35 Live: 200, 404, 500
+4:07 Web and application servers
+4:31 Live: time each step
+5:17 The checklist
+5:41 Symptoms and causes
+6:00 Common myths
+6:27 Pass or fail rubric
+6:55 Your turn
+7:38 Quick check
+
+Objectives covered: MC02-O08
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 (the typing is timed to the narration, and the yellow highlights were added afterwards). The demos talk to a tiny application we prepared ourselves on this same computer (address 127.0.0.1, port 5000), because it lets us show a healthy page, a missing page, a failing page and a slow page on demand. The made-up name "web" is resolved by hand with curl's resolve option; no real website was contacted. The demo user is called student. The hands-on task is unverified until you run it yourself.
+
+Previous lesson: https://youtu.be/d-rZpuwyomc
+Next: a new masterclass, computer networking.
+
+All lesson files: https://github.com/it-waves/devops-ai
+
+Photo: Ethernet cable by Yuri Samoilov, CC BY 2.0, via Wikimedia Commons.
+
+Subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #http #dns #curl #devopsbootcamp
