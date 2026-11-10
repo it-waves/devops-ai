@@ -1,0 +1,567 @@
+1
+00:00:00,500 --> 00:00:04,916
+Every conversation on a network needs two things: an address, and a door number.
+
+2
+00:00:05,466 --> 00:00:09,882
+The address finds the computer. The door number finds the program on that computer.
+
+3
+00:00:10,432 --> 00:00:13,228
+Today you learn how those door numbers,
+
+4
+00:00:13,228 --> 00:00:14,159
+called ports,
+
+5
+00:00:14,159 --> 00:00:14,518
+work,
+
+6
+00:00:14,518 --> 00:00:17,600
+and how TCP and UDP carry the conversation.
+
+7
+00:00:18,150 --> 00:00:22,417
+You will watch ports open, connections form, and a port say no, all live.
+
+8
+00:00:24,467 --> 00:00:25,555
+First, ports.
+
+9
+00:00:26,105 --> 00:00:30,030
+A computer runs many programs that use the network at the same time.
+
+10
+00:00:30,580 --> 00:00:35,082
+The IP address finds the computer. The port number finds the right program.
+
+11
+00:00:35,632 --> 00:00:40,709
+A port is just a number, from zero to sixty-five thousand five hundred thirty-five.
+
+12
+00:00:41,259 --> 00:00:42,803
+Some are well known.
+
+13
+00:00:42,803 --> 00:00:44,193
+Twenty-two is SSH.
+
+14
+00:00:44,193 --> 00:00:45,659
+Fifty-three is DNS.
+
+15
+00:00:45,659 --> 00:00:47,358
+Eighty is web traffic.
+
+16
+00:00:47,358 --> 00:00:50,368
+Four forty-three is secure web traffic.
+
+17
+00:00:50,668 --> 00:00:55,319
+Numbers up to one thousand twenty-three are reserved for well-known services.
+
+18
+00:00:55,869 --> 00:00:57,384
+When your browser connects,
+
+19
+00:00:57,384 --> 00:00:59,573
+it picks a random high port for itself,
+
+20
+00:00:59,573 --> 00:01:02,098
+and connects to the server's well-known port.
+
+21
+00:01:04,148 --> 00:01:10,024
+Your computer keeps a small list of well-known names and numbers.
+
+22
+00:01:10,024 --> 00:01:13,279
+Type: getent services ssh http https
+
+23
+00:01:13,409 --> 00:01:18,422
+Each line shows a name, a port number, and the protocol. All three use TCP.
+
+24
+00:01:18,972 --> 00:01:22,741
+Now let us see a real program listening.
+
+25
+00:01:22,741 --> 00:01:26,604
+We started a small web server beforehand,
+
+26
+00:01:26,604 --> 00:01:28,677
+on port eighty eighty.
+
+27
+00:01:28,677 --> 00:01:31,409
+Type: ss -ltn 'sport = :8080'
+
+28
+00:01:31,539 --> 00:01:36,126
+LISTEN means it is waiting for connections, on this address, at port eighty eighty.
+
+29
+00:01:36,676 --> 00:01:44,591
+Now let us knock on that door. Type: curl -sI localhost:8080 | head -1
+
+30
+00:01:44,721 --> 00:01:48,475
+Two hundred, O K. The door was open, and a program answered.
+
+31
+00:01:49,025 --> 00:01:52,652
+Remember: a port is only open while a program is listening on it.
+
+32
+00:01:54,702 --> 00:01:58,393
+Now the two ways to carry data: TCP and UDP.
+
+33
+00:01:58,943 --> 00:02:00,636
+TCP is like a phone call.
+
+34
+00:02:00,636 --> 00:02:01,855
+First you connect.
+
+35
+00:02:01,855 --> 00:02:03,549
+Then every piece arrives,
+
+36
+00:02:03,549 --> 00:02:04,159
+in order,
+
+37
+00:02:04,159 --> 00:02:05,513
+or it is sent again.
+
+38
+00:02:06,063 --> 00:02:11,055
+That makes TCP reliable. Web pages, SSH and email use it.
+
+39
+00:02:11,605 --> 00:02:16,811
+UDP is like sending postcards. No connection, no checking, no resending.
+
+40
+00:02:17,361 --> 00:02:22,971
+That makes UDP fast and light. DNS questions, video calls and games use it.
+
+41
+00:02:23,521 --> 00:02:25,804
+Neither is better. The job decides.
+
+42
+00:02:27,854 --> 00:02:32,483
+Before TCP sends data, it makes a connection with three short messages.
+
+43
+00:02:33,033 --> 00:02:36,063
+One: the client sends SYN, which means: can we talk?
+
+44
+00:02:36,613 --> 00:02:40,005
+Two: the server answers SYN-ACK: yes, and I am ready.
+
+45
+00:02:40,555 --> 00:02:43,520
+Three: the client sends ACK: great, let us begin.
+
+46
+00:02:44,070 --> 00:02:48,230
+This is the three-way handshake. It takes a tiny fraction of a second.
+
+47
+00:02:48,780 --> 00:02:53,303
+If the first message gets no answer, the connection hangs, and then times out.
+
+48
+00:02:55,353 --> 00:02:59,022
+A TCP connection moves through states, and you can see them.
+
+49
+00:02:59,572 --> 00:03:02,346
+LISTEN: a program is waiting for new connections.
+
+50
+00:03:02,896 --> 00:03:08,656
+ESTABLISHED: the handshake is done, and data can flow. The tool shows it as ESTAB.
+
+51
+00:03:09,206 --> 00:03:11,299
+TIME-WAIT: a connection just closed,
+
+52
+00:03:11,299 --> 00:03:14,496
+and the computer waits a short while before reusing it.
+
+53
+00:03:15,046 --> 00:03:18,481
+TIME-WAIT is normal. A busy server shows many of them.
+
+54
+00:03:19,031 --> 00:03:22,482
+SYN-SENT: a client sent its first message and is waiting.
+
+55
+00:03:22,482 --> 00:03:23,572
+If it stays there,
+
+56
+00:03:23,572 --> 00:03:25,388
+something is blocking the way.
+
+57
+00:03:27,438 --> 00:03:30,457
+Let us see two states at once.
+
+58
+00:03:30,457 --> 00:03:35,287
+A client is already connected to our web server.
+
+59
+00:03:35,287 --> 00:03:38,105
+Type: ss -tn 'sport = :8080'
+
+60
+00:03:38,235 --> 00:03:44,400
+ESTAB. One established connection. The other end is the client, on a random high port.
+
+61
+00:03:44,950 --> 00:03:52,843
+Now we make one short request. Type: curl -s localhost:8080 >/dev/null
+
+62
+00:03:52,973 --> 00:04:00,568
+Now list every state on that port. Type: ss -tan 'sport = :8080'
+
+63
+00:04:00,698 --> 00:04:05,989
+LISTEN: the server, waiting. ESTAB: the client that is still holding its connection.
+
+64
+00:04:06,539 --> 00:04:11,083
+And TIME-WAIT: requests that just finished and closed. All three states, live.
+
+65
+00:04:13,133 --> 00:04:14,113
+Now UDP.
+
+66
+00:04:14,113 --> 00:04:21,954
+A small UDP listener is waiting on port ninety-nine ninety-nine.
+
+67
+00:04:21,954 --> 00:04:25,506
+Type: ss -lun 'sport = :9999'
+
+68
+00:04:25,636 --> 00:04:26,135
+UNCONN,
+
+69
+00:04:26,135 --> 00:04:27,703
+short for unconnected.
+
+70
+00:04:27,703 --> 00:04:29,770
+There is no connection state,
+
+71
+00:04:29,770 --> 00:04:31,908
+because UDP has no connection.
+
+72
+00:04:32,458 --> 00:04:37,765
+Now send one message with the tool n c.
+
+73
+00:04:37,765 --> 00:04:40,623
+The dash u means UDP.
+
+74
+00:04:40,623 --> 00:04:46,474
+Type: echo hello | nc -u -w1 127.0.0.1 9999
+
+75
+00:04:46,604 --> 00:04:49,954
+Nothing came back. UDP does not confirm anything.
+
+76
+00:04:50,504 --> 00:04:54,514
+But the listener wrote it down. Type: cat udp.log
+
+77
+00:04:54,644 --> 00:04:57,994
+Got hello. The message arrived, with no handshake at all.
+
+78
+00:05:00,044 --> 00:05:01,687
+One more word: socket.
+
+79
+00:05:02,237 --> 00:05:06,311
+A socket is one end of a connection: an IP address plus a port.
+
+80
+00:05:06,861 --> 00:05:12,387
+A TCP connection is two sockets talking: the client's socket, and the server's socket.
+
+81
+00:05:12,937 --> 00:05:15,110
+The client uses a random high port.
+
+82
+00:05:15,110 --> 00:05:17,346
+The server uses its well-known port,
+
+83
+00:05:17,346 --> 00:05:18,526
+here eighty eighty.
+
+84
+00:05:19,076 --> 00:05:23,119
+That pair of sockets is how the computer keeps many connections apart,
+
+85
+00:05:23,119 --> 00:05:24,793
+even to the same server port.
+
+86
+00:05:26,843 --> 00:05:31,344
+Now, two ways a port says no. First: knock on a door nobody answers.
+
+87
+00:05:31,894 --> 00:05:36,955
+Nothing listens on port eighty eighty-one.
+
+88
+00:05:36,955 --> 00:05:42,860
+Type: curl -s localhost:8081; echo "exit code $?"
+
+89
+00:05:42,990 --> 00:05:44,004
+Exit code seven.
+
+90
+00:05:44,004 --> 00:05:44,575
+For curl,
+
+91
+00:05:44,575 --> 00:05:46,478
+that means: could not connect.
+
+92
+00:05:46,478 --> 00:05:48,190
+The connection was refused,
+
+93
+00:05:48,190 --> 00:05:50,030
+because nothing is listening.
+
+94
+00:05:50,580 --> 00:05:54,333
+Second: two programs cannot share one port.
+
+95
+00:05:54,333 --> 00:05:56,778
+Port eighty eighty is taken,
+
+96
+00:05:56,778 --> 00:06:00,619
+so let us try to start another server on it.
+
+97
+00:06:00,619 --> 00:06:04,809
+Type: python3 -m http.server 8080 2>&1 | tail -1
+
+98
+00:06:04,939 --> 00:06:07,883
+Address already in use. One port, one program.
+
+99
+00:06:08,433 --> 00:06:11,526
+The fix: stop the old program, or choose another port.
+
+100
+00:06:13,576 --> 00:06:15,219
+Match the symptom to the cause.
+
+101
+00:06:15,769 --> 00:06:20,398
+Connection refused: the computer is reachable, but nothing listens on that port.
+
+102
+00:06:20,948 --> 00:06:23,416
+Connection timed out: no answer at all.
+
+103
+00:06:23,416 --> 00:06:25,314
+A firewall may be dropping it,
+
+104
+00:06:25,314 --> 00:06:26,580
+or the host is down.
+
+105
+00:06:27,130 --> 00:06:31,055
+Address already in use: another program already holds that port.
+
+106
+00:06:31,605 --> 00:06:35,659
+Many TIME-WAIT lines: normal after busy traffic. Not an error.
+
+107
+00:06:36,209 --> 00:06:37,400
+Works on the server,
+
+108
+00:06:37,400 --> 00:06:41,627
+but not from outside: the program may listen on the local address only.
+
+109
+00:06:43,677 --> 00:06:45,533
+Watch out for four common myths.
+
+110
+00:06:46,083 --> 00:06:51,182
+Myth one: ports are physical sockets on the machine. They are only numbers in software.
+
+111
+00:06:51,732 --> 00:06:53,628
+Myth two: UDP is the bad one.
+
+112
+00:06:53,628 --> 00:06:55,197
+It is chosen on purpose,
+
+113
+00:06:55,197 --> 00:06:57,812
+when speed matters more than perfection.
+
+114
+00:06:58,362 --> 00:07:02,863
+Myth three: TIME-WAIT means something is broken. It is a normal, short wait.
+
+115
+00:07:03,413 --> 00:07:06,572
+Myth four: port eighty only works for web traffic.
+
+116
+00:07:06,572 --> 00:07:07,773
+It is a convention,
+
+117
+00:07:07,773 --> 00:07:10,048
+and a program can use any free port.
+
+118
+00:07:10,598 --> 00:07:12,070
+Check what is really listening.
+
+119
+00:07:14,120 --> 00:07:16,445
+Here is how you check your own understanding.
+
+120
+00:07:16,995 --> 00:07:20,387
+Explain what a port is, and name three well-known ports.
+
+121
+00:07:20,937 --> 00:07:24,585
+Choose TCP or UDP for a job, and say why.
+
+122
+00:07:25,135 --> 00:07:26,970
+Describe the three-way handshake.
+
+123
+00:07:27,520 --> 00:07:31,296
+Read LISTEN, ESTAB and TIME-WAIT in the s s output.
+
+124
+00:07:31,846 --> 00:07:34,022
+Explain refused versus timed out.
+
+125
+00:07:34,572 --> 00:07:36,812
+Explain why a port can be already in use.
+
+126
+00:07:37,362 --> 00:07:38,983
+To pass, you need all six.
+
+127
+00:07:41,033 --> 00:07:43,316
+Your turn, in the virtual machine you built.
+
+128
+00:07:43,866 --> 00:07:50,266
+One: start a server with python3 -m http.server 8080, and leave it running.
+
+129
+00:07:50,816 --> 00:07:57,941
+Two: in a second terminal, run ss -ltn 'sport = :8080', and find LISTEN.
+
+130
+00:07:58,491 --> 00:08:04,571
+Three: fetch it with curl, list all states with ss -tan, and find the TIME-WAIT line.
+
+131
+00:08:05,121 --> 00:08:08,876
+Four: try to start a second server on the same port, and read the error.
+
+132
+00:08:09,426 --> 00:08:13,948
+Five: stop the first server with control C, and watch the port disappear.
+
+133
+00:08:14,498 --> 00:08:17,805
+Mark yourself on the rubric. Pause the video, and do it now.
+
+134
+00:08:33,355 --> 00:08:34,230
+Quick check.
+
+135
+00:08:34,780 --> 00:08:38,129
+What does a port do, and which three well-known ports can you name?
+
+136
+00:08:38,679 --> 00:08:41,111
+How do TCP and UDP differ?
+
+137
+00:08:41,661 --> 00:08:43,538
+What are the three steps of the handshake?
+
+138
+00:08:44,088 --> 00:08:46,008
+What does connection refused tell you?
+
+139
+00:08:46,558 --> 00:08:50,633
+Objective covered: MC03-O02.
+
+140
+00:08:51,183 --> 00:08:53,252
+Pause the video, and answer out loud.
+
+141
+00:09:03,802 --> 00:09:07,002
+Next: HTTPS and TLS certificates.
+
+142
+00:09:07,552 --> 00:09:09,430
+Subscribe, so you do not miss it.

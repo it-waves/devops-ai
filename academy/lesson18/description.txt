@@ -1,0 +1,31 @@
+Lesson 18 of the DevOps Engineering Bootcamp, in the computer networking masterclass. Learn how ports let one computer run many network programs, the difference between TCP and UDP, the three-way handshake, and how to read connection states (LISTEN, ESTAB, TIME-WAIT). Every idea is checked live in a real terminal: well-known ports, a listening web server, a held connection, a UDP message, a refused connection and an address already in use. Includes a symptom checklist, a pass/fail rubric and a hands-on task to repeat in the virtual machine from Lesson 13.
+
+Chapters
+0:00 Every conversation needs a door number
+0:24 Ports
+1:03 Live: ports and listening
+1:54 TCP and UDP
+2:27 The three-way handshake
+2:54 Connection states
+3:26 Live: connection states
+4:12 Live: UDP
+4:59 Sockets
+5:26 Live: when a port says no
+6:13 Symptoms and causes
+6:43 Common myths
+7:13 Pass or fail rubric
+7:40 Your turn
+8:32 Quick check
+
+Objectives covered: MC03-O02
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 (the typing is timed to the narration, and the yellow highlights were added afterwards). The small web server on port 8080, the UDP listener on port 9999 and the held connection were started on this computer just before recording, so the output matches what you will see when you do the same; port numbers and addresses on your machine will differ. The door illustration in the opening is not a photo. The hands-on task is unverified until you run it yourself.
+
+Previous lesson: https://youtu.be/AqUkNak5Ezs
+Next: HTTPS and TLS certificates.
+
+All lesson files: https://github.com/it-waves/devops-ai
+
+Subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #networking #tcp #udp #devopsbootcamp
