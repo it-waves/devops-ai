@@ -1,0 +1,36 @@
+Lesson 15 of the DevOps Engineering Bootcamp. Learn the main parts of a server and how each one fails: CPU, memory, disk, network, services and logs. Every idea is shown live in a real terminal: finding and stopping a runaway process, reading memory with free, filling and freeing a disk, running a web server and telling "connection refused" from a 404, and finding the cause in a log with tail and grep. Includes a four-question troubleshooting routine, a pass/fail rubric and a hands-on task to repeat in the virtual machine from Lesson 13.
+
+Chapters
+0:00 Servers fail in patterns
+0:20 The main parts
+0:49 CPU
+1:13 Live: a busy CPU
+2:06 Memory
+2:34 Live: memory limits
+3:17 Disk
+3:42 Live: a full disk
+4:35 Services and ports
+5:06 Live: a service down
+6:31 Logs
+6:54 Live: read a log
+7:29 The routine
+7:47 Symptoms and causes
+8:14 Common myths
+8:41 Pass or fail rubric
+9:10 Your turn
+9:54 Quick check
+
+Objectives covered: MC02-O07
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 (the typing is timed to the narration, and the yellow highlights were added afterwards). Two demos use a safe stand-in: the memory demo caps the program at 200 MB with ulimit to mimic a small server, and the disk demo uses a tiny 10 MB practice disk held in memory so nothing real can fill up. The demo user is called student. The hands-on task is unverified until you run it yourself.
+
+Previous lesson: https://youtu.be/vbSVwbOrqG8
+Next lesson: tracing one web request.
+
+All lesson files: https://github.com/it-waves/devops-ai
+
+Photo: server farm, NASA, public domain, via Wikimedia Commons.
+
+Subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #linux #troubleshooting #servers #devopsbootcamp

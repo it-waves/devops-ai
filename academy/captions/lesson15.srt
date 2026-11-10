@@ -1,0 +1,627 @@
+1
+00:00:00,500 --> 00:00:03,935
+A server is just a computer that other computers depend on.
+
+2
+00:00:04,485 --> 00:00:06,426
+When it breaks, people notice quickly.
+
+3
+00:00:06,976 --> 00:00:10,444
+The good news: a handful of parts cause most failures,
+
+4
+00:00:10,444 --> 00:00:13,077
+and each one fails in a recognisable way.
+
+5
+00:00:13,627 --> 00:00:18,534
+Today you meet those parts, and watch each one fail, live, in a safe practice setup.
+
+6
+00:00:20,584 --> 00:00:22,845
+Every server has the same main parts.
+
+7
+00:00:23,395 --> 00:00:25,017
+The CPU does the work.
+
+8
+00:00:25,567 --> 00:00:30,239
+Memory, or RAM, is the fast workspace for whatever is running right now.
+
+9
+00:00:30,789 --> 00:00:32,858
+The disk stores data for the long term.
+
+10
+00:00:33,408 --> 00:00:35,733
+The network connects the server to everyone else.
+
+11
+00:00:36,283 --> 00:00:39,057
+Services are the programs that wait for requests.
+
+12
+00:00:39,607 --> 00:00:43,425
+And logs are the diary where those programs write down what happened.
+
+13
+00:00:43,975 --> 00:00:47,922
+Learn which part fails in which way, and troubleshooting gets much easier.
+
+14
+00:00:49,972 --> 00:00:51,423
+First, the CPU.
+
+15
+00:00:51,973 --> 00:00:55,237
+It runs instructions, billions of times every second.
+
+16
+00:00:55,787 --> 00:00:59,968
+Each core does one thing at a time, so a busy server shares its cores out.
+
+17
+00:01:00,518 --> 00:01:04,294
+When one program hogs the CPU, everything else slows down.
+
+18
+00:01:04,844 --> 00:01:07,937
+The symptom: slow responses, lag, and a high load.
+
+19
+00:01:08,487 --> 00:01:11,879
+The first check: which process is using the most CPU?
+
+20
+00:01:13,929 --> 00:01:16,254
+Let us watch a CPU problem happen.
+
+21
+00:01:16,804 --> 00:01:19,556
+First, how many cores? Type: nproc
+
+22
+00:01:19,686 --> 00:01:21,436
+Two cores. That is our budget.
+
+23
+00:01:21,986 --> 00:01:28,108
+Now start a program that never rests. Type: yes > /dev/null &
+
+24
+00:01:28,238 --> 00:01:32,356
+The ampersand runs it in the background, and the shell gives it a job number.
+
+25
+00:01:32,906 --> 00:01:43,231
+Now ask who is busiest. Type: ps -u student -o pid,pcpu,comm --sort=-pcpu
+
+26
+00:01:43,361 --> 00:01:47,222
+There it is: yes, using about ninety-nine percent of one core.
+
+27
+00:01:47,772 --> 00:01:51,804
+That is a runaway process. Stop it. Type: kill %1
+
+28
+00:01:51,934 --> 00:01:55,198
+Now ask again. Press the up arrow twice, then Enter.
+
+29
+00:01:58,748 --> 00:01:59,088
+Gone.
+
+30
+00:01:59,088 --> 00:02:00,584
+The CPU is free again.
+
+31
+00:02:00,584 --> 00:02:03,168
+The pattern: find the busiest process,
+
+32
+00:02:03,168 --> 00:02:05,276
+then decide whether to stop it.
+
+33
+00:02:07,326 --> 00:02:08,350
+Next, memory.
+
+34
+00:02:08,900 --> 00:02:13,743
+Memory holds the data of every running program, and it is much faster than the disk.
+
+35
+00:02:14,293 --> 00:02:15,358
+But it is limited.
+
+36
+00:02:15,358 --> 00:02:16,365
+When it runs out,
+
+37
+00:02:16,365 --> 00:02:18,437
+the system starts swapping to disk,
+
+38
+00:02:18,437 --> 00:02:19,562
+which is very slow.
+
+39
+00:02:20,112 --> 00:02:21,698
+If it runs out completely,
+
+40
+00:02:21,698 --> 00:02:24,015
+the system kills a program to survive.
+
+41
+00:02:24,015 --> 00:02:26,149
+That event is called out of memory.
+
+42
+00:02:26,699 --> 00:02:30,774
+The symptom: sudden slowness, or a program that vanishes without warning.
+
+43
+00:02:31,324 --> 00:02:33,180
+The first check: free dash h.
+
+44
+00:02:35,230 --> 00:02:38,131
+Let us look at memory. Type: free -h
+
+45
+00:02:38,261 --> 00:02:42,485
+Total is what exists. Available is what a new program can really use.
+
+46
+00:02:43,035 --> 00:02:47,686
+Now a greedy program. Look at it first. Type: cat hog.py
+
+47
+00:02:47,816 --> 00:02:50,376
+It asks for five hundred megabytes in one go.
+
+48
+00:02:50,926 --> 00:02:53,928
+To copy a small server,
+
+49
+00:02:53,928 --> 00:02:59,279
+we cap this run at two hundred megabytes.
+
+50
+00:02:59,279 --> 00:03:06,457
+Type: (ulimit -v 200000; python3 hog.py) 2>&1 | tail -1
+
+51
+00:03:06,587 --> 00:03:09,829
+Memory error. The program asked for more than it was allowed.
+
+52
+00:03:10,379 --> 00:03:12,033
+On a real server with no cap,
+
+53
+00:03:12,033 --> 00:03:13,915
+the kernel would kill it instead,
+
+54
+00:03:13,915 --> 00:03:15,969
+and the log would say out of memory.
+
+55
+00:03:18,019 --> 00:03:19,022
+Now the disk.
+
+56
+00:03:19,572 --> 00:03:22,409
+The disk keeps your files, databases, and logs.
+
+57
+00:03:22,959 --> 00:03:27,418
+A full disk is one of the most common outages, and one of the easiest to miss.
+
+58
+00:03:27,968 --> 00:03:32,597
+When there is no room, databases stop writing, logs stop, and programs crash.
+
+59
+00:03:33,147 --> 00:03:35,515
+The symptom: no space left on device.
+
+60
+00:03:36,065 --> 00:03:40,865
+The first checks: d f to see which disk is full, then d u to see what is filling it.
+
+61
+00:03:42,915 --> 00:03:47,608
+Let us fill a disk, safely. We use a small practice disk of only ten megabytes.
+
+62
+00:03:48,158 --> 00:03:50,078
+Type: df -h data
+
+63
+00:03:50,208 --> 00:03:52,790
+Size ten megabytes, almost nothing used.
+
+64
+00:03:53,340 --> 00:04:05,244
+Now write twenty megabytes into it. Type: dd if=/dev/zero of=data/big.bin bs=1M count=20
+
+65
+00:04:05,374 --> 00:04:08,083
+No space left on device. The disk is full.
+
+66
+00:04:08,633 --> 00:04:11,577
+Check again. Type: df -h data
+
+67
+00:04:11,707 --> 00:04:13,200
+One hundred percent used.
+
+68
+00:04:13,750 --> 00:04:17,740
+Who is using it? Type: du -sh data/*
+
+69
+00:04:17,870 --> 00:04:21,496
+One file, big dot bin, ten megabytes. Found the culprit.
+
+70
+00:04:22,046 --> 00:04:25,609
+Remove it. Type: rm data/big.bin
+
+71
+00:04:25,739 --> 00:04:28,939
+One last check. Type: df -h data
+
+72
+00:04:29,069 --> 00:04:33,634
+Back to zero. Check disk space early, before a full disk stops your service.
+
+73
+00:04:35,684 --> 00:04:39,801
+Now services: the programs that answer requests, like a web server.
+
+74
+00:04:40,351 --> 00:04:43,594
+A service must be running, and it must be listening on a port.
+
+75
+00:04:44,144 --> 00:04:48,816
+A port is a numbered door on the server. Only one program can hold each door.
+
+76
+00:04:49,366 --> 00:04:50,841
+Clients get codes back.
+
+77
+00:04:50,841 --> 00:04:52,509
+Two hundred means success.
+
+78
+00:04:52,509 --> 00:04:55,396
+Four hundred four means that page is missing.
+
+79
+00:04:55,396 --> 00:04:58,603
+Five hundred range means the server itself failed.
+
+80
+00:04:59,153 --> 00:05:01,065
+The symptom: connection refused,
+
+81
+00:05:01,065 --> 00:05:02,080
+or an error code.
+
+82
+00:05:02,080 --> 00:05:03,932
+The first check: is it running,
+
+83
+00:05:03,932 --> 00:05:05,127
+and is it listening?
+
+84
+00:05:07,177 --> 00:05:10,057
+Let us run a tiny web server that comes with Python.
+
+85
+00:05:10,607 --> 00:05:20,548
+Type: python3 -m http.server 8080 >server.log 2>&1 &
+
+86
+00:05:20,678 --> 00:05:29,745
+Is it reachable? Ask for its headline. Type: curl -sI localhost:8080 | head -1
+
+87
+00:05:29,875 --> 00:05:32,222
+Two hundred, O K. The service is up.
+
+88
+00:05:32,772 --> 00:05:42,777
+Now ask for a page that does not exist. Type: curl -sI localhost:8080/nope | head -1
+
+89
+00:05:42,907 --> 00:05:47,984
+Four hundred four. The server is fine; that page is missing. A different problem.
+
+90
+00:05:48,534 --> 00:06:00,588
+Now start a second copy on the same port. Type: python3 -m http.server 8080 2>&1 | tail -1
+
+91
+00:06:00,718 --> 00:06:04,259
+Address already in use. Only one program can hold a port.
+
+92
+00:06:04,809 --> 00:06:11,081
+Who is listening? Type: ss -ltn sport = :8080
+
+93
+00:06:11,211 --> 00:06:17,419
+The state is listen, on port eight zero eight zero. Now stop the server. Type: kill %1
+
+94
+00:06:17,549 --> 00:06:23,416
+Ask again. Type: curl -sS localhost:8080
+
+95
+00:06:23,546 --> 00:06:24,650
+Failed to connect.
+
+96
+00:06:24,650 --> 00:06:25,939
+Nothing is listening,
+
+97
+00:06:25,939 --> 00:06:27,350
+so the service is down.
+
+98
+00:06:27,350 --> 00:06:29,988
+That is what connection refused looks like.
+
+99
+00:06:32,038 --> 00:06:33,211
+Last, the logs.
+
+100
+00:06:33,761 --> 00:06:38,412
+When a service fails, the screen often shows nothing. The reason is in its log.
+
+101
+00:06:38,962 --> 00:06:43,399
+Logs record each request, each error, each start and stop, with a time.
+
+102
+00:06:43,949 --> 00:06:47,590
+Two tools do most of the work: tail shows the end of a file,
+
+103
+00:06:47,590 --> 00:06:49,411
+and grep finds matching lines.
+
+104
+00:06:49,961 --> 00:06:52,457
+Rule: do not guess. Read the log first.
+
+105
+00:06:54,507 --> 00:06:58,603
+This log came from a real run of the same web server. Let us read it.
+
+106
+00:06:59,153 --> 00:07:03,590
+Show the last lines. Type: tail -n 4 server.log
+
+107
+00:07:03,720 --> 00:07:07,688
+Each line has the client, the time, the request, and the result code.
+
+108
+00:07:08,238 --> 00:07:13,102
+Now find only the problems. Type: grep 404 server.log
+
+109
+00:07:13,232 --> 00:07:16,752
+These are the failed requests, with the reason: file not found.
+
+110
+00:07:17,302 --> 00:07:21,441
+Count them. Type: grep -c 404 server.log
+
+111
+00:07:21,571 --> 00:07:22,990
+Two lines: the request,
+
+112
+00:07:22,990 --> 00:07:24,533
+and the reason it failed.
+
+113
+00:07:24,533 --> 00:07:27,864
+That is how a log turns a vague complaint into a fact.
+
+114
+00:07:29,914 --> 00:07:32,239
+Put it together as one routine, in order.
+
+115
+00:07:32,789 --> 00:07:34,453
+One: is the service running?
+
+116
+00:07:35,003 --> 00:07:37,222
+Two: is it reachable, on the right port?
+
+117
+00:07:37,772 --> 00:07:40,887
+Three: are the CPU, memory, and disk exhausted?
+
+118
+00:07:41,437 --> 00:07:43,015
+Four: what do the logs say?
+
+119
+00:07:43,565 --> 00:07:46,168
+Work in that order, and write down what you find.
+
+120
+00:07:48,218 --> 00:07:49,818
+Match the symptom to the part.
+
+121
+00:07:50,368 --> 00:07:54,805
+Everything is slow: CPU or memory. Check with p s and free.
+
+122
+00:07:55,355 --> 00:07:58,257
+A program vanished: out of memory. Check the logs.
+
+123
+00:07:58,807 --> 00:08:02,817
+No space left on device: disk. Check with d f and d u.
+
+124
+00:08:03,367 --> 00:08:08,701
+Connection refused: the service is down or not listening. Check with s s and curl.
+
+125
+00:08:09,251 --> 00:08:13,155
+Four oh four: the service is fine. The page or path is wrong.
+
+126
+00:08:15,205 --> 00:08:17,061
+Watch out for four common myths.
+
+127
+00:08:17,611 --> 00:08:22,646
+Myth one: slow means the network. Often it is the CPU, memory, or disk.
+
+128
+00:08:23,196 --> 00:08:28,422
+Myth two: a full disk only means no new files. It can stop a database completely.
+
+129
+00:08:28,972 --> 00:08:33,666
+Myth three: four oh four means the server is down. It means the server answered.
+
+130
+00:08:34,216 --> 00:08:38,632
+Myth four: restart first, look later. A restart can erase the evidence.
+
+131
+00:08:39,182 --> 00:08:40,270
+Check, then act.
+
+132
+00:08:42,320 --> 00:08:44,645
+Here is how you check your own understanding.
+
+133
+00:08:45,195 --> 00:08:49,675
+Name the six parts: CPU, memory, disk, network, services, logs.
+
+134
+00:08:50,225 --> 00:08:53,297
+Find the busiest process, and stop a runaway one.
+
+135
+00:08:53,847 --> 00:08:56,471
+Read memory with free, and explain available.
+
+136
+00:08:57,021 --> 00:08:58,963
+Find a full disk, and what fills it.
+
+137
+00:08:59,513 --> 00:09:03,289
+Tell down from missing: connection refused versus four oh four.
+
+138
+00:09:03,839 --> 00:09:06,249
+Find a failed request in a log with grep.
+
+139
+00:09:06,799 --> 00:09:08,421
+To pass, you need all six.
+
+140
+00:09:10,471 --> 00:09:12,754
+Your turn, in the virtual machine you built.
+
+141
+00:09:13,304 --> 00:09:17,016
+One: run nproc and free dash h, and write down your numbers.
+
+142
+00:09:17,566 --> 00:09:20,958
+Two: start a yes process, find it with p s, and kill it.
+
+143
+00:09:21,508 --> 00:09:25,817
+Three: run d f on your system, and find your biggest folder with d u.
+
+144
+00:09:26,367 --> 00:09:28,404
+Four: start the Python web server,
+
+145
+00:09:28,404 --> 00:09:30,620
+get a two hundred and a four oh four,
+
+146
+00:09:30,620 --> 00:09:32,596
+then stop it and see the refusal.
+
+147
+00:09:33,146 --> 00:09:35,941
+Five: grep your own server log for four oh four.
+
+148
+00:09:36,491 --> 00:09:39,798
+Mark yourself on the rubric. Pause the video, and do it now.
+
+149
+00:09:55,348 --> 00:09:56,223
+Quick check.
+
+150
+00:09:56,773 --> 00:09:58,565
+Name the six parts of a server.
+
+151
+00:09:59,115 --> 00:10:01,355
+Which command finds the busiest process?
+
+152
+00:10:01,905 --> 00:10:04,209
+What does no space left on device point to?
+
+153
+00:10:04,759 --> 00:10:08,279
+What is the difference between connection refused and four oh four?
+
+154
+00:10:08,829 --> 00:10:13,394
+Objective covered: MC02-O07.
+
+155
+00:10:13,944 --> 00:10:16,013
+Pause the video, and answer out loud.
+
+156
+00:10:26,563 --> 00:10:28,953
+Next lesson: tracing one web request.
+
+157
+00:10:29,503 --> 00:10:31,380
+Subscribe, so you do not miss it.

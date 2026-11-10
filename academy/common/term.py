@@ -43,7 +43,7 @@ def cue_times(V, dur, scene):
         return C, round(t - 0.4 + 0.9, 3), cues[0][0]
 class Run:
     def __init__(s, LD, V, scene, delay=75):
-        s.LD = LD; s.V = V; s.scene = scene; s.delay = delay; s.dur = json.load(open(LD + '/vo/dur.json'))
+        s.clear = getattr(V, 'CLEAR', False); s.LD = LD; s.V = V; s.scene = scene; s.delay = delay; s.dur = json.load(open(LD + '/vo/dur.json'))
         s.C, s.D, s.first = cue_times(V, s.dur, scene); s.out = LD + f'/build/clip_{scene}.mp4'; os.makedirs(LD + '/build', exist_ok=True)
         s.ff = rec_start(s.out, s.D + 6); time.sleep(1.0); s.T0 = time.time(); s.warn = []
     def at(s, cid, off=0.0):
@@ -55,7 +55,9 @@ class Run:
         need = len(text) * s.delay / 1000.0 + 0.25; d = s.dur[cid]
         off = max(0.3, d - need)
         if d - need < 0.3: s.warn.append(f'{cid}: typing {need:.1f}s > cue {d:.1f}s -> add EXTRA {need + 0.3 - d:.1f}')
-        s.at(cid, off); typ(text, s.delay)
+        s.at(cid, off)
+        if s.clear: key('ctrl+l'); time.sleep(0.2)
+        typ(text, s.delay)
         if enter: key('Return')
     def keys(s, cid, ks, off=None):
         s.at(cid, s.dur[cid] - 1.8 if off is None else off)
