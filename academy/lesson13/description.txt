@@ -1,0 +1,34 @@
+Lesson 13 of the DevOps Engineering Bootcamp. Set up a disposable Linux virtual machine you can break, delete and rebuild: your options (VirtualBox, Multipass, WSL 2, cloud), sizing, how to download VirtualBox and the Ubuntu Server image, a live screen recording of the VirtualBox new-machine wizard, logging in over SSH with a key, real SSH output, common errors, and snapshots. Includes a pass/fail rubric and a hands-on task.
+
+Chapters
+0:00 A safe place to practice
+0:16 Why disposable
+0:34 Your options
+1:04 Size and release
+1:30 Download VirtualBox
+1:52 Download Ubuntu Server
+2:26 The install
+3:02 VirtualBox wizard
+4:06 Console and SSH
+4:33 Real demo
+5:19 Common errors
+5:47 Snapshot and rebuild
+6:11 Common myths
+6:43 Pass or fail rubric
+7:07 Your turn
+7:53 Quick check
+
+Objectives covered: MC02-O05
+
+Honest notes: the download pages are real screenshots; the VirtualBox wizard is a real screen recording and the SSH output is real, both from a Linux sandbox (VirtualBox 7.0, Linux build; the website now offers a newer version, so yours will differ slightly). The sandbox cannot start virtual machines, so the walkthrough stops after the machine is created. The Windows VirtualBox installer, the Multipass commands and the "Connection timed out" message are not captured here. The hands-on task is unverified until you run it yourself.
+
+Previous lesson: https://youtu.be/-A6QOWIphU4
+Next lesson: files, text, encodings, and paths.
+
+All lesson files: https://github.com/it-waves/devops-ai
+
+Photo: Derrick Coetzee, CC0, via Wikimedia Commons.
+
+Subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #linux #virtualbox #ssh #devopsbootcamp

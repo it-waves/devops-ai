@@ -43,13 +43,38 @@ SCENES = [
   c('s4', "Choose a long term support release of Ubuntu Server, because it is widely documented.", "Choose an L T S, long term support, release of Ubuntu Server, because it is widely documented."),
   c('s5', "Server means no desktop, just the command line, which is exactly what we want."),
  ]),
+ ('dlvbox', [
+  c('d1', "Before the wizard, you need two downloads. First, VirtualBox itself."),
+  c('d2', "Open virtualbox.org, and go to Downloads. On Windows, choose Windows hosts. On a Mac or Linux, choose yours.", "Open virtualbox dot org, and go to Downloads. On Windows, choose Windows hosts. On a Mac or Linux, choose yours."),
+  c('d3', "Run the file you download. You do not need the Extension Pack for this lab."),
+  c('d4', "Your version number will be newer than mine, and that is fine."),
+ ]),
+ ('dlubuntu', [
+  c('u1', "Second, the Ubuntu Server image."),
+  c('u2', "Open ubuntu.com slash download slash server, and press Download. Choose the Intel or AMD 64 bit one.", "Open ubuntu dot com slash download slash server, and press Download. Choose the Intel or AMD sixty four bit one."),
+  c('u3', "It is about three gigabytes, so start it on a good connection."),
+  c('u4', "The file ends in ISO. That is a disk image the installer boots from. Remember where you saved it."),
+  c('u5', "At recording time, the latest long term support release was Ubuntu 26.04.1.", "At recording time, the latest long term support release was Ubuntu twenty six oh four point one."),
+  c('u6', "Yours may be newer. Choose the current long term support release."),
+ ]),
  ('install', [
-  c('i1', "Here is the install, in two ways."),
-  c('i2', "With VirtualBox: download the Ubuntu Server ISO, create a machine with those sizes, and start it from the ISO."),
-  c('i3', "The installer asks for a disk, a user name, and a password. Choose a throwaway user, and a throwaway password."),
-  c('i4', "Tick the option to install the OpenSSH server, so you can log in remotely later.", "Tick the option to install the open S S H server, so you can log in remotely later."),
+  c('i1', "Now the install, in two ways."),
+  c('i2', "With VirtualBox on Windows: run the installer you downloaded, and accept the defaults. It may briefly interrupt your network, and ask to install drivers. Allow them."),
+  c('i3', "Then open VirtualBox, and create the machine. We do that next."),
+  c('i4', "Later, inside the Ubuntu installer, choose a throwaway user and password, and tick the OpenSSH server option.", "Later, inside the Ubuntu installer, choose a throwaway user and password, and tick the open S S H server option."),
   c('i5', "With Multipass, one command does all of it."),
   c('i6', "Launch creates the machine, shell opens a terminal inside it, and list shows what is running."),
+ ]),
+ ('vbox', [
+  c('b1', "Let us walk through the VirtualBox wizard."),
+  c('b2', "These are real screenshots, captured from VirtualBox running in the sandbox."),
+  c('b3', "Step one: name the machine, choose Linux, and the Ubuntu version. This is also where you pick your ISO file."),
+  c('b4', "Step two: memory and processors. Two gigabytes, and two processors."),
+  c('b5', "Step three: the virtual disk. Twenty gigabytes. It grows as you use it, so it does not take all of that at once."),
+  c('b6', "Step four: the summary. Check it, then press Finish."),
+  c('b7', "The machine now appears in the list, powered off. Press Start, and the installer boots from the ISO."),
+  c('b8', "Here, we stop, because the sandbox cannot start virtual machines."),
+  c('b9', "On Windows, you first run the VirtualBox installer. I have not captured that part, but the wizard you just saw is very similar."),
  ]),
  ('access', [
   c('a1', "Now: how do you get in?"),
@@ -113,8 +138,8 @@ SCENES = [
   c('z5', "Pause the video, and answer out loud."), c('z6', "Next lesson: files, text, encodings, and paths."), c('z7', "Subscribe, so you do not miss it."),
  ]),
 ]
-EXTRA = {'h4': 0.5, 'w5': 0.5, 'o7': 0.5, 's5': 0.5, 'i6': 0.5, 'a6': 0.5, 'e8': 0.5, 'x5': 0.5, 't5': 0.5, 'm6': 0.5, 'r9': 0.5, 'y8': 12.0, 'z5': 10.0}
-CHAP = {'why': 'Why disposable', 'options': 'Your options', 'size': 'Size and release', 'install': 'The install', 'access': 'Console and SSH', 'demo': 'Real demo', 'errors': 'Common errors',
+EXTRA = {'b3': 4.0, 'b4': 2.0, 'b5': 2.5, 'b6': 2.5, 'b7': 1.5, 'd4': 0.5, 'u6': 0.5, 'b9': 0.5, 'h4': 0.5, 'w5': 0.5, 'o7': 0.5, 's5': 0.5, 'i6': 0.5, 'a6': 0.5, 'e8': 0.5, 'x5': 0.5, 't5': 0.5, 'm6': 0.5, 'r9': 0.5, 'y8': 12.0, 'z5': 10.0}
+CHAP = {'why': 'Why disposable', 'options': 'Your options', 'size': 'Size and release', 'dlvbox': 'Download VirtualBox', 'dlubuntu': 'Download Ubuntu Server', 'install': 'The install', 'vbox': 'VirtualBox wizard', 'access': 'Console and SSH', 'demo': 'Real demo', 'errors': 'Common errors',
         'reset': 'Snapshot and rebuild', 'myths': 'Common myths', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}
 def head(title, sub, t): return [El(T('Fundamentals  ·  Lesson 13', 'b', 30, ACC), 100, 120, t), El(T(title, 'x', 64), 100, 160, t + 0.1), El(T(sub, 'm', 32, MUTED, maxw=1200), 100, 245, t + 0.4)]
 def takeaway(s, y, t, col=None, w=1500, size=38): return El(T(s, 'b', size, col or WARN, maxw=w), 100, y, t)
@@ -162,14 +187,36 @@ def s_size(C, D, dur):
     E.append(takeaway('Never give it more than you can spare.', 840, C['s3'] + 0.0, GOOD, 1600)); return E
 def s_install(C, D, dur):
     E = head('The install', 'Two ways in.', C['i1']); E.append(ill(C['i1'] + 0.5, 1400, 130))
-    st = [('1  Download the Ubuntu Server ISO', 'i2'), ('2  Create a machine: 2 CPUs, 2 GB, 20 GB', 'i2'), ('3  Start it from the ISO', 'i2'), ('4  Throwaway user and password', 'i3'), ('5  Tick the OpenSSH server option', 'i4')]
-    E.append(Pop(card(900, 520, ACC, 'VirtualBox', [], 40), 100, 330, C['i2']))
-    for i, (s, cid) in enumerate(st): E.append(El(T(s, 'm', 30, TXT, maxw=840), 140, 435 + i * 80, C[cid] + (0.4 * (i if cid == 'i2' else 0)), anim='fade'))
+    st = [('1  Run the installer you downloaded', 'i2', 0), ('2  Accept the defaults, press Next', 'i2', 0.8), ('3  Allow the driver prompt', 'i2', 1.6), ('4  Finish, then open VirtualBox', 'i3', 0), ('5  Ubuntu installer: throwaway user, password', 'i4', 0), ('6  Tick the OpenSSH server option', 'i4', 1.2)]
+    E.append(Pop(card(900, 520, ACC, 'VirtualBox on Windows', [], 40), 100, 330, C['i2']))
+    for i, (s_, cid, off) in enumerate(st): E.append(El(T(s_, 'm', 28, TXT, maxw=840), 140, 420 + i * 70, C[cid] + off, anim='fade'))
     E.append(Pop(card(780, 520, VIO, 'Multipass', [], 40), 1040, 330, C['i5']))
     cmds = [('$ multipass launch --name lab', ACC), ('$ multipass shell lab', ACC), ('$ multipass list', ACC)]
-    for j, (s, col) in enumerate(cmds): E.append(El(mono(s, col), 1070, 430 + j * 64, C['i5'] + 0.6 + (j * 1.0 if j else 0), anim='fade'))
+    for j, (s_, col) in enumerate(cmds): E.append(El(mono(s_, col), 1070, 430 + j * 64, C['i5'] + 0.6 + (j * 1.0 if j else 0), anim='fade'))
     E.append(El(T('Launch creates it, shell opens it, list shows it.', 'm', 28, MUTED, maxw=700), 1070, 660, C['i6'], anim='fade'))
     E.append(takeaway('Either way: a Linux machine you can throw away.', 900, C['i6'] + 0.8, GOOD, 1700)); return E
+def s_dlvbox(C, D, dur):
+    E = head('Download VirtualBox', 'Download one of two.', C['d1']); E.append(real(C['d2'], 'REAL SCREENSHOT  ·  the official website', 1260, 296))
+    E.append(Pop(photo('/home/claude/academy/lesson13/assets/dl/ann_vbox.jpg', 1100, 584, ACC), 100, 336, C['d2']))
+    it = [('Website', 'virtualbox.org, then Downloads', ACC, 'd2'), ('Click', 'Your computer: Windows hosts', WARN, 'd2'), ('Then', 'Run the file you download', GOOD, 'd3')]
+    for i, (n, t_, col, cid) in enumerate(it): E.append(Pop(card(560, 130, col, n, [(t_, TXT)], 36, 28), 1260, 370 + i * 150 + (0.0), C[cid] + 0.4 * i))
+    E.append(takeaway('No Extension Pack needed for this lab.', 960, C['d3'] + 0.5, GOOD, 1100, 34)); return E
+def s_dlubuntu(C, D, dur):
+    E = head('Download Ubuntu Server', 'The disk image for your machine.', C['u1']); E.append(real(C['u2'], 'REAL SCREENSHOT  ·  the official website', 1260, 296))
+    E.append(Pop(photo('/home/claude/academy/lesson13/assets/dl/ann_ubuntu.jpg', 1100, 409, ACC), 100, 336, C['u2']))
+    it = [('Website', 'ubuntu.com/download/server', ACC, 'u2'), ('Click', 'Download, Intel or AMD 64-bit', WARN, 'u2'), ('Keep', 'The .iso file', GOOD, 'u4')]
+    for i, (n, t_, col, cid) in enumerate(it): E.append(Pop(card(560, 130, col, n, [(t_, TXT)], 36, 28), 1260, 370 + i * 150, C[cid] + 0.4 * i))
+    trio_i = [('File type', '.iso, a disk image', VIO, 'u4'), ('Size', 'About 3 GB', PINK, 'u3'), ('Version', 'Latest long term support', ACC, 'u6')]
+    for i, (n, t_, col, cid) in enumerate(trio_i): E.append(Pop(card(340, 170, col, n, [(t_, TXT)], 36, 28), 100 + i * 380, 790, C[cid]))
+    return E
+def s_vbox(C, D, dur):
+    E = head('VirtualBox wizard', 'Watch it happen, step by step.', C['b1']); E.append(real(C['b2'], 'REAL RECORDING  ·  VirtualBox 7.0', 1260, 296))
+    E.append(Pop(card(1100, 600, ACC, '', [], 4), 100, 330, C['b2']))
+    steps = [('Step 1  ·  Name and type', ACC, 'b3'), ('Step 2  ·  2 GB, 2 CPUs', VIO, 'b4'), ('Step 3  ·  20 GB disk', GOOD, 'b5'), ('Step 4  ·  Check, Finish', WARN, 'b6'), ('Step 5  ·  Start the VM', PINK, 'b7')]
+    for i, (n, col, cid) in enumerate(steps):
+        E.append(Pop(card(560, 100, col, '', [(n, TXT)], 4, 32), 1260, 360 + i * 120, C[cid] + 0.2))
+    E.append(El(T('Sandbox limit: it cannot start a machine, so we stop after creating it.', 'm', 24, MUTED, maxw=1100), 100, 955, C['b8'], anim='fade'))
+    E.append(El(T('Windows: run the VirtualBox installer first. Not captured here.', 'm', 24, MUTED, maxw=1100), 100, 990, C['b9'], anim='fade')); return E
 def s_access(C, D, dur):
     E = head('Console and SSH', 'Two ways to get in.', C['a1'])
     E.append(Pop(card(560, 150, MUTED, 'Console', [('Always works, but awkward', TXT)], 40, 28), 100, 330, C['a2']))
@@ -246,8 +293,8 @@ def s_recap(C, D, dur):
     pb = badge('PAUSE  ·  answer aloud', F('b', 34), INK, PINK, padx=26, pady=14); E.append(Pop(pb, 100, 860, C['z5']))
     E.append(El(T('Next: files, text, encodings, and paths', 'x', 46, ACC, maxw=1500), 100, 960, C['z6'])); E.append(Pop(badge('SUBSCRIBE', F('b', 34), INK, GOOD, padx=26, pady=14), 100 + pb.width + 40, 860, C['z7']))
     return E
-FN = dict(hook=s_hook, why=s_why, options=s_options, size=s_size, install=s_install, access=s_access, demo=s_demo, errors=s_errors, reset=s_reset, myths=s_myths, rubric=s_rubric, yourturn=s_yourturn, recap=s_recap)
-_GL = dict(why=('eye', GOOD), options=('swap', VIO), size=('gear', WARN), install=('steps', ACC), access=('link', ACC), demo=('eye', GOOD), errors=('question', WARN), reset=('loop', GOOD), myths=('question', VIO), rubric=('test', GOOD), yourturn=('board', VIO))
+FN = dict(hook=s_hook, why=s_why, options=s_options, size=s_size, install=s_install, dlvbox=s_dlvbox, dlubuntu=s_dlubuntu, vbox=s_vbox, access=s_access, demo=s_demo, errors=s_errors, reset=s_reset, myths=s_myths, rubric=s_rubric, yourturn=s_yourturn, recap=s_recap)
+_GL = dict(why=('eye', GOOD), options=('swap', VIO), size=('gear', WARN), install=('steps', ACC), vbox=('screen', ACC), dlvbox=('link', ACC), dlubuntu=('link', GOOD), access=('link', ACC), demo=('eye', GOOD), errors=('question', WARN), reset=('loop', GOOD), myths=('question', VIO), rubric=('test', GOOD), yourturn=('board', VIO))
 def _wrap(name, fn):
     first = dict(SCENES)[name][0][0]
     def w(C, D, dur):
