@@ -78,7 +78,7 @@ One lesson per objective, then the mastery scenario. Real Ubuntu 24.04 terminal,
 | L40 | MC05-O04 | grep, sed, awk, cut, sort, find | Next lesson: pipes, file descriptors, temp files | Published (3mWfNoWRf1Y, 9:49, https://youtu.be/3mWfNoWRf1Y; six real demos; captions published) |
 | L41 | MC05-O05 | Pipes, file descriptors, redirection, safe temp files | Next lesson: error handling and traps | Published (heCG-klUYFc, 8:40, https://youtu.be/heCG-klUYFc; five real demos; captions published) |
 | L42 | MC05-O06 | Error handling, traps, logging, exit codes | Next lesson: secrets and safe input | Published (RedniqKyMX0, 7:36, https://youtu.be/RedniqKyMX0; five real demos; captions published) |
-| L43 | MC05-O07 | Secrets, permissions, input validation, injection risks | Next lesson: idempotent scripts and ShellCheck | Built (8:56; five real Ubuntu 24.04 terminal demos), delivered, awaiting upload |
+| L43 | MC05-O07 | Secrets, permissions, input validation, injection risks | Next lesson: idempotent scripts and ShellCheck | Published (15YDY5MxKgQ, 8:56, https://youtu.be/15YDY5MxKgQ; five real demos; captions published) |
 | L44 | MC05-O08 | Idempotent operational scripts, ShellCheck | Next lesson: deploy, health check, rollback script | Not started |
 | L45 | MC05-O09 | Deployment/health-check/rollback automation script | Next lesson: MC05 mastery scenario | Not started |
 | L46 | MC05 mastery | Mastery scenario with lab info on screen | Next masterclass: MC06 Python for DevOps | Not started |
