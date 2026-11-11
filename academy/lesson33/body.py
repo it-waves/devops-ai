@@ -1,0 +1,93 @@
+RB = 'REAL RECORDING  ·  Ubuntu 24.04 on this computer'
+SCENES = [
+ ('hook', [
+  c('h1', "A server is only useful if it has room to work. When a disk fills up, things stop."),
+  c('h2', "A disk holds a filesystem. A filesystem is mounted on a folder, called the mount point. That is how a disk becomes part of the folder tree you already know."),
+  c('h3', "Today you check free space, format and mount a practice disk, fill it up on purpose, and grow it."),
+ ]),
+ ('see', [
+  c('s1', "First, how full is this machine? Type: df -hT /home. D F means disk free. Dash h is human readable. Dash capital T adds the filesystem type.", "First, how full is this machine? Type: D F, dash h, capital T, slash home. D F means disk free. Dash h is human readable. Dash capital T adds the filesystem type."),
+  c('s2', "Size is the whole filesystem. Used and available are what is taken and what is left. The last column is the mount point."),
+  c('s3', "Watch the use percent. Above ninety, plan ahead. At one hundred, writes fail."),
+  c('s4', "Now, what is using the space? Type: du -sh /usr/share. D U means disk usage. Dash s gives one total for the folder.", "Now, what is using the space? Type: D U, dash s h, slash U S R, slash share. D U means disk usage. Dash s gives one total for the folder."),
+  c('s5', "That is the whole folder, in human units. It can take a few seconds, because du reads every file."),
+  c('s6', "To find the biggest folders, sort them. Type: du -sh /usr/* | sort -h | tail -n 3.", "To find the biggest folders, sort them. Type: D U, dash s h, slash U S R, slash star, pipe, sort, dash h, pipe, tail, dash n, three. The part with two greater than hides error messages. This may take a moment."),
+  c('s7', "The biggest folders come last. When space runs out, start with them."),
+ ]),
+ ('make', [
+  c('m1', "Never practise on a real disk. So we make a pretend one, an ordinary file. Type: truncate -s 100M disk.img.", "Never practise on a real disk. So we make a pretend one, an ordinary file. Type: truncate, dash s, one hundred M, disk dot img."),
+  c('m2', "Check it. Type: ls -lh disk.img.", "Check it. Type: L S, dash l h, disk dot img."),
+  c('m3', "One hundred megabytes of empty space. To Linux, a disk is just somewhere to store blocks, and a file can play that part."),
+  c('m4', "Now give it a filesystem. Type: mkfs.ext4 -q disk.img. Mkfs means make filesystem, and dash q keeps it quiet.", "Now give it a filesystem. Type: M K F S, dot E X T four, dash q, disk dot img. M K F S means make filesystem, and dash q keeps it quiet."),
+  c('m5', "No news is good news. Formatting erases what was there, so on a real disk, check the device name twice."),
+  c('m6', "Read the label. Type: sudo blkid -s TYPE -s UUID disk.img.", "Read the label. Type: sue do, block I D, dash s, TYPE, dash s, U U I D, disk dot img."),
+  c('m7', "The type is E X T four, and the U U I D is its unique I D. Real systems mount by U U I D, because device names can change."),
+ ]),
+ ('mount', [
+  c('t1', "A filesystem is not usable until it is mounted. First, make a folder to mount it on. Type: mkdir mnt.", "A filesystem is not usable until it is mounted. First, make a folder to mount it on. Type: make dir, M N T."),
+  c('t2', "Now mount it. Type: sudo mount disk.img mnt. Because it is a file, Linux attaches it to a loop device for you.", "Now mount it. Type: sue do, mount, disk dot img, M N T. Because it is a file, Linux attaches it to a loop device for you."),
+  c('t3', "Check it. Type: df -h mnt.", "Check it. Type: D F, dash h, M N T."),
+  c('t4', "A new filesystem, mounted on mnt. About ninety megabytes, because the filesystem keeps some for itself. Used is almost nothing."),
+  c('t5', "Now list the block devices. Type: lsblk -o NAME,SIZE,TYPE,MOUNTPOINTS | grep loop.", "Now list the block devices. Type: L S B L K, dash o, name, size, type, mount points, pipe, grep, loop."),
+  c('t6', "Loop zero is the device, one hundred megabytes, mounted on your folder. A real disk looks the same, with a name like S D A or N V M E."),
+ ]),
+ ('full', [
+  c('u1', "Now see what a full disk does. Reserve a sixty megabyte file. Type: fallocate -l 60M mnt/big.bin.", "Now see what a full disk does. Reserve a sixty megabyte file. Type: F allocate, dash l, sixty M, M N T, slash big dot bin."),
+  c('u2', "Check the space. Type: df -h mnt.", "Check the space. Type: D F, dash h, M N T."),
+  c('u3', "Seventy-three percent used, and twenty-three megabytes left."),
+  c('u4', "Now ask for forty more, which will not fit. Type: fallocate -l 40M mnt/more.bin.", "Now ask for forty more, which will not fit. Type: F allocate, dash l, forty M, M N T, slash more dot bin."),
+  c('u5', "No space left on device. That is what every program sees on a full disk: failed writes, failed logs, crashed databases."),
+  c('u6', "Free the space. Type: rm mnt/big.bin mnt/more.bin.", "Free the space. Type: R M, M N T, slash big dot bin, M N T, slash more dot bin."),
+  c('u7', "And check again. Type: df -h mnt.", "And check again. Type: D F, dash h, M N T."),
+  c('u8', "The space is back. Deleting is the fix, but first find what is big, with D U, as you saw."),
+ ]),
+ ('grow', [
+  c('g1', "Disks get too small. Growing has two parts: make the disk bigger, then make the filesystem bigger. First, the size now. Type: df -h mnt.", "Disks get too small. Growing has two parts: make the disk bigger, then make the filesystem bigger. First, the size now. Type: D F, dash h, M N T."),
+  c('g2', "About ninety megabytes. Unmount it, so the filesystem is quiet. Type: sudo umount mnt.", "About ninety megabytes. Unmount it, so the filesystem is quiet. Type: sue do, U mount, M N T."),
+  c('g3', "Make the disk bigger. Type: truncate -s 200M disk.img. On a cloud server, this is where you grow the volume in the console.", "Make the disk bigger. Type: truncate, dash s, two hundred M, disk dot img. On a cloud server, this is where you grow the volume in the console."),
+  c('g4', "Check the filesystem before you resize it. Type: sudo e2fsck -fy disk.img 2>&1 | tail -n 1. The 2>&1 part joins the messages, and tail keeps the last line.", "Check the filesystem before you resize it. Type: sue do, E two F S C K, dash f y, disk dot img, then two greater than and one, pipe, tail, dash n, one. The two greater than and one part joins the messages, and tail keeps the last line."),
+  c('g5', "Clean means no problems found. Now grow the filesystem to fill the disk. Type: sudo resize2fs disk.img 2>&1 | grep now.", "Clean means no problems found. Now grow the filesystem to fill the disk. Type: sue do, resize two F S, disk dot img, then two greater than and one, pipe, grep, now."),
+  c('g6', "It now fills the bigger disk. Mount it again. Type: sudo mount disk.img mnt.", "It now fills the bigger disk. Mount it again. Type: sue do, mount, disk dot img, M N T."),
+  c('g7', "And check. Type: df -h mnt.", "And check. Type: D F, dash h, M N T."),
+  c('g8', "About one hundred eighty-four megabytes. Same disk, more room, nothing lost. On a real server, you grow the partition or volume first, then resize the filesystem."),
+ ]),
+ ('fstab', [
+  c('k1', "A mount you make by hand is gone after a reboot. To keep it, add one line to the file slash E T C slash F S tab.", "A mount you make by hand is gone after a reboot. To keep it, add one line to the file slash E T C slash F S tab."),
+  c('k2', "Each line has six fields: what to mount, where, the filesystem type, options, and two numbers for backup and check order."),
+  c('k3', "Use the U U I D from blkid, not the device name, because device names can change."),
+  c('k4', "A wrong line can stop a server booting. So after editing, run sudo mount dash a, and fix any error before you reboot. The option nofail lets the boot continue if the disk is missing.", "A wrong line can stop a server booting. So after editing, run sue do, mount, dash a, and fix any error before you reboot. The option no fail lets the boot continue if the disk is missing."),
+ ]),
+ ('myths', [
+  c('my1', "Four myths to clear up."),
+  c('my2', "Myth one: delete a file and the space always returns. No. If a program still holds it open, the space stays used until the program closes it."),
+  c('my3', "Myth two: formatting is safe to try. No. It erases the disk, so check the device name first."),
+  c('my4', "Myth three: a bigger disk means a bigger filesystem. No. You must resize the filesystem too."),
+  c('my5', "Myth four: if it mounted, it will mount at boot. No. Only the F S tab file does that."),
+  c('my6', "Check, mount, grow, then make it permanent."),
+ ]),
+ ('rubric', [
+  c('b1', "Here is how you check your own understanding."), c('b2', "Check free space with D F, and say what the use percent means."),
+  c('b3', "Find the biggest folders with D U, and sort them."), c('b4', "Make a filesystem on a practice disk, and read its U U I D."),
+  c('b5', "Mount it, and prove it with D F and L S B L K."), c('b6', "Fill it, read the error, and free the space."),
+  c('b7', "Grow it: bigger disk, check, resize, mount. And say what goes in F S tab."), c('b8', "To pass, you need all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your virtual machine. Everything here uses a practice file, never a real disk."),
+  c('z2', "One: run D F dash h T and D U, and name your fullest mount."),
+  c('z3', "Two: make a one hundred megabyte image with truncate, and format it with M K F S dot E X T four."),
+  c('z4', "Three: read its U U I D with block I D, then mount it and prove it with D F."),
+  c('z5', "Four: fill it with F allocate, read the error, and free the space."),
+  c('z6', "Five: unmount it, grow it to two hundred megabytes, check, resize, and mount it again."),
+  c('z7', "Six: write down the F S tab line you would add, using the U U I D."),
+  c('z8', "Last, clean up. Unmount, then delete the image. Then mark yourself on the rubric. Pause the video, and do it now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "Which command shows free space on a filesystem?"), c('f13', "Which command finds what is using the space?"),
+  c('f14', "Which two steps grow a filesystem?"), c('f15', "Which file makes a mount permanent?"),
+  c('f16', "Objective covered: MC04-O08.", "Objective covered: M C zero four, objective eight, in the Linux administration masterclass."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next lesson: Linux networking and security."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'h3': 0.5, 's3': 0.4, 's5': 5.0, 's6': 3.0, 's7': 0.5, 'm3': 0.4, 'm5': 0.4, 'm7': 0.5, 't4': 0.5, 't6': 0.5, 'u3': 0.4, 'u5': 0.5, 'u8': 0.5, 'g2': 0.3, 'g5': 0.4, 'g8': 0.5, 'k4': 0.5, 'my6': 0.5, 'b8': 0.5, 'z8': 14.0, 'f17': 10.0}
+CHAP = {'see': 'Free space and who uses it', 'make': 'Make a practice disk', 'mount': 'Mount it', 'full': 'Fill it, then free it', 'grow': 'Grow a disk', 'fstab': 'Mount at boot', 'myths': 'Common myths', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

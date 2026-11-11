@@ -1,0 +1,27 @@
+Lesson 33 of the DevOps Engineering Bootcamp, the eighth lesson of the Linux administration masterclass. A server needs room to work, and a full disk stops things. You learn the path from disk to filesystem to mount point. You check free space with df, find what is using it with du, make a practice disk from an ordinary file, format it with mkfs.ext4 and read its UUID with blkid, mount it and prove it with df and lsblk, fill it on purpose and read the no space left error, free the space, and grow it: bigger disk, filesystem check, resize2fs, mount again. You see what goes in /etc/fstab to mount at boot, and why you use the UUID. You finish with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine, using a practice file and never a real disk.
+
+Chapters
+0:00 A disk is only useful with room to spare
+0:23 Free space and who uses it
+1:36 Make a practice disk
+2:36 Mount it
+3:26 Fill it, then free it
+4:19 Grow a disk
+5:40 Mount at boot
+6:16 Common myths
+6:51 Pass or fail rubric
+7:21 Your turn
+8:22 Quick check
+
+Objectives covered: MC04-O08
+
+Practice: work only in your own Ubuntu 24.04 virtual machine, with a practice file. Never format a real disk while following along. When you finish, unmount the practice disk and delete the image. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson33. The next lesson covers Linux networking and security.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, including the loop mount, the full disk error and the resize. The disk is a 100 MB file, not a physical disk, so the device is a loop device (loop0) where a real server would show a name like sda or nvme0n1. The sizes and the 86 percent used figure on the first screen come from the recording computer, so yours will differ. The /etc/fstab line is an example drawn as a labelled illustration, not a capture, and I did not edit a real fstab. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/88z8drNqD_0
+Next lesson: Linux networking and security.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#linux #ubuntu #filesystem #devopsbootcamp

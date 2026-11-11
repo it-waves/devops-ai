@@ -14,7 +14,7 @@ def xterm_start(prefix=None):
     ensure_x(); reset_home(); subprocess.run(['xsetroot', '-solid', '#0b1a1e'], env=E97)
     cmd = ['xterm', '-geometry', '71x19+0+0', '-b', '6', '-fa', 'DejaVu Sans Mono', '-fs', '18', '-bg', '#0b1a1e', '-fg', '#e4f0f1', '-cr', '#7fe0d0', '-xrm', 'XTerm*cursorBlink:false',
            '-xrm', 'XTerm*scrollBar:false', '-xrm', 'XTerm*borderWidth:0', '-e'] + (prefix or []) + ['runuser', '-u', 'student', '--', 'env', '-i', 'HOME=/home/student', 'LANG=C.UTF-8', 'TERM=xterm-256color',
-           'PATH=/usr/local/bin:/usr/bin:/bin', 'PS1=' + PS1, 'USER=student', 'SHELL=/bin/bash', 'bash', '-c', 'cd ~; exec bash --rcfile /etc/ps1rc -i']
+           'PATH=' + os.environ.get('LPATH', '/usr/local/bin:/usr/bin:/bin'), 'PS1=' + PS1, 'USER=student', 'SHELL=/bin/bash', 'bash', '-c', 'cd ~; exec bash --rcfile /etc/ps1rc -i']
     p = subprocess.Popen(cmd, env=E97); time.sleep(2.0)
     w = subprocess.run(['xdotool', 'search', '--class', 'xterm'], env=E97, capture_output=True, text=True).stdout.split()
     if w:
