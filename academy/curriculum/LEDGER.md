@@ -72,7 +72,7 @@ One lesson per objective, then the mastery scenario. Real Ubuntu 24.04 terminal,
 
 | Lesson | Objectives | Topic | "Next" line | Status |
 |---|---|---|---|---|
-| L37 | MC05-O01 | Shell execution, quoting, expansion, environment, exit status | Next lesson: variables, arguments, input | Built (9:17; five real Ubuntu 24.04 terminal demos: how a script runs, quoting, expansion, environment, exit status; four-step diagram labelled illustration), delivered, awaiting upload |
+| L37 | MC05-O01 | Shell execution, quoting, expansion, environment, exit status | Next lesson: variables, arguments, input | Published (GoieJXqMSqk, 9:17, https://youtu.be/GoieJXqMSqk; captions uploaded; five real Ubuntu 24.04 terminal demos: how a script runs, quoting, expansion, environment, exit status; four-step diagram labelled illustration |
 | L38 | MC05-O02 | Variables, positional arguments, input, command substitution | Next lesson: conditions, loops, functions | Not started |
 | L39 | MC05-O03 | Conditions, tests, case, loops, functions | Next lesson: text processing | Not started |
 | L40 | MC05-O04 | grep, sed, awk, cut, sort, find | Next lesson: pipes, file descriptors, temp files | Not started |
