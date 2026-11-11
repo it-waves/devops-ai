@@ -1,0 +1,391 @@
+1
+00:00:00,500 --> 00:00:05,663
+Every server runs software that someone had to install. Doing it by hand does not scale.
+
+2
+00:00:06,213 --> 00:00:06,935
+On Ubuntu,
+
+3
+00:00:06,935 --> 00:00:09,389
+a package manager does it for you.
+
+4
+00:00:09,389 --> 00:00:11,049
+A package is a program,
+
+5
+00:00:11,049 --> 00:00:13,287
+plus the list of what it needs.
+
+6
+00:00:13,287 --> 00:00:15,813
+Apt finds packages in repositories,
+
+7
+00:00:15,813 --> 00:00:17,690
+and D P K G installs them.
+
+8
+00:00:18,240 --> 00:00:20,443
+Today you read the repository list,
+
+9
+00:00:20,443 --> 00:00:21,513
+inspect packages,
+
+10
+00:00:21,513 --> 00:00:22,708
+preview an install,
+
+11
+00:00:22,708 --> 00:00:24,533
+and learn the update routine.
+
+12
+00:00:26,583 --> 00:00:29,682
+Where do packages come from?
+
+13
+00:00:29,682 --> 00:00:31,674
+From repositories,
+
+14
+00:00:31,674 --> 00:00:33,776
+listed in one file.
+
+15
+00:00:33,776 --> 00:00:35,658
+Type: grep ^URIs,
+
+16
+00:00:35,658 --> 00:00:37,207
+then the path.
+
+17
+00:00:37,757 --> 00:00:38,722
+Two addresses.
+
+18
+00:00:38,722 --> 00:00:40,377
+The main Ubuntu archive,
+
+19
+00:00:40,377 --> 00:00:42,583
+and a separate security archive.
+
+20
+00:00:42,583 --> 00:00:44,306
+Each one is a repository.
+
+21
+00:00:45,256 --> 00:00:49,160
+Now the suites. Type: grep ^Suites, and the same path.
+
+22
+00:00:50,710 --> 00:00:52,722
+Suites are release channels.
+
+23
+00:00:52,722 --> 00:00:56,172
+Noble is Ubuntu twenty-four oh four as released.
+
+24
+00:00:56,172 --> 00:00:58,543
+Noble dash updates carries fixes.
+
+25
+00:00:58,543 --> 00:01:01,633
+Noble dash security carries security fixes.
+
+26
+00:01:02,683 --> 00:01:08,571
+Now ask about one package. Type: apt-cache policy curl | head -n 4.
+
+27
+00:01:09,121 --> 00:01:11,297
+Installed is the version you have.
+
+28
+00:01:11,297 --> 00:01:14,817
+Candidate is the newest version the repositories offer.
+
+29
+00:01:14,817 --> 00:01:15,777
+If they differ,
+
+30
+00:01:15,777 --> 00:01:17,121
+an update is waiting.
+
+31
+00:01:19,171 --> 00:01:26,531
+What is installed? Ask the package database. Type: dpkg -s curl | head -n 4.
+
+32
+00:01:27,081 --> 00:01:32,926
+Status says install ok installed. The database is the record of what is on this machine.
+
+33
+00:01:33,876 --> 00:01:40,916
+Which package owns a file? Type: dpkg -S /usr/bin/curl.
+
+34
+00:01:41,466 --> 00:01:46,160
+The curl package owns it. Use this when you find a file and wonder where it came from.
+
+35
+00:01:47,110 --> 00:01:54,256
+And which files does a package put on disk? Type: dpkg -L curl | grep bin.
+
+36
+00:01:54,806 --> 00:01:57,345
+The bin folder, and the curl program itself.
+
+37
+00:01:59,395 --> 00:02:01,322
+Always preview first.
+
+38
+00:02:01,322 --> 00:02:03,341
+Dash s means simulate,
+
+39
+00:02:03,341 --> 00:02:05,085
+so nothing changes.
+
+40
+00:02:05,085 --> 00:02:09,123
+Type: apt-get -s install cowsay | tail -n 6.
+
+41
+00:02:09,673 --> 00:02:12,316
+Two packages would be installed: cowsay,
+
+42
+00:02:12,316 --> 00:02:14,166
+and a library it depends on.
+
+43
+00:02:14,166 --> 00:02:16,478
+Apt works out dependencies for you.
+
+44
+00:02:17,428 --> 00:02:20,820
+The Inst lines are the plan, and the dependency comes first.
+
+45
+00:02:21,770 --> 00:02:27,914
+Now preview a removal. Type: apt-get -s remove curl | tail -n 4.
+
+46
+00:02:28,464 --> 00:02:32,603
+It would remove curl. Read what will be removed before you agree to anything.
+
+47
+00:02:33,553 --> 00:02:35,568
+How many updates are waiting?
+
+48
+00:02:35,568 --> 00:02:37,792
+Type: apt-get -s upgrade | grep,
+
+49
+00:02:37,792 --> 00:02:40,849
+and keep the line that starts with a number.
+
+50
+00:02:41,399 --> 00:02:45,730
+The first number is how many packages could be upgraded. Your number will differ.
+
+51
+00:02:47,780 --> 00:02:50,197
+Now the commands that change the system.
+
+52
+00:02:50,197 --> 00:02:52,371
+They need sue do and a real machine,
+
+53
+00:02:52,371 --> 00:02:54,607
+so these screens are an illustration.
+
+54
+00:02:55,557 --> 00:02:57,075
+First: sudo apt update.
+
+55
+00:02:57,075 --> 00:03:00,573
+It refreshes the package lists from the repositories.
+
+56
+00:03:00,573 --> 00:03:01,893
+It installs nothing.
+
+57
+00:03:02,843 --> 00:03:08,389
+Then: sudo apt install, and the package name. Apt shows the plan, and asks you to confirm.
+
+58
+00:03:08,939 --> 00:03:13,462
+To bring everything current: sudo apt upgrade. Update first, then upgrade.
+
+59
+00:03:14,012 --> 00:03:18,727
+Remove takes the program away. Purge also deletes its configuration files.
+
+60
+00:03:19,677 --> 00:03:24,733
+Then: sudo apt autoremove. It removes dependencies that nothing needs any more.
+
+61
+00:03:25,283 --> 00:03:30,232
+Add repositories only from sources you trust. Read the plan, then answer yes.
+
+62
+00:03:32,282 --> 00:03:33,605
+Four myths to clear up.
+
+63
+00:03:34,155 --> 00:03:40,171
+Myth one: apt update installs updates. No. Update refreshes the list. Upgrade installs.
+
+64
+00:03:40,721 --> 00:03:46,139
+Myth two: remove deletes everything. No. Purge also deletes the configuration.
+
+65
+00:03:46,689 --> 00:03:52,044
+Myth three: any download is safe if it installs. No. Use trusted repositories.
+
+66
+00:03:52,594 --> 00:03:56,647
+Myth four: answer yes to every prompt. No. Read the plan first.
+
+67
+00:03:57,197 --> 00:03:59,288
+Update, read the plan, then upgrade.
+
+68
+00:04:01,338 --> 00:04:03,663
+Here is how you check your own understanding.
+
+69
+00:04:04,213 --> 00:04:07,648
+Read the repository list, and say where packages come from.
+
+70
+00:04:08,198 --> 00:04:10,673
+Compare the installed and candidate versions.
+
+71
+00:04:11,223 --> 00:04:14,444
+Find which package owns a file, with D P K G.
+
+72
+00:04:14,994 --> 00:04:18,130
+Preview an install with a simulation, and read the plan.
+
+73
+00:04:18,680 --> 00:04:22,179
+Explain update, upgrade, remove, purge and autoremove.
+
+74
+00:04:22,729 --> 00:04:24,499
+Say how to add software safely.
+
+75
+00:04:25,049 --> 00:04:26,671
+To pass, you need all six.
+
+76
+00:04:28,721 --> 00:04:29,392
+Your turn,
+
+77
+00:04:29,392 --> 00:04:31,003
+in your virtual machine.
+
+78
+00:04:31,003 --> 00:04:32,480
+These tasks only read,
+
+79
+00:04:32,480 --> 00:04:33,285
+or simulate.
+
+80
+00:04:33,285 --> 00:04:34,694
+Nothing is installed.
+
+81
+00:04:35,244 --> 00:04:38,188
+One: read your repository list, and name the suites.
+
+82
+00:04:38,738 --> 00:04:43,538
+Two: run apt-cache policy for a package, and compare installed with candidate.
+
+83
+00:04:44,088 --> 00:04:49,038
+Three: use D P K G dash s and dash capital S on a program you use.
+
+84
+00:04:49,588 --> 00:04:54,494
+Four: simulate an install of a small package, with dash s, and read the plan.
+
+85
+00:04:55,044 --> 00:04:56,923
+Five: run sudo apt update,
+
+86
+00:04:56,923 --> 00:04:59,452
+then apt list dash dash upgradable.
+
+87
+00:04:59,452 --> 00:05:01,764
+Update only refreshes the lists.
+
+88
+00:05:02,314 --> 00:05:05,514
+Six: simulate a removal, and say what purge would add.
+
+89
+00:05:06,064 --> 00:05:09,371
+Mark yourself on the rubric. Pause the video, and do it now.
+
+90
+00:05:24,921 --> 00:05:25,796
+Quick check.
+
+91
+00:05:26,346 --> 00:05:28,607
+Which command refreshes the package lists?
+
+92
+00:05:29,157 --> 00:05:31,013
+Which flag simulates an install?
+
+93
+00:05:31,563 --> 00:05:34,848
+Which D P K G option finds the owner of a file?
+
+94
+00:05:35,398 --> 00:05:37,724
+Does remove delete configuration files?
+
+95
+00:05:38,274 --> 00:05:44,887
+Objective covered: MC04-O07.
+
+96
+00:05:45,437 --> 00:05:47,506
+Pause the video, and answer out loud.
+
+97
+00:05:58,056 --> 00:06:00,936
+Next lesson: disks, filesystems and mounts.
+
+98
+00:06:01,486 --> 00:06:04,814
+If this helped, like, share and subscribe, so you do not miss it.

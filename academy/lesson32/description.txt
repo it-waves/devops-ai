@@ -1,0 +1,25 @@
+Lesson 32 of the DevOps Engineering Bootcamp, the seventh lesson of the Linux administration masterclass. Software on a server arrives in packages, and on Ubuntu you manage them with apt and dpkg. You read the repository list and its suites, compare the installed and candidate version of a package, ask the package database what is installed, which package owns a file and which files a package put on disk, and preview an install, a removal and an upgrade with the simulate flag, so you can read the plan before anything changes. You learn the routine for update, install, upgrade, remove, purge and autoremove, and how to add software safely. You finish with common myths, a six-point pass or fail rubric and six read-only or simulate-only tasks to do in your own virtual machine.
+
+Chapters
+0:00 Software arrives in packages
+0:26 Repositories and versions
+1:19 Inspect installed packages
+1:59 Preview before you change
+2:47 Install, update, remove
+3:32 Common myths
+4:01 Pass or fail rubric
+4:28 Your turn
+5:24 Quick check
+
+Objectives covered: MC04-O07
+
+Practice: work only in your own Ubuntu 24.04 virtual machine. The tasks only read or simulate, so nothing is installed or removed. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson32. The next lesson covers disks, filesystems and mounts.
+
+Honest notes: the segments labelled REAL RECORDING are real commands on Ubuntu 24.04 (the repository file, apt-cache policy, dpkg, and apt-get with the simulate flag, which changes nothing). The recording computer has no network access for apt, so the screen showing sudo apt update and the install, upgrade, remove and autoremove commands is labelled ILLUSTRATION, with invented example output; try those in your own virtual machine. Package versions and the count of upgradable packages come from the recording computer, so yours will differ. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/8fIFbG-4xuY
+Next lesson: disks, filesystems and mounts.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#linux #ubuntu #apt #devopsbootcamp
