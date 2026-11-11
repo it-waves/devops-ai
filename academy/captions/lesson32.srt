@@ -199,193 +199,253 @@ and keep the line that starts with a number.
 The first number is how many packages could be upgraded. Your number will differ.
 
 51
-00:02:47,780 --> 00:02:50,197
+00:02:47,780 --> 00:02:50,389
 Now the commands that change the system.
 
 52
-00:02:50,197 --> 00:02:52,371
-They need sue do and a real machine,
+00:02:50,389 --> 00:02:51,367
+They need sudo,
 
 53
-00:02:52,371 --> 00:02:54,607
-so these screens are an illustration.
+00:02:51,367 --> 00:02:54,628
+which lets a normal user act as the administrator.
 
 54
-00:02:55,557 --> 00:02:57,075
-First: sudo apt update.
+00:02:54,628 --> 00:02:56,911
+They run for real on this computer.
 
 55
-00:02:57,075 --> 00:03:00,573
-It refreshes the package lists from the repositories.
+00:02:57,861 --> 00:02:58,312
+First,
 
 56
-00:03:00,573 --> 00:03:01,893
-It installs nothing.
+00:02:58,312 --> 00:03:00,267
+refresh the package lists.
 
 57
-00:03:02,843 --> 00:03:08,389
-Then: sudo apt install, and the package name. Apt shows the plan, and asks you to confirm.
+00:03:00,267 --> 00:03:03,125
+Type: sudo apt-get update | tail -n 2.
 
 58
-00:03:08,939 --> 00:03:13,462
-To bring everything current: sudo apt upgrade. Update first, then upgrade.
+00:03:03,125 --> 00:03:04,629
+It installs nothing,
 
 59
-00:03:14,012 --> 00:03:18,727
-Remove takes the program away. Purge also deletes its configuration files.
+00:03:04,629 --> 00:03:06,660
+but it downloads the lists,
 
 60
-00:03:19,677 --> 00:03:24,733
-Then: sudo apt autoremove. It removes dependencies that nothing needs any more.
+00:03:06,660 --> 00:03:08,314
+so wait a few seconds.
 
 61
-00:03:25,283 --> 00:03:30,232
-Add repositories only from sources you trust. Read the plan, then answer yes.
+00:03:11,864 --> 00:03:14,082
+Fetched shows how much it downloaded.
 
 62
-00:03:32,282 --> 00:03:33,605
-Four myths to clear up.
+00:03:14,082 --> 00:03:15,521
+The lists are fresh now.
 
 63
-00:03:34,155 --> 00:03:40,171
-Myth one: apt update installs updates. No. Update refreshes the list. Upgrade installs.
+00:03:15,521 --> 00:03:17,379
+Update only refreshes the list,
 
 64
-00:03:40,721 --> 00:03:46,139
-Myth two: remove deletes everything. No. Purge also deletes the configuration.
+00:03:17,379 --> 00:03:19,117
+it does not upgrade anything.
 
 65
-00:03:46,689 --> 00:03:52,044
-Myth three: any download is safe if it installs. No. Use trusted repositories.
+00:03:20,167 --> 00:03:21,579
+Now install one.
 
 66
-00:03:52,594 --> 00:03:56,647
-Myth four: answer yes to every prompt. No. Read the plan first.
+00:03:21,579 --> 00:03:25,904
+Type: sudo apt-get install -y cowsay | tail -n 4.
 
 67
-00:03:57,197 --> 00:03:59,288
-Update, read the plan, then upgrade.
+00:03:25,904 --> 00:03:27,581
+Dash y answers yes.
 
 68
-00:04:01,338 --> 00:04:03,663
-Here is how you check your own understanding.
+00:03:27,581 --> 00:03:29,346
+On your own machine,
 
 69
-00:04:04,213 --> 00:04:07,648
-Read the repository list, and say where packages come from.
+00:03:29,346 --> 00:03:31,111
+read the plan first.
 
 70
-00:04:08,198 --> 00:04:10,673
-Compare the installed and candidate versions.
+00:03:31,661 --> 00:03:40,195
+It works. The program lives in slash usr slash games. Type: /usr/games/cowsay hello.
 
 71
-00:04:11,223 --> 00:04:14,444
-Find which package owns a file, with D P K G.
+00:03:41,345 --> 00:03:46,934
+Remove it. Type: sudo apt-get remove -y cowsay | tail -n 2.
 
 72
-00:04:14,994 --> 00:04:18,130
-Preview an install with a simulation, and read the plan.
+00:03:47,484 --> 00:03:51,708
+Remove takes the program away, but the library it needed stays behind.
 
 73
-00:04:18,680 --> 00:04:22,179
-Explain update, upgrade, remove, purge and autoremove.
+00:03:52,758 --> 00:03:57,985
+Clean up. Type: sudo apt-get autoremove -y | tail -n 2.
 
 74
-00:04:22,729 --> 00:04:24,499
-Say how to add software safely.
+00:03:58,535 --> 00:04:02,315
+Autoremove deletes dependencies nothing needs any more.
 
 75
-00:04:25,049 --> 00:04:26,671
-To pass, you need all six.
+00:04:02,315 --> 00:04:05,340
+Purge would also delete configuration files.
 
 76
-00:04:28,721 --> 00:04:29,392
-Your turn,
+00:04:05,340 --> 00:04:08,433
+Add repositories only from sources you trust.
 
 77
-00:04:29,392 --> 00:04:31,003
-in your virtual machine.
+00:04:10,483 --> 00:04:11,806
+Four myths to clear up.
 
 78
-00:04:31,003 --> 00:04:32,480
-These tasks only read,
+00:04:12,356 --> 00:04:18,372
+Myth one: apt update installs updates. No. Update refreshes the list. Upgrade installs.
 
 79
-00:04:32,480 --> 00:04:33,285
-or simulate.
+00:04:18,922 --> 00:04:24,340
+Myth two: remove deletes everything. No. Purge also deletes the configuration.
 
 80
-00:04:33,285 --> 00:04:34,694
-Nothing is installed.
+00:04:24,890 --> 00:04:30,245
+Myth three: any download is safe if it installs. No. Use trusted repositories.
 
 81
-00:04:35,244 --> 00:04:38,188
-One: read your repository list, and name the suites.
+00:04:30,795 --> 00:04:34,848
+Myth four: answer yes to every prompt. No. Read the plan first.
 
 82
-00:04:38,738 --> 00:04:43,538
-Two: run apt-cache policy for a package, and compare installed with candidate.
+00:04:35,398 --> 00:04:37,489
+Update, read the plan, then upgrade.
 
 83
-00:04:44,088 --> 00:04:49,038
-Three: use D P K G dash s and dash capital S on a program you use.
+00:04:39,539 --> 00:04:41,864
+Here is how you check your own understanding.
 
 84
-00:04:49,588 --> 00:04:54,494
-Four: simulate an install of a small package, with dash s, and read the plan.
+00:04:42,414 --> 00:04:45,849
+Read the repository list, and say where packages come from.
 
 85
-00:04:55,044 --> 00:04:56,923
-Five: run sudo apt update,
+00:04:46,399 --> 00:04:48,874
+Compare the installed and candidate versions.
 
 86
-00:04:56,923 --> 00:04:59,452
-then apt list dash dash upgradable.
+00:04:49,424 --> 00:04:52,645
+Find which package owns a file, with D P K G.
 
 87
-00:04:59,452 --> 00:05:01,764
-Update only refreshes the lists.
+00:04:53,195 --> 00:04:56,331
+Preview an install with a simulation, and read the plan.
 
 88
-00:05:02,314 --> 00:05:05,514
-Six: simulate a removal, and say what purge would add.
+00:04:56,881 --> 00:05:00,380
+Explain update, upgrade, remove, purge and autoremove.
 
 89
-00:05:06,064 --> 00:05:09,371
-Mark yourself on the rubric. Pause the video, and do it now.
+00:05:00,930 --> 00:05:02,700
+Say how to add software safely.
 
 90
-00:05:24,921 --> 00:05:25,796
-Quick check.
+00:05:03,250 --> 00:05:04,872
+To pass, you need all six.
 
 91
-00:05:26,346 --> 00:05:28,607
-Which command refreshes the package lists?
+00:05:06,922 --> 00:05:07,593
+Your turn,
 
 92
-00:05:29,157 --> 00:05:31,013
-Which flag simulates an install?
+00:05:07,593 --> 00:05:09,204
+in your virtual machine.
 
 93
-00:05:31,563 --> 00:05:34,848
-Which D P K G option finds the owner of a file?
+00:05:09,204 --> 00:05:10,681
+These tasks only read,
 
 94
-00:05:35,398 --> 00:05:37,724
-Does remove delete configuration files?
+00:05:10,681 --> 00:05:11,486
+or simulate.
 
 95
-00:05:38,274 --> 00:05:44,887
-Objective covered: MC04-O07.
+00:05:11,486 --> 00:05:12,895
+Nothing is installed.
 
 96
-00:05:45,437 --> 00:05:47,506
-Pause the video, and answer out loud.
+00:05:13,445 --> 00:05:16,389
+One: read your repository list, and name the suites.
 
 97
-00:05:58,056 --> 00:06:00,936
-Next lesson: disks, filesystems and mounts.
+00:05:16,939 --> 00:05:21,739
+Two: run apt-cache policy for a package, and compare installed with candidate.
 
 98
-00:06:01,486 --> 00:06:04,814
+00:05:22,289 --> 00:05:27,239
+Three: use D P K G dash s and dash capital S on a program you use.
+
+99
+00:05:27,789 --> 00:05:32,695
+Four: simulate an install of a small package, with dash s, and read the plan.
+
+100
+00:05:33,245 --> 00:05:35,124
+Five: run sudo apt update,
+
+101
+00:05:35,124 --> 00:05:37,653
+then apt list dash dash upgradable.
+
+102
+00:05:37,653 --> 00:05:39,965
+Update only refreshes the lists.
+
+103
+00:05:40,515 --> 00:05:43,715
+Six: simulate a removal, and say what purge would add.
+
+104
+00:05:44,265 --> 00:05:47,572
+Mark yourself on the rubric. Pause the video, and do it now.
+
+105
+00:06:03,122 --> 00:06:03,997
+Quick check.
+
+106
+00:06:04,547 --> 00:06:06,808
+Which command refreshes the package lists?
+
+107
+00:06:07,358 --> 00:06:09,214
+Which flag simulates an install?
+
+108
+00:06:09,764 --> 00:06:13,049
+Which D P K G option finds the owner of a file?
+
+109
+00:06:13,599 --> 00:06:15,925
+Does remove delete configuration files?
+
+110
+00:06:16,475 --> 00:06:23,088
+Objective covered: MC04-O07.
+
+111
+00:06:23,638 --> 00:06:25,707
+Pause the video, and answer out loud.
+
+112
+00:06:36,257 --> 00:06:39,137
+Next lesson: disks, filesystems and mounts.
+
+113
+00:06:39,687 --> 00:06:43,015
 If this helped, like, share and subscribe, so you do not miss it.

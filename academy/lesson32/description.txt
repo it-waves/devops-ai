@@ -6,16 +6,16 @@ Chapters
 1:19 Inspect installed packages
 1:59 Preview before you change
 2:47 Install, update, remove
-3:32 Common myths
-4:01 Pass or fail rubric
-4:28 Your turn
-5:24 Quick check
+4:10 Common myths
+4:39 Pass or fail rubric
+5:06 Your turn
+6:03 Quick check
 
 Objectives covered: MC04-O07
 
 Practice: work only in your own Ubuntu 24.04 virtual machine. The tasks only read or simulate, so nothing is installed or removed. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson32. The next lesson covers disks, filesystems and mounts.
 
-Honest notes: the segments labelled REAL RECORDING are real commands on Ubuntu 24.04 (the repository file, apt-cache policy, dpkg, and apt-get with the simulate flag, which changes nothing). The recording computer has no network access for apt, so the screen showing sudo apt update and the install, upgrade, remove and autoremove commands is labelled ILLUSTRATION, with invented example output; try those in your own virtual machine. Package versions and the count of upgradable packages come from the recording computer, so yours will differ. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, including sudo apt-get update, install, remove and autoremove of the small cowsay package (I removed it again afterwards). The apt-get -s commands simulate and change nothing. The recording computer reaches the Ubuntu archive over https, so the repository address in the recording is https, while yours may show http. The update downloaded only a small part, because I removed one list beforehand so there was something to fetch. Package versions and the count of upgradable packages come from the recording computer, so yours will differ. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
 
 Previous lesson: https://youtu.be/8fIFbG-4xuY
 Next lesson: disks, filesystems and mounts.

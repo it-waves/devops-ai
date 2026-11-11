@@ -14,14 +14,7 @@ def s_hook(C, D, dur):
 s_repo = _lab('Repositories and versions', 'Where packages come from.', 'q1', RB, [('q1', 'sources file', 'The repository list', ACC), ('q3', 'Suites', 'Release channels', VIO), ('q5', 'apt-cache policy', 'Installed vs candidate', GOOD)])
 s_installed = _lab('Inspect installed packages', 'Ask the package database.', 'd1', RB, [('d1', 'dpkg -s', 'What is installed', ACC), ('d3', 'dpkg -S', 'Who owns a file', VIO), ('d5', 'dpkg -L', 'Files it installed', WARN)])
 s_plan = _lab('Preview before you change', 'Simulate with -s. Nothing changes.', 'n1', RB, [('n1', 'install -s', 'Preview an install', GOOD), ('n3', 'Inst lines', 'The plan', ACC), ('n4', 'remove -s', 'Preview a removal', BAD), ('n6', 'upgrade -s', 'Updates waiting', WARN)])
-def s_manage(C, D, dur):
-    E = head('Install, update, remove', 'The routine, with sudo.', C['a1']); E.append(ill(C['a1'] + 0.2, 1260, 286))
-    rows = [('$ sudo apt update', GOOD), ('Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease', TXT), ('Get:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease', TXT), ('Get:3 http://security.ubuntu.com/ubuntu noble-security InRelease', TXT), ('Fetched 252 kB in 1s', TXT), ('Reading package lists... Done', TXT), ('22 packages can be upgraded.', TXT)]
-    mono_panel(E, 100, 345, 1060, rows, C['a2'], fs=22, lh=38)
-    hbar(E, 112, 345 + 24 + 6 * 38 - 4, 1030, 36, C['a4'], C['a4'] + dur['a4'] + 0.5, WARN)
-    it = [('sudo apt update', 'Refresh the lists', ACC, 'a2'), ('sudo apt install pkg', 'Shows the plan, asks', VIO, 'a3'), ('sudo apt upgrade', 'Update, then upgrade', GOOD, 'a4'), ('remove  /  purge', 'Purge deletes config too', WARN, 'a5'), ('sudo apt autoremove', 'Unneeded dependencies', PINK, 'a6')]
-    for i, (a, b, col, cid) in enumerate(it): E.append(Pop(card(560, 105, col, a, [(b, TXT)], 32, 26), 1260, 345 + i * 118, C[cid]))
-    E.append(takeaway('Read the plan. Then answer yes.', 920, C['a7'], GOOD, 1100)); return E
+s_manage = _lab('Install, update, remove', 'The routine, with sudo.', 'a1', RB, [('a2', 'apt-get update', 'Refresh the lists', ACC), ('a4', 'install -y', 'Install, with the plan', VIO), ('a6', 'remove -y', 'Program goes, library stays', WARN), ('a8', 'autoremove', 'Unneeded libraries', GOOD)])
 def s_myths(C, D, dur):
     E = head('Common myths', 'Four wrong ideas, corrected.', C['my1'])
     it = [('Myth: update installs', 'Update = refresh the list.', 'my2'), ('Myth: remove deletes all', 'Purge deletes config.', 'my3'), ('Myth: it installs, so safe', 'Use trusted repositories.', 'my4'), ('Myth: yes to every prompt', 'Read the plan first.', 'my5')]
@@ -50,7 +43,7 @@ def s_recap(C, D, dur):
     E.append(El(T('Next lesson: disks, filesystems, mounts', 'x', 46, ACC, maxw=1700), 100, 960, C['f18'])); E.append(Pop(badge('LIKE  ·  SHARE  ·  SUBSCRIBE', F('b', 34), INK, GOOD, padx=26, pady=14), 100 + pb.width + 40, 860, C['f19']))
     return E
 FN = dict(hook=s_hook, repo=s_repo, installed=s_installed, plan=s_plan, manage=s_manage, myths=s_myths, rubric=s_rubric, yourturn=s_yourturn, recap=s_recap)
-_GL = dict(repo=('eye', GOOD), installed=('eye', GOOD), plan=('eye', GOOD), manage=('gear', ACC), myths=('question', BAD), rubric=('test', GOOD), yourturn=('board', VIO))
+_GL = dict(repo=('eye', GOOD), installed=('eye', GOOD), plan=('eye', GOOD), manage=('eye', GOOD), myths=('question', BAD), rubric=('test', GOOD), yourturn=('board', VIO))
 def _wrap(name, fn):
     first = dict(SCENES)[name][0][0]
     def w(C, D, dur):
@@ -58,6 +51,7 @@ def _wrap(name, fn):
     return w
 for _n in _GL: FN[_n] = _wrap(_n, FN[_n])
 HL = {
+ 'manage': [('a3', 1, 1, 4, 560, ''), ('a7', 1, 1, 4, 560, '')],
  'repo': [('q2', 1, 2, 4, 592, ''), ('q4', 1, 2, 4, 652, ''), ('q6', 2, 2, 4, 450, '')],
  'installed': [('d2', 2, 1, 4, 424, ''), ('d4', 1, 1, 4, 290, ''), ('d6', 1, 2, 4, 216, '')],
  'plan': [('n2', 1, 2, 4, 948, ''), ('n3', 3, 2, 4, 1062, ''), ('n5', 1, 2, 4, 700, ''), ('n5', 4, 1, 4, 454, ''), ('n7', 1, 1, 4, 948, '')],

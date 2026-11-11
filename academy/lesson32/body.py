@@ -31,13 +31,15 @@ SCENES = [
   c('n7', "The first number is how many packages could be upgraded. Your number will differ."),
  ]),
  ('manage', [
-  c('a1', "Now the commands that change the system. They need sue do and a real machine, so these screens are an illustration."),
-  c('a2', "First: sudo apt update. It refreshes the package lists from the repositories. It installs nothing."),
-  c('a3', "Then: sudo apt install, and the package name. Apt shows the plan, and asks you to confirm."),
-  c('a4', "To bring everything current: sudo apt upgrade. Update first, then upgrade."),
-  c('a5', "Remove takes the program away. Purge also deletes its configuration files."),
-  c('a6', "Then: sudo apt autoremove. It removes dependencies that nothing needs any more."),
-  c('a7', "Add repositories only from sources you trust. Read the plan, then answer yes."),
+  c('a1', "Now the commands that change the system. They need sudo, which lets a normal user act as the administrator. They run for real on this computer."),
+  c('a2', "First, refresh the package lists. Type: sudo apt-get update | tail -n 2. It installs nothing, but it downloads the lists, so wait a few seconds.", "First, refresh the package lists. Type: sudo, apt get, update, pipe, tail, dash n, two. It installs nothing, but it downloads the lists, so wait a few seconds."),
+  c('a3', "Fetched shows how much it downloaded. The lists are fresh now. Update only refreshes the list, it does not upgrade anything."),
+  c('a4', "Now install one. Type: sudo apt-get install -y cowsay | tail -n 4. Dash y answers yes. On your own machine, read the plan first.", "Now install one. Type: sudo, apt get, install, dash y, cowsay, pipe, tail, dash n, four. Dash y answers yes. On your own machine, read the plan first."),
+  c('a5', "It works. The program lives in slash usr slash games. Type: /usr/games/cowsay hello.", "It works. The program lives in slash U S R slash games. Type: slash U S R, slash games, slash cow say, hello."),
+  c('a6', "Remove it. Type: sudo apt-get remove -y cowsay | tail -n 2.", "Remove it. Type: sudo, apt get, remove, dash y, cowsay, pipe, tail, dash n, two."),
+  c('a7', "Remove takes the program away, but the library it needed stays behind."),
+  c('a8', "Clean up. Type: sudo apt-get autoremove -y | tail -n 2.", "Clean up. Type: sudo, apt get, autoremove, dash y, pipe, tail, dash n, two."),
+  c('a9', "Autoremove deletes dependencies nothing needs any more. Purge would also delete configuration files. Add repositories only from sources you trust."),
  ]),
  ('myths', [
   c('my1', "Four myths to clear up."),
@@ -71,5 +73,5 @@ SCENES = [
  ]),
 ]
 CLEAR = True
-EXTRA = {'q3': 1.0, 'h3': 0.5, 'q2': 0.4, 'q4': 0.5, 'q6': 0.5, 'd2': 0.4, 'd4': 0.4, 'd6': 0.5, 'n2': 0.4, 'n3': 0.4, 'n5': 0.4, 'n7': 0.5, 'a1': 0.4, 'a2': 0.4, 'a5': 0.4, 'a7': 0.5, 'my6': 0.5, 'b8': 0.5, 'z8': 14.0, 'f17': 10.0}
+EXTRA = {'q3': 1.0, 'h3': 0.5, 'q2': 0.4, 'q4': 0.5, 'q6': 0.5, 'd2': 0.4, 'd4': 0.4, 'd6': 0.5, 'n2': 0.4, 'n3': 0.4, 'n5': 0.4, 'n7': 0.5, 'a1': 0.4, 'a2': 3.0, 'a3': 0.5, 'a5': 0.6, 'a7': 0.5, 'a9': 0.5, 'my6': 0.5, 'b8': 0.5, 'z8': 14.0, 'f17': 10.0}
 CHAP = {'repo': 'Repositories and versions', 'installed': 'Inspect installed packages', 'plan': 'Preview before you change', 'manage': 'Install, update, remove', 'myths': 'Common myths', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

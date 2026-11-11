@@ -73,13 +73,15 @@ SCENES = [
   c('n7', "The first number is how many packages could be upgraded. Your number will differ."),
  ]),
  ('manage', [
-  c('a1', "Now the commands that change the system. They need sue do and a real machine, so these screens are an illustration."),
-  c('a2', "First: sudo apt update. It refreshes the package lists from the repositories. It installs nothing."),
-  c('a3', "Then: sudo apt install, and the package name. Apt shows the plan, and asks you to confirm."),
-  c('a4', "To bring everything current: sudo apt upgrade. Update first, then upgrade."),
-  c('a5', "Remove takes the program away. Purge also deletes its configuration files."),
-  c('a6', "Then: sudo apt autoremove. It removes dependencies that nothing needs any more."),
-  c('a7', "Add repositories only from sources you trust. Read the plan, then answer yes."),
+  c('a1', "Now the commands that change the system. They need sudo, which lets a normal user act as the administrator. They run for real on this computer."),
+  c('a2', "First, refresh the package lists. Type: sudo apt-get update | tail -n 2. It installs nothing, but it downloads the lists, so wait a few seconds.", "First, refresh the package lists. Type: sudo, apt get, update, pipe, tail, dash n, two. It installs nothing, but it downloads the lists, so wait a few seconds."),
+  c('a3', "Fetched shows how much it downloaded. The lists are fresh now. Update only refreshes the list, it does not upgrade anything."),
+  c('a4', "Now install one. Type: sudo apt-get install -y cowsay | tail -n 4. Dash y answers yes. On your own machine, read the plan first.", "Now install one. Type: sudo, apt get, install, dash y, cowsay, pipe, tail, dash n, four. Dash y answers yes. On your own machine, read the plan first."),
+  c('a5', "It works. The program lives in slash usr slash games. Type: /usr/games/cowsay hello.", "It works. The program lives in slash U S R slash games. Type: slash U S R, slash games, slash cow say, hello."),
+  c('a6', "Remove it. Type: sudo apt-get remove -y cowsay | tail -n 2.", "Remove it. Type: sudo, apt get, remove, dash y, cowsay, pipe, tail, dash n, two."),
+  c('a7', "Remove takes the program away, but the library it needed stays behind."),
+  c('a8', "Clean up. Type: sudo apt-get autoremove -y | tail -n 2.", "Clean up. Type: sudo, apt get, autoremove, dash y, pipe, tail, dash n, two."),
+  c('a9', "Autoremove deletes dependencies nothing needs any more. Purge would also delete configuration files. Add repositories only from sources you trust."),
  ]),
  ('myths', [
   c('my1', "Four myths to clear up."),
@@ -113,7 +115,7 @@ SCENES = [
  ]),
 ]
 CLEAR = True
-EXTRA = {'q3': 1.0, 'h3': 0.5, 'q2': 0.4, 'q4': 0.5, 'q6': 0.5, 'd2': 0.4, 'd4': 0.4, 'd6': 0.5, 'n2': 0.4, 'n3': 0.4, 'n5': 0.4, 'n7': 0.5, 'a1': 0.4, 'a2': 0.4, 'a5': 0.4, 'a7': 0.5, 'my6': 0.5, 'b8': 0.5, 'z8': 14.0, 'f17': 10.0}
+EXTRA = {'q3': 1.0, 'h3': 0.5, 'q2': 0.4, 'q4': 0.5, 'q6': 0.5, 'd2': 0.4, 'd4': 0.4, 'd6': 0.5, 'n2': 0.4, 'n3': 0.4, 'n5': 0.4, 'n7': 0.5, 'a1': 0.4, 'a2': 3.0, 'a3': 0.5, 'a5': 0.6, 'a7': 0.5, 'a9': 0.5, 'my6': 0.5, 'b8': 0.5, 'z8': 14.0, 'f17': 10.0}
 CHAP = {'repo': 'Repositories and versions', 'installed': 'Inspect installed packages', 'plan': 'Preview before you change', 'manage': 'Install, update, remove', 'myths': 'Common myths', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}
 def mono_panel(E, x, y, w, rows, t_show, fs=24, lh=40, col=None):
     """illustration terminal panel: a glass panel and monospaced lines that all appear at t_show"""
@@ -131,14 +133,7 @@ def s_hook(C, D, dur):
 s_repo = _lab('Repositories and versions', 'Where packages come from.', 'q1', RB, [('q1', 'sources file', 'The repository list', ACC), ('q3', 'Suites', 'Release channels', VIO), ('q5', 'apt-cache policy', 'Installed vs candidate', GOOD)])
 s_installed = _lab('Inspect installed packages', 'Ask the package database.', 'd1', RB, [('d1', 'dpkg -s', 'What is installed', ACC), ('d3', 'dpkg -S', 'Who owns a file', VIO), ('d5', 'dpkg -L', 'Files it installed', WARN)])
 s_plan = _lab('Preview before you change', 'Simulate with -s. Nothing changes.', 'n1', RB, [('n1', 'install -s', 'Preview an install', GOOD), ('n3', 'Inst lines', 'The plan', ACC), ('n4', 'remove -s', 'Preview a removal', BAD), ('n6', 'upgrade -s', 'Updates waiting', WARN)])
-def s_manage(C, D, dur):
-    E = head('Install, update, remove', 'The routine, with sudo.', C['a1']); E.append(ill(C['a1'] + 0.2, 1260, 286))
-    rows = [('$ sudo apt update', GOOD), ('Hit:1 http://archive.ubuntu.com/ubuntu noble InRelease', TXT), ('Get:2 http://archive.ubuntu.com/ubuntu noble-updates InRelease', TXT), ('Get:3 http://security.ubuntu.com/ubuntu noble-security InRelease', TXT), ('Fetched 252 kB in 1s', TXT), ('Reading package lists... Done', TXT), ('22 packages can be upgraded.', TXT)]
-    mono_panel(E, 100, 345, 1060, rows, C['a2'], fs=22, lh=38)
-    hbar(E, 112, 345 + 24 + 6 * 38 - 4, 1030, 36, C['a4'], C['a4'] + dur['a4'] + 0.5, WARN)
-    it = [('sudo apt update', 'Refresh the lists', ACC, 'a2'), ('sudo apt install pkg', 'Shows the plan, asks', VIO, 'a3'), ('sudo apt upgrade', 'Update, then upgrade', GOOD, 'a4'), ('remove  /  purge', 'Purge deletes config too', WARN, 'a5'), ('sudo apt autoremove', 'Unneeded dependencies', PINK, 'a6')]
-    for i, (a, b, col, cid) in enumerate(it): E.append(Pop(card(560, 105, col, a, [(b, TXT)], 32, 26), 1260, 345 + i * 118, C[cid]))
-    E.append(takeaway('Read the plan. Then answer yes.', 920, C['a7'], GOOD, 1100)); return E
+s_manage = _lab('Install, update, remove', 'The routine, with sudo.', 'a1', RB, [('a2', 'apt-get update', 'Refresh the lists', ACC), ('a4', 'install -y', 'Install, with the plan', VIO), ('a6', 'remove -y', 'Program goes, library stays', WARN), ('a8', 'autoremove', 'Unneeded libraries', GOOD)])
 def s_myths(C, D, dur):
     E = head('Common myths', 'Four wrong ideas, corrected.', C['my1'])
     it = [('Myth: update installs', 'Update = refresh the list.', 'my2'), ('Myth: remove deletes all', 'Purge deletes config.', 'my3'), ('Myth: it installs, so safe', 'Use trusted repositories.', 'my4'), ('Myth: yes to every prompt', 'Read the plan first.', 'my5')]
@@ -167,7 +162,7 @@ def s_recap(C, D, dur):
     E.append(El(T('Next lesson: disks, filesystems, mounts', 'x', 46, ACC, maxw=1700), 100, 960, C['f18'])); E.append(Pop(badge('LIKE  ·  SHARE  ·  SUBSCRIBE', F('b', 34), INK, GOOD, padx=26, pady=14), 100 + pb.width + 40, 860, C['f19']))
     return E
 FN = dict(hook=s_hook, repo=s_repo, installed=s_installed, plan=s_plan, manage=s_manage, myths=s_myths, rubric=s_rubric, yourturn=s_yourturn, recap=s_recap)
-_GL = dict(repo=('eye', GOOD), installed=('eye', GOOD), plan=('eye', GOOD), manage=('gear', ACC), myths=('question', BAD), rubric=('test', GOOD), yourturn=('board', VIO))
+_GL = dict(repo=('eye', GOOD), installed=('eye', GOOD), plan=('eye', GOOD), manage=('eye', GOOD), myths=('question', BAD), rubric=('test', GOOD), yourturn=('board', VIO))
 def _wrap(name, fn):
     first = dict(SCENES)[name][0][0]
     def w(C, D, dur):
@@ -175,6 +170,7 @@ def _wrap(name, fn):
     return w
 for _n in _GL: FN[_n] = _wrap(_n, FN[_n])
 HL = {
+ 'manage': [('a3', 1, 1, 4, 560, ''), ('a7', 1, 1, 4, 560, '')],
  'repo': [('q2', 1, 2, 4, 592, ''), ('q4', 1, 2, 4, 652, ''), ('q6', 2, 2, 4, 450, '')],
  'installed': [('d2', 2, 1, 4, 424, ''), ('d4', 1, 1, 4, 290, ''), ('d6', 1, 2, 4, 216, '')],
  'plan': [('n2', 1, 2, 4, 948, ''), ('n3', 3, 2, 4, 1062, ''), ('n5', 1, 2, 4, 700, ''), ('n5', 4, 1, 4, 454, ''), ('n7', 1, 1, 4, 948, '')],
