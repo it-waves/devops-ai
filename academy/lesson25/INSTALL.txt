@@ -5,3 +5,4 @@ Install the lab (needs Linux with root, python3, iproute2, iptables, dig, curl, 
   sudo lab25.sh check     # four FAIL lines at the start
   sudo lab25.sh down      # cleanup when finished
 Helpers: sudo lab25.sh client CMD | router CMD | server CMD  (run a command inside that machine)
+  source shortcuts.sh     # gives you the short names lab, cl, rt, sv used in the video
