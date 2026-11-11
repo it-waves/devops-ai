@@ -1,0 +1,26 @@
+Lesson 38 of the DevOps Engineering Bootcamp, the second lesson of the Bash scripting masterclass. A script is only useful when it can take input. You learn four ways to feed one, each in a real demo on Ubuntu: variables (assignment with no spaces, braces to end a name, and a default value with colon dash), positional arguments ($1, $#, $@ and quoting an argument that contains a space), reading input with read (from the keyboard and from a pipe) and command substitution with $( ). A short backup script then combines the ideas. The lesson ends with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Feed your script
+0:29 Variables
+1:38 Positional arguments
+2:39 Reading input
+3:25 Command substitution
+4:27 Put it together
+4:58 Common myths
+5:30 Pass or fail rubric
+6:01 Your turn
+7:01 Quick check
+
+Objectives covered: MC05-O02
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson38. The next lesson covers conditions, tests, case statements, loops and functions.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount setup on the recording computer. The date in the backup file names is the recording date, so yours will differ. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/GoieJXqMSqk
+Next lesson: conditions, tests, case statements, loops and functions.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#bash #bashscripting #linux #ubuntu #devopsbootcamp
