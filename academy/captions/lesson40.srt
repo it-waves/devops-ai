@@ -1,0 +1,1363 @@
+1
+00:00:00,500 --> 00:00:02,725
+Real servers produce text: logs,
+
+2
+00:00:02,725 --> 00:00:04,810
+lists and configuration files.
+
+3
+00:00:04,810 --> 00:00:10,441
+Searching and reshaping that text is one of the most useful skills in operations.
+
+4
+00:00:10,991 --> 00:00:12,952
+Today you learn six tools.
+
+5
+00:00:12,952 --> 00:00:13,329
+grep,
+
+6
+00:00:13,329 --> 00:00:14,084
+to search.
+
+7
+00:00:14,084 --> 00:00:15,064
+Cut and sort,
+
+8
+00:00:15,064 --> 00:00:18,006
+to pick columns and put lines in order.
+
+9
+00:00:18,006 --> 00:00:18,307
+sed,
+
+10
+00:00:18,307 --> 00:00:19,514
+to replace text.
+
+11
+00:00:19,514 --> 00:00:19,816
+awk,
+
+12
+00:00:19,816 --> 00:00:20,796
+to calculate.
+
+13
+00:00:20,796 --> 00:00:21,475
+And find,
+
+14
+00:00:21,475 --> 00:00:22,682
+to locate files.
+
+15
+00:00:23,232 --> 00:00:26,027
+Every demo is a real recording on Ubuntu.
+
+16
+00:00:28,077 --> 00:00:28,472
+First,
+
+17
+00:00:28,472 --> 00:00:28,801
+grep.
+
+18
+00:00:28,801 --> 00:00:32,159
+It prints the lines of a file that match a pattern.
+
+19
+00:00:32,159 --> 00:00:34,266
+Here is a small application log.
+
+20
+00:00:34,266 --> 00:00:35,714
+Type: cat app dot log.
+
+21
+00:00:36,264 --> 00:00:37,022
+Six lines,
+
+22
+00:00:37,022 --> 00:00:38,842
+with three levels: info,
+
+23
+00:00:38,842 --> 00:00:39,979
+warn and error.
+
+24
+00:00:39,979 --> 00:00:41,191
+Find the errors.
+
+25
+00:00:41,191 --> 00:00:42,025
+Type: grep,
+
+26
+00:00:42,025 --> 00:00:42,480
+ERROR,
+
+27
+00:00:42,480 --> 00:00:43,390
+app dot log.
+
+28
+00:00:43,940 --> 00:00:45,809
+Only the two error lines.
+
+29
+00:00:45,809 --> 00:00:48,276
+Now count the info lines instead,
+
+30
+00:00:48,276 --> 00:00:49,173
+with dash c.
+
+31
+00:00:49,173 --> 00:00:49,996
+Type: grep,
+
+32
+00:00:49,996 --> 00:00:50,519
+dash c,
+
+33
+00:00:50,519 --> 00:00:50,893
+INFO,
+
+34
+00:00:50,893 --> 00:00:51,790
+app dot log.
+
+35
+00:00:52,340 --> 00:00:53,616
+Three info lines.
+
+36
+00:00:53,616 --> 00:00:55,191
+Now invert the match,
+
+37
+00:00:55,191 --> 00:00:56,091
+with dash v,
+
+38
+00:00:56,091 --> 00:00:58,717
+to see every line that is not info.
+
+39
+00:00:58,717 --> 00:00:59,542
+Type: grep,
+
+40
+00:00:59,542 --> 00:01:00,068
+dash v,
+
+41
+00:01:00,068 --> 00:01:00,443
+INFO,
+
+42
+00:01:00,443 --> 00:01:01,343
+app dot log.
+
+43
+00:01:01,893 --> 00:01:04,773
+Those are the lines that need attention.
+
+44
+00:01:04,773 --> 00:01:05,133
+Next,
+
+45
+00:01:05,133 --> 00:01:06,357
+add line numbers,
+
+46
+00:01:06,357 --> 00:01:07,221
+with dash n.
+
+47
+00:01:07,221 --> 00:01:08,013
+Type: grep,
+
+48
+00:01:08,013 --> 00:01:08,517
+dash n,
+
+49
+00:01:08,517 --> 00:01:09,093
+timeout,
+
+50
+00:01:09,093 --> 00:01:09,957
+app dot log.
+
+51
+00:01:10,507 --> 00:01:11,315
+Line five.
+
+52
+00:01:11,315 --> 00:01:11,720
+Last,
+
+53
+00:01:11,720 --> 00:01:13,175
+extended patterns,
+
+54
+00:01:13,175 --> 00:01:14,791
+with dash capital E.
+
+55
+00:01:14,791 --> 00:01:16,004
+A bar means or.
+
+56
+00:01:16,004 --> 00:01:16,893
+Type: grep,
+
+57
+00:01:16,893 --> 00:01:18,105
+dash capital E,
+
+58
+00:01:18,105 --> 00:01:19,156
+double quote,
+
+59
+00:01:19,156 --> 00:01:19,560
+WARN,
+
+60
+00:01:19,560 --> 00:01:19,884
+bar,
+
+61
+00:01:19,884 --> 00:01:20,369
+ERROR,
+
+62
+00:01:20,369 --> 00:01:21,420
+double quote,
+
+63
+00:01:21,420 --> 00:01:22,390
+app dot log.
+
+64
+00:01:22,940 --> 00:01:28,550
+Warnings and errors together: three lines. One tool, four flags, and you can read any log.
+
+65
+00:01:30,600 --> 00:01:30,973
+Next,
+
+66
+00:01:30,973 --> 00:01:31,942
+cut and sort.
+
+67
+00:01:31,942 --> 00:01:34,329
+Here is a small table of people,
+
+68
+00:01:34,329 --> 00:01:37,088
+with the columns separated by commas.
+
+69
+00:01:37,088 --> 00:01:39,027
+Type: cat users dot C S V.
+
+70
+00:01:39,577 --> 00:01:41,153
+Three columns: name,
+
+71
+00:01:41,153 --> 00:01:42,177
+team and age.
+
+72
+00:01:42,177 --> 00:01:44,857
+The cut command pulls out columns.
+
+73
+00:01:44,857 --> 00:01:46,906
+Dash d sets the separator,
+
+74
+00:01:46,906 --> 00:01:49,034
+and dash f picks the field.
+
+75
+00:01:49,034 --> 00:01:49,822
+Type: cut,
+
+76
+00:01:49,822 --> 00:01:50,373
+dash d,
+
+77
+00:01:50,373 --> 00:01:50,846
+comma,
+
+78
+00:01:50,846 --> 00:01:51,398
+dash f,
+
+79
+00:01:51,398 --> 00:01:51,713
+one,
+
+80
+00:01:51,713 --> 00:01:52,974
+users dot C S V.
+
+81
+00:01:53,524 --> 00:01:54,677
+Just the names.
+
+82
+00:01:54,677 --> 00:01:57,138
+Now sort the whole table by age.
+
+83
+00:01:57,138 --> 00:01:59,137
+Dash t sets the separator,
+
+84
+00:01:59,137 --> 00:02:01,905
+dash k three picks the third column,
+
+85
+00:02:01,905 --> 00:02:04,057
+and dash n sorts as numbers.
+
+86
+00:02:04,057 --> 00:02:04,903
+Type: sort,
+
+87
+00:02:04,903 --> 00:02:05,441
+dash t,
+
+88
+00:02:05,441 --> 00:02:05,903
+comma,
+
+89
+00:02:05,903 --> 00:02:06,441
+dash k,
+
+90
+00:02:06,441 --> 00:02:06,902
+three,
+
+91
+00:02:06,902 --> 00:02:07,440
+dash n,
+
+92
+00:02:07,440 --> 00:02:08,671
+users dot C S V.
+
+93
+00:02:09,221 --> 00:02:10,302
+Youngest first,
+
+94
+00:02:10,302 --> 00:02:12,392
+and the header stayed on top,
+
+95
+00:02:12,392 --> 00:02:14,411
+because text counts as zero.
+
+96
+00:02:14,411 --> 00:02:14,771
+Next,
+
+97
+00:02:14,771 --> 00:02:16,357
+count people per team.
+
+98
+00:02:16,357 --> 00:02:17,799
+Cut the team column,
+
+99
+00:02:17,799 --> 00:02:18,376
+sort it,
+
+100
+00:02:18,376 --> 00:02:21,403
+then count the repeats with unique dash c.
+
+101
+00:02:21,403 --> 00:02:22,124
+Type: cut,
+
+102
+00:02:22,124 --> 00:02:22,629
+dash d,
+
+103
+00:02:22,629 --> 00:02:23,061
+comma,
+
+104
+00:02:23,061 --> 00:02:23,566
+dash f,
+
+105
+00:02:23,566 --> 00:02:23,854
+two,
+
+106
+00:02:23,854 --> 00:02:25,008
+users dot C S V,
+
+107
+00:02:25,008 --> 00:02:25,368
+pipe,
+
+108
+00:02:25,368 --> 00:02:25,728
+sort,
+
+109
+00:02:25,728 --> 00:02:26,089
+pipe,
+
+110
+00:02:26,089 --> 00:02:27,098
+unique dash c.
+
+111
+00:02:27,648 --> 00:02:28,358
+Two in dev,
+
+112
+00:02:28,358 --> 00:02:29,197
+three in ops,
+
+113
+00:02:29,197 --> 00:02:31,004
+and the header counted once.
+
+114
+00:02:31,004 --> 00:02:33,649
+Unique only collapses neighbouring lines,
+
+115
+00:02:33,649 --> 00:02:35,456
+which is why you sort first.
+
+116
+00:02:37,506 --> 00:02:38,074
+Now sed,
+
+117
+00:02:38,074 --> 00:02:39,351
+the stream editor.
+
+118
+00:02:39,351 --> 00:02:42,330
+Its most common job is search and replace.
+
+119
+00:02:42,330 --> 00:02:44,813
+Here is a small configuration file.
+
+120
+00:02:44,813 --> 00:02:46,658
+Type: cat config dot text.
+
+121
+00:02:47,208 --> 00:02:48,337
+Three settings.
+
+122
+00:02:48,337 --> 00:02:50,822
+Change the mode from dev to prod.
+
+123
+00:02:50,822 --> 00:02:53,382
+The s command means substitute: s,
+
+124
+00:02:53,382 --> 00:02:53,833
+slash,
+
+125
+00:02:53,833 --> 00:02:54,134
+old,
+
+126
+00:02:54,134 --> 00:02:54,586
+slash,
+
+127
+00:02:54,586 --> 00:02:54,887
+new,
+
+128
+00:02:54,887 --> 00:02:55,339
+slash.
+
+129
+00:02:55,339 --> 00:02:56,092
+Type: sed,
+
+130
+00:02:56,092 --> 00:02:57,071
+single quote,
+
+131
+00:02:57,071 --> 00:02:59,254
+s slash dev slash prod slash,
+
+132
+00:02:59,254 --> 00:03:00,233
+single quote,
+
+133
+00:03:00,233 --> 00:03:01,437
+config dot text.
+
+134
+00:03:01,987 --> 00:03:07,491
+The mode shows prod. But did the file change? Check it. Type: cat config dot text.
+
+135
+00:03:08,041 --> 00:03:08,766
+Still dev.
+
+136
+00:03:08,766 --> 00:03:11,667
+The sed command only printed the change,
+
+137
+00:03:11,667 --> 00:03:13,553
+and the file is untouched.
+
+138
+00:03:13,553 --> 00:03:15,293
+To edit the file itself,
+
+139
+00:03:15,293 --> 00:03:16,091
+use dash i.
+
+140
+00:03:16,091 --> 00:03:17,251
+Change the port.
+
+141
+00:03:17,251 --> 00:03:17,976
+Type: sed,
+
+142
+00:03:17,976 --> 00:03:18,484
+dash i,
+
+143
+00:03:18,484 --> 00:03:19,426
+single quote,
+
+144
+00:03:19,426 --> 00:03:23,922
+s slash eight zero eight zero slash nine zero nine zero slash,
+
+145
+00:03:23,922 --> 00:03:24,865
+single quote,
+
+146
+00:03:24,865 --> 00:03:26,025
+config dot text.
+
+147
+00:03:26,575 --> 00:03:31,354
+Silent, and the file has changed. Check it. Type: cat config dot text.
+
+148
+00:03:31,904 --> 00:03:34,494
+The port is now nine zero nine zero.
+
+149
+00:03:34,494 --> 00:03:36,724
+Dash i changes a file for good,
+
+150
+00:03:36,724 --> 00:03:38,378
+so keep a backup first.
+
+151
+00:03:38,378 --> 00:03:41,111
+One more trick: delete matching lines.
+
+152
+00:03:41,111 --> 00:03:41,831
+Type: sed,
+
+153
+00:03:41,831 --> 00:03:42,766
+single quote,
+
+154
+00:03:42,766 --> 00:03:44,133
+slash mode slash d,
+
+155
+00:03:44,133 --> 00:03:45,068
+single quote,
+
+156
+00:03:45,068 --> 00:03:46,219
+config dot text.
+
+157
+00:03:46,769 --> 00:03:49,273
+The mode line is gone from the output.
+
+158
+00:03:49,273 --> 00:03:49,668
+Again,
+
+159
+00:03:49,668 --> 00:03:51,579
+the file itself is unchanged,
+
+160
+00:03:51,579 --> 00:03:53,425
+because there was no dash i.
+
+161
+00:03:55,475 --> 00:03:56,077
+Now awk,
+
+162
+00:03:56,077 --> 00:03:58,859
+a small language for columns of text.
+
+163
+00:03:58,859 --> 00:03:59,310
+First,
+
+164
+00:03:59,310 --> 00:04:01,115
+look at the table again.
+
+165
+00:04:01,115 --> 00:04:03,070
+Type: cat users dot C S V.
+
+166
+00:04:03,620 --> 00:04:06,862
+Awk reads each line and splits it into fields.
+
+167
+00:04:06,862 --> 00:04:08,976
+Dollar one is the first field,
+
+168
+00:04:08,976 --> 00:04:11,655
+and dash capital F sets the separator.
+
+169
+00:04:11,655 --> 00:04:12,360
+Type: awk,
+
+170
+00:04:12,360 --> 00:04:13,417
+dash capital F,
+
+171
+00:04:13,417 --> 00:04:13,840
+comma,
+
+172
+00:04:13,840 --> 00:04:14,756
+single quote,
+
+173
+00:04:14,756 --> 00:04:15,532
+open brace,
+
+174
+00:04:15,532 --> 00:04:16,730
+print dollar one,
+
+175
+00:04:16,730 --> 00:04:17,576
+close brace,
+
+176
+00:04:17,576 --> 00:04:18,492
+single quote,
+
+177
+00:04:18,492 --> 00:04:19,620
+users dot C S V.
+
+178
+00:04:20,170 --> 00:04:21,170
+The names again,
+
+179
+00:04:21,170 --> 00:04:21,733
+like cut.
+
+180
+00:04:21,733 --> 00:04:23,796
+But awk can also test conditions.
+
+181
+00:04:23,796 --> 00:04:25,984
+Print the people older than thirty.
+
+182
+00:04:25,984 --> 00:04:27,422
+N R is the line number,
+
+183
+00:04:27,422 --> 00:04:30,048
+and N R greater than one skips the header.
+
+184
+00:04:30,048 --> 00:04:30,673
+Type: awk,
+
+185
+00:04:30,673 --> 00:04:31,611
+dash capital F,
+
+186
+00:04:31,611 --> 00:04:31,986
+comma,
+
+187
+00:04:31,986 --> 00:04:32,799
+single quote,
+
+188
+00:04:32,799 --> 00:04:34,112
+N R greater than one,
+
+189
+00:04:34,112 --> 00:04:35,175
+double ampersand,
+
+190
+00:04:35,175 --> 00:04:37,238
+dollar three greater than thirty,
+
+191
+00:04:37,238 --> 00:04:37,926
+open brace,
+
+192
+00:04:37,926 --> 00:04:38,989
+print dollar one,
+
+193
+00:04:38,989 --> 00:04:39,364
+comma,
+
+194
+00:04:39,364 --> 00:04:40,177
+dollar three,
+
+195
+00:04:40,177 --> 00:04:40,927
+close brace,
+
+196
+00:04:40,927 --> 00:04:41,740
+single quote,
+
+197
+00:04:41,740 --> 00:04:42,740
+users dot C S V.
+
+198
+00:04:43,290 --> 00:04:44,152
+Three people.
+
+199
+00:04:44,152 --> 00:04:44,484
+Last,
+
+200
+00:04:44,484 --> 00:04:45,412
+a calculation.
+
+201
+00:04:45,412 --> 00:04:47,070
+Add every age to a total,
+
+202
+00:04:47,070 --> 00:04:48,662
+and after the last line,
+
+203
+00:04:48,662 --> 00:04:49,855
+print the average.
+
+204
+00:04:49,855 --> 00:04:50,519
+Type: awk,
+
+205
+00:04:50,519 --> 00:04:51,513
+dash capital F,
+
+206
+00:04:51,513 --> 00:04:51,911
+comma,
+
+207
+00:04:51,911 --> 00:04:52,773
+single quote,
+
+208
+00:04:52,773 --> 00:04:54,166
+N R greater than one,
+
+209
+00:04:54,166 --> 00:04:54,895
+open brace,
+
+210
+00:04:54,895 --> 00:04:56,819
+sum plus equals dollar three,
+
+211
+00:04:56,819 --> 00:04:57,614
+close brace,
+
+212
+00:04:57,614 --> 00:04:57,880
+END,
+
+213
+00:04:57,880 --> 00:04:58,609
+open brace,
+
+214
+00:04:58,609 --> 00:04:59,670
+print sum slash,
+
+215
+00:04:59,670 --> 00:05:00,930
+open round bracket,
+
+216
+00:05:00,930 --> 00:05:01,858
+N R minus one,
+
+217
+00:05:01,858 --> 00:05:03,185
+close round bracket,
+
+218
+00:05:03,185 --> 00:05:03,981
+close brace,
+
+219
+00:05:03,981 --> 00:05:04,843
+single quote,
+
+220
+00:05:04,843 --> 00:05:05,904
+users dot C S V.
+
+221
+00:05:06,454 --> 00:05:11,424
+The average age is thirty-three point six. Awk did the maths, with no spreadsheet.
+
+222
+00:05:13,474 --> 00:05:14,693
+Last tool: find.
+
+223
+00:05:14,693 --> 00:05:16,978
+It searches folders for files.
+
+224
+00:05:16,978 --> 00:05:20,253
+Here is a small folder with two subfolders.
+
+225
+00:05:20,253 --> 00:05:21,014
+Type: L S,
+
+226
+00:05:21,014 --> 00:05:22,157
+dash capital R.
+
+227
+00:05:22,707 --> 00:05:24,112
+Logs in two places.
+
+228
+00:05:24,112 --> 00:05:26,406
+Find every log file below here.
+
+229
+00:05:26,406 --> 00:05:29,513
+The dot means start in the current folder.
+
+230
+00:05:29,513 --> 00:05:30,327
+Type: find,
+
+231
+00:05:30,327 --> 00:05:30,623
+dot,
+
+232
+00:05:30,623 --> 00:05:31,363
+dash name,
+
+233
+00:05:31,363 --> 00:05:32,324
+double quote,
+
+234
+00:05:32,324 --> 00:05:33,286
+star dot log,
+
+235
+00:05:33,286 --> 00:05:34,248
+double quote.
+
+236
+00:05:34,798 --> 00:05:35,933
+Three log files.
+
+237
+00:05:35,933 --> 00:05:41,112
+The quotes matter: they stop the shell from expanding the star too early.
+
+238
+00:05:41,112 --> 00:05:42,460
+Now find old files.
+
+239
+00:05:42,460 --> 00:05:46,930
+Dash M time plus seven means modified more than seven days ago.
+
+240
+00:05:46,930 --> 00:05:47,710
+Type: find,
+
+241
+00:05:47,710 --> 00:05:47,994
+dot,
+
+242
+00:05:47,994 --> 00:05:48,703
+dash name,
+
+243
+00:05:48,703 --> 00:05:49,626
+double quote,
+
+244
+00:05:49,626 --> 00:05:50,548
+star dot log,
+
+245
+00:05:50,548 --> 00:05:51,470
+double quote,
+
+246
+00:05:51,470 --> 00:05:52,322
+dash M time,
+
+247
+00:05:52,322 --> 00:05:53,102
+plus seven.
+
+248
+00:05:53,652 --> 00:05:54,964
+Only the old log.
+
+249
+00:05:54,964 --> 00:05:55,350
+Last,
+
+250
+00:05:55,350 --> 00:05:57,587
+run a command on every match,
+
+251
+00:05:57,587 --> 00:05:58,745
+with dash exec.
+
+252
+00:05:58,745 --> 00:06:02,063
+The curly braces stand for each file found.
+
+253
+00:06:02,063 --> 00:06:02,912
+Type: find,
+
+254
+00:06:02,912 --> 00:06:03,220
+dot,
+
+255
+00:06:03,220 --> 00:06:03,992
+dash name,
+
+256
+00:06:03,992 --> 00:06:04,995
+double quote,
+
+257
+00:06:04,995 --> 00:06:05,998
+star dot log,
+
+258
+00:06:05,998 --> 00:06:07,002
+double quote,
+
+259
+00:06:07,002 --> 00:06:07,773
+dash exec,
+
+260
+00:06:07,773 --> 00:06:08,082
+W C,
+
+261
+00:06:08,082 --> 00:06:08,622
+dash l,
+
+262
+00:06:08,622 --> 00:06:09,471
+open brace,
+
+263
+00:06:09,471 --> 00:06:10,397
+close brace,
+
+264
+00:06:10,397 --> 00:06:10,783
+plus.
+
+265
+00:06:11,333 --> 00:06:13,146
+A line count for every log,
+
+266
+00:06:13,146 --> 00:06:13,952
+and a total.
+
+267
+00:06:13,952 --> 00:06:18,117
+Find with dash exec can run any command on thousands of files.
+
+268
+00:06:20,167 --> 00:06:26,290
+Now combine the tools in a small log report. Here is the log again. Type: cat app dot log.
+
+269
+00:06:26,840 --> 00:06:28,532
+Which levels appear most?
+
+270
+00:06:28,532 --> 00:06:30,564
+Pull the third field with awk.
+
+271
+00:06:30,564 --> 00:06:31,579
+Sort the words,
+
+272
+00:06:31,579 --> 00:06:34,355
+and count the repeats with unique dash c.
+
+273
+00:06:34,355 --> 00:06:35,033
+Type: awk,
+
+274
+00:06:35,033 --> 00:06:35,913
+single quote,
+
+275
+00:06:35,913 --> 00:06:36,658
+open brace,
+
+276
+00:06:36,658 --> 00:06:37,944
+print dollar three,
+
+277
+00:06:37,944 --> 00:06:38,757
+close brace,
+
+278
+00:06:38,757 --> 00:06:39,637
+single quote,
+
+279
+00:06:39,637 --> 00:06:40,449
+app dot log,
+
+280
+00:06:40,449 --> 00:06:40,788
+pipe,
+
+281
+00:06:40,788 --> 00:06:41,127
+sort,
+
+282
+00:06:41,127 --> 00:06:41,465
+pipe,
+
+283
+00:06:41,465 --> 00:06:42,413
+unique dash c.
+
+284
+00:06:42,963 --> 00:06:44,145
+Three info lines,
+
+285
+00:06:44,145 --> 00:06:46,022
+two errors and one warning.
+
+286
+00:06:46,022 --> 00:06:48,803
+Now the details of each error: the time,
+
+287
+00:06:48,803 --> 00:06:49,777
+and the cause.
+
+288
+00:06:49,777 --> 00:06:50,541
+Type: grep,
+
+289
+00:06:50,541 --> 00:06:50,959
+ERROR,
+
+290
+00:06:50,959 --> 00:06:51,793
+app dot log,
+
+291
+00:06:51,793 --> 00:06:52,141
+pipe,
+
+292
+00:06:52,141 --> 00:06:52,419
+awk,
+
+293
+00:06:52,419 --> 00:06:53,323
+single quote,
+
+294
+00:06:53,323 --> 00:06:54,087
+open brace,
+
+295
+00:06:54,087 --> 00:06:55,269
+print dollar two,
+
+296
+00:06:55,269 --> 00:06:55,686
+comma,
+
+297
+00:06:55,686 --> 00:06:56,521
+dollar four,
+
+298
+00:06:56,521 --> 00:06:57,355
+close brace,
+
+299
+00:06:57,355 --> 00:06:58,259
+single quote.
+
+300
+00:06:58,809 --> 00:07:03,822
+A report with one line per error. Small tools, joined by pipes, do real work.
+
+301
+00:07:04,372 --> 00:07:06,762
+Search. Cut. Replace. Calculate. Find.
+
+302
+00:07:08,812 --> 00:07:10,135
+Four myths to clear up.
+
+303
+00:07:10,685 --> 00:07:12,869
+Myth one: sed changes the file.
+
+304
+00:07:12,869 --> 00:07:13,081
+No.
+
+305
+00:07:13,081 --> 00:07:14,561
+It prints the change.
+
+306
+00:07:14,561 --> 00:07:16,957
+Only dash i edits the file itself.
+
+307
+00:07:17,507 --> 00:07:19,770
+Myth two: grep only searches files.
+
+308
+00:07:19,770 --> 00:07:19,963
+No.
+
+309
+00:07:19,963 --> 00:07:22,873
+It also filters the output of other commands,
+
+310
+00:07:22,873 --> 00:07:23,843
+through a pipe.
+
+311
+00:07:24,393 --> 00:07:27,286
+Myth three: unique removes all duplicates.
+
+312
+00:07:27,286 --> 00:07:27,493
+No.
+
+313
+00:07:27,493 --> 00:07:30,042
+It collapses neighbouring lines only,
+
+314
+00:07:30,042 --> 00:07:31,006
+so sort first.
+
+315
+00:07:31,556 --> 00:07:37,167
+Myth four: find needs a file name. No. It can also filter by type, size and age.
+
+316
+00:07:37,717 --> 00:07:40,106
+Search. Cut. Replace. Calculate. Find.
+
+317
+00:07:42,156 --> 00:07:46,721
+Here is how you check your own understanding. Six points, and you need all six.
+
+318
+00:07:47,271 --> 00:07:51,090
+Search a file with grep, using dash c, dash v and dash n.
+
+319
+00:07:51,640 --> 00:07:54,797
+Cut a column, and sort lines as text and as numbers.
+
+320
+00:07:55,347 --> 00:07:58,995
+Replace text with sed, and know when dash i changes the file.
+
+321
+00:07:59,545 --> 00:08:02,831
+Print fields and calculate a total or an average with awk.
+
+322
+00:08:03,381 --> 00:08:06,901
+Find files by name and by age, and run a command on them.
+
+323
+00:08:07,451 --> 00:08:10,096
+Join the tools with pipes to build a small report.
+
+324
+00:08:10,646 --> 00:08:12,267
+To pass, you need all six.
+
+325
+00:08:14,317 --> 00:08:19,117
+Your turn, in your own Ubuntu virtual machine. Type every command yourself.
+
+326
+00:08:19,667 --> 00:08:24,232
+One: write a small log file, and use grep to count, invert and number lines.
+
+327
+00:08:24,782 --> 00:08:29,348
+Two: write a comma separated table, then cut a column and sort it by a number.
+
+328
+00:08:29,898 --> 00:08:35,295
+Three: use sed to replace a word. Then use dash i, but only on a copy of the file.
+
+329
+00:08:35,845 --> 00:08:39,258
+Four: use awk to add up one column, and print the average.
+
+330
+00:08:39,808 --> 00:08:44,310
+Five: find files by name, then by age, and run word count on them.
+
+331
+00:08:44,860 --> 00:08:49,382
+Six: build a pipeline that counts how many times each level appears in your log.
+
+332
+00:08:49,932 --> 00:08:53,239
+Mark yourself on the rubric. Pause the video, and do it now.
+
+333
+00:09:08,789 --> 00:09:09,664
+Quick check.
+
+334
+00:09:10,214 --> 00:09:12,070
+Which grep flag inverts the match?
+
+335
+00:09:12,620 --> 00:09:14,241
+Why do you sort before unique?
+
+336
+00:09:14,791 --> 00:09:16,818
+How do you make sed edit the file itself?
+
+337
+00:09:17,368 --> 00:09:18,968
+What does N R hold in awk?
+
+338
+00:09:19,518 --> 00:09:25,171
+Objective covered: MC05-O04.
+
+339
+00:09:25,721 --> 00:09:27,790
+Pause the video, and answer out loud.
+
+340
+00:09:38,340 --> 00:09:43,226
+Next lesson: pipes, file descriptors, redirection and safe temporary files.
+
+341
+00:09:43,776 --> 00:09:47,104
+If this helped, like, share and subscribe, so you do not miss it.

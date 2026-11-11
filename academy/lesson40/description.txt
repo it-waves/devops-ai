@@ -1,0 +1,27 @@
+Lesson 40 of the DevOps Engineering Bootcamp, the fourth lesson of the Bash scripting masterclass. Servers produce text: logs, lists and configuration files. You learn six tools for searching and reshaping it, each in a real demo on Ubuntu: grep (with the count, invert, line number and extended pattern options), cut and sort (columns, and sorting text or numbers, with a count of repeats), sed (search and replace, and when the dash i option changes the file), awk (fields, conditions and an average) and find (by name and age, with the exec option). A small log report then joins the tools with pipes. The lesson ends with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Text tools overview
+0:28 Search with grep
+1:30 Cut and sort
+2:37 Replace with sed
+3:55 Calculate with awk
+5:13 Find files
+6:20 Put it together
+7:08 Common myths
+7:42 Pass or fail rubric
+8:14 Your turn
+9:08 Quick check
+
+Objectives covered: MC05-O04
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson40. The next lesson covers pipes, file descriptors, redirection and safe temporary files.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount setup on the recording computer. The log and table are small sample files made for the lesson, and the find results show the folder order of that computer, so yours may list files in a different order. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/-scspi2DLUU
+Next lesson: pipes, file descriptors, redirection and safe temporary files.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#bash #bashscripting #grep #sed #awk #linux #ubuntu #devopsbootcamp

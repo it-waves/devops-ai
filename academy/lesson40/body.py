@@ -1,0 +1,91 @@
+RB = 'REAL RECORDING  ·  Ubuntu 24.04 on this computer'
+SCENES = [
+ ('hook', [
+  c('h1', "Real servers produce text: logs, lists and configuration files. Searching and reshaping that text is one of the most useful skills in operations."),
+  c('h2', "Today you learn six tools. grep, to search. Cut and sort, to pick columns and put lines in order. sed, to replace text. awk, to calculate. And find, to locate files."),
+  c('h3', "Every demo is a real recording on Ubuntu."),
+ ]),
+ ('grep', [
+  c('r1', "First, grep. It prints the lines of a file that match a pattern. Here is a small application log. Type: cat app dot log.", "First, grep. It prints the lines of a file that match a pattern. Here is a small application log. Type: cat app dot log."),
+  c('r2', "Six lines, with three levels: info, warn and error. Find the errors. Type: grep, ERROR, app dot log.", "Six lines, with three levels: info, warn and error. Find the errors. Type: grep, ERROR, app dot log."),
+  c('r3', "Only the two error lines. Now count the info lines instead, with dash c. Type: grep, dash c, INFO, app dot log.", "Only the two error lines. Now count the info lines instead, with dash c. Type: grep, dash c, INFO, app dot log."),
+  c('r4', "Three info lines. Now invert the match, with dash v, to see every line that is not info. Type: grep, dash v, INFO, app dot log.", "Three info lines. Now invert the match, with dash v, to see every line that is not info. Type: grep, dash v, INFO, app dot log."),
+  c('r5', "Those are the lines that need attention. Next, add line numbers, with dash n. Type: grep, dash n, timeout, app dot log.", "Those are the lines that need attention. Next, add line numbers, with dash n. Type: grep, dash n, timeout, app dot log."),
+  c('r6', "Line five. Last, extended patterns, with dash capital E. A bar means or. Type: grep, dash capital E, double quote, WARN, bar, ERROR, double quote, app dot log.", "Line five. Last, extended patterns, with dash capital E. A bar means or. Type: grep, dash capital E, double quote, WARN, bar, ERROR, double quote, app dot log."),
+  c('r7', "Warnings and errors together: three lines. One tool, four flags, and you can read any log."),
+ ]),
+ ('cutsort', [
+  c('p1', "Next, cut and sort. Here is a small table of people, with the columns separated by commas. Type: cat users dot C S V.", "Next, cut and sort. Here is a small table of people, with the columns separated by commas. Type: cat users dot C S V."),
+  c('p2', "Three columns: name, team and age. The cut command pulls out columns. Dash d sets the separator, and dash f picks the field. Type: cut, dash d, comma, dash f, one, users dot C S V.", "Three columns: name, team and age. The cut command pulls out columns. Dash d sets the separator, and dash f picks the field. Type: cut, dash d, comma, dash f, one, users dot C S V."),
+  c('p3', "Just the names. Now sort the whole table by age. Dash t sets the separator, dash k three picks the third column, and dash n sorts as numbers. Type: sort, dash t, comma, dash k, three, dash n, users dot C S V.", "Just the names. Now sort the whole table by age. Dash t sets the separator, dash k three picks the third column, and dash n sorts as numbers. Type: sort, dash t, comma, dash k, three, dash n, users dot C S V."),
+  c('p4', "Youngest first, and the header stayed on top, because text counts as zero. Next, count people per team. Cut the team column, sort it, then count the repeats with unique dash c. Type: cut, dash d, comma, dash f, two, users dot C S V, pipe, sort, pipe, unique dash c.", "Youngest first, and the header stayed on top, because text counts as zero. Next, count people per team. Cut the team column, sort it, then count the repeats with unique dash c. Type: cut, dash d, comma, dash f, two, users dot C S V, pipe, sort, pipe, unique dash c."),
+  c('p5', "Two in dev, three in ops, and the header counted once. Unique only collapses neighbouring lines, which is why you sort first."),
+ ]),
+ ('sed', [
+  c('s1', "Now sed, the stream editor. Its most common job is search and replace. Here is a small configuration file. Type: cat config dot text.", "Now sed, the stream editor. Its most common job is search and replace. Here is a small configuration file. Type: cat config dot text."),
+  c('s2', "Three settings. Change the mode from dev to prod. The s command means substitute: s, slash, old, slash, new, slash. Type: sed, single quote, s slash dev slash prod slash, single quote, config dot text.", "Three settings. Change the mode from dev to prod. The s command means substitute: s, slash, old, slash, new, slash. Type: sed, single quote, s slash dev slash prod slash, single quote, config dot text."),
+  c('s3', "The mode shows prod. But did the file change? Check it. Type: cat config dot text.", "The mode shows prod. But did the file change? Check it. Type: cat config dot text."),
+  c('s4', "Still dev. The sed command only printed the change, and the file is untouched. To edit the file itself, use dash i. Change the port. Type: sed, dash i, single quote, s slash eight zero eight zero slash nine zero nine zero slash, single quote, config dot text.", "Still dev. The sed command only printed the change, and the file is untouched. To edit the file itself, use dash i. Change the port. Type: sed, dash i, single quote, s slash eight zero eight zero slash nine zero nine zero slash, single quote, config dot text."),
+  c('s5', "Silent, and the file has changed. Check it. Type: cat config dot text.", "Silent, and the file has changed. Check it. Type: cat config dot text."),
+  c('s6', "The port is now nine zero nine zero. Dash i changes a file for good, so keep a backup first. One more trick: delete matching lines. Type: sed, single quote, slash mode slash d, single quote, config dot text.", "The port is now nine zero nine zero. Dash i changes a file for good, so keep a backup first. One more trick: delete matching lines. Type: sed, single quote, slash mode slash d, single quote, config dot text."),
+  c('s7', "The mode line is gone from the output. Again, the file itself is unchanged, because there was no dash i."),
+ ]),
+ ('awk', [
+  c('a1', "Now awk, a small language for columns of text. First, look at the table again. Type: cat users dot C S V.", "Now awk, a small language for columns of text. First, look at the table again. Type: cat users dot C S V."),
+  c('a2', "Awk reads each line and splits it into fields. Dollar one is the first field, and dash capital F sets the separator. Type: awk, dash capital F, comma, single quote, open brace, print dollar one, close brace, single quote, users dot C S V.", "Awk reads each line and splits it into fields. Dollar one is the first field, and dash capital F sets the separator. Type: awk, dash capital F, comma, single quote, open brace, print dollar one, close brace, single quote, users dot C S V."),
+  c('a3', "The names again, like cut. But awk can also test conditions. Print the people older than thirty. N R is the line number, and N R greater than one skips the header. Type: awk, dash capital F, comma, single quote, N R greater than one, double ampersand, dollar three greater than thirty, open brace, print dollar one, comma, dollar three, close brace, single quote, users dot C S V.", "The names again, like cut. But awk can also test conditions. Print the people older than thirty. N R is the line number, and N R greater than one skips the header. Type: awk, dash capital F, comma, single quote, N R greater than one, double ampersand, dollar three greater than thirty, open brace, print dollar one, comma, dollar three, close brace, single quote, users dot C S V."),
+  c('a4', "Three people. Last, a calculation. Add every age to a total, and after the last line, print the average. Type: awk, dash capital F, comma, single quote, N R greater than one, open brace, sum plus equals dollar three, close brace, END, open brace, print sum slash, open round bracket, N R minus one, close round bracket, close brace, single quote, users dot C S V.", "Three people. Last, a calculation. Add every age to a total, and after the last line, print the average. Type: awk, dash capital F, comma, single quote, N R greater than one, open brace, sum plus equals dollar three, close brace, END, open brace, print sum slash, open round bracket, N R minus one, close round bracket, close brace, single quote, users dot C S V."),
+  c('a5', "The average age is thirty-three point six. Awk did the maths, with no spreadsheet."),
+ ]),
+ ('find', [
+  c('n1', "Last tool: find. It searches folders for files. Here is a small folder with two subfolders. Type: L S, dash capital R.", "Last tool: find. It searches folders for files. Here is a small folder with two subfolders. Type: L S, dash capital R."),
+  c('n2', "Logs in two places. Find every log file below here. The dot means start in the current folder. Type: find, dot, dash name, double quote, star dot log, double quote.", "Logs in two places. Find every log file below here. The dot means start in the current folder. Type: find, dot, dash name, double quote, star dot log, double quote."),
+  c('n3', "Three log files. The quotes matter: they stop the shell from expanding the star too early. Now find old files. Dash M time plus seven means modified more than seven days ago. Type: find, dot, dash name, double quote, star dot log, double quote, dash M time, plus seven.", "Three log files. The quotes matter: they stop the shell from expanding the star too early. Now find old files. Dash M time plus seven means modified more than seven days ago. Type: find, dot, dash name, double quote, star dot log, double quote, dash M time, plus seven."),
+  c('n4', "Only the old log. Last, run a command on every match, with dash exec. The curly braces stand for each file found. Type: find, dot, dash name, double quote, star dot log, double quote, dash exec, W C, dash l, open brace, close brace, plus.", "Only the old log. Last, run a command on every match, with dash exec. The curly braces stand for each file found. Type: find, dot, dash name, double quote, star dot log, double quote, dash exec, W C, dash l, open brace, close brace, plus."),
+  c('n5', "A line count for every log, and a total. Find with dash exec can run any command on thousands of files."),
+ ]),
+ ('build', [
+  c('w1', "Now combine the tools in a small log report. Here is the log again. Type: cat app dot log.", "Now combine the tools in a small log report. Here is the log again. Type: cat app dot log."),
+  c('w2', "Which levels appear most? Pull the third field with awk. Sort the words, and count the repeats with unique dash c. Type: awk, single quote, open brace, print dollar three, close brace, single quote, app dot log, pipe, sort, pipe, unique dash c.", "Which levels appear most? Pull the third field with awk. Sort the words, and count the repeats with unique dash c. Type: awk, single quote, open brace, print dollar three, close brace, single quote, app dot log, pipe, sort, pipe, unique dash c."),
+  c('w3', "Three info lines, two errors and one warning. Now the details of each error: the time, and the cause. Type: grep, ERROR, app dot log, pipe, awk, single quote, open brace, print dollar two, comma, dollar four, close brace, single quote.", "Three info lines, two errors and one warning. Now the details of each error: the time, and the cause. Type: grep, ERROR, app dot log, pipe, awk, single quote, open brace, print dollar two, comma, dollar four, close brace, single quote."),
+  c('w4', "A report with one line per error. Small tools, joined by pipes, do real work."),
+  c('w5', "Search. Cut. Replace. Calculate. Find."),
+ ]),
+ ('myths', [
+  c('my1', "Four myths to clear up."),
+  c('my2', "Myth one: sed changes the file. No. It prints the change. Only dash i edits the file itself."),
+  c('my3', "Myth two: grep only searches files. No. It also filters the output of other commands, through a pipe."),
+  c('my4', "Myth three: unique removes all duplicates. No. It collapses neighbouring lines only, so sort first."),
+  c('my5', "Myth four: find needs a file name. No. It can also filter by type, size and age."),
+  c('my6', "Search. Cut. Replace. Calculate. Find."),
+ ]),
+ ('rubric', [
+  c('b1', "Here is how you check your own understanding. Six points, and you need all six."),
+  c('b2', "Search a file with grep, using dash c, dash v and dash n."),
+  c('b3', "Cut a column, and sort lines as text and as numbers."),
+  c('b4', "Replace text with sed, and know when dash i changes the file."),
+  c('b5', "Print fields and calculate a total or an average with awk."),
+  c('b6', "Find files by name and by age, and run a command on them."),
+  c('b7', "Join the tools with pipes to build a small report."),
+  c('b8', "To pass, you need all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine. Type every command yourself."),
+  c('z2', "One: write a small log file, and use grep to count, invert and number lines."),
+  c('z3', "Two: write a comma separated table, then cut a column and sort it by a number."),
+  c('z4', "Three: use sed to replace a word. Then use dash i, but only on a copy of the file."),
+  c('z5', "Four: use awk to add up one column, and print the average."),
+  c('z6', "Five: find files by name, then by age, and run word count on them."),
+  c('z7', "Six: build a pipeline that counts how many times each level appears in your log."),
+  c('z8', "Mark yourself on the rubric. Pause the video, and do it now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "Which grep flag inverts the match?"), c('f13', "Why do you sort before unique?"),
+  c('f14', "How do you make sed edit the file itself?"), c('f15', "What does N R hold in awk?"),
+  c('f16', "Objective covered: MC05-O04.", "Objective covered: M C zero five, objective four, in the Bash scripting masterclass."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next lesson: pipes, file descriptors, redirection and safe temporary files."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'h3': 0.5, 'r7': 0.5, 'p5': 0.5, 's7': 0.5, 'a5': 0.5, 'n5': 0.5, 'w5': 0.5, 'my6': 0.5, 'b8': 0.5, 'z8': 14.0, 'f17': 10.0}
+CHAP = {'grep': 'Search with grep', 'cutsort': 'Cut and sort', 'sed': 'Replace with sed', 'awk': 'Calculate with awk', 'find': 'Find files', 'build': 'Put it together', 'myths': 'Common myths', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}
