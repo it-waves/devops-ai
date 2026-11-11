@@ -77,7 +77,7 @@ One lesson per objective, then the mastery scenario. Real Ubuntu 24.04 terminal,
 | L39 | MC05-O03 | Conditions, tests, case, loops, functions | Next lesson: text processing | Published (-scspi2DLUU, 9:33, https://youtu.be/-scspi2DLUU; six real Ubuntu 24.04 terminal demos: if/else, tests, case, loops, functions, health-check script; captions published) |
 | L40 | MC05-O04 | grep, sed, awk, cut, sort, find | Next lesson: pipes, file descriptors, temp files | Published (3mWfNoWRf1Y, 9:49, https://youtu.be/3mWfNoWRf1Y; six real demos; captions published) |
 | L41 | MC05-O05 | Pipes, file descriptors, redirection, safe temp files | Next lesson: error handling and traps | Published (heCG-klUYFc, 8:40, https://youtu.be/heCG-klUYFc; five real demos; captions published) |
-| L42 | MC05-O06 | Error handling, traps, logging, exit codes | Next lesson: secrets and safe input | Not started |
+| L42 | MC05-O06 | Error handling, traps, logging, exit codes | Next lesson: secrets and safe input | Built (7:36; five real Ubuntu 24.04 terminal demos: exit codes, strict mode, trap, logging, safe script), delivered, awaiting upload |
 | L43 | MC05-O07 | Secrets, permissions, input validation, injection risks | Next lesson: idempotent scripts and ShellCheck | Not started |
 | L44 | MC05-O08 | Idempotent operational scripts, ShellCheck | Next lesson: deploy, health check, rollback script | Not started |
 | L45 | MC05-O09 | Deployment/health-check/rollback automation script | Next lesson: MC05 mastery scenario | Not started |

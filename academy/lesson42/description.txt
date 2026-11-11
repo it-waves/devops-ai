@@ -1,0 +1,26 @@
+Lesson 42 of the DevOps Engineering Bootcamp, the sixth lesson of the Bash scripting masterclass. Scripts fail, so a good script must notice, stop safely, clean up and report what happened. You learn it in real demos on Ubuntu: exit codes and the dollar question mark variable, returning your own code with exit, strict mode with set dash e u o pipefail, cleanup with a trap on EXIT, timestamped logging to standard error, and allowing an expected failure with or true. One short script then combines them all. The lesson ends with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Exit codes, strict mode, traps and logging
+0:26 Exit codes
+1:32 Strict mode
+2:44 Clean up with trap
+3:30 Logging
+4:17 Put it together
+4:54 Common myths
+5:29 Pass or fail rubric
+5:59 Your turn
+6:57 Quick check
+
+Objectives covered: MC05-O06
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson42. The next lesson covers secrets, permissions, input validation and injection risks.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount setup on the recording computer. The scripts are small samples made for the lesson, and the log times are the real clock of the recording computer, so yours will differ. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/heCG-klUYFc
+Next lesson: secrets, permissions, input validation and injection risks.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#bash #bashscripting #exitcodes #errorhandling #linux #ubuntu #devopsbootcamp

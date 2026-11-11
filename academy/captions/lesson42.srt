@@ -1,0 +1,827 @@
+1
+00:00:00,500 --> 00:00:01,354
+Scripts fail.
+
+2
+00:00:01,354 --> 00:00:02,404
+A disk fills up,
+
+3
+00:00:02,404 --> 00:00:03,586
+a file is missing,
+
+4
+00:00:03,586 --> 00:00:05,228
+a server does not answer.
+
+5
+00:00:05,228 --> 00:00:08,117
+The question is whether your script notices,
+
+6
+00:00:08,117 --> 00:00:08,970
+stops safely,
+
+7
+00:00:08,970 --> 00:00:11,465
+cleans up and tells you what happened.
+
+8
+00:00:12,015 --> 00:00:13,919
+Today you learn four things.
+
+9
+00:00:13,919 --> 00:00:14,667
+Exit codes.
+
+10
+00:00:14,667 --> 00:00:15,482
+Strict mode,
+
+11
+00:00:15,482 --> 00:00:17,454
+to stop on the first failure.
+
+12
+00:00:17,454 --> 00:00:17,862
+Traps,
+
+13
+00:00:17,862 --> 00:00:18,677
+to clean up.
+
+14
+00:00:18,677 --> 00:00:19,493
+And logging,
+
+15
+00:00:19,493 --> 00:00:21,125
+to leave a clear record.
+
+16
+00:00:21,675 --> 00:00:24,469
+Every demo is a real recording on Ubuntu.
+
+17
+00:00:26,519 --> 00:00:26,960
+First,
+
+18
+00:00:26,960 --> 00:00:27,767
+exit codes.
+
+19
+00:00:27,767 --> 00:00:30,190
+Every command ends with a number.
+
+20
+00:00:30,190 --> 00:00:31,585
+Zero means success,
+
+21
+00:00:31,585 --> 00:00:33,935
+and anything else means failure.
+
+22
+00:00:33,935 --> 00:00:35,770
+Run a command that works.
+
+23
+00:00:35,770 --> 00:00:36,505
+Type: L S,
+
+24
+00:00:36,505 --> 00:00:38,487
+slash E T C slash hostname.
+
+25
+00:00:39,037 --> 00:00:40,710
+It printed the file name.
+
+26
+00:00:40,710 --> 00:00:42,451
+Now ask for its exit code,
+
+27
+00:00:42,451 --> 00:00:44,191
+with dollar question mark.
+
+28
+00:00:44,191 --> 00:00:44,927
+Type: echo,
+
+29
+00:00:44,927 --> 00:00:46,333
+dollar question mark.
+
+30
+00:00:46,883 --> 00:00:51,512
+Zero, success. Now a command that fails. Type: L S, slash nope.
+
+31
+00:00:52,062 --> 00:00:57,374
+An error message. Ask for the exit code again. Type: echo, dollar question mark.
+
+32
+00:00:57,924 --> 00:00:58,196
+Two.
+
+33
+00:00:58,196 --> 00:00:58,808
+Not zero,
+
+34
+00:00:58,808 --> 00:01:00,305
+so the command failed.
+
+35
+00:01:00,305 --> 00:01:02,957
+Your own scripts can return a code too,
+
+36
+00:01:02,957 --> 00:01:04,453
+with the exit command.
+
+37
+00:01:04,453 --> 00:01:06,425
+Here is a small check script.
+
+38
+00:01:06,425 --> 00:01:08,058
+Type: cat check dot S H.
+
+39
+00:01:08,608 --> 00:01:11,048
+If the log contains the word ERROR,
+
+40
+00:01:11,048 --> 00:01:14,326
+the script prints a message and exits with one.
+
+41
+00:01:14,326 --> 00:01:16,139
+Otherwise it prints clean,
+
+42
+00:01:16,139 --> 00:01:17,534
+and exits with zero.
+
+43
+00:01:17,534 --> 00:01:18,022
+Run it.
+
+44
+00:01:18,022 --> 00:01:19,765
+Type: bash check dot S H.
+
+45
+00:01:20,315 --> 00:01:24,582
+It found errors. Check the code. Type: echo, dollar question mark.
+
+46
+00:01:25,132 --> 00:01:25,388
+One.
+
+47
+00:01:25,388 --> 00:01:26,156
+Other tools,
+
+48
+00:01:26,156 --> 00:01:28,076
+like pipelines and schedulers,
+
+49
+00:01:28,076 --> 00:01:29,164
+read this number,
+
+50
+00:01:29,164 --> 00:01:30,828
+to decide what to do next.
+
+51
+00:01:32,878 --> 00:01:33,226
+Next,
+
+52
+00:01:33,226 --> 00:01:34,062
+strict mode.
+
+53
+00:01:34,062 --> 00:01:34,828
+By default,
+
+54
+00:01:34,828 --> 00:01:36,988
+bash carries on after an error,
+
+55
+00:01:36,988 --> 00:01:38,799
+and that can be dangerous.
+
+56
+00:01:38,799 --> 00:01:40,401
+Here is a loose script.
+
+57
+00:01:40,401 --> 00:01:42,073
+Type: cat loose dot S H.
+
+58
+00:01:42,623 --> 00:01:46,295
+It tries to change into a folder that does not exist,
+
+59
+00:01:46,295 --> 00:01:47,680
+and then carries on.
+
+60
+00:01:47,680 --> 00:01:48,165
+Run it.
+
+61
+00:01:48,165 --> 00:01:49,897
+Type: bash loose dot S H.
+
+62
+00:01:50,447 --> 00:01:51,435
+The cd failed,
+
+63
+00:01:51,435 --> 00:01:53,057
+but the script went on.
+
+64
+00:01:53,057 --> 00:01:56,654
+It reported a folder that is not the one it wanted,
+
+65
+00:01:56,654 --> 00:01:59,405
+and used a variable that was never set.
+
+66
+00:01:59,405 --> 00:02:00,887
+Now a strict version.
+
+67
+00:02:00,887 --> 00:02:02,650
+Type: cat strict dot S H.
+
+68
+00:02:03,200 --> 00:02:05,419
+The set line has three options.
+
+69
+00:02:05,419 --> 00:02:08,427
+Dash E stops at the first failing command.
+
+70
+00:02:08,427 --> 00:02:11,577
+Dash U treats an unset variable as an error.
+
+71
+00:02:11,577 --> 00:02:15,515
+And pipe fail makes a pipeline fail if any stage fails.
+
+72
+00:02:15,515 --> 00:02:16,016
+Run it.
+
+73
+00:02:16,016 --> 00:02:17,877
+Type: bash strict dot S H.
+
+74
+00:02:18,427 --> 00:02:20,299
+It stopped at the failed cd,
+
+75
+00:02:20,299 --> 00:02:21,970
+and nothing after it ran.
+
+76
+00:02:21,970 --> 00:02:23,307
+Check the exit code.
+
+77
+00:02:23,307 --> 00:02:24,042
+Type: echo,
+
+78
+00:02:24,042 --> 00:02:25,446
+dollar question mark.
+
+79
+00:02:25,996 --> 00:02:26,274
+One.
+
+80
+00:02:26,274 --> 00:02:28,015
+Now see what dash U does.
+
+81
+00:02:28,015 --> 00:02:31,984
+Here is a script that uses a variable that was never set.
+
+82
+00:02:31,984 --> 00:02:33,655
+Type: cat unset dot S H.
+
+83
+00:02:34,205 --> 00:02:36,893
+Run it. Type: bash unset dot S H.
+
+84
+00:02:37,443 --> 00:02:38,469
+Unbound variable.
+
+85
+00:02:38,469 --> 00:02:39,374
+Without dash U,
+
+86
+00:02:39,374 --> 00:02:42,030
+the script would have printed an empty name,
+
+87
+00:02:42,030 --> 00:02:42,755
+and gone on.
+
+88
+00:02:44,805 --> 00:02:46,305
+Stopping early is good,
+
+89
+00:02:46,305 --> 00:02:48,978
+but a script that stops can leave a mess.
+
+90
+00:02:48,978 --> 00:02:51,912
+A trap runs a command when something happens.
+
+91
+00:02:51,912 --> 00:02:54,911
+Here is a script with a trap on the word EXIT.
+
+92
+00:02:54,911 --> 00:02:56,410
+Type: cat trap dot S H.
+
+93
+00:02:56,960 --> 00:02:58,807
+It makes a temporary file,
+
+94
+00:02:58,807 --> 00:03:02,996
+and sets a trap that removes the file and prints a message.
+
+95
+00:03:02,996 --> 00:03:04,487
+Then a command fails.
+
+96
+00:03:04,487 --> 00:03:04,984
+Run it.
+
+97
+00:03:04,984 --> 00:03:06,688
+Type: bash trap dot S H.
+
+98
+00:03:07,238 --> 00:03:09,381
+The script stopped at the failure,
+
+99
+00:03:09,381 --> 00:03:10,831
+and the trap still ran.
+
+100
+00:03:10,831 --> 00:03:12,091
+Check the exit code.
+
+101
+00:03:12,091 --> 00:03:12,784
+Type: echo,
+
+102
+00:03:12,784 --> 00:03:14,108
+dollar question mark.
+
+103
+00:03:14,658 --> 00:03:14,938
+One,
+
+104
+00:03:14,938 --> 00:03:16,060
+still a failure.
+
+105
+00:03:16,060 --> 00:03:19,777
+Now check that nothing was left behind in slash temp.
+
+106
+00:03:19,777 --> 00:03:20,478
+Type: L S,
+
+107
+00:03:20,478 --> 00:03:21,250
+slash temp.
+
+108
+00:03:21,800 --> 00:03:22,187
+Empty.
+
+109
+00:03:22,187 --> 00:03:25,737
+The trap on EXIT runs however the script ends: success,
+
+110
+00:03:25,737 --> 00:03:27,286
+failure or an interrupt.
+
+111
+00:03:27,286 --> 00:03:29,352
+That is how you clean up safely.
+
+112
+00:03:31,402 --> 00:03:31,767
+Next,
+
+113
+00:03:31,767 --> 00:03:32,351
+logging.
+
+114
+00:03:32,351 --> 00:03:34,979
+A good script says what it is doing,
+
+115
+00:03:34,979 --> 00:03:35,636
+and when.
+
+116
+00:03:35,636 --> 00:03:37,753
+Here is a small log function.
+
+117
+00:03:37,753 --> 00:03:39,359
+Type: cat log dot S H.
+
+118
+00:03:39,909 --> 00:03:41,886
+The function prints the time,
+
+119
+00:03:41,886 --> 00:03:43,385
+a level and a message,
+
+120
+00:03:43,385 --> 00:03:44,612
+to standard error,
+
+121
+00:03:44,612 --> 00:03:45,838
+with the redirect,
+
+122
+00:03:45,838 --> 00:03:47,678
+greater than ampersand two.
+
+123
+00:03:47,678 --> 00:03:48,155
+Run it.
+
+124
+00:03:48,155 --> 00:03:49,723
+Type: bash log dot S H.
+
+125
+00:03:50,273 --> 00:03:51,592
+Messages with times,
+
+126
+00:03:51,592 --> 00:03:52,516
+on the screen.
+
+127
+00:03:52,516 --> 00:03:54,891
+Because they went to standard error,
+
+128
+00:03:54,891 --> 00:03:58,585
+you can capture them without touching the normal output.
+
+129
+00:03:58,585 --> 00:04:00,102
+Type: bash log dot S H,
+
+130
+00:04:00,102 --> 00:04:00,498
+space,
+
+131
+00:04:00,498 --> 00:04:01,620
+two greater than,
+
+132
+00:04:01,620 --> 00:04:02,411
+run dot log.
+
+133
+00:04:02,961 --> 00:04:08,359
+Silent, because the log went into the file. Look inside. Type: cat run dot log.
+
+134
+00:04:08,909 --> 00:04:10,253
+A timestamped record.
+
+135
+00:04:10,253 --> 00:04:11,789
+Results on standard out,
+
+136
+00:04:11,789 --> 00:04:13,517
+and logs on standard error,
+
+137
+00:04:13,517 --> 00:04:15,565
+so each can go to its own place.
+
+138
+00:04:17,615 --> 00:04:19,439
+Now put it all together,
+
+139
+00:04:19,439 --> 00:04:20,883
+in one safe script.
+
+140
+00:04:20,883 --> 00:04:21,796
+Strict mode,
+
+141
+00:04:21,796 --> 00:04:23,088
+a temporary file,
+
+142
+00:04:23,088 --> 00:04:23,620
+a trap,
+
+143
+00:04:23,620 --> 00:04:24,912
+and an exit code.
+
+144
+00:04:24,912 --> 00:04:26,660
+Type: cat safe dot S H.
+
+145
+00:04:27,210 --> 00:04:29,049
+Notice or true after grep.
+
+146
+00:04:29,049 --> 00:04:30,818
+When grep finds no match,
+
+147
+00:04:30,818 --> 00:04:32,091
+it exits with one,
+
+148
+00:04:32,091 --> 00:04:34,778
+and strict mode would stop the script.
+
+149
+00:04:34,778 --> 00:04:36,900
+Or true says: that is allowed.
+
+150
+00:04:36,900 --> 00:04:37,395
+Run it.
+
+151
+00:04:37,395 --> 00:04:39,093
+Type: bash safe dot S H.
+
+152
+00:04:39,643 --> 00:04:40,345
+Two errors.
+
+153
+00:04:40,345 --> 00:04:42,322
+The script then exits with one,
+
+154
+00:04:42,322 --> 00:04:43,534
+to tell the caller.
+
+155
+00:04:43,534 --> 00:04:44,108
+Check it.
+
+156
+00:04:44,108 --> 00:04:44,810
+Type: echo,
+
+157
+00:04:44,810 --> 00:04:46,150
+dollar question mark.
+
+158
+00:04:46,700 --> 00:04:47,129
+Strict,
+
+159
+00:04:47,129 --> 00:04:47,497
+clean,
+
+160
+00:04:47,497 --> 00:04:49,215
+and honest about the result.
+
+161
+00:04:49,215 --> 00:04:52,038
+That is a script you can run from a scheduler,
+
+162
+00:04:52,038 --> 00:04:52,652
+and trust.
+
+163
+00:04:54,702 --> 00:04:56,025
+Four myths to clear up.
+
+164
+00:04:56,575 --> 00:04:59,392
+Myth one: exit code zero means failure.
+
+165
+00:04:59,392 --> 00:04:59,609
+No.
+
+166
+00:04:59,609 --> 00:05:00,981
+Zero means success.
+
+167
+00:05:00,981 --> 00:05:02,932
+Anything else is a failure.
+
+168
+00:05:03,482 --> 00:05:06,436
+Myth two: set dash E catches every error.
+
+169
+00:05:06,436 --> 00:05:06,652
+No.
+
+170
+00:05:06,652 --> 00:05:08,598
+Commands inside an if test,
+
+171
+00:05:08,598 --> 00:05:09,751
+or before or or,
+
+172
+00:05:09,751 --> 00:05:10,543
+are exempt.
+
+173
+00:05:11,093 --> 00:05:14,083
+Myth three: a trap only runs on control C.
+
+174
+00:05:14,083 --> 00:05:14,297
+No.
+
+175
+00:05:14,297 --> 00:05:17,429
+A trap on EXIT runs however the script ends.
+
+176
+00:05:17,979 --> 00:05:20,698
+Myth four: logs belong on standard out.
+
+177
+00:05:20,698 --> 00:05:20,907
+No.
+
+178
+00:05:20,907 --> 00:05:22,860
+Put results on standard out,
+
+179
+00:05:22,860 --> 00:05:24,742
+and logs on standard error.
+
+180
+00:05:25,292 --> 00:05:28,215
+Exit codes. Strict mode. Traps. Logs.
+
+181
+00:05:30,265 --> 00:05:34,830
+Here is how you check your own understanding. Six points, and you need all six.
+
+182
+00:05:35,380 --> 00:05:40,074
+Read an exit code with dollar question mark, and know that zero means success.
+
+183
+00:05:40,624 --> 00:05:43,397
+Return your own exit code with the exit command.
+
+184
+00:05:43,947 --> 00:05:47,467
+Use set dash E U O pipe fail, and explain each option.
+
+185
+00:05:48,017 --> 00:05:49,660
+Clean up with a trap on EXIT.
+
+186
+00:05:50,210 --> 00:05:52,962
+Write timestamped log lines to standard error.
+
+187
+00:05:53,512 --> 00:05:55,730
+Allow an expected failure with or true.
+
+188
+00:05:56,280 --> 00:05:57,902
+To pass, you need all six.
+
+189
+00:05:59,952 --> 00:06:04,752
+Your turn, in your own Ubuntu virtual machine. Type every command yourself.
+
+190
+00:06:05,302 --> 00:06:09,697
+One: run a command that works and one that fails, and print each exit code.
+
+191
+00:06:10,247 --> 00:06:14,305
+Two: write a script that exits with one when a file contains a word,
+
+192
+00:06:14,305 --> 00:06:15,857
+and zero when it does not.
+
+193
+00:06:16,407 --> 00:06:21,421
+Three: add set dash E U O pipe fail, and prove that it stops at the first failure.
+
+194
+00:06:21,971 --> 00:06:27,112
+Four: add a trap on EXIT that removes a temporary file, and check that none is left.
+
+195
+00:06:27,662 --> 00:06:31,589
+Five: add a log function that writes timestamps to standard error,
+
+196
+00:06:31,589 --> 00:06:33,017
+and save them to a file.
+
+197
+00:06:33,567 --> 00:06:38,281
+Six: run grep on a file with no match, and make the script survive with or true.
+
+198
+00:06:38,831 --> 00:06:42,138
+Mark yourself on the rubric. Pause the video, and do it now.
+
+199
+00:06:57,688 --> 00:06:58,563
+Quick check.
+
+200
+00:06:59,113 --> 00:07:00,883
+Which exit code means success?
+
+201
+00:07:01,433 --> 00:07:02,905
+What does set dash U do?
+
+202
+00:07:03,455 --> 00:07:05,055
+When does a trap on EXIT run?
+
+203
+00:07:05,605 --> 00:07:07,269
+Where should log messages go?
+
+204
+00:07:07,819 --> 00:07:13,558
+Objective covered: MC05-O06.
+
+205
+00:07:14,108 --> 00:07:16,177
+Pause the video, and answer out loud.
+
+206
+00:07:26,727 --> 00:07:31,421
+Next lesson: secrets, permissions, input validation and injection risks.
+
+207
+00:07:31,971 --> 00:07:35,299
+If this helped, like, share and subscribe, so you do not miss it.
