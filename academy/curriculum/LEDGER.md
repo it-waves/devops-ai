@@ -74,7 +74,7 @@ One lesson per objective, then the mastery scenario. Real Ubuntu 24.04 terminal,
 |---|---|---|---|---|
 | L37 | MC05-O01 | Shell execution, quoting, expansion, environment, exit status | Next lesson: variables, arguments, input | Published (GoieJXqMSqk, 9:17, https://youtu.be/GoieJXqMSqk; captions uploaded; five real Ubuntu 24.04 terminal demos: how a script runs, quoting, expansion, environment, exit status; four-step diagram labelled illustration |
 | L38 | MC05-O02 | Variables, positional arguments, input, command substitution | Next lesson: conditions, loops, functions | Published (iCJD8btV7yc, 7:42, https://youtu.be/iCJD8btV7yc; five real Ubuntu 24.04 terminal demos: variables, positional arguments, read, command substitution, a backup script; captions upload attempted, first publish errored, retried, unverified) |
-| L39 | MC05-O03 | Conditions, tests, case, loops, functions | Next lesson: text processing | Not started |
+| L39 | MC05-O03 | Conditions, tests, case, loops, functions | Next lesson: text processing | Built (9:33; six real Ubuntu 24.04 terminal demos: if/else, tests, case, loops, functions, health-check script), delivered, awaiting upload |
 | L40 | MC05-O04 | grep, sed, awk, cut, sort, find | Next lesson: pipes, file descriptors, temp files | Not started |
 | L41 | MC05-O05 | Pipes, file descriptors, redirection, safe temp files | Next lesson: error handling and traps | Not started |
 | L42 | MC05-O06 | Error handling, traps, logging, exit codes | Next lesson: secrets and safe input | Not started |

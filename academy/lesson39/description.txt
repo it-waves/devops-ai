@@ -1,0 +1,27 @@
+Lesson 39 of the DevOps Engineering Bootcamp, the third lesson of the Bash scripting masterclass. A script becomes useful when it can decide, choose and repeat. You learn four tools, each in a real demo on Ubuntu: if and else with the test command (square brackets and exit status), tests for files, strings and numbers (including the unquoted empty variable trap), the case statement with a default branch, for and while loops, and functions that you call with arguments. A small health check script then combines a function, a test, a loop and arithmetic. The lesson ends with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Scripts that decide
+0:25 If and else
+1:26 Tests
+3:30 The case statement
+4:17 For and while loops
+5:18 Functions
+6:02 Put it together
+6:43 Common myths
+7:22 Pass or fail rubric
+7:54 Your turn
+8:53 Quick check
+
+Objectives covered: MC05-O03
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson39. The next lesson covers text processing with grep, sed, awk, cut, sort and find.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount setup on the recording computer. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/iCJD8btV7yc
+Next lesson: text processing with grep, sed, awk, cut, sort and find.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#bash #bashscripting #linux #ubuntu #devopsbootcamp

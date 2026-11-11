@@ -1,0 +1,1139 @@
+1
+00:00:00,500 --> 00:00:03,965
+A script that cannot decide is just a list of commands.
+
+2
+00:00:03,965 --> 00:00:05,917
+Real scripts check a condition,
+
+3
+00:00:05,917 --> 00:00:06,799
+choose a path,
+
+4
+00:00:06,799 --> 00:00:07,555
+repeat work,
+
+5
+00:00:07,555 --> 00:00:08,500
+and reuse code.
+
+6
+00:00:09,050 --> 00:00:10,826
+Today you learn four tools.
+
+7
+00:00:10,826 --> 00:00:11,615
+If and test,
+
+8
+00:00:11,615 --> 00:00:12,799
+to make decisions.
+
+9
+00:00:12,799 --> 00:00:13,128
+Case,
+
+10
+00:00:13,128 --> 00:00:14,970
+to pick one of many answers.
+
+11
+00:00:14,970 --> 00:00:16,286
+For and while loops,
+
+12
+00:00:16,286 --> 00:00:17,272
+to repeat work.
+
+13
+00:00:17,272 --> 00:00:18,193
+And functions,
+
+14
+00:00:18,193 --> 00:00:20,101
+to reuse a block of commands.
+
+15
+00:00:20,651 --> 00:00:23,445
+Every demo is a real recording on Ubuntu.
+
+16
+00:00:25,495 --> 00:00:30,316
+Scripts make decisions with if. Here is one. Type: cat age.sh.
+
+17
+00:00:30,866 --> 00:00:33,654
+If the test in square brackets is true,
+
+18
+00:00:33,654 --> 00:00:35,226
+the first branch runs.
+
+19
+00:00:35,226 --> 00:00:37,442
+Otherwise the else branch runs.
+
+20
+00:00:37,442 --> 00:00:40,087
+Dash G E means greater than or equal.
+
+21
+00:00:40,087 --> 00:00:42,231
+Run it with the number twenty.
+
+22
+00:00:42,231 --> 00:00:44,233
+Type: dot slash age dot S H,
+
+23
+00:00:44,233 --> 00:00:44,733
+twenty.
+
+24
+00:00:45,283 --> 00:00:49,166
+Adult. Now ten. Type: dot slash age dot S H, ten.
+
+25
+00:00:49,716 --> 00:00:50,152
+Minor.
+
+26
+00:00:50,152 --> 00:00:53,133
+The square brackets are really a command,
+
+27
+00:00:53,133 --> 00:00:53,932
+named test.
+
+28
+00:00:53,932 --> 00:00:57,204
+It reports true or false with an exit status.
+
+29
+00:00:57,204 --> 00:00:59,094
+Type: open square bracket,
+
+30
+00:00:59,094 --> 00:00:59,457
+five,
+
+31
+00:00:59,457 --> 00:01:00,112
+dash G T,
+
+32
+00:01:00,112 --> 00:01:00,548
+three,
+
+33
+00:01:00,548 --> 00:01:02,075
+close square bracket,
+
+34
+00:01:02,075 --> 00:01:02,801
+semicolon,
+
+35
+00:01:02,801 --> 00:01:04,692
+echo dollar question mark.
+
+36
+00:01:05,242 --> 00:01:05,624
+Zero.
+
+37
+00:01:05,624 --> 00:01:06,618
+In the shell,
+
+38
+00:01:06,618 --> 00:01:07,841
+zero means true.
+
+39
+00:01:07,841 --> 00:01:09,753
+Now a test that is false.
+
+40
+00:01:09,753 --> 00:01:11,740
+Type: open square bracket,
+
+41
+00:01:11,740 --> 00:01:12,123
+five,
+
+42
+00:01:12,123 --> 00:01:12,811
+dash G T,
+
+43
+00:01:12,811 --> 00:01:13,193
+nine,
+
+44
+00:01:13,193 --> 00:01:14,799
+close square bracket,
+
+45
+00:01:14,799 --> 00:01:15,563
+semicolon,
+
+46
+00:01:15,563 --> 00:01:17,551
+echo dollar question mark.
+
+47
+00:01:18,101 --> 00:01:18,354
+One.
+
+48
+00:01:18,354 --> 00:01:20,692
+Anything other than zero means false.
+
+49
+00:01:20,692 --> 00:01:23,663
+The if statement simply reads that exit status,
+
+50
+00:01:23,663 --> 00:01:24,864
+and picks a branch.
+
+51
+00:01:26,914 --> 00:01:29,294
+Tests come in three kinds: files,
+
+52
+00:01:29,294 --> 00:01:30,737
+strings and numbers.
+
+53
+00:01:30,737 --> 00:01:31,602
+Files first.
+
+54
+00:01:31,602 --> 00:01:33,478
+Does notes dot text exist?
+
+55
+00:01:33,478 --> 00:01:35,786
+Dash F tests for a regular file.
+
+56
+00:01:35,786 --> 00:01:37,661
+Type: open square bracket,
+
+57
+00:01:37,661 --> 00:01:38,166
+dash F,
+
+58
+00:01:38,166 --> 00:01:39,248
+notes dot text,
+
+59
+00:01:39,248 --> 00:01:40,762
+close square bracket,
+
+60
+00:01:40,762 --> 00:01:41,989
+double ampersand,
+
+61
+00:01:41,989 --> 00:01:42,349
+echo,
+
+62
+00:01:42,349 --> 00:01:43,287
+double quote,
+
+63
+00:01:43,287 --> 00:01:44,152
+file exists,
+
+64
+00:01:44,152 --> 00:01:45,090
+double quote.
+
+65
+00:01:45,640 --> 00:01:46,498
+File exists.
+
+66
+00:01:46,498 --> 00:01:51,644
+The double ampersand means: run the next part only if the test was true.
+
+67
+00:01:51,644 --> 00:01:53,716
+Dash D tests for a directory.
+
+68
+00:01:53,716 --> 00:01:55,574
+Type: open square bracket,
+
+69
+00:01:55,574 --> 00:01:56,075
+dash D,
+
+70
+00:01:56,075 --> 00:01:56,432
+docs,
+
+71
+00:01:56,432 --> 00:01:57,933
+close square bracket,
+
+72
+00:01:57,933 --> 00:01:59,148
+double ampersand,
+
+73
+00:01:59,148 --> 00:01:59,505
+echo,
+
+74
+00:01:59,505 --> 00:02:00,435
+double quote,
+
+75
+00:02:00,435 --> 00:02:01,650
+directory exists,
+
+76
+00:02:01,650 --> 00:02:02,579
+double quote.
+
+77
+00:02:03,129 --> 00:02:04,275
+Directory exists.
+
+78
+00:02:04,275 --> 00:02:09,536
+The double pipe means the opposite: run the next part only if the test failed.
+
+79
+00:02:09,536 --> 00:02:11,289
+Type: open square bracket,
+
+80
+00:02:11,289 --> 00:02:11,761
+dash D,
+
+81
+00:02:11,761 --> 00:02:12,233
+no dir,
+
+82
+00:02:12,233 --> 00:02:13,649
+close square bracket,
+
+83
+00:02:13,649 --> 00:02:14,459
+double pipe,
+
+84
+00:02:14,459 --> 00:02:14,796
+echo,
+
+85
+00:02:14,796 --> 00:02:15,673
+double quote,
+
+86
+00:02:15,673 --> 00:02:16,887
+no such directory,
+
+87
+00:02:16,887 --> 00:02:17,763
+double quote.
+
+88
+00:02:18,313 --> 00:02:23,775
+No such directory. Next, strings. First store a name. Type: name equals Sam.
+
+89
+00:02:24,325 --> 00:02:26,516
+Strings use a single equals sign,
+
+90
+00:02:26,516 --> 00:02:28,242
+with a space on each side.
+
+91
+00:02:28,242 --> 00:02:29,969
+Type: open square bracket,
+
+92
+00:02:29,969 --> 00:02:30,832
+double quote,
+
+93
+00:02:30,832 --> 00:02:31,629
+dollar name,
+
+94
+00:02:31,629 --> 00:02:32,492
+double quote,
+
+95
+00:02:32,492 --> 00:02:32,957
+equals,
+
+96
+00:02:32,957 --> 00:02:33,223
+Sam,
+
+97
+00:02:33,223 --> 00:02:34,617
+close square bracket,
+
+98
+00:02:34,617 --> 00:02:35,746
+double ampersand,
+
+99
+00:02:35,746 --> 00:02:36,078
+echo,
+
+100
+00:02:36,078 --> 00:02:36,941
+double quote,
+
+101
+00:02:36,941 --> 00:02:37,605
+same name,
+
+102
+00:02:37,605 --> 00:02:38,469
+double quote.
+
+103
+00:02:39,019 --> 00:02:39,732
+Same name.
+
+104
+00:02:39,732 --> 00:02:41,158
+Numbers use letters,
+
+105
+00:02:41,158 --> 00:02:43,726
+not symbols: dash L T for less than,
+
+106
+00:02:43,726 --> 00:02:45,580
+dash G T for greater than,
+
+107
+00:02:45,580 --> 00:02:46,935
+dash E Q for equal.
+
+108
+00:02:46,935 --> 00:02:48,789
+Type: open square bracket,
+
+109
+00:02:48,789 --> 00:02:49,217
+seven,
+
+110
+00:02:49,217 --> 00:02:49,859
+dash L T,
+
+111
+00:02:49,859 --> 00:02:50,144
+ten,
+
+112
+00:02:50,144 --> 00:02:51,642
+close square bracket,
+
+113
+00:02:51,642 --> 00:02:52,855
+double ampersand,
+
+114
+00:02:52,855 --> 00:02:53,211
+echo,
+
+115
+00:02:53,211 --> 00:02:54,138
+double quote,
+
+116
+00:02:54,138 --> 00:02:55,137
+seven is less,
+
+117
+00:02:55,137 --> 00:02:56,064
+double quote.
+
+118
+00:02:56,614 --> 00:02:57,607
+Seven is less.
+
+119
+00:02:57,607 --> 00:03:00,446
+Now the classic trap: an empty variable,
+
+120
+00:03:00,446 --> 00:03:01,510
+with no quotes.
+
+121
+00:03:01,510 --> 00:03:03,355
+Type: open square bracket,
+
+122
+00:03:03,355 --> 00:03:04,277
+dollar empty,
+
+123
+00:03:04,277 --> 00:03:04,774
+equals,
+
+124
+00:03:04,774 --> 00:03:04,916
+x,
+
+125
+00:03:04,916 --> 00:03:06,406
+close square bracket.
+
+126
+00:03:06,956 --> 00:03:07,544
+An error.
+
+127
+00:03:07,544 --> 00:03:09,961
+The shell removed the empty variable,
+
+128
+00:03:09,961 --> 00:03:12,051
+and the test lost its left side.
+
+129
+00:03:12,051 --> 00:03:13,292
+Quote the variable,
+
+130
+00:03:13,292 --> 00:03:14,925
+and the test stays valid.
+
+131
+00:03:14,925 --> 00:03:16,623
+Type: open square bracket,
+
+132
+00:03:16,623 --> 00:03:17,472
+double quote,
+
+133
+00:03:17,472 --> 00:03:18,321
+dollar empty,
+
+134
+00:03:18,321 --> 00:03:19,171
+double quote,
+
+135
+00:03:19,171 --> 00:03:19,628
+equals,
+
+136
+00:03:19,628 --> 00:03:19,758
+x,
+
+137
+00:03:19,758 --> 00:03:21,130
+close square bracket,
+
+138
+00:03:21,130 --> 00:03:21,914
+double pipe,
+
+139
+00:03:21,914 --> 00:03:22,241
+echo,
+
+140
+00:03:22,241 --> 00:03:23,090
+double quote,
+
+141
+00:03:23,090 --> 00:03:24,070
+quoted is safe,
+
+142
+00:03:24,070 --> 00:03:24,919
+double quote.
+
+143
+00:03:25,469 --> 00:03:28,882
+Quoted is safe. Always quote a variable inside a test.
+
+144
+00:03:30,932 --> 00:03:34,057
+When one value has many possible answers,
+
+145
+00:03:34,057 --> 00:03:34,743
+use case.
+
+146
+00:03:34,743 --> 00:03:36,877
+Here is a small menu script.
+
+147
+00:03:36,877 --> 00:03:38,249
+Type: cat menu.sh.
+
+148
+00:03:38,799 --> 00:03:41,776
+Each pattern ends with a close parenthesis,
+
+149
+00:03:41,776 --> 00:03:44,890
+and each branch ends with a double semicolon.
+
+150
+00:03:44,890 --> 00:03:47,590
+The star pattern matches anything else.
+
+151
+00:03:47,590 --> 00:03:48,835
+Run it with start.
+
+152
+00:03:48,835 --> 00:03:50,843
+Type: dot slash menu dot S H,
+
+153
+00:03:50,843 --> 00:03:51,258
+start.
+
+154
+00:03:51,808 --> 00:03:56,011
+Starting. Now stop. Type: dot slash menu dot S H, stop.
+
+155
+00:03:56,561 --> 00:04:02,534
+Stopping. And now a word that no pattern matches. Type: dot slash menu dot S H, jump.
+
+156
+00:04:03,084 --> 00:04:04,619
+The star branch caught it,
+
+157
+00:04:04,619 --> 00:04:06,272
+and printed a usage message.
+
+158
+00:04:06,272 --> 00:04:07,393
+Notice dollar zero,
+
+159
+00:04:07,393 --> 00:04:09,164
+the name of the script itself.
+
+160
+00:04:09,714 --> 00:04:12,570
+Case is cleaner than a long chain of if statements,
+
+161
+00:04:12,570 --> 00:04:15,090
+and the star branch gives you a safe default.
+
+162
+00:04:17,140 --> 00:04:21,961
+Loops repeat work. The for loop walks through a list. Type: cat for dot S H.
+
+163
+00:04:22,511 --> 00:04:24,289
+For each word in the list,
+
+164
+00:04:24,289 --> 00:04:25,589
+the body runs once,
+
+165
+00:04:25,589 --> 00:04:27,435
+with name set to that word.
+
+166
+00:04:27,435 --> 00:04:27,914
+Run it.
+
+167
+00:04:27,914 --> 00:04:29,829
+Type: dot slash for dot S H.
+
+168
+00:04:30,379 --> 00:04:31,227
+Three words,
+
+169
+00:04:31,227 --> 00:04:32,146
+three rounds.
+
+170
+00:04:32,146 --> 00:04:35,540
+The list can also be files that match a pattern.
+
+171
+00:04:35,540 --> 00:04:37,520
+Type: for f in star dot log,
+
+172
+00:04:37,520 --> 00:04:38,227
+semicolon,
+
+173
+00:04:38,227 --> 00:04:38,439
+do,
+
+174
+00:04:38,439 --> 00:04:38,793
+echo,
+
+175
+00:04:38,793 --> 00:04:39,712
+double quote,
+
+176
+00:04:39,712 --> 00:04:40,772
+found dollar f,
+
+177
+00:04:40,772 --> 00:04:41,691
+double quote,
+
+178
+00:04:41,691 --> 00:04:42,398
+semicolon,
+
+179
+00:04:42,398 --> 00:04:42,752
+done.
+
+180
+00:04:43,302 --> 00:04:45,268
+One round per matching file.
+
+181
+00:04:45,268 --> 00:04:46,602
+Now the while loop.
+
+182
+00:04:46,602 --> 00:04:49,340
+It repeats as long as its test is true.
+
+183
+00:04:49,340 --> 00:04:51,025
+Type: cat count dot S H.
+
+184
+00:04:51,575 --> 00:04:53,089
+The test is dash L E,
+
+185
+00:04:53,089 --> 00:04:54,460
+less than or equal.
+
+186
+00:04:54,460 --> 00:04:59,941
+The line with double round brackets does arithmetic: it adds one each round.
+
+187
+00:04:59,941 --> 00:05:00,735
+Without it,
+
+188
+00:05:00,735 --> 00:05:02,538
+the loop would never end.
+
+189
+00:05:02,538 --> 00:05:03,043
+Run it.
+
+190
+00:05:03,043 --> 00:05:05,207
+Type: dot slash count dot S H.
+
+191
+00:05:05,757 --> 00:05:09,725
+Round one, two, three. Then the test turned false, and the loop ended.
+
+192
+00:05:10,275 --> 00:05:12,997
+A loop that never ends is an infinite loop.
+
+193
+00:05:12,997 --> 00:05:14,389
+If you ever start one,
+
+194
+00:05:14,389 --> 00:05:16,099
+press control C to stop it.
+
+195
+00:05:18,149 --> 00:05:23,717
+A function is a named block of commands that you can reuse. Type: cat func dot S H.
+
+196
+00:05:24,267 --> 00:05:26,066
+You define a function once,
+
+197
+00:05:26,066 --> 00:05:26,866
+with a name,
+
+198
+00:05:26,866 --> 00:05:28,599
+round brackets and braces.
+
+199
+00:05:28,599 --> 00:05:30,864
+Then you call it like any command,
+
+200
+00:05:30,864 --> 00:05:34,263
+and the words you pass become dollar one inside it.
+
+201
+00:05:34,263 --> 00:05:35,262
+Run the script.
+
+202
+00:05:35,262 --> 00:05:37,195
+Type: dot slash func dot S H.
+
+203
+00:05:37,745 --> 00:05:38,119
+Hello,
+
+204
+00:05:38,119 --> 00:05:38,368
+Sam.
+
+205
+00:05:38,368 --> 00:05:40,488
+The check function then ran twice,
+
+206
+00:05:40,488 --> 00:05:42,357
+with two different file names,
+
+207
+00:05:42,357 --> 00:05:44,913
+and printed a different result each time.
+
+208
+00:05:45,463 --> 00:05:47,923
+Functions keep a long script readable,
+
+209
+00:05:47,923 --> 00:05:50,642
+and a fix in one place applies everywhere.
+
+210
+00:05:50,642 --> 00:05:53,101
+A function can also end with a status,
+
+211
+00:05:53,101 --> 00:05:54,720
+using the return keyword,
+
+212
+00:05:54,720 --> 00:05:56,791
+and an if statement can test it.
+
+213
+00:05:57,341 --> 00:05:59,986
+One rule: define a function before you call it.
+
+214
+00:06:02,036 --> 00:06:06,943
+Now combine everything, in a small health check. Type: cat health dot S H.
+
+215
+00:06:07,493 --> 00:06:08,278
+A function,
+
+216
+00:06:08,278 --> 00:06:08,778
+a test,
+
+217
+00:06:08,778 --> 00:06:10,349
+a loop and arithmetic.
+
+218
+00:06:10,349 --> 00:06:12,849
+The loop walks over every argument,
+
+219
+00:06:12,849 --> 00:06:13,349
+quoted,
+
+220
+00:06:13,349 --> 00:06:15,991
+and the function counts the failures.
+
+221
+00:06:15,991 --> 00:06:18,348
+Run it with two files that exist.
+
+222
+00:06:18,348 --> 00:06:20,562
+Type: dot slash health dot S H,
+
+223
+00:06:20,562 --> 00:06:21,633
+notes dot text,
+
+224
+00:06:21,633 --> 00:06:22,490
+app dot log.
+
+225
+00:06:23,040 --> 00:06:23,694
+All good.
+
+226
+00:06:23,694 --> 00:06:26,529
+Now give it a file that does not exist.
+
+227
+00:06:26,529 --> 00:06:28,783
+Type: dot slash health dot S H,
+
+228
+00:06:28,783 --> 00:06:29,873
+notes dot text,
+
+229
+00:06:29,873 --> 00:06:30,891
+gone dot text.
+
+230
+00:06:31,441 --> 00:06:32,393
+One file failed,
+
+231
+00:06:32,393 --> 00:06:34,418
+and the script gave a clear count.
+
+232
+00:06:34,418 --> 00:06:36,860
+A script like this can run on a schedule,
+
+233
+00:06:36,860 --> 00:06:38,289
+and tell you what broke.
+
+234
+00:06:38,839 --> 00:06:41,036
+Decide. Choose. Repeat. Reuse.
+
+235
+00:06:43,086 --> 00:06:44,409
+Four myths to clear up.
+
+236
+00:06:44,959 --> 00:06:47,937
+Myth one: square brackets are special syntax.
+
+237
+00:06:47,937 --> 00:06:48,136
+No.
+
+238
+00:06:48,136 --> 00:06:50,121
+They are a command named test,
+
+239
+00:06:50,121 --> 00:06:52,703
+so the spaces inside them are required.
+
+240
+00:06:53,253 --> 00:06:56,478
+Myth two: dash E Q and equals are the same.
+
+241
+00:06:56,478 --> 00:06:56,703
+No.
+
+242
+00:06:56,703 --> 00:06:58,653
+Dash E Q compares numbers.
+
+243
+00:06:58,653 --> 00:07:00,229
+Equals compares text.
+
+244
+00:07:00,779 --> 00:07:03,461
+Myth three: a while loop stops by itself.
+
+245
+00:07:03,461 --> 00:07:03,657
+No.
+
+246
+00:07:03,657 --> 00:07:06,274
+It stops only when its test turns false,
+
+247
+00:07:06,274 --> 00:07:08,629
+so change something inside the loop.
+
+248
+00:07:09,179 --> 00:07:11,611
+Myth four: a function returns text.
+
+249
+00:07:11,611 --> 00:07:11,819
+No.
+
+250
+00:07:11,819 --> 00:07:12,861
+It prints text,
+
+251
+00:07:12,861 --> 00:07:14,320
+and returns a status.
+
+252
+00:07:14,320 --> 00:07:17,307
+Capture the text with command substitution.
+
+253
+00:07:17,857 --> 00:07:20,247
+Test it. Choose it. Repeat it. Reuse it.
+
+254
+00:07:22,297 --> 00:07:26,862
+Here is how you check your own understanding. Six points, and you need all six.
+
+255
+00:07:27,412 --> 00:07:31,615
+Write an if statement with an else branch, using a test in square brackets.
+
+256
+00:07:32,165 --> 00:07:36,090
+Use file, string and number tests correctly, and quote your variables.
+
+257
+00:07:36,640 --> 00:07:39,691
+Write a case statement with a star branch as the default.
+
+258
+00:07:40,241 --> 00:07:42,630
+Write a for loop, and a while loop that ends.
+
+259
+00:07:43,180 --> 00:07:45,719
+Define a function, and call it with arguments.
+
+260
+00:07:46,269 --> 00:07:50,024
+Combine them in one small script, and explain its exit status.
+
+261
+00:07:50,574 --> 00:07:52,195
+To pass, you need all six.
+
+262
+00:07:54,245 --> 00:07:59,045
+Your turn, in your own Ubuntu virtual machine. Type every command yourself.
+
+263
+00:07:59,595 --> 00:08:04,096
+One: write an if and else script that tells you whether a number is at least eighteen.
+
+264
+00:08:04,646 --> 00:08:05,734
+Two: test a file,
+
+265
+00:08:05,734 --> 00:08:06,502
+a directory,
+
+266
+00:08:06,502 --> 00:08:07,910
+a string and a number.
+
+267
+00:08:07,910 --> 00:08:10,022
+Then try the empty variable trap,
+
+268
+00:08:10,022 --> 00:08:11,558
+with and without quotes.
+
+269
+00:08:12,108 --> 00:08:16,759
+Three: write a case script for start and stop, with a star branch for anything else.
+
+270
+00:08:17,309 --> 00:08:19,401
+Four: write a for loop over a list,
+
+271
+00:08:19,401 --> 00:08:21,374
+and a for loop over star dot log.
+
+272
+00:08:21,374 --> 00:08:23,645
+Then a while loop that counts to five.
+
+273
+00:08:24,195 --> 00:08:27,950
+Five: write a function, and call it twice with different arguments.
+
+274
+00:08:28,500 --> 00:08:30,390
+Six: write a health check script,
+
+275
+00:08:30,390 --> 00:08:33,769
+and run it with one file that exists and one that does not.
+
+276
+00:08:34,319 --> 00:08:37,626
+Mark yourself on the rubric. Pause the video, and do it now.
+
+277
+00:08:53,176 --> 00:08:54,051
+Quick check.
+
+278
+00:08:54,601 --> 00:08:56,286
+What are the square brackets, really?
+
+279
+00:08:56,836 --> 00:08:58,991
+Which case pattern catches everything else?
+
+280
+00:08:59,541 --> 00:09:01,695
+What stops a while loop from running forever?
+
+281
+00:09:02,245 --> 00:09:04,293
+How do you pass values into a function?
+
+282
+00:09:04,843 --> 00:09:10,561
+Objective covered: MC05-O03.
+
+283
+00:09:11,111 --> 00:09:13,180
+Pause the video, and answer out loud.
+
+284
+00:09:23,730 --> 00:09:28,061
+Next lesson: text processing, with grep, sed, awk, cut, sort and find.
+
+285
+00:09:28,611 --> 00:09:31,939
+If this helped, like, share and subscribe, so you do not miss it.
