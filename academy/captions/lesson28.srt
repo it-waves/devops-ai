@@ -1,0 +1,343 @@
+1
+00:00:00,500 --> 00:00:02,036
+A server talks in text.
+
+2
+00:00:02,586 --> 00:00:05,871
+Logs, lists, configs. Far too much to read by hand.
+
+3
+00:00:06,421 --> 00:00:10,240
+Today you steer it: redirect, pipe, search, count, and pack it all up.
+
+4
+00:00:12,290 --> 00:00:12,786
+First,
+
+5
+00:00:12,786 --> 00:00:14,602
+save output in a file.
+
+6
+00:00:14,602 --> 00:00:17,576
+Type: echo hello server > hello.txt.
+
+7
+00:00:17,576 --> 00:00:20,631
+The arrow sends output into the file.
+
+8
+00:00:21,181 --> 00:00:26,280
+Nothing printed on screen. It went into the file. Read it with: cat hello.txt.
+
+9
+00:00:26,830 --> 00:00:29,107
+One arrow replaces the file.
+
+10
+00:00:29,107 --> 00:00:31,221
+Two arrows add to the end.
+
+11
+00:00:31,221 --> 00:00:34,149
+Type: echo second line >> hello.txt.
+
+12
+00:00:34,149 --> 00:00:35,043
+Two arrows.
+
+13
+00:00:35,593 --> 00:00:39,305
+Check it. Type: cat hello.txt. Both lines are there.
+
+14
+00:00:39,855 --> 00:00:46,405
+Errors travel on their own channel, number two. Type: ls nothere 2> errors.txt.
+
+15
+00:00:46,955 --> 00:00:51,499
+The error went into the file, not the screen. Type: cat errors.txt.
+
+16
+00:00:53,549 --> 00:01:01,400
+A pipe sends one command's output into the next command. Type: ls /etc | head -n 5.
+
+17
+00:01:01,950 --> 00:01:05,491
+Only the first five lines. Head read what L S produced.
+
+18
+00:01:06,041 --> 00:01:12,441
+Now count how many entries there are. Type: ls /etc | wc -l.
+
+19
+00:01:12,991 --> 00:01:16,639
+One number. Two small tools, joined. This is the Linux way.
+
+20
+00:01:17,689 --> 00:01:25,582
+Pipes chain as far as you like. Type: find . -name "*.log" | wc -l.
+
+21
+00:01:26,132 --> 00:01:30,100
+How many log files live under here? Four. One line answered it.
+
+22
+00:01:32,150 --> 00:01:34,057
+Here is an application log.
+
+23
+00:01:34,057 --> 00:01:35,823
+Type: grep ERROR app.log.
+
+24
+00:01:35,823 --> 00:01:38,507
+Grep prints only the lines that match.
+
+25
+00:01:39,057 --> 00:01:44,433
+Two errors, and nothing else. Now count them. Type: grep -c ERROR app.log.
+
+26
+00:01:44,983 --> 00:01:50,274
+Add line numbers. Type: grep -n ERROR app.log. Now you know where to look.
+
+27
+00:01:50,824 --> 00:01:56,712
+Ignore upper and lower case with dash i. Type: grep -i warning app.log.
+
+28
+00:01:57,262 --> 00:02:03,875
+Everything except a word. Dash v inverts the match. Type: grep -v INFO app.log.
+
+29
+00:02:04,425 --> 00:02:10,591
+And search a whole folder. Dash r is recursive. Type: grep -r timeout .
+
+30
+00:02:11,141 --> 00:02:11,834
+Every match,
+
+31
+00:02:11,834 --> 00:02:13,453
+with its file name in front.
+
+32
+00:02:13,453 --> 00:02:16,517
+That is how you find which config mentions a setting.
+
+33
+00:02:18,567 --> 00:02:24,348
+Text tools clean up lists. Type: sort fruits.txt. Sort puts the lines in order.
+
+34
+00:02:24,898 --> 00:02:26,325
+To count repeats,
+
+35
+00:02:26,325 --> 00:02:27,247
+sort first,
+
+36
+00:02:27,247 --> 00:02:29,680
+then pipe into unique dash c.
+
+37
+00:02:29,680 --> 00:02:32,365
+Type: sort fruits.txt | uniq -c.
+
+38
+00:02:32,915 --> 00:02:38,184
+Unique only collapses neighbours, so sorting first matters. Apple appears three times.
+
+39
+00:02:39,034 --> 00:02:42,277
+Biggest count first. Add a pipe: | sort -rn.
+
+40
+00:02:43,227 --> 00:02:50,438
+Now a table. Type: cut -d, -f1 users.csv. Cut takes one column.
+
+41
+00:02:50,988 --> 00:02:56,364
+Dash d sets the divider, a comma. Dash f picks the field. Field one is the name.
+
+42
+00:02:58,414 --> 00:03:06,179
+To back up or ship a folder, pack it with tar. Type: tar -czf backup.tar.gz project.
+
+43
+00:03:06,729 --> 00:03:07,559
+C creates,
+
+44
+00:03:07,559 --> 00:03:08,639
+Z compresses,
+
+45
+00:03:08,639 --> 00:03:10,050
+F names the file.
+
+46
+00:03:10,050 --> 00:03:12,042
+No output means success.
+
+47
+00:03:12,042 --> 00:03:14,367
+Check the size with: ls -lh.
+
+48
+00:03:14,917 --> 00:03:23,002
+Look inside without unpacking. Type: tar -tzf backup.tar.gz. T means table of contents.
+
+49
+00:03:23,552 --> 00:03:26,901
+Restore it somewhere safe. Type: mkdir restore.
+
+50
+00:03:27,451 --> 00:03:36,859
+Then: tar -xzf backup.tar.gz -C restore. X extracts, capital C sets the target folder.
+
+51
+00:03:37,409 --> 00:03:40,268
+Check with: ls restore. The project is back.
+
+52
+00:03:42,318 --> 00:03:43,641
+Four myths to clear up.
+
+53
+00:03:44,191 --> 00:03:49,460
+Myth one: one arrow adds to a file. No. One arrow replaces it. Two arrows add.
+
+54
+00:03:50,010 --> 00:03:52,875
+Myth two: a pipe saves output to a file.
+
+55
+00:03:52,875 --> 00:03:53,090
+No.
+
+56
+00:03:53,090 --> 00:03:55,239
+A pipe feeds the next command.
+
+57
+00:03:55,239 --> 00:03:56,815
+An arrow feeds a file.
+
+58
+00:03:57,365 --> 00:04:02,016
+Myth three: grep changes the file. No. It only reads, and prints matches.
+
+59
+00:04:02,566 --> 00:04:07,515
+Myth four: tar compresses by itself. It only packs. The Z flag compresses.
+
+60
+00:04:08,065 --> 00:04:10,156
+Arrow to file. Pipe to command.
+
+61
+00:04:12,206 --> 00:04:14,531
+Here is how you check your own understanding.
+
+62
+00:04:15,081 --> 00:04:17,961
+Redirect output into a file, and append to it.
+
+63
+00:04:18,511 --> 00:04:20,175
+Chain two commands with a pipe.
+
+64
+00:04:20,725 --> 00:04:22,944
+Search with grep, using at least two flags.
+
+65
+00:04:23,494 --> 00:04:24,945
+Sort and count repeats.
+
+66
+00:04:25,495 --> 00:04:27,287
+Pack and unpack a tar archive.
+
+67
+00:04:27,837 --> 00:04:29,415
+Say what each tar flag does.
+
+68
+00:04:29,965 --> 00:04:31,587
+To pass, you need all six.
+
+69
+00:04:33,637 --> 00:04:37,946
+Your turn, in your virtual machine. Work only inside a practice folder.
+
+70
+00:04:38,496 --> 00:04:44,000
+One: save the output of L S slash etc into a file, then append the date to it.
+
+71
+00:04:44,550 --> 00:04:47,153
+Two: use a pipe to count the lines in that file.
+
+72
+00:04:47,703 --> 00:04:52,674
+Three: write a small log with a few ERROR lines, then use grep to count and number them.
+
+73
+00:04:53,224 --> 00:04:57,106
+Four: make a list with repeats, and show a count of each, biggest first.
+
+74
+00:04:57,656 --> 00:05:02,520
+Five: pack a folder with tar, list the archive, and restore it into a new folder.
+
+75
+00:05:03,070 --> 00:05:06,059
+Six: compare the restored folder with the original,
+
+76
+00:05:06,059 --> 00:05:08,638
+and write one sentence about what you found.
+
+77
+00:05:09,188 --> 00:05:12,495
+Mark yourself on the rubric. Pause the video, and do it now.
+
+78
+00:05:28,045 --> 00:05:28,920
+Quick check.
+
+79
+00:05:29,470 --> 00:05:31,411
+Which arrow adds to the end of a file?
+
+80
+00:05:31,961 --> 00:05:33,220
+What does a pipe connect?
+
+81
+00:05:33,770 --> 00:05:35,860
+Which grep flag counts matching lines?
+
+82
+00:05:36,410 --> 00:05:37,968
+Which tar flag extracts?
+
+83
+00:05:38,518 --> 00:05:45,067
+Objective covered: MC04-O03.
+
+84
+00:05:45,617 --> 00:05:47,686
+Pause the video, and answer out loud.
+
+85
+00:05:58,236 --> 00:06:01,628
+Next lesson: users, permissions and S S H keys.
+
+86
+00:06:02,178 --> 00:06:05,506
+If this helped, like, share and subscribe, so you do not miss it.
