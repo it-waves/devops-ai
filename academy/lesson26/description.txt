@@ -1,0 +1,28 @@
+Lesson 26 of the DevOps Engineering Bootcamp, the first lesson of the Linux administration masterclass. You log in to a server with no desktop and no map. This lesson gives you the map, the moves and the manual. You see where you are with pwd, what is here with ls, ls -a and ls -l, and how paths work: relative, absolute, the dot, double dot, tilde and dash shortcuts, cd, cd - and Tab completion. Then a tour of the filesystem hierarchy (etc, var, usr, home, tmp, proc, dev, bin and sbin), and how to find answers yourself with type, --help, man pages and their sections, whatis and apropos. You finish with common myths, a six-point pass or fail rubric and six read-only tasks to do in your own virtual machine.
+
+Chapters
+0:00 Lost on a server?
+0:14 Where am I?
+0:56 Path shortcuts
+1:19 Moving around
+2:19 The filesystem map
+2:55 Tour of the tree
+4:19 Who do I ask?
+4:44 Manuals and help
+5:57 Common myths
+6:29 Pass or fail rubric
+6:55 Your turn
+7:56 Quick check
+
+Objectives covered: MC04-O01
+
+Practice: everything in "Your turn" only reads, so it is safe in your own Ubuntu 24.04 virtual machine. Nothing needs to be installed except the man pages if your minimal image lacks them (sudo apt install man-db manpages). Lab files and notes: github.com/it-waves/devops-ai, folder academy/lesson26.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04. To keep the picture clear, the recording runs in a standard-layout view of the filesystem that I built from real directories on the recording computer, so the top-level folders match what you see on an Ubuntu server. The files in my home folder (notes.txt and the projects folder) and the files under /var/log are samples I created for this demo. The commands type, ls, head, man, whatis and apropos, and the manual pages, are the real ones. Typing is timed to the narration and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/sGqq-OVOHL0
+Next lesson: files and directories.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#linux #ubuntu #commandline #devopsbootcamp
