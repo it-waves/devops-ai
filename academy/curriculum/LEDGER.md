@@ -60,7 +60,7 @@ Lesson numbers continue after L25. One lesson per objective, then the mastery sc
 | L28 | MC04-O03 | Pipes, redirects, grep, find, archives, text tools | Next lesson: users, permissions, SSH keys | Published Public 5EQUvFenFGc (6:07), captions, end screen, playlist; real terminal; sample files disclosed |
 | L29 | MC04-O04 | Users, groups, sudo, permissions, ownership, SSH keys | Next lesson: processes and signals | Published Public N9IYS05Ysao (6:36), captions, end screen, playlist; real terminal, private etc copy; key demo only, no remote login |
 | L30 | MC04-O05 | Processes, signals, resource usage, service status | Next lesson: systemd, logs, cron | Published (H0MuFuuOqYA, 5:46; real terminal with its own process list; host uptime/load/memory numbers) |
-| L31 | MC04-O06 | systemd services, journal, boot, scheduled jobs | Next lesson: packages | Built (7:07; real unit-file reads, verify and calendar checks; systemctl, journalctl, boot and cron screens are labelled illustrations because the sandbox does not run systemd), delivered, awaiting upload |
+| L31 | MC04-O06 | systemd services, journal, boot, scheduled jobs | Next lesson: packages | Published (8fIFbG-4xuY, 7:07; real unit-file reads, verify and calendar checks; systemctl, journalctl, boot and cron screens are labelled illustrations because the sandbox does not run systemd) |
 | L32 | MC04-O07 | Install/update packages, repositories | Next lesson: disks | Not started |
 | L33 | MC04-O08 | Disks, filesystems, mounts, free space, expansion | Next lesson: networking and security | Not started |
 | L34 | MC04-O09 | Linux networking, SSH, firewall, security | Next lesson: diagnose and recover | Not started |
