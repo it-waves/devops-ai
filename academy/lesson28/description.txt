@@ -1,4 +1,4 @@
-Lesson 28 of the DevOps Engineering Bootcamp, the third lesson of the Linux administration masterclass. Servers produce text, so you learn to steer it: redirect output into files with > and >> (and errors with 2>), join commands with pipes, search with grep (-c, -n, -i, -v, -r), sort and count repeats with sort and uniq -c, take one column with cut, and pack, list and restore a folder with tar. You finish with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+Lesson 28 of the DevOps Engineering Bootcamp, the third lesson of the Linux administration masterclass. Servers produce text, so you learn to steer it: redirect output into files with the greater-than arrow, the double arrow for appending, and 2 plus an arrow for errors, join commands with pipes, search with grep (-c, -n, -i, -v, -r), sort and count repeats with sort and uniq -c, take one column with cut, and pack, list and restore a folder with tar. You finish with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
 
 Chapters
 0:00 A server talks in text
@@ -14,7 +14,7 @@ Chapters
 
 Objectives covered: MC04-O03
 
-Practice: work only inside a practice folder in your own Ubuntu 24.04 virtual machine, so nothing important is at risk. A single arrow (>) replaces a file, so check the name before you redirect. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson28.
+Practice: work only inside a practice folder in your own Ubuntu 24.04 virtual machine, so nothing important is at risk. A single arrow replaces a file, so check the name before you redirect. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson28.
 
 Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04. The recording runs in a standard-layout view of the filesystem built from real directories on the recording computer. The log, the lists, the project folder and the other files in my lab28 folder are sample files I created for this demo, and the entries in /etc come from the recording computer, so your counts will differ. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
 
