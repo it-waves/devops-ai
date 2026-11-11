@@ -1,0 +1,29 @@
+Lesson 44 of the DevOps Engineering Bootcamp, the seventh lesson of the Bash scripting masterclass. Scripts get run twice: a scheduler fires again, or a failed job is retried. Learn to write idempotent scripts that give the same result every time, and use ShellCheck to find mistakes before you run anything. Watch six real Ubuntu 24.04 terminal demos, then do the lab on your own virtual machine.
+
+Chapters
+0:00 Overview
+0:28 Why repeats break
+1:04 The idempotent version
+1:45 Repeat-safe commands
+2:37 ShellCheck
+3:22 Fix with ShellCheck
+4:19 Put it together
+4:57 Common myths
+5:33 Pass or fail rubric
+6:13 Your turn
+7:19 Quick check
+
+Objectives covered: MC05-O08
+
+Practice in your own Ubuntu virtual machine only. Type every command yourself. On Ubuntu, install ShellCheck with sudo apt install shellcheck. The labs in this lesson are unverified until you run them and check the evidence.
+
+Previous lesson: Bash secrets, permissions, input validation and injection https://youtu.be/15YDY5MxKgQ
+Next lesson: a deploy, health check and rollback script
+
+Course files and lab scripts: https://github.com/it-waves/devops-ai
+
+Honest notes: the terminal sections are real recordings on Ubuntu 24.04 with ShellCheck 0.9.0. In the recordings an environment setting hides ShellCheck's web links so that the output fits the screen; ShellCheck normally prints them. The title cards, rubric and quiz are illustrations, not captures. This lesson is for learning, and a clean ShellCheck result does not make a script safe to run in production.
+
+If this helped, like, share and subscribe, so you do not miss the next lesson.
+
+#bash #linux #devops #scripting #shellcheck #ubuntu #linuxforbeginners

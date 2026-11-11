@@ -1,0 +1,783 @@
+1
+00:00:00,500 --> 00:00:01,930
+Scripts get run again.
+
+2
+00:00:01,930 --> 00:00:03,491
+A scheduler fires twice.
+
+3
+00:00:03,491 --> 00:00:04,986
+A deploy fails halfway,
+
+4
+00:00:04,986 --> 00:00:06,677
+and someone runs it again.
+
+5
+00:00:06,677 --> 00:00:09,342
+If your script only works the first time,
+
+6
+00:00:09,342 --> 00:00:11,423
+the second run can break things.
+
+7
+00:00:11,973 --> 00:00:13,744
+Today you learn two skills.
+
+8
+00:00:13,744 --> 00:00:14,991
+Idempotent scripts,
+
+9
+00:00:14,991 --> 00:00:16,762
+which give the same result,
+
+10
+00:00:16,762 --> 00:00:18,600
+however many times they run.
+
+11
+00:00:18,600 --> 00:00:19,584
+And ShellCheck,
+
+12
+00:00:19,584 --> 00:00:23,258
+a free tool that finds mistakes before you run anything.
+
+13
+00:00:23,808 --> 00:00:26,603
+Every demo is a real recording on Ubuntu.
+
+14
+00:00:28,653 --> 00:00:29,066
+First,
+
+15
+00:00:29,066 --> 00:00:31,890
+what goes wrong when a script runs twice.
+
+16
+00:00:31,890 --> 00:00:33,474
+Here is a setup script.
+
+17
+00:00:33,474 --> 00:00:34,989
+Type: cat bad dot S H.
+
+18
+00:00:35,539 --> 00:00:41,491
+It makes a folder, and adds a setting to a file. Run it once. Type: bash bad dot S H.
+
+19
+00:00:42,041 --> 00:00:47,268
+Silent, so it worked. Now run it a second time. Type: bash bad dot S H.
+
+20
+00:00:47,818 --> 00:00:48,396
+An error.
+
+21
+00:00:48,396 --> 00:00:50,066
+The folder already exists.
+
+22
+00:00:50,066 --> 00:00:52,186
+And what about the settings file?
+
+23
+00:00:52,186 --> 00:00:53,663
+Type: cat app dot conf.
+
+24
+00:00:54,213 --> 00:00:55,764
+The line is there twice.
+
+25
+00:00:55,764 --> 00:00:56,862
+Run it ten times,
+
+26
+00:00:56,862 --> 00:00:58,283
+and you get ten lines.
+
+27
+00:00:58,283 --> 00:01:01,643
+A script like this makes a mess when it is repeated,
+
+28
+00:01:01,643 --> 00:01:03,258
+or retried after a crash.
+
+29
+00:01:05,308 --> 00:01:08,679
+Now the better version. Type: cat good dot S H.
+
+30
+00:01:09,229 --> 00:01:10,206
+Three changes.
+
+31
+00:01:10,206 --> 00:01:14,463
+M K dir with dash P creates the folder only if it is missing.
+
+32
+00:01:14,463 --> 00:01:18,930
+The grep check adds the setting only if it is not there already.
+
+33
+00:01:18,930 --> 00:01:23,257
+And the strict mode line stops the script on any real failure.
+
+34
+00:01:23,257 --> 00:01:23,746
+Run it.
+
+35
+00:01:23,746 --> 00:01:25,421
+Type: bash good dot S H.
+
+36
+00:01:25,971 --> 00:01:30,301
+Run it again, with the same command. Type: bash good dot S H.
+
+37
+00:01:30,851 --> 00:01:36,910
+No error, and no output. Nothing needed doing. Check the file. Type: cat app dot conf.
+
+38
+00:01:37,460 --> 00:01:38,049
+One line,
+
+39
+00:01:38,049 --> 00:01:40,011
+however many times you run it.
+
+40
+00:01:40,011 --> 00:01:41,254
+That is idempotent.
+
+41
+00:01:41,254 --> 00:01:43,412
+Running it again changes nothing.
+
+42
+00:01:45,462 --> 00:01:49,129
+Bash gives you repeat-safe switches built in.
+
+43
+00:01:49,129 --> 00:01:49,618
+First,
+
+44
+00:01:49,618 --> 00:01:51,247
+M K dir with dash P,
+
+45
+00:01:51,247 --> 00:01:52,062
+run twice,
+
+46
+00:01:52,062 --> 00:01:54,099
+then print the exit code.
+
+47
+00:01:54,099 --> 00:01:56,055
+Type: mkdir dash P logs,
+
+48
+00:01:56,055 --> 00:01:56,870
+semicolon,
+
+49
+00:01:56,870 --> 00:01:58,337
+mkdir dash P logs,
+
+50
+00:01:58,337 --> 00:01:59,151
+semicolon,
+
+51
+00:01:59,151 --> 00:02:01,270
+echo dollar question mark.
+
+52
+00:02:01,820 --> 00:02:02,212
+Zero.
+
+53
+00:02:02,212 --> 00:02:04,330
+No error on the second run.
+
+54
+00:02:04,330 --> 00:02:04,722
+Next,
+
+55
+00:02:04,722 --> 00:02:05,977
+R M with dash F,
+
+56
+00:02:05,977 --> 00:02:09,820
+which does not complain when the file is missing.
+
+57
+00:02:09,820 --> 00:02:11,153
+Type: R M dash F,
+
+58
+00:02:11,153 --> 00:02:12,565
+nothing dot T X T,
+
+59
+00:02:12,565 --> 00:02:13,349
+semicolon,
+
+60
+00:02:13,349 --> 00:02:15,388
+echo dollar question mark.
+
+61
+00:02:15,938 --> 00:02:16,839
+Zero again.
+
+62
+00:02:16,839 --> 00:02:17,249
+Last,
+
+63
+00:02:17,249 --> 00:02:18,887
+L N with dash S F N,
+
+64
+00:02:18,887 --> 00:02:21,754
+which replaces a link if it exists,
+
+65
+00:02:21,754 --> 00:02:23,556
+and creates it if not.
+
+66
+00:02:23,556 --> 00:02:24,621
+Run it twice,
+
+67
+00:02:24,621 --> 00:02:25,440
+then look.
+
+68
+00:02:25,440 --> 00:02:27,160
+Type: L N dash S F N,
+
+69
+00:02:27,160 --> 00:02:27,569
+logs,
+
+70
+00:02:27,569 --> 00:02:27,897
+cur,
+
+71
+00:02:27,897 --> 00:02:28,716
+semicolon,
+
+72
+00:02:28,716 --> 00:02:29,208
+again,
+
+73
+00:02:29,208 --> 00:02:30,027
+semicolon,
+
+74
+00:02:30,027 --> 00:02:30,928
+L S dash L,
+
+75
+00:02:30,928 --> 00:02:31,255
+cur.
+
+76
+00:02:31,805 --> 00:02:36,264
+One link, and no error. Prefer these forms, so a second run is harmless.
+
+77
+00:02:38,314 --> 00:02:38,661
+Next,
+
+78
+00:02:38,661 --> 00:02:39,426
+ShellCheck,
+
+79
+00:02:39,426 --> 00:02:44,429
+a free tool that reads your script and finds mistakes before you run it.
+
+80
+00:02:44,429 --> 00:02:46,444
+Here is a script with a typo.
+
+81
+00:02:46,444 --> 00:02:48,042
+Type: cat typo dot S H.
+
+82
+00:02:48,592 --> 00:02:50,599
+The variable is called name,
+
+83
+00:02:50,599 --> 00:02:52,820
+but the echo line says N M A E.
+
+84
+00:02:52,820 --> 00:02:55,185
+Bash would quietly print nothing.
+
+85
+00:02:55,185 --> 00:02:56,618
+Let ShellCheck look.
+
+86
+00:02:56,618 --> 00:02:58,768
+Type: shellcheck typo dot S H.
+
+87
+00:02:59,318 --> 00:03:01,047
+ShellCheck shows the line,
+
+88
+00:03:01,047 --> 00:03:02,576
+the problem and a code,
+
+89
+00:03:02,576 --> 00:03:04,305
+S C twenty one fifty four.
+
+90
+00:03:04,305 --> 00:03:06,101
+The variable is referenced,
+
+91
+00:03:06,101 --> 00:03:07,231
+but not assigned.
+
+92
+00:03:07,231 --> 00:03:08,561
+Check its exit code.
+
+93
+00:03:08,561 --> 00:03:09,292
+Type: echo,
+
+94
+00:03:09,292 --> 00:03:10,689
+dollar question mark.
+
+95
+00:03:11,239 --> 00:03:11,522
+One.
+
+96
+00:03:11,522 --> 00:03:12,655
+A non-zero exit,
+
+97
+00:03:12,655 --> 00:03:17,186
+so a pipeline can fail the build when ShellCheck finds problems.
+
+98
+00:03:17,186 --> 00:03:17,894
+On Ubuntu,
+
+99
+00:03:17,894 --> 00:03:21,009
+install it with sudo apt install shellcheck.
+
+100
+00:03:23,059 --> 00:03:26,102
+ShellCheck can often fix the problem for you.
+
+101
+00:03:26,102 --> 00:03:29,820
+Here is a script that breaks on file names with spaces.
+
+102
+00:03:29,820 --> 00:03:31,443
+Type: cat buggy dot S H.
+
+103
+00:03:31,993 --> 00:03:33,127
+Without quotes,
+
+104
+00:03:33,127 --> 00:03:37,209
+the file name my file dot T X T splits into two words.
+
+105
+00:03:37,209 --> 00:03:39,174
+Ask ShellCheck for a diff.
+
+106
+00:03:39,174 --> 00:03:40,460
+Type: shellcheck,
+
+107
+00:03:40,460 --> 00:03:40,989
+dash F,
+
+108
+00:03:40,989 --> 00:03:41,367
+diff,
+
+109
+00:03:41,367 --> 00:03:42,425
+buggy dot S H.
+
+110
+00:03:42,975 --> 00:03:45,738
+Lines starting with a minus are removed,
+
+111
+00:03:45,738 --> 00:03:48,569
+and lines starting with a plus are added.
+
+112
+00:03:48,569 --> 00:03:51,194
+The fix is quotes around the variable.
+
+113
+00:03:51,194 --> 00:03:53,404
+Apply it with the patch command.
+
+114
+00:03:53,404 --> 00:03:56,374
+Type: shellcheck dash F diff buggy dot S H,
+
+115
+00:03:56,374 --> 00:03:56,719
+pipe,
+
+116
+00:03:56,719 --> 00:03:58,100
+patch buggy dot S H.
+
+117
+00:03:58,650 --> 00:04:02,704
+Patched. Look at the script again. Type: cat buggy dot S H.
+
+118
+00:04:03,254 --> 00:04:04,163
+Quotes added.
+
+119
+00:04:04,163 --> 00:04:05,912
+Now run ShellCheck again,
+
+120
+00:04:05,912 --> 00:04:08,780
+and print clean only if it finds nothing.
+
+121
+00:04:08,780 --> 00:04:10,949
+Type: shellcheck buggy dot S H,
+
+122
+00:04:10,949 --> 00:04:11,228
+and,
+
+123
+00:04:11,228 --> 00:04:11,508
+and,
+
+124
+00:04:11,508 --> 00:04:12,278
+echo clean.
+
+125
+00:04:12,828 --> 00:04:18,118
+Clean. Always read a patch before you trust it. But this is a fast way to learn the fixes.
+
+126
+00:04:20,168 --> 00:04:26,120
+Now one script that is idempotent, and clean under ShellCheck. Type: cat site dot S H.
+
+127
+00:04:26,670 --> 00:04:28,032
+It ensures a folder,
+
+128
+00:04:28,032 --> 00:04:29,463
+a setting and a link,
+
+129
+00:04:29,463 --> 00:04:30,757
+all safe to repeat.
+
+130
+00:04:30,757 --> 00:04:32,868
+Check it with ShellCheck first.
+
+131
+00:04:32,868 --> 00:04:34,912
+Type: shellcheck site dot S H,
+
+132
+00:04:34,912 --> 00:04:35,184
+and,
+
+133
+00:04:35,184 --> 00:04:35,457
+and,
+
+134
+00:04:35,457 --> 00:04:36,206
+echo clean.
+
+135
+00:04:36,756 --> 00:04:39,977
+Clean. Now run it. Type: bash site dot S H.
+
+136
+00:04:40,527 --> 00:04:42,280
+It ensured everything.
+
+137
+00:04:42,280 --> 00:04:43,316
+Run it again,
+
+138
+00:04:43,316 --> 00:04:45,866
+and count the lines in the file.
+
+139
+00:04:45,866 --> 00:04:47,779
+Type: bash site dot S H,
+
+140
+00:04:47,779 --> 00:04:48,576
+semicolon,
+
+141
+00:04:48,576 --> 00:04:48,894
+W C,
+
+142
+00:04:48,894 --> 00:04:49,452
+dash L,
+
+143
+00:04:49,452 --> 00:04:51,365
+conf slash app dot conf.
+
+144
+00:04:51,915 --> 00:04:56,352
+Still one line. Safe to run, safe to retry, and safe to schedule.
+
+145
+00:04:58,402 --> 00:04:59,725
+Four myths to clear up.
+
+146
+00:05:00,275 --> 00:05:02,526
+Myth one: if a script worked once,
+
+147
+00:05:02,526 --> 00:05:03,255
+it is fine.
+
+148
+00:05:03,255 --> 00:05:03,453
+No.
+
+149
+00:05:03,453 --> 00:05:04,314
+Run it twice,
+
+150
+00:05:04,314 --> 00:05:05,374
+and it may fail,
+
+151
+00:05:05,374 --> 00:05:06,632
+or repeat its work.
+
+152
+00:05:07,182 --> 00:05:09,421
+Myth two: ShellCheck finds every bug.
+
+153
+00:05:09,421 --> 00:05:09,603
+No.
+
+154
+00:05:09,603 --> 00:05:11,418
+It finds many common mistakes,
+
+155
+00:05:11,418 --> 00:05:13,475
+but it cannot know what you meant.
+
+156
+00:05:14,025 --> 00:05:17,647
+Myth three: a clean ShellCheck means safe for production.
+
+157
+00:05:17,647 --> 00:05:17,838
+No.
+
+158
+00:05:17,838 --> 00:05:19,871
+Test the script on a copy first.
+
+159
+00:05:20,421 --> 00:05:23,840
+Myth four: idempotent means the script does nothing.
+
+160
+00:05:23,840 --> 00:05:24,038
+No.
+
+161
+00:05:24,038 --> 00:05:26,142
+It does the work the first time,
+
+162
+00:05:26,142 --> 00:05:28,378
+and then finds nothing left to do.
+
+163
+00:05:28,928 --> 00:05:31,424
+Same result. Check first. Lint first.
+
+164
+00:05:33,474 --> 00:05:38,039
+Here is how you check your own understanding. Six points, and you need all six.
+
+165
+00:05:38,589 --> 00:05:44,157
+Explain idempotent in one sentence: the same result, however many times it runs.
+
+166
+00:05:44,707 --> 00:05:51,065
+Use M K dir dash P, R M dash F and L N dash S F N, so repeats are harmless.
+
+167
+00:05:51,615 --> 00:05:55,263
+Check before you change a file, so a setting is never added twice.
+
+168
+00:05:55,813 --> 00:05:59,717
+Run ShellCheck, and read the code and the line number of each finding.
+
+169
+00:06:00,267 --> 00:06:05,344
+Fix the findings, with quotes or the diff output, and run ShellCheck until it is clean.
+
+170
+00:06:05,894 --> 00:06:10,118
+Prove it: run the script twice, and show that the second run changes nothing.
+
+171
+00:06:10,668 --> 00:06:12,289
+To pass, you need all six.
+
+172
+00:06:14,339 --> 00:06:15,043
+Your turn,
+
+173
+00:06:15,043 --> 00:06:17,505
+in your own Ubuntu virtual machine.
+
+174
+00:06:17,505 --> 00:06:19,264
+Install ShellCheck first,
+
+175
+00:06:19,264 --> 00:06:21,585
+with sudo apt install shellcheck.
+
+176
+00:06:21,585 --> 00:06:23,555
+Type every command yourself.
+
+177
+00:06:24,105 --> 00:06:27,265
+One: write a script that makes a folder and appends a line,
+
+178
+00:06:27,265 --> 00:06:29,140
+and run it twice to watch it break.
+
+179
+00:06:29,690 --> 00:06:35,215
+Two: make it repeat-safe with M K dir dash P and a grep check, and run it three times.
+
+180
+00:06:35,765 --> 00:06:37,911
+Three: try M K dir dash P,
+
+181
+00:06:37,911 --> 00:06:41,294
+R M dash F and L N dash S F N twice each,
+
+182
+00:06:41,294 --> 00:06:43,274
+and read the exit codes.
+
+183
+00:06:43,824 --> 00:06:48,368
+Four: write a script with a typo in a variable name, and let ShellCheck find it.
+
+184
+00:06:48,918 --> 00:06:51,686
+Five: write a script with an unquoted variable,
+
+185
+00:06:51,686 --> 00:06:54,572
+and fix it with shellcheck dash F diff and patch.
+
+186
+00:06:55,122 --> 00:07:00,071
+Six: run ShellCheck on a script from earlier in this course, and fix every finding.
+
+187
+00:07:00,621 --> 00:07:03,928
+Mark yourself on the rubric. Pause the video, and do it now.
+
+188
+00:07:19,478 --> 00:07:20,353
+Quick check.
+
+189
+00:07:20,903 --> 00:07:22,631
+What does idempotent mean?
+
+190
+00:07:23,181 --> 00:07:25,698
+Which flag makes M K dir safe to repeat?
+
+191
+00:07:26,248 --> 00:07:29,576
+What exit code does ShellCheck give, when it finds problems?
+
+192
+00:07:30,126 --> 00:07:32,579
+How do you prove a script is idempotent?
+
+193
+00:07:33,129 --> 00:07:38,847
+Objective covered: MC05-O08.
+
+194
+00:07:39,397 --> 00:07:41,466
+Pause the video, and answer out loud.
+
+195
+00:07:52,016 --> 00:07:55,152
+Next lesson: a deploy, health check and rollback script.
+
+196
+00:07:55,702 --> 00:07:59,030
+If this helped, like, share and subscribe, so you do not miss it.
