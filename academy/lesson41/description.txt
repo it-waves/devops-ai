@@ -1,0 +1,26 @@
+Lesson 41 of the DevOps Engineering Bootcamp, the fifth lesson of the Bash scripting masterclass. Every command has three channels: standard in, standard out and standard error. Once you control them you can save output, hide noise and join commands. You learn them in real demos on Ubuntu: the three streams and their numbers, redirection with greater than, double greater than, less than and two greater than, the exit status, pipes and tee, and safe temporary files with mktemp. A small job then saves a report to one file and keeps the errors in another. The lesson ends with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Streams, redirects and pipes overview
+0:26 The three streams
+1:41 Redirection
+2:50 Pipes and tee
+3:47 Safe temporary files
+4:53 Put it together
+5:52 Common myths
+6:25 Pass or fail rubric
+7:00 Your turn
+7:59 Quick check
+
+Objectives covered: MC05-O05
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson41. The next lesson covers error handling, traps, logging and exit codes.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount setup on the recording computer. The log is a small sample file made for the lesson, and the temporary file name is random, so yours will differ. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/3mWfNoWRf1Y
+Next lesson: error handling, traps, logging and exit codes.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#bash #bashscripting #linux #ubuntu #redirection #pipes #devopsbootcamp

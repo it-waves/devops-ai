@@ -76,7 +76,7 @@ One lesson per objective, then the mastery scenario. Real Ubuntu 24.04 terminal,
 | L38 | MC05-O02 | Variables, positional arguments, input, command substitution | Next lesson: conditions, loops, functions | Published (iCJD8btV7yc, 7:42, https://youtu.be/iCJD8btV7yc; five real Ubuntu 24.04 terminal demos: variables, positional arguments, read, command substitution, a backup script; captions published) |
 | L39 | MC05-O03 | Conditions, tests, case, loops, functions | Next lesson: text processing | Published (-scspi2DLUU, 9:33, https://youtu.be/-scspi2DLUU; six real Ubuntu 24.04 terminal demos: if/else, tests, case, loops, functions, health-check script; captions published) |
 | L40 | MC05-O04 | grep, sed, awk, cut, sort, find | Next lesson: pipes, file descriptors, temp files | Published (3mWfNoWRf1Y, 9:49, https://youtu.be/3mWfNoWRf1Y; six real demos; captions published) |
-| L41 | MC05-O05 | Pipes, file descriptors, redirection, safe temp files | Next lesson: error handling and traps | Not started |
+| L41 | MC05-O05 | Pipes, file descriptors, redirection, safe temp files | Next lesson: error handling and traps | Built (8:39; five real Ubuntu 24.04 terminal demos: streams, redirection, pipes and tee, mktemp, report), delivered, awaiting upload |
 | L42 | MC05-O06 | Error handling, traps, logging, exit codes | Next lesson: secrets and safe input | Not started |
 | L43 | MC05-O07 | Secrets, permissions, input validation, injection risks | Next lesson: idempotent scripts and ShellCheck | Not started |
 | L44 | MC05-O08 | Idempotent operational scripts, ShellCheck | Next lesson: deploy, health check, rollback script | Not started |

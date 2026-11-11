@@ -1,0 +1,1091 @@
+1
+00:00:00,500 --> 00:00:03,430
+A command has three channels: one for input,
+
+2
+00:00:03,430 --> 00:00:06,160
+one for normal output and one for errors.
+
+3
+00:00:06,160 --> 00:00:07,625
+Once you control them,
+
+4
+00:00:07,625 --> 00:00:08,956
+you can save output,
+
+5
+00:00:08,956 --> 00:00:11,487
+hide noise and join commands together.
+
+6
+00:00:12,037 --> 00:00:13,907
+Today you learn four things.
+
+7
+00:00:13,907 --> 00:00:15,711
+The three standard streams.
+
+8
+00:00:15,711 --> 00:00:16,512
+Redirection,
+
+9
+00:00:16,512 --> 00:00:17,982
+to send them to files.
+
+10
+00:00:17,982 --> 00:00:18,383
+Pipes,
+
+11
+00:00:18,383 --> 00:00:19,519
+to join commands.
+
+12
+00:00:19,519 --> 00:00:21,189
+And safe temporary files.
+
+13
+00:00:21,739 --> 00:00:24,533
+Every demo is a real recording on Ubuntu.
+
+14
+00:00:26,583 --> 00:00:27,005
+First,
+
+15
+00:00:27,005 --> 00:00:28,272
+the three streams.
+
+16
+00:00:28,272 --> 00:00:30,383
+Every command has standard in,
+
+17
+00:00:30,383 --> 00:00:31,368
+numbered zero.
+
+18
+00:00:31,368 --> 00:00:32,283
+Standard out,
+
+19
+00:00:32,283 --> 00:00:33,198
+numbered one,
+
+20
+00:00:33,198 --> 00:00:34,464
+for normal output.
+
+21
+00:00:34,464 --> 00:00:35,801
+And standard error,
+
+22
+00:00:35,801 --> 00:00:36,716
+numbered two,
+
+23
+00:00:36,716 --> 00:00:37,490
+for errors.
+
+24
+00:00:37,490 --> 00:00:38,264
+Watch both.
+
+25
+00:00:38,264 --> 00:00:40,094
+List one file that exists,
+
+26
+00:00:40,094 --> 00:00:41,642
+and one that does not.
+
+27
+00:00:41,642 --> 00:00:42,345
+Type: L S,
+
+28
+00:00:42,345 --> 00:00:44,245
+slash E T C slash hostname,
+
+29
+00:00:44,245 --> 00:00:44,668
+space,
+
+30
+00:00:44,668 --> 00:00:45,442
+slash nope.
+
+31
+00:00:45,992 --> 00:00:47,632
+Two lines on the screen.
+
+32
+00:00:47,632 --> 00:00:48,316
+The error,
+
+33
+00:00:48,316 --> 00:00:49,546
+and the file name.
+
+34
+00:00:49,546 --> 00:00:50,845
+They look the same,
+
+35
+00:00:50,845 --> 00:00:53,374
+but they travel on different streams.
+
+36
+00:00:53,374 --> 00:00:57,270
+Now send standard out to a file with a greater than sign.
+
+37
+00:00:57,270 --> 00:00:57,954
+Type: L S,
+
+38
+00:00:57,954 --> 00:00:59,799
+slash E T C slash hostname,
+
+39
+00:00:59,799 --> 00:01:00,209
+space,
+
+40
+00:01:00,209 --> 00:01:00,961
+slash nope,
+
+41
+00:01:00,961 --> 00:01:01,850
+greater than,
+
+42
+00:01:01,850 --> 00:01:02,738
+out dot text.
+
+43
+00:01:03,288 --> 00:01:05,804
+Only the error is left on the screen.
+
+44
+00:01:05,804 --> 00:01:08,320
+The normal output went into the file.
+
+45
+00:01:08,320 --> 00:01:09,340
+Look inside it.
+
+46
+00:01:09,340 --> 00:01:10,904
+Type: cat out dot text.
+
+47
+00:01:11,454 --> 00:01:12,476
+The file name,
+
+48
+00:01:12,476 --> 00:01:13,424
+and no error.
+
+49
+00:01:13,424 --> 00:01:14,883
+Now do the opposite.
+
+50
+00:01:14,883 --> 00:01:15,175
+Two,
+
+51
+00:01:15,175 --> 00:01:16,124
+greater than,
+
+52
+00:01:16,124 --> 00:01:18,093
+sends the errors to a file.
+
+53
+00:01:18,093 --> 00:01:18,823
+Type: L S,
+
+54
+00:01:18,823 --> 00:01:20,793
+slash E T C slash hostname,
+
+55
+00:01:20,793 --> 00:01:21,231
+space,
+
+56
+00:01:21,231 --> 00:01:22,033
+slash nope,
+
+57
+00:01:22,033 --> 00:01:22,471
+space,
+
+58
+00:01:22,471 --> 00:01:23,711
+two greater than,
+
+59
+00:01:23,711 --> 00:01:24,660
+err dot text.
+
+60
+00:01:25,210 --> 00:01:26,746
+Now the file name shows,
+
+61
+00:01:26,746 --> 00:01:28,154
+and the error is gone.
+
+62
+00:01:28,154 --> 00:01:29,434
+Check where it went.
+
+63
+00:01:29,434 --> 00:01:30,906
+Type: cat err dot text.
+
+64
+00:01:31,456 --> 00:01:32,732
+The error message,
+
+65
+00:01:32,732 --> 00:01:33,158
+saved.
+
+66
+00:01:33,158 --> 00:01:34,931
+Stream one holds results.
+
+67
+00:01:34,931 --> 00:01:36,775
+Stream two holds problems.
+
+68
+00:01:36,775 --> 00:01:37,910
+Keep them apart,
+
+69
+00:01:37,910 --> 00:01:39,754
+and each is easier to use.
+
+70
+00:01:41,804 --> 00:01:42,168
+Next,
+
+71
+00:01:42,168 --> 00:01:43,405
+more redirection.
+
+72
+00:01:43,405 --> 00:01:46,244
+A single greater than creates the file,
+
+73
+00:01:46,244 --> 00:01:47,336
+or replaces it.
+
+74
+00:01:47,336 --> 00:01:48,573
+Type: echo first,
+
+75
+00:01:48,573 --> 00:01:49,519
+greater than,
+
+76
+00:01:49,519 --> 00:01:50,465
+log dot text.
+
+77
+00:01:51,015 --> 00:01:51,465
+Silent,
+
+78
+00:01:51,465 --> 00:01:53,907
+because the output went into the file.
+
+79
+00:01:53,907 --> 00:01:56,092
+Now two greater than signs append,
+
+80
+00:01:56,092 --> 00:01:58,084
+and keep what is already there.
+
+81
+00:01:58,084 --> 00:01:59,241
+Type: echo second,
+
+82
+00:01:59,241 --> 00:02:00,527
+double greater than,
+
+83
+00:02:00,527 --> 00:02:01,362
+log dot text.
+
+84
+00:02:01,912 --> 00:02:04,792
+Look at the file. Type: cat log dot text.
+
+85
+00:02:05,342 --> 00:02:06,105
+Both lines.
+
+86
+00:02:06,105 --> 00:02:09,852
+A single greater than would have erased the first one,
+
+87
+00:02:09,852 --> 00:02:11,378
+so be careful with it.
+
+88
+00:02:11,378 --> 00:02:16,582
+A less than sign does the reverse: it feeds a file into a command as input.
+
+89
+00:02:16,582 --> 00:02:17,692
+Count the lines.
+
+90
+00:02:17,692 --> 00:02:18,386
+Type: W C,
+
+91
+00:02:18,386 --> 00:02:18,872
+dash l,
+
+92
+00:02:18,872 --> 00:02:19,565
+less than,
+
+93
+00:02:19,565 --> 00:02:20,467
+log dot text.
+
+94
+00:02:21,017 --> 00:02:21,702
+Two lines.
+
+95
+00:02:21,702 --> 00:02:21,975
+Now,
+
+96
+00:02:21,975 --> 00:02:27,382
+a special file named slash dev slash null throws away everything written to it.
+
+97
+00:02:27,382 --> 00:02:28,409
+Hide the error.
+
+98
+00:02:28,409 --> 00:02:29,093
+Type: L S,
+
+99
+00:02:29,093 --> 00:02:29,846
+slash nope,
+
+100
+00:02:29,846 --> 00:02:30,257
+space,
+
+101
+00:02:30,257 --> 00:02:31,420
+two greater than,
+
+102
+00:02:31,420 --> 00:02:32,857
+slash dev slash null.
+
+103
+00:02:33,407 --> 00:02:34,444
+Nothing at all.
+
+104
+00:02:34,444 --> 00:02:36,379
+But did the command succeed?
+
+105
+00:02:36,379 --> 00:02:38,867
+Every command leaves an exit status,
+
+106
+00:02:38,867 --> 00:02:41,424
+in the variable dollar question mark.
+
+107
+00:02:41,424 --> 00:02:42,737
+Zero means success.
+
+108
+00:02:42,737 --> 00:02:43,497
+Type: echo,
+
+109
+00:02:43,497 --> 00:02:44,949
+dollar question mark.
+
+110
+00:02:45,499 --> 00:02:49,147
+Two, so it failed. Hiding the message did not hide the failure.
+
+111
+00:02:51,197 --> 00:02:51,848
+Now pipes.
+
+112
+00:02:51,848 --> 00:02:56,929
+A pipe sends the standard out of one command into the standard in of the next.
+
+113
+00:02:56,929 --> 00:02:58,361
+Here is the log again.
+
+114
+00:02:58,361 --> 00:02:59,794
+Type: cat app dot log.
+
+115
+00:03:00,344 --> 00:03:01,068
+Six lines.
+
+116
+00:03:01,068 --> 00:03:02,733
+Send them through grep,
+
+117
+00:03:02,733 --> 00:03:04,470
+to keep only the errors.
+
+118
+00:03:04,470 --> 00:03:06,062
+Type: cat app dot log,
+
+119
+00:03:06,062 --> 00:03:06,496
+space,
+
+120
+00:03:06,496 --> 00:03:06,858
+pipe,
+
+121
+00:03:06,858 --> 00:03:07,292
+space,
+
+122
+00:03:07,292 --> 00:03:08,088
+grep ERROR.
+
+123
+00:03:08,638 --> 00:03:09,440
+Two lines.
+
+124
+00:03:09,440 --> 00:03:10,883
+Add another stage,
+
+125
+00:03:10,883 --> 00:03:12,005
+to count them.
+
+126
+00:03:12,005 --> 00:03:14,330
+Type: grep ERROR app dot log,
+
+127
+00:03:14,330 --> 00:03:14,811
+space,
+
+128
+00:03:14,811 --> 00:03:15,212
+pipe,
+
+129
+00:03:15,212 --> 00:03:15,693
+space,
+
+130
+00:03:15,693 --> 00:03:16,013
+W C,
+
+131
+00:03:16,013 --> 00:03:16,574
+dash l.
+
+132
+00:03:17,124 --> 00:03:17,922
+Two errors.
+
+133
+00:03:17,922 --> 00:03:21,838
+Now suppose you want to see the data and also save it.
+
+134
+00:03:21,838 --> 00:03:24,738
+The tee command writes a copy to a file,
+
+135
+00:03:24,738 --> 00:03:26,406
+and passes the data on.
+
+136
+00:03:26,406 --> 00:03:28,509
+Type: grep ERROR app dot log,
+
+137
+00:03:28,509 --> 00:03:28,871
+pipe,
+
+138
+00:03:28,871 --> 00:03:30,321
+tee errors dot text,
+
+139
+00:03:30,321 --> 00:03:30,684
+pipe,
+
+140
+00:03:30,684 --> 00:03:30,974
+W C,
+
+141
+00:03:30,974 --> 00:03:31,482
+dash l.
+
+142
+00:03:32,032 --> 00:03:33,171
+The count came out,
+
+143
+00:03:33,171 --> 00:03:35,330
+and the file was written on the way.
+
+144
+00:03:35,330 --> 00:03:35,870
+Check it.
+
+145
+00:03:35,870 --> 00:03:37,429
+Type: cat errors dot text.
+
+146
+00:03:37,979 --> 00:03:39,283
+The two error lines,
+
+147
+00:03:39,283 --> 00:03:39,675
+saved.
+
+148
+00:03:39,675 --> 00:03:40,261
+Remember,
+
+149
+00:03:40,261 --> 00:03:42,414
+a pipe carries standard out only.
+
+150
+00:03:42,414 --> 00:03:44,370
+Errors still go to the screen,
+
+151
+00:03:44,370 --> 00:03:46,000
+unless you redirect them.
+
+152
+00:03:48,050 --> 00:03:48,395
+Last,
+
+153
+00:03:48,395 --> 00:03:49,499
+temporary files.
+
+154
+00:03:49,499 --> 00:03:51,984
+A script often needs a scratch file.
+
+155
+00:03:51,984 --> 00:03:53,778
+Never invent a fixed name,
+
+156
+00:03:53,778 --> 00:03:55,573
+because it is predictable,
+
+157
+00:03:55,573 --> 00:03:58,264
+and other users can plant a link there.
+
+158
+00:03:58,264 --> 00:04:00,542
+Ask for a safe one with M K temp.
+
+159
+00:04:00,542 --> 00:04:02,060
+Type: f equals dollar,
+
+160
+00:04:02,060 --> 00:04:03,371
+open round bracket,
+
+161
+00:04:03,371 --> 00:04:03,992
+M K temp,
+
+162
+00:04:03,992 --> 00:04:05,373
+close round bracket.
+
+163
+00:04:05,923 --> 00:04:06,393
+Silent,
+
+164
+00:04:06,393 --> 00:04:09,216
+because the name went into the variable f.
+
+165
+00:04:09,216 --> 00:04:09,956
+Look at it.
+
+166
+00:04:09,956 --> 00:04:10,695
+Type: echo,
+
+167
+00:04:10,695 --> 00:04:11,569
+double quote,
+
+168
+00:04:11,569 --> 00:04:12,174
+dollar f,
+
+169
+00:04:12,174 --> 00:04:13,048
+double quote.
+
+170
+00:04:13,598 --> 00:04:15,206
+A new file in slash temp,
+
+171
+00:04:15,206 --> 00:04:17,843
+with a random name that nobody can guess,
+
+172
+00:04:17,843 --> 00:04:19,966
+created with private permissions.
+
+173
+00:04:19,966 --> 00:04:21,573
+Write the errors into it.
+
+174
+00:04:21,573 --> 00:04:23,439
+Type: grep ERROR app dot log,
+
+175
+00:04:23,439 --> 00:04:24,275
+greater than,
+
+176
+00:04:24,275 --> 00:04:25,111
+double quote,
+
+177
+00:04:25,111 --> 00:04:25,690
+dollar f,
+
+178
+00:04:25,690 --> 00:04:26,526
+double quote.
+
+179
+00:04:27,076 --> 00:04:32,900
+Count its lines. Type: W C, dash l, less than, double quote, dollar f, double quote.
+
+180
+00:04:33,450 --> 00:04:34,115
+Two lines.
+
+181
+00:04:34,115 --> 00:04:35,579
+When you are finished,
+
+182
+00:04:35,579 --> 00:04:36,643
+always clean up.
+
+183
+00:04:36,643 --> 00:04:37,308
+Type: R M,
+
+184
+00:04:37,308 --> 00:04:38,173
+double quote,
+
+185
+00:04:38,173 --> 00:04:38,772
+dollar f,
+
+186
+00:04:38,772 --> 00:04:39,637
+double quote.
+
+187
+00:04:40,187 --> 00:04:44,560
+Check that it is gone. Type: L S, double quote, dollar f, double quote.
+
+188
+00:04:45,110 --> 00:04:45,980
+No such file.
+
+189
+00:04:45,980 --> 00:04:46,315
+Make,
+
+190
+00:04:46,315 --> 00:04:46,582
+use,
+
+191
+00:04:46,582 --> 00:04:47,051
+remove.
+
+192
+00:04:47,051 --> 00:04:48,389
+In the next lessons,
+
+193
+00:04:48,389 --> 00:04:51,937
+a trap will do that cleanup even when a script fails.
+
+194
+00:04:53,987 --> 00:04:56,592
+Now a small job that uses everything.
+
+195
+00:04:56,592 --> 00:04:58,070
+Count the log levels,
+
+196
+00:04:58,070 --> 00:04:59,197
+save the report,
+
+197
+00:04:59,197 --> 00:05:01,168
+and keep the problems apart.
+
+198
+00:05:01,168 --> 00:05:02,294
+Here is the log.
+
+199
+00:05:02,294 --> 00:05:03,843
+Type: cat app dot log.
+
+200
+00:05:04,393 --> 00:05:05,579
+Count the levels,
+
+201
+00:05:05,579 --> 00:05:07,673
+and send the report to a file.
+
+202
+00:05:07,673 --> 00:05:08,370
+Type: awk,
+
+203
+00:05:08,370 --> 00:05:09,277
+single quote,
+
+204
+00:05:09,277 --> 00:05:10,045
+open brace,
+
+205
+00:05:10,045 --> 00:05:11,371
+print dollar three,
+
+206
+00:05:11,371 --> 00:05:12,208
+close brace,
+
+207
+00:05:12,208 --> 00:05:13,115
+single quote,
+
+208
+00:05:13,115 --> 00:05:13,953
+app dot log,
+
+209
+00:05:13,953 --> 00:05:14,301
+pipe,
+
+210
+00:05:14,301 --> 00:05:14,650
+sort,
+
+211
+00:05:14,650 --> 00:05:14,999
+pipe,
+
+212
+00:05:14,999 --> 00:05:15,976
+unique dash c,
+
+213
+00:05:15,976 --> 00:05:16,883
+greater than,
+
+214
+00:05:16,883 --> 00:05:17,790
+out dot text.
+
+215
+00:05:18,340 --> 00:05:23,631
+No output, because it went to the file. Look at the report. Type: cat out dot text.
+
+216
+00:05:24,181 --> 00:05:24,934
+Two errors,
+
+217
+00:05:24,934 --> 00:05:27,193
+three info lines and one warning.
+
+218
+00:05:27,193 --> 00:05:30,343
+Now run grep on a good file and a missing one,
+
+219
+00:05:30,343 --> 00:05:32,945
+and keep the errors in their own file.
+
+220
+00:05:32,945 --> 00:05:33,698
+Type: grep,
+
+221
+00:05:33,698 --> 00:05:34,177
+dash c,
+
+222
+00:05:34,177 --> 00:05:34,588
+ERROR,
+
+223
+00:05:34,588 --> 00:05:35,409
+app dot log,
+
+224
+00:05:35,409 --> 00:05:36,505
+missing dot log,
+
+225
+00:05:36,505 --> 00:05:37,669
+two greater than,
+
+226
+00:05:37,669 --> 00:05:38,901
+problems dot text.
+
+227
+00:05:39,451 --> 00:05:41,222
+The count for the good file.
+
+228
+00:05:41,222 --> 00:05:44,511
+The complaint about the missing file went elsewhere.
+
+229
+00:05:44,511 --> 00:05:44,827
+Look.
+
+230
+00:05:44,827 --> 00:05:46,598
+Type: cat problems dot text.
+
+231
+00:05:47,148 --> 00:05:51,286
+Results on the screen, problems in a file. That is a script you can trust.
+
+232
+00:05:53,336 --> 00:05:54,659
+Four myths to clear up.
+
+233
+00:05:55,209 --> 00:05:57,750
+Myth one: greater than adds to a file.
+
+234
+00:05:57,750 --> 00:05:57,951
+No.
+
+235
+00:05:57,951 --> 00:05:59,356
+It replaces the file.
+
+236
+00:05:59,356 --> 00:05:59,824
+To add,
+
+237
+00:05:59,824 --> 00:06:01,630
+use two greater than signs.
+
+238
+00:06:02,180 --> 00:06:04,508
+Myth two: a pipe carries errors too.
+
+239
+00:06:04,508 --> 00:06:04,702
+No.
+
+240
+00:06:04,702 --> 00:06:06,577
+It carries standard out only.
+
+241
+00:06:06,577 --> 00:06:08,452
+Errors need two greater than.
+
+242
+00:06:09,002 --> 00:06:14,037
+Myth three: slash dev slash null stores output. No. It throws everything away.
+
+243
+00:06:14,587 --> 00:06:20,261
+Myth four: a fixed name in slash temp is fine. No. It is predictable. Use M K temp.
+
+244
+00:06:20,811 --> 00:06:23,862
+Streams. Redirects. Pipes. Safe temp files.
+
+245
+00:06:25,912 --> 00:06:30,477
+Here is how you check your own understanding. Six points, and you need all six.
+
+246
+00:06:31,027 --> 00:06:34,867
+Name the three standard streams, and their numbers: zero, one and two.
+
+247
+00:06:35,417 --> 00:06:40,047
+Redirect output with greater than and double greater than, and input with less than.
+
+248
+00:06:40,597 --> 00:06:45,503
+Send errors to a file with two greater than, or discard them with slash dev slash null.
+
+249
+00:06:46,053 --> 00:06:49,061
+Join commands with a pipe, and save a copy with tee.
+
+250
+00:06:49,611 --> 00:06:53,387
+Create a temporary file with M K temp, and remove it when done.
+
+251
+00:06:53,937 --> 00:06:56,817
+Read the exit status, with dollar question mark.
+
+252
+00:06:57,367 --> 00:06:58,989
+To pass, you need all six.
+
+253
+00:07:01,039 --> 00:07:05,839
+Your turn, in your own Ubuntu virtual machine. Type every command yourself.
+
+254
+00:07:06,389 --> 00:07:11,680
+One: list one file that exists and one that does not, and see both streams on the screen.
+
+255
+00:07:12,230 --> 00:07:14,891
+Two: write a line to a file with greater than,
+
+256
+00:07:14,891 --> 00:07:16,800
+add one with double greater than,
+
+257
+00:07:16,800 --> 00:07:18,246
+and count with less than.
+
+258
+00:07:18,796 --> 00:07:21,907
+Three: send errors to a file with two greater than,
+
+259
+00:07:21,907 --> 00:07:24,591
+then discard them with slash dev slash null,
+
+260
+00:07:24,591 --> 00:07:26,177
+and print the exit status.
+
+261
+00:07:26,727 --> 00:07:30,226
+Four: build a pipeline with tee, and check the saved copy.
+
+262
+00:07:30,776 --> 00:07:36,024
+Five: make a temporary file with M K temp, write to it, read it back and remove it.
+
+263
+00:07:36,574 --> 00:07:40,051
+Six: save a report to one file, and the errors to another.
+
+264
+00:07:40,601 --> 00:07:43,908
+Mark yourself on the rubric. Pause the video, and do it now.
+
+265
+00:07:59,458 --> 00:08:00,333
+Quick check.
+
+266
+00:08:00,883 --> 00:08:02,483
+Which number is standard error?
+
+267
+00:08:03,033 --> 00:08:06,318
+What is the difference between greater than, and double greater than?
+
+268
+00:08:06,868 --> 00:08:08,340
+Does a pipe carry errors?
+
+269
+00:08:08,890 --> 00:08:11,173
+Which command makes a safe temporary file?
+
+270
+00:08:11,723 --> 00:08:17,419
+Objective covered: MC05-O05.
+
+271
+00:08:17,969 --> 00:08:20,038
+Pause the video, and answer out loud.
+
+272
+00:08:30,588 --> 00:08:34,300
+Next lesson: error handling, traps, logging and exit codes.
+
+273
+00:08:34,850 --> 00:08:38,178
+If this helped, like, share and subscribe, so you do not miss it.
