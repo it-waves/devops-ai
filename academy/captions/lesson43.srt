@@ -1,0 +1,999 @@
+1
+00:00:00,500 --> 00:00:03,234
+A script is only as safe as what it handles.
+
+2
+00:00:03,234 --> 00:00:04,539
+Passwords and tokens.
+
+3
+00:00:04,539 --> 00:00:06,092
+Who is allowed to run it.
+
+4
+00:00:06,092 --> 00:00:07,397
+What a user types in.
+
+5
+00:00:07,397 --> 00:00:09,820
+And what the shell does with that text.
+
+6
+00:00:09,820 --> 00:00:11,187
+Get one of them wrong,
+
+7
+00:00:11,187 --> 00:00:13,300
+and a small script becomes a hole.
+
+8
+00:00:13,850 --> 00:00:15,691
+Today you learn four habits.
+
+9
+00:00:15,691 --> 00:00:17,729
+Keep secrets out of the script.
+
+10
+00:00:17,729 --> 00:00:19,176
+Lock down permissions.
+
+11
+00:00:19,176 --> 00:00:20,557
+Validate every input.
+
+12
+00:00:20,557 --> 00:00:22,661
+And never let input become code.
+
+13
+00:00:23,211 --> 00:00:25,900
+Every demo is a real recording on Ubuntu.
+
+14
+00:00:25,900 --> 00:00:27,802
+Every secret you see is fake,
+
+15
+00:00:27,802 --> 00:00:29,376
+made up for this lesson.
+
+16
+00:00:31,426 --> 00:00:31,875
+First,
+
+17
+00:00:31,875 --> 00:00:32,473
+secrets.
+
+18
+00:00:32,473 --> 00:00:35,389
+Never write a password inside a script.
+
+19
+00:00:35,389 --> 00:00:37,034
+Here is a bad example.
+
+20
+00:00:37,034 --> 00:00:38,679
+Type: cat bad dot S H.
+
+21
+00:00:39,229 --> 00:00:41,297
+The password sits in the file.
+
+22
+00:00:41,297 --> 00:00:43,434
+Anyone who can read the script,
+
+23
+00:00:43,434 --> 00:00:45,501
+or the repository it lands in,
+
+24
+00:00:45,501 --> 00:00:47,018
+can read the password.
+
+25
+00:00:47,018 --> 00:00:49,361
+The better way is a separate file.
+
+26
+00:00:49,361 --> 00:00:51,704
+Check the permissions of this one.
+
+27
+00:00:51,704 --> 00:00:52,394
+Type: L S,
+
+28
+00:00:52,394 --> 00:00:52,876
+dash L,
+
+29
+00:00:52,876 --> 00:00:53,565
+dot E N V.
+
+30
+00:00:54,115 --> 00:00:55,827
+Read the first column.
+
+31
+00:00:55,827 --> 00:00:56,138
+R W,
+
+32
+00:00:56,138 --> 00:00:56,682
+then R,
+
+33
+00:00:56,682 --> 00:00:57,227
+then R.
+
+34
+00:00:57,227 --> 00:00:58,782
+The owner can write,
+
+35
+00:00:58,782 --> 00:01:01,116
+but everyone else can read it.
+
+36
+00:01:01,116 --> 00:01:03,449
+That is too open for a secret.
+
+37
+00:01:03,449 --> 00:01:03,993
+Fix it.
+
+38
+00:01:03,993 --> 00:01:04,927
+Type: chmod,
+
+39
+00:01:04,927 --> 00:01:05,860
+six hundred,
+
+40
+00:01:05,860 --> 00:01:06,638
+dot E N V.
+
+41
+00:01:07,188 --> 00:01:07,491
+Six,
+
+42
+00:01:07,491 --> 00:01:07,870
+zero,
+
+43
+00:01:07,870 --> 00:01:10,900
+zero means the owner can read and write,
+
+44
+00:01:10,900 --> 00:01:13,172
+and nobody else gets anything.
+
+45
+00:01:13,172 --> 00:01:14,081
+Check again.
+
+46
+00:01:14,081 --> 00:01:14,839
+Type: L S,
+
+47
+00:01:14,839 --> 00:01:15,369
+dash L,
+
+48
+00:01:15,369 --> 00:01:16,127
+dot E N V.
+
+49
+00:01:16,677 --> 00:01:18,820
+Now only the owner has access.
+
+50
+00:01:18,820 --> 00:01:19,177
+Next,
+
+51
+00:01:19,177 --> 00:01:22,464
+a script that loads the secret from that file,
+
+52
+00:01:22,464 --> 00:01:24,036
+instead of holding it.
+
+53
+00:01:24,036 --> 00:01:25,679
+Type: cat good dot S H.
+
+54
+00:01:26,229 --> 00:01:28,266
+It reads the file with source,
+
+55
+00:01:28,266 --> 00:01:31,933
+and prints only the last four characters of the token.
+
+56
+00:01:31,933 --> 00:01:34,514
+Never print a whole secret into a log.
+
+57
+00:01:34,514 --> 00:01:34,989
+Run it.
+
+58
+00:01:34,989 --> 00:01:36,619
+Type: bash good dot S H.
+
+59
+00:01:37,169 --> 00:01:38,182
+The script works,
+
+60
+00:01:38,182 --> 00:01:40,269
+and the secret never appears in it.
+
+61
+00:01:40,269 --> 00:01:42,535
+Keep that file out of version control,
+
+62
+00:01:42,535 --> 00:01:44,443
+with an entry in dot git ignore.
+
+63
+00:01:46,493 --> 00:01:47,019
+Second,
+
+64
+00:01:47,019 --> 00:01:49,501
+permissions on the script itself.
+
+65
+00:01:49,501 --> 00:01:52,509
+A new file is not executable by default.
+
+66
+00:01:52,509 --> 00:01:54,540
+Look at this deploy script.
+
+67
+00:01:54,540 --> 00:01:55,292
+Type: L S,
+
+68
+00:01:55,292 --> 00:01:55,818
+dash L,
+
+69
+00:01:55,818 --> 00:01:56,946
+deploy dot S H.
+
+70
+00:01:57,496 --> 00:01:59,841
+There is no X in the permissions,
+
+71
+00:01:59,841 --> 00:02:01,901
+so it cannot be run directly.
+
+72
+00:02:01,901 --> 00:02:02,398
+Try it.
+
+73
+00:02:02,398 --> 00:02:04,600
+Type: dot slash deploy dot S H.
+
+74
+00:02:05,150 --> 00:02:06,527
+Permission denied.
+
+75
+00:02:06,527 --> 00:02:09,663
+Do not reach for chmod seven seven seven,
+
+76
+00:02:09,663 --> 00:02:12,264
+which gives everyone full control.
+
+77
+00:02:12,264 --> 00:02:14,941
+Give the owner only what is needed.
+
+78
+00:02:14,941 --> 00:02:15,859
+Type: chmod,
+
+79
+00:02:15,859 --> 00:02:16,547
+U plus X,
+
+80
+00:02:16,547 --> 00:02:17,694
+deploy dot S H.
+
+81
+00:02:18,244 --> 00:02:24,538
+That adds execute for the owner only. Check it. Type: L S, dash L, deploy dot S H.
+
+82
+00:02:25,088 --> 00:02:27,041
+Now the owner has R W X,
+
+83
+00:02:27,041 --> 00:02:29,889
+and nobody else has anything extra.
+
+84
+00:02:29,889 --> 00:02:30,458
+Run it.
+
+85
+00:02:30,458 --> 00:02:32,981
+Type: dot slash deploy dot S H.
+
+86
+00:02:33,531 --> 00:02:34,146
+It runs.
+
+87
+00:02:34,146 --> 00:02:35,298
+One more habit.
+
+88
+00:02:35,298 --> 00:02:39,294
+The umask decides the permissions of every new file.
+
+89
+00:02:39,294 --> 00:02:41,368
+Set it to zero seven seven,
+
+90
+00:02:41,368 --> 00:02:43,904
+and files you create are private.
+
+91
+00:02:43,904 --> 00:02:46,132
+Type: umask zero seven seven,
+
+92
+00:02:46,132 --> 00:02:46,901
+semicolon,
+
+93
+00:02:46,901 --> 00:02:48,514
+touch priv dot T X T,
+
+94
+00:02:48,514 --> 00:02:49,283
+semicolon,
+
+95
+00:02:49,283 --> 00:02:49,590
+L S,
+
+96
+00:02:49,590 --> 00:02:50,128
+dash L,
+
+97
+00:02:50,128 --> 00:02:51,280
+priv dot T X T.
+
+98
+00:02:51,830 --> 00:02:52,992
+R W for the owner,
+
+99
+00:02:52,992 --> 00:02:55,573
+and nothing for the group or for others.
+
+100
+00:02:55,573 --> 00:02:59,574
+Use a tight umask whenever a script writes secrets or reports.
+
+101
+00:03:01,624 --> 00:03:02,065
+Third,
+
+102
+00:03:02,065 --> 00:03:03,315
+input validation.
+
+103
+00:03:03,315 --> 00:03:05,814
+Never trust what a user passes in.
+
+104
+00:03:05,814 --> 00:03:09,048
+Here is a script that accepts a server name.
+
+105
+00:03:09,048 --> 00:03:11,032
+Type: cat validate dot S H.
+
+106
+00:03:11,582 --> 00:03:13,975
+It allows only lowercase letters,
+
+107
+00:03:13,975 --> 00:03:14,482
+digits,
+
+108
+00:03:14,482 --> 00:03:15,933
+dash and underscore,
+
+109
+00:03:15,933 --> 00:03:17,673
+up to twenty characters.
+
+110
+00:03:17,673 --> 00:03:19,486
+Anything else is refused,
+
+111
+00:03:19,486 --> 00:03:20,863
+with exit code two.
+
+112
+00:03:20,863 --> 00:03:22,604
+Run it with a good name.
+
+113
+00:03:22,604 --> 00:03:24,634
+Type: bash validate dot S H,
+
+114
+00:03:24,634 --> 00:03:25,577
+web zero one.
+
+115
+00:03:26,127 --> 00:03:26,831
+Accepted.
+
+116
+00:03:26,831 --> 00:03:28,395
+Now a hostile input,
+
+117
+00:03:28,395 --> 00:03:29,412
+with a space,
+
+118
+00:03:29,412 --> 00:03:31,993
+a semicolon and a delete command.
+
+119
+00:03:31,993 --> 00:03:34,184
+Type: bash validate dot S H,
+
+120
+00:03:34,184 --> 00:03:36,765
+and then in quotes: web zero one,
+
+121
+00:03:36,765 --> 00:03:37,547
+semicolon,
+
+122
+00:03:37,547 --> 00:03:37,860
+R M,
+
+123
+00:03:37,860 --> 00:03:38,564
+dash R F,
+
+124
+00:03:38,564 --> 00:03:39,033
+slash.
+
+125
+00:03:39,583 --> 00:03:40,109
+Refused.
+
+126
+00:03:40,109 --> 00:03:40,897
+Nothing ran,
+
+127
+00:03:40,897 --> 00:03:43,589
+because the input never passed the check.
+
+128
+00:03:43,589 --> 00:03:45,034
+Look at the exit code.
+
+129
+00:03:45,034 --> 00:03:45,756
+Type: echo,
+
+130
+00:03:45,756 --> 00:03:47,135
+dollar question mark.
+
+131
+00:03:47,685 --> 00:03:47,970
+Two.
+
+132
+00:03:47,970 --> 00:03:49,108
+A clear refusal,
+
+133
+00:03:49,108 --> 00:03:52,595
+and a clear signal for whoever called the script.
+
+134
+00:03:52,595 --> 00:03:53,733
+One more attack,
+
+135
+00:03:53,733 --> 00:03:56,366
+a path that climbs out of the folder.
+
+136
+00:03:56,366 --> 00:03:58,358
+Type: bash validate dot S H,
+
+137
+00:03:58,358 --> 00:03:59,781
+dot dot slash E T C.
+
+138
+00:04:00,331 --> 00:04:01,328
+Refused as well.
+
+139
+00:04:01,328 --> 00:04:02,699
+Allow what you expect,
+
+140
+00:04:02,699 --> 00:04:04,382
+and reject everything else.
+
+141
+00:04:04,382 --> 00:04:07,435
+That is safer than trying to list everything bad.
+
+142
+00:04:09,485 --> 00:04:10,001
+Fourth,
+
+143
+00:04:10,001 --> 00:04:10,739
+injection.
+
+144
+00:04:10,739 --> 00:04:13,321
+If a script lets input become code,
+
+145
+00:04:13,321 --> 00:04:15,608
+the user controls your machine.
+
+146
+00:04:15,608 --> 00:04:17,304
+Here is a risky script,
+
+147
+00:04:17,304 --> 00:04:18,116
+using eval.
+
+148
+00:04:18,116 --> 00:04:19,960
+Type: cat danger dot S H.
+
+149
+00:04:20,510 --> 00:04:22,766
+Eval runs its text as a command.
+
+150
+00:04:22,766 --> 00:04:24,177
+Pass it a file name,
+
+151
+00:04:24,177 --> 00:04:27,491
+with a second command hidden after a semicolon.
+
+152
+00:04:27,491 --> 00:04:30,029
+The hidden command is harmless here.
+
+153
+00:04:30,029 --> 00:04:31,581
+It only prints a word.
+
+154
+00:04:31,581 --> 00:04:33,414
+Type: bash danger dot S H,
+
+155
+00:04:33,414 --> 00:04:35,671
+and then in quotes: app dot log,
+
+156
+00:04:35,671 --> 00:04:36,376
+semicolon,
+
+157
+00:04:36,376 --> 00:04:37,363
+echo INJECTED.
+
+158
+00:04:37,913 --> 00:04:39,810
+The word INJECTED appeared.
+
+159
+00:04:39,810 --> 00:04:41,427
+The hidden command ran,
+
+160
+00:04:41,427 --> 00:04:43,043
+as if you had typed it.
+
+161
+00:04:43,043 --> 00:04:44,519
+Now the safe version.
+
+162
+00:04:44,519 --> 00:04:46,276
+Type: cat quoted dot S H.
+
+163
+00:04:46,826 --> 00:04:47,379
+No eval,
+
+164
+00:04:47,379 --> 00:04:49,939
+and the variable is in double quotes,
+
+165
+00:04:49,939 --> 00:04:51,738
+with two dashes before it,
+
+166
+00:04:51,738 --> 00:04:53,813
+so it can only be a file name.
+
+167
+00:04:53,813 --> 00:04:55,681
+Run it with the same input.
+
+168
+00:04:55,681 --> 00:04:57,480
+Type: bash quoted dot S H,
+
+169
+00:04:57,480 --> 00:04:59,693
+and then in quotes: app dot log,
+
+170
+00:04:59,693 --> 00:05:00,385
+semicolon,
+
+171
+00:05:00,385 --> 00:05:01,354
+echo INJECTED.
+
+172
+00:05:01,904 --> 00:05:03,307
+Nothing was injected.
+
+173
+00:05:03,307 --> 00:05:06,249
+The whole text was treated as one file name,
+
+174
+00:05:06,249 --> 00:05:07,652
+which does not exist.
+
+175
+00:05:07,652 --> 00:05:09,056
+Quote your variables,
+
+176
+00:05:09,056 --> 00:05:10,928
+and never use eval on input.
+
+177
+00:05:12,978 --> 00:05:18,119
+Now put the four habits together, in one script. Type: cat secure dot S H.
+
+178
+00:05:18,669 --> 00:05:19,688
+A tight umask.
+
+179
+00:05:19,688 --> 00:05:22,306
+Input checked against an allow list.
+
+180
+00:05:22,306 --> 00:05:24,925
+The secret loaded from its own file.
+
+181
+00:05:24,925 --> 00:05:26,452
+And a temporary file,
+
+182
+00:05:26,452 --> 00:05:27,762
+removed by a trap.
+
+183
+00:05:27,762 --> 00:05:29,507
+Run it with a good name.
+
+184
+00:05:29,507 --> 00:05:31,398
+Type: bash secure dot S H,
+
+185
+00:05:31,398 --> 00:05:32,344
+web zero one.
+
+186
+00:05:32,894 --> 00:05:33,547
+It works,
+
+187
+00:05:33,547 --> 00:05:37,610
+and it shows only the last four characters of the token.
+
+188
+00:05:37,610 --> 00:05:38,989
+Now a hostile name.
+
+189
+00:05:38,989 --> 00:05:40,876
+Type: bash secure dot S H,
+
+190
+00:05:40,876 --> 00:05:43,270
+and then in quotes: web zero one,
+
+191
+00:05:43,270 --> 00:05:43,996
+semicolon,
+
+192
+00:05:43,996 --> 00:05:44,286
+I D.
+
+193
+00:05:44,836 --> 00:05:49,188
+Refused. Check the exit code. Type: echo, dollar question mark.
+
+194
+00:05:49,738 --> 00:05:49,975
+Two.
+
+195
+00:05:49,975 --> 00:05:51,933
+Safe against the common mistakes,
+
+196
+00:05:51,933 --> 00:05:53,594
+and honest about the result.
+
+197
+00:05:53,594 --> 00:05:55,967
+That is a script you can hand to a team.
+
+198
+00:05:58,017 --> 00:05:59,340
+Four myths to clear up.
+
+199
+00:05:59,890 --> 00:06:03,380
+Myth one: a secret in a private repository is safe.
+
+200
+00:06:03,380 --> 00:06:03,585
+No.
+
+201
+00:06:03,585 --> 00:06:05,228
+Repositories get shared,
+
+202
+00:06:05,228 --> 00:06:06,460
+cloned and leaked.
+
+203
+00:06:06,460 --> 00:06:08,444
+Keep secrets out of the code.
+
+204
+00:06:08,994 --> 00:06:13,325
+Myth two: chmod seven seven seven fixes permission errors.
+
+205
+00:06:13,325 --> 00:06:13,549
+No.
+
+206
+00:06:13,549 --> 00:06:15,864
+It gives everyone full control.
+
+207
+00:06:15,864 --> 00:06:17,805
+Grant only what is needed.
+
+208
+00:06:18,355 --> 00:06:20,460
+Myth three: quotes are optional.
+
+209
+00:06:20,460 --> 00:06:20,658
+No.
+
+210
+00:06:20,658 --> 00:06:21,645
+Without quotes,
+
+211
+00:06:21,645 --> 00:06:25,592
+spaces and special characters split or change your commands.
+
+212
+00:06:25,592 --> 00:06:26,974
+Quote every variable.
+
+213
+00:06:27,524 --> 00:06:30,226
+Myth four: blocking bad input is enough.
+
+214
+00:06:30,226 --> 00:06:30,429
+No.
+
+215
+00:06:30,429 --> 00:06:32,253
+Allow only what you expect,
+
+216
+00:06:32,253 --> 00:06:33,604
+and reject the rest.
+
+217
+00:06:34,154 --> 00:06:37,332
+Secrets. Permissions. Validation. No eval.
+
+218
+00:06:39,382 --> 00:06:43,947
+Here is how you check your own understanding. Six points, and you need all six.
+
+219
+00:06:44,497 --> 00:06:47,633
+Keep secrets out of scripts, in a file only you can read.
+
+220
+00:06:48,183 --> 00:06:53,751
+Set permissions with chmod. Six hundred for secrets, and never seven seven seven.
+
+221
+00:06:54,301 --> 00:06:57,715
+Use umask zero seven seven for private output.
+
+222
+00:06:58,265 --> 00:07:01,913
+Validate input with an allow list, and exit with a clear code.
+
+223
+00:07:02,463 --> 00:07:05,641
+Quote every variable, and never use eval on input.
+
+224
+00:07:06,191 --> 00:07:09,797
+Never print a whole secret. At most, the last few characters.
+
+225
+00:07:10,347 --> 00:07:11,968
+To pass, you need all six.
+
+226
+00:07:14,018 --> 00:07:14,694
+Your turn,
+
+227
+00:07:14,694 --> 00:07:17,060
+in your own Ubuntu virtual machine.
+
+228
+00:07:17,060 --> 00:07:18,952
+Type every command yourself.
+
+229
+00:07:18,952 --> 00:07:20,439
+Use fake secrets only.
+
+230
+00:07:20,989 --> 00:07:26,920
+One: create a dot E N V file with a fake token, and lock it with chmod six hundred.
+
+231
+00:07:27,470 --> 00:07:32,185
+Two: write a script that loads it with source, and prints only the last four characters.
+
+232
+00:07:32,735 --> 00:07:35,837
+Three: create a script without execute permission,
+
+233
+00:07:35,837 --> 00:07:36,581
+see it fail,
+
+234
+00:07:36,581 --> 00:07:38,815
+then add execute for the owner only.
+
+235
+00:07:39,365 --> 00:07:44,037
+Four: set umask zero seven seven, create a file, and read its permissions.
+
+236
+00:07:44,587 --> 00:07:47,957
+Five: add input validation with a regular expression,
+
+237
+00:07:47,957 --> 00:07:51,136
+and prove that a name with a semicolon is refused.
+
+238
+00:07:51,686 --> 00:07:55,354
+Six: write a script that passes a quoted variable to L S,
+
+239
+00:07:55,354 --> 00:07:56,384
+with two dashes,
+
+240
+00:07:56,384 --> 00:07:59,473
+and show that a hostile name is not run as code.
+
+241
+00:08:00,023 --> 00:08:03,329
+Mark yourself on the rubric. Pause the video, and do it now.
+
+242
+00:08:18,879 --> 00:08:19,754
+Quick check.
+
+243
+00:08:20,304 --> 00:08:21,754
+Where does a password belong?
+
+244
+00:08:22,304 --> 00:08:24,950
+Which mode locks a secret file to its owner?
+
+245
+00:08:25,500 --> 00:08:26,886
+What does an allow list do?
+
+246
+00:08:27,436 --> 00:08:29,143
+Why avoid eval on input?
+
+247
+00:08:29,693 --> 00:08:35,432
+Objective covered: MC05-O07.
+
+248
+00:08:35,982 --> 00:08:38,051
+Pause the video, and answer out loud.
+
+249
+00:08:48,601 --> 00:08:51,481
+Next lesson: idempotent scripts and ShellCheck.
+
+250
+00:08:52,031 --> 00:08:55,359
+If this helped, like, share and subscribe, so you do not miss it.

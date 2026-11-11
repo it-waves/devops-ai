@@ -1,0 +1,30 @@
+Lesson 43 of the DevOps Engineering Bootcamp, the sixth lesson of the Bash scripting masterclass. A script is only as safe as what it handles: secrets, permissions, user input and the shell itself. Watch five real Ubuntu 24.04 terminal demos, then do the lab on your own virtual machine.
+
+All secrets shown are fake, made up for this lesson. Use fake secrets only in your own practice.
+
+Chapters
+0:00 Overview
+0:30 Keep secrets out of scripts
+1:46 Permissions and umask
+3:01 Validate input
+4:09 Injection and eval
+5:12 Put it together
+5:57 Common myths
+6:38 Pass or fail rubric
+7:13 Your turn
+8:18 Quick check
+
+Objectives covered: MC05-O07
+
+Practice in your own Ubuntu virtual machine only. Type every command yourself. The labs in this lesson are unverified until you run them and check the evidence.
+
+Previous lesson: Bash error handling, exit codes, set -e, trap and logging https://youtu.be/RedniqKyMX0
+Next lesson: idempotent scripts and ShellCheck
+
+Course files and lab scripts: https://github.com/it-waves/devops-ai
+
+Honest notes: the terminal sections are real recordings on Ubuntu 24.04. The title cards, rubric and quiz are illustrations, not captures. This lesson is for learning and is not a security audit of your systems.
+
+If this helped, like, share and subscribe, so you do not miss the next lesson.
+
+#bash #linux #devops #scripting #security #ubuntu #linuxforbeginners
