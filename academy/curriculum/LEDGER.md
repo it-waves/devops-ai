@@ -59,7 +59,7 @@ Lesson numbers continue after L25. One lesson per objective, then the mastery sc
 | L27 | MC04-O02 | Create, inspect, copy, move, search, edit files (vim) | Next lesson: pipes, redirects, grep, find | Published Public EshJVj6YyUo (7:19), playlist, end screen; real terminal and real vim; sample files disclosed; captions published |
 | L28 | MC04-O03 | Pipes, redirects, grep, find, archives, text tools | Next lesson: users, permissions, SSH keys | Published Public 5EQUvFenFGc (6:07), captions, end screen, playlist; real terminal; sample files disclosed |
 | L29 | MC04-O04 | Users, groups, sudo, permissions, ownership, SSH keys | Next lesson: processes and signals | Published Public N9IYS05Ysao (6:36), captions, end screen, playlist; real terminal, private etc copy; key demo only, no remote login |
-| L30 | MC04-O05 | Processes, signals, resource usage, service status | Next lesson: systemd, logs, cron | Built (5:45; real terminal with its own process list; host uptime/load/memory numbers), delivered, awaiting upload |
+| L30 | MC04-O05 | Processes, signals, resource usage, service status | Next lesson: systemd, logs, cron | Published (H0MuFuuOqYA, 5:46; real terminal with its own process list; host uptime/load/memory numbers) |
 | L31 | MC04-O06 | systemd services, journal, boot, scheduled jobs | Next lesson: packages | Not started |
 | L32 | MC04-O07 | Install/update packages, repositories | Next lesson: disks | Not started |
 | L33 | MC04-O08 | Disks, filesystems, mounts, free space, expansion | Next lesson: networking and security | Not started |
