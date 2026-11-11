@@ -1,0 +1,25 @@
+Lesson 29 of the DevOps Engineering Bootcamp, the fourth lesson of the Linux administration masterclass. Every file on a server has an owner, so you learn who you are (whoami, id and the passwd file), how to read permission strings from ls -l, how chmod changes them (numbers like 600 and plus x), why a script gives permission denied until it is executable, and how sudo borrows root power for one command. You create a user and a group, add the user to the group, change an owner with chown, and make an SSH key pair, with the right modes on the SSH folder and the authorized keys file. You finish with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Every file has an owner
+0:12 Who am I
+0:40 Read and change permissions
+1:36 sudo, users and owners
+2:28 SSH keys
+3:57 Common myths
+4:32 Pass or fail rubric
+4:59 Your turn
+5:55 Quick check
+
+Objectives covered: MC04-O04
+
+Practice: work only in your own Ubuntu 24.04 virtual machine, with a practice folder and a practice user. Never use chmod 777 to fix a problem, and never share a private key. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson29.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04. The recording runs in a standard-layout view of the filesystem built from real directories on the recording computer, with a private copy of the system user files, so the demo user and group exist only inside the recording. The folder, the files and the SSH key are sample files I created for this demo, and the key is a throwaway that protects nothing. The key setup is shown, but a remote SSH login is not demonstrated. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/5EQUvFenFGc
+Next lesson: processes and signals.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#linux #ubuntu #ssh #devopsbootcamp

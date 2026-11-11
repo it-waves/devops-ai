@@ -1,0 +1,447 @@
+1
+00:00:00,500 --> 00:00:02,569
+Every file on a server has an owner.
+
+2
+00:00:03,119 --> 00:00:06,149
+Who you are decides what you can read, change, and run.
+
+3
+00:00:06,699 --> 00:00:10,411
+Today you learn users, permissions, sudo, and S S H keys.
+
+4
+00:00:12,461 --> 00:00:15,874
+First question on any server: who am I? Type: whoami.
+
+5
+00:00:16,424 --> 00:00:17,402
+Now the detail.
+
+6
+00:00:17,402 --> 00:00:17,989
+Type: id.
+
+7
+00:00:17,989 --> 00:00:19,097
+Your user number,
+
+8
+00:00:19,097 --> 00:00:20,271
+your group number,
+
+9
+00:00:20,271 --> 00:00:22,227
+and every group you belong to.
+
+10
+00:00:22,777 --> 00:00:30,692
+Every user is one line in slash etc slash password. Type: grep student /etc/passwd.
+
+11
+00:00:31,242 --> 00:00:33,281
+Fields split by colons: the name,
+
+12
+00:00:33,281 --> 00:00:34,146
+a placeholder,
+
+13
+00:00:34,146 --> 00:00:35,135
+the user number,
+
+14
+00:00:35,135 --> 00:00:36,186
+the group number,
+
+15
+00:00:36,186 --> 00:00:36,804
+a comment,
+
+16
+00:00:36,804 --> 00:00:37,792
+the home folder,
+
+17
+00:00:37,792 --> 00:00:39,028
+and the login shell.
+
+18
+00:00:41,078 --> 00:00:44,747
+Permissions live on every file. Type: ls -l.
+
+19
+00:00:45,297 --> 00:00:46,583
+Read the first column.
+
+20
+00:00:46,583 --> 00:00:48,160
+One character for the type,
+
+21
+00:00:48,160 --> 00:00:50,146
+then three groups of three: owner,
+
+22
+00:00:50,146 --> 00:00:50,496
+group,
+
+23
+00:00:50,496 --> 00:00:51,548
+and everyone else.
+
+24
+00:00:52,098 --> 00:00:54,088
+Each group is r for read,
+
+25
+00:00:54,088 --> 00:00:55,043
+w for write,
+
+26
+00:00:55,043 --> 00:00:56,158
+x for execute.
+
+27
+00:00:56,158 --> 00:00:57,432
+A dash means no.
+
+28
+00:00:57,432 --> 00:01:01,969
+So rw dash r dash dash r dash dash means the owner edits,
+
+29
+00:01:01,969 --> 00:01:03,959
+everyone else only reads.
+
+30
+00:01:04,509 --> 00:01:09,224
+Lock a secret down. Type: chmod 600 secret.txt.
+
+31
+00:01:09,774 --> 00:01:13,251
+Check it. Type: ls -l secret.txt.
+
+32
+00:01:13,801 --> 00:01:15,871
+Now the owner can read and write.
+
+33
+00:01:15,871 --> 00:01:17,501
+Nobody else can even look.
+
+34
+00:01:17,501 --> 00:01:18,818
+Six is four for read,
+
+35
+00:01:18,818 --> 00:01:20,009
+plus two for write.
+
+36
+00:01:21,059 --> 00:01:25,177
+Try running the script. Type: ./run.sh.
+
+37
+00:01:25,727 --> 00:01:32,660
+Permission denied. The file is not executable yet. Fix it with: chmod +x run.sh.
+
+38
+00:01:33,210 --> 00:01:34,234
+And run it again.
+
+39
+00:01:36,584 --> 00:01:41,320
+Some files are not yours. Type: cat /etc/shadow.
+
+40
+00:01:41,870 --> 00:01:46,585
+Permission denied. That file holds password hashes, and only root may read it.
+
+41
+00:01:47,635 --> 00:01:53,779
+Root is the all powerful administrator. You borrow its power with sudo. Type: sudo whoami.
+
+42
+00:01:54,329 --> 00:01:55,777
+The answer is root,
+
+43
+00:01:55,777 --> 00:01:57,759
+for that one command only.
+
+44
+00:01:57,759 --> 00:01:58,978
+Make a new user.
+
+45
+00:01:58,978 --> 00:02:01,113
+Type: sudo useradd -m maria.
+
+46
+00:02:01,663 --> 00:02:04,777
+Create a group. Type: sudo groupadd devs.
+
+47
+00:02:05,327 --> 00:02:12,239
+Add Maria to it. Type: sudo usermod -aG devs maria. A G means append to a group.
+
+48
+00:02:12,789 --> 00:02:14,560
+Check. Type: id maria.
+
+49
+00:02:15,110 --> 00:02:22,321
+Now give her a file. Type: sudo chown maria:devs notes.txt. Owner colon group.
+
+50
+00:02:22,871 --> 00:02:27,116
+Confirm with: ls -l notes.txt. New owner, new group.
+
+51
+00:02:29,166 --> 00:02:31,962
+Passwords can be guessed.
+
+52
+00:02:31,962 --> 00:02:34,086
+Keys are far safer.
+
+53
+00:02:34,086 --> 00:02:35,428
+Make a pair.
+
+54
+00:02:35,428 --> 00:02:40,236
+Type: ssh-keygen -t ed25519 -f demo_key -N,
+
+55
+00:02:40,236 --> 00:02:42,585
+then two quote marks.
+
+56
+00:02:43,135 --> 00:02:49,577
+Two files appeared. Type: ls -l demo_key demo_key.pub.
+
+57
+00:02:50,127 --> 00:02:52,505
+The private key is rw only for you.
+
+58
+00:02:52,505 --> 00:02:54,543
+It never leaves your computer.
+
+59
+00:02:54,543 --> 00:02:56,920
+The dot pub file is the public key,
+
+60
+00:02:56,920 --> 00:02:57,871
+safe to share.
+
+61
+00:02:58,721 --> 00:03:05,868
+Read the public key. Type: cat demo_key.pub. One line. This is a throwaway demo key.
+
+62
+00:03:06,418 --> 00:03:13,134
+A server trusts you when your public key is in its authorized keys file.
+
+63
+00:03:13,134 --> 00:03:15,186
+Type: mkdir -p ~/.ssh.
+
+64
+00:03:15,736 --> 00:03:24,653
+Add the key. Type: cat demo_key.pub, two arrows, then the authorized keys file.
+
+65
+00:03:25,203 --> 00:03:27,129
+S S H is strict.
+
+66
+00:03:27,129 --> 00:03:30,861
+Lock the folder with chmod 700,
+
+67
+00:03:30,861 --> 00:03:34,232
+and the file with chmod 600.
+
+68
+00:03:34,232 --> 00:03:37,001
+Type: chmod 700 ~/.ssh.
+
+69
+00:03:37,551 --> 00:03:45,081
+Now the file. Type: chmod 600 ~/.ssh/authorized_keys.
+
+70
+00:03:45,631 --> 00:03:49,813
+Check it. Type: ls -l ~/.ssh.
+
+71
+00:03:50,363 --> 00:03:56,272
+Too open, and S S H refuses the key. That is the number one cause of key login failures.
+
+72
+00:03:58,322 --> 00:03:59,645
+Four myths to clear up.
+
+73
+00:04:00,195 --> 00:04:03,163
+Myth one: chmod 777 fixes everything.
+
+74
+00:04:03,163 --> 00:04:05,570
+It gives everyone full access.
+
+75
+00:04:05,570 --> 00:04:07,255
+It hides the problem,
+
+76
+00:04:07,255 --> 00:04:09,261
+and creates a bigger one.
+
+77
+00:04:09,811 --> 00:04:15,379
+Myth two: use sudo for every command. No. Use it only when you must. Least power wins.
+
+78
+00:04:15,929 --> 00:04:21,071
+Myth three: share your private key to let a friend in. Never. Share the public key only.
+
+79
+00:04:21,621 --> 00:04:24,094
+Myth four: root and sudo are the same.
+
+80
+00:04:24,094 --> 00:04:25,396
+Root is the account.
+
+81
+00:04:25,396 --> 00:04:27,935
+Sudo borrows its power for one command.
+
+82
+00:04:28,485 --> 00:04:30,619
+Least power. Public key only.
+
+83
+00:04:32,669 --> 00:04:34,994
+Here is how you check your own understanding.
+
+84
+00:04:35,544 --> 00:04:37,699
+Say who you are with whoami and id.
+
+85
+00:04:38,249 --> 00:04:40,702
+Read an ls dash l permission string.
+
+86
+00:04:41,252 --> 00:04:44,964
+Change permissions with chmod, in numbers and with plus x.
+
+87
+00:04:45,514 --> 00:04:47,989
+Create a user and group, and change an owner.
+
+88
+00:04:48,539 --> 00:04:51,995
+Make an S S H key pair, and say which half is private.
+
+89
+00:04:52,545 --> 00:04:55,724
+Set the right permissions on the S S H folder and file.
+
+90
+00:04:56,274 --> 00:04:57,895
+To pass, you need all six.
+
+91
+00:04:59,945 --> 00:05:04,638
+Your turn, in your virtual machine. Use a practice folder, and a practice user.
+
+92
+00:05:05,188 --> 00:05:08,474
+One: run who am I and I D, and write down your groups.
+
+93
+00:05:09,024 --> 00:05:12,906
+Two: make a file, and use ls dash l to read its permissions.
+
+94
+00:05:13,456 --> 00:05:17,083
+Three: use chmod to make it private, then check it again.
+
+95
+00:05:17,633 --> 00:05:23,393
+Four: write a tiny script, run it, see permission denied, then fix it with chmod plus x.
+
+96
+00:05:23,943 --> 00:05:24,921
+Five: with sudo,
+
+97
+00:05:24,921 --> 00:05:26,510
+create a user and a group,
+
+98
+00:05:26,510 --> 00:05:28,099
+add the user to the group,
+
+99
+00:05:28,099 --> 00:05:29,383
+and give them a file.
+
+100
+00:05:29,933 --> 00:05:31,967
+Six: make a throwaway key pair,
+
+101
+00:05:31,967 --> 00:05:34,724
+and set the S S H folder to seven hundred,
+
+102
+00:05:34,724 --> 00:05:36,824
+and the key file to six hundred.
+
+103
+00:05:37,374 --> 00:05:40,680
+Mark yourself on the rubric. Pause the video, and do it now.
+
+104
+00:05:56,230 --> 00:05:57,105
+Quick check.
+
+105
+00:05:57,655 --> 00:06:00,279
+What does chmod 600 give the owner?
+
+106
+00:06:00,829 --> 00:06:03,367
+Which command borrows root power for one command?
+
+107
+00:06:03,917 --> 00:06:05,688
+Which key file is safe to share?
+
+108
+00:06:06,238 --> 00:06:08,606
+What should the S S H folder permission be?
+
+109
+00:06:09,156 --> 00:06:15,599
+Objective covered: MC04-O04.
+
+110
+00:06:16,149 --> 00:06:18,218
+Pause the video, and answer out loud.
+
+111
+00:06:28,768 --> 00:06:31,051
+Next lesson: processes and signals.
+
+112
+00:06:31,601 --> 00:06:34,929
+If this helped, like, share and subscribe, so you do not miss it.
