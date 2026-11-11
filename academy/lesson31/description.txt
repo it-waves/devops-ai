@@ -1,0 +1,28 @@
+Lesson 31 of the DevOps Engineering Bootcamp, the sixth lesson of the Linux administration masterclass. A server must start, watch and restart its programs without anyone logged in, and on Ubuntu that is systemd. You read a real unit file (the ssh service) and find the command to run and the restart rule, write your own web.service and check it with systemd-analyze verify, then find the mistakes in a broken one. You learn what systemctl status, start, stop, enable and daemon-reload do, read service logs with journalctl, follow the boot chain from firmware to a target, check a timer schedule with systemd-analyze calendar, and read a cron line with its five fields. You finish with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Services run without you
+0:19 Read a unit file
+0:55 Write and check a unit
+1:48 Control a service
+2:36 Read the journal
+3:07 How a server boots
+3:35 Timers
+4:06 Cron
+4:32 Common myths
+4:59 Pass or fail rubric
+5:26 Your turn
+6:26 Quick check
+
+Objectives covered: MC04-O06
+
+Practice: work only in your own Ubuntu 24.04 virtual machine. Nothing in the tasks installs or changes a service. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson31. The next lesson covers installing and updating packages.
+
+Honest notes: the segments labelled REAL RECORDING are real commands on Ubuntu 24.04 (reading the ssh unit file, cat and systemd-analyze verify on two unit files, and systemd-analyze calendar). The recording computer is a sandbox that does not run systemd as its init system, so the screens for systemctl status, start, stop, enable, journalctl and the boot chain are labelled ILLUSTRATION, with invented example output; try those commands in your own virtual machine. The grep -v Bind part hides one harmless warning about IP version six that the recording computer prints. The schedule times shown come from the recording computer, in UTC, so yours will differ. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/H0MuFuuOqYA
+Next lesson: installing and updating packages.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#linux #ubuntu #systemd #devopsbootcamp
