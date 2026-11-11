@@ -56,7 +56,7 @@ Lesson numbers continue after L25. One lesson per objective, then the mastery sc
 | Lesson | Objectives | Topic | "Next" line | Status |
 |---|---|---|---|---|
 | L26 | MC04-O01 | Shell, paths, filesystem hierarchy, system documentation | Next lesson: files and directories | Published Public yal878gZIRo (8:37), captions, end screen, playlist (Learning; real terminal in a standard-layout view of real dirs, sample files disclosed). First upload iXhsSfijDBc was truncated (4:06), set Private; user to discard it |
-| L27 | MC04-O02 | Create, inspect, copy, move, search, edit files (vim) | Next lesson: pipes, redirects, grep, find | Not started |
+| L27 | MC04-O02 | Create, inspect, copy, move, search, edit files (vim) | Next lesson: pipes, redirects, grep, find | Built, delivered to user, awaiting upload (7:19; real terminal and real vim; sample files disclosed) |
 | L28 | MC04-O03 | Pipes, redirects, grep, find, archives, text tools | Next lesson: users, permissions, SSH keys | Not started |
 | L29 | MC04-O04 | Users, groups, sudo, permissions, ownership, SSH keys | Next lesson: processes and signals | Not started |
 | L30 | MC04-O05 | Processes, signals, resource usage, service status | Next lesson: systemd, logs, cron | Not started |

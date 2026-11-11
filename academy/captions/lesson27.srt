@@ -1,0 +1,519 @@
+1
+00:00:00,500 --> 00:00:02,527
+Files are what a server is made of.
+
+2
+00:00:03,077 --> 00:00:03,657
+Configs,
+
+3
+00:00:03,657 --> 00:00:04,020
+logs,
+
+4
+00:00:04,020 --> 00:00:05,254
+scripts and data.
+
+5
+00:00:05,254 --> 00:00:07,286
+Every task starts by making,
+
+6
+00:00:07,286 --> 00:00:07,867
+reading,
+
+7
+00:00:07,867 --> 00:00:09,391
+moving or fixing one.
+
+8
+00:00:09,941 --> 00:00:12,821
+Today you handle them safely, and you edit with vim.
+
+9
+00:00:14,871 --> 00:00:17,114
+Build a practice area.
+
+10
+00:00:17,114 --> 00:00:20,172
+Type: mkdir -p lab27/docs/old.
+
+11
+00:00:20,172 --> 00:00:25,474
+The dash p flag makes every parent folder in one go.
+
+12
+00:00:26,024 --> 00:00:29,458
+Step inside. Type: cd lab27.
+
+13
+00:00:30,008 --> 00:00:31,277
+Now empty files.
+
+14
+00:00:31,277 --> 00:00:33,815
+Type: touch hello.txt notes.txt.
+
+15
+00:00:33,815 --> 00:00:37,304
+Touch creates a file when it does not exist.
+
+16
+00:00:37,854 --> 00:00:40,841
+Check with: ls -l. Look at the size column.
+
+17
+00:00:41,391 --> 00:00:46,938
+Zero bytes. Both files exist, and both are empty. A folder starts with the letter d.
+
+18
+00:00:48,988 --> 00:00:51,633
+Bring in a file with real content.
+
+19
+00:00:51,633 --> 00:00:53,578
+Type: cp ~/shopping.txt .
+
+20
+00:00:53,578 --> 00:00:54,590
+with a space,
+
+21
+00:00:54,590 --> 00:00:55,446
+then a dot.
+
+22
+00:00:55,446 --> 00:00:56,924
+The dot means here.
+
+23
+00:00:57,474 --> 00:01:01,165
+Read it all with: cat shopping.txt. Cat prints a file.
+
+24
+00:01:01,715 --> 00:01:07,347
+For a quick peek, type: head -n 3 shopping.txt. Head shows the first lines.
+
+25
+00:01:07,897 --> 00:01:14,894
+And the end of a file. Type: tail -n 2 shopping.txt. Tail is the one you will use on logs.
+
+26
+00:01:15,444 --> 00:01:22,633
+How long is it? Type: wc -l shopping.txt. W C counts, and dash l counts lines.
+
+27
+00:01:23,183 --> 00:01:27,045
+And what kind of file is it? Type: file shopping.txt.
+
+28
+00:01:27,595 --> 00:01:32,395
+ASCII text. Linux does not trust the end of a name. It looks inside the file.
+
+29
+00:01:34,445 --> 00:01:40,098
+Copy with: cp shopping.txt backup.txt. Source first, then destination.
+
+30
+00:01:40,648 --> 00:01:47,027
+Move it into a folder. Type: mv backup.txt docs/. A move takes it out of here.
+
+31
+00:01:47,577 --> 00:01:54,553
+The same command renames. Type: mv notes.txt ideas.txt. Same folder, new name.
+
+32
+00:01:55,103 --> 00:02:01,674
+To copy a whole folder, add dash r, for recursive. Type: cp -r docs docs2.
+
+33
+00:02:02,224 --> 00:02:08,304
+See everything. Type: ls -R. Capital R lists every folder underneath.
+
+34
+00:02:08,854 --> 00:02:12,694
+Now delete, carefully. Type: rm hello.txt.
+
+35
+00:02:13,244 --> 00:02:14,278
+No question,
+
+36
+00:02:14,278 --> 00:02:15,917
+and no recycle bin.
+
+37
+00:02:15,917 --> 00:02:16,865
+It is gone.
+
+38
+00:02:16,865 --> 00:02:17,297
+Next,
+
+39
+00:02:17,297 --> 00:02:19,883
+a folder and everything in it.
+
+40
+00:02:19,883 --> 00:02:21,436
+Type: rm -r docs2.
+
+41
+00:02:21,986 --> 00:02:26,103
+Check twice before you press Enter on that one. Now confirm with: ls.
+
+42
+00:02:28,153 --> 00:02:29,689
+Four habits keep you safe.
+
+43
+00:02:30,239 --> 00:02:33,375
+One. Run ls first, so you know what the name matches.
+
+44
+00:02:33,925 --> 00:02:38,448
+Two. Never use a star with rm until you have run ls with the same star.
+
+45
+00:02:38,998 --> 00:02:43,520
+Three. When unsure, use rm dash i. It asks before every delete.
+
+46
+00:02:44,070 --> 00:02:46,865
+Four. There is no undo. A backup is your undo.
+
+47
+00:02:47,415 --> 00:02:49,122
+Look twice. Delete once.
+
+48
+00:02:51,172 --> 00:02:52,356
+Lost a file?
+
+49
+00:02:52,356 --> 00:02:53,243
+Use find.
+
+50
+00:02:53,243 --> 00:02:56,005
+Type: find ~ -name "*.conf".
+
+51
+00:02:56,005 --> 00:03:00,345
+The tilde means search my whole home folder.
+
+52
+00:03:00,895 --> 00:03:01,612
+One match,
+
+53
+00:03:01,612 --> 00:03:03,333
+deep inside the project.
+
+54
+00:03:03,333 --> 00:03:05,054
+The star means anything,
+
+55
+00:03:05,054 --> 00:03:08,639
+so star dot conf is every name ending in dot conf.
+
+56
+00:03:09,189 --> 00:03:14,352
+To find folders only, type: find ~ -type d -name config.
+
+57
+00:03:14,902 --> 00:03:16,440
+Type d means directory.
+
+58
+00:03:16,440 --> 00:03:18,714
+The next lesson adds more filters,
+
+59
+00:03:18,714 --> 00:03:19,316
+and grep,
+
+60
+00:03:19,316 --> 00:03:20,854
+to search inside files.
+
+61
+00:03:22,904 --> 00:03:26,104
+Vim is on almost every server, so learn its three modes.
+
+62
+00:03:26,654 --> 00:03:29,897
+Normal mode. Keys are commands. You always start here.
+
+63
+00:03:30,447 --> 00:03:34,735
+Insert mode. Keys are text. Press i to enter, and Escape to leave.
+
+64
+00:03:35,285 --> 00:03:36,381
+Command mode.
+
+65
+00:03:36,381 --> 00:03:37,478
+Type a colon.
+
+66
+00:03:37,478 --> 00:03:38,659
+Colon w saves.
+
+67
+00:03:38,659 --> 00:03:39,840
+Colon q quits.
+
+68
+00:03:39,840 --> 00:03:42,709
+Colon q bang quits without saving.
+
+69
+00:03:43,259 --> 00:03:46,715
+Lost? Press Escape twice. You are back in normal mode.
+
+70
+00:03:48,765 --> 00:03:52,008
+Open a new file. Type: vim todo.txt.
+
+71
+00:03:52,558 --> 00:03:58,104
+A blank file. Vim starts in normal mode, where keys are commands, so do not type text yet.
+
+72
+00:03:58,654 --> 00:04:03,412
+Press i for insert mode. Watch the bottom of the screen. It now says insert.
+
+73
+00:04:03,962 --> 00:04:06,415
+Now type three lines, for my to do list.
+
+74
+00:04:09,465 --> 00:04:13,241
+Press Escape. Back to normal mode. The word insert is gone.
+
+75
+00:04:13,791 --> 00:04:17,076
+Delete a line with d d. Two d's, in normal mode.
+
+76
+00:04:18,126 --> 00:04:20,878
+Oops. Press u to undo. The line comes back.
+
+77
+00:04:21,428 --> 00:04:25,887
+Search with a slash. Slash, eggs, Enter. The cursor jumps to the match.
+
+78
+00:04:27,437 --> 00:04:30,402
+Save and quit with colon, w, q, then Enter.
+
+79
+00:04:30,952 --> 00:04:33,960
+Prove it saved. Type: cat todo.txt.
+
+80
+00:04:34,510 --> 00:04:35,954
+Now the escape hatch.
+
+81
+00:04:35,954 --> 00:04:36,916
+Open the file,
+
+82
+00:04:36,916 --> 00:04:37,879
+delete a line,
+
+83
+00:04:37,879 --> 00:04:38,635
+then colon,
+
+84
+00:04:38,635 --> 00:04:38,772
+q,
+
+85
+00:04:38,772 --> 00:04:39,116
+bang,
+
+86
+00:04:39,116 --> 00:04:40,697
+to quit without saving.
+
+87
+00:04:43,247 --> 00:04:46,106
+Check it. Type: cat todo.txt again.
+
+88
+00:04:46,656 --> 00:04:50,816
+All three lines are still there. Your change was thrown away, on purpose.
+
+89
+00:04:52,866 --> 00:04:54,189
+Four myths to clear up.
+
+90
+00:04:54,739 --> 00:04:59,005
+Myth one: you need an editor to make a file. Touch does it in one command.
+
+91
+00:04:59,555 --> 00:05:03,843
+Myth two: rm sends files to a trash. No. It deletes for good.
+
+92
+00:05:04,393 --> 00:05:09,428
+Myth three: vim is broken, because you cannot type. It is in normal mode. Press i.
+
+93
+00:05:09,978 --> 00:05:14,394
+Myth four: cp copies folders on its own. A folder needs dash r.
+
+94
+00:05:14,944 --> 00:05:16,672
+Know the mode. Know the flag.
+
+95
+00:05:18,722 --> 00:05:21,047
+Here is how you check your own understanding.
+
+96
+00:05:21,597 --> 00:05:23,133
+Create folders and files.
+
+97
+00:05:23,683 --> 00:05:26,457
+Read a file with cat, head, tail and W C.
+
+98
+00:05:27,007 --> 00:05:28,457
+Copy, move and rename.
+
+99
+00:05:29,007 --> 00:05:30,629
+Delete only after looking.
+
+100
+00:05:31,179 --> 00:05:32,608
+Find a file by name.
+
+101
+00:05:33,158 --> 00:05:35,803
+Edit and save with vim, and quit without saving.
+
+102
+00:05:36,353 --> 00:05:37,975
+To pass, you need all six.
+
+103
+00:05:40,025 --> 00:05:40,657
+Your turn,
+
+104
+00:05:40,657 --> 00:05:42,172
+in your virtual machine.
+
+105
+00:05:42,172 --> 00:05:44,383
+Work only inside a practice folder,
+
+106
+00:05:44,383 --> 00:05:46,404
+so nothing important is at risk.
+
+107
+00:05:46,954 --> 00:05:51,114
+One: build practice, slash a, slash b, slash c, with a single command.
+
+108
+00:05:51,664 --> 00:05:54,821
+Two: create three files, and list them with their sizes.
+
+109
+00:05:55,371 --> 00:05:59,306
+Three: copy slash etc slash hostname into your folder,
+
+110
+00:05:59,306 --> 00:06:00,909
+then read it with cat,
+
+111
+00:06:00,909 --> 00:06:01,856
+W C and file.
+
+112
+00:06:02,406 --> 00:06:06,716
+Four: rename one file, move another, and copy a folder with dash r.
+
+113
+00:06:07,266 --> 00:06:12,855
+Five: find your dot text files with find, then delete one, only after you have listed it.
+
+114
+00:06:13,405 --> 00:06:14,199
+Six: in vim,
+
+115
+00:06:14,199 --> 00:06:15,390
+write three lines,
+
+116
+00:06:15,390 --> 00:06:16,317
+undo a change,
+
+117
+00:06:16,317 --> 00:06:16,647
+save,
+
+118
+00:06:16,647 --> 00:06:18,037
+then reopen the file,
+
+119
+00:06:18,037 --> 00:06:18,964
+delete a line,
+
+120
+00:06:18,964 --> 00:06:20,552
+and quit without saving.
+
+121
+00:06:21,102 --> 00:06:24,408
+Mark yourself on the rubric. Pause the video, and do it now.
+
+122
+00:06:39,958 --> 00:06:40,833
+Quick check.
+
+123
+00:06:41,383 --> 00:06:43,601
+Which flag makes missing parent folders?
+
+124
+00:06:44,151 --> 00:06:45,773
+Which flag copies a folder?
+
+125
+00:06:46,323 --> 00:06:48,371
+Which key starts insert mode in vim?
+
+126
+00:06:48,921 --> 00:06:50,691
+How do you quit vim without saving?
+
+127
+00:06:51,241 --> 00:06:57,641
+Objective covered: MC04-O02.
+
+128
+00:06:58,191 --> 00:07:00,261
+Pause the video, and answer out loud.
+
+129
+00:07:10,811 --> 00:07:13,733
+Next lesson: pipes, redirects, grep and find.
+
+130
+00:07:14,283 --> 00:07:17,611
+If this helped, like, share and subscribe, so you do not miss it.

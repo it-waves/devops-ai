@@ -1,0 +1,28 @@
+Lesson 27 of the DevOps Engineering Bootcamp, the second lesson of the Linux administration masterclass. Every server is made of files, so you learn to create, read, copy, move, find and edit them safely. You see mkdir -p and touch, how to read a file with cat, head, tail, wc and file, how cp, mv and rm work (and why there is no undo), how to find a file with find, and then a full vim session: normal, insert and command mode, dd and u, searching with a slash, saving with :wq and quitting without saving with :q!. You finish with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 A server is made of files
+0:14 Make folders and files
+0:48 Read a file
+1:33 Copy, move, rename, delete
+2:27 Delete safely
+2:50 Find a file
+3:22 The three vim modes
+3:48 Edit with vim
+4:52 Common myths
+5:18 Pass or fail rubric
+5:39 Your turn
+6:39 Quick check
+
+Objectives covered: MC04-O02
+
+Practice: work only inside a practice folder in your own Ubuntu 24.04 virtual machine, so nothing important is at risk. rm has no undo, so list a name with ls before you delete it. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson27.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, including the real vim editor. The recording runs in a standard-layout view of the filesystem built from real directories on the recording computer. The folders, shopping.txt and the project files in my home folder are sample files I created for this demo. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/yal878gZIRo
+Next lesson: pipes, redirects, grep and find.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#linux #ubuntu #vim #devopsbootcamp
