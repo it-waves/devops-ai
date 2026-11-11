@@ -1,0 +1,26 @@
+Lesson 34 of the DevOps Engineering Bootcamp, the ninth lesson of the Linux administration masterclass. Every server lives on a network, and the network is its front door. You read your addresses with ip, see where traffic goes with the route table, test the gateway with ping, and list what is listening with ss. You log in with an SSH key instead of a password, lock down the SSH server by turning off password and root logins, test the config with sshd -t before reloading, and switch on a firewall with UFW, allowing SSH first. You finish with security habits, common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 The network is the front door
+0:27 Your network, in four commands
+1:33 Log in with a key
+3:11 Lock the SSH door
+4:27 A firewall in minutes
+5:42 Security habits
+6:09 Common myths
+6:42 Pass or fail rubric
+7:11 Your turn
+8:12 Quick check
+
+Objectives covered: MC04-O09
+
+Practice: work only in your own Ubuntu 24.04 virtual machine, never on a server you do not own, and keep a second session open when you change SSH or the firewall so you cannot lock yourself out. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson34. The next lesson covers how to diagnose and recover a broken system.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04. The network is a private practice network I built on the recording computer (an eth0 card with the address 10.0.2.15 and a gateway at 10.0.2.2), and the SSH server runs on the loopback address of that same machine, so the key login connects the machine to itself. The server settings in the recording were written for this demo. UFW did not ask for the confirmation prompt that it can show on a machine with a live SSH session. Your addresses and fingerprints will differ. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/auXXBOCxi8g
+Next lesson: diagnose and recover a broken system.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#linux #ubuntu #ssh #firewall #devopsbootcamp
