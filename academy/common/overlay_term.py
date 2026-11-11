@@ -13,7 +13,9 @@ for scene, info in clips.items():
     if not os.path.exists(base): os.replace(B + scene + '.mp4', base)
     hl = ''
     for (cid, row, n, x0, x1, label) in getattr(V, 'HL', {}).get(scene, []):
-        a = C[cid] + 0.35 - C[first] * 0 ; b = C[cid] + dur[cid] + 0.45; y = 6 + 30 * row; h = 30 * n
+        a = C[cid] + 0.35 - C[first] * 0 ; b = C[cid] + dur[cid] + 0.45
+        if cid in getattr(V, 'CMDLEN', {}): b = min(b, C[cid] + max(0.3, dur[cid] - (V.CMDLEN[cid] * 0.080 + 0.25)) - 0.1)
+        y = 6 + 30 * row; h = 30 * n
         en = f"enable='between(t,{a:.2f},{b:.2f})'"
         hl += f",drawbox=x={x0}:y={y}:w={x1 - x0}:h={h}:color=0xffd24a@0.22:t=fill:{en},drawbox=x={x0}:y={y}:w={x1 - x0}:h={h}:color=0xffd24a@0.95:t=3:{en}"
         if label: hl += f",drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:text='{label.replace(chr(37), chr(92) * 2 + chr(37))}':fontsize=20:fontcolor=0x0b1a1e:box=1:boxcolor=0xffd24a:boxborderw=6:x={x1 + 12}:y={y + (h - 22) // 2}:{en}"

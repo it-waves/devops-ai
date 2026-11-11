@@ -1,0 +1,93 @@
+RB = 'REAL RECORDING  ·  Ubuntu 24.04 on this computer'
+SCENES = [
+ ('hook', [
+  c('h1', "Things break. What separates a beginner from an administrator is not never breaking anything. It is finding the cause, and fixing it calmly."),
+  c('h2', "Today you learn a four step method. Then you use it on four faults: a script that will not run, a disk that is full, a service nobody is listening to, and a broken service file."),
+  c('h3', "Every fault is a real recording on Ubuntu, broken on purpose, so you can watch the method work."),
+ ]),
+ ('method', [
+  c('m1', "Here is the method. It has four steps."),
+  c('m2', "One: read the symptom. What exactly failed, and what did the error say? Copy the words. Do not guess."),
+  c('m3', "Two: check. Ask the system what is true, with a command, before you change anything."),
+  c('m4', "Three: fix one thing. Make the smallest change, and keep a backup of any file you edit."),
+  c('m5', "Four: verify. Run the original action again. If it works, you are done. If not, you have a new error, so go back to step one."),
+  c('m6', "Slow is smooth. Change five things at once, and you never learn which one worked."),
+ ]),
+ ('perms', [
+  c('p1', "Fault one. A script will not run. Type: ./backup.sh.", "Fault one. A script will not run. Type: dot slash backup dot S H."),
+  c('p2', "Read the symptom: permission denied. The file is there, but the system will not let us run it. So check the permissions. Type: ls -l backup.sh.", "Read the symptom: permission denied. The file is there, but the system will not let us run it. So check the permissions. Type: L S, dash l, backup dot S H."),
+  c('p3', "The mode is dash r w, dash r, dash dash, r, dash dash. Nobody has an x, so nobody may execute it. We own the file, so we can change it."),
+  c('p4', "Fix one thing. Add the execute bit for the owner. Type: chmod u+x backup.sh. U is the user, and plus x adds execute.", "Fix one thing. Add the execute bit for the owner. Type: C H mod, u plus x, backup dot S H. U is the user, and plus x adds execute."),
+  c('p5', "Verify. Run the original command again. Type: ./backup.sh.", "Verify. Run the original command again. Type: dot slash backup dot S H."),
+  c('p6', "It runs. Fixed with one change. Not chmod seven seven seven, which would give everyone everything."),
+ ]),
+ ('disk', [
+  c('d1', "Fault two. You try to save a file, and it fails. Type: echo hello > mnt/new.txt.", "Fault two. You try to save a file, and it fails. Type: echo hello, greater than sign, mnt slash new dot text."),
+  c('d2', "No space left on device. Check, do not guess. Type: df -h mnt. D F shows how full a filesystem is.", "No space left on device. Check, do not guess. Type: D F, dash h, mnt. D F shows how full a filesystem is."),
+  c('d3', "Use is one hundred percent. Next question: what is using it? Type: du -ah mnt, then a pipe to sort -rh, then head -n 3. That lists the three biggest items.", "Use is one hundred percent. Next question: what is using it? Type: D U, dash a h, mnt, then a pipe to sort, dash r h, then head, dash n, three. That lists the three biggest items."),
+  c('d4', "Two lines show eighty-eight megabytes: the folder total, and old dump dot log. The file is the culprit. Check it is safe to remove. Then delete only that file. Type: rm mnt/old-dump.log.", "Two lines show eighty-eight megabytes: the folder total, and old dump dot log. The file is the culprit. Check it is safe to remove. Then delete only that file. Type: R M, mnt slash old dash dump dot log."),
+  c('d5', "Verify. Try the original action again. Type: echo hello > mnt/new.txt, and, and, echo saved.", "Verify. Try the original action again. Type: echo hello, greater than sign, mnt slash new dot text, and, and, echo saved."),
+  c('d6', "Saved. Confirm with D F. Type: df -h mnt.", "Saved. Confirm with D F. Type: D F, dash h, mnt."),
+  c('d7', "The space is back. D F says how full. D U says what is using it. Use both."),
+ ]),
+ ('net', [
+  c('t1', "Fault three. A web server on port 8080 is not answering. Test the port. Type: nc -zv 127.0.0.1 8080. Z means just test, and v means tell me.", "Fault three. A web server on port eighty eighty is not answering. Test the port. Type: N C, dash z v, one twenty-seven dot zero dot zero dot one, eighty eighty. Z means just test, and v means tell me."),
+  c('t2', "Connection refused. That is a precise clue: the machine answered, but no program is listening on that port. A silent hang would point at a firewall instead. Double check. Type: ss -tln | grep 8080.", "Connection refused. That is a precise clue: the machine answered, but no program is listening on that port. A silent hang would point at a firewall instead. Double check. Type: S S, dash t l n, pipe, grep, eighty eighty."),
+  c('t3', "Nothing printed. Nothing is listening on port 8080. So the fault is the service, not the network."),
+  c('t4', "Fix one thing: start the service. For this demo it is Python's built in web server. Type: python3 -m http.server 8080 &>/dev/null &. The last ampersand runs it in the background.", "Fix one thing: start the service. For this demo it is Python's built in web server. Type: python three, dash m, H T T P dot server, eighty eighty, and then send the output to dev null, with an ampersand at the end. The ampersand runs it in the background."),
+  c('t5', "The number in brackets is the job. The second number is the process I D. Verify. Type: nc -zv 127.0.0.1 8080.", "The number in brackets is the job. The second number is the process I D. Verify. Type: N C, dash z v, one twenty-seven dot zero dot zero dot one, eighty eighty."),
+  c('t6', "Succeeded. Now the port answers. See who is listening. Type: ss -tln | grep 8080.", "Succeeded. Now the port answers. See who is listening. Type: S S, dash t l n, pipe, grep, eighty eighty."),
+  c('t7', "A listener on port 8080. Refused means nothing listens. Timed out means something blocks the way. Read the difference, and you know where to look."),
+ ]),
+ ('svc', [
+  c('s1', "Fault four. A service will not start. On a live system you would run systemctl status and read the journal. Here we check the unit file itself. Type: cat web.service.", "Fault four. A service will not start. On a live system you would run system control status and read the journal. Here we check the unit file itself. Type: cat web dot service."),
+  c('s2', "A unit file has sections. The Service section says what to run. Now ask system D to verify the file. Type: systemd-analyze verify web.service, and keep only the lines about our file with grep web.", "A unit file has sections. The Service section says what to run. Now ask system D to verify the file. Type: system D analyze, verify, web dot service, and keep only the lines about our file with grep web."),
+  c('s3', "There is the cause, in plain words. The command is not executable: no such file. Look closely at the path. Pythn three. A missing letter o."),
+  c('s4', "Check the real path before you edit. Type: ls /usr/bin/python3.", "Check the real path before you edit. Type: L S, slash U S R, slash bin, slash python three."),
+  c('s5', "It exists. Fix one thing, with a backup. Type: sed -i.bak and the substitution, then web.service. Dash i dot bak keeps the original as web dot service dot bak.", "It exists. Fix one thing, with a backup. Type: sed, dash i dot bak, the substitution that changes pythn three to python three, then web dot service. Dash i dot bak keeps the original as web dot service dot bak."),
+  c('s6', "Verify. Run the same check again. Type: systemd-analyze verify web.service.", "Verify. Run the same check again. Type: system D analyze, verify, web dot service."),
+  c('s7', "Silence. No errors. With this tool, silence is success. Last, see exactly what you changed. Type: diff web.service.bak web.service.", "Silence. No errors. With this tool, silence is success. Last, see exactly what you changed. Type: diff, web dot service dot bak, web dot service."),
+  c('s8', "One word changed, and you can prove it. That is how careful administrators work."),
+ ]),
+ ('tools', [
+  c('o1', "On a live system, with system D running, you add a few more tools to the same method."),
+  c('o2', "Systemctl status shows whether a service is running, and its last log lines.", "System control status shows whether a service is running, and its last log lines."),
+  c('o3', "Journalctl dash u, then the service name, shows that service's own log.", "Journal control, dash u, then the service name, shows that service's own log."),
+  c('o4', "After you edit a unit file, run systemctl daemon dash reload, so system D reads it again.", "After you edit a unit file, run system control daemon reload, so system D reads it again."),
+  c('o5', "Then restart the service, and run status again to verify.", "Then restart the service, and run system control status again to verify."),
+  c('o6', "Same method. Symptom, check, fix, verify. These screens are an illustration, not a recording."),
+ ]),
+ ('myths', [
+  c('my1', "Four myths to clear up."),
+  c('my2', "Myth one: a reboot fixes everything. No. It hides the cause, wipes the evidence, and the fault comes back."),
+  c('my3', "Myth two: chmod seven seven seven fixes permissions. It does, by removing all protection. Add only the bit that is missing."),
+  c('my4', "Myth three: disk full, so delete something big. Check first. The biggest file may be the one that matters."),
+  c('my5', "Myth four: keep restarting until it works. A restart without a fix just fails again. Read the error."),
+  c('my6', "Read it. Check it. Fix one thing. Verify."),
+ ]),
+ ('rubric', [
+  c('b1', "Here is how you check your own understanding."), c('b2', "Name the four steps of the method."),
+  c('b3', "Read a file mode with ls dash l, and fix it with chmod."), c('b4', "Find a full disk with df, and what fills it with du."),
+  c('b5', "Tell connection refused from timed out, and check listeners with ss."), c('b6', "Verify a unit file with systemd-analyze, and name the status and journal commands."),
+  c('b7', "Verify after every fix, and back up before you edit."), c('b8', "To pass, you need all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own virtual machine. Break things only on a machine you own, and keep notes as you go."),
+  c('z2', "One: make a script, take away its execute bit, watch it fail, then fix it with chmod."),
+  c('z3', "Two: fill a small loop disk image, find the culprit with D U, and free the space."),
+  c('z4', "Three: start a web server, stop it, read connection refused, and bring it back."),
+  c('z5', "Four: put a typo in a unit file, and catch it with systemd dash analyze verify."),
+  c('z6', "Five: on a machine running system D, make a real service fail on purpose. Read status and the journal."),
+  c('z7', "Six: for each fault, write four lines in a notes file: symptom, check, fix, verify."),
+  c('z8', "Mark yourself on the rubric. Pause the video, and do it now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "Which command shows what is using disk space?"), c('f13', "What does connection refused tell you?"),
+  c('f14', "Which tool checks a unit file for mistakes?"), c('f15', "What do you do after every fix?"),
+  c('f16', "Objective covered: MC04-O10.", "Objective covered: M C zero four, objective ten, in the Linux administration masterclass."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next lesson: the Linux administration mastery scenario."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'h3': 0.5, 'm6': 0.5, 'p3': 0.4, 'p6': 0.5, 'd3': 0.4, 'd4': 0.4, 'd7': 0.5, 't2': 0.3, 't3': 0.4, 't4': 0.4, 't6': 0.4, 't7': 0.5, 's3': 0.4, 's7': 0.3, 's8': 0.5, 'o6': 0.5, 'my6': 0.5, 'b8': 0.5, 'z8': 14.0, 'f17': 10.0}
+CHAP = {'method': 'The four step method', 'perms': 'Fault 1: permission denied', 'disk': 'Fault 2: disk full', 'net': 'Fault 3: connection refused', 'svc': 'Fault 4: broken service file', 'tools': 'Live system tools', 'myths': 'Common myths', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

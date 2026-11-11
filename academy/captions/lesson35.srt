@@ -1,0 +1,803 @@
+1
+00:00:00,500 --> 00:00:01,273
+Things break.
+
+2
+00:00:01,273 --> 00:00:05,973
+What separates a beginner from an administrator is not never breaking anything.
+
+3
+00:00:05,973 --> 00:00:07,400
+It is finding the cause,
+
+4
+00:00:07,400 --> 00:00:08,649
+and fixing it calmly.
+
+5
+00:00:09,199 --> 00:00:11,405
+Today you learn a four step method.
+
+6
+00:00:11,405 --> 00:00:15,123
+Then you use it on four faults: a script that will not run,
+
+7
+00:00:15,123 --> 00:00:16,383
+a disk that is full,
+
+8
+00:00:16,383 --> 00:00:18,462
+a service nobody is listening to,
+
+9
+00:00:18,462 --> 00:00:20,101
+and a broken service file.
+
+10
+00:00:20,651 --> 00:00:23,310
+Every fault is a real recording on Ubuntu,
+
+11
+00:00:23,310 --> 00:00:24,449
+broken on purpose,
+
+12
+00:00:24,449 --> 00:00:26,539
+so you can watch the method work.
+
+13
+00:00:28,589 --> 00:00:30,765
+Here is the method. It has four steps.
+
+14
+00:00:31,315 --> 00:00:32,602
+One: read the symptom.
+
+15
+00:00:32,602 --> 00:00:33,772
+What exactly failed,
+
+16
+00:00:33,772 --> 00:00:35,352
+and what did the error say?
+
+17
+00:00:35,352 --> 00:00:36,229
+Copy the words.
+
+18
+00:00:36,229 --> 00:00:36,990
+Do not guess.
+
+19
+00:00:37,540 --> 00:00:42,254
+Two: check. Ask the system what is true, with a command, before you change anything.
+
+20
+00:00:42,804 --> 00:00:47,839
+Three: fix one thing. Make the smallest change, and keep a backup of any file you edit.
+
+21
+00:00:48,389 --> 00:00:49,249
+Four: verify.
+
+22
+00:00:49,249 --> 00:00:51,234
+Run the original action again.
+
+23
+00:00:51,234 --> 00:00:52,027
+If it works,
+
+24
+00:00:52,027 --> 00:00:52,887
+you are done.
+
+25
+00:00:52,887 --> 00:00:53,350
+If not,
+
+26
+00:00:53,350 --> 00:00:54,740
+you have a new error,
+
+27
+00:00:54,740 --> 00:00:56,261
+so go back to step one.
+
+28
+00:00:56,811 --> 00:01:01,312
+Slow is smooth. Change five things at once, and you never learn which one worked.
+
+29
+00:01:03,362 --> 00:01:08,077
+Fault one. A script will not run. Type: ./backup.sh.
+
+30
+00:01:08,627 --> 00:01:11,295
+Read the symptom: permission denied.
+
+31
+00:01:11,295 --> 00:01:12,630
+The file is there,
+
+32
+00:01:12,630 --> 00:01:15,447
+but the system will not let us run it.
+
+33
+00:01:15,447 --> 00:01:17,300
+So check the permissions.
+
+34
+00:01:17,300 --> 00:01:18,931
+Type: ls -l backup.sh.
+
+35
+00:01:19,481 --> 00:01:21,079
+The mode is dash r w,
+
+36
+00:01:21,079 --> 00:01:21,611
+dash r,
+
+37
+00:01:21,611 --> 00:01:22,372
+dash dash,
+
+38
+00:01:22,372 --> 00:01:22,524
+r,
+
+39
+00:01:22,524 --> 00:01:23,285
+dash dash.
+
+40
+00:01:23,285 --> 00:01:24,503
+Nobody has an x,
+
+41
+00:01:24,503 --> 00:01:26,405
+so nobody may execute it.
+
+42
+00:01:26,405 --> 00:01:27,623
+We own the file,
+
+43
+00:01:27,623 --> 00:01:29,145
+so we can change it.
+
+44
+00:01:30,095 --> 00:01:31,348
+Fix one thing.
+
+45
+00:01:31,348 --> 00:01:34,392
+Add the execute bit for the owner.
+
+46
+00:01:34,392 --> 00:01:36,719
+Type: chmod u+x backup.sh.
+
+47
+00:01:36,719 --> 00:01:37,973
+U is the user,
+
+48
+00:01:37,973 --> 00:01:40,121
+and plus x adds execute.
+
+49
+00:01:40,671 --> 00:01:46,047
+Verify. Run the original command again. Type: ./backup.sh.
+
+50
+00:01:46,597 --> 00:01:47,172
+It runs.
+
+51
+00:01:47,172 --> 00:01:48,753
+Fixed with one change.
+
+52
+00:01:48,753 --> 00:01:50,765
+Not chmod seven seven seven,
+
+53
+00:01:50,765 --> 00:01:53,424
+which would give everyone everything.
+
+54
+00:01:55,474 --> 00:02:03,005
+Fault two. You try to save a file, and it fails. Type: echo hello > mnt/new.txt.
+
+55
+00:02:03,555 --> 00:02:05,722
+No space left on device.
+
+56
+00:02:05,722 --> 00:02:06,264
+Check,
+
+57
+00:02:06,264 --> 00:02:07,439
+do not guess.
+
+58
+00:02:07,439 --> 00:02:08,884
+Type: df -h mnt.
+
+59
+00:02:08,884 --> 00:02:12,045
+D F shows how full a filesystem is.
+
+60
+00:02:12,595 --> 00:02:14,922
+Use is one hundred percent.
+
+61
+00:02:14,922 --> 00:02:17,680
+Next question: what is using it?
+
+62
+00:02:17,680 --> 00:02:19,146
+Type: du -ah mnt,
+
+63
+00:02:19,146 --> 00:02:21,214
+then a pipe to sort -rh,
+
+64
+00:02:21,214 --> 00:02:22,507
+then head -n 3.
+
+65
+00:02:22,507 --> 00:02:25,523
+That lists the three biggest items.
+
+66
+00:02:26,473 --> 00:02:30,988
+Two lines show eighty-eight megabytes: the folder total,
+
+67
+00:02:30,988 --> 00:02:32,681
+and old dump dot log.
+
+68
+00:02:32,681 --> 00:02:34,616
+The file is the culprit.
+
+69
+00:02:34,616 --> 00:02:36,793
+Check it is safe to remove.
+
+70
+00:02:36,793 --> 00:02:38,969
+Then delete only that file.
+
+71
+00:02:38,969 --> 00:02:41,065
+Type: rm mnt/old-dump.log.
+
+72
+00:02:42,015 --> 00:02:42,736
+Verify.
+
+73
+00:02:42,736 --> 00:02:45,826
+Try the original action again.
+
+74
+00:02:45,826 --> 00:02:49,019
+Type: echo hello > mnt/new.txt,
+
+75
+00:02:49,019 --> 00:02:49,431
+and,
+
+76
+00:02:49,431 --> 00:02:49,842
+and,
+
+77
+00:02:49,842 --> 00:02:50,975
+echo saved.
+
+78
+00:02:51,525 --> 00:02:55,899
+Saved. Confirm with D F. Type: df -h mnt.
+
+79
+00:02:56,449 --> 00:03:01,249
+The space is back. D F says how full. D U says what is using it. Use both.
+
+80
+00:03:03,299 --> 00:03:04,566
+Fault three.
+
+81
+00:03:04,566 --> 00:03:09,105
+A web server on port 8080 is not answering.
+
+82
+00:03:09,105 --> 00:03:10,583
+Test the port.
+
+83
+00:03:10,583 --> 00:03:13,538
+Type: nc -zv 127.0.0.1 8080.
+
+84
+00:03:13,538 --> 00:03:15,438
+Z means just test,
+
+85
+00:03:15,438 --> 00:03:17,550
+and v means tell me.
+
+86
+00:03:18,100 --> 00:03:19,506
+Connection refused.
+
+87
+00:03:19,506 --> 00:03:22,836
+That is a precise clue: the machine answered,
+
+88
+00:03:22,836 --> 00:03:25,870
+but no program is listening on that port.
+
+89
+00:03:25,870 --> 00:03:29,422
+A silent hang would point at a firewall instead.
+
+90
+00:03:29,422 --> 00:03:30,384
+Double check.
+
+91
+00:03:30,384 --> 00:03:32,308
+Type: ss -tln | grep 8080.
+
+92
+00:03:33,158 --> 00:03:34,301
+Nothing printed.
+
+93
+00:03:34,301 --> 00:03:36,732
+Nothing is listening on port 8080.
+
+94
+00:03:36,732 --> 00:03:38,734
+So the fault is the service,
+
+95
+00:03:38,734 --> 00:03:39,878
+not the network.
+
+96
+00:03:40,828 --> 00:03:43,986
+Fix one thing: start the service.
+
+97
+00:03:43,986 --> 00:03:48,675
+For this demo it is Python's built in web server.
+
+98
+00:03:48,675 --> 00:03:53,268
+Type: python3 -m http.server 8080 &>/dev/null &.
+
+99
+00:03:53,268 --> 00:03:57,574
+The last ampersand runs it in the background.
+
+100
+00:03:58,524 --> 00:04:02,404
+The number in brackets is the job.
+
+101
+00:04:02,404 --> 00:04:06,626
+The second number is the process I D.
+
+102
+00:04:06,626 --> 00:04:07,425
+Verify.
+
+103
+00:04:07,425 --> 00:04:10,620
+Type: nc -zv 127.0.0.1 8080.
+
+104
+00:04:11,170 --> 00:04:18,530
+Succeeded. Now the port answers. See who is listening. Type: ss -tln | grep 8080.
+
+105
+00:04:19,480 --> 00:04:21,078
+A listener on port 8080.
+
+106
+00:04:21,078 --> 00:04:23,074
+Refused means nothing listens.
+
+107
+00:04:23,074 --> 00:04:25,803
+Timed out means something blocks the way.
+
+108
+00:04:25,803 --> 00:04:27,134
+Read the difference,
+
+109
+00:04:27,134 --> 00:04:28,931
+and you know where to look.
+
+110
+00:04:30,981 --> 00:04:31,734
+Fault four.
+
+111
+00:04:31,734 --> 00:04:33,446
+A service will not start.
+
+112
+00:04:33,446 --> 00:04:38,171
+On a live system you would run systemctl status and read the journal.
+
+113
+00:04:38,171 --> 00:04:40,568
+Here we check the unit file itself.
+
+114
+00:04:40,568 --> 00:04:42,074
+Type: cat web.service.
+
+115
+00:04:42,624 --> 00:04:44,466
+A unit file has sections.
+
+116
+00:04:44,466 --> 00:04:47,192
+The Service section says what to run.
+
+117
+00:04:47,192 --> 00:04:49,844
+Now ask system D to verify the file.
+
+118
+00:04:49,844 --> 00:04:52,864
+Type: systemd-analyze verify web.service,
+
+119
+00:04:52,864 --> 00:04:56,768
+and keep only the lines about our file with grep web.
+
+120
+00:04:57,318 --> 00:04:58,607
+There is the cause,
+
+121
+00:04:58,607 --> 00:04:59,624
+in plain words.
+
+122
+00:04:59,624 --> 00:05:02,608
+The command is not executable: no such file.
+
+123
+00:05:02,608 --> 00:05:04,304
+Look closely at the path.
+
+124
+00:05:04,304 --> 00:05:05,118
+Pythn three.
+
+125
+00:05:05,118 --> 00:05:06,406
+A missing letter o.
+
+126
+00:05:07,356 --> 00:05:13,948
+Check the real path before you edit. Type: ls /usr/bin/python3.
+
+127
+00:05:14,498 --> 00:05:15,479
+It exists.
+
+128
+00:05:15,479 --> 00:05:16,852
+Fix one thing,
+
+129
+00:05:16,852 --> 00:05:18,225
+with a backup.
+
+130
+00:05:18,225 --> 00:05:21,952
+Type: sed -i.bak and the substitution,
+
+131
+00:05:21,952 --> 00:05:23,620
+then web.service.
+
+132
+00:05:23,620 --> 00:05:29,602
+Dash i dot bak keeps the original as web dot service dot bak.
+
+133
+00:05:30,152 --> 00:05:36,296
+Verify. Run the same check again. Type: systemd-analyze verify web.service.
+
+134
+00:05:36,846 --> 00:05:37,500
+Silence.
+
+135
+00:05:37,500 --> 00:05:38,318
+No errors.
+
+136
+00:05:38,318 --> 00:05:39,544
+With this tool,
+
+137
+00:05:39,544 --> 00:05:41,097
+silence is success.
+
+138
+00:05:41,097 --> 00:05:41,506
+Last,
+
+139
+00:05:41,506 --> 00:05:43,877
+see exactly what you changed.
+
+140
+00:05:43,877 --> 00:05:47,065
+Type: diff web.service.bak web.service.
+
+141
+00:05:47,915 --> 00:05:52,566
+One word changed, and you can prove it. That is how careful administrators work.
+
+142
+00:05:54,616 --> 00:05:59,565
+On a live system, with system D running, you add a few more tools to the same method.
+
+143
+00:06:00,115 --> 00:06:05,214
+Systemctl status shows whether a service is running, and its last log lines.
+
+144
+00:06:05,764 --> 00:06:10,351
+Journalctl dash u, then the service name, shows that service's own log.
+
+145
+00:06:10,901 --> 00:06:16,682
+After you edit a unit file, run systemctl daemon dash reload, so system D reads it again.
+
+146
+00:06:17,232 --> 00:06:21,541
+Then restart the service, and run status again to verify.
+
+147
+00:06:22,091 --> 00:06:22,965
+Same method.
+
+148
+00:06:22,965 --> 00:06:23,548
+Symptom,
+
+149
+00:06:23,548 --> 00:06:23,985
+check,
+
+150
+00:06:23,985 --> 00:06:24,276
+fix,
+
+151
+00:06:24,276 --> 00:06:24,786
+verify.
+
+152
+00:06:24,786 --> 00:06:27,262
+These screens are an illustration,
+
+153
+00:06:27,262 --> 00:06:28,427
+not a recording.
+
+154
+00:06:30,477 --> 00:06:31,800
+Four myths to clear up.
+
+155
+00:06:32,350 --> 00:06:34,661
+Myth one: a reboot fixes everything.
+
+156
+00:06:34,661 --> 00:06:34,854
+No.
+
+157
+00:06:34,854 --> 00:06:36,074
+It hides the cause,
+
+158
+00:06:36,074 --> 00:06:37,294
+wipes the evidence,
+
+159
+00:06:37,294 --> 00:06:38,899
+and the fault comes back.
+
+160
+00:06:39,449 --> 00:06:43,202
+Myth two: chmod seven seven seven fixes permissions.
+
+161
+00:06:43,202 --> 00:06:43,780
+It does,
+
+162
+00:06:43,780 --> 00:06:45,728
+by removing all protection.
+
+163
+00:06:45,728 --> 00:06:48,110
+Add only the bit that is missing.
+
+164
+00:06:48,660 --> 00:06:49,964
+Myth three: disk full,
+
+165
+00:06:49,964 --> 00:06:51,385
+so delete something big.
+
+166
+00:06:51,385 --> 00:06:52,096
+Check first.
+
+167
+00:06:52,096 --> 00:06:54,762
+The biggest file may be the one that matters.
+
+168
+00:06:55,312 --> 00:06:57,844
+Myth four: keep restarting until it works.
+
+169
+00:06:57,844 --> 00:07:00,317
+A restart without a fix just fails again.
+
+170
+00:07:00,317 --> 00:07:01,221
+Read the error.
+
+171
+00:07:01,771 --> 00:07:04,502
+Read it. Check it. Fix one thing. Verify.
+
+172
+00:07:06,552 --> 00:07:08,877
+Here is how you check your own understanding.
+
+173
+00:07:09,427 --> 00:07:11,198
+Name the four steps of the method.
+
+174
+00:07:11,748 --> 00:07:15,588
+Read a file mode with ls dash l, and fix it with chmod.
+
+175
+00:07:16,138 --> 00:07:19,253
+Find a full disk with df, and what fills it with du.
+
+176
+00:07:19,803 --> 00:07:23,877
+Tell connection refused from timed out, and check listeners with ss.
+
+177
+00:07:24,427 --> 00:07:29,654
+Verify a unit file with systemd-analyze, and name the status and journal commands.
+
+178
+00:07:30,204 --> 00:07:33,425
+Verify after every fix, and back up before you edit.
+
+179
+00:07:33,975 --> 00:07:35,597
+To pass, you need all six.
+
+180
+00:07:37,647 --> 00:07:38,274
+Your turn,
+
+181
+00:07:38,274 --> 00:07:40,031
+in your own virtual machine.
+
+182
+00:07:40,031 --> 00:07:42,478
+Break things only on a machine you own,
+
+183
+00:07:42,478 --> 00:07:44,047
+and keep notes as you go.
+
+184
+00:07:44,597 --> 00:07:49,952
+One: make a script, take away its execute bit, watch it fail, then fix it with chmod.
+
+185
+00:07:50,502 --> 00:07:55,366
+Two: fill a small loop disk image, find the culprit with D U, and free the space.
+
+186
+00:07:55,916 --> 00:08:00,652
+Three: start a web server, stop it, read connection refused, and bring it back.
+
+187
+00:08:01,202 --> 00:08:06,471
+Four: put a typo in a unit file, and catch it with systemd dash analyze verify.
+
+188
+00:08:07,021 --> 00:08:09,386
+Five: on a machine running system D,
+
+189
+00:08:09,386 --> 00:08:11,752
+make a real service fail on purpose.
+
+190
+00:08:11,752 --> 00:08:13,592
+Read status and the journal.
+
+191
+00:08:14,142 --> 00:08:19,667
+Six: for each fault, write four lines in a notes file: symptom, check, fix, verify.
+
+192
+00:08:20,217 --> 00:08:23,524
+Mark yourself on the rubric. Pause the video, and do it now.
+
+193
+00:08:39,074 --> 00:08:39,949
+Quick check.
+
+194
+00:08:40,499 --> 00:08:42,888
+Which command shows what is using disk space?
+
+195
+00:08:43,438 --> 00:08:45,358
+What does connection refused tell you?
+
+196
+00:08:45,908 --> 00:08:48,340
+Which tool checks a unit file for mistakes?
+
+197
+00:08:48,890 --> 00:08:50,639
+What do you do after every fix?
+
+198
+00:08:51,189 --> 00:08:57,760
+Objective covered: MC04-O10.
+
+199
+00:08:58,310 --> 00:09:00,379
+Pause the video, and answer out loud.
+
+200
+00:09:10,929 --> 00:09:14,513
+Next lesson: the Linux administration mastery scenario.
+
+201
+00:09:15,063 --> 00:09:18,391
+If this helped, like, share and subscribe, so you do not miss it.

@@ -1,0 +1,27 @@
+Lesson 35 of the DevOps Engineering Bootcamp, the tenth lesson of the Linux administration masterclass. Things break, and an administrator is the person who finds the cause and fixes it calmly. You learn a four step method (read the symptom, check, fix one thing, verify) and use it on four faults: a script that fails with permission denied (ls -l and chmod), a full disk (df and du), a service nobody is listening to (nc and ss) and a broken service file (systemd-analyze verify, sed with a backup, and diff). You also meet the live-system tools systemctl status, journalctl -u and daemon-reload, then finish with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Find the cause, fix it calmly
+0:28 The four step method
+1:03 Fault 1: permission denied
+1:55 Fault 2: disk full
+3:03 Fault 3: connection refused
+4:31 Fault 4: broken service file
+5:54 Live system tools
+6:30 Common myths
+7:06 Pass or fail rubric
+7:37 Your turn
+8:39 Quick check
+
+Objectives covered: MC04-O10
+
+Practice: work only in your own Ubuntu 24.04 virtual machine, break things only on a machine you own, and keep notes of symptom, check, fix and verify for every fault. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson35. The next lesson is the Linux administration mastery scenario.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, with each fault set up on purpose before recording. The full disk is a small loop disk image, and the web server in the connectivity fault is Python's built-in server standing in for a real service. In the recording environment systemd was not running as the main process, so the service fault checks the unit file offline with systemd-analyze verify instead of starting it; the systemctl and journalctl screen is labelled as an illustration, not a capture. Your output will differ in sizes, dates and process numbers. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/ArJrv4aabnM
+Next lesson: the Linux administration mastery scenario.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#linux #ubuntu #troubleshooting #linuxadmin #devopsbootcamp
