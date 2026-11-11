@@ -66,3 +66,19 @@ Lesson numbers continue after L25. One lesson per objective, then the mastery sc
 | L34 | MC04-O09 | Linux networking, SSH, firewall, security | Next lesson: diagnose and recover | Published (ArJrv4aabnM, 8:55, https://youtu.be/ArJrv4aabnM; every terminal segment is a real Ubuntu 24.04 recording on a private practice network: ip, ping, ss, SSH keys, sshd hardening, ufw) |
 | L35 | MC04-O10 | Diagnose and recover failed services, permissions, storage, connectivity | Next lesson: MC04 mastery scenario | Published (ukSEbfyFEPM, 9:20, https://youtu.be/ukSEbfyFEPM; real Ubuntu 24.04 recordings of permission denied, disk full, connection refused; broken unit file checked offline with systemd-analyze; systemctl/journalctl screen is a labelled illustration) |
 | L36 | MC04 mastery | Mastery scenario with lab info on screen | Next masterclass: MC05 Bash scripting | Published (nFPZviAM-yE, 7:23, https://youtu.be/nFPZviAM-yE; captions uploaded; lab36.sh run end to end: 4 FAIL, 4 PASS after fixes, clean removal; real Ubuntu 24.04 recordings of install, lab up/check, fault 1 fixed live and cleanup proof; getlab, scenario and report screens are labelled illustrations) |
+
+## MC05 Bash Scripting (9 objectives + mastery) - locked lesson order
+One lesson per objective, then the mastery scenario. Real Ubuntu 24.04 terminal, vim, demo + independent task + rubric.
+
+| Lesson | Objectives | Topic | "Next" line | Status |
+|---|---|---|---|---|
+| L37 | MC05-O01 | Shell execution, quoting, expansion, environment, exit status | Next lesson: variables, arguments, input | Built (9:17; five real Ubuntu 24.04 terminal demos: how a script runs, quoting, expansion, environment, exit status; four-step diagram labelled illustration), delivered, awaiting upload |
+| L38 | MC05-O02 | Variables, positional arguments, input, command substitution | Next lesson: conditions, loops, functions | Not started |
+| L39 | MC05-O03 | Conditions, tests, case, loops, functions | Next lesson: text processing | Not started |
+| L40 | MC05-O04 | grep, sed, awk, cut, sort, find | Next lesson: pipes, file descriptors, temp files | Not started |
+| L41 | MC05-O05 | Pipes, file descriptors, redirection, safe temp files | Next lesson: error handling and traps | Not started |
+| L42 | MC05-O06 | Error handling, traps, logging, exit codes | Next lesson: secrets and safe input | Not started |
+| L43 | MC05-O07 | Secrets, permissions, input validation, injection risks | Next lesson: idempotent scripts and ShellCheck | Not started |
+| L44 | MC05-O08 | Idempotent operational scripts, ShellCheck | Next lesson: deploy, health check, rollback script | Not started |
+| L45 | MC05-O09 | Deployment/health-check/rollback automation script | Next lesson: MC05 mastery scenario | Not started |
+| L46 | MC05 mastery | Mastery scenario with lab info on screen | Next masterclass: MC06 Python for DevOps | Not started |

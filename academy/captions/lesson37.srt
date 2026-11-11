@@ -1,0 +1,983 @@
+1
+00:00:00,500 --> 00:00:02,611
+A script is just commands in a file.
+
+2
+00:00:02,611 --> 00:00:04,077
+But before you write one,
+
+3
+00:00:04,077 --> 00:00:06,832
+you must understand how the shell reads a line,
+
+4
+00:00:06,832 --> 00:00:09,353
+because most script bugs start right there.
+
+5
+00:00:09,903 --> 00:00:10,316
+Today,
+
+6
+00:00:10,316 --> 00:00:11,072
+four ideas.
+
+7
+00:00:11,072 --> 00:00:12,310
+How a script runs.
+
+8
+00:00:12,310 --> 00:00:14,442
+How quoting protects your text.
+
+9
+00:00:14,442 --> 00:00:18,705
+How expansion changes your line before a command ever sees it.
+
+10
+00:00:18,705 --> 00:00:23,450
+And how every command reports success or failure with an exit status.
+
+11
+00:00:24,000 --> 00:00:28,075
+Every demo is a real recording on Ubuntu, so you can follow along.
+
+12
+00:00:30,125 --> 00:00:35,053
+First, the big picture. When you press Enter, the shell does not simply run your text.
+
+13
+00:00:35,603 --> 00:00:38,099
+Step one: it splits the line into words.
+
+14
+00:00:38,649 --> 00:00:40,122
+Step two: it expands.
+
+15
+00:00:40,122 --> 00:00:40,823
+Variables,
+
+16
+00:00:40,823 --> 00:00:42,366
+command substitutions,
+
+17
+00:00:42,366 --> 00:00:43,067
+wildcards,
+
+18
+00:00:43,067 --> 00:00:45,241
+and the tilde are all replaced.
+
+19
+00:00:45,791 --> 00:00:49,204
+Step three: it runs the command, with the expanded words.
+
+20
+00:00:49,754 --> 00:00:55,536
+Step four: the command finishes, and leaves an exit status. A number. Zero means success.
+
+21
+00:00:56,086 --> 00:01:01,248
+Keep this order in mind. Almost every strange result comes from step one or step two.
+
+22
+00:01:03,298 --> 00:01:05,377
+First: how a script runs.
+
+23
+00:01:05,377 --> 00:01:08,370
+A script is a text file of commands.
+
+24
+00:01:08,370 --> 00:01:09,367
+Here is one,
+
+25
+00:01:09,367 --> 00:01:10,864
+called hi dot S H.
+
+26
+00:01:10,864 --> 00:01:12,194
+Type: cat hi.sh.
+
+27
+00:01:12,744 --> 00:01:13,845
+The first line,
+
+28
+00:01:13,845 --> 00:01:14,211
+hash,
+
+29
+00:01:14,211 --> 00:01:14,578
+bang,
+
+30
+00:01:14,578 --> 00:01:16,119
+slash bin slash bash,
+
+31
+00:01:16,119 --> 00:01:17,733
+is called the shebang.
+
+32
+00:01:17,733 --> 00:01:20,742
+It names the program that reads the file.
+
+33
+00:01:20,742 --> 00:01:24,190
+Run the script by naming that program yourself.
+
+34
+00:01:24,190 --> 00:01:25,437
+Type: bash hi.sh.
+
+35
+00:01:25,987 --> 00:01:26,659
+It works.
+
+36
+00:01:26,659 --> 00:01:30,318
+Dollar zero holds the name the script was run as.
+
+37
+00:01:30,318 --> 00:01:31,811
+Now run it directly,
+
+38
+00:01:31,811 --> 00:01:33,678
+the way a real tool runs.
+
+39
+00:01:33,678 --> 00:01:35,694
+Type: dot slash hi dot S H.
+
+40
+00:01:36,244 --> 00:01:37,832
+Permission denied.
+
+41
+00:01:37,832 --> 00:01:42,507
+A file is not a program until it has the execute bit.
+
+42
+00:01:42,507 --> 00:01:44,095
+You know this fix.
+
+43
+00:01:44,095 --> 00:01:46,036
+Type: chmod u+x hi.sh.
+
+44
+00:01:46,586 --> 00:01:50,319
+Now run it again. Type: dot slash hi dot S H.
+
+45
+00:01:50,869 --> 00:01:51,429
+It runs,
+
+46
+00:01:51,429 --> 00:01:54,649
+and dollar zero now says dot slash hi dot S H.
+
+47
+00:01:54,649 --> 00:01:58,358
+The shebang told the system to hand the file to bash.
+
+48
+00:01:58,358 --> 00:01:59,688
+Two ways to run it,
+
+49
+00:01:59,688 --> 00:02:00,458
+one result,
+
+50
+00:02:00,458 --> 00:02:02,837
+as long as the file is executable.
+
+51
+00:02:04,887 --> 00:02:05,873
+Next: quoting.
+
+52
+00:02:05,873 --> 00:02:09,677
+Quotes tell the shell which characters are plain text.
+
+53
+00:02:09,677 --> 00:02:10,100
+First,
+
+54
+00:02:10,100 --> 00:02:12,001
+store a name in a variable.
+
+55
+00:02:12,001 --> 00:02:13,058
+Type: name=Sam.
+
+56
+00:02:13,058 --> 00:02:16,087
+There are no spaces around the equals sign.
+
+57
+00:02:16,637 --> 00:02:17,725
+Nothing printed,
+
+58
+00:02:17,725 --> 00:02:19,016
+and that is normal.
+
+59
+00:02:19,016 --> 00:02:21,871
+Now use the variable inside double quotes.
+
+60
+00:02:21,871 --> 00:02:22,618
+Type: echo,
+
+61
+00:02:22,618 --> 00:02:23,502
+double quote,
+
+62
+00:02:23,502 --> 00:02:24,521
+Hi dollar name,
+
+63
+00:02:24,521 --> 00:02:25,405
+double quote.
+
+64
+00:02:25,955 --> 00:02:28,669
+Double quotes let the variable expand.
+
+65
+00:02:28,669 --> 00:02:29,169
+Hi Sam.
+
+66
+00:02:29,169 --> 00:02:30,454
+Now single quotes.
+
+67
+00:02:30,454 --> 00:02:31,240
+Type: echo,
+
+68
+00:02:31,240 --> 00:02:32,169
+single quote,
+
+69
+00:02:32,169 --> 00:02:33,240
+Hi dollar name,
+
+70
+00:02:33,240 --> 00:02:34,168
+single quote.
+
+71
+00:02:34,718 --> 00:02:37,772
+Single quotes keep every character literal,
+
+72
+00:02:37,772 --> 00:02:39,548
+so the dollar sign stays.
+
+73
+00:02:39,548 --> 00:02:41,465
+Rule: double quotes expand,
+
+74
+00:02:41,465 --> 00:02:42,957
+single quotes do not.
+
+75
+00:02:42,957 --> 00:02:44,306
+Now a classic trap.
+
+76
+00:02:44,306 --> 00:02:45,514
+List this folder.
+
+77
+00:02:45,514 --> 00:02:46,153
+Type: ls.
+
+78
+00:02:46,703 --> 00:02:47,410
+One file,
+
+79
+00:02:47,410 --> 00:02:49,374
+with a space in its name.
+
+80
+00:02:49,374 --> 00:02:51,887
+Try to remove it without quotes.
+
+81
+00:02:51,887 --> 00:02:53,615
+Type: rm my notes.txt.
+
+82
+00:02:54,165 --> 00:02:54,937
+Two errors.
+
+83
+00:02:54,937 --> 00:02:55,989
+Without quotes,
+
+84
+00:02:55,989 --> 00:02:58,795
+the shell split the name into two words,
+
+85
+00:02:58,795 --> 00:03:02,022
+and rm looked for two files that do not exist.
+
+86
+00:03:02,022 --> 00:03:03,075
+Quote the name.
+
+87
+00:03:03,075 --> 00:03:03,706
+Type: rm,
+
+88
+00:03:03,706 --> 00:03:04,618
+double quote,
+
+89
+00:03:04,618 --> 00:03:05,881
+my notes dot text,
+
+90
+00:03:05,881 --> 00:03:06,793
+double quote,
+
+91
+00:03:06,793 --> 00:03:07,354
+and and,
+
+92
+00:03:07,354 --> 00:03:08,266
+echo removed.
+
+93
+00:03:08,816 --> 00:03:12,422
+Removed. Quote your variables and your file names, every time.
+
+94
+00:03:14,372 --> 00:03:15,330
+Now expansion.
+
+95
+00:03:15,330 --> 00:03:19,575
+The shell rewrites parts of your line before the command runs.
+
+96
+00:03:19,575 --> 00:03:21,013
+Start with the tilde.
+
+97
+00:03:21,013 --> 00:03:21,903
+Type: echo ~.
+
+98
+00:03:22,453 --> 00:03:24,795
+The tilde became your home folder.
+
+99
+00:03:24,795 --> 00:03:26,379
+Echo never saw a tilde.
+
+100
+00:03:26,379 --> 00:03:26,724
+Next,
+
+101
+00:03:26,724 --> 00:03:31,270
+command substitution: a dollar sign and brackets around a command.
+
+102
+00:03:31,270 --> 00:03:32,855
+The output replaces it.
+
+103
+00:03:32,855 --> 00:03:33,613
+Type: echo,
+
+104
+00:03:33,613 --> 00:03:34,508
+double quote,
+
+105
+00:03:34,508 --> 00:03:35,128
+today is,
+
+106
+00:03:35,128 --> 00:03:35,610
+dollar,
+
+107
+00:03:35,610 --> 00:03:36,162
+bracket,
+
+108
+00:03:36,162 --> 00:03:37,539
+date plus percent A,
+
+109
+00:03:37,539 --> 00:03:38,090
+bracket,
+
+110
+00:03:38,090 --> 00:03:38,986
+double quote.
+
+111
+00:03:39,536 --> 00:03:41,503
+The date command ran first,
+
+112
+00:03:41,503 --> 00:03:44,417
+and its output was pasted into the line.
+
+113
+00:03:44,417 --> 00:03:45,437
+Now wildcards.
+
+114
+00:03:45,437 --> 00:03:47,259
+Type: echo star dot text.
+
+115
+00:03:47,809 --> 00:03:52,480
+The shell expanded the star into the matching file names.
+
+116
+00:03:52,480 --> 00:03:55,430
+Echo just printed what it was given.
+
+117
+00:03:55,430 --> 00:03:56,331
+Now braces,
+
+118
+00:03:56,331 --> 00:03:57,888
+which build a list.
+
+119
+00:03:57,888 --> 00:03:59,609
+Type: echo file dash,
+
+120
+00:03:59,609 --> 00:04:00,264
+brace a,
+
+121
+00:04:00,264 --> 00:04:00,428
+b,
+
+122
+00:04:00,428 --> 00:04:00,592
+c,
+
+123
+00:04:00,592 --> 00:04:01,084
+brace,
+
+124
+00:04:01,084 --> 00:04:01,739
+dot log.
+
+125
+00:04:02,289 --> 00:04:03,933
+Braces made three words.
+
+126
+00:04:03,933 --> 00:04:05,372
+One more: arithmetic,
+
+127
+00:04:05,372 --> 00:04:07,701
+with a dollar and double brackets.
+
+128
+00:04:07,701 --> 00:04:08,454
+Type: echo,
+
+129
+00:04:08,454 --> 00:04:08,934
+dollar,
+
+130
+00:04:08,934 --> 00:04:09,961
+double bracket,
+
+131
+00:04:09,961 --> 00:04:11,057
+six times seven.
+
+132
+00:04:11,607 --> 00:04:12,258
+Forty two.
+
+133
+00:04:12,258 --> 00:04:12,844
+Remember,
+
+134
+00:04:12,844 --> 00:04:14,406
+expansion happens first,
+
+135
+00:04:14,406 --> 00:04:16,099
+and then the command runs.
+
+136
+00:04:16,099 --> 00:04:18,637
+If you want text kept exactly as typed,
+
+137
+00:04:18,637 --> 00:04:19,223
+quote it.
+
+138
+00:04:21,273 --> 00:04:21,635
+Next,
+
+139
+00:04:21,635 --> 00:04:22,792
+the environment.
+
+140
+00:04:22,792 --> 00:04:25,973
+Every program carries a set of named values.
+
+141
+00:04:25,973 --> 00:04:29,589
+A plain shell variable belongs only to this shell.
+
+142
+00:04:29,589 --> 00:04:31,108
+Type: GREETING=hello.
+
+143
+00:04:31,658 --> 00:04:33,194
+Now start a child shell,
+
+144
+00:04:33,194 --> 00:04:35,306
+and ask it to print the variable.
+
+145
+00:04:35,306 --> 00:04:36,458
+Type: bash dash c,
+
+146
+00:04:36,458 --> 00:04:38,634
+then the command in single quotes.
+
+147
+00:04:39,184 --> 00:04:39,584
+Empty.
+
+148
+00:04:39,584 --> 00:04:41,185
+The child cannot see it.
+
+149
+00:04:41,185 --> 00:04:43,854
+To share a variable with child programs,
+
+150
+00:04:43,854 --> 00:04:44,521
+export it.
+
+151
+00:04:44,521 --> 00:04:45,989
+Type: export GREETING.
+
+152
+00:04:46,539 --> 00:04:51,254
+Now run the same test again. Type: bash dash c, and the same command.
+
+153
+00:04:51,804 --> 00:04:53,638
+Now the child sees hello.
+
+154
+00:04:53,638 --> 00:04:56,500
+Exported variables are the environment,
+
+155
+00:04:56,500 --> 00:04:58,481
+passed down to every child.
+
+156
+00:04:58,481 --> 00:05:00,463
+One famous example is path.
+
+157
+00:05:00,463 --> 00:05:02,150
+Type: echo dollar PATH.
+
+158
+00:05:02,700 --> 00:05:03,571
+These folders,
+
+159
+00:05:03,571 --> 00:05:04,815
+separated by colons,
+
+160
+00:05:04,815 --> 00:05:07,241
+are where the shell looks for commands,
+
+161
+00:05:07,241 --> 00:05:07,800
+in order.
+
+162
+00:05:07,800 --> 00:05:09,977
+That is why a command can be found,
+
+163
+00:05:09,977 --> 00:05:10,786
+or not found.
+
+164
+00:05:12,836 --> 00:05:14,882
+Last idea: exit status.
+
+165
+00:05:14,882 --> 00:05:17,818
+Every command ends with a number.
+
+166
+00:05:17,818 --> 00:05:18,351
+First,
+
+167
+00:05:18,351 --> 00:05:20,219
+a command that works.
+
+168
+00:05:20,219 --> 00:05:22,265
+Type: ls /etc/hostname.
+
+169
+00:05:22,815 --> 00:05:24,415
+It printed the file name.
+
+170
+00:05:24,415 --> 00:05:25,375
+Did it succeed?
+
+171
+00:05:25,375 --> 00:05:28,639
+The shell keeps the answer in dollar question mark.
+
+172
+00:05:28,639 --> 00:05:30,687
+Type: echo dollar question mark.
+
+173
+00:05:31,237 --> 00:05:36,763
+Zero. Zero means success. Now a command that fails. Type: ls /nope.
+
+174
+00:05:37,313 --> 00:05:42,902
+An error message. But the number is the real signal. Type: echo dollar question mark.
+
+175
+00:05:43,452 --> 00:05:43,757
+Two.
+
+176
+00:05:43,757 --> 00:05:46,199
+Anything but zero means failure,
+
+177
+00:05:46,199 --> 00:05:48,259
+and the number can say why.
+
+178
+00:05:48,259 --> 00:05:50,548
+Scripts use this with and and,
+
+179
+00:05:50,548 --> 00:05:51,311
+and or or.
+
+180
+00:05:51,311 --> 00:05:54,973
+Type: grep dash q root slash E T C slash passwd,
+
+181
+00:05:54,973 --> 00:05:55,583
+and and,
+
+182
+00:05:55,583 --> 00:05:56,423
+echo found.
+
+183
+00:05:56,973 --> 00:05:57,426
+Found.
+
+184
+00:05:57,426 --> 00:06:02,115
+And and runs the next command only if the first one succeeded.
+
+185
+00:06:02,115 --> 00:06:03,325
+Now the reverse.
+
+186
+00:06:03,325 --> 00:06:04,686
+Type: grep dash q,
+
+187
+00:06:04,686 --> 00:06:05,064
+zzzz,
+
+188
+00:06:05,064 --> 00:06:06,123
+the same file,
+
+189
+00:06:06,123 --> 00:06:06,955
+then or or,
+
+190
+00:06:06,955 --> 00:06:07,938
+echo missing.
+
+191
+00:06:08,488 --> 00:06:09,012
+Missing.
+
+192
+00:06:09,012 --> 00:06:12,748
+Or or runs the next command only if the first one failed.
+
+193
+00:06:12,748 --> 00:06:13,796
+Zero is success,
+
+194
+00:06:13,796 --> 00:06:15,435
+anything else is failure.
+
+195
+00:06:15,435 --> 00:06:18,515
+Scripts decide what to do from this one number.
+
+196
+00:06:20,565 --> 00:06:21,888
+Four myths to clear up.
+
+197
+00:06:22,438 --> 00:06:25,113
+Myth one: a script must end in dot S H.
+
+198
+00:06:25,113 --> 00:06:25,319
+No.
+
+199
+00:06:25,319 --> 00:06:27,034
+The name does not matter.
+
+200
+00:06:27,034 --> 00:06:29,435
+The shebang and the execute bit do.
+
+201
+00:06:29,985 --> 00:06:33,108
+Myth two: single and double quotes are the same.
+
+202
+00:06:33,108 --> 00:06:33,303
+No.
+
+203
+00:06:33,303 --> 00:06:35,320
+Double quotes expand variables.
+
+204
+00:06:35,320 --> 00:06:37,793
+Single quotes keep everything literal.
+
+205
+00:06:38,343 --> 00:06:43,420
+Myth three: zero means false. In the shell it is the opposite. Zero means success.
+
+206
+00:06:43,970 --> 00:06:46,832
+Myth four: quotes are optional if it works today.
+
+207
+00:06:46,832 --> 00:06:49,635
+A file name with a space will break it tomorrow.
+
+208
+00:06:49,635 --> 00:06:50,861
+Quote your variables.
+
+209
+00:06:51,411 --> 00:06:54,078
+Quote it. Expand it. Check the exit status.
+
+210
+00:06:56,128 --> 00:07:00,693
+Here is how you check your own understanding. Six points, and you need all six.
+
+211
+00:07:01,243 --> 00:07:05,382
+Run a script two ways, with bash and directly, and say what the shebang does.
+
+212
+00:07:05,932 --> 00:07:08,705
+Say when to use single quotes, and when to use double.
+
+213
+00:07:09,255 --> 00:07:14,397
+Name four expansions: tilde, variables, command substitution, and wildcards.
+
+214
+00:07:14,947 --> 00:07:19,640
+Explain why a child does not see an unexported variable, and fix it with export.
+
+215
+00:07:20,190 --> 00:07:24,691
+Read an exit status with dollar question mark, and use and and, or or.
+
+216
+00:07:25,241 --> 00:07:28,164
+Quote a file name that has a space, and explain why.
+
+217
+00:07:28,714 --> 00:07:30,335
+To pass, you need all six.
+
+218
+00:07:32,385 --> 00:07:33,037
+Your turn,
+
+219
+00:07:33,037 --> 00:07:35,317
+in your own Ubuntu virtual machine.
+
+220
+00:07:35,317 --> 00:07:36,295
+Take your time,
+
+221
+00:07:36,295 --> 00:07:38,380
+and type every command yourself.
+
+222
+00:07:38,930 --> 00:07:41,699
+One: write a three line script with a shebang.
+
+223
+00:07:41,699 --> 00:07:42,723
+Run it with bash,
+
+224
+00:07:42,723 --> 00:07:45,372
+then make it executable and run it directly.
+
+225
+00:07:45,922 --> 00:07:48,563
+Two: create a file with a space in its name.
+
+226
+00:07:48,563 --> 00:07:50,484
+Try to remove it without quotes,
+
+227
+00:07:50,484 --> 00:07:51,384
+read the error,
+
+228
+00:07:51,384 --> 00:07:53,005
+then remove it with quotes.
+
+229
+00:07:53,555 --> 00:07:55,983
+Three: print a message with single quotes,
+
+230
+00:07:55,983 --> 00:07:57,660
+and again with double quotes,
+
+231
+00:07:57,660 --> 00:07:58,643
+using a variable.
+
+232
+00:07:58,643 --> 00:07:59,742
+Compare the output.
+
+233
+00:08:00,292 --> 00:08:03,472
+Four: use command substitution to print today's date,
+
+234
+00:08:03,472 --> 00:08:06,052
+and a brace list to print three file names.
+
+235
+00:08:06,602 --> 00:08:10,932
+Five: set a variable, test it in a child shell, export it, and test again.
+
+236
+00:08:11,482 --> 00:08:17,114
+Six: run one command that succeeds, and one that fails, and print the exit status of each.
+
+237
+00:08:17,664 --> 00:08:20,971
+Mark yourself on the rubric. Pause the video, and do it now.
+
+238
+00:08:36,521 --> 00:08:37,396
+Quick check.
+
+239
+00:08:37,946 --> 00:08:39,439
+What does the shebang line do?
+
+240
+00:08:39,989 --> 00:08:42,890
+Which quotes expand a variable, single or double?
+
+241
+00:08:43,440 --> 00:08:45,638
+What does an exit status of zero mean?
+
+242
+00:08:46,188 --> 00:08:47,937
+Why must you export a variable?
+
+243
+00:08:48,487 --> 00:08:54,183
+Objective covered: MC05-O01.
+
+244
+00:08:54,733 --> 00:08:56,802
+Pause the video, and answer out loud.
+
+245
+00:09:07,352 --> 00:09:11,832
+Next lesson: variables, arguments, input and command substitution.
+
+246
+00:09:12,382 --> 00:09:15,710
+If this helped, like, share and subscribe, so you do not miss it.

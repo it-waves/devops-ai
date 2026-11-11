@@ -1,0 +1,27 @@
+Lesson 37 of the DevOps Engineering Bootcamp, the first lesson of the Bash scripting masterclass. Before you write a script you must understand how the shell reads a line. You see the four steps (split into words, expand, run, exit status), then four real demos on Ubuntu: how a script runs (shebang, bash hi.sh, the execute bit and chmod), quoting (single quotes, double quotes and the space in a file name trap), expansion (tilde, command substitution, wildcards, braces and arithmetic) and the environment (a shell variable versus an exported one, and PATH). The last demo covers exit status with $?, && and ||. The lesson ends with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 How the shell reads a line
+0:30 The four steps
+1:03 How a script runs
+2:04 Quoting
+3:14 Expansion
+4:21 Environment variables
+5:12 Exit status
+6:20 Common myths
+6:56 Pass or fail rubric
+7:32 Your turn
+8:36 Quick check
+
+Objectives covered: MC05-O01
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson37. The next lesson covers variables, positional arguments, input and command substitution.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount setup on the recording computer. The four-step diagram is an illustration, not a capture. The day name in the date example and the PATH value will differ on your machine. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/nFPZviAM-yE
+Next lesson: variables, positional arguments, input and command substitution.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#bash #bashscripting #linux #ubuntu #devopsbootcamp
