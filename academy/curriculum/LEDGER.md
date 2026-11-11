@@ -46,3 +46,23 @@ Lesson numbers continue from MC01 (global numbering, L9-L16). One lesson per obj
 | L23 | MC03-O07 | Network boundaries: clients, servers, containers, cloud subnets | Published Public, youtu.be/QQujGd_dKY4 (Learning; captions, end screen, playlist; real 6-namespace lab + hand-built container network; real AWS console segment, account details blurred, resources deleted afterwards; thumbnail uses real frames) |
 | L24 | MC03-O08 | Diagnose DNS, port, firewall, TLS and routing failures in a lab | Next: MC03 mastery scenario (L25) | Published Public S8ZAIQ5Oz7I, captions on (Learning; real 3-namespace lab with 5 faults injected in advance; thumbnail uses real terminal frames) |
 | L25 | MC03 mastery | Mastery scenario: independently verifiable network diagnosis lab; document results, troubleshooting, cleanup | Next masterclass: MC04 Linux administration | Published Public sGqq-OVOHL0, captions on, end screen, playlist (6:22, Learning; real 3-namespace lab, 4 faults, checker script; first fault fixed live; report template; lab run end to end with evidence) |
+
+## MC02 mastery (catch-up) - DEFERRED by owner on 2026-11-10: "after the program we can come back to fix that"
+Scenario, lab (lab/lab26.sh, verified end to end) and script are built; sources in academy/deferred_mc02_mastery. Narration not yet generated. Resume after the whole program. Do not renumber it ahead of MC04.
+
+## MC04 Linux Administration (10 objectives + mastery) - locked lesson order
+Lesson numbers continue after L25. One lesson per objective, then the mastery scenario. Each lesson: live terminal, vim (not nano), demo + independent task + pass/fail rubric. The mastery lesson shows lab info on screen (repo, files, install, shortcuts).
+
+| Lesson | Objectives | Topic | "Next" line | Status |
+|---|---|---|---|---|
+| L26 | MC04-O01 | Shell, paths, filesystem hierarchy, system documentation | Next lesson: files and directories | Not started |
+| L27 | MC04-O02 | Create, inspect, copy, move, search, edit files (vim) | Next lesson: pipes, redirects, grep, find | Not started |
+| L28 | MC04-O03 | Pipes, redirects, grep, find, archives, text tools | Next lesson: users, permissions, SSH keys | Not started |
+| L29 | MC04-O04 | Users, groups, sudo, permissions, ownership, SSH keys | Next lesson: processes and signals | Not started |
+| L30 | MC04-O05 | Processes, signals, resource usage, service status | Next lesson: systemd, logs, cron | Not started |
+| L31 | MC04-O06 | systemd services, journal, boot, scheduled jobs | Next lesson: packages | Not started |
+| L32 | MC04-O07 | Install/update packages, repositories | Next lesson: disks | Not started |
+| L33 | MC04-O08 | Disks, filesystems, mounts, free space, expansion | Next lesson: networking and security | Not started |
+| L34 | MC04-O09 | Linux networking, SSH, firewall, security | Next lesson: diagnose and recover | Not started |
+| L35 | MC04-O10 | Diagnose and recover failed services, permissions, storage, connectivity | Next lesson: MC04 mastery scenario | Not started |
+| L36 | MC04 mastery | Mastery scenario with lab info on screen | Next masterclass: MC05 Bash scripting | Not started |

@@ -1,0 +1,17 @@
+Lesson 26 of the DevOps Engineering Bootcamp: the mastery scenario for the IT and computer fundamentals masterclass. A small shop server on your own Linux virtual machine is misbehaving, and a checker script says PASS or FAIL for four things: a runaway process, an oversized log folder, a missing setting and bad data behind the web request. You see the lab built, the first fault fixed live (a runaway process found with ps and stopped with kill), a tool belt of the commands from the whole masterclass, and how to keep four notes for every fault: the exact message, the cause and the command that proves it, the single change, and the proof afterwards. Then you fix the other three yourself, write the report from the template, and clean up with proof that nothing is left behind.
+
+Chapters
+CHAPTERS_HERE
+
+Objectives covered: MC02 mastery evidence (builds on MC02-O01 to MC02-O08)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab26.sh) and academy/lesson26 (INSTALL.txt and report_template.md). Download lab26.sh into your virtual machine, run chmod +x lab26.sh, then ./lab26.sh up, ./lab26.sh check and ./lab26.sh down. You need a Linux virtual machine (the one from Lesson 13), python3 and curl. No sudo is needed and everything lives in /tmp/lab26. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04. The lab was run end to end before this lesson: the four faults make all four checks fail, and one set of fixes makes all four pass. I fix only the first fault on screen, so the scenario is still yours to solve. The log folder holds a 150 MB file, so make sure /tmp has room. Typing is timed to the narration and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/sGqq-OVOHL0
+Next masterclass: MC04 Linux administration.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #linux #troubleshooting #devopsbootcamp

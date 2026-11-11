@@ -1,0 +1,7 @@
+Install the lab (a Linux virtual machine with python3 and curl; no sudo needed):
+  curl -LO https://raw.githubusercontent.com/it-waves/devops-ai/main/academy/lab/lab26.sh
+  chmod +x lab26.sh
+  ./lab26.sh up        # builds the shop server and breaks four things
+  ./lab26.sh check     # four FAIL lines at the start
+  ./lab26.sh down      # cleanup when you are finished (removes /tmp/lab26)
+Everything lives in /tmp/lab26. Fill in report_template.md as you go.
