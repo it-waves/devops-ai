@@ -32,8 +32,8 @@ def _lab(title, sub, first, badge_, steps):
     def f(C, D, dur):
         E = head(title, sub, C[first]); E.append(real(C[first] + 0.2, badge_, 1260, 286))
         E.append(Pop(card(1100, 640, ACC, '', [], 4), 100, 330, C[first]))
-        n = len(steps); gap = min(120, (1035 - 345) // n); fs_t, fs_s = (30, 25) if n <= 6 else (27, 23)
-        for i, (cid, t, sb, col) in enumerate(steps): E.append(Pop(card(560, gap - 12, col, t, [(sb, TXT)], fs_t, fs_s), 1260, 345 + i * gap, C[cid] + 0.2))
+        n = len(steps); gap = min(120, (1050 - 335) // n); fs_t, fs_s = (30, 25) if n <= 6 else (24, 20)
+        for i, (cid, t, sb, col) in enumerate(steps): E.append(Pop(card(560, gap - 6, col, t, [(sb, TXT)], fs_t, fs_s), 1260, 335 + i * gap, C[cid] + 0.2))
         return E
     return f
 def grid6(E, C, it, y0=330):
