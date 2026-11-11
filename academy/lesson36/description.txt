@@ -1,0 +1,28 @@
+Lesson 36 of the DevOps Engineering Bootcamp, the mastery scenario for the Linux administration masterclass. A tidy shop server has four things broken on purpose, and a checker script says PASS or FAIL for each: the report script runs, the data disk accepts a write, the service file verifies clean, and the shop page answers on port 8080. You see where to get the lab, the lab built and checked (four FAIL lines), and the first fault fixed live with four notes: the exact symptom, the cause and the command that proved it, the single change, and the proof afterwards. Then you fix the other three yourself, write the report from the template, and clean up with proof that nothing is left behind.
+
+Chapters
+0:00 Mastery evidence
+0:21 The scenario
+0:50 Get the lab
+1:49 Start the lab
+2:42 Four notes per fault
+3:01 Fault 1 live
+3:51 The report
+4:14 Your three faults
+4:50 Cleanup with proof
+5:33 Pass or fail rubric
+5:59 Your turn
+6:42 Quick check
+
+Objectives covered: MC04 mastery evidence (builds on MC04-O01 to MC04-O10)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab36.sh and shortcuts36.sh) and academy/lesson36 (INSTALL.txt and report_template.md). Install with: sudo install -m 755 lab36.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts36.sh (without it, use sudo lab36.sh up, check, down). You need an Ubuntu virtual machine with root, python3, iptables, curl and systemd-analyze. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount and network setup on the recording computer. The lab was run end to end before this lesson: the four faults make all four checks fail, one set of fixes makes all four pass, and lab down leaves nothing behind. I fix only the first fault on screen, so the scenario is still yours to solve. The service check uses systemd-analyze verify on the unit file, so it does not need a running systemd. The lab names and ports are invented, and lab is a short name I made for sudo lab36.sh. The on-screen guide, scenario and report screens are labelled illustrations, not captures. Typing is timed to the narration and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/ukSEbfyFEPM
+Next masterclass: MC05 Bash scripting.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#linux #ubuntu #linuxadmin #troubleshooting #devopsbootcamp

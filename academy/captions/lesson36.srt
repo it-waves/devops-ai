@@ -1,0 +1,567 @@
+1
+00:00:00,500 --> 00:00:05,577
+Mastery evidence. You have learned the Linux administration toolkit. Now you prove it.
+
+2
+00:00:06,127 --> 00:00:08,949
+Mastery means someone else could check your work.
+
+3
+00:00:08,949 --> 00:00:10,734
+So this lesson gives you a lab,
+
+4
+00:00:10,734 --> 00:00:12,635
+a checker that says pass or fail,
+
+5
+00:00:12,635 --> 00:00:14,938
+and a report that shows how you thought.
+
+6
+00:00:15,488 --> 00:00:19,648
+I will build the lab, fix the first fault live, and leave the other three to you.
+
+7
+00:00:21,698 --> 00:00:23,319
+Meet the tidy shop server.
+
+8
+00:00:23,319 --> 00:00:24,753
+It has a report script,
+
+9
+00:00:24,753 --> 00:00:25,501
+a data disk,
+
+10
+00:00:25,501 --> 00:00:26,374
+a web service,
+
+11
+00:00:26,374 --> 00:00:27,309
+and a firewall.
+
+12
+00:00:27,859 --> 00:00:32,936
+Four things are broken, on purpose. A checker prints pass or fail for four checks.
+
+13
+00:00:33,486 --> 00:00:35,299
+One: the report script runs.
+
+14
+00:00:35,849 --> 00:00:37,897
+Two: the data disk accepts a write.
+
+15
+00:00:38,447 --> 00:00:40,879
+Three: the service file verifies clean.
+
+16
+00:00:41,429 --> 00:00:44,309
+Four: the shop page answers on port 8080.
+
+17
+00:00:44,859 --> 00:00:48,209
+Your mission: four pass lines, with proof for every fix.
+
+18
+00:00:50,259 --> 00:00:54,462
+Before we start, here is where everything lives. It is also in the description.
+
+19
+00:00:55,012 --> 00:01:00,686
+The repository is github dot com, slash it dash waves, slash devops dash A I.
+
+20
+00:01:01,236 --> 00:01:03,674
+The lab is one file: lab36.sh,
+
+21
+00:01:03,674 --> 00:01:06,275
+in the academy slash lab folder.
+
+22
+00:01:06,275 --> 00:01:11,882
+Your report template and install notes are in academy slash lesson36.
+
+23
+00:01:12,432 --> 00:01:14,357
+Install it in three steps.
+
+24
+00:01:14,357 --> 00:01:15,913
+Clone the repository.
+
+25
+00:01:15,913 --> 00:01:17,468
+Go to the lab folder.
+
+26
+00:01:17,468 --> 00:01:21,690
+Install the script into slash usr slash local slash sbin.
+
+27
+00:01:22,240 --> 00:01:24,262
+Three commands run everything.
+
+28
+00:01:24,262 --> 00:01:26,081
+Lab up builds the problems.
+
+29
+00:01:26,081 --> 00:01:28,709
+Lab check prints pass or fail for each.
+
+30
+00:01:28,709 --> 00:01:30,326
+Lab down removes it all.
+
+31
+00:01:30,876 --> 00:01:37,574
+Lab is a short name. Source the shortcuts file, and it runs sudo lab36.sh for you.
+
+32
+00:01:38,124 --> 00:01:41,373
+You need an Ubuntu virtual machine with root,
+
+33
+00:01:41,373 --> 00:01:42,311
+python three,
+
+34
+00:01:42,311 --> 00:01:42,961
+iptables,
+
+35
+00:01:42,961 --> 00:01:43,322
+curl,
+
+36
+00:01:43,322 --> 00:01:44,838
+and system D analyze.
+
+37
+00:01:44,838 --> 00:01:47,148
+Run it only in your own machine.
+
+38
+00:01:49,498 --> 00:01:50,430
+Now for real.
+
+39
+00:01:50,430 --> 00:01:52,509
+I have cloned the repository,
+
+40
+00:01:52,509 --> 00:01:55,734
+and the lab files are in a folder called lab.
+
+41
+00:01:55,734 --> 00:01:56,666
+Type: cd lab.
+
+42
+00:01:57,216 --> 00:01:59,371
+List what is here. Type: ls.
+
+43
+00:01:59,921 --> 00:02:04,139
+The lab script and the shortcuts file.
+
+44
+00:02:04,139 --> 00:02:06,249
+Install the script.
+
+45
+00:02:06,249 --> 00:02:12,022
+Type: sudo install -m 755 lab36.sh /usr/local/sbin/.
+
+46
+00:02:12,022 --> 00:02:16,795
+Dash m seven five five makes it executable.
+
+47
+00:02:17,345 --> 00:02:22,017
+Load the short names. Type: source shortcuts36.sh.
+
+48
+00:02:22,567 --> 00:02:27,837
+Build the lab. Type: lab up. It takes a few seconds, because it builds a small disk.
+
+49
+00:02:32,387 --> 00:02:34,968
+Now ask the checker. Type: lab check.
+
+50
+00:02:36,518 --> 00:02:40,678
+Four FAIL lines. That is your starting point. Copy them into your report.
+
+51
+00:02:42,728 --> 00:02:44,477
+Keep four notes for every fault.
+
+52
+00:02:45,027 --> 00:02:47,993
+One: the symptom, in the exact words of the error.
+
+53
+00:02:48,543 --> 00:02:50,975
+Two: the cause, and the command that proved it.
+
+54
+00:02:51,525 --> 00:02:53,807
+Three: the fix. One change only.
+
+55
+00:02:54,357 --> 00:02:56,789
+Four: the proof, the output after the fix.
+
+56
+00:02:57,339 --> 00:02:59,494
+Notes turn a lucky fix into evidence.
+
+57
+00:03:01,544 --> 00:03:02,422
+Fault one,
+
+58
+00:03:02,422 --> 00:03:02,861
+live.
+
+59
+00:03:02,861 --> 00:03:07,074
+The checker says the report script does not run.
+
+60
+00:03:07,074 --> 00:03:09,882
+Run it the way the checker does.
+
+61
+00:03:09,882 --> 00:03:13,832
+Type the full path: /opt/lab36/bin/report.sh.
+
+62
+00:03:14,382 --> 00:03:15,255
+Note one,
+
+63
+00:03:15,255 --> 00:03:18,260
+the symptom: permission denied.
+
+64
+00:03:18,260 --> 00:03:19,229
+Now check,
+
+65
+00:03:19,229 --> 00:03:20,490
+do not guess.
+
+66
+00:03:20,490 --> 00:03:23,107
+Type: ls -l /opt/lab36/bin.
+
+67
+00:03:23,657 --> 00:03:24,256
+Note two,
+
+68
+00:03:24,256 --> 00:03:24,921
+the cause.
+
+69
+00:03:24,921 --> 00:03:26,716
+The mode has no x anywhere,
+
+70
+00:03:26,716 --> 00:03:28,777
+so nobody may execute the file.
+
+71
+00:03:28,777 --> 00:03:30,505
+This listing is the proof.
+
+72
+00:03:31,455 --> 00:03:36,469
+Note three, one change. Type: chmod u+x and the same path.
+
+73
+00:03:37,019 --> 00:03:39,408
+Note four, the proof. Run the script again.
+
+74
+00:03:39,958 --> 00:03:43,030
+It runs. Now ask the checker. Type: lab check.
+
+75
+00:03:43,580 --> 00:03:44,166
+One PASS,
+
+76
+00:03:44,166 --> 00:03:44,882
+three FAIL.
+
+77
+00:03:44,882 --> 00:03:45,858
+One fault down,
+
+78
+00:03:45,858 --> 00:03:46,575
+one change,
+
+79
+00:03:46,575 --> 00:03:47,291
+with proof.
+
+80
+00:03:47,291 --> 00:03:49,895
+Now it is your turn for the other three.
+
+81
+00:03:51,945 --> 00:03:55,721
+Your report has five parts. The template is in the lesson folder.
+
+82
+00:03:56,271 --> 00:03:58,404
+Setup: the checker output at the start.
+
+83
+00:03:58,954 --> 00:04:00,576
+Each fault, with its four notes.
+
+84
+00:04:01,126 --> 00:04:04,283
+The final checker output, all four lines saying pass.
+
+85
+00:04:04,833 --> 00:04:05,961
+Where you got stuck,
+
+86
+00:04:05,961 --> 00:04:07,146
+and what unstuck you.
+
+87
+00:04:07,146 --> 00:04:09,910
+Honest notes are worth more than a perfect story.
+
+88
+00:04:10,460 --> 00:04:12,530
+And the cleanup proof, which we do next.
+
+89
+00:04:14,480 --> 00:04:17,531
+Your three faults. No spoilers, only directions.
+
+90
+00:04:18,081 --> 00:04:21,297
+Check two says the data disk will not accept a write.
+
+91
+00:04:21,297 --> 00:04:22,572
+Read the exact error.
+
+92
+00:04:22,572 --> 00:04:24,635
+Then recall how you measure space,
+
+93
+00:04:24,635 --> 00:04:25,910
+and what is using it.
+
+94
+00:04:26,460 --> 00:04:29,679
+Check three says the service file does not verify.
+
+95
+00:04:29,679 --> 00:04:33,543
+System D analyze will tell you in plain words what is wrong.
+
+96
+00:04:34,093 --> 00:04:36,949
+Check four says the page does not answer.
+
+97
+00:04:36,949 --> 00:04:39,038
+Is anything listening on 8080?
+
+98
+00:04:39,038 --> 00:04:39,526
+If yes,
+
+99
+00:04:39,526 --> 00:04:41,407
+ask what stands in the way.
+
+100
+00:04:41,407 --> 00:04:43,287
+Look at the firewall rules.
+
+101
+00:04:43,837 --> 00:04:48,125
+Same method every time. Symptom, check, fix one thing, verify.
+
+102
+00:04:50,175 --> 00:04:53,567
+When you finish, clean up, and prove it. Type: lab down.
+
+103
+00:04:56,117 --> 00:04:59,147
+Proof one: is any lab disk still mounted?
+
+104
+00:04:59,147 --> 00:05:00,034
+Type: mount,
+
+105
+00:05:00,034 --> 00:05:00,403
+pipe,
+
+106
+00:05:00,403 --> 00:05:01,733
+grep dash c lab36,
+
+107
+00:05:01,733 --> 00:05:03,285
+to count the matches.
+
+108
+00:05:03,835 --> 00:05:10,086
+Zero. Proof two: is the web server gone? Type: pgrep -fc and the pattern, in quotes.
+
+109
+00:05:10,636 --> 00:05:11,107
+Zero.
+
+110
+00:05:11,107 --> 00:05:14,781
+Proof three: is the firewall rule gone?
+
+111
+00:05:14,781 --> 00:05:16,947
+Type: sudo iptables -S,
+
+112
+00:05:16,947 --> 00:05:17,418
+pipe,
+
+113
+00:05:17,418 --> 00:05:19,020
+grep dash c 8080.
+
+114
+00:05:19,570 --> 00:05:25,543
+Zero. Proof four: is the folder gone? Type: ls /opt/lab36.
+
+115
+00:05:26,093 --> 00:05:27,732
+No such file or directory.
+
+116
+00:05:27,732 --> 00:05:29,119
+Everything is removed.
+
+117
+00:05:29,119 --> 00:05:31,704
+Paste these four proofs into your report.
+
+118
+00:05:33,754 --> 00:05:37,679
+Here is how your work is judged. Six points, and you need all six.
+
+119
+00:05:38,229 --> 00:05:40,064
+The checker shows four pass lines.
+
+120
+00:05:40,614 --> 00:05:43,814
+Every fault has a symptom, a cause, a fix, and a proof.
+
+121
+00:05:44,364 --> 00:05:46,113
+You changed one thing at a time.
+
+122
+00:05:46,663 --> 00:05:49,479
+The report is complete, including where you got stuck.
+
+123
+00:05:50,029 --> 00:05:52,376
+The cleanup proof shows nothing left behind.
+
+124
+00:05:52,926 --> 00:05:55,315
+You ran it only in your own virtual machine.
+
+125
+00:05:55,865 --> 00:05:57,487
+To pass, you need all six.
+
+126
+00:05:59,537 --> 00:06:05,404
+Your turn, in your own Ubuntu virtual machine. Take your time. Mastery is slow and exact.
+
+127
+00:06:05,954 --> 00:06:08,727
+One: clone the repository and install the lab.
+
+128
+00:06:09,277 --> 00:06:12,093
+Two: run lab up, and save the checker output.
+
+129
+00:06:12,643 --> 00:06:15,864
+Three: fix the three remaining faults, with four notes each.
+
+130
+00:06:16,414 --> 00:06:18,526
+Four: write the report from the template.
+
+131
+00:06:19,076 --> 00:06:22,255
+Five: run the checker. All four lines must say pass.
+
+132
+00:06:22,805 --> 00:06:24,768
+Six: clean up, and paste the proof.
+
+133
+00:06:25,318 --> 00:06:27,152
+Pause the video, and begin now.
+
+134
+00:06:42,702 --> 00:06:43,577
+Quick check.
+
+135
+00:06:44,127 --> 00:06:46,217
+Which command counts what is still mounted?
+
+136
+00:06:46,767 --> 00:06:48,474
+What are the four notes for a fault?
+
+137
+00:06:49,024 --> 00:06:51,883
+How many changes do you make before you verify?
+
+138
+00:06:52,433 --> 00:06:53,990
+What proves your cleanup worked?
+
+139
+00:06:54,540 --> 00:07:02,775
+Mastery evidence covered: M C zero four, building on objectives one to ten.
+
+140
+00:07:03,325 --> 00:07:05,394
+Pause the video, and answer out loud.
+
+141
+00:07:15,944 --> 00:07:17,992
+Next masterclass: Bash scripting.
+
+142
+00:07:18,542 --> 00:07:21,870
+If this helped, like, share and subscribe, so you do not miss it.

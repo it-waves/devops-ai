@@ -1,0 +1,9 @@
+Install the lab (needs an Ubuntu virtual machine with root, python3, iptables, curl and systemd-analyze):
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab36.sh /usr/local/sbin/
+  source shortcuts36.sh   # gives you the short name lab used in the video
+  lab up                  # builds the four faults (a few seconds)
+  lab check               # four FAIL lines at the start; your goal is four PASS lines
+  lab down                # cleanup when finished
+Without the shortcut, use: sudo lab36.sh up | check | down
+Run it only in your own virtual machine. It creates /opt/lab36, /srv/lab36, /var/lib/lab36, a small loop disk, a web server on 127.0.0.1:8080 and one iptables rule, and lab down removes them all.
