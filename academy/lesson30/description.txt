@@ -1,0 +1,25 @@
+Lesson 30 of the DevOps Engineering Bootcamp, the fifth lesson of the Linux administration masterclass. A process is a running program, and on a server you must find, read and stop them. You list processes with ps and choose your own columns (PID, user, CPU, memory), start a job in the background, send the TERM signal with kill, find a runaway process by sorting on CPU, and learn why kill -9 comes last. You read uptime, nproc and free -h to judge how busy the machine is (load against CPU cores, and the available memory column), and you check whether a program is running with pgrep and its exit status. You finish with common myths, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 A server is never idle
+0:16 List processes
+0:57 Background jobs and signals
+2:04 Load and memory
+2:36 Is it running?
+3:10 Common myths
+3:40 Pass or fail rubric
+4:07 Your turn
+5:04 Quick check
+
+Objectives covered: MC04-O05
+
+Practice: work only in your own Ubuntu 24.04 virtual machine, and only stop programs you started yourself. Notes and files: github.com/it-waves/devops-ai, folder academy/lesson30. The next lesson covers systemd services, logs and scheduled jobs.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04. The recording runs in a standard-layout view of the filesystem with its own process list, so ps shows only the demo processes. The uptime, load average and memory numbers come from the recording computer, so yours will differ. The sleep and yes programs are harmless demo programs that I started and stopped myself. Typing is timed to the narration, and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/N9IYS05Ysao
+Next lesson: systemd services, logs and cron.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#linux #ubuntu #processes #devopsbootcamp
