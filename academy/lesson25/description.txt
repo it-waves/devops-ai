@@ -1,0 +1,27 @@
+Lesson 25 of the DevOps Engineering Bootcamp, the mastery scenario for the computer networking masterclass. A small shop service called cart runs behind a router. Four things are broken, and a checker script says PASS or FAIL for each: the name, ping, the plain web page and the secure web page. You see the lab built, the first fault fixed live (a router that is not forwarding packets), and how to keep four notes for every fault: the exact message, the cause and the command that proves it, the single change, and the proof afterwards. Then you fix the other three yourself, write the report from the template, and clean up with proof that nothing is left behind.
+
+Chapters
+0:00 Mastery evidence
+0:20 The scenario
+0:49 Start the lab
+1:17 Four notes per fault
+1:39 Fault 1 live: the route
+3:03 The report
+3:29 Your three faults
+4:02 Cleanup
+4:25 Pass or fail rubric
+4:58 Your turn
+5:45 Quick check
+
+Objectives covered: MC03 mastery evidence (builds on MC03-O01 to MC03-O08)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab25.sh, dns25.py, web25.py) and academy/lesson25 (INSTALL.txt and report_template.md). Install with: sudo install -m 755 lab25.sh dns25.py web25.py /usr/local/bin/ then run sudo lab25.sh up, sudo lab25.sh check and sudo lab25.sh down. You need Linux with root, python3, iproute2, iptables, dig, curl and openssl. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, in a lab of three network namespaces (a client, a router and a server) on one computer. The lab was run end to end before this lesson: the four faults make all four checks fail, and one set of fixes makes all four pass. I fix only the first fault on screen, so the scenario is still yours to solve. The names (lab.test) and 10.0.x.x addresses are invented, the certificate comes from a private "Lab Root CA", and "lab", "cl" and "rt" are short names I made for longer commands (lab runs the script with sudo, cl runs a command inside the client, rt inside the router). Typing is timed to the narration and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: https://youtu.be/S8ZAIQ5Oz7I
+Next masterclass: MC04 Linux administration.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #networking #troubleshooting #devopsbootcamp

@@ -34,14 +34,15 @@ up() {
 chk() { if eval "$2" >/dev/null 2>&1; then echo "PASS  $1"; else echo "FAIL  $1"; fi; }
 check() {
   C="ip netns exec client"
-  chk "1 name resolves (cart.lab.test)" "$C getent hosts cart.lab.test | grep -q 10.0.2.2"
+  NS=$(awk '/^nameserver/{print $2; exit}' /etc/netns/client/resolv.conf 2>/dev/null)
+  chk "1 name resolves (cart.lab.test)" "$C dig +short +time=1 +tries=1 @$NS cart.lab.test | grep -q 10.0.2.2"
   chk "2 server reachable (ping)" "$C ping -c 1 -W 1 10.0.2.2"
-  chk "3 http works (port 8080)" "$C env -i curl -s -m 3 http://cart.lab.test:8080 | grep -q cart"
-  chk "4 https works (trusting the lab CA)" "$C env -i curl -s -m 3 --cacert $D/ca.pem https://cart.lab.test:8443 | grep -q cart"
+  chk "3 http works (port 8080)" "$C env -i curl -s -m 2 http://cart.lab.test:8080 | grep -q cart"
+  chk "4 https works (trusting the lab CA)" "$C env -i curl -s -m 2 --cacert $D/ca.pem https://cart.lab.test:8443 | grep -q cart"
 }
 case "$1" in
  up) up;; down) down; echo "lab removed";; reset) up;; check) check;;
- restart-app) pkill -f "web25.py [0-9]*$"; ip netns exec srv sh -c "nohup python3 /usr/local/bin/web25.py $(cat $D/app.port) >/dev/null 2>&1 &"; sleep 1; echo "app restarted on port $(cat $D/app.port)";;
+ restart-app) pkill -f "web25.py [0-9]*$"; ip netns exec srv sh -c "nohup python3 /usr/local/bin/web25.py $(cat $D/app.port) >/dev/null 2>&1 &"; sleep 2; echo "app restarted on port $(cat $D/app.port)";;
  client) shift; ip netns exec client "$@";; router) shift; ip netns exec r1 "$@";; server) shift; ip netns exec srv "$@";;
  *) echo "usage: sudo $0 up|down|reset|check|restart-app|client CMD|router CMD|server CMD";;
 esac

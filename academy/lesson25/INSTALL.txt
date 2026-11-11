@@ -1,0 +1,7 @@
+Install the lab (needs Linux with root, python3, iproute2, iptables, dig, curl, openssl):
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab25.sh dns25.py web25.py /usr/local/bin/
+  sudo lab25.sh up        # wait about 10 seconds
+  sudo lab25.sh check     # four FAIL lines at the start
+  sudo lab25.sh down      # cleanup when finished
+Helpers: sudo lab25.sh client CMD | router CMD | server CMD  (run a command inside that machine)

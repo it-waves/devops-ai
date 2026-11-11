@@ -1,0 +1,447 @@
+1
+00:00:00,500 --> 00:00:03,359
+Every masterclass ends the same way. With proof.
+
+2
+00:00:03,909 --> 00:00:08,026
+Not a quiz. A broken network, and four checks that say pass or fail.
+
+3
+00:00:08,576 --> 00:00:13,077
+When the checks pass, anyone can see that you fixed it. That is mastery evidence.
+
+4
+00:00:13,627 --> 00:00:15,252
+Today you build the scenario,
+
+5
+00:00:15,252 --> 00:00:17,101
+fix the first fault live with me,
+
+6
+00:00:17,101 --> 00:00:18,726
+and learn how to document it.
+
+7
+00:00:20,776 --> 00:00:25,384
+Here is the scenario. A small shop service, called cart, runs on a server.
+
+8
+00:00:25,934 --> 00:00:28,430
+A client has to reach it, through one router.
+
+9
+00:00:28,980 --> 00:00:30,747
+Two addresses must work.
+
+10
+00:00:30,747 --> 00:00:33,398
+Plain H T T P on port eighty eighty,
+
+11
+00:00:33,398 --> 00:00:37,300
+and secure H T T P S on port eighty four forty three.
+
+12
+00:00:37,850 --> 00:00:41,370
+Four things are broken. I will not say which. The checker will.
+
+13
+00:00:41,920 --> 00:00:43,392
+You need a Linux machine,
+
+14
+00:00:43,392 --> 00:00:45,924
+the lab scripts from the course repository,
+
+15
+00:00:45,924 --> 00:00:47,573
+and an hour without rushing.
+
+16
+00:00:49,623 --> 00:00:51,049
+I already built the lab.
+
+17
+00:00:51,049 --> 00:00:52,119
+It makes a client,
+
+18
+00:00:52,119 --> 00:00:53,426
+a router and a server,
+
+19
+00:00:53,426 --> 00:00:54,792
+and breaks four things.
+
+20
+00:00:54,792 --> 00:00:56,040
+It takes ten seconds,
+
+21
+00:00:56,040 --> 00:00:58,476
+and you will run it yourself in a moment.
+
+22
+00:00:59,026 --> 00:01:04,232
+Now ask the checker. Type: lab check. Lab is my short name for the lab script.
+
+23
+00:01:09,782 --> 00:01:10,535
+Four checks,
+
+24
+00:01:10,535 --> 00:01:11,226
+four fails.
+
+25
+00:01:11,226 --> 00:01:12,985
+That is your starting point.
+
+26
+00:01:12,985 --> 00:01:15,435
+Every fix must turn a fail into a pass.
+
+27
+00:01:17,485 --> 00:01:21,453
+Before you touch anything, a rule. For every fault, you keep four notes.
+
+28
+00:01:22,003 --> 00:01:24,350
+One: the exact message, before the fix.
+
+29
+00:01:24,900 --> 00:01:27,396
+Two: the cause, and the command that proves it.
+
+30
+00:01:27,946 --> 00:01:29,631
+Three: the one change you made.
+
+31
+00:01:30,181 --> 00:01:32,037
+Four: the proof, after the fix.
+
+32
+00:01:32,587 --> 00:01:34,394
+Those four notes are your report.
+
+33
+00:01:34,394 --> 00:01:35,708
+They take a minute each,
+
+34
+00:01:35,708 --> 00:01:37,515
+and they turn luck into evidence.
+
+35
+00:01:39,565 --> 00:01:40,663
+Fault one,
+
+36
+00:01:40,663 --> 00:01:41,212
+live.
+
+37
+00:01:41,212 --> 00:01:43,739
+Check two failed: ping.
+
+38
+00:01:43,739 --> 00:01:45,935
+Start with evidence.
+
+39
+00:01:45,935 --> 00:01:49,560
+Type: cl ping -c 1 -W 1 10.0.2.2.
+
+40
+00:01:49,560 --> 00:01:53,624
+C L runs a command inside the client.
+
+41
+00:01:54,174 --> 00:01:54,764
+No reply,
+
+42
+00:01:54,764 --> 00:01:56,140
+and no error message.
+
+43
+00:01:56,140 --> 00:01:56,664
+Silence.
+
+44
+00:01:56,664 --> 00:01:58,171
+The client has a route,
+
+45
+00:01:58,171 --> 00:02:01,448
+so something on the way is not passing packets on.
+
+46
+00:02:01,998 --> 00:02:11,364
+Where does the path stop? Type: cl traceroute -n -w 1 -q 1 -m 3 10.0.2.2
+
+47
+00:02:11,494 --> 00:02:15,632
+Stars from the very first hop. The gateway is not forwarding traffic.
+
+48
+00:02:16,182 --> 00:02:22,988
+Ask the router. Type: rt sysctl net.ipv4.ip_forward
+
+49
+00:02:23,118 --> 00:02:26,147
+Zero. Forwarding is switched off. That is the cause.
+
+50
+00:02:26,697 --> 00:02:35,636
+One change only. Type: rt sysctl -w net.ipv4.ip_forward=1
+
+51
+00:02:35,766 --> 00:02:42,998
+Now the proof. Type: cl ping -c 1 -W 1 10.0.2.2
+
+52
+00:02:43,128 --> 00:02:47,202
+A reply. The server is reachable. Save this output in your report.
+
+53
+00:02:48,252 --> 00:02:50,834
+Run the checker again. Type: lab check
+
+54
+00:02:53,464 --> 00:02:54,691
+Check two is a pass.
+
+55
+00:02:54,691 --> 00:02:55,734
+Three still fail.
+
+56
+00:02:55,734 --> 00:02:58,435
+Notice that the name check is still failing,
+
+57
+00:02:58,435 --> 00:03:00,337
+and it needed the router first.
+
+58
+00:03:00,337 --> 00:03:01,933
+Fix the lower layer first.
+
+59
+00:03:03,983 --> 00:03:09,167
+Now the report. There is a template in the repository, with one section per fault.
+
+60
+00:03:09,717 --> 00:03:11,893
+Symptom: the exact message you saw.
+
+61
+00:03:12,443 --> 00:03:14,640
+Cause: what was wrong, in one sentence.
+
+62
+00:03:15,190 --> 00:03:17,622
+Fix: the single command or edit you made.
+
+63
+00:03:18,172 --> 00:03:20,050
+Proof: the output after the fix.
+
+64
+00:03:20,600 --> 00:03:24,589
+At the end, paste the full checker output, with all four lines passing.
+
+65
+00:03:25,139 --> 00:03:27,998
+Fill it in as you go, not at the end from memory.
+
+66
+00:03:30,048 --> 00:03:33,269
+Your turn begins where I stopped. Three checks still fail.
+
+67
+00:03:33,819 --> 00:03:36,955
+The name. The plain web page. The secure web page.
+
+68
+00:03:37,505 --> 00:03:38,900
+Each has its own clue,
+
+69
+00:03:38,900 --> 00:03:40,295
+just like last lesson.
+
+70
+00:03:40,295 --> 00:03:41,563
+Open the clue table,
+
+71
+00:03:41,563 --> 00:03:44,225
+and read the exact words of every message.
+
+72
+00:03:44,775 --> 00:03:47,975
+Fix one at a time, and run the checker after each fix.
+
+73
+00:03:48,525 --> 00:03:51,158
+The lab script has three helpers: client,
+
+74
+00:03:51,158 --> 00:03:52,314
+router and server.
+
+75
+00:03:52,314 --> 00:03:55,139
+Each one runs a command inside that machine.
+
+76
+00:03:55,689 --> 00:03:56,639
+If you are stuck,
+
+77
+00:03:56,639 --> 00:03:58,764
+ask which layer fails first: the name,
+
+78
+00:03:58,764 --> 00:03:59,323
+the route,
+
+79
+00:03:59,323 --> 00:03:59,826
+the port,
+
+80
+00:03:59,826 --> 00:04:00,553
+or the trust.
+
+81
+00:04:02,603 --> 00:04:07,680
+When you are done, clean up. A good engineer leaves nothing behind. Type: lab down
+
+82
+00:04:07,810 --> 00:04:13,293
+Lab removed. Now prove it. Type: ip netns list | wc -l
+
+83
+00:04:13,423 --> 00:04:15,450
+Zero network namespaces left.
+
+84
+00:04:15,999 --> 00:04:21,525
+And no servers running. Type: pgrep -fc web25.py
+
+85
+00:04:21,655 --> 00:04:24,258
+Zero. Put that proof at the end of your report.
+
+86
+00:04:26,308 --> 00:04:30,489
+Here is how your scenario is judged. Pass or fail, no opinions.
+
+87
+00:04:31,039 --> 00:04:33,087
+One: the checker shows four passes.
+
+88
+00:04:33,637 --> 00:04:37,755
+Two: your report has symptom, cause, fix and proof for every fault.
+
+89
+00:04:38,305 --> 00:04:42,251
+Three: you changed one thing at a time, and the report shows the order.
+
+90
+00:04:42,801 --> 00:04:46,961
+Four: the cleanup proof shows no namespaces and no servers left.
+
+91
+00:04:47,511 --> 00:04:50,583
+Miss one, and you are not done yet. Go back and fix it.
+
+92
+00:04:51,133 --> 00:04:53,421
+Also write down where you got stuck.
+
+93
+00:04:53,421 --> 00:04:54,693
+That is not failure.
+
+94
+00:04:54,693 --> 00:04:57,299
+It is the most useful part of the report.
+
+95
+00:04:59,349 --> 00:05:01,952
+Your turn. Do this in your own virtual machine.
+
+96
+00:05:02,502 --> 00:05:07,460
+One: copy the three lab files from the course repository into user local bin.
+
+97
+00:05:07,460 --> 00:05:09,456
+The link is in the description.
+
+98
+00:05:10,006 --> 00:05:14,102
+Two: run the lab script with sudo, and the word up. Wait ten seconds.
+
+99
+00:05:14,652 --> 00:05:17,468
+Three: run check, and save the four fail lines.
+
+100
+00:05:18,018 --> 00:05:21,304
+Four: fix all four faults, one at a time, with your notes.
+
+101
+00:05:21,854 --> 00:05:24,862
+Five: run check again, and save the four passes.
+
+102
+00:05:25,412 --> 00:05:28,526
+Six: clean up with lab down, and save that proof too.
+
+103
+00:05:29,076 --> 00:05:30,783
+Pause the video, and start now.
+
+104
+00:05:46,333 --> 00:05:47,208
+Quick check.
+
+105
+00:05:47,758 --> 00:05:49,251
+How many checks must pass?
+
+106
+00:05:49,801 --> 00:05:51,870
+Which four notes do you keep for each fault?
+
+107
+00:05:52,420 --> 00:05:53,807
+What does the cleanup prove?
+
+108
+00:05:54,357 --> 00:05:56,362
+Why did we fix the router before the name?
+
+109
+00:05:56,912 --> 00:05:59,920
+Mastery evidence for masterclass three is complete.
+
+110
+00:06:00,470 --> 00:06:02,540
+Pause the video, and answer out loud.
+
+111
+00:06:13,090 --> 00:06:17,207
+Next masterclass: M C zero four, Linux administration.
+
+112
+00:06:17,757 --> 00:06:21,085
+If this helped, like, share and subscribe, so you do not miss it.
