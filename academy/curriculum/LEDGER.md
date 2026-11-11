@@ -55,7 +55,7 @@ Lesson numbers continue after L25. One lesson per objective, then the mastery sc
 
 | Lesson | Objectives | Topic | "Next" line | Status |
 |---|---|---|---|---|
-| L26 | MC04-O01 | Shell, paths, filesystem hierarchy, system documentation | Next lesson: files and directories | UPLOAD TRUNCATED: first upload iXhsSfijDBc is only 4:06 of 8:36, set Private; waiting for the user to re-upload the full file (details, captions, end screen then redo; delete the old one) |
+| L26 | MC04-O01 | Shell, paths, filesystem hierarchy, system documentation | Next lesson: files and directories | Published Public yal878gZIRo (8:37), captions, end screen, playlist (Learning; real terminal in a standard-layout view of real dirs, sample files disclosed). First upload iXhsSfijDBc was truncated (4:06), set Private; user to discard it |
 | L27 | MC04-O02 | Create, inspect, copy, move, search, edit files (vim) | Next lesson: pipes, redirects, grep, find | Not started |
 | L28 | MC04-O03 | Pipes, redirects, grep, find, archives, text tools | Next lesson: users, permissions, SSH keys | Not started |
 | L29 | MC04-O04 | Users, groups, sudo, permissions, ownership, SSH keys | Next lesson: processes and signals | Not started |
