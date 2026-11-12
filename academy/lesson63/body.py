@@ -1,0 +1,97 @@
+
+RB = 'REAL RECORDING  ·  Ubuntu 24.04 on this computer'
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('y1', "You just broke something in Git. A bad edit, a wrong commit, a reset you regret. Most beginners panic here."),
+  c('y2', "Today you learn the undo toolbox: restore, revert, and reset, and how to choose the right one."),
+  c('y3', "And the safety net that almost never lets you lose work: the ref log."),
+  c('y4', "As always, there is a lab with a checker at the end."),
+ ]),
+ ('model', [
+  c('d1', "Git keeps your work in three places. The working folder, where you edit. The staging area, where you prepare the next commit. And the history, the commits themselves."),
+  c('d2', "Each undo command works on one of these places. First question: where is the mistake?"),
+  c('d3', "A mistake in a file you have not committed? Use git restore. It puts the file back."),
+  c('d4', "A mistake in a commit that is already shared with your team? Use git revert. It adds a new commit that cancels the old one. History stays honest."),
+  c('d5', "A mistake in commits that are only on your computer? Use git reset. It moves your branch back, and rewrites your private history."),
+  c('d6', "And if you ever lose a commit, the ref log remembers where your branch has been."),
+ ]),
+ ('restore', [
+  k('rs1', "Let us see it live. A small notes site, three commits. Go in. Type: C D, site."),
+  k('rs2', "Make a mistake: add a junk line to the page. Type: echo, quote, paragraph oops, quote, two arrows, index dot H T M L."),
+  k('rs3', "Check the status. Type: git status, dash S."),
+  c('rs4', "An M in the second column: modified, not staged. Git tells you how to undo it, but here is the command. Type: git restore, index dot H T M L.", "An M in the second column: modified, and not staged. Now undo it. Type: git restore, index dot H T M L."),
+  k('rs5', "Nothing printed, which is good. Check the status again. Type: git status, dash S."),
+  k('rs6', "Clean. Now a second mistake, staged this time. Add a draft line. Type: echo, quote, paragraph draft, quote, two arrows, index dot H T M L."),
+  k('rs7', "Stage it. Type: git add, index dot H T M L."),
+  k('rs8', "To take it out of the staging area, use restore with the staged flag. Type: git restore, dash dash staged, index dot H T M L."),
+  k('rs9', "Status again. Type: git status, dash S."),
+  c('rs10', "Now the M is in the second column again. The change left the staging area, but your edit is still in the file. Discard it too. Type: git restore, index dot H T M L.", "The M moved to the second column: unstaged, but your edit is still in the file. Discard it too. Type: git restore, index dot H T M L."),
+  k('rs11', "One more power: restore a file from an older commit. Type: git restore, dash dash source equals head tilde two, index dot H T M L."),
+  k('rs12', "The file now comes from two commits ago. See the difference. Type: git diff."),
+  c('rs13', "Careful: restore on a working file cannot be undone. Those edits were never committed, so Git has nothing to bring back."),
+ ]),
+ ('revert', [
+  k('rv1', "Now a bad commit that your team already has. Go in. Type: C D, site."),
+  k('rv2', "Look at the history. Type: git log, dash dash one line."),
+  c('rv3', "The last commit, Delete the ports note, was a mistake, and it is already shared. Do not rewrite shared history. Revert it. Type: git revert, dash dash no dash edit, head.", "The last commit, Delete the ports note, was a mistake, and it is shared. Do not rewrite shared history. Revert it. Type: git revert, dash dash no dash edit, head."),
+  k('rv4', "Look at the history again. Type: git log, dash dash one line."),
+  c('rv5', "The bad commit is still there, and a new commit cancels it. Everyone can see what happened, and nobody's copy breaks. Check the file. Type: cat index dot H T M L.", "The bad commit is still there, and a new commit cancels it. Nobody's copy breaks. Check the file. Type: cat index dot H T M L."),
+  c('rv6', "The ports line is back. Revert is the safe undo for shared history."),
+ ]),
+ ('reset', [
+  k('rt1', "Now commits that are only on your computer. Go in. Type: C D, site."),
+  k('rt2', "Look at the history. Type: git log, dash dash one line."),
+  c('rt3', "Two experiments, try a red title, and try a blue title. You want to undo the last commit, but keep the work. Type: git reset, dash dash soft, head tilde one.", "Two experiments: a red title, then a blue title. Undo the last commit, but keep the work. Type: git reset, dash dash soft, head tilde one."),
+  k('rt4', "Check the status. Type: git status, dash S."),
+  c('rt5', "The commit is gone, but the change is still staged, with an M in the first column. Soft keeps the staging area. Now the default mode. Type: git reset.", "The commit is gone, but the change is still staged. Soft keeps the staging area. Now the default mode, mixed. Type: git reset."),
+  k('rt6', "Status again. Type: git status, dash S."),
+  c('rt7', "Now unstaged too. Mixed keeps your edit in the file, only. The third mode is the dangerous one. Hard throws the work away. Type: git reset, dash dash hard, head tilde one.", "Now unstaged as well. Mixed keeps the edit in the file. The third mode is the dangerous one: hard throws work away. Type: git reset, dash dash hard, head tilde one."),
+  k('rt8', "Head is now at the older commit. Look at the history. Type: git log, dash dash one line."),
+  c('rt9', "Soft keeps staged changes. Mixed keeps files. Hard keeps nothing. And never reset commits that your team already has."),
+ ]),
+ ('reflog', [
+  k('rl1', "Now the safety net. Same repository, five commits. Go in. Type: C D, site."),
+  c('rl2', "Imagine a slip. You meant to go back one commit, and you went back two with a hard reset. Type: git reset, dash dash hard, head tilde two.", "Imagine a slip: a hard reset, two commits back. Type: git reset, dash dash hard, head tilde two."),
+  k('rl3', "Two commits vanished. Check the history. Type: git log, dash dash one line."),
+  c('rl4', "Do not panic. Git keeps a diary of where your head has been. Type: git reflog.", "Do not panic. Git keeps a diary of everywhere your head has been. Type: git reflog."),
+  c('rl5', "Each line is a move. Head at one is where you were just before the reset. Jump back to it. Type: git reset, dash dash hard, head at one.", "Each line is a move. Head at one is where you were just before the reset. Jump back. Type: git reset, dash dash hard, head at one."),
+  k('rl6', "Recovered. Check the history. Type: git log, dash dash one line."),
+  c('rl7', "All five commits are back. The ref log is local, and it keeps entries for about ninety days, so recover quickly. It only knows about commits, so uncommitted edits are not covered."),
+ ]),
+ ('task', [
+  c('t1', "Your task, in your own Ubuntu virtual machine."),
+  k('t2', "The lab is lab sixty-three dot S H, in the academy slash lab folder of git hub dot com, slash it dash waves, slash dev ops dash A I. Install it like before, then run lab up."),
+  c('t3', "It builds a repository with a messy situation: junk in a file, a bad commit that is already shared, and a commit that someone lost."),
+  c('t4', "One: discard the junk edit in start dot S H, and leave the working folder clean."),
+  c('t5', "Two: find the lost commit, Add retry setting, in the ref log, and bring it back."),
+  c('t6', "Three: revert the shared commit, Add debug flag. Do not rewrite history."),
+  c('t7', "Four: in answers dot text, write one number: how many commits are on main now."),
+  c('t8', "Then run lab check. Four pass lines. Restore, revert, reflog."),
+ ]),
+ ('rubric', [
+  c('rb1', "Six points, and you need all six."),
+  c('rb2', "The checker shows four pass lines."), c('rb3', "You reverted the shared commit instead of resetting it."),
+  c('rb4', "The lost commit is back, found through the ref log."), c('rb5', "You can say when to use restore, revert, and reset."),
+  c('rb6', "The number in answers dot text is correct."), c('rb7', "You ran lab down to clean up."), c('rb8', "To pass, you need all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine."),
+  c('z2', "One: install the lab, and run lab up."),
+  c('z3', "Two: restore the junk file."),
+  c('z4', "Three: find the lost commit in the ref log, and recover it."),
+  c('z5', "Four: revert the debug flag commit."),
+  c('z6', "Five: count the commits, write the number, and run lab check."),
+  c('z7', "Six: run lab down."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "Which command undoes an edit that is not committed?"), c('f13', "Why revert, and not reset, for a shared commit?"),
+  c('f14', "What is the difference between soft, mixed, and hard?"), c('f15', "How do you recover after a bad hard reset?"),
+  c('f16', "Objective covered: M C zero seven, objective seven, restore, revert, reset, and the ref log."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next: secrets, credentials, and repository access."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'y4': 0.5, 'd6': 0.5, 'rs13': 0.5, 'rv6': 0.5, 'rt9': 0.6, 'rl7': 0.6, 't8': 0.5, 'rb8': 0.5, 'z8': 14.0, 'f17': 10.0}
+CHAP = {'model': 'Which undo to use', 'restore': 'Restore files', 'revert': 'Revert a shared commit', 'reset': 'Reset: soft, mixed, hard', 'reflog': 'The reflog safety net', 'task': 'Your lab task', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

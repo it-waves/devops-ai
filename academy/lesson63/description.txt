@@ -1,0 +1,26 @@
+Lesson 63 of the DevOps Engineering Bootcamp, the seventh lesson of the Git and GitHub masterclass, from beginner to mastery. You learn how to undo mistakes in Git and how to choose the right tool: git restore for edits that are not committed (and for unstaging), git revert for a commit that is already shared, git reset for commits that exist only on your computer, and the reflog as the safety net when something goes wrong. Live on Ubuntu you see: git status -s, git restore, git restore --staged, git restore --source=HEAD~2, git revert --no-edit HEAD, git reset --soft, git reset (mixed) and git reset --hard, why you never reset shared history, and how git reflog and git reset --hard HEAD@{1} bring back a commit lost by a bad hard reset. The lab has a checker that says PASS or FAIL for four checks, a pass/fail rubric, and cleanup.
+
+Chapters
+0:00 Undo anything in Git
+0:23 Which undo to use
+1:08 Restore files
+2:43 Revert a shared commit
+3:23 Reset: soft, mixed, hard
+4:26 The reflog safety net
+5:17 Your lab task
+6:10 Pass or fail rubric
+6:34 Your turn
+7:13 Quick check
+
+Objectives covered: MC07-O07 restore, revert, reset and the reflog
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab63.sh and shortcuts63.sh) and academy/lesson63 (INSTALL.txt). Install with: sudo apt install -y git (if needed), then sudo install -m 755 lab63.sh /usr/local/sbin/ and run lab up, lab check and lab down after loading the short name with: source shortcuts63.sh (without it, use sudo lab63.sh up, check, down). You need an Ubuntu virtual machine with root and git. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Git 2.43, run in a private mount setup on the recording computer. The repository was prepared before recording so each segment starts from a known state; the commit hashes you see will differ from yours. The on-screen model, task and rubric screens are labelled illustrations, not captures. The lab was run end to end before this lesson: all four checks fail before the work, all four pass after a reference solution (two different valid solutions were tested), and lab down leaves nothing behind. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Git pull requests, reviews and protected branches https://youtu.be/JwolVMgWCkk
+Next lesson: secrets, credentials and repository access.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#git #github #devops #gitreset #gitrevert #devopsbootcamp

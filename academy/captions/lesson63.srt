@@ -1,0 +1,771 @@
+1
+00:00:00,500 --> 00:00:02,581
+You just broke something in Git.
+
+2
+00:00:02,581 --> 00:00:03,297
+A bad edit,
+
+3
+00:00:03,297 --> 00:00:04,272
+a wrong commit,
+
+4
+00:00:04,272 --> 00:00:05,508
+a reset you regret.
+
+5
+00:00:05,508 --> 00:00:07,199
+Most beginners panic here.
+
+6
+00:00:07,749 --> 00:00:10,437
+Today you learn the undo toolbox: restore,
+
+7
+00:00:10,437 --> 00:00:10,885
+revert,
+
+8
+00:00:10,885 --> 00:00:11,525
+and reset,
+
+9
+00:00:11,525 --> 00:00:13,573
+and how to choose the right one.
+
+10
+00:00:14,123 --> 00:00:18,005
+And the safety net that almost never lets you lose work: the ref log.
+
+11
+00:00:18,555 --> 00:00:21,371
+As always, there is a lab with a checker at the end.
+
+12
+00:00:23,421 --> 00:00:25,591
+Git keeps your work in three places.
+
+13
+00:00:25,591 --> 00:00:26,736
+The working folder,
+
+14
+00:00:26,736 --> 00:00:27,640
+where you edit.
+
+15
+00:00:27,640 --> 00:00:28,664
+The staging area,
+
+16
+00:00:28,664 --> 00:00:30,713
+where you prepare the next commit.
+
+17
+00:00:30,713 --> 00:00:31,678
+And the history,
+
+18
+00:00:31,678 --> 00:00:33,064
+the commits themselves.
+
+19
+00:00:33,614 --> 00:00:38,840
+Each undo command works on one of these places. First question: where is the mistake?
+
+20
+00:00:39,390 --> 00:00:44,404
+A mistake in a file you have not committed? Use git restore. It puts the file back.
+
+21
+00:00:44,954 --> 00:00:48,649
+A mistake in a commit that is already shared with your team?
+
+22
+00:00:48,649 --> 00:00:49,573
+Use git revert.
+
+23
+00:00:49,573 --> 00:00:52,407
+It adds a new commit that cancels the old one.
+
+24
+00:00:52,407 --> 00:00:53,700
+History stays honest.
+
+25
+00:00:54,250 --> 00:00:57,429
+A mistake in commits that are only on your computer?
+
+26
+00:00:57,429 --> 00:00:58,284
+Use git reset.
+
+27
+00:00:58,284 --> 00:00:59,874
+It moves your branch back,
+
+28
+00:00:59,874 --> 00:01:01,952
+and rewrites your private history.
+
+29
+00:01:02,502 --> 00:01:06,726
+And if you ever lose a commit, the ref log remembers where your branch has been.
+
+30
+00:01:08,776 --> 00:01:13,939
+Let us see it live. A small notes site, three commits. Go in. Type: CD, site.
+
+31
+00:01:14,489 --> 00:01:17,753
+Make a mistake: add a junk line to the page.
+
+32
+00:01:17,753 --> 00:01:18,569
+Type: echo,
+
+33
+00:01:18,569 --> 00:01:19,014
+quote,
+
+34
+00:01:19,014 --> 00:01:20,127
+paragraph oops,
+
+35
+00:01:20,127 --> 00:01:20,572
+quote,
+
+36
+00:01:20,572 --> 00:01:21,388
+two arrows,
+
+37
+00:01:21,388 --> 00:01:22,723
+index dot H T M L.
+
+38
+00:01:23,273 --> 00:01:26,431
+Check the status. Type: git status, dash S.
+
+39
+00:01:26,981 --> 00:01:29,064
+An M in the second column: modified,
+
+40
+00:01:29,064 --> 00:01:29,701
+not staged.
+
+41
+00:01:29,701 --> 00:01:31,380
+Git tells you how to undo it,
+
+42
+00:01:31,380 --> 00:01:32,769
+but here is the command.
+
+43
+00:01:32,769 --> 00:01:33,811
+Type: git restore,
+
+44
+00:01:33,811 --> 00:01:34,853
+index dot H T M L.
+
+45
+00:01:35,403 --> 00:01:40,565
+Nothing printed, which is good. Check the status again. Type: git status, dash S.
+
+46
+00:01:41,115 --> 00:01:41,581
+Clean.
+
+47
+00:01:41,581 --> 00:01:43,209
+Now a second mistake,
+
+48
+00:01:43,209 --> 00:01:44,528
+staged this time.
+
+49
+00:01:44,528 --> 00:01:45,847
+Add a draft line.
+
+50
+00:01:45,847 --> 00:01:46,700
+Type: echo,
+
+51
+00:01:46,700 --> 00:01:47,165
+quote,
+
+52
+00:01:47,165 --> 00:01:48,406
+paragraph draft,
+
+53
+00:01:48,406 --> 00:01:48,871
+quote,
+
+54
+00:01:48,871 --> 00:01:49,725
+two arrows,
+
+55
+00:01:49,725 --> 00:01:51,121
+index dot H T M L.
+
+56
+00:01:51,671 --> 00:01:55,063
+Stage it. Type: git add, index dot H T M L.
+
+57
+00:01:55,613 --> 00:01:58,161
+To take it out of the staging area,
+
+58
+00:01:58,161 --> 00:02:00,564
+use restore with the staged flag.
+
+59
+00:02:00,564 --> 00:02:01,875
+Type: git restore,
+
+60
+00:02:01,875 --> 00:02:03,113
+dash dash staged,
+
+61
+00:02:03,113 --> 00:02:04,423
+index dot H T M L.
+
+62
+00:02:04,973 --> 00:02:08,045
+Status again. Type: git status, dash S.
+
+63
+00:02:08,595 --> 00:02:10,978
+Now the M is in the second column again.
+
+64
+00:02:10,978 --> 00:02:12,944
+The change left the staging area,
+
+65
+00:02:12,944 --> 00:02:15,029
+but your edit is still in the file.
+
+66
+00:02:15,029 --> 00:02:15,923
+Discard it too.
+
+67
+00:02:15,923 --> 00:02:16,995
+Type: git restore,
+
+68
+00:02:16,995 --> 00:02:18,067
+index dot H T M L.
+
+69
+00:02:18,617 --> 00:02:22,434
+One more power: restore a file from an older commit.
+
+70
+00:02:22,434 --> 00:02:23,756
+Type: git restore,
+
+71
+00:02:23,756 --> 00:02:26,619
+dash dash source equals head tilde two,
+
+72
+00:02:26,619 --> 00:02:27,940
+index dot H T M L.
+
+73
+00:02:28,490 --> 00:02:33,162
+The file now comes from two commits ago. See the difference. Type: git diff.
+
+74
+00:02:33,712 --> 00:02:36,927
+Careful: restore on a working file cannot be undone.
+
+75
+00:02:36,927 --> 00:02:38,968
+Those edits were never committed,
+
+76
+00:02:38,968 --> 00:02:41,008
+so Git has nothing to bring back.
+
+77
+00:02:43,058 --> 00:02:47,581
+Now a bad commit that your team already has. Go in. Type: CD, site.
+
+78
+00:02:48,131 --> 00:02:51,885
+Look at the history. Type: git log, dash dash one line.
+
+79
+00:02:52,435 --> 00:02:53,451
+The last commit,
+
+80
+00:02:53,451 --> 00:02:54,847
+Delete the ports note,
+
+81
+00:02:54,847 --> 00:02:55,736
+was a mistake,
+
+82
+00:02:55,736 --> 00:02:57,323
+and it is already shared.
+
+83
+00:02:57,323 --> 00:02:59,227
+Do not rewrite shared history.
+
+84
+00:02:59,227 --> 00:02:59,862
+Revert it.
+
+85
+00:02:59,862 --> 00:03:00,941
+Type: git revert,
+
+86
+00:03:00,941 --> 00:03:02,401
+dash dash no dash edit,
+
+87
+00:03:02,401 --> 00:03:02,718
+head.
+
+88
+00:03:03,268 --> 00:03:07,300
+Look at the history again. Type: git log, dash dash one line.
+
+89
+00:03:07,850 --> 00:03:09,513
+The bad commit is still there,
+
+90
+00:03:09,513 --> 00:03:11,065
+and a new commit cancels it.
+
+91
+00:03:11,065 --> 00:03:12,784
+Everyone can see what happened,
+
+92
+00:03:12,784 --> 00:03:14,170
+and nobody's copy breaks.
+
+93
+00:03:14,170 --> 00:03:15,002
+Check the file.
+
+94
+00:03:15,002 --> 00:03:16,554
+Type: cat index dot H T M L.
+
+95
+00:03:17,104 --> 00:03:21,157
+The ports line is back. Revert is the safe undo for shared history.
+
+96
+00:03:23,207 --> 00:03:27,794
+Now commits that are only on your computer. Go in. Type: CD, site.
+
+97
+00:03:28,344 --> 00:03:32,098
+Look at the history. Type: git log, dash dash one line.
+
+98
+00:03:32,648 --> 00:03:33,613
+Two experiments,
+
+99
+00:03:33,613 --> 00:03:34,578
+try a red title,
+
+100
+00:03:34,578 --> 00:03:35,844
+and try a blue title.
+
+101
+00:03:35,844 --> 00:03:37,834
+You want to undo the last commit,
+
+102
+00:03:37,834 --> 00:03:38,920
+but keep the work.
+
+103
+00:03:38,920 --> 00:03:39,885
+Type: git reset,
+
+104
+00:03:39,885 --> 00:03:40,789
+dash dash soft,
+
+105
+00:03:40,789 --> 00:03:41,694
+head tilde one.
+
+106
+00:03:42,244 --> 00:03:45,401
+Check the status. Type: git status, dash S.
+
+107
+00:03:45,951 --> 00:03:47,019
+The commit is gone,
+
+108
+00:03:47,019 --> 00:03:48,761
+but the change is still staged,
+
+109
+00:03:48,761 --> 00:03:50,447
+with an M in the first column.
+
+110
+00:03:50,447 --> 00:03:52,021
+Soft keeps the staging area.
+
+111
+00:03:52,021 --> 00:03:53,201
+Now the default mode.
+
+112
+00:03:53,201 --> 00:03:54,100
+Type: git reset.
+
+113
+00:03:54,650 --> 00:03:57,722
+Status again. Type: git status, dash S.
+
+114
+00:03:58,272 --> 00:03:59,462
+Now unstaged too.
+
+115
+00:03:59,462 --> 00:04:01,842
+Mixed keeps your edit in the file,
+
+116
+00:04:01,842 --> 00:04:02,191
+only.
+
+117
+00:04:02,191 --> 00:04:04,711
+The third mode is the dangerous one.
+
+118
+00:04:04,711 --> 00:04:06,530
+Hard throws the work away.
+
+119
+00:04:06,530 --> 00:04:07,650
+Type: git reset,
+
+120
+00:04:07,650 --> 00:04:08,700
+dash dash hard,
+
+121
+00:04:08,700 --> 00:04:09,750
+head tilde one.
+
+122
+00:04:10,300 --> 00:04:16,017
+Head is now at the older commit. Look at the history. Type: git log, dash dash one line.
+
+123
+00:04:16,567 --> 00:04:18,314
+Soft keeps staged changes.
+
+124
+00:04:18,314 --> 00:04:19,523
+Mixed keeps files.
+
+125
+00:04:19,523 --> 00:04:20,799
+Hard keeps nothing.
+
+126
+00:04:20,799 --> 00:04:24,226
+And never reset commits that your team already has.
+
+127
+00:04:26,376 --> 00:04:31,859
+Now the safety net. Same repository, five commits. Go in. Type: CD, site.
+
+128
+00:04:32,409 --> 00:04:33,135
+Imagine a slip.
+
+129
+00:04:33,135 --> 00:04:34,685
+You meant to go back one commit,
+
+130
+00:04:34,685 --> 00:04:36,623
+and you went back two with a hard reset.
+
+131
+00:04:36,623 --> 00:04:37,398
+Type: git reset,
+
+132
+00:04:37,398 --> 00:04:38,125
+dash dash hard,
+
+133
+00:04:38,125 --> 00:04:38,851
+head tilde two.
+
+134
+00:04:39,401 --> 00:04:44,372
+Two commits vanished. Check the history. Type: git log, dash dash one line.
+
+135
+00:04:44,922 --> 00:04:50,149
+Do not panic. Git keeps a diary of where your head has been. Type: git reflog.
+
+136
+00:04:50,699 --> 00:04:51,988
+Each line is a move.
+
+137
+00:04:51,988 --> 00:04:55,342
+Head at one is where you were just before the reset.
+
+138
+00:04:55,342 --> 00:04:56,374
+Jump back to it.
+
+139
+00:04:56,374 --> 00:04:57,405
+Type: git reset,
+
+140
+00:04:57,405 --> 00:04:58,373
+dash dash hard,
+
+141
+00:04:58,373 --> 00:04:59,147
+head at one.
+
+142
+00:04:59,697 --> 00:05:03,921
+Recovered. Check the history. Type: git log, dash dash one line.
+
+143
+00:05:04,471 --> 00:05:06,138
+All five commits are back.
+
+144
+00:05:06,138 --> 00:05:07,484
+The ref log is local,
+
+145
+00:05:07,484 --> 00:05:10,242
+and it keeps entries for about ninety days,
+
+146
+00:05:10,242 --> 00:05:11,460
+so recover quickly.
+
+147
+00:05:11,460 --> 00:05:13,255
+It only knows about commits,
+
+148
+00:05:13,255 --> 00:05:15,628
+so uncommitted edits are not covered.
+
+149
+00:05:17,778 --> 00:05:20,551
+Your task, in your own Ubuntu virtual machine.
+
+150
+00:05:21,101 --> 00:05:23,652
+The lab is lab sixty-three dot S H,
+
+151
+00:05:23,652 --> 00:05:27,370
+in the academy slash lab folder of git hub dot com,
+
+152
+00:05:27,370 --> 00:05:28,828
+slash it dash waves,
+
+153
+00:05:28,828 --> 00:05:30,504
+slash dev ops dash A I.
+
+154
+00:05:30,504 --> 00:05:32,180
+Install it like before,
+
+155
+00:05:32,180 --> 00:05:33,347
+then run lab up.
+
+156
+00:05:33,897 --> 00:05:37,967
+It builds a repository with a messy situation: junk in a file,
+
+157
+00:05:37,967 --> 00:05:40,331
+a bad commit that is already shared,
+
+158
+00:05:40,331 --> 00:05:42,366
+and a commit that someone lost.
+
+159
+00:05:42,916 --> 00:05:47,887
+One: discard the junk edit in start dot S H, and leave the working folder clean.
+
+160
+00:05:48,437 --> 00:05:53,109
+Two: find the lost commit, Add retry setting, in the ref log, and bring it back.
+
+161
+00:05:53,659 --> 00:05:58,224
+Three: revert the shared commit, Add debug flag. Do not rewrite history.
+
+162
+00:05:58,774 --> 00:06:03,403
+Four: in answers dot text, write one number: how many commits are on main now.
+
+163
+00:06:03,953 --> 00:06:08,305
+Then run lab check. Four pass lines. Restore, revert, reflog.
+
+164
+00:06:10,355 --> 00:06:12,339
+Six points, and you need all six.
+
+165
+00:06:12,889 --> 00:06:14,724
+The checker shows four pass lines.
+
+166
+00:06:15,274 --> 00:06:18,196
+You reverted the shared commit instead of resetting it.
+
+167
+00:06:18,746 --> 00:06:21,477
+The lost commit is back, found through the ref log.
+
+168
+00:06:22,027 --> 00:06:25,312
+You can say when to use restore, revert, and reset.
+
+169
+00:06:25,862 --> 00:06:28,188
+The number in answers dot text is correct.
+
+170
+00:06:28,738 --> 00:06:30,380
+You ran lab down to clean up.
+
+171
+00:06:30,930 --> 00:06:32,552
+To pass, you need all six.
+
+172
+00:06:34,602 --> 00:06:37,439
+Your turn, in your own Ubuntu virtual machine.
+
+173
+00:06:37,989 --> 00:06:40,208
+One: install the lab, and run lab up.
+
+174
+00:06:40,758 --> 00:06:42,486
+Two: restore the junk file.
+
+175
+00:06:43,036 --> 00:06:46,492
+Three: find the lost commit in the ref log, and recover it.
+
+176
+00:06:47,042 --> 00:06:49,346
+Four: revert the debug flag commit.
+
+177
+00:06:49,896 --> 00:06:53,267
+Five: count the commits, write the number, and run lab check.
+
+178
+00:06:53,817 --> 00:06:55,289
+Six: run lab down.
+
+179
+00:06:55,839 --> 00:06:57,673
+Pause the video, and begin now.
+
+180
+00:07:13,223 --> 00:07:14,098
+Quick check.
+
+181
+00:07:14,648 --> 00:07:17,421
+Which command undoes an edit that is not committed?
+
+182
+00:07:17,971 --> 00:07:20,766
+Why revert, and not reset, for a shared commit?
+
+183
+00:07:21,316 --> 00:07:24,153
+What is the difference between soft, mixed, and hard?
+
+184
+00:07:24,703 --> 00:07:27,263
+How do you recover after a bad hard reset?
+
+185
+00:07:27,813 --> 00:07:30,481
+Objective covered: M C zero seven,
+
+186
+00:07:30,481 --> 00:07:31,736
+objective seven,
+
+187
+00:07:31,736 --> 00:07:32,364
+restore,
+
+188
+00:07:32,364 --> 00:07:32,913
+revert,
+
+189
+00:07:32,913 --> 00:07:33,384
+reset,
+
+190
+00:07:33,384 --> 00:07:34,640
+and the ref log.
+
+191
+00:07:35,190 --> 00:07:37,259
+Pause the video, and answer out loud.
+
+192
+00:07:47,809 --> 00:07:51,308
+Next: secrets, credentials, and repository access.
+
+193
+00:07:51,858 --> 00:07:55,186
+If this helped, like, share and subscribe, so you do not miss it.
