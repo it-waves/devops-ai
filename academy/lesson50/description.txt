@@ -1,0 +1,26 @@
+Lesson 50 of the DevOps Engineering Bootcamp, the fourth lesson of the Python for DevOps masterclass. You call a REST API from Python with the requests library, and you learn the three habits that make API calls safe: authentication, timeouts and pagination. Every demo is typed live on Ubuntu 24.04 against a small lab API that runs on the same computer: GET with a status code and r.json(), a 401 without a token and a 200 with an Authorization: Bearer header (the token comes from an environment variable), a request that gives up after one second with a Timeout error, and a loop that follows next_page across four pages and raises an error on a bad status. The lesson ends with a lab and checker, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 REST APIs from Python
+0:24 What a REST API is
+0:55 A first request
+1:56 Authentication with a token
+3:49 Timeouts
+4:52 Pagination
+5:26 Get the lab and task
+6:16 Pass or fail rubric
+6:44 Your turn
+7:29 Quick check
+
+Objectives covered: MC06-O04
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself, inside your virtual environment with pip install requests. Lab files: github.com/it-waves/devops-ai, folder academy/lesson50 (TASK.md, the lab API api06.py and the checker check50.sh). The token in the lab is a throwaway value published in the repository: never put a real token in code, on screen or in git. The next lesson covers exceptions, logging and retries.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Python 3.12.3 and requests, run in a private mount setup on the recording computer. The API is the lesson's own lab file api06.py, running locally on port 8081; it is not a public service. The two small example scripts (timeout.py and pages.py) were prepared before recording and shown with cat, and the requests package was installed in the virtual environment beforehand, so the pip install step is described, not shown. The what-is-a-REST-API diagram is an illustration, not a capture. Typing is timed to the narration, and the yellow highlights were added afterwards. The checker was tested with a reference solution and with failing files, but your own run of the lab is unverified until you do it.
+
+Previous lesson: https://youtu.be/2C4w8AgD_0Q
+Next lesson: exceptions, logging and retries.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#python #pythonfordevops #restapi #pythonrequests #devopsbootcamp

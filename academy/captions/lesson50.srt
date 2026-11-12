@@ -1,0 +1,843 @@
+1
+00:00:00,500 --> 00:00:03,060
+Today your Python talks to the outside world.
+
+2
+00:00:03,610 --> 00:00:05,427
+A REST API is how tools,
+
+3
+00:00:05,427 --> 00:00:08,909
+clouds and servers answer questions over HTTP.
+
+4
+00:00:08,909 --> 00:00:12,694
+Three habits make your calls safe: authentication,
+
+5
+00:00:12,694 --> 00:00:13,376
+timeouts,
+
+6
+00:00:13,376 --> 00:00:14,511
+and pagination.
+
+7
+00:00:15,061 --> 00:00:18,637
+Every demo is typed live on Ubuntu twenty-four oh four,
+
+8
+00:00:18,637 --> 00:00:21,952
+against a small lab API that runs on this computer.
+
+9
+00:00:24,002 --> 00:00:28,482
+A REST API is a web address that answers with data, usually JSON.
+
+10
+00:00:29,032 --> 00:00:34,771
+You ask with a method. GET reads data. POST creates data. And you get back a status code.
+
+11
+00:00:35,321 --> 00:00:36,928
+Two hundred means success.
+
+12
+00:00:36,928 --> 00:00:39,400
+Four oh one means you are not logged in.
+
+13
+00:00:39,400 --> 00:00:42,553
+Five hundred and up means the server has a problem.
+
+14
+00:00:43,103 --> 00:00:46,964
+Python's requests library turns this into three lines of code.
+
+15
+00:00:47,514 --> 00:00:50,965
+But real APIs need three habits: prove who you are,
+
+16
+00:00:50,965 --> 00:00:52,251
+never wait forever,
+
+17
+00:00:52,251 --> 00:00:53,807
+and ask for every page.
+
+18
+00:00:55,857 --> 00:01:00,380
+First, a simple call. Start Python. Type: python three, dash Q.
+
+19
+00:01:01,230 --> 00:01:03,171
+Import the requests library.
+
+20
+00:01:03,171 --> 00:01:06,222
+It is installed in this virtual environment,
+
+21
+00:01:06,222 --> 00:01:08,024
+with pip install requests.
+
+22
+00:01:08,024 --> 00:01:09,550
+Type: import requests.
+
+23
+00:01:10,100 --> 00:01:13,112
+Now call the health address of our lab API.
+
+24
+00:01:13,112 --> 00:01:14,583
+Always set a timeout.
+
+25
+00:01:14,583 --> 00:01:15,143
+Type: r,
+
+26
+00:01:15,143 --> 00:01:15,634
+equals,
+
+27
+00:01:15,634 --> 00:01:16,825
+requests dot get,
+
+28
+00:01:16,825 --> 00:01:17,735
+open bracket,
+
+29
+00:01:17,735 --> 00:01:19,276
+the address in quotes,
+
+30
+00:01:19,276 --> 00:01:23,900
+H T T P colon slash slash one two seven dot zero dot zero dot one,
+
+31
+00:01:23,900 --> 00:01:25,791
+colon eight zero eight one,
+
+32
+00:01:25,791 --> 00:01:26,702
+slash health,
+
+33
+00:01:26,702 --> 00:01:27,473
+then comma,
+
+34
+00:01:27,473 --> 00:01:28,874
+timeout equals five,
+
+35
+00:01:28,874 --> 00:01:29,854
+close bracket.
+
+36
+00:01:30,404 --> 00:01:31,536
+Nothing printed,
+
+37
+00:01:31,536 --> 00:01:33,376
+the answer is stored in r.
+
+38
+00:01:33,376 --> 00:01:35,074
+Ask for the status code.
+
+39
+00:01:35,074 --> 00:01:37,551
+Type: r dot status underscore code.
+
+40
+00:01:38,101 --> 00:01:43,114
+Two hundred, success. Now the data. Type: r dot jay son, open, close.
+
+41
+00:01:43,664 --> 00:01:49,275
+A Python dictionary, already decoded. Leave Python. Type: exit, open, close.
+
+42
+00:01:49,825 --> 00:01:54,454
+A status code, and JSON. Get, check, decode. That is the whole pattern.
+
+43
+00:01:56,504 --> 00:01:58,330
+Most API s need a token.
+
+44
+00:01:58,330 --> 00:02:01,221
+We keep it in an environment variable,
+
+45
+00:02:01,221 --> 00:02:02,590
+never in the code.
+
+46
+00:02:02,590 --> 00:02:08,600
+Type: export API underscore T O K E N equals lab dash token dash one two three.
+
+47
+00:02:09,150 --> 00:02:11,359
+That is a throwaway lab token,
+
+48
+00:02:11,359 --> 00:02:13,421
+published in the repository.
+
+49
+00:02:13,421 --> 00:02:16,219
+A real token is never typed on screen.
+
+50
+00:02:16,219 --> 00:02:17,177
+Start Python.
+
+51
+00:02:17,177 --> 00:02:18,576
+Type: python three,
+
+52
+00:02:18,576 --> 00:02:19,091
+dash Q.
+
+53
+00:02:19,941 --> 00:02:24,571
+Import O S and requests. Type: import O S, comma, requests.
+
+54
+00:02:25,121 --> 00:02:27,945
+Store the address of the servers list.
+
+55
+00:02:27,945 --> 00:02:28,837
+Type: U R L,
+
+56
+00:02:28,837 --> 00:02:29,357
+equals,
+
+57
+00:02:29,357 --> 00:02:30,992
+the address in quotes,
+
+58
+00:02:30,992 --> 00:02:35,897
+H T T P colon slash slash one two seven dot zero dot zero dot one,
+
+59
+00:02:35,897 --> 00:02:37,904
+colon eight zero eight one,
+
+60
+00:02:37,904 --> 00:02:38,945
+slash servers.
+
+61
+00:02:39,495 --> 00:02:39,950
+First,
+
+62
+00:02:39,950 --> 00:02:41,618
+call it with no token.
+
+63
+00:02:41,618 --> 00:02:43,362
+Type: requests dot get,
+
+64
+00:02:43,362 --> 00:02:44,348
+open bracket,
+
+65
+00:02:44,348 --> 00:02:44,803
+U R L,
+
+66
+00:02:44,803 --> 00:02:45,258
+comma,
+
+67
+00:02:45,258 --> 00:02:46,775
+timeout equals five,
+
+68
+00:02:46,775 --> 00:02:47,836
+close bracket,
+
+69
+00:02:47,836 --> 00:02:49,884
+dot status underscore code.
+
+70
+00:02:50,434 --> 00:02:52,387
+Four oh one: not authorized.
+
+71
+00:02:52,387 --> 00:02:53,991
+The server wants proof.
+
+72
+00:02:53,991 --> 00:02:57,548
+Build a header with the token from the environment.
+
+73
+00:02:57,548 --> 00:02:58,106
+Type: h,
+
+74
+00:02:58,106 --> 00:02:58,594
+equals,
+
+75
+00:02:58,594 --> 00:02:59,012
+brace,
+
+76
+00:02:59,012 --> 00:03:00,826
+quote Authorization quote,
+
+77
+00:03:00,826 --> 00:03:01,244
+colon,
+
+78
+00:03:01,244 --> 00:03:02,151
+quote Bearer,
+
+79
+00:03:02,151 --> 00:03:02,569
+space,
+
+80
+00:03:02,569 --> 00:03:02,988
+quote,
+
+81
+00:03:02,988 --> 00:03:03,337
+plus,
+
+82
+00:03:03,337 --> 00:03:04,452
+O S dot environ,
+
+83
+00:03:04,452 --> 00:03:05,499
+square bracket,
+
+84
+00:03:05,499 --> 00:03:08,079
+quote API underscore T O K E N quote,
+
+85
+00:03:08,079 --> 00:03:09,544
+close square bracket,
+
+86
+00:03:09,544 --> 00:03:10,381
+close brace.
+
+87
+00:03:10,931 --> 00:03:12,034
+Now call again,
+
+88
+00:03:12,034 --> 00:03:13,211
+with the header.
+
+89
+00:03:13,211 --> 00:03:14,903
+Type: requests dot get,
+
+90
+00:03:14,903 --> 00:03:15,859
+open bracket,
+
+91
+00:03:15,859 --> 00:03:16,300
+U R L,
+
+92
+00:03:16,300 --> 00:03:16,741
+comma,
+
+93
+00:03:16,741 --> 00:03:17,992
+headers equals h,
+
+94
+00:03:17,992 --> 00:03:18,433
+comma,
+
+95
+00:03:18,433 --> 00:03:19,904
+timeout equals five,
+
+96
+00:03:19,904 --> 00:03:20,934
+close bracket,
+
+97
+00:03:20,934 --> 00:03:22,920
+dot status underscore code.
+
+98
+00:03:23,470 --> 00:03:24,283
+Two hundred,
+
+99
+00:03:24,283 --> 00:03:24,960
+we are in.
+
+100
+00:03:24,960 --> 00:03:27,738
+How many servers does the API say it has?
+
+101
+00:03:27,738 --> 00:03:29,093
+Type: the same call,
+
+102
+00:03:29,093 --> 00:03:30,245
+then dot jay son,
+
+103
+00:03:30,245 --> 00:03:30,584
+open,
+
+104
+00:03:30,584 --> 00:03:30,990
+close,
+
+105
+00:03:30,990 --> 00:03:32,006
+square bracket,
+
+106
+00:03:32,006 --> 00:03:33,226
+quote total quote,
+
+107
+00:03:33,226 --> 00:03:34,649
+close square bracket.
+
+108
+00:03:35,199 --> 00:03:35,998
+Ten servers.
+
+109
+00:03:35,998 --> 00:03:39,128
+Authentication is a header named Authorization,
+
+110
+00:03:39,128 --> 00:03:40,526
+with the word Bearer,
+
+111
+00:03:40,526 --> 00:03:41,059
+a space,
+
+112
+00:03:41,059 --> 00:03:41,991
+and the token.
+
+113
+00:03:41,991 --> 00:03:44,456
+The token comes from the environment,
+
+114
+00:03:44,456 --> 00:03:47,785
+so it never sits in your code or your git history.
+
+115
+00:03:49,835 --> 00:03:50,214
+Next,
+
+116
+00:03:50,214 --> 00:03:50,897
+timeouts.
+
+117
+00:03:50,897 --> 00:03:51,808
+Without one,
+
+118
+00:03:51,808 --> 00:03:55,299
+your script can hang forever on a slow server.
+
+119
+00:03:55,299 --> 00:03:56,589
+Here is a script,
+
+120
+00:03:56,589 --> 00:03:57,803
+timeout dot P Y.
+
+121
+00:03:57,803 --> 00:03:59,776
+Type: cat timeout dot P Y.
+
+122
+00:04:00,326 --> 00:04:02,084
+It calls the slow address,
+
+123
+00:04:02,084 --> 00:04:04,383
+which answers after three seconds,
+
+124
+00:04:04,383 --> 00:04:05,803
+but we only wait one.
+
+125
+00:04:05,803 --> 00:04:08,170
+If that fails with a Timeout error,
+
+126
+00:04:08,170 --> 00:04:09,860
+we print a clear message.
+
+127
+00:04:09,860 --> 00:04:10,333
+Run it.
+
+128
+00:04:10,333 --> 00:04:11,618
+Type: python three,
+
+129
+00:04:11,618 --> 00:04:12,700
+timeout dot P Y.
+
+130
+00:04:16,750 --> 00:04:18,806
+It gave up after one second,
+
+131
+00:04:18,806 --> 00:04:20,201
+instead of hanging.
+
+132
+00:04:20,201 --> 00:04:21,891
+Now allow five seconds,
+
+133
+00:04:21,891 --> 00:04:22,552
+with sed.
+
+134
+00:04:22,552 --> 00:04:23,286
+Type: sed,
+
+135
+00:04:23,286 --> 00:04:23,800
+dash I,
+
+136
+00:04:23,800 --> 00:04:24,241
+quote,
+
+137
+00:04:24,241 --> 00:04:28,574
+S slash timeout equals one slash timeout equals five slash,
+
+138
+00:04:28,574 --> 00:04:29,015
+quote,
+
+139
+00:04:29,015 --> 00:04:30,190
+timeout dot P Y.
+
+140
+00:04:30,740 --> 00:04:31,523
+No output,
+
+141
+00:04:31,523 --> 00:04:33,872
+the file was changed in place.
+
+142
+00:04:33,872 --> 00:04:34,890
+Run it again.
+
+143
+00:04:34,890 --> 00:04:36,377
+Type: python three,
+
+144
+00:04:36,377 --> 00:04:37,630
+timeout dot P Y.
+
+145
+00:04:41,180 --> 00:04:42,722
+Now it waits long enough,
+
+146
+00:04:42,722 --> 00:04:44,326
+and prints ok two hundred.
+
+147
+00:04:44,326 --> 00:04:46,423
+The lesson: always pass a timeout,
+
+148
+00:04:46,423 --> 00:04:48,458
+pick a number that fits the call,
+
+149
+00:04:48,458 --> 00:04:50,247
+and handle the Timeout error.
+
+150
+00:04:52,297 --> 00:04:52,756
+Last,
+
+151
+00:04:52,756 --> 00:04:53,767
+pagination.
+
+152
+00:04:53,767 --> 00:04:57,350
+Real APIs return a few items at a time.
+
+153
+00:04:57,350 --> 00:04:59,372
+Here is pages dot P Y.
+
+154
+00:04:59,372 --> 00:05:01,577
+Type: cat pages dot P Y.
+
+155
+00:05:02,127 --> 00:05:03,696
+It starts at page one.
+
+156
+00:05:03,696 --> 00:05:05,479
+The loop asks for a page,
+
+157
+00:05:05,479 --> 00:05:08,332
+raises an error for any bad status code,
+
+158
+00:05:08,332 --> 00:05:09,687
+collects the names,
+
+159
+00:05:09,687 --> 00:05:13,824
+and follows next page until the server says there is none.
+
+160
+00:05:13,824 --> 00:05:14,323
+Run it.
+
+161
+00:05:14,323 --> 00:05:15,678
+Type: python three,
+
+162
+00:05:15,678 --> 00:05:16,676
+pages dot P Y.
+
+163
+00:05:17,226 --> 00:05:17,888
+Ten servers,
+
+164
+00:05:17,888 --> 00:05:19,265
+from four pages of three.
+
+165
+00:05:19,265 --> 00:05:22,461
+Without the loop you would have seen only the first three,
+
+166
+00:05:22,461 --> 00:05:24,885
+and your script would silently miss servers.
+
+167
+00:05:26,935 --> 00:05:28,020
+Here is your task,
+
+168
+00:05:28,020 --> 00:05:29,528
+with everything you need.
+
+169
+00:05:29,528 --> 00:05:31,457
+The files are in the repository,
+
+170
+00:05:31,457 --> 00:05:32,844
+and in the description.
+
+171
+00:05:33,394 --> 00:05:39,069
+The repository is git hub dot com, slash it dash waves, slash dev ops dash A I.
+
+172
+00:05:39,619 --> 00:05:44,350
+In the academy slash lesson fifty folder you will find the task file,
+
+173
+00:05:44,350 --> 00:05:45,172
+the lab API,
+
+174
+00:05:45,172 --> 00:05:46,269
+and the checker,
+
+175
+00:05:46,269 --> 00:05:47,640
+check fifty dot S H.
+
+176
+00:05:48,190 --> 00:05:49,483
+You write one file,
+
+177
+00:05:49,483 --> 00:05:50,435
+fetch dot P Y.
+
+178
+00:05:50,435 --> 00:05:53,156
+It reads the token from the environment,
+
+179
+00:05:53,156 --> 00:05:56,013
+calls the servers endpoint with a timeout,
+
+180
+00:05:56,013 --> 00:05:57,577
+and follows every page.
+
+181
+00:05:58,127 --> 00:06:00,845
+Then it prints two lines: how many servers,
+
+182
+00:06:00,845 --> 00:06:02,235
+and which are stopped.
+
+183
+00:06:02,235 --> 00:06:04,953
+The checker starts its own copy of the API,
+
+184
+00:06:04,953 --> 00:06:06,596
+and shows four pass lines.
+
+185
+00:06:07,146 --> 00:06:10,496
+Do not open the solution file until you have really tried.
+
+186
+00:06:11,046 --> 00:06:14,480
+Write your results in a report, with the commands and their output.
+
+187
+00:06:16,530 --> 00:06:20,455
+Here is how your work is judged. Six points, and you need all six.
+
+188
+00:06:21,005 --> 00:06:22,840
+The checker shows four pass lines.
+
+189
+00:06:23,390 --> 00:06:27,486
+The token comes from the environment, with a clear message when it is missing.
+
+190
+00:06:28,036 --> 00:06:29,508
+Every call has a timeout.
+
+191
+00:06:30,058 --> 00:06:32,895
+The status code is checked, with raise for status.
+
+192
+00:06:33,445 --> 00:06:36,048
+All pages are collected, not just the first.
+
+193
+00:06:36,598 --> 00:06:40,011
+The report is complete, and you worked in your own virtual machine.
+
+194
+00:06:40,561 --> 00:06:42,183
+To pass, you need all six.
+
+195
+00:06:44,233 --> 00:06:47,070
+Your turn, in your own Ubuntu virtual machine.
+
+196
+00:06:47,620 --> 00:06:53,167
+One: get the lesson folder, activate your virtual environment, and pip install requests.
+
+197
+00:06:53,717 --> 00:06:58,112
+Two: start the lab API in one terminal, and set your token in another.
+
+198
+00:06:58,662 --> 00:07:02,160
+Three: write fetch dot P Y, with the header and a timeout.
+
+199
+00:07:02,710 --> 00:07:05,932
+Four: loop over the pages until next page is none.
+
+200
+00:07:06,482 --> 00:07:08,466
+Five: print the two summary lines.
+
+201
+00:07:09,016 --> 00:07:11,490
+Six: run the checker, and write your report.
+
+202
+00:07:12,040 --> 00:07:13,875
+Pause the video, and begin now.
+
+203
+00:07:29,425 --> 00:07:30,300
+Quick check.
+
+204
+00:07:30,850 --> 00:07:32,727
+Which header carries a bearer token?
+
+205
+00:07:33,277 --> 00:07:35,752
+What happens to a request that has no timeout?
+
+206
+00:07:36,302 --> 00:07:38,030
+What does raise for status do?
+
+207
+00:07:38,580 --> 00:07:40,350
+How do you know there are more pages?
+
+208
+00:07:40,900 --> 00:07:48,879
+Objective covered: MC06-O04, REST APIs with authentication, timeouts, and pagination.
+
+209
+00:07:49,429 --> 00:07:51,498
+Pause the video, and answer out loud.
+
+210
+00:08:02,048 --> 00:08:05,078
+Next lesson: exceptions, logging, and retries.
+
+211
+00:08:05,628 --> 00:08:08,956
+If this helped, like, share and subscribe, so you do not miss it.
