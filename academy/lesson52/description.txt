@@ -1,0 +1,24 @@
+Lesson 52 of the DevOps Engineering Bootcamp, the sixth lesson of the Python for DevOps masterclass. You turn a script into a proper command line tool that a pipeline can trust: arguments read and checked by argparse, a result reported as an exit code (0 success, 1 failure, 2 wrong usage), and two output channels, standard out for results and standard error for problems. Every demo is typed live on Ubuntu 24.04: a 16-line port checker, its free -h help, an open port and a closed port with echo $? after each, a bad port value that argparse rejects with exit code 2, and the shell operators the redirect of standard error to /dev/null, && and || making decisions from the exit code alone. The lesson ends with a lab and checker, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Scripts that speak to the command line
+0:21 Arguments, exit codes, two channels
+1:09 argparse and exit codes
+2:59 Exit codes in the shell
+4:15 Get the lab and task
+5:08 Pass or fail rubric
+5:35 Your turn
+6:24 Quick check
+
+Objectives covered: MC06-O06
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself, inside your virtual environment with pip install requests. Lab files: github.com/it-waves/devops-ai, folder academy/lesson52 (TASK.md, the lab API api06.py and the checker check52.sh). The next lesson covers tests with pytest and mocks.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Python 3.12.3, run in a private mount setup on the recording computer. The lab API is the lesson's own file api06.py, running locally on port 8081; it is not a public service. The example script portcheck.py was prepared before recording and shown with cat. The overview cards are illustrations, not captures. Typing is timed to the narration, and the yellow highlights were added afterwards. The checker was tested with a reference solution and with failing files, but your own run of the lab is unverified until you do it.
+
+Previous lesson: https://youtu.be/NH2altszb-k
+Next lesson: tests with pytest and mocks.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#python #pythonfordevops #argparse #exitcodes #devopsbootcamp

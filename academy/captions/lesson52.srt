@@ -1,0 +1,823 @@
+1
+00:00:00,500 --> 00:00:03,081
+Today your scripts learn to speak to the command line.
+
+2
+00:00:03,631 --> 00:00:04,735
+Run by a person,
+
+3
+00:00:04,735 --> 00:00:06,667
+a script can explain itself.
+
+4
+00:00:06,667 --> 00:00:07,908
+Run by a pipeline,
+
+5
+00:00:07,908 --> 00:00:09,357
+it only has a number.
+
+6
+00:00:09,357 --> 00:00:13,910
+Three habits make a script a proper tool: arguments with argparse,
+
+7
+00:00:13,910 --> 00:00:14,669
+exit codes,
+
+8
+00:00:14,669 --> 00:00:16,325
+and two output channels.
+
+9
+00:00:16,875 --> 00:00:20,160
+Every demo is typed live on Ubuntu twenty-four oh four.
+
+10
+00:00:22,210 --> 00:00:24,744
+A script you run by hand can talk to you.
+
+11
+00:00:24,744 --> 00:00:27,217
+A script that runs in a pipeline cannot.
+
+12
+00:00:27,217 --> 00:00:29,566
+So it needs a clear way to take input,
+
+13
+00:00:29,566 --> 00:00:31,853
+and a clear way to report the result.
+
+14
+00:00:32,403 --> 00:00:34,569
+Input comes from the command line.
+
+15
+00:00:34,569 --> 00:00:36,736
+Arguments are what the tool needs,
+
+16
+00:00:36,736 --> 00:00:37,883
+flags are options.
+
+17
+00:00:37,883 --> 00:00:39,158
+Argparse reads them,
+
+18
+00:00:39,158 --> 00:00:40,369
+checks their types,
+
+19
+00:00:40,369 --> 00:00:42,472
+and even writes the help for you.
+
+20
+00:00:43,022 --> 00:00:44,914
+The result is the exit code.
+
+21
+00:00:44,914 --> 00:00:46,198
+Zero means success.
+
+22
+00:00:46,198 --> 00:00:48,090
+Anything else means failure.
+
+23
+00:00:48,090 --> 00:00:49,037
+By convention,
+
+24
+00:00:49,037 --> 00:00:50,185
+one is a failure,
+
+25
+00:00:50,185 --> 00:00:53,091
+and two means the command was used wrongly.
+
+26
+00:00:53,641 --> 00:00:55,460
+And output has two channels.
+
+27
+00:00:55,460 --> 00:00:57,343
+Standard out carries results.
+
+28
+00:00:57,343 --> 00:00:59,421
+Standard error carries problems.
+
+29
+00:00:59,421 --> 00:01:02,473
+A pipeline can keep one and show you the other.
+
+30
+00:01:03,023 --> 00:01:07,546
+The rule: arguments in, exit code out, and problems to standard error.
+
+31
+00:01:09,596 --> 00:01:11,206
+Let's build a real tool,
+
+32
+00:01:11,206 --> 00:01:13,554
+one you could drop into a pipeline.
+
+33
+00:01:13,554 --> 00:01:16,305
+It checks whether a network port is open.
+
+34
+00:01:16,305 --> 00:01:17,378
+Show the script.
+
+35
+00:01:17,378 --> 00:01:18,049
+Type: cat,
+
+36
+00:01:18,049 --> 00:01:19,324
+port check dot P Y.
+
+37
+00:01:20,174 --> 00:01:21,157
+Sixteen lines.
+
+38
+00:01:21,157 --> 00:01:23,966
+Argparse reads the command line: a host,
+
+39
+00:01:23,966 --> 00:01:26,003
+a port that must be a number,
+
+40
+00:01:26,003 --> 00:01:27,969
+and an optional dash Q flag.
+
+41
+00:01:27,969 --> 00:01:30,638
+The try and except decides the result,
+
+42
+00:01:30,638 --> 00:01:34,571
+and the number the script returns becomes the exit code.
+
+43
+00:01:34,571 --> 00:01:36,467
+Ask the tool how to use it.
+
+44
+00:01:36,467 --> 00:01:37,591
+Type: dot slash,
+
+45
+00:01:37,591 --> 00:01:38,925
+port check dot P Y,
+
+46
+00:01:38,925 --> 00:01:39,417
+dash H.
+
+47
+00:01:39,967 --> 00:01:41,349
+Free documentation,
+
+48
+00:01:41,349 --> 00:01:43,969
+written by argparse: the usage line,
+
+49
+00:01:43,969 --> 00:01:45,278
+the two arguments,
+
+50
+00:01:45,278 --> 00:01:46,879
+and the dash Q option.
+
+51
+00:01:46,879 --> 00:01:47,680
+Now use it,
+
+52
+00:01:47,680 --> 00:01:48,771
+on the lab API.
+
+53
+00:01:48,771 --> 00:01:49,935
+Type: dot slash,
+
+54
+00:01:49,935 --> 00:01:51,318
+port check dot P Y,
+
+55
+00:01:51,318 --> 00:01:52,118
+local host,
+
+56
+00:01:52,118 --> 00:01:53,428
+eighty eighty-one.
+
+57
+00:01:53,978 --> 00:01:54,308
+Open.
+
+58
+00:01:54,308 --> 00:01:55,432
+The port answers,
+
+59
+00:01:55,432 --> 00:01:57,811
+and the result went to standard out.
+
+60
+00:01:57,811 --> 00:02:00,982
+But the script also left a number for the shell.
+
+61
+00:02:00,982 --> 00:02:01,709
+Ask for it.
+
+62
+00:02:01,709 --> 00:02:02,436
+Type: echo,
+
+63
+00:02:02,436 --> 00:02:03,229
+dollar sign,
+
+64
+00:02:03,229 --> 00:02:04,154
+question mark.
+
+65
+00:02:04,704 --> 00:02:05,082
+Zero.
+
+66
+00:02:05,082 --> 00:02:06,519
+Zero means success.
+
+67
+00:02:06,519 --> 00:02:09,392
+Now a port where nothing is listening.
+
+68
+00:02:09,392 --> 00:02:10,602
+Type: dot slash,
+
+69
+00:02:10,602 --> 00:02:12,039
+port check dot P Y,
+
+70
+00:02:12,039 --> 00:02:12,871
+local host,
+
+71
+00:02:12,871 --> 00:02:13,173
+one.
+
+72
+00:02:13,723 --> 00:02:14,211
+Closed,
+
+73
+00:02:14,211 --> 00:02:15,533
+connection refused,
+
+74
+00:02:15,533 --> 00:02:16,716
+and no traceback.
+
+75
+00:02:16,716 --> 00:02:19,153
+The problem went to standard error.
+
+76
+00:02:19,153 --> 00:02:20,684
+Ask for the exit code.
+
+77
+00:02:20,684 --> 00:02:21,450
+Type: echo,
+
+78
+00:02:21,450 --> 00:02:22,285
+dollar sign,
+
+79
+00:02:22,285 --> 00:02:23,259
+question mark.
+
+80
+00:02:23,809 --> 00:02:24,098
+One.
+
+81
+00:02:24,098 --> 00:02:24,674
+Failure.
+
+82
+00:02:24,674 --> 00:02:26,116
+Any caller can tell,
+
+83
+00:02:26,116 --> 00:02:28,278
+without reading a single word.
+
+84
+00:02:28,278 --> 00:02:32,243
+Now a mistake by the user: a port that is not a number.
+
+85
+00:02:32,243 --> 00:02:33,396
+Type: dot slash,
+
+86
+00:02:33,396 --> 00:02:34,765
+port check dot P Y,
+
+87
+00:02:34,765 --> 00:02:35,558
+local host,
+
+88
+00:02:35,558 --> 00:02:35,991
+A B C.
+
+89
+00:02:36,541 --> 00:02:37,927
+Argparse refused it,
+
+90
+00:02:37,927 --> 00:02:39,175
+printed the usage,
+
+91
+00:02:39,175 --> 00:02:40,770
+and gave a clear error,
+
+92
+00:02:40,770 --> 00:02:41,741
+all by itself,
+
+93
+00:02:41,741 --> 00:02:43,474
+and the script never ran.
+
+94
+00:02:43,474 --> 00:02:44,514
+What exit code?
+
+95
+00:02:44,514 --> 00:02:45,277
+Type: echo,
+
+96
+00:02:45,277 --> 00:02:46,109
+dollar sign,
+
+97
+00:02:46,109 --> 00:02:47,079
+question mark.
+
+98
+00:02:47,629 --> 00:02:47,895
+Two.
+
+99
+00:02:47,895 --> 00:02:49,952
+By convention: zero is success,
+
+100
+00:02:49,952 --> 00:02:50,948
+one is failure,
+
+101
+00:02:50,948 --> 00:02:53,802
+and two means the command was used wrongly.
+
+102
+00:02:53,802 --> 00:02:54,797
+Three outcomes,
+
+103
+00:02:54,797 --> 00:02:55,727
+three numbers,
+
+104
+00:02:55,727 --> 00:02:57,784
+and a caller can react to each.
+
+105
+00:02:59,834 --> 00:03:03,494
+Now the part that makes exit codes powerful: the shell.
+
+106
+00:03:03,494 --> 00:03:05,624
+Our closed message was an error,
+
+107
+00:03:05,624 --> 00:03:07,887
+so it travelled on standard error.
+
+108
+00:03:07,887 --> 00:03:09,617
+Throw standard error away,
+
+109
+00:03:09,617 --> 00:03:10,216
+with two,
+
+110
+00:03:10,216 --> 00:03:11,082
+greater than,
+
+111
+00:03:11,082 --> 00:03:11,747
+slash dev,
+
+112
+00:03:11,747 --> 00:03:12,479
+slash null.
+
+113
+00:03:12,479 --> 00:03:13,544
+Type: dot slash,
+
+114
+00:03:13,544 --> 00:03:14,809
+port check dot P Y,
+
+115
+00:03:14,809 --> 00:03:15,541
+local host,
+
+116
+00:03:15,541 --> 00:03:15,807
+one,
+
+117
+00:03:15,807 --> 00:03:16,206
+space,
+
+118
+00:03:16,206 --> 00:03:16,472
+two,
+
+119
+00:03:16,472 --> 00:03:17,338
+greater than,
+
+120
+00:03:17,338 --> 00:03:18,003
+slash dev,
+
+121
+00:03:18,003 --> 00:03:18,735
+slash null.
+
+122
+00:03:19,285 --> 00:03:20,542
+Nothing on screen.
+
+123
+00:03:20,542 --> 00:03:21,938
+The message is gone,
+
+124
+00:03:21,938 --> 00:03:24,101
+but the exit code is still one.
+
+125
+00:03:24,101 --> 00:03:25,497
+Now the dash Q flag,
+
+126
+00:03:25,497 --> 00:03:27,312
+with the double ampersand,
+
+127
+00:03:27,312 --> 00:03:31,570
+which means: run the next command only if this one succeeded.
+
+128
+00:03:31,570 --> 00:03:32,687
+Type: dot slash,
+
+129
+00:03:32,687 --> 00:03:34,013
+port check dot P Y,
+
+130
+00:03:34,013 --> 00:03:34,501
+dash Q,
+
+131
+00:03:34,501 --> 00:03:35,269
+local host,
+
+132
+00:03:35,269 --> 00:03:36,525
+eighty eighty-one,
+
+133
+00:03:36,525 --> 00:03:36,944
+space,
+
+134
+00:03:36,944 --> 00:03:37,642
+ampersand,
+
+135
+00:03:37,642 --> 00:03:38,340
+ampersand,
+
+136
+00:03:38,340 --> 00:03:38,759
+space,
+
+137
+00:03:38,759 --> 00:03:39,317
+echo up.
+
+138
+00:03:39,867 --> 00:03:40,097
+Up.
+
+139
+00:03:40,097 --> 00:03:42,543
+The shell read a zero and chose.
+
+140
+00:03:42,543 --> 00:03:43,843
+Now the opposite.
+
+141
+00:03:43,843 --> 00:03:49,042
+The double pipe means: run the next command only if this one failed.
+
+142
+00:03:49,042 --> 00:03:50,265
+Type: dot slash,
+
+143
+00:03:50,265 --> 00:03:51,718
+port check dot P Y,
+
+144
+00:03:51,718 --> 00:03:52,253
+dash Q,
+
+145
+00:03:52,253 --> 00:03:53,094
+local host,
+
+146
+00:03:53,094 --> 00:03:53,400
+one,
+
+147
+00:03:53,400 --> 00:03:53,858
+space,
+
+148
+00:03:53,858 --> 00:03:54,240
+pipe,
+
+149
+00:03:54,240 --> 00:03:54,623
+pipe,
+
+150
+00:03:54,623 --> 00:03:55,081
+space,
+
+151
+00:03:55,081 --> 00:03:55,846
+echo down.
+
+152
+00:03:56,396 --> 00:03:56,738
+Down.
+
+153
+00:03:56,738 --> 00:03:58,241
+The tool said nothing,
+
+154
+00:03:58,241 --> 00:04:00,018
+and the shell still chose,
+
+155
+00:04:00,018 --> 00:04:01,726
+from the exit code alone.
+
+156
+00:04:01,726 --> 00:04:03,229
+This is how pipelines,
+
+157
+00:04:03,229 --> 00:04:06,578
+cron jobs and CI systems decide whether to go on.
+
+158
+00:04:06,578 --> 00:04:08,628
+They never read your messages.
+
+159
+00:04:08,628 --> 00:04:10,063
+They read the number.
+
+160
+00:04:10,063 --> 00:04:13,548
+A tool that always exits zero lies to its pipeline.
+
+161
+00:04:15,598 --> 00:04:16,683
+Here is your task,
+
+162
+00:04:16,683 --> 00:04:18,191
+with everything you need.
+
+163
+00:04:18,191 --> 00:04:20,120
+The files are in the repository,
+
+164
+00:04:20,120 --> 00:04:21,507
+and in the description.
+
+165
+00:04:22,057 --> 00:04:27,732
+The repository is git hub dot com, slash it dash waves, slash dev ops dash A I.
+
+166
+00:04:28,282 --> 00:04:33,166
+In the academy slash lesson fifty-two folder you will find the task file,
+
+167
+00:04:33,166 --> 00:04:33,969
+the lab API,
+
+168
+00:04:33,969 --> 00:04:35,039
+and the checker,
+
+169
+00:04:35,039 --> 00:04:36,645
+check fifty-two dot S H.
+
+170
+00:04:37,195 --> 00:04:38,439
+You write one file,
+
+171
+00:04:38,439 --> 00:04:39,879
+service check dot P Y.
+
+172
+00:04:39,879 --> 00:04:40,992
+It takes a U R L,
+
+173
+00:04:40,992 --> 00:04:42,564
+calls it with a timeout,
+
+174
+00:04:42,564 --> 00:04:45,707
+and prints up when the page answers two hundred.
+
+175
+00:04:46,257 --> 00:04:50,849
+Any failure prints down on standard error and exits with code one,
+
+176
+00:04:50,849 --> 00:04:52,101
+with no traceback.
+
+177
+00:04:52,101 --> 00:04:54,884
+A missing U R L must exit with code two.
+
+178
+00:04:54,884 --> 00:04:56,763
+And dash Q makes it silent,
+
+179
+00:04:56,763 --> 00:04:58,502
+with the same exit codes.
+
+180
+00:04:59,052 --> 00:05:02,401
+Do not open the solution file until you have really tried.
+
+181
+00:05:02,951 --> 00:05:06,621
+The checker shows six pass lines. Write your results in a report.
+
+182
+00:05:08,671 --> 00:05:12,596
+Here is how your work is judged. Six points, and you need all six.
+
+183
+00:05:13,146 --> 00:05:14,981
+The checker shows six pass lines.
+
+184
+00:05:15,531 --> 00:05:18,006
+Exit codes are right: zero, one, and two.
+
+185
+00:05:18,556 --> 00:05:21,948
+Results go to standard out, and problems go to standard error.
+
+186
+00:05:22,498 --> 00:05:25,314
+You use argparse, and every call has a timeout.
+
+187
+00:05:25,864 --> 00:05:28,253
+No traceback, and never a bare except.
+
+188
+00:05:28,803 --> 00:05:32,216
+The report is complete, and you worked in your own virtual machine.
+
+189
+00:05:32,766 --> 00:05:34,388
+To pass, you need all six.
+
+190
+00:05:36,438 --> 00:05:39,275
+Your turn, in your own Ubuntu virtual machine.
+
+191
+00:05:39,825 --> 00:05:43,729
+One: get the lesson folder, and activate your virtual environment.
+
+192
+00:05:44,279 --> 00:05:46,797
+Two: start the lab API in one terminal.
+
+193
+00:05:47,347 --> 00:05:53,683
+Three: write service check dot P Y with argparse: a U R L, a timeout, and a quiet flag.
+
+194
+00:05:54,233 --> 00:05:58,307
+Four: call the U R L with a timeout, and catch request exception.
+
+195
+00:05:58,857 --> 00:06:04,105
+Five: print up on standard out, or down on standard error, and return zero or one.
+
+196
+00:06:04,655 --> 00:06:07,130
+Six: run the checker, and write your report.
+
+197
+00:06:07,680 --> 00:06:09,515
+Pause the video, and begin now.
+
+198
+00:06:25,065 --> 00:06:25,940
+Quick check.
+
+199
+00:06:26,490 --> 00:06:28,218
+What does exit code zero mean?
+
+200
+00:06:28,768 --> 00:06:30,602
+Which channel carries the problems?
+
+201
+00:06:31,152 --> 00:06:34,054
+What exit code means the command was used wrongly?
+
+202
+00:06:34,604 --> 00:06:37,974
+Why does a pipeline read the exit code, not your messages?
+
+203
+00:06:38,524 --> 00:06:44,498
+Objective covered: MC06-O06, command line tools and exit codes.
+
+204
+00:06:45,048 --> 00:06:47,117
+Pause the video, and answer out loud.
+
+205
+00:06:57,667 --> 00:07:00,483
+Next lesson: tests with pytest and mocks.
+
+206
+00:07:01,033 --> 00:07:04,361
+If this helped, like, share and subscribe, so you do not miss it.
