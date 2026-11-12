@@ -1,0 +1,787 @@
+1
+00:00:00,500 --> 00:00:00,935
+Friday,
+
+2
+00:00:00,935 --> 00:00:01,743
+five o'clock.
+
+3
+00:00:01,743 --> 00:00:04,104
+Someone pushes a small change to main,
+
+4
+00:00:04,104 --> 00:00:06,217
+and the whole team's build breaks.
+
+5
+00:00:06,767 --> 00:00:08,906
+A team release workflow stops that.
+
+6
+00:00:08,906 --> 00:00:11,534
+Automated checks run before code is shared,
+
+7
+00:00:11,534 --> 00:00:13,978
+and every release gets a version number.
+
+8
+00:00:14,528 --> 00:00:16,891
+Today you build one: a check script,
+
+9
+00:00:16,891 --> 00:00:18,859
+a gate that blocks bad pushes,
+
+10
+00:00:18,859 --> 00:00:20,106
+a CI workflow file,
+
+11
+00:00:20,106 --> 00:00:21,419
+and tagged releases.
+
+12
+00:00:21,969 --> 00:00:24,785
+As always, there is a lab with a checker at the end.
+
+13
+00:00:26,835 --> 00:00:32,403
+A release workflow is a path that every change walks. Branch, check, review, merge, tag.
+
+14
+00:00:32,953 --> 00:00:37,911
+A check is a small script that answers one question: is this change safe?
+
+15
+00:00:37,911 --> 00:00:39,744
+It exits with zero for yes,
+
+16
+00:00:39,744 --> 00:00:41,102
+and non-zero for no.
+
+17
+00:00:41,652 --> 00:00:43,896
+Run checks on your own computer first,
+
+18
+00:00:43,896 --> 00:00:45,786
+so you find mistakes in seconds.
+
+19
+00:00:45,786 --> 00:00:48,266
+A pre push gate can even run them for you.
+
+20
+00:00:48,816 --> 00:00:50,712
+Run them again on the server,
+
+21
+00:00:50,712 --> 00:00:51,105
+in CI,
+
+22
+00:00:51,105 --> 00:00:52,544
+on every pull request,
+
+23
+00:00:52,544 --> 00:00:54,768
+so nothing unchecked reaches main.
+
+24
+00:00:55,318 --> 00:00:56,562
+When main is ready,
+
+25
+00:00:56,562 --> 00:01:00,228
+tag it with a version number: major dot minor dot patch.
+
+26
+00:01:00,228 --> 00:01:02,912
+A tag is a permanent label on one commit.
+
+27
+00:01:03,462 --> 00:01:05,830
+That is the whole workflow. Let us build it.
+
+28
+00:01:07,880 --> 00:01:13,576
+Let us see it live. A tiny shop script, and the team check. Go in. Type: CD, shop.
+
+29
+00:01:14,126 --> 00:01:17,603
+Here is the team check. Type: cat, check dot S H.
+
+30
+00:01:18,153 --> 00:01:20,933
+Three checks: the syntax of every script,
+
+31
+00:01:20,933 --> 00:01:22,696
+no leftover to do markers,
+
+32
+00:01:22,696 --> 00:01:23,645
+and the tests.
+
+33
+00:01:23,645 --> 00:01:24,119
+Run it.
+
+34
+00:01:24,119 --> 00:01:26,153
+Type: dot slash check dot S H.
+
+35
+00:01:26,703 --> 00:01:28,216
+Now break something.
+
+36
+00:01:28,216 --> 00:01:29,577
+Add a broken line.
+
+37
+00:01:29,577 --> 00:01:30,409
+Type: echo,
+
+38
+00:01:30,409 --> 00:01:30,862
+quote,
+
+39
+00:01:30,862 --> 00:01:31,240
+oops,
+
+40
+00:01:31,240 --> 00:01:32,072
+open paren,
+
+41
+00:01:32,072 --> 00:01:32,526
+quote,
+
+42
+00:01:32,526 --> 00:01:33,358
+two arrows,
+
+43
+00:01:33,358 --> 00:01:34,341
+shop dot S H.
+
+44
+00:01:34,891 --> 00:01:38,667
+Run the check again. Type: dot slash check dot S H.
+
+45
+00:01:39,217 --> 00:01:39,888
+It failed,
+
+46
+00:01:39,888 --> 00:01:41,366
+and it names the file.
+
+47
+00:01:41,366 --> 00:01:43,851
+A check speaks through its exit code.
+
+48
+00:01:43,851 --> 00:01:44,321
+See it.
+
+49
+00:01:44,321 --> 00:01:45,060
+Type: echo,
+
+50
+00:01:45,060 --> 00:01:45,530
+dollar,
+
+51
+00:01:45,530 --> 00:01:46,470
+question mark.
+
+52
+00:01:47,020 --> 00:01:48,371
+One means failure.
+
+53
+00:01:48,371 --> 00:01:49,798
+Zero means success.
+
+54
+00:01:49,798 --> 00:01:52,650
+Undo the mistake with a tool you know.
+
+55
+00:01:52,650 --> 00:01:54,001
+Type: git restore,
+
+56
+00:01:54,001 --> 00:01:54,977
+shop dot S H.
+
+57
+00:01:55,527 --> 00:01:59,410
+Run the check once more. Type: dot slash check dot S H.
+
+58
+00:01:59,960 --> 00:02:04,013
+Checks passed. The same answer, every time, for everyone on the team.
+
+59
+00:02:06,063 --> 00:02:08,836
+Now the gate. Go in. Type: CD, shop.
+
+60
+00:02:09,386 --> 00:02:13,236
+A git hook is a script that Git runs at a moment you choose.
+
+61
+00:02:13,236 --> 00:02:15,289
+This one runs before every push.
+
+62
+00:02:15,289 --> 00:02:15,930
+Type: cat,
+
+63
+00:02:15,930 --> 00:02:16,829
+dot git hooks,
+
+64
+00:02:16,829 --> 00:02:17,213
+slash,
+
+65
+00:02:17,213 --> 00:02:18,112
+pre dash push.
+
+66
+00:02:18,662 --> 00:02:19,844
+It runs the check,
+
+67
+00:02:19,844 --> 00:02:22,406
+and blocks the push if the check fails.
+
+68
+00:02:22,406 --> 00:02:24,442
+Turn it on for this repository.
+
+69
+00:02:24,442 --> 00:02:25,559
+Type: git config,
+
+70
+00:02:25,559 --> 00:02:26,873
+core dot hooks path,
+
+71
+00:02:26,873 --> 00:02:27,792
+dot git hooks.
+
+72
+00:02:28,342 --> 00:02:30,048
+Now make a bad change.
+
+73
+00:02:30,048 --> 00:02:30,902
+Type: echo,
+
+74
+00:02:30,902 --> 00:02:31,367
+quote,
+
+75
+00:02:31,367 --> 00:02:31,755
+oops,
+
+76
+00:02:31,755 --> 00:02:32,608
+open paren,
+
+77
+00:02:32,608 --> 00:02:33,073
+quote,
+
+78
+00:02:33,073 --> 00:02:33,926
+two arrows,
+
+79
+00:02:33,926 --> 00:02:34,934
+shop dot S H.
+
+80
+00:02:35,484 --> 00:02:39,410
+Commit it. Type: git commit, dash A M, quote, Quick change, quote.
+
+81
+00:02:39,960 --> 00:02:43,693
+Try to push it to the team. Type: git push, origin main.
+
+82
+00:02:44,243 --> 00:02:44,785
+Blocked.
+
+83
+00:02:44,785 --> 00:02:47,493
+The bad commit never left your computer.
+
+84
+00:02:47,493 --> 00:02:48,441
+It is private,
+
+85
+00:02:48,441 --> 00:02:50,067
+so a reset is safe here.
+
+86
+00:02:50,067 --> 00:02:51,150
+Type: git reset,
+
+87
+00:02:51,150 --> 00:02:52,166
+dash dash hard,
+
+88
+00:02:52,166 --> 00:02:53,182
+head tilde one.
+
+89
+00:02:53,732 --> 00:02:59,236
+Now a good change. Type: echo, quote, Free shipping, quote, two arrows, notes dot text.
+
+90
+00:02:59,786 --> 00:03:02,580
+Stage it. Type: git add, notes dot text.
+
+91
+00:03:03,130 --> 00:03:07,162
+Commit it. Type: git commit, dash M, quote, Add shipping note, quote.
+
+92
+00:03:07,712 --> 00:03:10,635
+Push again. Type: git push, origin main.
+
+93
+00:03:11,185 --> 00:03:15,558
+The check ran, passed, and the push went through. Bad changes stop at your door.
+
+94
+00:03:17,608 --> 00:03:21,171
+Same check, on the server. Go in. Type: CD, shop.
+
+95
+00:03:21,721 --> 00:03:24,960
+This file lives in the repository.
+
+96
+00:03:24,960 --> 00:03:25,913
+Type: cat,
+
+97
+00:03:25,913 --> 00:03:30,297
+dot github slash workflows slash CI dot yamel.
+
+98
+00:03:30,847 --> 00:03:36,393
+On: pull request. This workflow starts on every pull request, and on every push to main.
+
+99
+00:03:36,943 --> 00:03:38,483
+Runs on: ubuntu latest.
+
+100
+00:03:38,483 --> 00:03:41,832
+Git hub gives it a fresh Ubuntu machine each time,
+
+101
+00:03:41,832 --> 00:03:44,175
+so it never depends on your laptop.
+
+102
+00:03:44,725 --> 00:03:49,504
+Uses: actions slash checkout. This step downloads your code onto that machine.
+
+103
+00:03:50,054 --> 00:03:55,601
+Run: dot slash check dot S H. The same script as your gate. One check, two places.
+
+104
+00:03:56,151 --> 00:03:56,477
+Then,
+
+105
+00:03:56,477 --> 00:03:58,240
+in the repository settings,
+
+106
+00:03:58,240 --> 00:04:01,438
+turn on branch protection and require this check.
+
+107
+00:04:01,438 --> 00:04:02,679
+Red means no merge.
+
+108
+00:04:03,229 --> 00:04:05,738
+This screen is a labelled illustration.
+
+109
+00:04:05,738 --> 00:04:07,283
+Git hub runs it for you,
+
+110
+00:04:07,283 --> 00:04:11,015
+and the workflow file is the real one from the repository.
+
+111
+00:04:13,065 --> 00:04:15,988
+Now releases. Go in. Type: CD, shop.
+
+112
+00:04:16,538 --> 00:04:21,956
+A release is a tag: a permanent name on one commit. List the tags. Type: git tag.
+
+113
+00:04:22,506 --> 00:04:23,707
+One tag so far,
+
+114
+00:04:23,707 --> 00:04:25,628
+V one dot zero dot zero.
+
+115
+00:04:25,628 --> 00:04:27,549
+What changed since then?
+
+116
+00:04:27,549 --> 00:04:28,669
+Type: git log,
+
+117
+00:04:28,669 --> 00:04:30,190
+dash dash one line,
+
+118
+00:04:30,190 --> 00:04:32,111
+V one dot zero dot zero,
+
+119
+00:04:32,111 --> 00:04:32,751
+dot dot,
+
+120
+00:04:32,751 --> 00:04:33,152
+head.
+
+121
+00:04:33,702 --> 00:04:36,686
+Those two lines are your release notes.
+
+122
+00:04:36,686 --> 00:04:39,441
+Git can also tell you where you are.
+
+123
+00:04:39,441 --> 00:04:40,895
+Type: git describe,
+
+124
+00:04:40,895 --> 00:04:42,043
+dash dash tags.
+
+125
+00:04:42,593 --> 00:04:45,768
+Two commits after V one dot zero dot zero.
+
+126
+00:04:45,768 --> 00:04:48,263
+A new feature earns a minor bump.
+
+127
+00:04:48,263 --> 00:04:51,060
+Make an annotated tag with a message.
+
+128
+00:04:51,060 --> 00:04:52,118
+Type: git tag,
+
+129
+00:04:52,118 --> 00:04:52,647
+dash A,
+
+130
+00:04:52,647 --> 00:04:54,386
+V one dot one dot zero,
+
+131
+00:04:54,386 --> 00:04:54,915
+dash M,
+
+132
+00:04:54,915 --> 00:04:55,369
+quote,
+
+133
+00:04:55,369 --> 00:04:56,881
+Add discount option,
+
+134
+00:04:56,881 --> 00:04:57,334
+quote.
+
+135
+00:04:57,884 --> 00:05:00,410
+Tags do not travel by themselves.
+
+136
+00:05:00,410 --> 00:05:01,481
+Push this one.
+
+137
+00:05:01,481 --> 00:05:02,629
+Type: git push,
+
+138
+00:05:02,629 --> 00:05:03,164
+origin,
+
+139
+00:05:03,164 --> 00:05:04,924
+V one dot one dot zero.
+
+140
+00:05:05,474 --> 00:05:10,637
+Check what the team can see. Type: git L S remote, dash dash tags, origin.
+
+141
+00:05:11,187 --> 00:05:12,821
+Both releases are there.
+
+142
+00:05:12,821 --> 00:05:14,659
+Major for breaking changes,
+
+143
+00:05:14,659 --> 00:05:15,952
+minor for features,
+
+144
+00:05:15,952 --> 00:05:17,042
+patch for fixes.
+
+145
+00:05:17,042 --> 00:05:18,335
+Use annotated tags,
+
+146
+00:05:18,335 --> 00:05:20,445
+so every release has an author,
+
+147
+00:05:20,445 --> 00:05:20,922
+a date,
+
+148
+00:05:20,922 --> 00:05:21,875
+and a message.
+
+149
+00:05:24,025 --> 00:05:26,798
+Your task, in your own Ubuntu virtual machine.
+
+150
+00:05:27,348 --> 00:05:29,863
+The lab is lab sixty-five dot S H,
+
+151
+00:05:29,863 --> 00:05:33,635
+in the academy slash lab folder of git hub dot com,
+
+152
+00:05:33,635 --> 00:05:35,115
+slash it dash waves,
+
+153
+00:05:35,115 --> 00:05:36,816
+slash dev ops dash A I.
+
+154
+00:05:36,816 --> 00:05:38,517
+Install it like before,
+
+155
+00:05:38,517 --> 00:05:39,700
+then run lab up.
+
+156
+00:05:40,250 --> 00:05:43,118
+It builds a shop repository and a shared copy.
+
+157
+00:05:43,118 --> 00:05:45,487
+The last commit broke the shop script,
+
+158
+00:05:45,487 --> 00:05:46,672
+so the checks fail.
+
+159
+00:05:47,222 --> 00:05:51,040
+One: run the check, read the failure, and fix the bug in a new commit.
+
+160
+00:05:51,590 --> 00:05:55,196
+Two: turn on the gate, with git config core dot hooks path.
+
+161
+00:05:55,746 --> 00:05:59,052
+Three: push main to origin. The gate must let it through.
+
+162
+00:05:59,602 --> 00:06:04,914
+Four: create an annotated tag, V one dot zero dot zero, and push the tag.
+
+163
+00:06:05,464 --> 00:06:07,205
+Five: in answers dot text,
+
+164
+00:06:07,205 --> 00:06:11,756
+write which part of the version you raise for a bug fix only: major,
+
+165
+00:06:11,756 --> 00:06:12,158
+minor,
+
+166
+00:06:12,158 --> 00:06:12,760
+or patch.
+
+167
+00:06:13,310 --> 00:06:17,150
+Then run lab check. Five pass lines. Check, gate, tag.
+
+168
+00:06:19,200 --> 00:06:21,184
+Six points, and you need all six.
+
+169
+00:06:21,734 --> 00:06:23,611
+The checker shows five pass lines.
+
+170
+00:06:24,161 --> 00:06:26,892
+You fixed the bug in a new commit, and the checks pass.
+
+171
+00:06:27,442 --> 00:06:29,725
+The gate is on, and your push went through it.
+
+172
+00:06:30,275 --> 00:06:33,069
+Your tag is annotated, and it is on origin.
+
+173
+00:06:33,619 --> 00:06:35,987
+You can explain major, minor, and patch.
+
+174
+00:06:36,537 --> 00:06:38,180
+You ran lab down to clean up.
+
+175
+00:06:38,730 --> 00:06:40,351
+To pass, you need all six.
+
+176
+00:06:42,401 --> 00:06:45,238
+Your turn, in your own Ubuntu virtual machine.
+
+177
+00:06:45,788 --> 00:06:48,007
+One: install the lab, and run lab up.
+
+178
+00:06:48,557 --> 00:06:50,605
+Two: run the check, and fix the bug.
+
+179
+00:06:51,155 --> 00:06:52,563
+Three: turn on the gate.
+
+180
+00:06:53,113 --> 00:06:54,926
+Four: push main to origin.
+
+181
+00:06:55,476 --> 00:06:58,058
+Five: tag V one dot zero dot zero,
+
+182
+00:06:58,058 --> 00:06:59,045
+push the tag,
+
+183
+00:06:59,045 --> 00:07:01,095
+and write answers dot text.
+
+184
+00:07:01,095 --> 00:07:02,538
+Then run lab check.
+
+185
+00:07:03,088 --> 00:07:04,560
+Six: run lab down.
+
+186
+00:07:05,110 --> 00:07:06,944
+Pause the video, and begin now.
+
+187
+00:07:22,494 --> 00:07:23,369
+Quick check.
+
+188
+00:07:23,919 --> 00:07:25,881
+What does a check's exit code tell you?
+
+189
+00:07:26,431 --> 00:07:29,290
+Why run checks both on your computer and in CI?
+
+190
+00:07:29,840 --> 00:07:31,419
+What does a pre push gate do?
+
+191
+00:07:31,969 --> 00:07:35,062
+What do major, minor, and patch mean in a version number?
+
+192
+00:07:35,612 --> 00:07:38,086
+Objective covered: M C zero seven,
+
+193
+00:07:38,086 --> 00:07:39,177
+objective nine,
+
+194
+00:07:39,177 --> 00:07:42,524
+a team release workflow with automated checks.
+
+195
+00:07:43,074 --> 00:07:45,143
+Pause the video, and answer out loud.
+
+196
+00:07:55,693 --> 00:07:59,683
+Next: the mastery lesson for the whole Git and Git hub masterclass.
+
+197
+00:08:00,233 --> 00:08:03,561
+If this helped, like, share and subscribe, so you do not miss it.

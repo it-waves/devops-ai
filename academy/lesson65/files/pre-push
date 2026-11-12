@@ -1,0 +1,2 @@
+#!/bin/sh
+./check.sh || { echo "push blocked: fix the checks first"; exit 1; }

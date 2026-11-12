@@ -1,0 +1,26 @@
+Lesson 65 of the DevOps Engineering Bootcamp, the ninth lesson of the Git and GitHub masterclass, from beginner to mastery. You learn how a team ships safely: a check script that exits zero for safe and non-zero for stop, a pre-push gate that runs it before every push and blocks bad commits, a CI workflow file that runs the same check on every pull request (with branch protection), and releases as annotated version tags using major, minor and patch. Live on Ubuntu you see: ./check.sh, exit codes with echo $?, git restore, a pre-push hook turned on with git config core.hooksPath .githooks, a blocked push and git reset --hard HEAD~1, a good push through the gate, cat of a GitHub Actions workflow, git tag, git log v1.0.0..HEAD for release notes, git describe --tags, git tag -a v1.1.0, git push origin v1.1.0 and git ls-remote --tags origin. The lab has a checker that says PASS or FAIL for five checks, a pass/fail rubric, and cleanup.
+
+Chapters
+0:00 Ship with confidence
+0:26 The release workflow
+1:07 Automated checks
+2:05 A pre-push gate
+3:17 Checks in CI
+4:12 Tags and releases
+5:23 Your lab task
+6:18 Pass or fail rubric
+6:41 Your turn
+7:22 Quick check
+
+Objectives covered: MC07-O09 a team release workflow with automated checks
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab65.sh and shortcuts65.sh) and academy/lesson65 (INSTALL.txt). Install with: sudo apt install -y git (if needed), then sudo install -m 755 lab65.sh /usr/local/sbin/ and run lab up, lab check and lab down after loading the short name with: source shortcuts65.sh (without it, use sudo lab65.sh up, check, down). You need an Ubuntu virtual machine with root and git. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Git 2.43, run in a private mount setup on the recording computer. The shared copy of the repository is a local folder, not GitHub, and the repository was prepared before recording so each segment starts from a known state; the commit hashes you see will differ from yours. The GitHub Actions workflow file is a real file shown with cat, but it was not run on GitHub in this lesson, and the CI and branch protection screens are labelled illustrations, not captures. The lab was run end to end before this lesson: all five checks fail before the work, all five pass after a reference solution (two different valid solutions were tested, and a lightweight tag correctly fails), and lab down leaves nothing behind. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Git secrets, SSH keys, tokens and repository roles https://youtu.be/sgm3_-lp6K8
+Next lesson: the Git and GitHub mastery lesson.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#git #github #devops #cicd #githubactions #devopsbootcamp
