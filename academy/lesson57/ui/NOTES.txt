@@ -1,0 +1,1 @@
+L57 UI frames captured 1280x598; cursor targets: editor name field (228,132), commit btn (1182,132), dialog commit (797,493), history link (870,267), commit link (244,292), Code btn (872,209)

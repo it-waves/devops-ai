@@ -1,0 +1,1295 @@
+1
+00:00:00,500 --> 00:00:02,265
+You have named files final,
+
+2
+00:00:02,265 --> 00:00:02,919
+final two,
+
+3
+00:00:02,919 --> 00:00:03,572
+and final,
+
+4
+00:00:03,572 --> 00:00:04,422
+really final.
+
+5
+00:00:04,422 --> 00:00:08,671
+Today you learn the tool that makes all of that unnecessary: Git.
+
+6
+00:00:09,221 --> 00:00:11,794
+Git remembers every version of your work,
+
+7
+00:00:11,794 --> 00:00:12,736
+who changed it,
+
+8
+00:00:12,736 --> 00:00:13,238
+and why.
+
+9
+00:00:13,238 --> 00:00:16,753
+And every copy of the project carries the whole history,
+
+10
+00:00:16,753 --> 00:00:20,079
+so no single laptop and no single server can lose it.
+
+11
+00:00:20,629 --> 00:00:24,471
+This is the first lesson of the Git and GitHub masterclass,
+
+12
+00:00:24,471 --> 00:00:26,099
+from beginner to mastery.
+
+13
+00:00:26,099 --> 00:00:27,857
+We will build a repository,
+
+14
+00:00:27,857 --> 00:00:29,616
+open it up and look inside,
+
+15
+00:00:29,616 --> 00:00:30,202
+clone it,
+
+16
+00:00:30,202 --> 00:00:33,197
+and then watch the very same commit on GitHub,
+
+17
+00:00:33,197 --> 00:00:34,304
+on a real screen.
+
+18
+00:00:34,854 --> 00:00:37,990
+At the end there is a lab with a checker, so you can prove it.
+
+19
+00:00:40,040 --> 00:00:40,433
+First,
+
+20
+00:00:40,433 --> 00:00:41,283
+the big idea.
+
+21
+00:00:41,283 --> 00:00:44,685
+Older version control tools kept one central server.
+
+22
+00:00:44,685 --> 00:00:47,760
+Everyone asked the server for the latest files,
+
+23
+00:00:47,760 --> 00:00:49,853
+and the server held the history.
+
+24
+00:00:50,403 --> 00:00:51,832
+If the server was down,
+
+25
+00:00:51,832 --> 00:00:53,447
+nobody could save history.
+
+26
+00:00:53,447 --> 00:00:54,504
+If its disk died,
+
+27
+00:00:54,504 --> 00:00:56,057
+the history died with it.
+
+28
+00:00:56,607 --> 00:00:57,804
+Git is distributed.
+
+29
+00:00:57,804 --> 00:01:02,216
+Every developer has a full copy of the project and its entire history,
+
+30
+00:01:02,216 --> 00:01:03,540
+on their own machine.
+
+31
+00:01:04,090 --> 00:01:05,605
+You can commit on a plane.
+
+32
+00:01:05,605 --> 00:01:08,461
+You can read last year's version with no network.
+
+33
+00:01:08,461 --> 00:01:12,133
+And any one clone can rebuild everything if the server is lost.
+
+34
+00:01:12,683 --> 00:01:13,676
+One more thing,
+
+35
+00:01:13,676 --> 00:01:15,729
+because beginners mix these up.
+
+36
+00:01:15,729 --> 00:01:17,914
+Git is the tool on your computer.
+
+37
+00:01:17,914 --> 00:01:20,894
+GitHub is a website that hosts a shared copy,
+
+38
+00:01:20,894 --> 00:01:22,020
+and adds reviews,
+
+39
+00:01:22,020 --> 00:01:22,483
+issues,
+
+40
+00:01:22,483 --> 00:01:24,139
+and automation around it.
+
+41
+00:01:24,689 --> 00:01:26,067
+Many complete copies,
+
+42
+00:01:26,067 --> 00:01:30,661
+and one shared copy that the team agrees to treat as the official one.
+
+43
+00:01:30,661 --> 00:01:31,711
+That is a habit,
+
+44
+00:01:31,711 --> 00:01:33,286
+not a rule Git enforces.
+
+45
+00:01:35,336 --> 00:01:38,813
+Now look inside. Git has four places your work can live.
+
+46
+00:01:39,363 --> 00:01:41,817
+The working tree: the files you see and edit.
+
+47
+00:01:42,367 --> 00:01:47,444
+The staging area: the next snapshot, being prepared. You choose what goes in with git add.
+
+48
+00:01:47,994 --> 00:01:51,081
+The repository: a hidden folder called dot git.
+
+49
+00:01:51,081 --> 00:01:53,905
+Git commit saves the staged snapshot there,
+
+50
+00:01:53,905 --> 00:01:54,693
+permanently.
+
+51
+00:01:55,243 --> 00:01:57,057
+And the remote: another copy,
+
+52
+00:01:57,057 --> 00:01:58,183
+such as on GitHub.
+
+53
+00:01:58,183 --> 00:01:59,998
+Git push sends commits there.
+
+54
+00:01:59,998 --> 00:02:00,936
+Until you push,
+
+55
+00:02:00,936 --> 00:02:02,688
+nothing leaves your machine.
+
+56
+00:02:03,238 --> 00:02:06,299
+Inside dot git: head says where you are now.
+
+57
+00:02:06,299 --> 00:02:07,830
+Config holds settings.
+
+58
+00:02:07,830 --> 00:02:11,239
+Objects is the database of every file and commit.
+
+59
+00:02:11,239 --> 00:02:14,161
+Refs holds the names of branches and tags.
+
+60
+00:02:14,711 --> 00:02:17,718
+Delete the dot git folder and the history is gone.
+
+61
+00:02:17,718 --> 00:02:19,522
+Everything else is just files.
+
+62
+00:02:19,522 --> 00:02:20,364
+Remember that.
+
+63
+00:02:22,414 --> 00:02:23,587
+Let us build one.
+
+64
+00:02:23,587 --> 00:02:24,001
+First,
+
+65
+00:02:24,001 --> 00:02:25,450
+tell Git who you are,
+
+66
+00:02:25,450 --> 00:02:28,832
+because every commit carries a name and an email.
+
+67
+00:02:28,832 --> 00:02:30,005
+Type: git config,
+
+68
+00:02:30,005 --> 00:02:31,178
+dash dash global,
+
+69
+00:02:31,178 --> 00:02:32,145
+user dot name,
+
+70
+00:02:32,145 --> 00:02:32,697
+Sam Lee.
+
+71
+00:02:33,247 --> 00:02:40,052
+Now the email. Type: git config, dash dash global, user dot email, Sam at example dot com.
+
+72
+00:02:40,602 --> 00:02:43,022
+Git saved both in your home folder,
+
+73
+00:02:43,022 --> 00:02:43,368
+once.
+
+74
+00:02:43,368 --> 00:02:45,166
+Now make a project folder.
+
+75
+00:02:45,166 --> 00:02:46,203
+Type: make dir,
+
+76
+00:02:46,203 --> 00:02:46,618
+notes.
+
+77
+00:02:47,168 --> 00:02:49,451
+Move into it. Type: CD, notes.
+
+78
+00:02:50,001 --> 00:02:53,969
+Turn this plain folder into a repository. Type: git init.
+
+79
+00:02:54,519 --> 00:02:57,811
+Git says it initialised an empty repository.
+
+80
+00:02:57,811 --> 00:02:58,933
+No commits yet,
+
+81
+00:02:58,933 --> 00:03:00,504
+and no files changed.
+
+82
+00:03:00,504 --> 00:03:02,001
+Now list everything,
+
+83
+00:03:02,001 --> 00:03:03,721
+including hidden files.
+
+84
+00:03:03,721 --> 00:03:04,470
+Type: L S,
+
+85
+00:03:04,470 --> 00:03:04,993
+dash A.
+
+86
+00:03:05,543 --> 00:03:08,207
+One hidden folder appeared: dot git.
+
+87
+00:03:08,207 --> 00:03:10,427
+That folder is the repository.
+
+88
+00:03:10,427 --> 00:03:11,315
+Look inside.
+
+89
+00:03:11,315 --> 00:03:12,055
+Type: L S,
+
+90
+00:03:12,055 --> 00:03:12,647
+dot git.
+
+91
+00:03:13,197 --> 00:03:13,557
+Head,
+
+92
+00:03:13,557 --> 00:03:14,060
+config,
+
+93
+00:03:14,060 --> 00:03:14,635
+objects,
+
+94
+00:03:14,635 --> 00:03:14,994
+refs,
+
+95
+00:03:14,994 --> 00:03:16,072
+and a few more.
+
+96
+00:03:16,072 --> 00:03:17,724
+We will open them soon.
+
+97
+00:03:17,724 --> 00:03:18,299
+For now,
+
+98
+00:03:18,299 --> 00:03:19,952
+notice how small it is.
+
+99
+00:03:19,952 --> 00:03:22,755
+A repository is just a folder of files.
+
+100
+00:03:24,805 --> 00:03:25,173
+Next,
+
+101
+00:03:25,173 --> 00:03:29,077
+the cycle you will repeat thousands of times: change,
+
+102
+00:03:29,077 --> 00:03:29,519
+stage,
+
+103
+00:03:29,519 --> 00:03:30,035
+commit.
+
+104
+00:03:30,035 --> 00:03:31,508
+Go into the project.
+
+105
+00:03:31,508 --> 00:03:32,171
+Type: CD,
+
+106
+00:03:32,171 --> 00:03:32,613
+notes.
+
+107
+00:03:33,163 --> 00:03:38,688
+Create a file. Type: echo, hash ports, in quotes, then an arrow into read me dot M D.
+
+108
+00:03:39,238 --> 00:03:42,609
+Ask Git what it sees. Type: git status, dash S.
+
+109
+00:03:43,159 --> 00:03:46,711
+Two question marks mean untracked: the file exists,
+
+110
+00:03:46,711 --> 00:03:48,870
+but Git is not watching it yet.
+
+111
+00:03:48,870 --> 00:03:49,496
+Stage it.
+
+112
+00:03:49,496 --> 00:03:50,471
+Type: git add,
+
+113
+00:03:50,471 --> 00:03:51,586
+read me dot M D.
+
+114
+00:03:52,136 --> 00:03:52,596
+Staged.
+
+115
+00:03:52,596 --> 00:03:54,305
+Nothing is in history yet.
+
+116
+00:03:54,305 --> 00:03:55,029
+Now commit,
+
+117
+00:03:55,029 --> 00:03:57,527
+with a message that says what changed.
+
+118
+00:03:57,527 --> 00:03:58,645
+Type: git commit,
+
+119
+00:03:58,645 --> 00:03:59,105
+dash M,
+
+120
+00:03:59,105 --> 00:04:00,157
+start the notes.
+
+121
+00:04:00,707 --> 00:04:02,317
+Look at the first line.
+
+122
+00:04:02,317 --> 00:04:03,157
+Root commit.
+
+123
+00:04:03,157 --> 00:04:06,796
+The very first commit in a repository has no parent,
+
+124
+00:04:06,796 --> 00:04:08,896
+and Git gives it a short hash.
+
+125
+00:04:08,896 --> 00:04:10,296
+Now a second change.
+
+126
+00:04:10,296 --> 00:04:11,066
+Type: echo,
+
+127
+00:04:11,066 --> 00:04:13,515
+ports colon eighty four four three,
+
+128
+00:04:13,515 --> 00:04:14,915
+into ports dot text.
+
+129
+00:04:15,465 --> 00:04:18,452
+Stage it. Type: git add, ports dot text.
+
+130
+00:04:19,002 --> 00:04:22,458
+Commit it. Type: git commit, dash M, add ports list.
+
+131
+00:04:23,008 --> 00:04:26,933
+Now read the history. Type: git log, dash dash one line.
+
+132
+00:04:27,483 --> 00:04:28,241
+Two commits,
+
+133
+00:04:28,241 --> 00:04:29,063
+newest first.
+
+134
+00:04:29,063 --> 00:04:31,338
+Each has a short hash and a message.
+
+135
+00:04:31,338 --> 00:04:34,182
+The second remembers the first as its parent.
+
+136
+00:04:34,182 --> 00:04:35,888
+That chain is your history.
+
+137
+00:04:37,938 --> 00:04:40,762
+Now go deeper than most people ever do,
+
+138
+00:04:40,762 --> 00:04:43,297
+and open the repository's database.
+
+139
+00:04:43,297 --> 00:04:44,745
+Go into the project.
+
+140
+00:04:44,745 --> 00:04:45,397
+Type: CD,
+
+141
+00:04:45,397 --> 00:04:45,831
+notes.
+
+142
+00:04:46,381 --> 00:04:50,925
+First, where am I? Head is a tiny file. Type: cat, dot git slash head.
+
+143
+00:04:51,475 --> 00:04:52,454
+Head says: ref,
+
+144
+00:04:52,454 --> 00:04:54,281
+refs slash heads slash main.
+
+145
+00:04:54,281 --> 00:04:56,304
+Head points to the branch main,
+
+146
+00:04:56,304 --> 00:04:59,110
+and the branch points to the latest commit.
+
+147
+00:04:59,110 --> 00:05:00,415
+Look at the history.
+
+148
+00:05:00,415 --> 00:05:01,329
+Type: git log,
+
+149
+00:05:01,329 --> 00:05:02,569
+dash dash one line.
+
+150
+00:05:03,119 --> 00:05:06,808
+The top hash begins d one two five zero one zero.
+
+151
+00:05:06,808 --> 00:05:09,518
+Ask Git what kind of object that is.
+
+152
+00:05:09,518 --> 00:05:11,325
+Type: git cat dash file,
+
+153
+00:05:11,325 --> 00:05:11,852
+dash T,
+
+154
+00:05:11,852 --> 00:05:12,228
+head.
+
+155
+00:05:12,778 --> 00:05:17,770
+A commit. Now print what is inside it. Type: git cat dash file, dash P, head.
+
+156
+00:05:18,320 --> 00:05:20,617
+A commit is a small text object.
+
+157
+00:05:20,617 --> 00:05:21,119
+A tree,
+
+158
+00:05:21,119 --> 00:05:23,560
+which is a snapshot of every file.
+
+159
+00:05:23,560 --> 00:05:24,206
+A parent,
+
+160
+00:05:24,206 --> 00:05:25,713
+the commit before it.
+
+161
+00:05:25,713 --> 00:05:26,431
+An author,
+
+162
+00:05:26,431 --> 00:05:26,933
+a date,
+
+163
+00:05:26,933 --> 00:05:28,081
+and the message.
+
+164
+00:05:28,081 --> 00:05:29,015
+Nothing else.
+
+165
+00:05:29,015 --> 00:05:30,307
+Now open the tree.
+
+166
+00:05:30,307 --> 00:05:32,029
+Type: git cat dash file,
+
+167
+00:05:32,029 --> 00:05:32,532
+dash P,
+
+168
+00:05:32,532 --> 00:05:32,890
+head,
+
+169
+00:05:32,890 --> 00:05:33,321
+caret,
+
+170
+00:05:33,321 --> 00:05:33,680
+tree.
+
+171
+00:05:34,230 --> 00:05:37,180
+The tree lists each file with a blob hash.
+
+172
+00:05:37,180 --> 00:05:39,217
+A blob is the file's content,
+
+173
+00:05:39,217 --> 00:05:41,957
+named by a fingerprint of that content.
+
+174
+00:05:41,957 --> 00:05:42,940
+Test the idea.
+
+175
+00:05:42,940 --> 00:05:44,907
+Hash the same text yourself.
+
+176
+00:05:44,907 --> 00:05:45,680
+Type: echo,
+
+177
+00:05:45,680 --> 00:05:48,138
+ports colon eighty four four three,
+
+178
+00:05:48,138 --> 00:05:48,490
+pipe,
+
+179
+00:05:48,490 --> 00:05:49,965
+git hash dash object,
+
+180
+00:05:49,965 --> 00:05:51,510
+dash dash standard in.
+
+181
+00:05:52,060 --> 00:05:55,651
+The very same hash as the ports blob in the tree.
+
+182
+00:05:55,651 --> 00:05:59,022
+An object's name is computed from its content.
+
+183
+00:05:59,022 --> 00:05:59,974
+Same content,
+
+184
+00:05:59,974 --> 00:06:00,707
+same name,
+
+185
+00:06:00,707 --> 00:06:02,319
+anywhere in the world.
+
+186
+00:06:02,319 --> 00:06:03,931
+Now count the objects.
+
+187
+00:06:03,931 --> 00:06:04,737
+Type: find,
+
+188
+00:06:04,737 --> 00:06:06,350
+dot git slash objects,
+
+189
+00:06:06,350 --> 00:06:07,229
+dash type F,
+
+190
+00:06:07,229 --> 00:06:07,595
+pipe,
+
+191
+00:06:07,595 --> 00:06:07,888
+W C,
+
+192
+00:06:07,888 --> 00:06:08,401
+dash L.
+
+193
+00:06:08,951 --> 00:06:10,515
+Six objects: two commits,
+
+194
+00:06:10,515 --> 00:06:11,140
+two trees,
+
+195
+00:06:11,140 --> 00:06:11,765
+two blobs.
+
+196
+00:06:11,765 --> 00:06:14,892
+Everything in Git is built from these three kinds.
+
+197
+00:06:14,892 --> 00:06:17,831
+And a commit's hash includes its parent's hash.
+
+198
+00:06:17,831 --> 00:06:19,144
+Change an old commit,
+
+199
+00:06:19,144 --> 00:06:21,771
+and every commit after it gets a new name.
+
+200
+00:06:21,771 --> 00:06:24,147
+That is why history is tamper evident,
+
+201
+00:06:24,147 --> 00:06:27,149
+and why we never rewrite shared history lightly.
+
+202
+00:06:29,299 --> 00:06:31,044
+Now the distributed part.
+
+203
+00:06:31,044 --> 00:06:34,604
+A remote is just another repository somewhere else.
+
+204
+00:06:34,604 --> 00:06:37,814
+I have one in a folder called S R V slash git.
+
+205
+00:06:37,814 --> 00:06:40,397
+On a real team it would be on GitHub,
+
+206
+00:06:40,397 --> 00:06:41,723
+with a web address,
+
+207
+00:06:41,723 --> 00:06:43,747
+but the command is identical.
+
+208
+00:06:43,747 --> 00:06:44,864
+Type: git clone,
+
+209
+00:06:44,864 --> 00:06:47,795
+slash S R V slash git slash notes dot git.
+
+210
+00:06:49,345 --> 00:06:54,700
+Git made a full copy: files and the entire history. Go in. Type: CD, notes.
+
+211
+00:06:55,250 --> 00:06:58,919
+Check the history. Type: git log, dash dash one line.
+
+212
+00:06:59,469 --> 00:07:00,809
+The same two commits,
+
+213
+00:07:00,809 --> 00:07:02,150
+with the same hashes.
+
+214
+00:07:02,150 --> 00:07:04,192
+This clone is a complete backup.
+
+215
+00:07:04,192 --> 00:07:05,660
+Where did it come from?
+
+216
+00:07:05,660 --> 00:07:06,745
+Type: git remote,
+
+217
+00:07:06,745 --> 00:07:07,192
+dash V.
+
+218
+00:07:07,742 --> 00:07:11,503
+Origin is the default name for the place you cloned from.
+
+219
+00:07:11,503 --> 00:07:13,681
+Fetch is where you download from,
+
+220
+00:07:13,681 --> 00:07:15,529
+push is where you upload to.
+
+221
+00:07:15,529 --> 00:07:16,717
+Now list branches,
+
+222
+00:07:16,717 --> 00:07:18,169
+including remote ones.
+
+223
+00:07:18,169 --> 00:07:19,290
+Type: git branch,
+
+224
+00:07:19,290 --> 00:07:19,752
+dash A.
+
+225
+00:07:20,302 --> 00:07:21,339
+Your own branch,
+
+226
+00:07:21,339 --> 00:07:21,663
+main,
+
+227
+00:07:21,663 --> 00:07:23,541
+and a remote tracking branch,
+
+228
+00:07:23,541 --> 00:07:24,707
+origin slash main.
+
+229
+00:07:24,707 --> 00:07:30,342
+That second one is Git's memory of where the remote was the last time you talked to it.
+
+230
+00:07:30,342 --> 00:07:33,192
+Your commits stay local until you push them.
+
+231
+00:07:33,192 --> 00:07:36,366
+That separation is the heart of distributed work.
+
+232
+00:07:38,416 --> 00:07:40,523
+Now the same ideas on GitHub,
+
+233
+00:07:40,523 --> 00:07:41,759
+on a real screen.
+
+234
+00:07:41,759 --> 00:07:45,175
+This is a real capture of a private repository,
+
+235
+00:07:45,175 --> 00:07:46,991
+assembled frame by frame,
+
+236
+00:07:46,991 --> 00:07:48,663
+with every click shown.
+
+237
+00:07:48,663 --> 00:07:51,570
+I created an empty repository and chose,
+
+238
+00:07:51,570 --> 00:07:52,878
+create a new file.
+
+239
+00:07:52,878 --> 00:07:54,113
+The editor opens.
+
+240
+00:07:54,113 --> 00:07:56,293
+Name the file read me dot M D.
+
+241
+00:07:56,843 --> 00:08:01,174
+Add a heading and one line of text. When you are ready, click Commit changes.
+
+242
+00:08:01,724 --> 00:08:03,959
+GitHub asks for the commit message.
+
+243
+00:08:03,959 --> 00:08:07,725
+It is the same thing we typed after dash M in the terminal.
+
+244
+00:08:07,725 --> 00:08:08,811
+Say what changed.
+
+245
+00:08:08,811 --> 00:08:10,471
+Then click Commit changes.
+
+246
+00:08:11,021 --> 00:08:11,333
+Done.
+
+247
+00:08:11,333 --> 00:08:13,835
+GitHub made a commit on the main branch.
+
+248
+00:08:13,835 --> 00:08:15,024
+See the short hash,
+
+249
+00:08:15,024 --> 00:08:16,713
+e four eight five c a five,
+
+250
+00:08:16,713 --> 00:08:18,464
+and the counter: one commit.
+
+251
+00:08:18,464 --> 00:08:20,215
+Click it to see the history.
+
+252
+00:08:20,765 --> 00:08:25,309
+The history lists the commit with its message and the same short hash. Open it.
+
+253
+00:08:25,859 --> 00:08:27,520
+Here is the commit itself.
+
+254
+00:08:27,520 --> 00:08:29,564
+Look on the right: zero parents.
+
+255
+00:08:29,564 --> 00:08:30,969
+This is a root commit,
+
+256
+00:08:30,969 --> 00:08:33,907
+exactly like our first commit in the terminal.
+
+257
+00:08:33,907 --> 00:08:36,590
+The green lines are what the commit added.
+
+258
+00:08:37,140 --> 00:08:38,131
+One more place.
+
+259
+00:08:38,131 --> 00:08:39,651
+On the repository page,
+
+260
+00:08:39,651 --> 00:08:43,350
+the Code button shows the address you give to git clone.
+
+261
+00:08:43,350 --> 00:08:43,879
+Copy it,
+
+262
+00:08:43,879 --> 00:08:46,125
+and you can clone this repository,
+
+263
+00:08:46,125 --> 00:08:48,041
+just as we did from a folder.
+
+264
+00:08:48,591 --> 00:08:49,469
+Same objects,
+
+265
+00:08:49,469 --> 00:08:50,279
+same hashes,
+
+266
+00:08:50,279 --> 00:08:51,156
+same history.
+
+267
+00:08:51,156 --> 00:08:55,610
+The terminal and the web page are two windows onto one repository.
+
+268
+00:08:57,960 --> 00:09:03,144
+Your task, in your own Ubuntu virtual machine. Everything you need is in one place.
+
+269
+00:09:03,694 --> 00:09:06,344
+The repository is git hub dot com,
+
+270
+00:09:06,344 --> 00:09:07,903
+slash it dash waves,
+
+271
+00:09:07,903 --> 00:09:09,696
+slash dev ops dash A I.
+
+272
+00:09:09,696 --> 00:09:11,255
+The lab is one file,
+
+273
+00:09:11,255 --> 00:09:13,125
+lab fifty-seven dot S H,
+
+274
+00:09:13,125 --> 00:09:15,619
+in the academy slash lab folder.
+
+275
+00:09:16,169 --> 00:09:17,756
+Install it like before,
+
+276
+00:09:17,756 --> 00:09:19,825
+and source the shortcuts file.
+
+277
+00:09:19,825 --> 00:09:20,929
+Then run lab up.
+
+278
+00:09:20,929 --> 00:09:24,516
+It builds a shared repository called origin dot git,
+
+279
+00:09:24,516 --> 00:09:25,620
+with one commit.
+
+280
+00:09:26,170 --> 00:09:30,735
+One: clone origin dot git into the work folder, as a folder called team.
+
+281
+00:09:31,285 --> 00:09:35,872
+Two: inside your clone, create notes dot text, and make one commit of your own.
+
+282
+00:09:36,422 --> 00:09:38,204
+Three: in answers dot text,
+
+283
+00:09:38,204 --> 00:09:39,260
+write two lines.
+
+284
+00:09:39,260 --> 00:09:39,656
+First,
+
+285
+00:09:39,656 --> 00:09:43,022
+the first seven characters of the root commit hash.
+
+286
+00:09:43,022 --> 00:09:43,483
+Second,
+
+287
+00:09:43,483 --> 00:09:45,595
+how many commits your clone has.
+
+288
+00:09:46,145 --> 00:09:49,644
+Then run lab check. Four lines. All four must say pass.
+
+289
+00:09:50,194 --> 00:09:50,610
+Stuck?
+
+290
+00:09:50,610 --> 00:09:52,068
+Git log shows hashes.
+
+291
+00:09:52,068 --> 00:09:54,428
+The root commit is the oldest one,
+
+292
+00:09:54,428 --> 00:09:55,470
+with no parent.
+
+293
+00:09:55,470 --> 00:09:57,621
+Same method as always: symptom,
+
+294
+00:09:57,621 --> 00:09:58,038
+check,
+
+295
+00:09:58,038 --> 00:09:58,802
+one change,
+
+296
+00:09:58,802 --> 00:09:59,218
+proof.
+
+297
+00:10:01,268 --> 00:10:05,193
+Here is how your work is judged. Six points, and you need all six.
+
+298
+00:10:05,743 --> 00:10:07,578
+The checker shows four pass lines.
+
+299
+00:10:08,128 --> 00:10:11,371
+You cloned the repository, you did not copy the folder.
+
+300
+00:10:11,921 --> 00:10:14,865
+Your commit has a clear message that says what changed.
+
+301
+00:10:15,415 --> 00:10:18,124
+You can explain why origin still has one commit.
+
+302
+00:10:18,674 --> 00:10:22,322
+The root hash and the commit count in answers dot text are right.
+
+303
+00:10:22,872 --> 00:10:25,453
+You ran lab down, and the lab is removed.
+
+304
+00:10:26,003 --> 00:10:27,625
+To pass, you need all six.
+
+305
+00:10:29,675 --> 00:10:35,542
+Your turn, in your own Ubuntu virtual machine. Take your time. Mastery is slow and exact.
+
+306
+00:10:36,092 --> 00:10:38,310
+One: install the lab, and run lab up.
+
+307
+00:10:38,860 --> 00:10:42,060
+Two: clone origin dot git, and look at its history.
+
+308
+00:10:42,610 --> 00:10:45,682
+Three: add notes dot text, stage it, and commit it.
+
+309
+00:10:46,232 --> 00:10:50,030
+Four: write the root hash and the commit count in answers dot text.
+
+310
+00:10:50,580 --> 00:10:53,886
+Five: run lab check. All four lines must say pass.
+
+311
+00:10:54,436 --> 00:10:56,463
+Six: run lab down to clean up.
+
+312
+00:10:57,013 --> 00:10:58,848
+Pause the video, and begin now.
+
+313
+00:11:14,398 --> 00:11:15,273
+Quick check.
+
+314
+00:11:15,823 --> 00:11:17,636
+Why do we call Git distributed?
+
+315
+00:11:18,186 --> 00:11:19,850
+What is the staging area for?
+
+316
+00:11:20,400 --> 00:11:21,808
+What does a commit contain?
+
+317
+00:11:22,358 --> 00:11:24,513
+Why does a root commit have zero parents?
+
+318
+00:11:25,063 --> 00:11:27,593
+Objective covered: M C zero seven,
+
+319
+00:11:27,593 --> 00:11:28,635
+objective one,
+
+320
+00:11:28,635 --> 00:11:32,431
+distributed version control and repository anatomy,
+
+321
+00:11:32,431 --> 00:11:34,961
+in the Git and GitHub masterclass.
+
+322
+00:11:35,511 --> 00:11:37,581
+Pause the video, and answer out loud.
+
+323
+00:11:48,131 --> 00:11:51,309
+Next: staging, history, and ignore files, in depth.
+
+324
+00:11:51,859 --> 00:11:55,187
+If this helped, like, share and subscribe, so you do not miss it.

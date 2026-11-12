@@ -1,0 +1,28 @@
+Lesson 57 of the DevOps Engineering Bootcamp, the first lesson of the Git and GitHub masterclass, from beginner to mastery. You learn why Git is distributed (every copy is a full backup), the four places your work lives (working tree, staging area, repository, remote), then build a repository live on Ubuntu: git config, git init, a look inside the hidden .git folder, git add and git commit with a root commit, and git log. Then you open the object database with git cat-file, prove that an object's name is computed from its content, clone a repository and read its remotes and branches. You then watch the same first commit on GitHub as a real screen capture, with every click shown: create a file, the commit message, the history, the commit page showing zero parents, and the clone address. The lab has a checker that says PASS or FAIL for four checks, a pass/fail rubric, and cleanup.
+
+Chapters
+0:00 Git: version control from zero
+0:39 The big idea
+1:35 Four places for your work
+2:22 git init
+3:24 Stage and commit
+4:37 Inside the database
+6:29 git clone
+7:38 The same commit on GitHub
+8:57 Your lab task
+10:01 Pass or fail rubric
+10:29 Your turn
+11:14 Quick check
+
+Objectives covered: MC07-O01 distributed version control and repository anatomy
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab57.sh and shortcuts57.sh) and academy/lesson57 (INSTALL.txt). Install with: sudo apt install -y git (if needed), then sudo install -m 755 lab57.sh /usr/local/sbin/ and run lab up, lab check and lab down after loading the short name with: source shortcuts57.sh (without it, use sudo lab57.sh up, check, down). You need an Ubuntu virtual machine with root and git. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Git 2.43, run in a private mount setup on the recording computer; the author name and email (Sam Lee) are made up, and the commit dates are fixed so the hashes stay the same between segments. The GitHub segment is a real capture of a private demo repository in a signed-in browser, assembled frame by frame with an animated cursor and yellow highlights added afterwards, so it is labelled on screen as a capture assembled from frames and not as one continuous recording. The lab was run end to end before this lesson: all four checks fail before the work, all four pass after a reference solution, and lab down leaves nothing behind. The on-screen big idea, four places and task screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Python for DevOps mastery evidence, fix four broken scripts https://youtu.be/1hZTi5THEWo
+Next lesson: staging, history, and ignore files, in depth.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#git #github #devops #versioncontrol #ubuntu #devopsbootcamp
