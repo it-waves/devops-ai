@@ -1,0 +1,28 @@
+Lesson 46 of the DevOps Engineering Bootcamp, the mastery scenario for the Bash scripting masterclass. A small team's toolbox has four Bash scripts broken on purpose, and a checker script says PASS or FAIL for each: archive.sh must cope with a space in a file name, backup.sh must fail when the folder is missing, count_errors.sh must count lines and not words, and setup.sh must be safe to run twice. You see where to get the lab, the lab built and checked (four FAIL lines), and the first fault fixed live with four notes: the exact symptom, the cause and the command that proved it, the single change, and the proof afterwards. Then you fix the other three yourself, write the report from the template, and clean up with proof that nothing is left behind.
+
+Chapters
+0:00 Mastery evidence
+0:26 The scenario
+0:56 Get the lab
+1:53 Start the lab
+2:41 Four notes per fault
+3:00 Fault 1 live
+4:20 The report
+4:42 Your three faults
+5:28 Cleanup with proof
+6:14 Pass or fail rubric
+6:40 Your turn
+7:23 Quick check
+
+Objectives covered: MC05 mastery evidence (builds on MC05-O01 to MC05-O09)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab46.sh and shortcuts46.sh) and academy/lesson46 (INSTALL.txt and report_template.md). Install with: sudo install -m 755 lab46.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts46.sh (without it, use sudo lab46.sh up, check, down). You need an Ubuntu virtual machine with root and bash; ShellCheck is a useful extra (sudo apt install shellcheck). Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount setup on the recording computer. The lab was run end to end before this lesson: the four faults make all four checks fail, one set of fixes makes all four pass, and lab down leaves nothing behind. I fix only the first fault on screen, so the scenario is still yours to solve. The lab file names are invented, and lab is a short name I made for sudo lab46.sh. The on-screen guide, scenario and report screens are labelled illustrations, not captures. Typing is timed to the narration and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: Bash deploy, health check and rollback https://youtu.be/3GBH18iO0So
+Next masterclass: MC06 Python for DevOps.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#bash #linux #devops #scripting #troubleshooting #ubuntu #devopsbootcamp

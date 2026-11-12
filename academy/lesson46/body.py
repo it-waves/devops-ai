@@ -1,0 +1,101 @@
+RB = 'REAL RECORDING  ·  Ubuntu 24.04 on this computer'
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('h1', "Mastery evidence. You have learned Bash scripting: variables, tests, loops, pipes, error handling, security, and safe deploys. Now you prove it."),
+  c('h2', "Mastery means someone else could check your work. So this lesson gives you a lab, a checker that says pass or fail, and a report that shows how you thought."),
+  c('h3', "I will build the lab, fix the first broken script live, and leave the other three to you."),
+ ]),
+ ('scenario', [
+  c('sc1', "Meet a small team's toolbox. Four Bash scripts, each one broken on purpose."),
+  c('sc2', "A checker prints pass or fail for four checks."),
+  k('sc3', "One: archive dot S H must cope with a space in a file name."),
+  k('sc4', "Two: backup dot S H must fail, loudly, when the folder is missing."),
+  k('sc5', "Three: count errors dot S H must count lines, not words."),
+  k('sc6', "Four: setup dot S H must be safe to run twice."),
+  c('sc7', "Your mission: four pass lines, with proof for every fix."),
+ ]),
+ ('getlab', [
+  c('g1', "Before we start, here is where everything lives. It is also in the description."),
+  k('g2', "The repository is git hub dot com, slash it dash waves, slash dev ops dash A I."),
+  k('g3', "The lab is one file: lab forty-six dot S H, in the academy slash lab folder. Your report template and install notes are in academy slash lesson forty-six."),
+  k('g4', "Install it in three steps. Clone the repository. Go to the lab folder. Install the script into slash U S R slash local slash S bin."),
+  c('g5', "Three commands run everything. Lab up builds the problems. Lab check prints pass or fail for each. Lab down removes it all."),
+  k('g6', "Lab is a short name. Source the shortcuts file, and it runs sue do, lab forty-six dot S H, for you."),
+  c('g7', "You need an Ubuntu virtual machine with root and bash. Shell Check is a useful extra. Run it only in your own machine."),
+ ]),
+ ('start', [
+  k('st1', "Now for real. I have cloned the repository, and the lab files are in a folder called lab. Type: C D, lab."),
+  k('st2', "List what is here. Type: L S."),
+  k('st3', "The lab script and the shortcuts file. Install the script. Type: sue do, install, dash m, seven five five, lab forty-six dot S H, slash U S R slash local slash S bin. Dash m seven five five makes it executable."),
+  k('st4', "Load the short names. Type: source, shortcuts forty-six dot S H."),
+  k('st5', "Build the lab. Type: lab up."),
+  k('st6', "Now ask the checker. Type: lab check."),
+  c('st7', "Four FAIL lines. That is your starting point. Copy them into your report."),
+ ]),
+ ('notes', [
+  c('n1', "Keep four notes for every fault."),
+  c('n2', "One: the symptom, in the exact words of the error."),
+  c('n3', "Two: the cause, and the command that proved it."),
+  c('n4', "Three: the fix. One change only."),
+  c('n5', "Four: the proof, the output after the fix."),
+  c('n6', "Notes turn a lucky fix into evidence."),
+ ]),
+ ('fix1', [
+  k('f1', "Fault one, live. The checker says archive dot S H does not cope with a space in a name. Go to the scripts folder. Type: C D, slash opt, slash lab forty-six, slash bin."),
+  k('f2', "Run the script the way the checker does, with a file name that has a space, in quotes. Type: dot slash archive dot S H, and the name."),
+  k('f3', "Note one, the symptom: two C P errors, and then the script says archived anyway. It reported success while failing. Now find the cause with proof, do not guess. Type: bash dash x, archive dot S H, and the same name."),
+  k('f4', "Note two, the cause. Look at the C P line. The shell split the name into two words, daily and notes dot text. The variable was not in quotes. This trace is the proof. Note three, one change. Type: sed, dash i, and the substitution that puts quotes around dollar S R C."),
+  k('f5', "Note four, the proof. Run the script again, with the very same name, and watch what the C P step does this time. Type: dot slash archive dot S H, and the name."),
+  k('f6', "One file copied, and archived printed once. Now ask the checker. Type: lab check."),
+  c('f7', "One PASS, three FAIL. One fault down, one change, with proof. Now it is your turn for the other three."),
+ ]),
+ ('report', [
+  c('r1', "Your report has five parts. The template is in the lesson folder."),
+  c('r2', "Setup: the checker output at the start."),
+  c('r3', "Each fault, with its four notes."),
+  c('r4', "The final checker output, all four lines saying pass."),
+  c('r5', "Where you got stuck, and what unstuck you. Honest notes are worth more than a perfect story."),
+  c('r6', "And the cleanup proof, which we do next."),
+ ]),
+ ('hints', [
+  c('y1', "Your three faults. No spoilers, only directions."),
+  c('y2', "Check two: backup dot S H prints finished even when the folder is missing. Run it with a missing folder, then ask what exit code it returned. Read about set dash e, dash u, and pipefail."),
+  c('y3', "Check three: count errors dot S H prints four, but only three log lines have ERROR. A for loop over a command substitution reads words, not lines. Which loop reads lines?"),
+  c('y4', "Check four: run setup dot S H twice, then look at the config file. What makes adding a line safe to repeat? Think idempotent."),
+  c('y5', "Shell Check can point at faults one and three. Same method every time: symptom, check, fix one thing, verify."),
+ ]),
+ ('cleanup', [
+  k('c1', "When you finish, clean up, and prove it. Type: lab down."),
+  k('c2', "Proof one: is the lab folder gone? Type: L S, slash opt, slash lab forty-six."),
+  k('c3', "No such file or directory. Proof two: count it in opt. Type: L S, slash opt, pipe, grep dash c, lab forty-six."),
+  k('c4', "Zero. Now remove the lab script itself. Type: sue do, R M, slash U S R slash local slash S bin slash lab forty-six dot S H."),
+  k('c5', "Proof three: is anything left in S bin? Type: L S, slash U S R slash local slash S bin, pipe, W C, dash l."),
+  c('c6', "Zero. Everything is removed. Paste these proofs into your report."),
+ ]),
+ ('rubric', [
+  c('b1', "Here is how your work is judged. Six points, and you need all six."),
+  c('b2', "The checker shows four pass lines."), c('b3', "Every fault has a symptom, a cause, a fix, and a proof."),
+  c('b4', "You changed one thing at a time."), c('b5', "The report is complete, including where you got stuck."),
+  c('b6', "The cleanup proof shows nothing left behind."), c('b7', "You ran it only in your own virtual machine."), c('b8', "To pass, you need all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine. Take your time. Mastery is slow and exact."),
+  c('z2', "One: clone the repository and install the lab."),
+  c('z3', "Two: run lab up, and save the checker output."),
+  c('z4', "Three: fix the three remaining faults, with four notes each."),
+  c('z5', "Four: write the report from the template."),
+  c('z6', "Five: run the checker. All four lines must say pass."),
+  c('z7', "Six: clean up, and paste the proof."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "Which option shows each command a script runs?"), c('f13', "What are the four notes for a fault?"),
+  c('f14', "What makes a script safe to run twice?"), c('f15', "What proves your cleanup worked?"),
+  c('f16', "Mastery evidence covered: M C zero five, building on objectives one to nine, in the Bash scripting masterclass."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next masterclass: Python for DevOps."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'h3': 0.5, 'sc7': 0.5, 'g7': 0.8, 'st5': 2.0, 'st6': 1.0, 'st7': 0.5, 'n6': 0.5, 'f7': 0.5, 'f5': 0.2, 'r6': 0.4, 'y5': 0.5, 'c1': 1.0, 'c6': 0.5, 'b8': 0.5, 'z8': 14.0, 'f17': 10.0}
+CHAP = {'scenario': 'The scenario', 'getlab': 'Get the lab', 'start': 'Start the lab', 'notes': 'Four notes per fault', 'fix1': 'Fault 1 live', 'report': 'The report', 'hints': 'Your three faults', 'cleanup': 'Cleanup with proof', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}
