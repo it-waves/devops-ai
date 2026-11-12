@@ -1,0 +1,12 @@
+Install the lab (needs an Ubuntu virtual machine with root and git):
+  sudo apt install -y git git-filter-repo   # skip what is already installed
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab64.sh /usr/local/sbin/
+  source shortcuts64.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab64/work: a repository with a fake password committed by mistake
+  lab check               # four FAIL lines at the start; your goal is four PASS lines
+  lab down                # cleanup when finished (also removes ~/.ssh/lab64_key and its .pub)
+Without the shortcut, use: sudo lab64.sh up | check | down
+Your task (in /opt/lab64/work): 1 echo .env >> .gitignore, git rm --cached .env, commit  2 rewrite history: git filter-repo --path .env --invert-paths --force (only safe here because this is a practice repository)  3 ssh-keygen -t ed25519 -f ~/.ssh/lab64_key (run it as your normal user, not with sudo)  4 write the word rotate in /opt/lab64/answers.txt: the first thing you do when a secret leaks.
+If git asks who you are: git config --global user.name "Your Name" and git config --global user.email you@example.com
+Run it only in your own virtual machine. It creates only /opt/lab64 and the two lab64_key files; lab down removes them, and you remove the installed script with: sudo rm /usr/local/sbin/lab64.sh

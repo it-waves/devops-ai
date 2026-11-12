@@ -1,0 +1,26 @@
+Lesson 64 of the DevOps Engineering Bootcamp, the eighth lesson of the Git and GitHub masterclass, from beginner to mastery. You learn how secrets leak into Git, why deleting a file does not remove a secret from history, and the three rules: keep secrets out, rotate first when one leaks, and give the least access that works. Live on Ubuntu: a fake password committed by mistake, git rm --cached, .gitignore, git log -S to search history, and git filter-repo to rewrite history. Then S S H keys with ssh-keygen -t ed25519 (public half shared, private half never), and on a live screen recording: creating a personal access token with a single read-only scope, and giving a teammate the smallest repository role (Read, Write or Admin). The lab has a checker that says PASS or FAIL for four checks, a pass/fail rubric, and cleanup.
+
+Chapters
+0:00 Keep your secrets secret
+0:29 Secrets, and three rules
+1:15 A leaked password
+2:50 SSH keys
+3:41 Access tokens
+4:24 Repository roles
+4:55 Your lab task
+5:43 Pass or fail rubric
+6:07 Your turn
+6:45 Quick check
+
+Objectives covered: MC07-O08 secrets, credentials and repository access
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab64.sh and shortcuts64.sh) and academy/lesson64 (INSTALL.txt). Install with: sudo apt install -y git git-filter-repo (if needed), then sudo install -m 755 lab64.sh /usr/local/sbin/ and run lab up, lab check and lab down after loading the short name with: source shortcuts64.sh (without it, use sudo lab64.sh up, check, down). You need an Ubuntu virtual machine with root. Only run it in your own virtual machine. In a real incident, rotate the leaked secret first: rewriting history alone does not make a leaked secret safe.
+
+Honest notes: the terminal segments are real recordings of real commands on Ubuntu 24.04 with Git 2.43, run in a private mount setup on the recording computer; the password and the keys in them are fake and thrown away. The token and repository-role screens are a real, continuous full-screen recording of a real browser with a real mouse and keyboard, on Gitea (a free, open-source Git server) running on the recording computer, not on github.com. GitHub uses the same ideas with different menus: tokens are under Settings, Developer settings, Personal access tokens, and roles are under a repository's Settings, Collaborators. The token shown on screen was created on that private server and discarded. The on-screen model, task and rubric screens are labelled illustrations. The lab was run end to end before this lesson: all four checks fail before the work, all four pass after a reference solution, and lab down leaves nothing behind. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Git restore, revert, reset and reflog https://youtu.be/ZNT4cgrRmFk
+Next lesson: a team release workflow with automated checks.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#git #github #devops #gitsecrets #sshkeys #devopsbootcamp

@@ -1,0 +1,695 @@
+1
+00:00:00,500 --> 00:00:05,323
+One password in the wrong place can cost a company its whole cloud account.
+
+2
+00:00:05,323 --> 00:00:08,024
+Bots scan public repositories for secrets,
+
+3
+00:00:08,024 --> 00:00:09,375
+often within minutes.
+
+4
+00:00:09,925 --> 00:00:12,414
+Today you learn how secrets leak into Git,
+
+5
+00:00:12,414 --> 00:00:14,251
+what to do the moment one does,
+
+6
+00:00:14,251 --> 00:00:17,925
+and how to give people and programs only the access they need.
+
+7
+00:00:18,475 --> 00:00:24,000
+You will use a leaked password, an S S H key, an access token, and repository roles.
+
+8
+00:00:24,550 --> 00:00:27,366
+As always, there is a lab with a checker at the end.
+
+9
+00:00:29,416 --> 00:00:33,253
+A secret is anything that proves who you are: a password,
+
+10
+00:00:33,253 --> 00:00:33,994
+an API key,
+
+11
+00:00:33,994 --> 00:00:34,532
+a token,
+
+12
+00:00:34,532 --> 00:00:35,475
+a private key.
+
+13
+00:00:36,025 --> 00:00:37,140
+Git never forgets.
+
+14
+00:00:37,140 --> 00:00:38,814
+Once a secret is committed,
+
+15
+00:00:38,814 --> 00:00:40,301
+it lives in the history,
+
+16
+00:00:40,301 --> 00:00:43,214
+even if you delete the file in the next commit.
+
+17
+00:00:43,764 --> 00:00:45,702
+Rule one: keep secrets out.
+
+18
+00:00:45,702 --> 00:00:47,568
+Use environment variables,
+
+19
+00:00:47,568 --> 00:00:50,008
+a dot E N V file that Git ignores,
+
+20
+00:00:50,008 --> 00:00:51,444
+or a secret manager.
+
+21
+00:00:51,994 --> 00:00:53,477
+Rule two: if one leaks,
+
+22
+00:00:53,477 --> 00:00:54,766
+assume it is stolen.
+
+23
+00:00:54,766 --> 00:00:55,798
+Rotate it first,
+
+24
+00:00:55,798 --> 00:00:58,893
+which means make a new one and kill the old one.
+
+25
+00:00:58,893 --> 00:01:00,698
+Only then clean the history.
+
+26
+00:01:01,248 --> 00:01:02,757
+Rule three: least access.
+
+27
+00:01:02,757 --> 00:01:06,923
+An S S H key pair has a private half that never leaves your computer,
+
+28
+00:01:06,923 --> 00:01:08,613
+and a public half you share.
+
+29
+00:01:08,613 --> 00:01:10,907
+Tokens should have the smallest scope,
+
+30
+00:01:10,907 --> 00:01:12,960
+and roles the smallest permission.
+
+31
+00:01:15,010 --> 00:01:20,130
+A real mistake, live. A small app repository. Go in. Type: CD, app.
+
+32
+00:01:20,680 --> 00:01:24,435
+Look at the history. Type: git log, dash dash one line.
+
+33
+00:01:24,985 --> 00:01:30,659
+Add database settings. That sounds risky. Look at the file. Type: cat, dot E N V.
+
+34
+00:01:31,209 --> 00:01:32,592
+A database password,
+
+35
+00:01:32,592 --> 00:01:33,283
+committed.
+
+36
+00:01:33,283 --> 00:01:34,459
+This one is fake,
+
+37
+00:01:34,459 --> 00:01:36,118
+but the mistake is real.
+
+38
+00:01:36,118 --> 00:01:37,224
+First rotate it,
+
+39
+00:01:37,224 --> 00:01:38,123
+in real life.
+
+40
+00:01:38,123 --> 00:01:40,058
+Then stop tracking the file.
+
+41
+00:01:40,058 --> 00:01:40,819
+Type: echo,
+
+42
+00:01:40,819 --> 00:01:41,234
+quote,
+
+43
+00:01:41,234 --> 00:01:41,925
+dot E N V,
+
+44
+00:01:41,925 --> 00:01:42,340
+quote,
+
+45
+00:01:42,340 --> 00:01:43,100
+two arrows,
+
+46
+00:01:43,100 --> 00:01:44,137
+dot git ignore.
+
+47
+00:01:44,687 --> 00:01:51,194
+Remove it from Git, but keep the file on disk. Type: git R M, dash dash cached, dot E N V.
+
+48
+00:01:51,744 --> 00:01:55,371
+Stage the ignore file. Type: git add, dot git ignore.
+
+49
+00:01:55,921 --> 00:02:00,550
+Commit. Type: git commit, dash M, quote, Stop tracking dot E N V, quote.
+
+50
+00:02:01,100 --> 00:02:01,516
+Fixed?
+
+51
+00:02:01,516 --> 00:02:04,426
+Search the whole history for the password.
+
+52
+00:02:04,426 --> 00:02:05,396
+Type: git log,
+
+53
+00:02:05,396 --> 00:02:05,880
+dash S,
+
+54
+00:02:05,880 --> 00:02:07,058
+demo dash secret,
+
+55
+00:02:07,058 --> 00:02:08,375
+dash dash one line.
+
+56
+00:02:08,925 --> 00:02:09,633
+Still there!
+
+57
+00:02:09,633 --> 00:02:11,875
+The old commit still holds the secret,
+
+58
+00:02:11,875 --> 00:02:13,940
+and anyone with a copy can read it.
+
+59
+00:02:13,940 --> 00:02:15,887
+This is why rotating comes first.
+
+60
+00:02:15,887 --> 00:02:18,129
+Now rewrite history without that file.
+
+61
+00:02:18,129 --> 00:02:19,723
+Type: git filter dash repo,
+
+62
+00:02:19,723 --> 00:02:20,608
+dash dash path,
+
+63
+00:02:20,608 --> 00:02:21,198
+dot E N V,
+
+64
+00:02:21,198 --> 00:02:22,850
+dash dash invert dash paths,
+
+65
+00:02:22,850 --> 00:02:23,794
+dash dash force.
+
+66
+00:02:24,344 --> 00:02:29,635
+Search again. Type: git log, dash S, demo dash secret, dash dash one line.
+
+67
+00:02:30,185 --> 00:02:34,729
+Nothing found. Check the history. Type: git log, dash dash one line.
+
+68
+00:02:35,279 --> 00:02:37,063
+The secret commit is gone.
+
+69
+00:02:37,063 --> 00:02:38,985
+On a real shared repository,
+
+70
+00:02:38,985 --> 00:02:40,564
+everyone must re-clone,
+
+71
+00:02:40,564 --> 00:02:43,035
+and the old password must stay dead.
+
+72
+00:02:43,035 --> 00:02:47,908
+The force flag is only safe here because this is a practice repository.
+
+73
+00:02:49,958 --> 00:02:53,492
+Now S S H keys: log in without a password,
+
+74
+00:02:53,492 --> 00:02:54,081
+safely.
+
+75
+00:02:54,081 --> 00:02:55,428
+Make the folder.
+
+76
+00:02:55,428 --> 00:02:56,606
+Type: M K dir,
+
+77
+00:02:56,606 --> 00:02:57,195
+dash P,
+
+78
+00:02:57,195 --> 00:02:59,046
+tilde slash dot S S H.
+
+79
+00:02:59,596 --> 00:03:00,932
+Generate a key pair.
+
+80
+00:03:00,932 --> 00:03:02,601
+Type: S S H dash key gen,
+
+81
+00:03:02,601 --> 00:03:03,068
+dash T,
+
+82
+00:03:03,068 --> 00:03:04,871
+E D two five five one nine,
+
+83
+00:03:04,871 --> 00:03:05,339
+dash C,
+
+84
+00:03:05,339 --> 00:03:06,875
+sam at example dot com,
+
+85
+00:03:06,875 --> 00:03:07,342
+dash F,
+
+86
+00:03:07,342 --> 00:03:11,215
+tilde slash dot S S H slash lab sixty-four underscore key,
+
+87
+00:03:11,215 --> 00:03:11,683
+dash N,
+
+88
+00:03:11,683 --> 00:03:12,417
+two quotes.
+
+89
+00:03:12,967 --> 00:03:17,618
+Two files were made. Look. Type: L S, tilde slash dot S S H.
+
+90
+00:03:18,168 --> 00:03:21,116
+The one ending in dot pub is the public key.
+
+91
+00:03:21,116 --> 00:03:23,729
+This is the one you paste into git hub.
+
+92
+00:03:23,729 --> 00:03:24,398
+Type: cat,
+
+93
+00:03:24,398 --> 00:03:25,269
+the key path,
+
+94
+00:03:25,269 --> 00:03:25,805
+dot pub.
+
+95
+00:03:26,355 --> 00:03:28,339
+The other file is the private key.
+
+96
+00:03:28,339 --> 00:03:29,214
+Never share it,
+
+97
+00:03:29,214 --> 00:03:30,147
+never commit it.
+
+98
+00:03:30,147 --> 00:03:31,780
+Peek at its first line only.
+
+99
+00:03:31,780 --> 00:03:32,422
+Type: head,
+
+100
+00:03:32,422 --> 00:03:33,064
+dash N one,
+
+101
+00:03:33,064 --> 00:03:33,822
+the key path.
+
+102
+00:03:34,372 --> 00:03:35,153
+In real life,
+
+103
+00:03:35,153 --> 00:03:37,315
+always set a passphrase on your key.
+
+104
+00:03:37,315 --> 00:03:39,897
+We skipped it only to keep this demo short.
+
+105
+00:03:41,947 --> 00:03:43,773
+Programs need access too.
+
+106
+00:03:43,773 --> 00:03:46,766
+On git hub it is a personal access token.
+
+107
+00:03:46,766 --> 00:03:48,373
+This demo is on Gitea,
+
+108
+00:03:48,373 --> 00:03:50,125
+which has the same idea.
+
+109
+00:03:50,125 --> 00:03:51,513
+Open your settings,
+
+110
+00:03:51,513 --> 00:03:52,827
+then Applications.
+
+111
+00:03:58,777 --> 00:04:02,361
+Give the token a name that says what it is for: CI read only.
+
+112
+00:04:02,911 --> 00:04:03,938
+Now the scopes.
+
+113
+00:04:03,938 --> 00:04:06,059
+Everything starts at No Access.
+
+114
+00:04:06,059 --> 00:04:08,797
+Give the one thing it needs: repository,
+
+115
+00:04:08,797 --> 00:04:09,482
+read only.
+
+116
+00:04:10,032 --> 00:04:11,161
+Generate the token.
+
+117
+00:04:11,161 --> 00:04:12,171
+It is shown once.
+
+118
+00:04:12,171 --> 00:04:14,250
+Copy it into your secret store now,
+
+119
+00:04:14,250 --> 00:04:16,389
+because you will never see it again.
+
+120
+00:04:16,939 --> 00:04:19,377
+Treat it like a password: never in code,
+
+121
+00:04:19,377 --> 00:04:20,352
+never in a chat.
+
+122
+00:04:20,352 --> 00:04:22,486
+And revoke it when the job is done.
+
+123
+00:04:24,536 --> 00:04:28,739
+Now people. Open the repository, then Settings, then Collaborators.
+
+124
+00:04:32,389 --> 00:04:33,322
+Alex can write.
+
+125
+00:04:33,322 --> 00:04:35,812
+That is right for a teammate who pushes.
+
+126
+00:04:35,812 --> 00:04:37,679
+For a reviewer who only reads,
+
+127
+00:04:37,679 --> 00:04:38,426
+we use Read.
+
+128
+00:04:38,976 --> 00:04:42,987
+Change Alex to Read. The menu offers Read, Write, and Admin.
+
+129
+00:04:46,337 --> 00:04:49,967
+Give people the smallest role that lets them do their job.
+
+130
+00:04:49,967 --> 00:04:51,970
+Admin can delete the repository,
+
+131
+00:04:51,970 --> 00:04:53,910
+so keep it for very few people.
+
+132
+00:04:55,960 --> 00:04:58,733
+Your task, in your own Ubuntu virtual machine.
+
+133
+00:04:59,283 --> 00:05:01,776
+The lab is lab sixty-four dot S H,
+
+134
+00:05:01,776 --> 00:05:05,516
+in the academy slash lab folder of git hub dot com,
+
+135
+00:05:05,516 --> 00:05:06,982
+slash it dash waves,
+
+136
+00:05:06,982 --> 00:05:08,669
+slash dev ops dash A I.
+
+137
+00:05:08,669 --> 00:05:10,355
+Install it like before,
+
+138
+00:05:10,355 --> 00:05:11,529
+then run lab up.
+
+139
+00:05:12,079 --> 00:05:16,111
+It builds a repository where a fake password was committed by mistake.
+
+140
+00:05:16,661 --> 00:05:20,693
+One: stop tracking dot E N V, and list it in dot git ignore.
+
+141
+00:05:21,243 --> 00:05:23,867
+Two: rewrite the history so the secret is gone.
+
+142
+00:05:24,417 --> 00:05:31,009
+Three: make an E D two five five one nine S S H key named lab sixty-four underscore key.
+
+143
+00:05:31,559 --> 00:05:33,132
+Four: in answers dot text,
+
+144
+00:05:33,132 --> 00:05:37,127
+write the first thing you do when a secret leaks: the word rotate.
+
+145
+00:05:37,677 --> 00:05:41,367
+Then run lab check. Four pass lines. Rotate, then clean.
+
+146
+00:05:43,417 --> 00:05:45,401
+Six points, and you need all six.
+
+147
+00:05:45,951 --> 00:05:47,786
+The checker shows four pass lines.
+
+148
+00:05:48,336 --> 00:05:50,362
+The secret is gone from every commit.
+
+149
+00:05:50,912 --> 00:05:53,920
+Your private key stays private, and is never committed.
+
+150
+00:05:54,470 --> 00:05:57,521
+You can explain why rotate comes before cleaning history.
+
+151
+00:05:58,071 --> 00:06:01,399
+You can name the smallest token scope or role for a job.
+
+152
+00:06:01,949 --> 00:06:03,592
+You ran lab down to clean up.
+
+153
+00:06:04,142 --> 00:06:05,763
+To pass, you need all six.
+
+154
+00:06:07,813 --> 00:06:10,650
+Your turn, in your own Ubuntu virtual machine.
+
+155
+00:06:11,200 --> 00:06:13,419
+One: install the lab, and run lab up.
+
+156
+00:06:13,969 --> 00:06:16,252
+Two: ignore and untrack dot E N V.
+
+157
+00:06:16,802 --> 00:06:19,447
+Three: rewrite history with git filter repo.
+
+158
+00:06:19,997 --> 00:06:22,152
+Four: generate the S S H key.
+
+159
+00:06:22,702 --> 00:06:25,262
+Five: write the answer, and run lab check.
+
+160
+00:06:25,812 --> 00:06:27,284
+Six: run lab down.
+
+161
+00:06:27,834 --> 00:06:29,668
+Pause the video, and begin now.
+
+162
+00:06:45,218 --> 00:06:46,093
+Quick check.
+
+163
+00:06:46,643 --> 00:06:49,949
+Why does deleting a file not remove a secret from Git?
+
+164
+00:06:50,499 --> 00:06:52,569
+What do you do first when a secret leaks?
+
+165
+00:06:53,119 --> 00:06:55,721
+Which half of an S S H key pair do you share?
+
+166
+00:06:56,271 --> 00:06:57,466
+What is least access?
+
+167
+00:06:58,016 --> 00:07:00,618
+Objective covered: M C zero seven,
+
+168
+00:07:00,618 --> 00:07:01,842
+objective eight,
+
+169
+00:07:01,842 --> 00:07:02,454
+secrets,
+
+170
+00:07:02,454 --> 00:07:03,373
+credentials,
+
+171
+00:07:03,373 --> 00:07:05,056
+and repository access.
+
+172
+00:07:05,606 --> 00:07:07,675
+Pause the video, and answer out loud.
+
+173
+00:07:18,225 --> 00:07:21,340
+Next: a team release workflow with automated checks.
+
+174
+00:07:21,890 --> 00:07:25,218
+If this helped, like, share and subscribe, so you do not miss it.
