@@ -1,0 +1,24 @@
+Lesson 54 of the DevOps Engineering Bootcamp, the eighth lesson of the Python for DevOps masterclass. You learn to write cloud SDK code with least privilege. Every demo is typed live on Ubuntu 24.04: a least privilege IAM policy (list one bucket, get objects only inside it), a small audit script that flags a star in Action or Resource and exits with code 1 so a pipeline can block it, boto3 code that lists objects in a bucket and catches ClientError, all run against moto, a free mock of AWS, so no cloud account is needed. You also learn how boto3 finds credentials (environment variables, the credentials file, then a role) and why a key never belongs in your code. The lesson ends with a lab whose checker uses moto, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Cloud SDKs, least privilege
+0:24 Least privilege, SDKs, moto
+1:33 Policies and the audit
+2:31 boto3 against moto
+3:42 Get the lab and task
+4:46 Pass or fail rubric
+5:16 Your turn
+6:06 Quick check
+
+Objectives covered: MC06-O08
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself, inside your virtual environment with pip install boto3 moto. Lab files: github.com/it-waves/devops-ai, folder academy/lesson54 (TASK.md and the checker check54.sh). If you ever try a real cloud account, use free tier resources only, keep policies least privilege, and delete everything you created when you finish so nothing keeps costing money. The next lesson is a tested inventory validation utility.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Python 3.12.3, boto3 and moto, run in a private mount setup on the recording computer. The example files (policy.json, bad.json, audit.py, s3list.py and s3miss.py) were prepared before recording and shown with cat, and boto3 and moto were installed in the virtual environment beforehand, so the pip install step is described, not shown. No real cloud account was used. The overview cards are illustrations, not captures. Typing is timed to the narration, and the yellow highlights were added afterwards. The checker was tested with a reference solution, an empty folder and a weak solution, but your own run of the lab is unverified until you do it.
+
+Previous lesson: https://youtu.be/kTAizqRfkx0
+Next lesson: a tested inventory validation utility.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#python #pythonfordevops #boto3 #aws #leastprivilege #devopsbootcamp
