@@ -1,0 +1,987 @@
+1
+00:00:00,500 --> 00:00:03,359
+Last lesson you built a clean Python project.
+
+2
+00:00:03,359 --> 00:00:06,217
+Today you write the code that goes inside it.
+
+3
+00:00:06,767 --> 00:00:12,527
+Five building blocks. Types. Collections. Conditions and loops. Functions. And modules.
+
+4
+00:00:13,077 --> 00:00:17,749
+Every demo is typed live on Ubuntu twenty-four oh four, so you can follow along.
+
+5
+00:00:19,799 --> 00:00:23,916
+Why Python for DevOps? Shell is great for gluing commands together.
+
+6
+00:00:24,466 --> 00:00:26,883
+But the moment your data has structure,
+
+7
+00:00:26,883 --> 00:00:27,999
+a list of servers,
+
+8
+00:00:27,999 --> 00:00:29,115
+a map of settings,
+
+9
+00:00:29,115 --> 00:00:30,478
+an answer from an API,
+
+10
+00:00:30,478 --> 00:00:31,656
+shell gets painful.
+
+11
+00:00:32,206 --> 00:00:36,643
+Python gives you clear data types, readable errors, and code you can test.
+
+12
+00:00:37,193 --> 00:00:42,932
+And a lot of DevOps data is already in the shape Python understands: lists and dictionaries.
+
+13
+00:00:43,482 --> 00:00:47,770
+So these five building blocks are the base for every tool in this masterclass.
+
+14
+00:00:49,820 --> 00:00:50,266
+First,
+
+15
+00:00:50,266 --> 00:00:50,712
+types.
+
+16
+00:00:50,712 --> 00:00:53,090
+Start Python's interactive mode,
+
+17
+00:00:53,090 --> 00:00:54,501
+called the R E P L.
+
+18
+00:00:54,501 --> 00:00:55,913
+Type: python three,
+
+19
+00:00:55,913 --> 00:00:56,433
+dash Q.
+
+20
+00:00:57,983 --> 00:01:01,103
+Three greater-than signs is the Python prompt.
+
+21
+00:01:01,103 --> 00:01:02,460
+Store a port number.
+
+22
+00:01:02,460 --> 00:01:03,206
+Type: port,
+
+23
+00:01:03,206 --> 00:01:03,681
+equals,
+
+24
+00:01:03,681 --> 00:01:05,173
+eight zero eight zero.
+
+25
+00:01:05,723 --> 00:01:06,895
+Nothing printed,
+
+26
+00:01:06,895 --> 00:01:08,360
+the value is stored.
+
+27
+00:01:08,360 --> 00:01:10,044
+Every value has a type.
+
+28
+00:01:10,044 --> 00:01:10,850
+Ask Python.
+
+29
+00:01:10,850 --> 00:01:11,656
+Type: type,
+
+30
+00:01:11,656 --> 00:01:12,608
+open bracket,
+
+31
+00:01:12,608 --> 00:01:12,974
+port,
+
+32
+00:01:12,974 --> 00:01:14,000
+close bracket.
+
+33
+00:01:14,550 --> 00:01:19,947
+Class int, a whole number. Now some text. Type: name, equals, quote, web one, quote.
+
+34
+00:01:20,497 --> 00:01:26,172
+Text goes in quotes. Ask its type. Type: type, open bracket, name, close bracket.
+
+35
+00:01:26,722 --> 00:01:27,435
+Class str,
+
+36
+00:01:27,435 --> 00:01:28,076
+a string.
+
+37
+00:01:28,076 --> 00:01:34,777
+Now a trap that bites DevOps engineers all the time: environment variables are always strings.
+
+38
+00:01:34,777 --> 00:01:37,130
+Compare the number with the text.
+
+39
+00:01:37,130 --> 00:01:37,914
+Type: port,
+
+40
+00:01:37,914 --> 00:01:38,912
+equals equals,
+
+41
+00:01:38,912 --> 00:01:39,339
+quote,
+
+42
+00:01:39,339 --> 00:01:40,908
+eight zero eight zero,
+
+43
+00:01:40,908 --> 00:01:41,335
+quote.
+
+44
+00:01:41,885 --> 00:01:42,297
+False.
+
+45
+00:01:42,297 --> 00:01:47,780
+The number eight thousand eighty is not equal to the text eight thousand eighty.
+
+46
+00:01:47,780 --> 00:01:48,946
+Convert the text.
+
+47
+00:01:48,946 --> 00:01:49,631
+Type: int,
+
+48
+00:01:49,631 --> 00:01:50,522
+open bracket,
+
+49
+00:01:50,522 --> 00:01:50,933
+quote,
+
+50
+00:01:50,933 --> 00:01:52,441
+eight zero eight zero,
+
+51
+00:01:52,441 --> 00:01:52,853
+quote,
+
+52
+00:01:52,853 --> 00:01:53,812
+close bracket,
+
+53
+00:01:53,812 --> 00:01:54,429
+plus one.
+
+54
+00:01:54,979 --> 00:01:56,913
+Eight thousand eighty-one.
+
+55
+00:01:56,913 --> 00:01:59,070
+Int turns text into a number.
+
+56
+00:01:59,070 --> 00:02:00,409
+Leave the R E P L.
+
+57
+00:02:00,409 --> 00:02:01,227
+Type: exit,
+
+58
+00:02:01,227 --> 00:02:02,194
+open bracket,
+
+59
+00:02:02,194 --> 00:02:03,235
+close bracket.
+
+60
+00:02:04,385 --> 00:02:05,931
+Remember: types matter.
+
+61
+00:02:05,931 --> 00:02:08,284
+Use int to turn text into a number,
+
+62
+00:02:08,284 --> 00:02:10,636
+and str to turn a number into text.
+
+63
+00:02:12,686 --> 00:02:17,123
+Next, collections. Start Python again. Type: python three, dash Q.
+
+64
+00:02:18,673 --> 00:02:20,564
+A list holds items in order.
+
+65
+00:02:20,564 --> 00:02:21,374
+Type: ports,
+
+66
+00:02:21,374 --> 00:02:21,847
+equals,
+
+67
+00:02:21,847 --> 00:02:22,860
+square bracket,
+
+68
+00:02:22,860 --> 00:02:23,333
+eighty,
+
+69
+00:02:23,333 --> 00:02:23,738
+comma,
+
+70
+00:02:23,738 --> 00:02:24,886
+four forty-three,
+
+71
+00:02:24,886 --> 00:02:25,291
+comma,
+
+72
+00:02:25,291 --> 00:02:26,237
+eighty eighty,
+
+73
+00:02:26,237 --> 00:02:27,655
+close square bracket.
+
+74
+00:02:28,205 --> 00:02:33,410
+Add an item. Type: ports dot append, open bracket, twenty-two, close bracket.
+
+75
+00:02:33,960 --> 00:02:35,901
+Look at the list. Type: ports.
+
+76
+00:02:36,451 --> 00:02:37,279
+Four items.
+
+77
+00:02:37,279 --> 00:02:39,084
+Counting starts at zero,
+
+78
+00:02:39,084 --> 00:02:41,490
+so the first item is index zero.
+
+79
+00:02:41,490 --> 00:02:42,393
+Type: ports,
+
+80
+00:02:42,393 --> 00:02:43,521
+square bracket,
+
+81
+00:02:43,521 --> 00:02:43,897
+zero.
+
+82
+00:02:44,447 --> 00:02:44,964
+Eighty.
+
+83
+00:02:44,964 --> 00:02:48,143
+Now a dictionary: names paired with values,
+
+84
+00:02:48,143 --> 00:02:49,326
+in curly braces.
+
+85
+00:02:49,326 --> 00:02:50,287
+Type: server,
+
+86
+00:02:50,287 --> 00:02:50,805
+equals,
+
+87
+00:02:50,805 --> 00:02:51,249
+brace,
+
+88
+00:02:51,249 --> 00:02:52,505
+quote name quote,
+
+89
+00:02:52,505 --> 00:02:52,949
+colon,
+
+90
+00:02:52,949 --> 00:02:54,428
+quote web one quote,
+
+91
+00:02:54,428 --> 00:02:54,871
+comma,
+
+92
+00:02:54,871 --> 00:02:56,202
+quote C P U quote,
+
+93
+00:02:56,202 --> 00:02:56,646
+colon,
+
+94
+00:02:56,646 --> 00:02:57,533
+seventy-two,
+
+95
+00:02:57,533 --> 00:02:58,420
+close brace.
+
+96
+00:02:58,970 --> 00:03:00,938
+Look up a value by its name.
+
+97
+00:03:00,938 --> 00:03:01,852
+Type: server,
+
+98
+00:03:01,852 --> 00:03:02,906
+square bracket,
+
+99
+00:03:02,906 --> 00:03:04,171
+quote C P U quote,
+
+100
+00:03:04,171 --> 00:03:05,647
+close square bracket.
+
+101
+00:03:06,197 --> 00:03:06,993
+Seventy-two.
+
+102
+00:03:06,993 --> 00:03:08,652
+What if a key is missing?
+
+103
+00:03:08,652 --> 00:03:10,708
+Square brackets raise an error,
+
+104
+00:03:10,708 --> 00:03:12,831
+so use get with a default value.
+
+105
+00:03:12,831 --> 00:03:14,224
+Type: server dot get,
+
+106
+00:03:14,224 --> 00:03:15,086
+open bracket,
+
+107
+00:03:15,086 --> 00:03:16,147
+quote mem quote,
+
+108
+00:03:16,147 --> 00:03:16,545
+comma,
+
+109
+00:03:16,545 --> 00:03:18,005
+quote N slash A quote,
+
+110
+00:03:18,005 --> 00:03:18,933
+close bracket.
+
+111
+00:03:19,483 --> 00:03:20,174
+N slash A,
+
+112
+00:03:20,174 --> 00:03:21,003
+the default.
+
+113
+00:03:21,003 --> 00:03:22,523
+Now the error version.
+
+114
+00:03:22,523 --> 00:03:23,421
+Type: server,
+
+115
+00:03:23,421 --> 00:03:24,458
+square bracket,
+
+116
+00:03:24,458 --> 00:03:25,563
+quote mem quote,
+
+117
+00:03:25,563 --> 00:03:27,014
+close square bracket.
+
+118
+00:03:27,564 --> 00:03:28,352
+A key error.
+
+119
+00:03:28,352 --> 00:03:30,782
+Python names exactly what is missing.
+
+120
+00:03:30,782 --> 00:03:31,899
+Lists keep order,
+
+121
+00:03:31,899 --> 00:03:34,526
+and dictionaries look things up by name.
+
+122
+00:03:34,526 --> 00:03:36,430
+You will use both constantly,
+
+123
+00:03:36,430 --> 00:03:40,108
+because the answer from an API is made of exactly these.
+
+124
+00:03:42,158 --> 00:03:43,459
+Now a real script,
+
+125
+00:03:43,459 --> 00:03:45,482
+with a condition and a loop.
+
+126
+00:03:45,482 --> 00:03:48,083
+Here is a file called check dot P Y.
+
+127
+00:03:48,083 --> 00:03:49,817
+Type: cat check dot P Y.
+
+128
+00:03:50,367 --> 00:03:53,703
+A list of pairs: a server name and its C P U.
+
+129
+00:03:53,703 --> 00:03:55,779
+A for loop visits each pair.
+
+130
+00:03:55,779 --> 00:03:56,298
+Inside,
+
+131
+00:03:56,298 --> 00:03:58,449
+if the C P U is above eighty,
+
+132
+00:03:58,449 --> 00:03:59,264
+print busy,
+
+133
+00:03:59,264 --> 00:04:00,451
+else print okay.
+
+134
+00:04:00,451 --> 00:04:02,453
+Notice there are no braces.
+
+135
+00:04:02,453 --> 00:04:04,232
+Python uses indentation,
+
+136
+00:04:04,232 --> 00:04:05,122
+four spaces,
+
+137
+00:04:05,122 --> 00:04:07,198
+to show what belongs inside.
+
+138
+00:04:07,198 --> 00:04:07,717
+Run it.
+
+139
+00:04:07,717 --> 00:04:09,126
+Type: python three,
+
+140
+00:04:09,126 --> 00:04:10,164
+check dot P Y.
+
+141
+00:04:10,714 --> 00:04:11,728
+Web two is busy,
+
+142
+00:04:11,728 --> 00:04:13,249
+and the others are okay.
+
+143
+00:04:13,249 --> 00:04:14,833
+The loop ran three times,
+
+144
+00:04:14,833 --> 00:04:17,114
+and the if chose a branch each time.
+
+145
+00:04:17,664 --> 00:04:19,082
+Two rules to remember.
+
+146
+00:04:19,082 --> 00:04:20,758
+A colon opens every block,
+
+147
+00:04:20,758 --> 00:04:23,659
+and the indented lines under it belong to it.
+
+148
+00:04:25,709 --> 00:04:29,130
+Functions package logic so you can reuse it.
+
+149
+00:04:29,130 --> 00:04:30,840
+Here is funcs dot P Y.
+
+150
+00:04:30,840 --> 00:04:32,706
+Type: cat funcs dot P Y.
+
+151
+00:04:33,256 --> 00:04:34,825
+Def starts a function.
+
+152
+00:04:34,825 --> 00:04:36,394
+Busy takes two inputs,
+
+153
+00:04:36,394 --> 00:04:38,534
+a list of servers and a limit.
+
+154
+00:04:38,534 --> 00:04:40,388
+It builds a list of names,
+
+155
+00:04:40,388 --> 00:04:41,457
+and returns it.
+
+156
+00:04:41,457 --> 00:04:45,380
+The last block runs only when the file is run directly.
+
+157
+00:04:45,380 --> 00:04:45,879
+Run it.
+
+158
+00:04:45,879 --> 00:04:47,234
+Type: python three,
+
+159
+00:04:47,234 --> 00:04:48,232
+funcs dot P Y.
+
+160
+00:04:48,782 --> 00:04:53,881
+Only web two. Change the limit, and the answer changes. One function, many uses.
+
+161
+00:04:54,431 --> 00:04:56,258
+A function should do one job,
+
+162
+00:04:56,258 --> 00:04:58,149
+take its inputs as parameters,
+
+163
+00:04:58,149 --> 00:05:00,354
+and give back a result with return.
+
+164
+00:05:00,354 --> 00:05:02,055
+That makes it easy to test,
+
+165
+00:05:02,055 --> 00:05:03,946
+which we do in a later lesson.
+
+166
+00:05:05,996 --> 00:05:06,619
+Finally,
+
+167
+00:05:06,619 --> 00:05:09,264
+modules: files of ready-made code.
+
+168
+00:05:09,264 --> 00:05:11,054
+Python ships with many,
+
+169
+00:05:11,054 --> 00:05:13,233
+called the standard library.
+
+170
+00:05:13,233 --> 00:05:16,579
+Use J S O N to turn a dictionary into text.
+
+171
+00:05:16,579 --> 00:05:18,057
+Type: python three,
+
+172
+00:05:18,057 --> 00:05:18,602
+dash C,
+
+173
+00:05:18,602 --> 00:05:19,925
+then import json,
+
+174
+00:05:19,925 --> 00:05:20,703
+semicolon,
+
+175
+00:05:20,703 --> 00:05:21,170
+print,
+
+176
+00:05:21,170 --> 00:05:22,337
+json dot dumps.
+
+177
+00:05:22,887 --> 00:05:23,913
+J S O N text,
+
+178
+00:05:23,913 --> 00:05:25,412
+with double quotes,
+
+179
+00:05:25,412 --> 00:05:27,305
+ready to send to an API.
+
+180
+00:05:27,305 --> 00:05:29,751
+Your own files are modules too.
+
+181
+00:05:29,751 --> 00:05:30,776
+Import funcs.
+
+182
+00:05:30,776 --> 00:05:32,275
+Type: python three,
+
+183
+00:05:32,275 --> 00:05:32,827
+dash C,
+
+184
+00:05:32,827 --> 00:05:33,853
+import funcs.
+
+185
+00:05:34,403 --> 00:05:35,479
+Nothing printed.
+
+186
+00:05:35,479 --> 00:05:40,325
+The if name equals main guard kept the demo code from running on import.
+
+187
+00:05:40,325 --> 00:05:41,940
+That is why we wrote it.
+
+188
+00:05:41,940 --> 00:05:44,699
+Now import something that does not exist.
+
+189
+00:05:44,699 --> 00:05:45,978
+Type: python three,
+
+190
+00:05:45,978 --> 00:05:46,449
+dash C,
+
+191
+00:05:46,449 --> 00:05:47,459
+import nothere.
+
+192
+00:05:48,009 --> 00:05:49,184
+Module not found.
+
+193
+00:05:49,184 --> 00:05:51,190
+Inside a virtual environment,
+
+194
+00:05:51,190 --> 00:05:54,026
+that usually means a missing pip install,
+
+195
+00:05:54,026 --> 00:05:56,584
+or an environment that is not active.
+
+196
+00:05:56,584 --> 00:05:58,590
+Last lesson's habit pays off.
+
+197
+00:06:00,640 --> 00:06:01,725
+Here is your task,
+
+198
+00:06:01,725 --> 00:06:03,233
+with everything you need.
+
+199
+00:06:03,233 --> 00:06:05,162
+The files are in the repository,
+
+200
+00:06:05,162 --> 00:06:06,549
+and in the description.
+
+201
+00:06:07,099 --> 00:06:12,774
+The repository is git hub dot com, slash it dash waves, slash dev ops dash A I.
+
+202
+00:06:13,324 --> 00:06:18,190
+In the academy slash lesson forty-eight folder you will find the task file,
+
+203
+00:06:18,190 --> 00:06:18,774
+the data,
+
+204
+00:06:18,774 --> 00:06:20,071
+the expected output,
+
+205
+00:06:20,071 --> 00:06:21,109
+and the checker,
+
+206
+00:06:21,109 --> 00:06:22,796
+check forty-eight dot S H.
+
+207
+00:06:23,346 --> 00:06:24,599
+You write one file,
+
+208
+00:06:24,599 --> 00:06:25,786
+inventory dot P Y.
+
+209
+00:06:25,786 --> 00:06:27,105
+It imports the data,
+
+210
+00:06:27,105 --> 00:06:30,337
+counts servers per environment with a dictionary,
+
+211
+00:06:30,337 --> 00:06:32,711
+finds the busy ones with a function,
+
+212
+00:06:32,711 --> 00:06:34,162
+and prints an average.
+
+213
+00:06:34,712 --> 00:06:39,896
+The checker runs it and compares with the expected output. Four pass lines to finish.
+
+214
+00:06:40,446 --> 00:06:43,795
+Do not open the solution file until you have really tried.
+
+215
+00:06:44,345 --> 00:06:47,780
+Write your results in a report, with the commands and their output.
+
+216
+00:06:49,830 --> 00:06:53,755
+Here is how your work is judged. Six points, and you need all six.
+
+217
+00:06:54,305 --> 00:06:56,140
+The checker shows four pass lines.
+
+218
+00:06:56,690 --> 00:06:58,951
+Busy takes a limit, and returns names.
+
+219
+00:06:59,501 --> 00:07:03,405
+The counts come from a dictionary and a loop, not hard-coded numbers.
+
+220
+00:07:03,955 --> 00:07:06,089
+The data is imported, not copied.
+
+221
+00:07:06,639 --> 00:07:09,455
+The report is complete, including where you got stuck.
+
+222
+00:07:10,005 --> 00:07:11,903
+You worked in your own virtual machine.
+
+223
+00:07:12,453 --> 00:07:14,075
+To pass, you need all six.
+
+224
+00:07:16,125 --> 00:07:18,962
+Your turn, in your own Ubuntu virtual machine.
+
+225
+00:07:19,512 --> 00:07:23,416
+One: get the lesson folder, and activate your virtual environment.
+
+226
+00:07:23,966 --> 00:07:27,444
+Two: start inventory dot P Y, and import the data.
+
+227
+00:07:27,994 --> 00:07:29,807
+Three: write busy, with a limit.
+
+228
+00:07:30,357 --> 00:07:33,386
+Four: count servers per environment with a dictionary.
+
+229
+00:07:33,936 --> 00:07:36,582
+Five: print the four lines, under the main guard.
+
+230
+00:07:37,132 --> 00:07:39,606
+Six: run the checker, and write your report.
+
+231
+00:07:40,156 --> 00:07:41,991
+Pause the video, and begin now.
+
+232
+00:07:57,541 --> 00:07:58,416
+Quick check.
+
+233
+00:07:58,966 --> 00:08:03,232
+Why does port equals equals quote eight zero eight zero quote give false?
+
+234
+00:08:03,782 --> 00:08:06,257
+How do you get a dictionary value with a default?
+
+235
+00:08:06,807 --> 00:08:09,090
+What shows which lines belong inside a loop?
+
+236
+00:08:09,640 --> 00:08:11,752
+Why use the if name equals main guard?
+
+237
+00:08:12,302 --> 00:08:14,655
+Objective covered: M C zero six,
+
+238
+00:08:14,655 --> 00:08:15,684
+objective two,
+
+239
+00:08:15,684 --> 00:08:16,125
+types,
+
+240
+00:08:16,125 --> 00:08:17,007
+collections,
+
+241
+00:08:17,007 --> 00:08:17,816
+conditions,
+
+242
+00:08:17,816 --> 00:08:18,257
+loops,
+
+243
+00:08:18,257 --> 00:08:18,993
+functions,
+
+244
+00:08:18,993 --> 00:08:19,875
+and modules.
+
+245
+00:08:20,425 --> 00:08:22,494
+Pause the video, and answer out loud.
+
+246
+00:08:33,044 --> 00:08:39,252
+Next lesson: files, J S O N, Y A M L, C S V, and environment configuration.
+
+247
+00:08:39,802 --> 00:08:43,130
+If this helped, like, share and subscribe, so you do not miss it.

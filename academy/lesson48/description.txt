@@ -1,0 +1,27 @@
+Lesson 48 of the DevOps Engineering Bootcamp, the second lesson of the Python for DevOps masterclass. You learn the five Python building blocks you will use in every DevOps tool: types, collections, conditions and loops, functions, and modules. Every demo is typed live on Ubuntu 24.04: the Python REPL with int and str (and the classic trap where port == "8080" is False because environment variables are strings), lists and dictionaries (append, indexing, get with a default, and a KeyError), a script with a for loop and if/else, a function with parameters and return, and imports (the json module, your own file as a module, the main guard, and ModuleNotFoundError). The lesson ends with a lab and checker, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Python building blocks
+0:19 Why Python for DevOps
+0:49 Types in the REPL
+2:12 Lists and dictionaries
+3:41 Conditions and loops
+4:25 Functions
+5:05 Modules and imports
+6:00 Get the lab and task
+6:49 Pass or fail rubric
+7:15 Your turn
+7:57 Quick check
+
+Objectives covered: MC06-O02
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself. Lab files: github.com/it-waves/devops-ai, folder academy/lesson48 (TASK.md, data48.py, expected48.txt and the checker check48.sh). The next lesson covers files, JSON, YAML, CSV and environment configuration.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Python 3.12.3, run in a private mount setup on the recording computer. The two small example scripts shown (check.py and funcs.py) were prepared before recording and shown with cat. The why-Python diagram is an illustration, not a capture. Typing is timed to the narration, and the yellow highlights were added afterwards. The checker was tested with a reference solution and with a failing file, but your own run of the lab is unverified until you do it.
+
+Previous lesson: https://youtu.be/zL0ZJw9CgkI
+Next lesson: files, JSON, YAML, CSV and environment configuration.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#python #pythonfordevops #pythonbasics #devopsbootcamp

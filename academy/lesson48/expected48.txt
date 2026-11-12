@@ -1,0 +1,4 @@
+servers: 4
+by env: dev=1 prod=3
+busy (cpu > 80): web2
+average cpu: 57.5
