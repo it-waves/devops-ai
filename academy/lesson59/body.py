@@ -1,0 +1,102 @@
+
+RB = 'REAL RECORDING  ·  Ubuntu 24.04 on this computer'
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('y1', "Two people edit the same file at the same time. One saves over the other, and an hour of work is gone. Branches exist so that never happens."),
+  c('y2', "Last lesson you controlled your commits. Today you learn to work in parallel: create a branch, merge it back, and fix a conflict without panic."),
+  c('y3', "Three skills. Branching, so your experiments stay safe. Merging, so finished work comes home. And conflicts, the scary message that turns out to be a five minute job."),
+  c('y4', "As always, there is a lab with a checker at the end."),
+ ]),
+ ('model', [
+  c('d1', "First, the idea. A commit is a snapshot of your project. Each commit points back to the one before it."),
+  c('d2', "A branch is just a name that points at one commit. Nothing is copied. That is why branches in Git are instant and almost free."),
+  c('d3', "The default branch is called main. When you commit, the branch you are on moves forward to the new commit."),
+  c('d4', "And head is a pointer to the branch you are on right now. Switch branches, and head moves, and your files change to match."),
+  c('d5', "So a branch is a safe place to try things. If the experiment fails, you delete the branch, and main never knew."),
+  c('d6', "One habit before we start: git status first. It always tells you which branch you are on."),
+ ]),
+ ('kinds', [
+  c('e1', "When work on a branch is finished, you merge it into another branch, usually main. There are three outcomes."),
+  c('e2', "One: fast forward. Main has not moved since you branched. Git just slides the main pointer forward. No new commit, no fuss."),
+  c('e3', "Two: a true merge. Both branches have new commits, but in different places. Git combines them and creates a merge commit with two parents."),
+  c('e4', "Three: a conflict. Both branches changed the same lines. Git cannot guess which you want, so it stops and asks you."),
+  c('e5', "Two out of three outcomes need nothing from you. And the third, you are about to see, is just editing a file."),
+ ]),
+ ('branch', [
+  k('br1', "Let us see it live. This project has two commits on main. Go in. Type: C D, site."),
+  k('br2', "List the branches. Type: git branch."),
+  k('br3', "One branch, main, and the star shows where you are. Create a new branch and switch to it in one step. Type: git switch, dash C, feature."),
+  k('br4', "Switched to a new branch. Check. Type: git branch."),
+  k('br5', "The star moved to feature. Now do some work here. Add a line to the page. Type: echo, quote, Owner colon Sam, quote, two arrows, index dot H T M L."),
+  k('br6', "Commit it. The dash A option stages changes to files Git already tracks, and dash M gives the message. Type: git commit, dash A M, quote, Add owner line, quote."),
+  k('br7', "One commit, on this branch. Now see the shape of history. Type: git log, dash dash one line, dash dash graph, dash dash all."),
+  k('br8', "The feature branch is one commit ahead of main. Now go back. Type: git switch, main."),
+  k('br9', "Look at the page. Type: cat, index dot H T M L."),
+  c('br10', "The owner line is gone! It is not lost. It lives on the feature branch, and Git swapped your files to match main. Switch back, and it returns. That is what isolation means."),
+ ]),
+ ('merge', [
+  k('mg1', "Now bring work home. In this project, feature and main have both moved. Go in. Type: C D, site."),
+  k('mg2', "Look at the picture first. Type: git log, dash dash one line, dash dash graph, dash dash all."),
+  k('mg3', "Two lines of work that split from the same commit: the stylesheet on feature, and an owner line on main. You are on main, so merge feature into it. The no edit option accepts the default message. Type: git merge, dash dash no dash edit, feature."),
+  k('mg4', "Merge made. No conflict, because the changes touched different files. Look at the history. Type: git log, dash dash one line, dash dash graph."),
+  k('mg5', "The two lines of work join at a merge commit. The branch has done its job, so delete it. The lowercase D only deletes branches that are already merged, so it is safe. Type: git branch, dash D, feature."),
+  k('mg6', "Deleted. Check what is left. Type: git branch."),
+  c('mg7', "Only main. The work is merged, and the history keeps the full story."),
+ ]),
+ ('marks', [
+  c('x1', "Now the part everyone fears. When Git cannot merge, it writes both versions into the file, between markers."),
+  c('x2', "Seven less than signs, then head, mark your side, the branch you are on. Seven equals signs split the two versions. And seven greater than signs, with the branch name, end the other side."),
+  c('x3', "Your job has four steps. One: open the file and decide what the right result is. Two: delete all three marker lines, and keep the right content. Three: git add the file. Four: git commit."),
+  c('x4', "And if you are not ready, git merge dash dash abort puts everything back exactly as it was. Nothing is lost."),
+ ]),
+ ('conflict', [
+  k('cf1', "Let us do it for real. In this project, both branches changed the port line. Go in. Type: C D, site."),
+  k('cf2', "Merge. Type: git merge, dash dash no dash edit, feature."),
+  k('cf3', "Conflict, content, in app dot conf. Automatic merge failed. Do not panic: Git is waiting for you. Ask for the short status. Type: git status, dash S."),
+  k('cf4', "Two U letters: unmerged, both sides changed it. First, the escape hatch. Type: git merge, dash dash abort."),
+  k('cf5', "Back to normal. Check. Type: git status, dash S."),
+  k('cf6', "Nothing to report, as if the merge never happened. Now try again, for real. Type: git merge, dash dash no dash edit, feature."),
+  k('cf7', "The same conflict. Open the file. Type: cat, app dot conf."),
+  k('cf8', "There are the markers. Our side, port nine thousand ninety. Their side, port eight thousand eighty. The team agreed on eight thousand eighty, and the timeout line is fine. Write the final file. Type: printf, the text in single quotes, port equals eight thousand eighty, backslash N, timeout equals five, backslash N, redirect into app dot conf."),
+  k('cf9', "No markers left. Tell Git it is resolved. Type: git add, app dot conf."),
+  k('cf10', "Now finish the merge. Type: git commit, dash dash no dash edit."),
+  k('cf11', "Merge committed. Look at the history. Type: git log, dash dash one line, dash dash graph."),
+  c('cf12', "A clean graph, and a merge commit that records how you resolved it. A conflict is not an error. It is Git asking you a question."),
+ ]),
+ ('task', [
+  c('t1', "Your task, in your own Ubuntu virtual machine."),
+  k('t2', "The lab is lab fifty-nine dot S H, in the academy slash lab folder of git hub dot com, slash it dash waves, slash dev ops dash A I. Install it like before, then run lab up."),
+  c('t3', "It builds a repository on main, with two feature branches waiting. One merges cleanly. The other conflicts on the port line."),
+  c('t4', "One: merge feature slash logging into main."),
+  c('t5', "Two: merge feature slash port into main, resolve the conflict, and keep port eight thousand eighty."),
+  c('t6', "Three: delete both merged branches."),
+  c('t7', "Four: in answers dot text, write one number: how many merge commits main has now."),
+  c('t8', "Then run lab check. Four pass lines. Before you merge, always run git status."),
+ ]),
+ ('rubric', [
+  c('rb1', "Six points, and you need all six."),
+  c('rb2', "The checker shows four pass lines."), c('rb3', "You were on main when you merged, and checked with git status."),
+  c('rb4', "No conflict markers remain in app dot conf."), c('rb5', "You can explain when Git needs a merge commit and when it fast forwards."),
+  c('rb6', "The number in answers dot text is correct."), c('rb7', "You ran lab down to clean up."), c('rb8', "To pass, you need all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine."),
+  c('z2', "One: install the lab, and run lab up."),
+  c('z3', "Two: merge the logging branch."),
+  c('z4', "Three: merge the port branch, and fix the conflict by hand."),
+  c('z5', "Four: delete both branches."),
+  c('z6', "Five: count the merge commits, write the number, and run lab check."),
+  c('z7', "Six: run lab down."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "What is a branch, really?"), c('f13', "Which merge needs no new commit?"),
+  c('f14', "What do the three marker lines mean?"), c('f15', "How do you back out of a merge you are not ready for?"),
+  c('f16', "Objective covered: M C zero seven, objective three, branches, merging, and conflicts."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next: rebasing, a cleaner way to bring work together."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'y4': 0.5, 'd6': 0.5, 'e5': 0.5, 'br10': 0.5, 'mg7': 0.5, 'x4': 0.5, 'cf12': 0.6, 't8': 0.5, 'rb8': 0.5, 'z8': 14.0, 'f17': 10.0}
+CHAP = {'model': 'What a branch is', 'kinds': 'Three kinds of merge', 'branch': 'Create and switch branches', 'merge': 'Merge and clean up', 'marks': 'Conflict markers', 'conflict': 'Fix a real conflict', 'task': 'Your lab task', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

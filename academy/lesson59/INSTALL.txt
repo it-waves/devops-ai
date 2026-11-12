@@ -1,0 +1,12 @@
+Install the lab (needs an Ubuntu virtual machine with root and git):
+  sudo apt install -y git      # skip if git is already installed
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab59.sh /usr/local/sbin/
+  source shortcuts59.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab59/app: a repository on main with two feature branches waiting
+  lab check               # four FAIL lines at the start; your goal is four PASS lines
+  lab down                # cleanup when finished
+Without the shortcut, use: sudo lab59.sh up | check | down
+Your task (in /opt/lab59/app): 1 merge feature/logging into main  2 merge feature/port into main, resolve the conflict by hand and keep port=8080 and timeout=5  3 delete both merged branches  4 write one number in /opt/lab59/answers.txt: how many merge commits main has now.
+If git asks who you are: git config --global user.name "Your Name" and git config --global user.email you@example.com
+Run it only in your own virtual machine. It creates only /opt/lab59; lab down removes it, and you remove the installed script with: sudo rm /usr/local/sbin/lab59.sh

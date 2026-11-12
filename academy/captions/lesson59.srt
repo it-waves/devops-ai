@@ -1,0 +1,1003 @@
+1
+00:00:00,500 --> 00:00:03,530
+Two people edit the same file at the same time.
+
+2
+00:00:03,530 --> 00:00:05,142
+One saves over the other,
+
+3
+00:00:05,142 --> 00:00:06,947
+and an hour of work is gone.
+
+4
+00:00:06,947 --> 00:00:09,332
+Branches exist so that never happens.
+
+5
+00:00:09,882 --> 00:00:12,302
+Last lesson you controlled your commits.
+
+6
+00:00:12,302 --> 00:00:15,508
+Today you learn to work in parallel: create a branch,
+
+7
+00:00:15,508 --> 00:00:16,355
+merge it back,
+
+8
+00:00:16,355 --> 00:00:18,351
+and fix a conflict without panic.
+
+9
+00:00:18,901 --> 00:00:19,766
+Three skills.
+
+10
+00:00:19,766 --> 00:00:20,432
+Branching,
+
+11
+00:00:20,432 --> 00:00:22,428
+so your experiments stay safe.
+
+12
+00:00:22,428 --> 00:00:22,960
+Merging,
+
+13
+00:00:22,960 --> 00:00:24,823
+so finished work comes home.
+
+14
+00:00:24,823 --> 00:00:25,754
+And conflicts,
+
+15
+00:00:25,754 --> 00:00:29,547
+the scary message that turns out to be a five minute job.
+
+16
+00:00:30,097 --> 00:00:32,913
+As always, there is a lab with a checker at the end.
+
+17
+00:00:34,963 --> 00:00:35,339
+First,
+
+18
+00:00:35,339 --> 00:00:35,904
+the idea.
+
+19
+00:00:35,904 --> 00:00:38,349
+A commit is a snapshot of your project.
+
+20
+00:00:38,349 --> 00:00:41,171
+Each commit points back to the one before it.
+
+21
+00:00:41,721 --> 00:00:44,835
+A branch is just a name that points at one commit.
+
+22
+00:00:44,835 --> 00:00:45,956
+Nothing is copied.
+
+23
+00:00:45,956 --> 00:00:49,444
+That is why branches in Git are instant and almost free.
+
+24
+00:00:49,994 --> 00:00:51,870
+The default branch is called main.
+
+25
+00:00:51,870 --> 00:00:52,753
+When you commit,
+
+26
+00:00:52,753 --> 00:00:55,732
+the branch you are on moves forward to the new commit.
+
+27
+00:00:56,282 --> 00:00:59,562
+And head is a pointer to the branch you are on right now.
+
+28
+00:00:59,562 --> 00:01:00,483
+Switch branches,
+
+29
+00:01:00,483 --> 00:01:01,346
+and head moves,
+
+30
+00:01:01,346 --> 00:01:03,130
+and your files change to match.
+
+31
+00:01:03,680 --> 00:01:06,252
+So a branch is a safe place to try things.
+
+32
+00:01:06,252 --> 00:01:07,722
+If the experiment fails,
+
+33
+00:01:07,722 --> 00:01:09,069
+you delete the branch,
+
+34
+00:01:09,069 --> 00:01:10,294
+and main never knew.
+
+35
+00:01:10,844 --> 00:01:16,028
+One habit before we start: git status first. It always tells you which branch you are on.
+
+36
+00:01:18,078 --> 00:01:20,012
+When work on a branch is finished,
+
+37
+00:01:20,012 --> 00:01:21,890
+you merge it into another branch,
+
+38
+00:01:21,890 --> 00:01:22,629
+usually main.
+
+39
+00:01:22,629 --> 00:01:24,051
+There are three outcomes.
+
+40
+00:01:24,601 --> 00:01:25,776
+One: fast forward.
+
+41
+00:01:25,776 --> 00:01:28,256
+Main has not moved since you branched.
+
+42
+00:01:28,256 --> 00:01:30,931
+Git just slides the main pointer forward.
+
+43
+00:01:30,931 --> 00:01:31,845
+No new commit,
+
+44
+00:01:31,845 --> 00:01:32,367
+no fuss.
+
+45
+00:01:32,917 --> 00:01:34,066
+Two: a true merge.
+
+46
+00:01:34,066 --> 00:01:36,045
+Both branches have new commits,
+
+47
+00:01:36,045 --> 00:01:37,577
+but in different places.
+
+48
+00:01:37,577 --> 00:01:41,535
+Git combines them and creates a merge commit with two parents.
+
+49
+00:01:42,085 --> 00:01:43,210
+Three: a conflict.
+
+50
+00:01:43,210 --> 00:01:45,522
+Both branches changed the same lines.
+
+51
+00:01:45,522 --> 00:01:47,521
+Git cannot guess which you want,
+
+52
+00:01:47,521 --> 00:01:49,083
+so it stops and asks you.
+
+53
+00:01:49,633 --> 00:01:52,463
+Two out of three outcomes need nothing from you.
+
+54
+00:01:52,463 --> 00:01:53,289
+And the third,
+
+55
+00:01:53,289 --> 00:01:54,527
+you are about to see,
+
+56
+00:01:54,527 --> 00:01:55,883
+is just editing a file.
+
+57
+00:01:57,933 --> 00:02:03,288
+Let us see it live. This project has two commits on main. Go in. Type: CD, site.
+
+58
+00:02:03,838 --> 00:02:06,270
+List the branches. Type: git branch.
+
+59
+00:02:06,820 --> 00:02:07,542
+One branch,
+
+60
+00:02:07,542 --> 00:02:07,870
+main,
+
+61
+00:02:07,870 --> 00:02:10,036
+and the star shows where you are.
+
+62
+00:02:10,036 --> 00:02:13,252
+Create a new branch and switch to it in one step.
+
+63
+00:02:13,252 --> 00:02:14,368
+Type: git switch,
+
+64
+00:02:14,368 --> 00:02:14,828
+dash C,
+
+65
+00:02:14,828 --> 00:02:15,353
+feature.
+
+66
+00:02:15,903 --> 00:02:18,847
+Switched to a new branch. Check. Type: git branch.
+
+67
+00:02:19,397 --> 00:02:21,340
+The star moved to feature.
+
+68
+00:02:21,340 --> 00:02:22,985
+Now do some work here.
+
+69
+00:02:22,985 --> 00:02:24,704
+Add a line to the page.
+
+70
+00:02:24,704 --> 00:02:25,526
+Type: echo,
+
+71
+00:02:25,526 --> 00:02:25,974
+quote,
+
+72
+00:02:25,974 --> 00:02:27,170
+Owner colon Sam,
+
+73
+00:02:27,170 --> 00:02:27,619
+quote,
+
+74
+00:02:27,619 --> 00:02:28,441
+two arrows,
+
+75
+00:02:28,441 --> 00:02:29,786
+index dot H T M L.
+
+76
+00:02:30,336 --> 00:02:31,021
+Commit it.
+
+77
+00:02:31,021 --> 00:02:35,197
+The dash A option stages changes to files Git already tracks,
+
+78
+00:02:35,197 --> 00:02:37,183
+and dash M gives the message.
+
+79
+00:02:37,183 --> 00:02:38,346
+Type: git commit,
+
+80
+00:02:38,346 --> 00:02:38,963
+dash A M,
+
+81
+00:02:38,963 --> 00:02:39,373
+quote,
+
+82
+00:02:39,373 --> 00:02:40,400
+Add owner line,
+
+83
+00:02:40,400 --> 00:02:40,811
+quote.
+
+84
+00:02:41,361 --> 00:02:42,117
+One commit,
+
+85
+00:02:42,117 --> 00:02:43,147
+on this branch.
+
+86
+00:02:43,147 --> 00:02:45,140
+Now see the shape of history.
+
+87
+00:02:45,140 --> 00:02:46,101
+Type: git log,
+
+88
+00:02:46,101 --> 00:02:47,407
+dash dash one line,
+
+89
+00:02:47,407 --> 00:02:48,506
+dash dash graph,
+
+90
+00:02:48,506 --> 00:02:49,468
+dash dash all.
+
+91
+00:02:50,018 --> 00:02:55,116
+The feature branch is one commit ahead of main. Now go back. Type: git switch, main.
+
+92
+00:02:55,666 --> 00:02:59,272
+Look at the page. Type: cat, index dot H T M L.
+
+93
+00:02:59,822 --> 00:03:01,285
+The owner line is gone!
+
+94
+00:03:01,285 --> 00:03:02,239
+It is not lost.
+
+95
+00:03:02,239 --> 00:03:04,211
+It lives on the feature branch,
+
+96
+00:03:04,211 --> 00:03:06,819
+and Git swapped your files to match main.
+
+97
+00:03:06,819 --> 00:03:07,583
+Switch back,
+
+98
+00:03:07,583 --> 00:03:08,537
+and it returns.
+
+99
+00:03:08,537 --> 00:03:10,382
+That is what isolation means.
+
+100
+00:03:12,432 --> 00:03:13,841
+Now bring work home.
+
+101
+00:03:13,841 --> 00:03:14,969
+In this project,
+
+102
+00:03:14,969 --> 00:03:17,295
+feature and main have both moved.
+
+103
+00:03:17,295 --> 00:03:17,717
+Go in.
+
+104
+00:03:17,717 --> 00:03:18,352
+Type: CD,
+
+105
+00:03:18,352 --> 00:03:18,704
+site.
+
+106
+00:03:19,254 --> 00:03:21,043
+Look at the picture first.
+
+107
+00:03:21,043 --> 00:03:22,006
+Type: git log,
+
+108
+00:03:22,006 --> 00:03:23,313
+dash dash one line,
+
+109
+00:03:23,313 --> 00:03:24,414
+dash dash graph,
+
+110
+00:03:24,414 --> 00:03:25,377
+dash dash all.
+
+111
+00:03:25,927 --> 00:03:30,944
+Two lines of work that split from the same commit: the stylesheet on feature,
+
+112
+00:03:30,944 --> 00:03:32,639
+and an owner line on main.
+
+113
+00:03:32,639 --> 00:03:33,681
+You are on main,
+
+114
+00:03:33,681 --> 00:03:35,310
+so merge feature into it.
+
+115
+00:03:35,310 --> 00:03:38,373
+The no edit option accepts the default message.
+
+116
+00:03:38,373 --> 00:03:39,416
+Type: git merge,
+
+117
+00:03:39,416 --> 00:03:40,915
+dash dash no dash edit,
+
+118
+00:03:40,915 --> 00:03:41,436
+feature.
+
+119
+00:03:41,986 --> 00:03:42,745
+Merge made.
+
+120
+00:03:42,745 --> 00:03:43,573
+No conflict,
+
+121
+00:03:43,573 --> 00:03:46,610
+because the changes touched different files.
+
+122
+00:03:46,610 --> 00:03:47,991
+Look at the history.
+
+123
+00:03:47,991 --> 00:03:48,957
+Type: git log,
+
+124
+00:03:48,957 --> 00:03:50,268
+dash dash one line,
+
+125
+00:03:50,268 --> 00:03:51,373
+dash dash graph.
+
+126
+00:03:51,923 --> 00:03:54,936
+The two lines of work join at a merge commit.
+
+127
+00:03:54,936 --> 00:03:56,811
+The branch has done its job,
+
+128
+00:03:56,811 --> 00:03:57,682
+so delete it.
+
+129
+00:03:57,682 --> 00:04:01,834
+The lowercase D only deletes branches that are already merged,
+
+130
+00:04:01,834 --> 00:04:02,772
+so it is safe.
+
+131
+00:04:02,772 --> 00:04:03,910
+Type: git branch,
+
+132
+00:04:03,910 --> 00:04:04,379
+dash D,
+
+133
+00:04:04,379 --> 00:04:04,915
+feature.
+
+134
+00:04:05,465 --> 00:04:08,451
+Deleted. Check what is left. Type: git branch.
+
+135
+00:04:09,001 --> 00:04:13,033
+Only main. The work is merged, and the history keeps the full story.
+
+136
+00:04:15,083 --> 00:04:16,864
+Now the part everyone fears.
+
+137
+00:04:16,864 --> 00:04:18,262
+When Git cannot merge,
+
+138
+00:04:18,262 --> 00:04:20,679
+it writes both versions into the file,
+
+139
+00:04:20,679 --> 00:04:21,696
+between markers.
+
+140
+00:04:22,246 --> 00:04:23,662
+Seven less than signs,
+
+141
+00:04:23,662 --> 00:04:24,306
+then head,
+
+142
+00:04:24,306 --> 00:04:25,271
+mark your side,
+
+143
+00:04:25,271 --> 00:04:26,687
+the branch you are on.
+
+144
+00:04:26,687 --> 00:04:29,390
+Seven equals signs split the two versions.
+
+145
+00:04:29,390 --> 00:04:31,256
+And seven greater than signs,
+
+146
+00:04:31,256 --> 00:04:32,608
+with the branch name,
+
+147
+00:04:32,608 --> 00:04:33,830
+end the other side.
+
+148
+00:04:34,380 --> 00:04:36,071
+Your job has four steps.
+
+149
+00:04:36,071 --> 00:04:39,946
+One: open the file and decide what the right result is.
+
+150
+00:04:39,946 --> 00:04:42,411
+Two: delete all three marker lines,
+
+151
+00:04:42,411 --> 00:04:44,313
+and keep the right content.
+
+152
+00:04:44,313 --> 00:04:46,004
+Three: git add the file.
+
+153
+00:04:46,004 --> 00:04:47,202
+Four: git commit.
+
+154
+00:04:47,752 --> 00:04:49,362
+And if you are not ready,
+
+155
+00:04:49,362 --> 00:04:53,548
+git merge dash dash abort puts everything back exactly as it was.
+
+156
+00:04:53,548 --> 00:04:54,578
+Nothing is lost.
+
+157
+00:04:56,628 --> 00:04:58,241
+Let us do it for real.
+
+158
+00:04:58,241 --> 00:04:59,414
+In this project,
+
+159
+00:04:59,414 --> 00:05:02,053
+both branches changed the port line.
+
+160
+00:05:02,053 --> 00:05:02,492
+Go in.
+
+161
+00:05:02,492 --> 00:05:03,152
+Type: CD,
+
+162
+00:05:03,152 --> 00:05:03,519
+site.
+
+163
+00:05:04,069 --> 00:05:07,759
+Merge. Type: git merge, dash dash no dash edit, feature.
+
+164
+00:05:08,309 --> 00:05:08,971
+Conflict,
+
+165
+00:05:08,971 --> 00:05:09,558
+content,
+
+166
+00:05:09,558 --> 00:05:10,734
+in app dot conf.
+
+167
+00:05:10,734 --> 00:05:12,423
+Automatic merge failed.
+
+168
+00:05:12,423 --> 00:05:15,142
+Do not panic: Git is waiting for you.
+
+169
+00:05:15,142 --> 00:05:16,978
+Ask for the short status.
+
+170
+00:05:16,978 --> 00:05:18,227
+Type: git status,
+
+171
+00:05:18,227 --> 00:05:18,741
+dash S.
+
+172
+00:05:19,291 --> 00:05:21,040
+Two U letters: unmerged,
+
+173
+00:05:21,040 --> 00:05:22,643
+both sides changed it.
+
+174
+00:05:22,643 --> 00:05:23,081
+First,
+
+175
+00:05:23,081 --> 00:05:24,319
+the escape hatch.
+
+176
+00:05:24,319 --> 00:05:25,485
+Type: git merge,
+
+177
+00:05:25,485 --> 00:05:26,651
+dash dash abort.
+
+178
+00:05:27,201 --> 00:05:30,593
+Back to normal. Check. Type: git status, dash S.
+
+179
+00:05:31,143 --> 00:05:32,395
+Nothing to report,
+
+180
+00:05:32,395 --> 00:05:34,552
+as if the merge never happened.
+
+181
+00:05:34,552 --> 00:05:35,525
+Now try again,
+
+182
+00:05:35,525 --> 00:05:36,151
+for real.
+
+183
+00:05:36,151 --> 00:05:37,264
+Type: git merge,
+
+184
+00:05:37,264 --> 00:05:38,864
+dash dash no dash edit,
+
+185
+00:05:38,864 --> 00:05:39,421
+feature.
+
+186
+00:05:39,971 --> 00:05:44,152
+The same conflict. Open the file. Type: cat, app dot conf.
+
+187
+00:05:44,702 --> 00:05:46,107
+There are the markers.
+
+188
+00:05:46,107 --> 00:05:46,682
+Our side,
+
+189
+00:05:46,682 --> 00:05:48,343
+port nine thousand ninety.
+
+190
+00:05:48,343 --> 00:05:49,045
+Their side,
+
+191
+00:05:49,045 --> 00:05:50,770
+port eight thousand eighty.
+
+192
+00:05:50,770 --> 00:05:53,388
+The team agreed on eight thousand eighty,
+
+193
+00:05:53,388 --> 00:05:55,241
+and the timeout line is fine.
+
+194
+00:05:55,241 --> 00:05:56,582
+Write the final file.
+
+195
+00:05:56,582 --> 00:05:57,412
+Type: printf,
+
+196
+00:05:57,412 --> 00:05:59,073
+the text in single quotes,
+
+197
+00:05:59,073 --> 00:06:01,245
+port equals eight thousand eighty,
+
+198
+00:06:01,245 --> 00:06:02,011
+backslash N,
+
+199
+00:06:02,011 --> 00:06:03,288
+timeout equals five,
+
+200
+00:06:03,288 --> 00:06:04,055
+backslash N,
+
+201
+00:06:04,055 --> 00:06:05,779
+redirect into app dot conf.
+
+202
+00:06:06,329 --> 00:06:11,236
+No markers left. Tell Git it is resolved. Type: git add, app dot conf.
+
+203
+00:06:11,786 --> 00:06:16,053
+Now finish the merge. Type: git commit, dash dash no dash edit.
+
+204
+00:06:16,603 --> 00:06:22,491
+Merge committed. Look at the history. Type: git log, dash dash one line, dash dash graph.
+
+205
+00:06:23,041 --> 00:06:23,925
+A clean graph,
+
+206
+00:06:23,925 --> 00:06:27,208
+and a merge commit that records how you resolved it.
+
+207
+00:06:27,208 --> 00:06:28,913
+A conflict is not an error.
+
+208
+00:06:28,913 --> 00:06:30,934
+It is Git asking you a question.
+
+209
+00:06:33,084 --> 00:06:35,857
+Your task, in your own Ubuntu virtual machine.
+
+210
+00:06:36,407 --> 00:06:38,918
+The lab is lab fifty-nine dot S H,
+
+211
+00:06:38,918 --> 00:06:42,683
+in the academy slash lab folder of git hub dot com,
+
+212
+00:06:42,683 --> 00:06:44,160
+slash it dash waves,
+
+213
+00:06:44,160 --> 00:06:45,858
+slash dev ops dash A I.
+
+214
+00:06:45,858 --> 00:06:47,557
+Install it like before,
+
+215
+00:06:47,557 --> 00:06:48,738
+then run lab up.
+
+216
+00:06:49,288 --> 00:06:51,288
+It builds a repository on main,
+
+217
+00:06:51,288 --> 00:06:53,482
+with two feature branches waiting.
+
+218
+00:06:53,482 --> 00:06:54,708
+One merges cleanly.
+
+219
+00:06:54,708 --> 00:06:57,096
+The other conflicts on the port line.
+
+220
+00:06:57,646 --> 00:07:00,206
+One: merge feature slash logging into main.
+
+221
+00:07:00,756 --> 00:07:03,175
+Two: merge feature slash port into main,
+
+222
+00:07:03,175 --> 00:07:04,445
+resolve the conflict,
+
+223
+00:07:04,445 --> 00:07:06,623
+and keep port eight thousand eighty.
+
+224
+00:07:07,173 --> 00:07:09,370
+Three: delete both merged branches.
+
+225
+00:07:09,920 --> 00:07:14,933
+Four: in answers dot text, write one number: how many merge commits main has now.
+
+226
+00:07:15,483 --> 00:07:20,411
+Then run lab check. Four pass lines. Before you merge, always run git status.
+
+227
+00:07:22,461 --> 00:07:24,445
+Six points, and you need all six.
+
+228
+00:07:24,995 --> 00:07:26,830
+The checker shows four pass lines.
+
+229
+00:07:27,380 --> 00:07:30,452
+You were on main when you merged, and checked with git status.
+
+230
+00:07:31,002 --> 00:07:33,946
+No conflict markers remain in app dot conf.
+
+231
+00:07:34,496 --> 00:07:38,336
+You can explain when Git needs a merge commit and when it fast forwards.
+
+232
+00:07:38,886 --> 00:07:41,211
+The number in answers dot text is correct.
+
+233
+00:07:41,761 --> 00:07:43,404
+You ran lab down to clean up.
+
+234
+00:07:43,954 --> 00:07:45,575
+To pass, you need all six.
+
+235
+00:07:47,625 --> 00:07:50,462
+Your turn, in your own Ubuntu virtual machine.
+
+236
+00:07:51,012 --> 00:07:53,231
+One: install the lab, and run lab up.
+
+237
+00:07:53,781 --> 00:07:55,509
+Two: merge the logging branch.
+
+238
+00:07:56,059 --> 00:07:59,707
+Three: merge the port branch, and fix the conflict by hand.
+
+239
+00:08:00,257 --> 00:08:02,028
+Four: delete both branches.
+
+240
+00:08:02,578 --> 00:08:06,247
+Five: count the merge commits, write the number, and run lab check.
+
+241
+00:08:06,797 --> 00:08:08,269
+Six: run lab down.
+
+242
+00:08:08,819 --> 00:08:10,654
+Pause the video, and begin now.
+
+243
+00:08:26,204 --> 00:08:27,079
+Quick check.
+
+244
+00:08:27,629 --> 00:08:28,994
+What is a branch, really?
+
+245
+00:08:29,544 --> 00:08:31,315
+Which merge needs no new commit?
+
+246
+00:08:31,865 --> 00:08:33,635
+What do the three marker lines mean?
+
+247
+00:08:34,185 --> 00:08:36,745
+How do you back out of a merge you are not ready for?
+
+248
+00:08:37,295 --> 00:08:43,333
+Objective covered: M C zero seven, objective three, branches, merging, and conflicts.
+
+249
+00:08:43,883 --> 00:08:45,952
+Pause the video, and answer out loud.
+
+250
+00:08:56,502 --> 00:08:59,766
+Next: rebasing, a cleaner way to bring work together.
+
+251
+00:09:00,316 --> 00:09:03,644
+If this helped, like, share and subscribe, so you do not miss it.

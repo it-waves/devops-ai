@@ -1,0 +1,27 @@
+Lesson 59 of the DevOps Engineering Bootcamp, the third lesson of the Git and GitHub masterclass, from beginner to mastery. You learn to work in parallel without overwriting anyone. You see what a branch really is (a movable name pointing at a commit, with HEAD showing where you are) and the three kinds of merge: fast-forward, a true merge commit with two parents, and a conflict. Then, live on Ubuntu: git branch, git switch -c, committing on a branch with git commit -am, git log --oneline --graph --all, and seeing your files swap when you switch back to main. You merge a finished branch with git merge, read the graph, and delete it safely with git branch -d. Finally the part people fear: conflict markers, git status -s showing UU, git merge --abort as the escape hatch, resolving by hand, git add and git commit to finish. The lab has a checker that says PASS or FAIL for four checks, a pass/fail rubric, and cleanup.
+
+Chapters
+0:00 Work in parallel, safely
+0:34 What a branch is
+1:18 Three kinds of merge
+1:57 Create and switch branches
+3:12 Merge and clean up
+4:15 Conflict markers
+4:56 Fix a real conflict
+6:33 Your lab task
+7:22 Pass or fail rubric
+7:47 Your turn
+8:26 Quick check
+
+Objectives covered: MC07-O03 branches, merging and conflicts
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab59.sh and shortcuts59.sh) and academy/lesson59 (INSTALL.txt). Install with: sudo apt install -y git (if needed), then sudo install -m 755 lab59.sh /usr/local/sbin/ and run lab up, lab check and lab down after loading the short name with: source shortcuts59.sh (without it, use sudo lab59.sh up, check, down). You need an Ubuntu virtual machine with root and git. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Git 2.43, run in a private mount setup on the recording computer; the author name and email (Sam Lee) are made up, and the example repositories were prepared before recording so each segment starts from a known state. The lab was run end to end before this lesson: all four checks fail before the work, all four pass after a reference solution, and lab down leaves nothing behind. The on-screen branch, merge-kinds, conflict-marker and task screens are labelled illustrations, not captures. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Git staging, commits, history and .gitignore https://youtu.be/HYXZSB9D_Cg
+Next lesson: rebasing.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#git #github #devops #gitbranch #mergeconflict #versioncontrol #devopsbootcamp
