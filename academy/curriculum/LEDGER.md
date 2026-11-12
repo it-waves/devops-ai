@@ -100,4 +100,4 @@ One lesson per objective, then the mastery scenario. Real Ubuntu 24.04 terminal,
 | L60 | MC07-O04 Git: rebasing | Published (OoYo0hVqvVo, 7:52, https://youtu.be/OoYo0hVqvVo; uploaded by me via Studio; Public, playlist, end screen done; captions published; lab60.sh run end to end; labs unverified) |
 | L61 | MC07-O05 Git: remotes, fetch, pull, push, tags | Published (Q8FPBQyvBAA, 7:22, https://youtu.be/Q8FPBQyvBAA; uploaded by me via Studio; Public, playlist, end screen done; captions published|
 | L62 | MC07-O06 Git: pull requests, reviews, protected branches | Published (JwolVMgWCkk, 6:18, Public, playlist, end screen); live full-screen recording on a local Gitea; lab62.sh tested only against a simulated GitHub API; captions published |
-| L63 | MC07-O07 Git: restore, revert, reset, reflog | Built (7:56); terminal-only live recordings; lab63.sh tested 0/4 -> 4/4 with two valid solutions, down clean; uploading |
+| L63 | MC07-O07 Git: restore, revert, reset, reflog | Published (ZNT4cgrRmFk, 7:57, https://youtu.be/ZNT4cgrRmFk; Public, playlist, end screen; lab63.sh tested 0/4 -> 4/4 with two valid solutions, down clean; captions pending) |
