@@ -1,0 +1,24 @@
+Lesson 55 of the DevOps Engineering Bootcamp, the ninth lesson of the Python for DevOps masterclass. You build a real utility and prove that it works, putting the whole masterclass together: data files, functions, a command line tool with exit codes, and tests. Every demo is typed live on Ubuntu 24.04: a validate function that returns a list of errors, a command line tool that reports every problem and exits 0 (valid), 1 (problems) or 2 (file cannot be read), and a pytest suite that tests the edges (port 65535 and 65536) with parametrize. You then break the code on purpose and watch the edge test fail (red, then green). The lesson ends with a lab whose checker also runs your tests against a deliberately broken version, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 A tested validation utility
+0:21 Anatomy of a utility
+1:05 The tool and exit codes
+2:27 Tests: edges, red, green
+3:47 Get the lab and task
+4:59 Pass or fail rubric
+5:31 Your turn
+6:17 Quick check
+
+Objectives covered: MC06-O09
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself, inside your virtual environment with pip install pytest. Lab files: github.com/it-waves/devops-ai, folder academy/lesson55 (TASK.md, the checker check55.sh and broken_invcheck.py). The next lesson is the Python for DevOps mastery evidence.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Python 3.12.3 and pytest 9, run in a private mount setup on the recording computer. The example files (svccheck.py, services.json and test_svccheck.py) were prepared before recording and shown with cat and head, and pytest was installed in the virtual environment beforehand, so the pip install step is described, not shown. The overview cards are illustrations, not captures. Typing is timed to the narration, and the yellow highlights were added afterwards. The checker was tested with a reference solution, an empty folder and a weak test file, but your own run of the lab is unverified until you do it.
+
+Previous lesson: https://youtu.be/nGNe5xhQ6hk
+Next lesson: Python for DevOps mastery evidence.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#python #pythonfordevops #pytest #exitcodes #devopsbootcamp
