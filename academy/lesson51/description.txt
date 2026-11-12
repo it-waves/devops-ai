@@ -1,0 +1,25 @@
+Lesson 51 of the DevOps Engineering Bootcamp, the fifth lesson of the Python for DevOps masterclass. You make a script fail well with three habits: exceptions, logging and retries. Every demo is typed live on Ubuntu 24.04: an int("eight") traceback read from the bottom, a script with try, except, else and finally that handles a missing file and bad JSON, a logging script whose debug, info, warning and error levels you turn down with sed, and a retry loop with back off that survives a flaky API and gives up with exit code 1. The lesson ends with a lab and checker, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Fail well in Python
+0:19 Exceptions, logging, retries
+0:54 try, except, else, finally
+2:28 Logging levels
+3:27 Retries with back off
+4:47 Get the lab and task
+5:39 Pass or fail rubric
+6:09 Your turn
+6:55 Quick check
+
+Objectives covered: MC06-O05
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself, inside your virtual environment with pip install requests. Lab files: github.com/it-waves/devops-ai, folder academy/lesson51 (TASK.md, the lab API api06.py and the checker check51.sh). The next lesson covers command line tools and exit codes.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Python 3.12.3 and requests, run in a private mount setup on the recording computer. The API is the lesson's own lab file api06.py, running locally on port 8081; it is not a public service. The three small example scripts (load.py, logdemo.py and retry.py) were prepared before recording and shown with cat, and requests was installed in the virtual environment beforehand, so the pip install step is described, not shown. The try, except and logging overview cards are illustrations, not captures. Typing is timed to the narration, and the yellow highlights were added afterwards. The checker was tested with a reference solution and with failing files, but your own run of the lab is unverified until you do it.
+
+Previous lesson: https://youtu.be/YopPEShN3ck
+Next lesson: command line tools and exit codes.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#python #pythonfordevops #exceptions #logging #devopsbootcamp

@@ -1,0 +1,863 @@
+1
+00:00:00,500 --> 00:00:02,356
+Today your scripts learn to fail well.
+
+2
+00:00:02,906 --> 00:00:05,796
+Every script meets trouble: a missing file,
+
+3
+00:00:05,796 --> 00:00:06,602
+a bad value,
+
+4
+00:00:06,602 --> 00:00:08,080
+a server that is busy.
+
+5
+00:00:08,080 --> 00:00:12,314
+Three habits turn a crash into a controlled result: exceptions,
+
+6
+00:00:12,314 --> 00:00:12,852
+logging,
+
+7
+00:00:12,852 --> 00:00:13,658
+and retries.
+
+8
+00:00:14,208 --> 00:00:17,493
+Every demo is typed live on Ubuntu twenty-four oh four.
+
+9
+00:00:19,543 --> 00:00:21,105
+When something goes wrong,
+
+10
+00:00:21,105 --> 00:00:22,728
+Python raises an exception.
+
+11
+00:00:22,728 --> 00:00:24,049
+If nothing catches it,
+
+12
+00:00:24,049 --> 00:00:26,092
+the script stops with a traceback.
+
+13
+00:00:26,642 --> 00:00:28,318
+Try holds the risky code.
+
+14
+00:00:28,318 --> 00:00:31,066
+Except handles one named kind of failure.
+
+15
+00:00:31,066 --> 00:00:33,076
+Else runs when nothing failed,
+
+16
+00:00:33,076 --> 00:00:34,685
+and finally always runs.
+
+17
+00:00:35,235 --> 00:00:38,832
+Logging is how a script tells operators what happened.
+
+18
+00:00:38,832 --> 00:00:40,231
+It has levels: debug,
+
+19
+00:00:40,231 --> 00:00:40,564
+info,
+
+20
+00:00:40,564 --> 00:00:41,097
+warning,
+
+21
+00:00:41,097 --> 00:00:41,763
+and error.
+
+22
+00:00:42,313 --> 00:00:47,497
+Retries handle temporary failures. Wait, try again, and wait longer each time.
+
+23
+00:00:48,047 --> 00:00:52,975
+The rule: catch what you expect, say what happened, and retry only what can recover.
+
+24
+00:00:55,025 --> 00:00:59,356
+First, an exception. Start Python. Type: python three, dash Q.
+
+25
+00:01:00,206 --> 00:01:02,999
+Ask Python to turn a word into a number.
+
+26
+00:01:02,999 --> 00:01:03,698
+Type: int,
+
+27
+00:01:03,698 --> 00:01:04,605
+open bracket,
+
+28
+00:01:04,605 --> 00:01:05,025
+quote,
+
+29
+00:01:05,025 --> 00:01:05,444
+eight,
+
+30
+00:01:05,444 --> 00:01:05,863
+quote,
+
+31
+00:01:05,863 --> 00:01:06,840
+close bracket.
+
+32
+00:01:07,390 --> 00:01:08,205
+A traceback.
+
+33
+00:01:08,205 --> 00:01:09,835
+Read it from the bottom.
+
+34
+00:01:09,835 --> 00:01:12,144
+The last line names the exception,
+
+35
+00:01:12,144 --> 00:01:12,959
+value error,
+
+36
+00:01:12,959 --> 00:01:13,842
+and says why.
+
+37
+00:01:13,842 --> 00:01:16,491
+The lines above show where it happened.
+
+38
+00:01:16,491 --> 00:01:17,374
+Leave Python.
+
+39
+00:01:17,374 --> 00:01:18,121
+Type: exit,
+
+40
+00:01:18,121 --> 00:01:18,460
+open,
+
+41
+00:01:18,460 --> 00:01:18,868
+close.
+
+42
+00:01:19,418 --> 00:01:24,047
+Now a script that expects trouble. Show it. Type: cat load dot P Y.
+
+43
+00:01:24,597 --> 00:01:27,393
+It tries to open settings dot jay son.
+
+44
+00:01:27,393 --> 00:01:30,630
+Each except block handles one named failure.
+
+45
+00:01:30,630 --> 00:01:32,764
+Else runs when all went well,
+
+46
+00:01:32,764 --> 00:01:34,530
+and finally always runs.
+
+47
+00:01:34,530 --> 00:01:35,045
+Run it,
+
+48
+00:01:35,045 --> 00:01:36,664
+with no settings file.
+
+49
+00:01:36,664 --> 00:01:38,062
+Type: python three,
+
+50
+00:01:38,062 --> 00:01:39,018
+load dot P Y.
+
+51
+00:01:39,568 --> 00:01:40,614
+File not found,
+
+52
+00:01:40,614 --> 00:01:41,172
+handled.
+
+53
+00:01:41,172 --> 00:01:44,032
+The script chose defaults and carried on.
+
+54
+00:01:44,032 --> 00:01:46,333
+Now create a valid settings file.
+
+55
+00:01:46,333 --> 00:01:47,100
+Type: echo,
+
+56
+00:01:47,100 --> 00:01:49,541
+then the jay son with retries five,
+
+57
+00:01:49,541 --> 00:01:50,727
+in single quotes,
+
+58
+00:01:50,727 --> 00:01:53,307
+redirected into settings dot jay son.
+
+59
+00:01:53,857 --> 00:01:59,958
+No output, the file is written. Run the script again. Type: python three, load dot P Y.
+
+60
+00:02:00,508 --> 00:02:01,704
+Loaded settings,
+
+61
+00:02:01,704 --> 00:02:02,601
+finally ran,
+
+62
+00:02:02,601 --> 00:02:04,095
+and retries is five.
+
+63
+00:02:04,095 --> 00:02:06,337
+Now break the file on purpose.
+
+64
+00:02:06,337 --> 00:02:07,159
+Type: echo,
+
+65
+00:02:07,159 --> 00:02:08,131
+single quote,
+
+66
+00:02:08,131 --> 00:02:08,953
+open brace,
+
+67
+00:02:08,953 --> 00:02:09,252
+bad,
+
+68
+00:02:09,252 --> 00:02:10,223
+single quote,
+
+69
+00:02:10,223 --> 00:02:12,988
+redirected into settings dot jay son.
+
+70
+00:02:13,538 --> 00:02:17,485
+Run it one more time. Type: python three, load dot P Y.
+
+71
+00:02:18,035 --> 00:02:18,848
+Bad jay son,
+
+72
+00:02:18,848 --> 00:02:20,272
+caught and explained,
+
+73
+00:02:20,272 --> 00:02:21,220
+with no crash.
+
+74
+00:02:21,220 --> 00:02:23,999
+Catch the specific exceptions you expect.
+
+75
+00:02:23,999 --> 00:02:26,032
+A bare except hides real bugs,
+
+76
+00:02:26,032 --> 00:02:26,846
+so avoid it.
+
+77
+00:02:28,896 --> 00:02:29,776
+Now logging.
+
+78
+00:02:29,776 --> 00:02:31,170
+Print is for users.
+
+79
+00:02:31,170 --> 00:02:33,003
+Logging is for operators,
+
+80
+00:02:33,003 --> 00:02:34,617
+because it has levels.
+
+81
+00:02:34,617 --> 00:02:35,790
+Show the script.
+
+82
+00:02:35,790 --> 00:02:37,771
+Type: cat log demo dot P Y.
+
+83
+00:02:38,321 --> 00:02:40,109
+The level is set to info,
+
+84
+00:02:40,109 --> 00:02:42,611
+so the debug line will stay hidden.
+
+85
+00:02:42,611 --> 00:02:46,616
+Log dot exception records the message and the traceback.
+
+86
+00:02:46,616 --> 00:02:47,117
+Run it.
+
+87
+00:02:47,117 --> 00:02:48,476
+Type: python three,
+
+88
+00:02:48,476 --> 00:02:49,691
+log demo dot P Y.
+
+89
+00:02:50,541 --> 00:02:50,916
+Info,
+
+90
+00:02:50,916 --> 00:02:51,516
+warning,
+
+91
+00:02:51,516 --> 00:02:51,967
+error,
+
+92
+00:02:51,967 --> 00:02:53,992
+each tagged with its level.
+
+93
+00:02:53,992 --> 00:02:55,867
+The debug line is hidden,
+
+94
+00:02:55,867 --> 00:02:58,718
+and the error came with its traceback,
+
+95
+00:02:58,718 --> 00:03:00,668
+so you can find the cause.
+
+96
+00:03:00,668 --> 00:03:02,543
+Now turn the detail down.
+
+97
+00:03:02,543 --> 00:03:03,293
+Type: sed,
+
+98
+00:03:03,293 --> 00:03:03,818
+dash I,
+
+99
+00:03:03,818 --> 00:03:04,268
+quote,
+
+100
+00:03:04,268 --> 00:03:04,868
+S slash,
+
+101
+00:03:04,868 --> 00:03:05,468
+I N F O,
+
+102
+00:03:05,468 --> 00:03:05,919
+slash,
+
+103
+00:03:05,919 --> 00:03:06,969
+W A R N I N G,
+
+104
+00:03:06,969 --> 00:03:07,419
+slash,
+
+105
+00:03:07,419 --> 00:03:07,869
+quote,
+
+106
+00:03:07,869 --> 00:03:09,144
+log demo dot P Y.
+
+107
+00:03:09,694 --> 00:03:14,686
+No output. Run it again. Type: python three, log demo dot P Y.
+
+108
+00:03:15,236 --> 00:03:17,902
+Now only the warning and the error appear.
+
+109
+00:03:17,902 --> 00:03:18,536
+Same code,
+
+110
+00:03:18,536 --> 00:03:19,235
+less noise.
+
+111
+00:03:19,235 --> 00:03:22,599
+In production you lower the level to keep logs short,
+
+112
+00:03:22,599 --> 00:03:25,455
+and raise the detail when you hunt a problem.
+
+113
+00:03:27,505 --> 00:03:27,880
+Last,
+
+114
+00:03:27,880 --> 00:03:28,480
+retries.
+
+115
+00:03:28,480 --> 00:03:32,303
+A busy server or a dropped connection is temporary.
+
+116
+00:03:32,303 --> 00:03:34,927
+This script tries up to four times,
+
+117
+00:03:34,927 --> 00:03:36,351
+logs every attempt,
+
+118
+00:03:36,351 --> 00:03:38,375
+and waits longer each time.
+
+119
+00:03:38,375 --> 00:03:38,975
+Show it.
+
+120
+00:03:38,975 --> 00:03:40,774
+Type: cat retry dot P Y.
+
+121
+00:03:41,324 --> 00:03:43,426
+The wait doubles: one second,
+
+122
+00:03:43,426 --> 00:03:43,716
+two,
+
+123
+00:03:43,716 --> 00:03:44,078
+four.
+
+124
+00:03:44,078 --> 00:03:45,818
+That is called back off.
+
+125
+00:03:45,818 --> 00:03:46,978
+Our lab address,
+
+126
+00:03:46,978 --> 00:03:47,412
+flaky,
+
+127
+00:03:47,412 --> 00:03:49,369
+fails twice and then works.
+
+128
+00:03:49,369 --> 00:03:49,877
+Run it.
+
+129
+00:03:49,877 --> 00:03:51,254
+Type: python three,
+
+130
+00:03:51,254 --> 00:03:52,268
+retry dot P Y.
+
+131
+00:03:56,318 --> 00:03:57,247
+Two warnings,
+
+132
+00:03:57,247 --> 00:03:59,391
+then success on attempt three.
+
+133
+00:03:59,391 --> 00:04:01,248
+Now let it give up sooner,
+
+134
+00:04:01,248 --> 00:04:02,892
+with only two attempts.
+
+135
+00:04:02,892 --> 00:04:03,606
+Type: sed,
+
+136
+00:04:03,606 --> 00:04:04,106
+dash I,
+
+137
+00:04:04,106 --> 00:04:04,535
+quote,
+
+138
+00:04:04,535 --> 00:04:05,107
+S slash,
+
+139
+00:04:05,107 --> 00:04:05,535
+range,
+
+140
+00:04:05,535 --> 00:04:06,464
+open bracket,
+
+141
+00:04:06,464 --> 00:04:06,750
+one,
+
+142
+00:04:06,750 --> 00:04:07,179
+comma,
+
+143
+00:04:07,179 --> 00:04:07,536
+five,
+
+144
+00:04:07,536 --> 00:04:08,536
+close bracket,
+
+145
+00:04:08,536 --> 00:04:08,965
+slash,
+
+146
+00:04:08,965 --> 00:04:09,394
+range,
+
+147
+00:04:09,394 --> 00:04:10,322
+open bracket,
+
+148
+00:04:10,322 --> 00:04:10,608
+one,
+
+149
+00:04:10,608 --> 00:04:11,037
+comma,
+
+150
+00:04:11,037 --> 00:04:11,466
+three,
+
+151
+00:04:11,466 --> 00:04:12,466
+close bracket,
+
+152
+00:04:12,466 --> 00:04:12,895
+slash,
+
+153
+00:04:12,895 --> 00:04:13,323
+quote,
+
+154
+00:04:13,323 --> 00:04:14,324
+retry dot P Y.
+
+155
+00:04:14,874 --> 00:04:19,716
+No output. Run it again. Type: python three, retry dot P Y.
+
+156
+00:04:23,766 --> 00:04:25,153
+Both attempts failed,
+
+157
+00:04:25,153 --> 00:04:28,057
+and the script gave up with a clear message,
+
+158
+00:04:28,057 --> 00:04:28,849
+not a crash.
+
+159
+00:04:28,849 --> 00:04:30,433
+Now check its exit code.
+
+160
+00:04:30,433 --> 00:04:31,159
+Type: echo,
+
+161
+00:04:31,159 --> 00:04:31,952
+dollar sign,
+
+162
+00:04:31,952 --> 00:04:32,876
+question mark.
+
+163
+00:04:33,426 --> 00:04:33,706
+One.
+
+164
+00:04:33,706 --> 00:04:35,318
+Not zero means failure,
+
+165
+00:04:35,318 --> 00:04:36,930
+so any caller can tell.
+
+166
+00:04:36,930 --> 00:04:39,033
+Retry only temporary problems,
+
+167
+00:04:39,033 --> 00:04:41,697
+like timeouts and five hundred errors.
+
+168
+00:04:41,697 --> 00:04:45,272
+A wrong token or a missing page never fixes itself,
+
+169
+00:04:45,272 --> 00:04:46,183
+so fail fast.
+
+170
+00:04:48,233 --> 00:04:49,318
+Here is your task,
+
+171
+00:04:49,318 --> 00:04:50,826
+with everything you need.
+
+172
+00:04:50,826 --> 00:04:52,755
+The files are in the repository,
+
+173
+00:04:52,755 --> 00:04:54,142
+and in the description.
+
+174
+00:04:54,692 --> 00:05:00,367
+The repository is git hub dot com, slash it dash waves, slash dev ops dash A I.
+
+175
+00:05:00,917 --> 00:05:05,788
+In the academy slash lesson fifty-one folder you will find the task file,
+
+176
+00:05:05,788 --> 00:05:06,589
+the lab API,
+
+177
+00:05:06,589 --> 00:05:07,657
+and the checker,
+
+178
+00:05:07,657 --> 00:05:09,258
+check fifty-one dot S H.
+
+179
+00:05:09,808 --> 00:05:11,100
+You write one file,
+
+180
+00:05:11,100 --> 00:05:12,459
+fetch retry dot P Y.
+
+181
+00:05:12,459 --> 00:05:15,313
+It calls the flaky address with a timeout,
+
+182
+00:05:15,313 --> 00:05:16,876
+tries up to four times,
+
+183
+00:05:16,876 --> 00:05:17,828
+and waits one,
+
+184
+00:05:17,828 --> 00:05:18,100
+two,
+
+185
+00:05:18,100 --> 00:05:19,323
+then four seconds.
+
+186
+00:05:19,873 --> 00:05:22,958
+Every attempt is logged with the logging module.
+
+187
+00:05:22,958 --> 00:05:24,950
+On success it prints recovered.
+
+188
+00:05:24,950 --> 00:05:28,807
+After four failures it logs gave up and exits with code one,
+
+189
+00:05:28,807 --> 00:05:29,964
+with no traceback.
+
+190
+00:05:30,514 --> 00:05:33,863
+Do not open the solution file until you have really tried.
+
+191
+00:05:34,413 --> 00:05:38,104
+The checker shows four pass lines. Write your results in a report.
+
+192
+00:05:40,154 --> 00:05:44,079
+Here is how your work is judged. Six points, and you need all six.
+
+193
+00:05:44,629 --> 00:05:46,464
+The checker shows four pass lines.
+
+194
+00:05:47,014 --> 00:05:49,211
+Every attempt is logged at the right level.
+
+195
+00:05:49,761 --> 00:05:52,577
+You catch request exception, never a bare except.
+
+196
+00:05:53,127 --> 00:05:56,562
+Every call has a timeout, and the wait grows between attempts.
+
+197
+00:05:57,112 --> 00:06:01,507
+After the last failure: a clear message, exit code one, no traceback.
+
+198
+00:06:02,057 --> 00:06:05,470
+The report is complete, and you worked in your own virtual machine.
+
+199
+00:06:06,020 --> 00:06:07,641
+To pass, you need all six.
+
+200
+00:06:09,691 --> 00:06:12,528
+Your turn, in your own Ubuntu virtual machine.
+
+201
+00:06:13,078 --> 00:06:16,982
+One: get the lesson folder, and activate your virtual environment.
+
+202
+00:06:17,532 --> 00:06:20,050
+Two: start the lab API in one terminal.
+
+203
+00:06:20,600 --> 00:06:25,485
+Three: write fetch retry dot P Y with a loop of four attempts and a timeout.
+
+204
+00:06:26,035 --> 00:06:29,896
+Four: catch request exception, and log each failure with logging.
+
+205
+00:06:30,446 --> 00:06:34,713
+Five: wait longer after each failure, and give up with exit code one.
+
+206
+00:06:35,263 --> 00:06:37,738
+Six: run the checker, and write your report.
+
+207
+00:06:38,288 --> 00:06:40,122
+Pause the video, and begin now.
+
+208
+00:06:55,672 --> 00:06:56,547
+Quick check.
+
+209
+00:06:57,097 --> 00:06:59,123
+Why is a bare except a bad idea?
+
+210
+00:06:59,673 --> 00:07:01,935
+Which level would you use for a failed attempt?
+
+211
+00:07:02,485 --> 00:07:04,575
+Why does the wait grow between retries?
+
+212
+00:07:05,125 --> 00:07:06,981
+Which failures are worth retrying?
+
+213
+00:07:07,531 --> 00:07:13,505
+Objective covered: MC06-O05, exceptions, logging, and retries.
+
+214
+00:07:14,055 --> 00:07:16,124
+Pause the video, and answer out loud.
+
+215
+00:07:26,674 --> 00:07:29,703
+Next lesson: command line tools and exit codes.
+
+216
+00:07:30,253 --> 00:07:33,581
+If this helped, like, share and subscribe, so you do not miss it.
