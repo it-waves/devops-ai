@@ -90,4 +90,4 @@ One lesson per objective, then the mastery scenario. Real Ubuntu 24.04 terminal,
 | L52 | MC06-O06 | CLI tools and exit codes (argparse, 0/1/2, stdout vs stderr) | Next: pytest and mocks | Published (_SfHfOcdpuo, 7:05, https://youtu.be/_SfHfOcdpuo; uploaded by me via Studio; captions published) |
 | L53 | MC06-O07 | pytest and mocks (assert, parametrize, patch) | Next: cloud SDKs with least privilege | Published (kTAizqRfkx0, 6:58, https://youtu.be/kTAizqRfkx0; uploaded by me via Studio; captions published) |
 | L54 | MC06-O08 | Cloud SDKs with least privilege (boto3, moto, IAM policy audit) | Next: tested inventory validation utility | Published (nGNe5xhQ6hk, 6:47, https://youtu.be/nGNe5xhQ6hk; uploaded by me via Studio; captions published) |
-| L55 | MC06-O09 | Tested inventory validation utility (exit codes, edges, pytest) | Next: Python for DevOps mastery evidence | Built (6:58); mirrored; Studio upload in progress |
+| L55 | MC06-O09 | Tested inventory validation utility (exit codes, edges, pytest) | Next: Python for DevOps mastery evidence | Published (n8so-RBKj7o, 6:58, https://youtu.be/n8so-RBKj7o; uploaded by me via Studio; captions pending) |
