@@ -1,0 +1,12 @@
+Install the lab (needs an Ubuntu virtual machine with root and git):
+  sudo apt install -y git      # skip if git is already installed
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab61.sh /usr/local/sbin/
+  source shortcuts61.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab61: a shared repo (origin.git) and your clone (work)
+  lab check               # four FAIL lines at the start; your goal is four PASS lines
+  lab down                # cleanup when finished
+Without the shortcut, use: sudo lab61.sh up | check | down
+Your task (in /opt/lab61/work): 1 create release-notes.txt and commit  2 git push is rejected: git pull --rebase, then push  3 git tag -a v1.0 -m "First release" and git push origin v1.0  4 write one number in /opt/lab61/answers.txt: how many commits origin main has now.
+If git asks who you are: git config --global user.name "Your Name" and git config --global user.email you@example.com
+Run it only in your own virtual machine. It creates only /opt/lab61; lab down removes it, and you remove the installed script with: sudo rm /usr/local/sbin/lab61.sh

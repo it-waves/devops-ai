@@ -1,0 +1,791 @@
+1
+00:00:00,500 --> 00:00:02,832
+You made great commits on your laptop.
+
+2
+00:00:02,832 --> 00:00:03,385
+Now what?
+
+3
+00:00:03,385 --> 00:00:04,551
+If the laptop dies,
+
+4
+00:00:04,551 --> 00:00:05,410
+they are gone.
+
+5
+00:00:05,410 --> 00:00:07,497
+And your team has never seen them.
+
+6
+00:00:08,047 --> 00:00:11,175
+Today you connect your repository to a shared copy,
+
+7
+00:00:11,175 --> 00:00:14,058
+and learn the daily rhythm of team work: fetch,
+
+8
+00:00:14,058 --> 00:00:14,365
+pull,
+
+9
+00:00:14,365 --> 00:00:14,917
+and push.
+
+10
+00:00:15,467 --> 00:00:16,068
+Plus tags,
+
+11
+00:00:16,068 --> 00:00:19,193
+which stamp a version like one point oh on a commit,
+
+12
+00:00:19,193 --> 00:00:21,717
+so everyone can find exactly what shipped.
+
+13
+00:00:22,267 --> 00:00:25,083
+As always, there is a lab with a checker at the end.
+
+14
+00:00:27,133 --> 00:00:30,571
+A remote is just another copy of your repository,
+
+15
+00:00:30,571 --> 00:00:31,974
+usually on a server.
+
+16
+00:00:31,974 --> 00:00:34,290
+Git gives each remote a nickname,
+
+17
+00:00:34,290 --> 00:00:36,114
+and the default is origin.
+
+18
+00:00:36,664 --> 00:00:37,565
+When you clone,
+
+19
+00:00:37,565 --> 00:00:40,868
+Git copies everything and remembers where it came from.
+
+20
+00:00:40,868 --> 00:00:42,190
+That source is origin.
+
+21
+00:00:42,740 --> 00:00:48,170
+Git also keeps a bookmark of where the remote branch was the last time you talked to it.
+
+22
+00:00:48,170 --> 00:00:50,083
+It is called origin slash main,
+
+23
+00:00:50,083 --> 00:00:51,625
+a remote tracking branch.
+
+24
+00:00:51,625 --> 00:00:54,217
+It only moves when you talk to the server.
+
+25
+00:00:54,767 --> 00:00:57,926
+Fetch downloads new commits and moves that bookmark.
+
+26
+00:00:57,926 --> 00:00:59,870
+It never touches your own files,
+
+27
+00:00:59,870 --> 00:01:01,146
+so it is always safe.
+
+28
+00:01:01,696 --> 00:01:02,547
+Pull is fetch,
+
+29
+00:01:02,547 --> 00:01:04,068
+plus a merge or a rebase.
+
+30
+00:01:04,068 --> 00:01:05,710
+It updates your own branch,
+
+31
+00:01:05,710 --> 00:01:07,413
+so it can change your files.
+
+32
+00:01:07,963 --> 00:01:09,743
+And push uploads your commits.
+
+33
+00:01:09,743 --> 00:01:13,659
+Git only allows it when you will not overwrite anyone else's work.
+
+34
+00:01:15,709 --> 00:01:17,217
+Let us see it live.
+
+35
+00:01:17,217 --> 00:01:20,075
+A team repository lives on a server,
+
+36
+00:01:20,075 --> 00:01:21,266
+at slash S R V,
+
+37
+00:01:21,266 --> 00:01:22,060
+slash git,
+
+38
+00:01:22,060 --> 00:01:23,568
+slash team dot git.
+
+39
+00:01:23,568 --> 00:01:24,283
+Clone it.
+
+40
+00:01:24,283 --> 00:01:25,553
+Type: git clone,
+
+41
+00:01:25,553 --> 00:01:26,505
+slash S R V,
+
+42
+00:01:26,505 --> 00:01:27,299
+slash git,
+
+43
+00:01:27,299 --> 00:01:28,808
+slash team dot git.
+
+44
+00:01:29,358 --> 00:01:32,472
+Cloned. Go into the folder. Type: CD, team.
+
+45
+00:01:33,022 --> 00:01:36,094
+List the remotes. Type: git remote, dash V.
+
+46
+00:01:36,644 --> 00:01:37,105
+Origin,
+
+47
+00:01:37,105 --> 00:01:40,329
+with an address for fetching and one for pushing.
+
+48
+00:01:40,329 --> 00:01:41,447
+Now the branches,
+
+49
+00:01:41,447 --> 00:01:42,763
+and what they track.
+
+50
+00:01:42,763 --> 00:01:43,882
+Type: git branch,
+
+51
+00:01:43,882 --> 00:01:44,474
+dash V V.
+
+52
+00:01:45,024 --> 00:01:47,079
+Main tracks origin slash main,
+
+53
+00:01:47,079 --> 00:01:48,792
+shown in square brackets.
+
+54
+00:01:48,792 --> 00:01:50,299
+Now list every branch,
+
+55
+00:01:50,299 --> 00:01:51,806
+including remote ones.
+
+56
+00:01:51,806 --> 00:01:52,971
+Type: git branch,
+
+57
+00:01:52,971 --> 00:01:53,450
+dash A.
+
+58
+00:01:54,000 --> 00:01:57,554
+The remote tracking branches live under remotes slash origin.
+
+59
+00:01:57,554 --> 00:01:59,011
+You never commit on them.
+
+60
+00:01:59,011 --> 00:02:00,934
+They are bookmarks of the server.
+
+61
+00:02:02,984 --> 00:02:08,147
+Now a teammate pushes while you are working. Go into your clone. Type: CD, team.
+
+62
+00:02:08,697 --> 00:02:11,299
+Ask for the status. Type: git status.
+
+63
+00:02:11,849 --> 00:02:14,211
+Up to date with origin slash main.
+
+64
+00:02:14,211 --> 00:02:18,657
+But careful: that only means up to date with your last bookmark.
+
+65
+00:02:18,657 --> 00:02:20,672
+Git has not asked the server.
+
+66
+00:02:20,672 --> 00:02:21,575
+Ask for news.
+
+67
+00:02:21,575 --> 00:02:22,687
+Type: git fetch.
+
+68
+00:02:23,237 --> 00:02:28,250
+A new commit arrived on origin slash main. Check again. Type: git status.
+
+69
+00:02:28,800 --> 00:02:31,298
+Now it knows: behind by one commit.
+
+70
+00:02:31,298 --> 00:02:32,725
+See what is waiting,
+
+71
+00:02:32,725 --> 00:02:34,081
+before you take it.
+
+72
+00:02:34,081 --> 00:02:35,080
+Type: git log,
+
+73
+00:02:35,080 --> 00:02:36,436
+dash dash one line,
+
+74
+00:02:36,436 --> 00:02:36,793
+main,
+
+75
+00:02:36,793 --> 00:02:37,435
+two dots,
+
+76
+00:02:37,435 --> 00:02:38,720
+origin slash main.
+
+77
+00:02:39,270 --> 00:02:43,116
+Two dots mean: commits on the right that are not on the left.
+
+78
+00:02:43,116 --> 00:02:43,810
+One commit,
+
+79
+00:02:43,810 --> 00:02:44,441
+from Alex.
+
+80
+00:02:44,441 --> 00:02:45,449
+Now bring it in.
+
+81
+00:02:45,449 --> 00:02:46,395
+Type: git pull.
+
+82
+00:02:46,945 --> 00:02:47,843
+Fast forward,
+
+83
+00:02:47,843 --> 00:02:49,431
+and your files updated.
+
+84
+00:02:49,431 --> 00:02:50,811
+Look at the history.
+
+85
+00:02:50,811 --> 00:02:51,778
+Type: git log,
+
+86
+00:02:51,778 --> 00:02:53,089
+dash dash one line.
+
+87
+00:02:53,639 --> 00:02:57,095
+A good habit: fetch, look, then pull. Nothing surprises you.
+
+88
+00:02:59,145 --> 00:03:02,345
+Now share your own work. Go in. Type: CD, team.
+
+89
+00:03:02,895 --> 00:03:05,160
+Make the start script friendlier.
+
+90
+00:03:05,160 --> 00:03:05,915
+Type: echo,
+
+91
+00:03:05,915 --> 00:03:06,327
+quote,
+
+92
+00:03:06,327 --> 00:03:07,082
+echo ready,
+
+93
+00:03:07,082 --> 00:03:07,494
+quote,
+
+94
+00:03:07,494 --> 00:03:08,249
+two arrows,
+
+95
+00:03:08,249 --> 00:03:09,210
+start dot S H.
+
+96
+00:03:09,760 --> 00:03:14,090
+Commit it. Type: git commit, dash A M, quote, Print ready message, quote.
+
+97
+00:03:14,640 --> 00:03:16,582
+Now share it. Type: git push.
+
+98
+00:03:17,132 --> 00:03:17,731
+Rejected!
+
+99
+00:03:17,731 --> 00:03:20,394
+The remote has a commit you do not have,
+
+100
+00:03:20,394 --> 00:03:22,524
+and Git refuses to overwrite it.
+
+101
+00:03:22,524 --> 00:03:23,922
+That is a protection,
+
+102
+00:03:23,922 --> 00:03:24,588
+not a bug.
+
+103
+00:03:24,588 --> 00:03:26,585
+The hint says it: fetch first.
+
+104
+00:03:26,585 --> 00:03:28,316
+Pull your teammate's work,
+
+105
+00:03:28,316 --> 00:03:29,913
+and replay yours on top.
+
+106
+00:03:29,913 --> 00:03:30,912
+Type: git pull,
+
+107
+00:03:30,912 --> 00:03:32,044
+dash dash rebase.
+
+108
+00:03:32,594 --> 00:03:35,346
+Rebased. Now push again. Type: git push.
+
+109
+00:03:35,896 --> 00:03:36,380
+Pushed.
+
+110
+00:03:36,380 --> 00:03:37,764
+Look at the picture.
+
+111
+00:03:37,764 --> 00:03:38,733
+Type: git log,
+
+112
+00:03:38,733 --> 00:03:40,049
+dash dash one line,
+
+113
+00:03:40,049 --> 00:03:41,156
+dash dash graph,
+
+114
+00:03:41,156 --> 00:03:42,125
+dash dash all.
+
+115
+00:03:42,675 --> 00:03:45,967
+Origin slash main and your main sit on the same commit,
+
+116
+00:03:45,967 --> 00:03:47,104
+in a straight line.
+
+117
+00:03:47,104 --> 00:03:51,592
+And never force push to a shared branch: it can erase your teammates' work.
+
+118
+00:03:53,742 --> 00:03:55,022
+Last skill: tags.
+
+119
+00:03:55,022 --> 00:03:58,108
+A tag is a permanent name for one commit,
+
+120
+00:03:58,108 --> 00:04:00,066
+like version one point oh.
+
+121
+00:04:00,066 --> 00:04:00,517
+Go in.
+
+122
+00:04:00,517 --> 00:04:01,195
+Type: CD,
+
+123
+00:04:01,195 --> 00:04:01,571
+team.
+
+124
+00:04:02,121 --> 00:04:03,837
+Create an annotated tag,
+
+125
+00:04:03,837 --> 00:04:04,910
+with a message.
+
+126
+00:04:04,910 --> 00:04:05,911
+Type: git tag,
+
+127
+00:04:05,911 --> 00:04:06,412
+dash A,
+
+128
+00:04:06,412 --> 00:04:07,484
+V one dot zero,
+
+129
+00:04:07,484 --> 00:04:07,985
+dash M,
+
+130
+00:04:07,985 --> 00:04:08,414
+quote,
+
+131
+00:04:08,414 --> 00:04:09,415
+First release,
+
+132
+00:04:09,415 --> 00:04:09,844
+quote.
+
+133
+00:04:10,394 --> 00:04:12,549
+List the tags. Type: git tag.
+
+134
+00:04:13,099 --> 00:04:18,091
+See what the tag holds. Type: git show, dash dash stat, V one dot zero.
+
+135
+00:04:18,641 --> 00:04:19,376
+The tagger,
+
+136
+00:04:19,376 --> 00:04:21,046
+the date and the message,
+
+137
+00:04:21,046 --> 00:04:22,984
+then the commit it points to.
+
+138
+00:04:22,984 --> 00:04:25,256
+Tags are not pushed automatically.
+
+139
+00:04:25,256 --> 00:04:26,259
+Type: git push,
+
+140
+00:04:26,259 --> 00:04:26,726
+origin,
+
+141
+00:04:26,726 --> 00:04:27,729
+V one dot zero.
+
+142
+00:04:28,279 --> 00:04:29,796
+Pushed as a new tag.
+
+143
+00:04:29,796 --> 00:04:31,464
+Confirm on the server.
+
+144
+00:04:31,464 --> 00:04:33,437
+Type: git L S dash remote,
+
+145
+00:04:33,437 --> 00:04:34,574
+dash dash tags,
+
+146
+00:04:34,574 --> 00:04:35,105
+origin.
+
+147
+00:04:35,655 --> 00:04:37,358
+The tag is on the server.
+
+148
+00:04:37,358 --> 00:04:40,354
+Everyone can check out exactly this version.
+
+149
+00:04:40,354 --> 00:04:42,397
+To push all your tags at once,
+
+150
+00:04:42,397 --> 00:04:44,781
+use git push origin dash dash tags.
+
+151
+00:04:44,781 --> 00:04:45,462
+On GitHub,
+
+152
+00:04:45,462 --> 00:04:47,096
+a tag becomes a release,
+
+153
+00:04:47,096 --> 00:04:48,798
+with notes and downloads,
+
+154
+00:04:48,798 --> 00:04:51,250
+and we will make one on screen soon.
+
+155
+00:04:53,400 --> 00:04:56,173
+Your task, in your own Ubuntu virtual machine.
+
+156
+00:04:56,723 --> 00:04:59,179
+The lab is lab sixty-one dot S H,
+
+157
+00:04:59,179 --> 00:05:02,974
+in the academy slash lab folder of git hub dot com,
+
+158
+00:05:02,974 --> 00:05:04,462
+slash it dash waves,
+
+159
+00:05:04,462 --> 00:05:06,173
+slash dev ops dash A I.
+
+160
+00:05:06,173 --> 00:05:07,885
+Install it like before,
+
+161
+00:05:07,885 --> 00:05:09,075
+then run lab up.
+
+162
+00:05:09,625 --> 00:05:11,284
+It builds a shared repository,
+
+163
+00:05:11,284 --> 00:05:12,445
+and your clone of it.
+
+164
+00:05:12,445 --> 00:05:13,551
+While you were away,
+
+165
+00:05:13,551 --> 00:05:15,044
+a teammate pushed a commit.
+
+166
+00:05:15,594 --> 00:05:19,818
+One: create release notes dot text with one line of text, and commit it.
+
+167
+00:05:20,368 --> 00:05:21,110
+Two: push it.
+
+168
+00:05:21,110 --> 00:05:22,536
+Git will reject the push,
+
+169
+00:05:22,536 --> 00:05:24,533
+so pull your teammate's work first,
+
+170
+00:05:24,533 --> 00:05:25,445
+then push again.
+
+171
+00:05:25,995 --> 00:05:30,817
+Three: create an annotated tag, V one dot zero, and push it to origin.
+
+172
+00:05:31,367 --> 00:05:36,423
+Four: in answers dot text, write one number: how many commits origin main has now.
+
+173
+00:05:36,973 --> 00:05:41,026
+Then run lab check. Four pass lines. Fetch first, look, then pull.
+
+174
+00:05:43,076 --> 00:05:45,060
+Six points, and you need all six.
+
+175
+00:05:45,610 --> 00:05:47,445
+The checker shows four pass lines.
+
+176
+00:05:47,995 --> 00:05:50,619
+You pulled before you pushed, and never used force.
+
+177
+00:05:51,169 --> 00:05:53,451
+The tag is annotated and on the server.
+
+178
+00:05:54,001 --> 00:05:56,519
+You can explain what fetch does that pull does not.
+
+179
+00:05:57,069 --> 00:05:59,394
+The number in answers dot text is correct.
+
+180
+00:05:59,944 --> 00:06:01,587
+You ran lab down to clean up.
+
+181
+00:06:02,137 --> 00:06:03,758
+To pass, you need all six.
+
+182
+00:06:05,808 --> 00:06:08,645
+Your turn, in your own Ubuntu virtual machine.
+
+183
+00:06:09,195 --> 00:06:11,414
+One: install the lab, and run lab up.
+
+184
+00:06:11,964 --> 00:06:13,585
+Two: commit the release notes.
+
+185
+00:06:14,135 --> 00:06:17,570
+Three: push, fix the rejection by pulling, and push again.
+
+186
+00:06:18,120 --> 00:06:19,933
+Four: tag, and push the tag.
+
+187
+00:06:20,483 --> 00:06:23,854
+Five: count the commits, write the number, and run lab check.
+
+188
+00:06:24,404 --> 00:06:25,876
+Six: run lab down.
+
+189
+00:06:26,426 --> 00:06:28,261
+Pause the video, and begin now.
+
+190
+00:06:43,811 --> 00:06:44,686
+Quick check.
+
+191
+00:06:45,236 --> 00:06:47,049
+What does fetch do that pull does not?
+
+192
+00:06:47,599 --> 00:06:49,220
+What is origin slash main?
+
+193
+00:06:49,770 --> 00:06:51,584
+Why was your first push rejected?
+
+194
+00:06:52,134 --> 00:06:53,904
+Are tags pushed automatically?
+
+195
+00:06:54,454 --> 00:07:00,726
+Objective covered: M C zero seven, objective five, remotes, fetch, pull, push, and tags.
+
+196
+00:07:01,276 --> 00:07:03,346
+Pause the video, and answer out loud.
+
+197
+00:07:13,896 --> 00:07:17,352
+Next: pull requests, reviews, and protected branches.
+
+198
+00:07:17,902 --> 00:07:21,230
+If this helped, like, share and subscribe, so you do not miss it.

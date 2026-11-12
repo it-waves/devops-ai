@@ -1,0 +1,26 @@
+Lesson 61 of the DevOps Engineering Bootcamp, the fifth lesson of the Git and GitHub masterclass, from beginner to mastery. You learn how to work with a remote: a shared copy of your repository. You see what origin is, what the remote tracking branch origin/main means (a bookmark of the server that moves only when you talk to it), and how fetch, pull and push differ. Then, live on Ubuntu: git clone, git remote -v, git branch -vv and -a, git fetch followed by git status and git log main..origin/main to look before you take changes, git pull, a rejected git push (fetch first) fixed with git pull --rebase, why you never force push to a shared branch, and tags: git tag -a v1.0 -m, git show, git push origin v1.0 and git ls-remote --tags. The lab has a checker that says PASS or FAIL for four checks, a pass/fail rubric, and cleanup.
+
+Chapters
+0:00 Share your work with the team
+0:26 Remotes and origin
+1:15 Clone and remote tracking
+2:02 Fetch, then pull
+2:58 Push and rejection
+3:53 Tags
+4:52 Your lab task
+5:42 Pass or fail rubric
+6:05 Your turn
+6:43 Quick check
+
+Objectives covered: MC07-O05 remotes, fetch, pull, push and tags
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab61.sh and shortcuts61.sh) and academy/lesson61 (INSTALL.txt). Install with: sudo apt install -y git (if needed), then sudo install -m 755 lab61.sh /usr/local/sbin/ and run lab up, lab check and lab down after loading the short name with: source shortcuts61.sh (without it, use sudo lab61.sh up, check, down). You need an Ubuntu virtual machine with root and git. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Git 2.43, run in a private mount setup on the recording computer. The "server" is a local bare repository at /srv/git/team.git, not GitHub; GitHub itself comes in the next lesson. The author names (Sam Lee, Alex Kim) are made up, and the repositories were prepared before recording so each segment starts from a known state. The on-screen model, task and rubric screens are labelled illustrations, not captures. The lab was run end to end before this lesson: all four checks fail before the work, all four pass after a reference solution, and lab down leaves nothing behind. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Git rebasing https://youtu.be/OoYo0hVqvVo
+Next lesson: pull requests, reviews and protected branches.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#git #github #devops #gitremote #versioncontrol #devopsbootcamp
