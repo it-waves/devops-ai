@@ -1,0 +1,10 @@
+Install the lab (needs an Ubuntu virtual machine with root and python3, which Ubuntu includes):
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab56.sh /usr/local/sbin/
+  source shortcuts56.sh   # gives you the short name lab used in the video
+  lab up                  # builds the four broken scripts in /opt/lab56 (a second)
+  lab check               # four FAIL lines at the start; your goal is four PASS lines
+  lab down                # cleanup when finished
+Without the shortcut, use: sudo lab56.sh up | check | down
+Run it only in your own virtual machine. It creates only the folder /opt/lab56; lab down removes it, and you remove the installed script with: sudo rm /usr/local/sbin/lab56.sh
+The scripts are in /opt/lab56/bin: top.py, load_cfg.py, fetch.py, tags.py (config in /opt/lab56/conf). Edit them with vim or sed, and change one thing at a time.

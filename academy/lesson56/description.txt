@@ -1,0 +1,28 @@
+Lesson 56 of the DevOps Engineering Bootcamp, the mastery scenario for the Python for DevOps masterclass. A small team's toolbox has four Python scripts broken on purpose, and a checker script says PASS or FAIL for each: top.py must sort ports as numbers and not as text, load_cfg.py must print a clear error and exit with code 2 and not dump a traceback, fetch.py must exit with code 1 when it gives up, and tags.py must give every call a fresh list. You see where to get the lab, the lab built and checked (four FAIL lines), and the first fault fixed live with four notes: the exact symptom, the cause and the command that proved it, the single change, and the proof afterwards. Then you fix the other three yourself, write the report from the template, and clean up with proof that nothing is left behind.
+
+Chapters
+0:00 Mastery evidence
+0:28 The scenario
+1:03 Get the lab
+2:00 Start the lab
+2:47 Four notes per fault
+3:08 Fault 1 live
+4:29 The report
+4:51 Your three faults
+5:43 Cleanup with proof
+6:28 Pass or fail rubric
+6:54 Your turn
+7:37 Quick check
+
+Objectives covered: MC06 mastery evidence (builds on MC06-O01 to MC06-O09)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab56.sh and shortcuts56.sh) and academy/lesson56 (INSTALL.txt and report_template.md). Install with: sudo install -m 755 lab56.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts56.sh (without it, use sudo lab56.sh up, check, down). You need an Ubuntu virtual machine with root and python3, which Ubuntu includes. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Python 3.12, run in a private mount setup on the recording computer. The lab was run end to end before this lesson: the four faults make all four checks fail, one set of fixes makes all four pass, and lab down leaves nothing behind. I fix only the first fault on screen, so the scenario is still yours to solve. The lab file names are invented, and lab is a short name I made for sudo lab56.sh. The on-screen guide, scenario and report screens are labelled illustrations, not captures. Typing is timed to the narration and the yellow highlights were added afterwards. Your own run is unverified until you do it.
+
+Previous lesson: Build a tested inventory validator https://youtu.be/n8so-RBKj7o
+Next masterclass: Git and GitHub, from beginner to mastery.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#python #pythonfordevops #devops #troubleshooting #ubuntu #devopsbootcamp
