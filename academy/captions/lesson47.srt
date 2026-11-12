@@ -1,0 +1,1019 @@
+1
+00:00:00,500 --> 00:00:03,311
+Welcome to the Python for DevOps masterclass.
+
+2
+00:00:03,311 --> 00:00:04,311
+Before any code,
+
+3
+00:00:04,311 --> 00:00:11,871
+one habit that separates a script that works on your machine from a tool a whole team can trust: the virtual environment.
+
+4
+00:00:12,421 --> 00:00:14,075
+Today: check your Python,
+
+5
+00:00:14,075 --> 00:00:15,993
+create a virtual environment,
+
+6
+00:00:15,993 --> 00:00:17,184
+install a package,
+
+7
+00:00:17,184 --> 00:00:20,426
+record the exact versions in a requirements file,
+
+8
+00:00:20,426 --> 00:00:23,006
+rebuild the environment from that file,
+
+9
+00:00:23,006 --> 00:00:24,858
+and lay out a clean project.
+
+10
+00:00:25,408 --> 00:00:29,901
+Every terminal demo is a real recording on Ubuntu twenty-four oh four,
+
+11
+00:00:29,901 --> 00:00:33,045
+with real installs from the Python package index.
+
+12
+00:00:35,095 --> 00:00:40,215
+Why not just install packages for the whole machine? Because Ubuntu itself uses Python.
+
+13
+00:00:40,765 --> 00:00:44,023
+The system Python belongs to the operating system.
+
+14
+00:00:44,023 --> 00:00:45,978
+Add or upgrade packages there,
+
+15
+00:00:45,978 --> 00:00:49,170
+and you can break the tools the system relies on.
+
+16
+00:00:49,720 --> 00:00:54,055
+Two projects can also need different versions of the same package.
+
+17
+00:00:54,055 --> 00:00:54,843
+One machine,
+
+18
+00:00:54,843 --> 00:00:55,893
+one global copy,
+
+19
+00:00:55,893 --> 00:00:57,272
+so one of them loses.
+
+20
+00:00:57,822 --> 00:01:00,027
+A virtual environment solves both.
+
+21
+00:01:00,027 --> 00:01:02,297
+It is a folder inside your project,
+
+22
+00:01:02,297 --> 00:01:04,956
+with its own Python and its own packages.
+
+23
+00:01:04,956 --> 00:01:06,123
+Delete the folder,
+
+24
+00:01:06,123 --> 00:01:07,614
+and everything is gone.
+
+25
+00:01:08,164 --> 00:01:09,987
+The recipe has three parts.
+
+26
+00:01:09,987 --> 00:01:11,540
+Create the environment.
+
+27
+00:01:11,540 --> 00:01:12,350
+Activate it.
+
+28
+00:01:12,350 --> 00:01:13,430
+Install into it.
+
+29
+00:01:13,430 --> 00:01:15,927
+Then freeze the versions into a file,
+
+30
+00:01:15,927 --> 00:01:17,615
+so anyone can rebuild it.
+
+31
+00:01:19,665 --> 00:01:23,889
+First, check your Python. Type: python three, dash dash version.
+
+32
+00:01:24,439 --> 00:01:26,109
+Python three point twelve,
+
+33
+00:01:26,109 --> 00:01:29,641
+the version that ships with Ubuntu twenty-four oh four.
+
+34
+00:01:29,641 --> 00:01:31,439
+Where does this Python live?
+
+35
+00:01:31,439 --> 00:01:32,852
+Ask it for its prefix.
+
+36
+00:01:32,852 --> 00:01:34,072
+Type: python three,
+
+37
+00:01:34,072 --> 00:01:34,521
+dash C,
+
+38
+00:01:34,521 --> 00:01:37,026
+then a line that prints sys dot prefix.
+
+39
+00:01:37,576 --> 00:01:38,473
+Slash U S R.
+
+40
+00:01:38,473 --> 00:01:40,416
+That is the system Python,
+
+41
+00:01:40,416 --> 00:01:42,658
+owned by the operating system,
+
+42
+00:01:42,658 --> 00:01:45,423
+so we never install packages into it.
+
+43
+00:01:45,423 --> 00:01:47,067
+Make a project folder.
+
+44
+00:01:47,067 --> 00:01:48,114
+Type: M K dir,
+
+45
+00:01:48,114 --> 00:01:48,861
+inventory.
+
+46
+00:01:49,411 --> 00:01:52,163
+Go inside. Type: CD, inventory.
+
+47
+00:01:52,713 --> 00:01:55,332
+Now create a virtual environment.
+
+48
+00:01:55,332 --> 00:01:56,839
+Type: python three,
+
+49
+00:01:56,839 --> 00:01:57,395
+dash M,
+
+50
+00:01:57,395 --> 00:01:57,871
+V env,
+
+51
+00:01:57,871 --> 00:01:58,665
+dot V env.
+
+52
+00:01:58,665 --> 00:01:59,696
+Python three,
+
+53
+00:01:59,696 --> 00:02:00,252
+dash M,
+
+54
+00:02:00,252 --> 00:02:00,728
+V env,
+
+55
+00:02:00,728 --> 00:02:02,553
+builds the environment,
+
+56
+00:02:02,553 --> 00:02:05,172
+and dot V env is the folder name.
+
+57
+00:02:08,722 --> 00:02:14,247
+It takes a few seconds. List the folder, including hidden files. Type: L S, dash A.
+
+58
+00:02:15,797 --> 00:02:19,904
+A hidden folder called dot V env now sits inside the project.
+
+59
+00:02:19,904 --> 00:02:22,194
+It holds a private copy of Python,
+
+60
+00:02:22,194 --> 00:02:24,416
+and a private place for packages.
+
+61
+00:02:26,466 --> 00:02:32,119
+Now turn the environment on. Type: source, dot V env, slash bin, slash activate.
+
+62
+00:02:33,169 --> 00:02:35,610
+The prompt now starts with dot V env,
+
+63
+00:02:35,610 --> 00:02:36,402
+in brackets.
+
+64
+00:02:36,402 --> 00:02:39,898
+That is your reminder that the environment is active.
+
+65
+00:02:39,898 --> 00:02:41,217
+Where is Python now?
+
+66
+00:02:41,217 --> 00:02:42,471
+Type: which python.
+
+67
+00:02:43,021 --> 00:02:45,928
+The path points inside the project folder.
+
+68
+00:02:45,928 --> 00:02:48,488
+This is the Python you are using now.
+
+69
+00:02:48,488 --> 00:02:49,734
+Install a package.
+
+70
+00:02:49,734 --> 00:02:50,426
+Type: pip,
+
+71
+00:02:50,426 --> 00:02:50,980
+install,
+
+72
+00:02:50,980 --> 00:02:51,464
+dash Q,
+
+73
+00:02:51,464 --> 00:02:52,087
+requests.
+
+74
+00:02:59,637 --> 00:03:00,983
+Dash Q means quiet,
+
+75
+00:03:00,983 --> 00:03:02,966
+so pip only prints problems.
+
+76
+00:03:02,966 --> 00:03:06,508
+It fetched requests from the Python package index,
+
+77
+00:03:06,508 --> 00:03:07,570
+called pie P I.
+
+78
+00:03:07,570 --> 00:03:09,199
+List what is installed.
+
+79
+00:03:09,199 --> 00:03:10,261
+Type: pip list.
+
+80
+00:03:11,811 --> 00:03:12,456
+Requests,
+
+81
+00:03:12,456 --> 00:03:14,105
+four packages it needs,
+
+82
+00:03:14,105 --> 00:03:15,538
+called dependencies,
+
+83
+00:03:15,538 --> 00:03:16,613
+and pip itself.
+
+84
+00:03:16,613 --> 00:03:17,975
+Look closer at one.
+
+85
+00:03:17,975 --> 00:03:18,691
+Type: pip,
+
+86
+00:03:18,691 --> 00:03:19,050
+show,
+
+87
+00:03:19,050 --> 00:03:19,695
+requests,
+
+88
+00:03:19,695 --> 00:03:20,053
+pipe,
+
+89
+00:03:20,053 --> 00:03:20,411
+grep,
+
+90
+00:03:20,411 --> 00:03:20,985
+Version.
+
+91
+00:03:21,535 --> 00:03:22,718
+The exact version.
+
+92
+00:03:22,718 --> 00:03:23,770
+Versions matter,
+
+93
+00:03:23,770 --> 00:03:28,241
+because the same code can behave differently on a different version.
+
+94
+00:03:28,241 --> 00:03:28,570
+Next,
+
+95
+00:03:28,570 --> 00:03:29,556
+we record them.
+
+96
+00:03:31,606 --> 00:03:35,745
+To share exactly what you installed, freeze it. Type: pip, freeze.
+
+97
+00:03:36,295 --> 00:03:37,271
+Every package,
+
+98
+00:03:37,271 --> 00:03:38,805
+with an exact version,
+
+99
+00:03:38,805 --> 00:03:40,687
+joined by two equals signs.
+
+100
+00:03:40,687 --> 00:03:42,291
+This is called pinning.
+
+101
+00:03:42,291 --> 00:03:43,546
+Save it to a file.
+
+102
+00:03:43,546 --> 00:03:44,243
+Type: pip,
+
+103
+00:03:44,243 --> 00:03:44,731
+freeze,
+
+104
+00:03:44,731 --> 00:03:47,729
+then a redirect into requirements dot text.
+
+105
+00:03:48,279 --> 00:03:49,337
+Nothing printed,
+
+106
+00:03:49,337 --> 00:03:51,851
+because the output went into the file.
+
+107
+00:03:51,851 --> 00:03:52,776
+Show the file.
+
+108
+00:03:52,776 --> 00:03:53,438
+Type: cat,
+
+109
+00:03:53,438 --> 00:03:54,893
+requirements dot text.
+
+110
+00:03:55,443 --> 00:03:56,851
+The same five lines.
+
+111
+00:03:56,851 --> 00:04:00,019
+This file is the recipe for your environment,
+
+112
+00:04:00,019 --> 00:04:01,567
+and it belongs in Git.
+
+113
+00:04:01,567 --> 00:04:03,398
+Now leave the environment.
+
+114
+00:04:03,398 --> 00:04:04,595
+Type: deactivate.
+
+115
+00:04:05,145 --> 00:04:07,184
+The prompt is back to normal.
+
+116
+00:04:07,184 --> 00:04:08,873
+Now prove the isolation.
+
+117
+00:04:08,873 --> 00:04:11,897
+Try to use requests from the system Python.
+
+118
+00:04:11,897 --> 00:04:13,234
+Type: python three,
+
+119
+00:04:13,234 --> 00:04:13,726
+dash C,
+
+120
+00:04:13,726 --> 00:04:14,851
+import requests.
+
+121
+00:04:15,401 --> 00:04:17,082
+No module named requests.
+
+122
+00:04:17,082 --> 00:04:19,167
+The system Python never saw it.
+
+123
+00:04:19,167 --> 00:04:21,453
+Each project has its own packages,
+
+124
+00:04:21,453 --> 00:04:23,807
+and nothing leaks between projects.
+
+125
+00:04:25,857 --> 00:04:27,209
+Now the real test.
+
+126
+00:04:27,209 --> 00:04:29,539
+A teammate clones your project.
+
+127
+00:04:29,539 --> 00:04:31,192
+They get no dot V env,
+
+128
+00:04:31,192 --> 00:04:32,394
+only your files.
+
+129
+00:04:32,394 --> 00:04:33,596
+List the folder.
+
+130
+00:04:33,596 --> 00:04:34,348
+Type: L S.
+
+131
+00:04:34,898 --> 00:04:36,938
+Just the requirements file.
+
+132
+00:04:36,938 --> 00:04:38,978
+Create a fresh environment.
+
+133
+00:04:38,978 --> 00:04:40,413
+Type: python three,
+
+134
+00:04:40,413 --> 00:04:40,942
+dash M,
+
+135
+00:04:40,942 --> 00:04:41,395
+V env,
+
+136
+00:04:41,395 --> 00:04:42,151
+dot V env.
+
+137
+00:04:45,701 --> 00:04:50,309
+Activate it. Type: source, dot V env, slash bin, slash activate.
+
+138
+00:04:50,859 --> 00:04:52,500
+Install from the file.
+
+139
+00:04:52,500 --> 00:04:53,245
+Type: pip,
+
+140
+00:04:53,245 --> 00:04:53,842
+install,
+
+141
+00:04:53,842 --> 00:04:54,364
+dash Q,
+
+142
+00:04:54,364 --> 00:04:54,886
+dash R,
+
+143
+00:04:54,886 --> 00:04:56,527
+requirements dot text.
+
+144
+00:04:56,527 --> 00:04:59,734
+Dash R means: read the list from this file.
+
+145
+00:05:07,284 --> 00:05:10,291
+Now compare what is installed with the file.
+
+146
+00:05:10,291 --> 00:05:10,975
+Type: pip,
+
+147
+00:05:10,975 --> 00:05:11,453
+freeze,
+
+148
+00:05:11,453 --> 00:05:11,795
+pipe,
+
+149
+00:05:11,795 --> 00:05:12,137
+diff,
+
+150
+00:05:12,137 --> 00:05:12,479
+dash,
+
+151
+00:05:12,479 --> 00:05:13,982
+requirements dot text.
+
+152
+00:05:14,532 --> 00:05:15,224
+No output,
+
+153
+00:05:15,224 --> 00:05:17,024
+which means no difference.
+
+154
+00:05:17,024 --> 00:05:18,547
+Check the exit status.
+
+155
+00:05:18,547 --> 00:05:19,308
+Type: echo,
+
+156
+00:05:19,308 --> 00:05:19,793
+dollar,
+
+157
+00:05:19,793 --> 00:05:20,762
+question mark.
+
+158
+00:05:21,312 --> 00:05:21,638
+Zero.
+
+159
+00:05:21,638 --> 00:05:24,375
+The new environment matches yours exactly.
+
+160
+00:05:24,375 --> 00:05:25,939
+That is reproducibility,
+
+161
+00:05:25,939 --> 00:05:28,416
+and it is the whole point of the file.
+
+162
+00:05:30,466 --> 00:05:32,336
+Now the project structure.
+
+163
+00:05:32,336 --> 00:05:34,422
+Code goes in a source folder,
+
+164
+00:05:34,422 --> 00:05:36,651
+and tests go in a tests folder.
+
+165
+00:05:36,651 --> 00:05:37,658
+Type: M K dir,
+
+166
+00:05:37,658 --> 00:05:38,162
+dash P,
+
+167
+00:05:38,162 --> 00:05:39,816
+source slash inventory,
+
+168
+00:05:39,816 --> 00:05:40,535
+and tests.
+
+169
+00:05:41,085 --> 00:05:42,293
+Add an init file,
+
+170
+00:05:42,293 --> 00:05:45,206
+so Python treats the folder as a package.
+
+171
+00:05:45,206 --> 00:05:46,059
+Type: touch,
+
+172
+00:05:46,059 --> 00:05:48,119
+source slash inventory slash,
+
+173
+00:05:48,119 --> 00:05:48,474
+init,
+
+174
+00:05:48,474 --> 00:05:49,043
+dot P Y.
+
+175
+00:05:49,593 --> 00:05:52,078
+Tell Git to ignore the environment.
+
+176
+00:05:52,078 --> 00:05:53,640
+You commit the recipe,
+
+177
+00:05:53,640 --> 00:05:55,699
+never the environment itself.
+
+178
+00:05:55,699 --> 00:05:56,480
+Type: echo,
+
+179
+00:05:56,480 --> 00:05:57,616
+dot V env slash,
+
+180
+00:05:57,616 --> 00:05:58,256
+redirect,
+
+181
+00:05:58,256 --> 00:05:59,321
+dot git ignore.
+
+182
+00:05:59,871 --> 00:06:01,086
+Show the layout,
+
+183
+00:06:01,086 --> 00:06:02,529
+skipping dot V env.
+
+184
+00:06:02,529 --> 00:06:03,364
+Type: find,
+
+185
+00:06:03,364 --> 00:06:03,668
+dot,
+
+186
+00:06:03,668 --> 00:06:04,427
+dash path,
+
+187
+00:06:04,427 --> 00:06:05,946
+dot slash dot V env,
+
+188
+00:06:05,946 --> 00:06:06,781
+dash prune,
+
+189
+00:06:06,781 --> 00:06:07,313
+dash O,
+
+190
+00:06:07,313 --> 00:06:08,148
+dash print.
+
+191
+00:06:08,698 --> 00:06:10,910
+That is the shape: requirements,
+
+192
+00:06:10,910 --> 00:06:11,394
+source,
+
+193
+00:06:11,394 --> 00:06:11,808
+tests,
+
+194
+00:06:11,808 --> 00:06:13,191
+and the ignore file.
+
+195
+00:06:13,191 --> 00:06:14,573
+Now run the checker,
+
+196
+00:06:14,573 --> 00:06:16,578
+which comes with this lesson.
+
+197
+00:06:16,578 --> 00:06:17,338
+Type: bash,
+
+198
+00:06:17,338 --> 00:06:18,306
+dot dot slash,
+
+199
+00:06:18,306 --> 00:06:20,103
+check forty-seven dot S H,
+
+200
+00:06:20,103 --> 00:06:20,794
+and a dot.
+
+201
+00:06:21,344 --> 00:06:26,421
+Five PASS lines. Your project is isolated, pinned, reproducible, and tidy.
+
+202
+00:06:28,471 --> 00:06:32,716
+Cleanup, with proof. List the project first. Type: L S, dash A.
+
+203
+00:06:33,266 --> 00:06:36,082
+Leave the folder. Type: CD, dot dot.
+
+204
+00:06:36,632 --> 00:06:42,478
+Delete the whole project, environment included. Type: R M, dash R F, inventory.
+
+205
+00:06:43,028 --> 00:06:45,481
+Now prove it is gone. Type: L S.
+
+206
+00:06:46,031 --> 00:06:47,931
+Only the checker file is left.
+
+207
+00:06:47,931 --> 00:06:51,540
+Removing a virtual environment is just deleting a folder.
+
+208
+00:06:51,540 --> 00:06:53,946
+Nothing was installed into the system.
+
+209
+00:06:55,996 --> 00:06:57,081
+Here is your task,
+
+210
+00:06:57,081 --> 00:06:58,589
+with everything you need.
+
+211
+00:06:58,589 --> 00:07:00,518
+The files are in the repository,
+
+212
+00:07:00,518 --> 00:07:01,905
+and in the description.
+
+213
+00:07:02,455 --> 00:07:08,130
+The repository is git hub dot com, slash it dash waves, slash dev ops dash A I.
+
+214
+00:07:08,680 --> 00:07:13,480
+In the academy slash lesson forty-seven folder you will find the task file,
+
+215
+00:07:13,480 --> 00:07:14,504
+and the checker,
+
+216
+00:07:14,504 --> 00:07:16,168
+check forty-seven dot S H.
+
+217
+00:07:16,718 --> 00:07:21,654
+You need an Ubuntu virtual machine with Python three and the venv package.
+
+218
+00:07:21,654 --> 00:07:22,321
+On Ubuntu,
+
+219
+00:07:22,321 --> 00:07:25,657
+that is the package called python three dash venv.
+
+220
+00:07:26,207 --> 00:07:31,711
+Build a project called servers. Create the environment, install one package, and pin it.
+
+221
+00:07:32,261 --> 00:07:33,129
+Add the layout,
+
+222
+00:07:33,129 --> 00:07:35,619
+prove a fresh environment matches the file,
+
+223
+00:07:35,619 --> 00:07:36,546
+run the checker,
+
+224
+00:07:36,546 --> 00:07:37,935
+and clean up with proof.
+
+225
+00:07:38,485 --> 00:07:41,920
+Write your results in a report, with the commands and their output.
+
+226
+00:07:43,970 --> 00:07:47,895
+Here is how your work is judged. Six points, and you need all six.
+
+227
+00:07:48,445 --> 00:07:50,323
+The checker shows five pass lines.
+
+228
+00:07:50,873 --> 00:07:53,731
+The requirements file has exact, pinned versions.
+
+229
+00:07:54,281 --> 00:07:57,503
+A fresh environment matches the file, with no difference.
+
+230
+00:07:58,053 --> 00:08:00,613
+The environment folder is ignored by Git.
+
+231
+00:08:01,163 --> 00:08:03,509
+The cleanup proof shows nothing left behind.
+
+232
+00:08:04,059 --> 00:08:08,795
+You worked only in your own virtual machine, and never installed into the system Python.
+
+233
+00:08:09,345 --> 00:08:10,967
+To pass, you need all six.
+
+234
+00:08:13,017 --> 00:08:15,854
+Your turn, in your own Ubuntu virtual machine.
+
+235
+00:08:16,404 --> 00:08:19,626
+One: make the servers folder, and create the environment.
+
+236
+00:08:20,176 --> 00:08:22,736
+Two: activate it, and install one package.
+
+237
+00:08:23,286 --> 00:08:26,528
+Three: freeze the versions into requirements dot text.
+
+238
+00:08:27,078 --> 00:08:29,596
+Four: build the layout, and the ignore file.
+
+239
+00:08:30,146 --> 00:08:33,175
+Five: make a fresh environment, and prove it matches.
+
+240
+00:08:33,725 --> 00:08:36,349
+Six: run the checker, then clean up with proof.
+
+241
+00:08:36,899 --> 00:08:38,734
+Pause the video, and begin now.
+
+242
+00:08:54,284 --> 00:08:55,159
+Quick check.
+
+243
+00:08:55,709 --> 00:08:57,735
+Why do we use a virtual environment?
+
+244
+00:08:58,285 --> 00:08:59,757
+Which command turns it on?
+
+245
+00:09:00,307 --> 00:09:01,801
+What does pip freeze give you?
+
+246
+00:09:02,351 --> 00:09:05,273
+Why is the environment folder not committed to Git?
+
+247
+00:09:05,823 --> 00:09:08,076
+Objective covered: M C zero six,
+
+248
+00:09:08,076 --> 00:09:09,062
+objective one,
+
+249
+00:09:09,062 --> 00:09:10,329
+setting up Python,
+
+250
+00:09:10,329 --> 00:09:11,807
+virtual environments,
+
+251
+00:09:11,807 --> 00:09:12,723
+dependencies,
+
+252
+00:09:12,723 --> 00:09:14,271
+and project structure.
+
+253
+00:09:14,821 --> 00:09:16,891
+Pause the video, and answer out loud.
+
+254
+00:09:27,441 --> 00:09:30,790
+Next lesson: Python types, collections, and functions.
+
+255
+00:09:31,340 --> 00:09:34,668
+If this helped, like, share and subscribe, so you do not miss it.

@@ -1,0 +1,28 @@
+Lesson 47 of the DevOps Engineering Bootcamp, the first lesson of the Python for DevOps masterclass. Before you write any Python tool, set it up so it works on every machine: check your Python, create a virtual environment, install a package, pin the exact versions in requirements.txt, rebuild the environment from that file, and lay out a clean project. You see why the system Python must stay untouched, then six real recordings on Ubuntu 24.04: python3 --version and sys.prefix, python3 -m venv, activate and pip install from PyPI, pip freeze into requirements.txt, a fresh environment rebuilt with pip install -r and checked with diff, and the src, tests and .gitignore layout with a checker script. The lesson ends with a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Python for DevOps
+0:35 Why virtual environments
+1:19 Check Python and create a venv
+2:26 Activate and install
+3:31 Freeze the versions
+4:25 Rebuild from the file
+5:30 Project layout and checker
+6:28 Cleanup with proof
+6:55 Get the lab and task
+7:43 Pass or fail rubric
+8:12 Your turn
+8:54 Quick check
+
+Objectives covered: MC06-O01
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself. Never install packages into the system Python. Lab files: github.com/it-waves/devops-ai, folder academy/lesson47 (TASK.md and the checker check47.sh). On a fresh Ubuntu you may need: sudo apt install python3-venv. The next lesson covers Python types, collections, conditions, loops and functions.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Python 3.12.3, run in a private mount setup on the recording computer, with real installs from PyPI. Package versions (for example requests 2.34.2) will differ when you run it later. The system-versus-venv diagram is an illustration, not a capture. Typing is timed to the narration, and the yellow highlights were added afterwards. The checker was tested on a passing and a failing project, but your own run of the lab is unverified until you do it.
+
+Previous lesson: https://youtu.be/Q4zXrtMexfg
+Next lesson: Python types, collections, conditions, loops and functions.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#python #pythonfordevops #venv #pip #devopsbootcamp
