@@ -1,0 +1,447 @@
+1
+00:00:00,500 --> 00:00:01,719
+Your branch is ready.
+
+2
+00:00:01,719 --> 00:00:03,924
+But you cannot just push it into main,
+
+3
+00:00:03,924 --> 00:00:06,303
+because main is what everyone depends on.
+
+4
+00:00:06,853 --> 00:00:10,696
+Today you use a pull request: a proposal to merge your branch,
+
+5
+00:00:10,696 --> 00:00:14,106
+with a conversation and a review before anything lands.
+
+6
+00:00:14,656 --> 00:00:19,328
+You also protect main, so nobody can skip that review, not even by accident.
+
+7
+00:00:19,878 --> 00:00:23,931
+And you watch all of it live, on a real Git server running on this computer.
+
+8
+00:00:25,481 --> 00:00:28,089
+A pull request is a page about one branch.
+
+9
+00:00:28,089 --> 00:00:31,256
+It says: I want to merge this branch into that one.
+
+10
+00:00:31,256 --> 00:00:32,436
+Please take a look.
+
+11
+00:00:32,986 --> 00:00:34,415
+It shows the commits,
+
+12
+00:00:34,415 --> 00:00:35,640
+the changed lines,
+
+13
+00:00:35,640 --> 00:00:36,934
+and a conversation.
+
+14
+00:00:36,934 --> 00:00:39,044
+GitHub calls it a pull request.
+
+15
+00:00:39,044 --> 00:00:41,222
+GitLab calls it a merge request.
+
+16
+00:00:41,222 --> 00:00:41,903
+Same idea.
+
+17
+00:00:42,453 --> 00:00:46,976
+A review has three outcomes. Comment. Approve. Or request changes.
+
+18
+00:00:47,526 --> 00:00:50,308
+A protected branch is a rule on the server.
+
+19
+00:00:50,308 --> 00:00:52,766
+For example: no direct pushes to main,
+
+20
+00:00:52,766 --> 00:00:55,419
+and at least one approval before a merge.
+
+21
+00:00:55,969 --> 00:00:57,302
+Our demo uses Gitea,
+
+22
+00:00:57,302 --> 00:01:01,701
+a free Git server with the same words and almost the same screens.
+
+23
+00:01:01,701 --> 00:01:02,367
+On GitHub,
+
+24
+00:01:02,367 --> 00:01:04,367
+the rule lives under Settings,
+
+25
+00:01:04,367 --> 00:01:05,300
+then Branches.
+
+26
+00:01:05,300 --> 00:01:07,233
+We point out each difference.
+
+27
+00:01:08,783 --> 00:01:11,962
+Sam opens the team app repository, and signs in.
+
+28
+00:01:19,712 --> 00:01:21,973
+First, protect main. Click Settings.
+
+29
+00:01:22,523 --> 00:01:24,464
+Then Branches, and Add New Rule.
+
+30
+00:01:27,614 --> 00:01:29,876
+The pattern is the branch name: main.
+
+31
+00:01:30,426 --> 00:01:34,394
+Scroll down. Push is disabled: nobody can push straight to main.
+
+32
+00:01:34,944 --> 00:01:37,333
+Now require one approval before a merge.
+
+33
+00:01:38,283 --> 00:01:40,459
+Save the rule. Main is protected.
+
+34
+00:01:45,209 --> 00:01:47,214
+Now the work. Click Pull Requests.
+
+35
+00:01:48,464 --> 00:01:52,304
+New Pull Request. Merge into main. Pull from the feature branch.
+
+36
+00:01:57,554 --> 00:02:01,565
+Below, Git shows exactly what would change: two commits, two files.
+
+37
+00:02:02,115 --> 00:02:06,958
+Press New Pull Request. Give it a clear title, and a short description: what, and why.
+
+38
+00:02:11,808 --> 00:02:13,173
+Create Pull Request.
+
+39
+00:02:16,523 --> 00:02:21,088
+This is the pull request page. Conversation, Commits, and Files Changed.
+
+40
+00:02:23,638 --> 00:02:25,234
+And look at the merge box.
+
+41
+00:02:25,234 --> 00:02:29,283
+This pull request does not have enough approvals yet: zero of one.
+
+42
+00:02:29,283 --> 00:02:30,572
+The protection works.
+
+43
+00:02:32,122 --> 00:02:37,007
+Now Alex, a teammate, opens the pull request on his own computer, and signs in.
+
+44
+00:02:41,557 --> 00:02:45,099
+He opens Files Changed, and reads the difference like a reviewer.
+
+45
+00:02:45,649 --> 00:02:49,659
+Hover over a line, click the plus, and comment on exactly that line.
+
+46
+00:02:53,209 --> 00:02:57,583
+Start review, so your comments are sent together. Then open the Review menu.
+
+47
+00:03:01,433 --> 00:03:03,737
+Request changes, with a short summary.
+
+48
+00:03:08,987 --> 00:03:09,757
+Back to Sam.
+
+49
+00:03:09,757 --> 00:03:12,132
+He fixes the code on his own machine,
+
+50
+00:03:12,132 --> 00:03:12,645
+commits,
+
+51
+00:03:12,645 --> 00:03:14,571
+and pushes to the same branch.
+
+52
+00:03:14,571 --> 00:03:16,496
+No new pull request is needed.
+
+53
+00:03:17,046 --> 00:03:20,715
+The pull request updates by itself: one new commit appears.
+
+54
+00:03:21,265 --> 00:03:25,127
+Alex reads the change again, opens the Review menu, and approves.
+
+55
+00:03:32,477 --> 00:03:35,421
+Now the merge box turns blue. It can be merged.
+
+56
+00:03:38,471 --> 00:03:42,204
+Click the arrow next to the merge button. There are several ways to merge.
+
+57
+00:03:42,754 --> 00:03:46,027
+A merge commit keeps every commit and adds one merge.
+
+58
+00:03:46,027 --> 00:03:47,818
+Rebase keeps a straight line.
+
+59
+00:03:47,818 --> 00:03:50,968
+Squash turns the whole branch into a single commit.
+
+60
+00:03:51,518 --> 00:03:54,995
+A team picks one rule. We choose squash, for a tidy main.
+
+61
+00:03:55,545 --> 00:03:57,428
+The message is filled in for you.
+
+62
+00:03:57,428 --> 00:03:58,513
+Tick Delete Branch,
+
+63
+00:03:58,513 --> 00:04:00,510
+because the work will live on main,
+
+64
+00:04:00,510 --> 00:04:02,222
+then confirm the squash merge.
+
+65
+00:04:08,372 --> 00:04:11,764
+Merged. The pull request is closed, and the branch is gone.
+
+66
+00:04:12,314 --> 00:04:16,645
+Look at main: one clean commit, with the pull request number in its message.
+
+67
+00:04:18,195 --> 00:04:21,203
+Your task, on your own GitHub account. It is free.
+
+68
+00:04:21,753 --> 00:04:24,477
+The checker is lab sixty-two dot S H,
+
+69
+00:04:24,477 --> 00:04:28,231
+in the academy slash lab folder of git hub dot com,
+
+70
+00:04:28,231 --> 00:04:29,703
+slash it dash waves,
+
+71
+00:04:29,703 --> 00:04:31,396
+slash dev ops dash A I.
+
+72
+00:04:31,946 --> 00:04:35,007
+One: create a public repository called team app,
+
+73
+00:04:35,007 --> 00:04:35,900
+with one file,
+
+74
+00:04:35,900 --> 00:04:38,324
+and push a branch with a small change.
+
+75
+00:04:38,874 --> 00:04:43,632
+Two: open a pull request from that branch into main, and leave one review comment.
+
+76
+00:04:44,182 --> 00:04:49,046
+Three: protect main, under Settings, Branches, so a pull request is required.
+
+77
+00:04:49,596 --> 00:04:52,476
+Four: merge the pull request, and delete the branch.
+
+78
+00:04:53,026 --> 00:04:55,652
+Then run: sh lab sixty-two dot S H,
+
+79
+00:04:55,652 --> 00:04:56,102
+check,
+
+80
+00:04:56,102 --> 00:04:57,228
+your user name,
+
+81
+00:04:57,228 --> 00:04:57,678
+slash,
+
+82
+00:04:57,678 --> 00:04:58,353
+team app.
+
+83
+00:04:58,353 --> 00:04:59,554
+Four pass lines.
+
+84
+00:05:01,104 --> 00:05:03,088
+Six points, and you need all six.
+
+85
+00:05:03,638 --> 00:05:05,473
+The checker shows four pass lines.
+
+86
+00:05:06,023 --> 00:05:09,116
+Main is protected, and you did not push to it directly.
+
+87
+00:05:09,666 --> 00:05:12,610
+Your pull request has a clear title and description.
+
+88
+00:05:13,160 --> 00:05:16,147
+You can explain comment, approve and request changes.
+
+89
+00:05:16,697 --> 00:05:18,787
+The branch is deleted after the merge.
+
+90
+00:05:19,337 --> 00:05:21,300
+You can say why a team protects main.
+
+91
+00:05:21,850 --> 00:05:23,471
+To pass, you need all six.
+
+92
+00:05:25,021 --> 00:05:27,261
+Your turn, on your own GitHub account.
+
+93
+00:05:27,811 --> 00:05:30,520
+One: create the repository and push a branch.
+
+94
+00:05:31,070 --> 00:05:33,481
+Two: open the pull request, and review it.
+
+95
+00:05:34,031 --> 00:05:35,396
+Three: protect main.
+
+96
+00:05:35,946 --> 00:05:37,845
+Four: merge and delete the branch.
+
+97
+00:05:38,395 --> 00:05:39,846
+Five: run lab check.
+
+98
+00:05:40,396 --> 00:05:44,150
+Six: delete the practice repository when you no longer need it.
+
+99
+00:05:44,700 --> 00:05:46,535
+Pause the video, and begin now.
+
+100
+00:05:48,085 --> 00:05:48,960
+Quick check.
+
+101
+00:05:49,510 --> 00:05:50,832
+What is a pull request?
+
+102
+00:05:51,382 --> 00:05:53,110
+What are the three review outcomes?
+
+103
+00:05:53,660 --> 00:05:55,388
+What does a protected branch stop?
+
+104
+00:05:55,938 --> 00:05:57,858
+Why delete the branch after the merge?
+
+105
+00:05:58,408 --> 00:06:00,943
+Objective covered: M C zero seven,
+
+106
+00:06:00,943 --> 00:06:01,987
+objective six,
+
+107
+00:06:01,987 --> 00:06:03,031
+pull requests,
+
+108
+00:06:03,031 --> 00:06:03,627
+reviews,
+
+109
+00:06:03,627 --> 00:06:05,342
+and protected branches.
+
+110
+00:06:05,892 --> 00:06:07,961
+Pause the video, and answer out loud.
+
+111
+00:06:08,511 --> 00:06:12,756
+Next: undoing mistakes safely, with restore, revert, and reflog.
+
+112
+00:06:13,306 --> 00:06:16,634
+If this helped, like, share and subscribe, so you do not miss it.

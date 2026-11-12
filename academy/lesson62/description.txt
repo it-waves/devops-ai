@@ -1,0 +1,26 @@
+Lesson 62 of the DevOps Engineering Bootcamp, the sixth lesson of the Git and GitHub masterclass, from beginner to mastery. You learn how teams get code into main safely: pull requests, reviews and protected branches. You see what a pull request is (a proposal to merge one branch into another, with a conversation), the three review outcomes (comment, approve, request changes), and what a protected branch stops (direct pushes to main, merges without approval). Then, live and full screen: protecting main with a rule that requires one approval, opening a pull request from a feature branch, a teammate reviewing the changed lines and requesting changes, the author pushing a fix to the same branch so the pull request updates itself, the approval that unlocks the merge, and a squash merge that also deletes the branch. The lab has a checker that says PASS or FAIL for four checks on your own free GitHub repository, a pass/fail rubric, and cleanup.
+
+Chapters
+0:00 Get your branch into main safely
+0:25 Pull requests and protected branches
+1:08 Protect main
+1:44 Open a pull request
+2:31 Review and request changes
+3:38 Approve and squash merge
+4:17 Your lab task
+5:00 Pass or fail rubric
+5:24 Your turn
+5:47 Quick check
+
+Objectives covered: MC07-O06 pull requests, reviews and protected branches
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab62.sh) and academy/lesson62 (INSTALL.txt). You do the work in your own free GitHub account (a public repository), then run: sh lab62.sh check YOUR-USER/team-app . The checker only reads your public repository through the public GitHub API and changes nothing. It needs python3, which Ubuntu has.
+
+Honest notes: the on-screen demo is a real, continuous, full-screen recording of a real browser with a real mouse and keyboard, on Gitea (a free, open-source Git server) running on the recording computer, not on github.com. Gitea uses the same words and almost the same screens as GitHub; on GitHub the protection rule is under Settings, Branches, and the merge button offers merge commit, squash and rebase in the same way. Two made-up users (Sam and Alex) take part; the author pushes the fix from a terminal, which is not shown. The lab checker was tested against a simulated GitHub API before this lesson (all four checks fail on an empty result and pass on a complete one); a run against the real github.com API is unverified until you do it. The on-screen model, task and rubric screens are labelled illustrations, not captures. The narration is synthetic speech.
+
+Previous lesson: Git remotes, fetch, pull, push and tags https://youtu.be/Q8FPBQyvBAA
+Next lesson: undoing mistakes safely with restore, revert and reflog.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#git #github #devops #pullrequest #codereview #devopsbootcamp

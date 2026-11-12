@@ -1,0 +1,11 @@
+Lesson 62 lab: you work in your own free GitHub account, then run a read-only checker.
+  1. On github.com create a PUBLIC repository named team-app, with a README (any file is fine).
+  2. Clone it, create a branch (for example feature/health-check), commit a small change, and push the branch.
+  3. Open a pull request from that branch into main. Add one review comment or review (comment, approve or request changes).
+  4. Protect main: Settings, Branches, add a rule for main that requires a pull request before merging.
+  5. Merge the pull request, then delete its branch.
+  6. Get the checker and run it with your own user name:
+       git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+       sh lab62.sh check YOUR-USER/team-app
+     Four FAIL lines before the work; your goal is four PASS lines. The checker only reads your public repository; it changes nothing and needs python3 (installed on Ubuntu). If you hit the API rate limit, set GITHUB_TOKEN in your environment.
+Cleanup: delete the practice repository when you no longer need it (Settings, scroll to Danger Zone, Delete this repository).
