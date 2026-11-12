@@ -1,0 +1,615 @@
+1
+00:00:00,500 --> 00:00:02,540
+Deploying is the moment of truth.
+
+2
+00:00:02,540 --> 00:00:03,962
+You push a new version,
+
+3
+00:00:03,962 --> 00:00:04,519
+and hope.
+
+4
+00:00:04,519 --> 00:00:05,322
+If it breaks,
+
+5
+00:00:05,322 --> 00:00:06,559
+every second counts,
+
+6
+00:00:06,559 --> 00:00:09,588
+and a manual fix at night is how mistakes happen.
+
+7
+00:00:10,138 --> 00:00:13,558
+Today you build a deploy script that does three things.
+
+8
+00:00:13,558 --> 00:00:15,174
+It releases a new version.
+
+9
+00:00:15,174 --> 00:00:17,786
+It checks that the new version is healthy.
+
+10
+00:00:17,786 --> 00:00:18,843
+And if it is not,
+
+11
+00:00:18,843 --> 00:00:20,335
+it rolls back by itself.
+
+12
+00:00:20,885 --> 00:00:25,920
+Every demo is a real recording on Ubuntu, with a small web server running in the lab.
+
+13
+00:00:27,970 --> 00:00:28,379
+First,
+
+14
+00:00:28,379 --> 00:00:30,217
+how the files are laid out.
+
+15
+00:00:30,217 --> 00:00:32,737
+Each version lives in its own folder,
+
+16
+00:00:32,737 --> 00:00:33,759
+under releases.
+
+17
+00:00:33,759 --> 00:00:34,440
+Type: L S,
+
+18
+00:00:34,440 --> 00:00:35,053
+releases.
+
+19
+00:00:35,603 --> 00:00:37,217
+Three versions: v one,
+
+20
+00:00:37,217 --> 00:00:38,537
+v two and v three.
+
+21
+00:00:38,537 --> 00:00:42,131
+A sim link called current points to the live one.
+
+22
+00:00:42,131 --> 00:00:42,865
+Type: L S,
+
+23
+00:00:42,865 --> 00:00:43,378
+dash L,
+
+24
+00:00:43,378 --> 00:00:43,965
+current.
+
+25
+00:00:44,515 --> 00:00:47,264
+Current points to releases slash v one.
+
+26
+00:00:47,264 --> 00:00:50,717
+The web server serves whatever current points to.
+
+27
+00:00:50,717 --> 00:00:52,760
+Ask it which version is live.
+
+28
+00:00:52,760 --> 00:00:53,535
+Type: curl,
+
+29
+00:00:53,535 --> 00:00:54,029
+dash S,
+
+30
+00:00:54,029 --> 00:00:56,777
+local host colon eight zero eight zero,
+
+31
+00:00:56,777 --> 00:00:57,763
+slash version.
+
+32
+00:00:58,313 --> 00:00:59,815
+Version one is live.
+
+33
+00:00:59,815 --> 00:01:02,593
+Every version also has a health page.
+
+34
+00:01:02,593 --> 00:01:03,419
+Type: curl,
+
+35
+00:01:03,419 --> 00:01:04,095
+dash F S,
+
+36
+00:01:04,095 --> 00:01:07,023
+local host colon eight zero eight zero,
+
+37
+00:01:07,023 --> 00:01:07,999
+slash health.
+
+38
+00:01:08,549 --> 00:01:08,745
+OK.
+
+39
+00:01:08,745 --> 00:01:09,986
+The server answers,
+
+40
+00:01:09,986 --> 00:01:11,750
+so this version is healthy.
+
+41
+00:01:11,750 --> 00:01:14,821
+Switching versions is just moving the sim link,
+
+42
+00:01:14,821 --> 00:01:15,801
+which is quick,
+
+43
+00:01:15,801 --> 00:01:16,911
+and easy to undo.
+
+44
+00:01:18,961 --> 00:01:22,545
+Now the deploy script. Type: cat release dot S H.
+
+45
+00:01:23,095 --> 00:01:24,983
+It remembers the old version,
+
+46
+00:01:24,983 --> 00:01:26,416
+switches the sim link,
+
+47
+00:01:26,416 --> 00:01:28,174
+then calls the health page.
+
+48
+00:01:28,174 --> 00:01:29,476
+If the check passes,
+
+49
+00:01:29,476 --> 00:01:30,713
+it reports success.
+
+50
+00:01:30,713 --> 00:01:31,169
+If not,
+
+51
+00:01:31,169 --> 00:01:33,968
+it points the link back to the old version,
+
+52
+00:01:33,968 --> 00:01:35,206
+and exits with one.
+
+53
+00:01:35,206 --> 00:01:37,224
+Check it with ShellCheck first.
+
+54
+00:01:37,224 --> 00:01:39,373
+Type: shellcheck release dot S H,
+
+55
+00:01:39,373 --> 00:01:39,633
+and,
+
+56
+00:01:39,633 --> 00:01:39,893
+and,
+
+57
+00:01:39,893 --> 00:01:40,610
+echo clean.
+
+58
+00:01:41,160 --> 00:01:45,746
+Clean. A script you can trust, with a clear exit code that a pipeline can read.
+
+59
+00:01:47,796 --> 00:01:52,127
+Now deploy version two. Type: bash release dot S H, v two.
+
+60
+00:01:52,677 --> 00:01:53,340
+Deployed.
+
+61
+00:01:53,340 --> 00:01:56,065
+Ask the server which version is live.
+
+62
+00:01:56,065 --> 00:01:56,876
+Type: curl,
+
+63
+00:01:56,876 --> 00:01:57,391
+dash S,
+
+64
+00:01:57,391 --> 00:02:00,264
+local host colon eight zero eight zero,
+
+65
+00:02:00,264 --> 00:02:01,295
+slash version.
+
+66
+00:02:01,845 --> 00:02:06,517
+Version two is live. Check where the link points. Type: read link, current.
+
+67
+00:02:07,067 --> 00:02:13,147
+Releases slash v two. Run the same deploy again. Type: bash release dot S H, v two.
+
+68
+00:02:13,697 --> 00:02:14,794
+Deployed again,
+
+69
+00:02:14,794 --> 00:02:15,892
+with no errors.
+
+70
+00:02:15,892 --> 00:02:17,720
+The script is idempotent,
+
+71
+00:02:17,720 --> 00:02:20,353
+so a repeat or a retry does no harm.
+
+72
+00:02:22,403 --> 00:02:25,306
+Now the test that matters: a bad release.
+
+73
+00:02:25,306 --> 00:02:27,643
+Version three has no health page.
+
+74
+00:02:27,643 --> 00:02:28,351
+Deploy it.
+
+75
+00:02:28,351 --> 00:02:30,263
+Type: bash release dot S H,
+
+76
+00:02:30,263 --> 00:02:30,830
+v three.
+
+77
+00:02:31,380 --> 00:02:34,077
+The health check failed with a four oh four,
+
+78
+00:02:34,077 --> 00:02:36,406
+and the script rolled back on its own.
+
+79
+00:02:36,406 --> 00:02:37,632
+Check the exit code.
+
+80
+00:02:37,632 --> 00:02:38,306
+Type: echo,
+
+81
+00:02:38,306 --> 00:02:39,593
+dollar question mark.
+
+82
+00:02:40,143 --> 00:02:40,425
+One,
+
+83
+00:02:40,425 --> 00:02:41,130
+a failure,
+
+84
+00:02:41,130 --> 00:02:42,893
+so a pipeline would stop,
+
+85
+00:02:42,893 --> 00:02:44,162
+and alert someone.
+
+86
+00:02:44,162 --> 00:02:45,995
+Which version is live now?
+
+87
+00:02:45,995 --> 00:02:46,771
+Type: curl,
+
+88
+00:02:46,771 --> 00:02:47,265
+dash S,
+
+89
+00:02:47,265 --> 00:02:50,015
+local host colon eight zero eight zero,
+
+90
+00:02:50,015 --> 00:02:51,002
+slash version.
+
+91
+00:02:51,552 --> 00:02:56,629
+Version two, still serving users. Confirm the link. Type: read link, current.
+
+92
+00:02:57,179 --> 00:02:59,258
+Back on releases slash v two.
+
+93
+00:02:59,258 --> 00:03:01,481
+You can also roll back by hand,
+
+94
+00:03:01,481 --> 00:03:04,349
+by deploying a known good older version.
+
+95
+00:03:04,349 --> 00:03:06,285
+Type: bash release dot S H,
+
+96
+00:03:06,285 --> 00:03:06,715
+v one.
+
+97
+00:03:07,265 --> 00:03:07,917
+Deployed.
+
+98
+00:03:07,917 --> 00:03:09,222
+Check the version.
+
+99
+00:03:09,222 --> 00:03:10,020
+Type: curl,
+
+100
+00:03:10,020 --> 00:03:10,527
+dash S,
+
+101
+00:03:10,527 --> 00:03:13,354
+local host colon eight zero eight zero,
+
+102
+00:03:13,354 --> 00:03:14,369
+slash version.
+
+103
+00:03:14,919 --> 00:03:19,356
+Version one is live. Rollback is just a deploy of an older release.
+
+104
+00:03:21,406 --> 00:03:22,729
+Four myths to clear up.
+
+105
+00:03:23,279 --> 00:03:25,685
+Myth one: if the deploy script finished,
+
+106
+00:03:25,685 --> 00:03:26,768
+the deploy worked.
+
+107
+00:03:26,768 --> 00:03:26,948
+No.
+
+108
+00:03:26,948 --> 00:03:30,617
+Only a health check proves that the new version really works.
+
+109
+00:03:31,167 --> 00:03:34,283
+Myth two: rollback means restoring from a backup.
+
+110
+00:03:34,283 --> 00:03:34,474
+No.
+
+111
+00:03:34,474 --> 00:03:36,000
+With versioned releases,
+
+112
+00:03:36,000 --> 00:03:37,781
+a rollback is moving a link.
+
+113
+00:03:38,331 --> 00:03:41,787
+Myth three: a deploy script only needs the happy path.
+
+114
+00:03:41,787 --> 00:03:41,979
+No.
+
+115
+00:03:41,979 --> 00:03:43,451
+Plan the failure first,
+
+116
+00:03:43,451 --> 00:03:44,219
+and test it.
+
+117
+00:03:44,769 --> 00:03:47,709
+Myth four: health checks must be complicated.
+
+118
+00:03:47,709 --> 00:03:47,905
+No.
+
+119
+00:03:47,905 --> 00:03:51,041
+Start with one simple request that must succeed.
+
+120
+00:03:51,591 --> 00:03:53,276
+Release. Check. Roll back.
+
+121
+00:03:55,326 --> 00:03:59,891
+Here is how you check your own understanding. Six points, and you need all six.
+
+122
+00:04:00,441 --> 00:04:03,449
+Keep every release in its own folder, with a current link.
+
+123
+00:04:03,999 --> 00:04:07,946
+Switch versions by moving the link, not by editing files in place.
+
+124
+00:04:08,496 --> 00:04:12,144
+Check health after every deploy, with a request that must succeed.
+
+125
+00:04:12,694 --> 00:04:14,998
+Roll back automatically when the check fails.
+
+126
+00:04:15,548 --> 00:04:19,537
+Exit with a non-zero code on failure, so a pipeline can react.
+
+127
+00:04:20,087 --> 00:04:23,010
+Test the failure path on purpose, with a bad release.
+
+128
+00:04:23,560 --> 00:04:25,181
+To pass, you need all six.
+
+129
+00:04:27,231 --> 00:04:27,909
+Your turn,
+
+130
+00:04:27,909 --> 00:04:30,281
+in your own Ubuntu virtual machine.
+
+131
+00:04:30,281 --> 00:04:32,585
+Use a small local web server only,
+
+132
+00:04:32,585 --> 00:04:33,738
+and nothing real.
+
+133
+00:04:34,288 --> 00:04:36,098
+One: make three release folders,
+
+134
+00:04:36,098 --> 00:04:37,512
+each with a version file,
+
+135
+00:04:37,512 --> 00:04:39,322
+and a current link to the first.
+
+136
+00:04:39,872 --> 00:04:43,019
+Two: start a web server on the current folder,
+
+137
+00:04:43,019 --> 00:04:44,250
+with python three,
+
+138
+00:04:44,250 --> 00:04:44,729
+dash M,
+
+139
+00:04:44,729 --> 00:04:45,824
+http dot server,
+
+140
+00:04:45,824 --> 00:04:48,150
+and request the version with curl.
+
+141
+00:04:48,700 --> 00:04:52,198
+Three: write the release script, with a health check and a rollback.
+
+142
+00:04:52,748 --> 00:04:56,418
+Four: deploy a good version, and prove with curl that it is live.
+
+143
+00:04:56,968 --> 00:05:01,277
+Five: deploy a bad version, with no health file, and watch it roll back.
+
+144
+00:05:01,827 --> 00:05:06,478
+Six: check the exit code, run ShellCheck, and stop the server when you finish.
+
+145
+00:05:07,028 --> 00:05:10,334
+Mark yourself on the rubric. Pause the video, and do it now.
+
+146
+00:05:25,884 --> 00:05:26,759
+Quick check.
+
+147
+00:05:27,309 --> 00:05:29,485
+Why keep each release in its own folder?
+
+148
+00:05:30,035 --> 00:05:31,677
+What proves that a deploy worked?
+
+149
+00:05:32,227 --> 00:05:34,190
+What should happen when the health check fails?
+
+150
+00:05:34,740 --> 00:05:37,279
+How does a rollback work, with versioned releases?
+
+151
+00:05:37,829 --> 00:05:43,589
+Objective covered: MC05-O09.
+
+152
+00:05:44,139 --> 00:05:46,208
+Pause the video, and answer out loud.
+
+153
+00:05:56,758 --> 00:05:59,787
+Next lesson: the Bash scripting mastery scenario.
+
+154
+00:06:00,337 --> 00:06:03,665
+If this helped, like, share and subscribe, so you do not miss it.

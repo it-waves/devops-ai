@@ -1,0 +1,27 @@
+Lesson 45 of the DevOps Engineering Bootcamp, the eighth lesson of the Bash scripting masterclass. A deploy that cannot be undone is a gamble. Build a small release script: each version lives in its own folder, a symlink points at the live one, a health check decides if the deploy worked, and a failed check rolls back on its own. Watch five real Ubuntu 24.04 terminal demos, then do the lab on your own virtual machine.
+
+Chapters
+0:00 Overview
+0:27 Releases and a link
+1:18 The deploy script
+1:47 A good deploy
+2:21 A bad deploy and rollback
+3:20 Common myths
+3:54 Pass or fail rubric
+4:26 Your turn
+5:25 Quick check
+
+Objectives covered: MC05-O09
+
+Practice in your own Ubuntu virtual machine only. Type every command yourself. The labs in this lesson are unverified until you run them and check the evidence.
+
+Previous lesson: Bash idempotent scripts and ShellCheck https://youtu.be/T6ejuN7cANU
+Next lesson: the Bash scripting mastery scenario
+
+Course files and lab scripts: https://github.com/it-waves/devops-ai
+
+Honest notes: the terminal sections are real recordings on Ubuntu 24.04. The app being deployed is a small local Python web server started for the demo, not a production service. The phone and browser pictures of the Pocket Shop demo page are real Chrome screenshots of the v1 and v2 pages, taken separately from the terminal recording; the page files are in the course repository. The title cards, rubric and quiz are illustrations, not captures. This lesson is for learning; a real deploy needs more checks than one health URL.
+
+If this helped, like, share and subscribe, so you do not miss the next lesson.
+
+#bash #linux #devops #scripting #deployment #rollback #ubuntu #linuxforbeginners
