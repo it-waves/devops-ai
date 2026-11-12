@@ -1,0 +1,24 @@
+Lesson 53 of the DevOps Engineering Bootcamp, the seventh lesson of the Python for DevOps masterclass. You learn to test your scripts with pytest and to fake the network with mocks. Every demo is typed live on Ubuntu 24.04: a small module and its tests with plain assert and parametrize, a test broken on purpose so you can read pytest's failure report and fix it (red, then green), a Mock and a patch that replace requests.get so the tests need no server, pytest -v to list every test by name, and pytest -k to run only some. The lesson ends with a lab whose checker breaks the module three ways and expects your tests to catch each one, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Test your scripts, fake the network
+0:19 Tests, asserts, mocks
+1:06 pytest: red to green
+2:49 Mocks: fake the network
+4:01 Get the lab and task
+5:00 Pass or fail rubric
+5:29 Your turn
+6:19 Quick check
+
+Objectives covered: MC06-O07
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself, inside your virtual environment with pip install requests pytest. Lab files: github.com/it-waves/devops-ai, folder academy/lesson53 (TASK.md, the module inventory_tools.py and the checker check53.sh). The next lesson covers cloud SDKs with least privilege.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Python 3.12.3, pytest 9 and requests, run in a private mount setup on the recording computer. The example files (inventory.py, test_inventory.py and test_health.py) were prepared before recording and shown with cat, and pytest and requests were installed in the virtual environment beforehand, so the pip install step is described, not shown. The overview cards are illustrations, not captures. Typing is timed to the narration, and the yellow highlights were added afterwards. The checker was tested with a reference solution and with failing and weak test files, but your own run of the lab is unverified until you do it.
+
+Previous lesson: https://youtu.be/_SfHfOcdpuo
+Next lesson: cloud SDKs with least privilege.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#python #pythonfordevops #pytest #mocking #devopsbootcamp

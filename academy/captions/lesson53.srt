@@ -1,0 +1,751 @@
+1
+00:00:00,500 --> 00:00:03,380
+Today your scripts earn trust, because you will test them.
+
+2
+00:00:03,930 --> 00:00:06,260
+A script that works once proves little.
+
+3
+00:00:06,260 --> 00:00:09,127
+A test proves it still works after every change.
+
+4
+00:00:09,127 --> 00:00:12,472
+And a mock lets you test code that talks to the network,
+
+5
+00:00:12,472 --> 00:00:14,085
+without any network at all.
+
+6
+00:00:14,635 --> 00:00:17,920
+Every demo is typed live on Ubuntu twenty-four oh four.
+
+7
+00:00:19,970 --> 00:00:21,966
+Every change can break something.
+
+8
+00:00:21,966 --> 00:00:25,052
+A test is a small script that checks one behaviour,
+
+9
+00:00:25,052 --> 00:00:27,714
+and fails loudly when that behaviour breaks.
+
+10
+00:00:28,264 --> 00:00:30,280
+Pytest finds files named test,
+
+11
+00:00:30,280 --> 00:00:31,019
+underscore,
+
+12
+00:00:31,019 --> 00:00:31,691
+something.
+
+13
+00:00:31,691 --> 00:00:33,908
+It runs the functions named test,
+
+14
+00:00:33,908 --> 00:00:34,647
+underscore,
+
+15
+00:00:34,647 --> 00:00:35,319
+something,
+
+16
+00:00:35,319 --> 00:00:37,939
+and it uses the plain assert statement.
+
+17
+00:00:37,939 --> 00:00:38,678
+No classes,
+
+18
+00:00:38,678 --> 00:00:39,955
+and no boilerplate.
+
+19
+00:00:40,505 --> 00:00:43,294
+Parametrize runs one test with many inputs.
+
+20
+00:00:43,294 --> 00:00:46,798
+Pytest dot raises checks that the right error happens.
+
+21
+00:00:47,348 --> 00:00:48,751
+A mock is a stand-in.
+
+22
+00:00:48,751 --> 00:00:50,554
+Our code calls the network,
+
+23
+00:00:50,554 --> 00:00:52,158
+but a test must be fast,
+
+24
+00:00:52,158 --> 00:00:52,492
+free,
+
+25
+00:00:52,492 --> 00:00:53,494
+and repeatable.
+
+26
+00:00:53,494 --> 00:00:56,834
+So we replace the network call with a fake answer,
+
+27
+00:00:56,834 --> 00:00:58,036
+or a fake failure.
+
+28
+00:00:58,586 --> 00:01:00,371
+The rule: test one behaviour,
+
+29
+00:01:00,371 --> 00:01:02,157
+fake what you do not control,
+
+30
+00:01:02,157 --> 00:01:04,065
+and watch every test fail once,
+
+31
+00:01:04,065 --> 00:01:05,050
+to prove it can.
+
+32
+00:01:07,100 --> 00:01:11,921
+First, the code we will test. Show it. Type: cat, inventory dot P Y.
+
+33
+00:01:12,771 --> 00:01:14,187
+Two small functions.
+
+34
+00:01:14,187 --> 00:01:17,656
+Running returns the names of the running servers.
+
+35
+00:01:17,656 --> 00:01:20,983
+Health calls an address and returns its status.
+
+36
+00:01:20,983 --> 00:01:22,541
+First we test running.
+
+37
+00:01:22,541 --> 00:01:23,886
+Show the test file.
+
+38
+00:01:23,886 --> 00:01:24,594
+Type: cat,
+
+39
+00:01:24,594 --> 00:01:27,001
+test underscore inventory dot P Y.
+
+40
+00:01:27,551 --> 00:01:28,383
+Three tests.
+
+41
+00:01:28,383 --> 00:01:31,641
+Each is a function whose name starts with test,
+
+42
+00:01:31,641 --> 00:01:33,860
+and the check is a plain assert.
+
+43
+00:01:33,860 --> 00:01:36,356
+Parametrize runs the last one twice,
+
+44
+00:01:36,356 --> 00:01:38,159
+with two different states.
+
+45
+00:01:38,159 --> 00:01:38,921
+Run pytest.
+
+46
+00:01:38,921 --> 00:01:39,823
+Type: pytest,
+
+47
+00:01:39,823 --> 00:01:40,308
+dash Q.
+
+48
+00:01:41,358 --> 00:01:42,081
+Four dots,
+
+49
+00:01:42,081 --> 00:01:42,948
+four passed.
+
+50
+00:01:42,948 --> 00:01:44,466
+Each dot is one test.
+
+51
+00:01:44,466 --> 00:01:45,478
+Green is good,
+
+52
+00:01:45,478 --> 00:01:48,803
+but a test that can never fail proves nothing.
+
+53
+00:01:48,803 --> 00:01:50,466
+So break it on purpose.
+
+54
+00:01:50,466 --> 00:01:53,285
+Change the expected name on line eight.
+
+55
+00:01:53,285 --> 00:01:54,008
+Type: sed,
+
+56
+00:01:54,008 --> 00:01:54,514
+dash I,
+
+57
+00:01:54,514 --> 00:01:54,947
+quote,
+
+58
+00:01:54,947 --> 00:01:55,381
+eight,
+
+59
+00:01:55,381 --> 00:01:55,959
+S slash,
+
+60
+00:01:55,959 --> 00:01:57,260
+web dash zero one,
+
+61
+00:01:57,260 --> 00:01:57,694
+slash,
+
+62
+00:01:57,694 --> 00:01:59,068
+web dash zero nine,
+
+63
+00:01:59,068 --> 00:01:59,501
+slash,
+
+64
+00:01:59,501 --> 00:01:59,935
+quote,
+
+65
+00:01:59,935 --> 00:02:02,393
+test underscore inventory dot P Y.
+
+66
+00:02:02,943 --> 00:02:03,686
+No output,
+
+67
+00:02:03,686 --> 00:02:05,173
+the file is changed.
+
+68
+00:02:05,173 --> 00:02:06,659
+Run the tests again,
+
+69
+00:02:06,659 --> 00:02:08,964
+with the short traceback style.
+
+70
+00:02:08,964 --> 00:02:09,930
+Type: pytest,
+
+71
+00:02:09,930 --> 00:02:10,450
+dash Q,
+
+72
+00:02:10,450 --> 00:02:11,491
+dash dash T B,
+
+73
+00:02:11,491 --> 00:02:12,011
+equals,
+
+74
+00:02:12,011 --> 00:02:12,457
+short.
+
+75
+00:02:13,507 --> 00:02:13,935
+One F,
+
+76
+00:02:13,935 --> 00:02:14,791
+one failure.
+
+77
+00:02:14,791 --> 00:02:16,931
+Pytest shows the failing line,
+
+78
+00:02:16,931 --> 00:02:20,282
+and compares the two values: web dash zero one,
+
+79
+00:02:20,282 --> 00:02:22,208
+against web dash zero nine.
+
+80
+00:02:22,208 --> 00:02:24,133
+The summary names the test,
+
+81
+00:02:24,133 --> 00:02:25,988
+so you know where to look.
+
+82
+00:02:25,988 --> 00:02:26,772
+Now fix it.
+
+83
+00:02:26,772 --> 00:02:27,485
+Type: sed,
+
+84
+00:02:27,485 --> 00:02:27,985
+dash I,
+
+85
+00:02:27,985 --> 00:02:28,412
+quote,
+
+86
+00:02:28,412 --> 00:02:28,840
+eight,
+
+87
+00:02:28,840 --> 00:02:29,411
+S slash,
+
+88
+00:02:29,411 --> 00:02:30,766
+web dash zero nine,
+
+89
+00:02:30,766 --> 00:02:31,194
+slash,
+
+90
+00:02:31,194 --> 00:02:32,477
+web dash zero one,
+
+91
+00:02:32,477 --> 00:02:32,905
+slash,
+
+92
+00:02:32,905 --> 00:02:33,333
+quote,
+
+93
+00:02:33,333 --> 00:02:35,758
+test underscore inventory dot P Y.
+
+94
+00:02:36,308 --> 00:02:40,105
+Fixed. Run everything once more. Type: pytest, dash Q.
+
+95
+00:02:41,155 --> 00:02:42,233
+Four passed again.
+
+96
+00:02:42,233 --> 00:02:42,831
+That loop,
+
+97
+00:02:42,831 --> 00:02:43,729
+red then green,
+
+98
+00:02:43,729 --> 00:02:46,003
+is the heart of testing: write a test,
+
+99
+00:02:46,003 --> 00:02:46,841
+watch it fail,
+
+100
+00:02:46,841 --> 00:02:47,918
+then make it pass.
+
+101
+00:02:49,968 --> 00:02:51,210
+Now the hard case.
+
+102
+00:02:51,210 --> 00:02:52,936
+Health calls the network,
+
+103
+00:02:52,936 --> 00:02:56,387
+and a test must never depend on a server being up.
+
+104
+00:02:56,387 --> 00:02:57,905
+So we fake the answer.
+
+105
+00:02:57,905 --> 00:02:58,872
+Show the test.
+
+106
+00:02:58,872 --> 00:02:59,562
+Type: cat,
+
+107
+00:02:59,562 --> 00:03:01,701
+test underscore health dot P Y.
+
+108
+00:03:02,251 --> 00:03:03,872
+Mock makes a fake object,
+
+109
+00:03:03,872 --> 00:03:06,725
+and we tell it what its json method returns.
+
+110
+00:03:06,725 --> 00:03:08,605
+Patch swaps requests dot get,
+
+111
+00:03:08,605 --> 00:03:09,772
+inside our module,
+
+112
+00:03:09,772 --> 00:03:10,615
+for the fake,
+
+113
+00:03:10,615 --> 00:03:12,365
+only inside the with block.
+
+114
+00:03:12,365 --> 00:03:15,866
+In the second test the fake raises a connection error,
+
+115
+00:03:15,866 --> 00:03:19,692
+and pytest dot raises checks that our code lets it through.
+
+116
+00:03:19,692 --> 00:03:20,859
+Run all the tests.
+
+117
+00:03:20,859 --> 00:03:21,701
+Type: pytest,
+
+118
+00:03:21,701 --> 00:03:22,155
+dash Q.
+
+119
+00:03:23,205 --> 00:03:23,983
+Six passed,
+
+120
+00:03:23,983 --> 00:03:26,103
+with no network and no server,
+
+121
+00:03:26,103 --> 00:03:27,941
+in a fraction of a second.
+
+122
+00:03:27,941 --> 00:03:29,920
+Now list every test by name.
+
+123
+00:03:29,920 --> 00:03:30,839
+Type: pytest,
+
+124
+00:03:30,839 --> 00:03:31,333
+dash V.
+
+125
+00:03:32,383 --> 00:03:35,742
+Verbose mode shows each test with the word passed.
+
+126
+00:03:35,742 --> 00:03:38,764
+Handy when you need to know exactly what ran.
+
+127
+00:03:38,764 --> 00:03:40,980
+You can also run just some tests,
+
+128
+00:03:40,980 --> 00:03:42,458
+by a word in the name.
+
+129
+00:03:42,458 --> 00:03:43,331
+Type: pytest,
+
+130
+00:03:43,331 --> 00:03:43,801
+dash Q,
+
+131
+00:03:43,801 --> 00:03:44,272
+dash K,
+
+132
+00:03:44,272 --> 00:03:44,607
+down.
+
+133
+00:03:45,657 --> 00:03:46,459
+One passed,
+
+134
+00:03:46,459 --> 00:03:47,626
+five deselected.
+
+135
+00:03:47,626 --> 00:03:48,939
+And in a pipeline,
+
+136
+00:03:48,939 --> 00:03:52,803
+pytest returns exit code zero when everything passes,
+
+137
+00:03:52,803 --> 00:03:55,720
+and a non zero code when anything fails,
+
+138
+00:03:55,720 --> 00:03:57,324
+so the pipeline stops.
+
+139
+00:03:57,324 --> 00:04:00,313
+That is last lesson's exit codes at work.
+
+140
+00:04:02,363 --> 00:04:03,448
+Here is your task,
+
+141
+00:04:03,448 --> 00:04:04,956
+with everything you need.
+
+142
+00:04:04,956 --> 00:04:06,885
+The files are in the repository,
+
+143
+00:04:06,885 --> 00:04:08,272
+and in the description.
+
+144
+00:04:08,822 --> 00:04:14,497
+The repository is git hub dot com, slash it dash waves, slash dev ops dash A I.
+
+145
+00:04:15,047 --> 00:04:19,788
+In the academy slash lesson fifty-three folder you will find the task file,
+
+146
+00:04:19,788 --> 00:04:20,989
+the module to test,
+
+147
+00:04:20,989 --> 00:04:22,001
+and the checker,
+
+148
+00:04:22,001 --> 00:04:23,644
+check fifty-three dot S H.
+
+149
+00:04:24,194 --> 00:04:25,518
+You write one file,
+
+150
+00:04:25,518 --> 00:04:26,841
+test tools dot P Y,
+
+151
+00:04:26,841 --> 00:04:31,996
+for a small module with two functions: one counts servers per environment,
+
+152
+00:04:31,996 --> 00:04:34,434
+and one asks an API for its status.
+
+153
+00:04:34,984 --> 00:04:36,767
+Write at least five tests.
+
+154
+00:04:36,767 --> 00:04:37,863
+Use parametrize,
+
+155
+00:04:37,863 --> 00:04:39,371
+use pytest dot raises,
+
+156
+00:04:39,371 --> 00:04:42,182
+and fake the network with mock and patch.
+
+157
+00:04:42,182 --> 00:04:44,307
+No test may need a real server.
+
+158
+00:04:44,857 --> 00:04:46,167
+The checker is strict.
+
+159
+00:04:46,167 --> 00:04:48,668
+It breaks the module three different ways,
+
+160
+00:04:48,668 --> 00:04:50,811
+and your tests must catch every one.
+
+161
+00:04:50,811 --> 00:04:54,265
+Do not open the solution file until you have really tried.
+
+162
+00:04:54,815 --> 00:04:58,484
+The checker shows six pass lines. Write your results in a report.
+
+163
+00:05:00,534 --> 00:05:04,459
+Here is how your work is judged. Six points, and you need all six.
+
+164
+00:05:05,009 --> 00:05:06,844
+The checker shows six pass lines.
+
+165
+00:05:07,394 --> 00:05:09,677
+At least five tests, and all of them pass.
+
+166
+00:05:10,227 --> 00:05:13,213
+You use parametrize, and pytest dot raises.
+
+167
+00:05:13,763 --> 00:05:16,601
+The network is faked, so no test needs a server.
+
+168
+00:05:17,151 --> 00:05:21,396
+Your tests catch bugs: the checker breaks the code, and your tests must fail.
+
+169
+00:05:21,946 --> 00:05:25,359
+The report is complete, and you worked in your own virtual machine.
+
+170
+00:05:25,909 --> 00:05:27,531
+To pass, you need all six.
+
+171
+00:05:29,581 --> 00:05:32,418
+Your turn, in your own Ubuntu virtual machine.
+
+172
+00:05:32,968 --> 00:05:36,872
+One: get the lesson folder, and activate your virtual environment.
+
+173
+00:05:37,422 --> 00:05:41,177
+Two: install pytest and requests in your virtual environment.
+
+174
+00:05:41,727 --> 00:05:45,163
+Three: write test tools dot P Y with five tests,
+
+175
+00:05:45,163 --> 00:05:48,170
+and use parametrize and pytest dot raises.
+
+176
+00:05:48,720 --> 00:05:54,480
+Four: fake the network with mock and patch. Test an ok answer, and an H T T P error.
+
+177
+00:05:55,030 --> 00:05:58,507
+Five: break the code yourself, and watch one of your tests fail.
+
+178
+00:05:59,057 --> 00:06:01,532
+Six: run the checker, and write your report.
+
+179
+00:06:02,082 --> 00:06:03,916
+Pause the video, and begin now.
+
+180
+00:06:19,466 --> 00:06:20,341
+Quick check.
+
+181
+00:06:20,891 --> 00:06:22,811
+How does pytest find your tests?
+
+182
+00:06:23,361 --> 00:06:24,683
+What does a mock replace?
+
+183
+00:06:25,233 --> 00:06:27,452
+Why should you watch a test fail at least once?
+
+184
+00:06:28,002 --> 00:06:31,031
+What exit code does pytest return when a test fails?
+
+185
+00:06:31,581 --> 00:06:37,427
+Objective covered: MC06-O07, tests with pytest and mocks.
+
+186
+00:06:37,977 --> 00:06:40,046
+Pause the video, and answer out loud.
+
+187
+00:06:50,596 --> 00:06:54,009
+Next lesson: cloud SDKs with least privilege.
+
+188
+00:06:54,559 --> 00:06:57,887
+If this helped, like, share and subscribe, so you do not miss it.
