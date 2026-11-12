@@ -1,0 +1,12 @@
+Install the lab (needs an Ubuntu virtual machine with root and git):
+  sudo apt install -y git      # skip if git is already installed
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab60.sh /usr/local/sbin/
+  source shortcuts60.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab60/app: a repository on a feature branch that diverged from main
+  lab check               # four FAIL lines at the start; your goal is four PASS lines
+  lab down                # cleanup when finished
+Without the shortcut, use: sudo lab60.sh up | check | down
+Your task (in /opt/lab60/app): 1 on feature, amend the last commit ("wip") to a clear message  2 rebase feature onto main  3 switch to main and merge feature (a fast-forward, no merge commit)  4 write one number in /opt/lab60/answers.txt: how many commits main has now.
+If git asks who you are: git config --global user.name "Your Name" and git config --global user.email you@example.com
+Run it only in your own virtual machine. It creates only /opt/lab60; lab down removes it, and you remove the installed script with: sudo rm /usr/local/sbin/lab60.sh

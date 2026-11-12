@@ -1,0 +1,855 @@
+1
+00:00:00,500 --> 00:00:05,027
+Open a project's history and it looks like a tangled ball of string.
+
+2
+00:00:05,027 --> 00:00:05,427
+Merge,
+
+3
+00:00:05,427 --> 00:00:05,826
+merge,
+
+4
+00:00:05,826 --> 00:00:06,225
+merge,
+
+5
+00:00:06,225 --> 00:00:08,223
+and nobody can read the story.
+
+6
+00:00:08,773 --> 00:00:10,764
+Last lesson you merged branches.
+
+7
+00:00:10,764 --> 00:00:13,315
+Today you learn the other tool: rebasing,
+
+8
+00:00:13,315 --> 00:00:16,426
+which replays your work on top of the latest code,
+
+9
+00:00:16,426 --> 00:00:18,479
+so history stays a straight line.
+
+10
+00:00:19,029 --> 00:00:19,899
+Three skills.
+
+11
+00:00:19,899 --> 00:00:20,300
+Amend,
+
+12
+00:00:20,300 --> 00:00:21,905
+to fix your last commit.
+
+13
+00:00:21,905 --> 00:00:22,373
+Rebase,
+
+14
+00:00:22,373 --> 00:00:24,447
+to move a branch onto new work.
+
+15
+00:00:24,447 --> 00:00:25,851
+And rebase conflicts,
+
+16
+00:00:25,851 --> 00:00:28,928
+which are just merge conflicts in slow motion.
+
+17
+00:00:29,478 --> 00:00:32,298
+And one golden rule that keeps you out of trouble.
+
+18
+00:00:32,298 --> 00:00:32,862
+As always,
+
+19
+00:00:32,862 --> 00:00:35,174
+there is a lab with a checker at the end.
+
+20
+00:00:37,224 --> 00:00:38,593
+Here is the situation.
+
+21
+00:00:38,593 --> 00:00:40,025
+You branched from main,
+
+22
+00:00:40,025 --> 00:00:41,269
+and did two commits.
+
+23
+00:00:41,269 --> 00:00:41,892
+Meanwhile,
+
+24
+00:00:41,892 --> 00:00:43,821
+someone added a commit to main.
+
+25
+00:00:43,821 --> 00:00:45,501
+The branches have diverged.
+
+26
+00:00:46,051 --> 00:00:48,534
+Merging joins them with a merge commit.
+
+27
+00:00:48,534 --> 00:00:48,852
+Safe,
+
+28
+00:00:48,852 --> 00:00:51,271
+and it keeps the real order of events,
+
+29
+00:00:51,271 --> 00:00:53,945
+but the history now has a fork and a join.
+
+30
+00:00:54,495 --> 00:00:56,578
+Rebasing does something different.
+
+31
+00:00:56,578 --> 00:00:57,987
+Git takes your commits,
+
+32
+00:00:57,987 --> 00:00:58,967
+sets them aside,
+
+33
+00:00:58,967 --> 00:01:01,234
+moves your branch to the tip of main,
+
+34
+00:01:01,234 --> 00:01:03,194
+and replays your commits on top,
+
+35
+00:01:03,194 --> 00:01:04,052
+one at a time.
+
+36
+00:01:04,602 --> 00:01:06,321
+The result is a straight line,
+
+37
+00:01:06,321 --> 00:01:08,498
+as if you had started your work today.
+
+38
+00:01:08,498 --> 00:01:09,701
+But there is a catch.
+
+39
+00:01:10,251 --> 00:01:11,700
+Your commits are copied.
+
+40
+00:01:11,700 --> 00:01:13,330
+They have the same changes,
+
+41
+00:01:13,330 --> 00:01:14,840
+but they are new commits,
+
+42
+00:01:14,840 --> 00:01:15,806
+with new hashes.
+
+43
+00:01:15,806 --> 00:01:17,376
+Rebasing rewrites history.
+
+44
+00:01:17,926 --> 00:01:19,891
+Remember this: rebase rewrites.
+
+45
+00:01:19,891 --> 00:01:21,095
+Amend rewrites too.
+
+46
+00:01:21,095 --> 00:01:24,328
+So everything we do today applies to your own work,
+
+47
+00:01:24,328 --> 00:01:26,737
+not to work other people already have.
+
+48
+00:01:28,787 --> 00:01:32,452
+First the smallest rewrite: fixing the last commit.
+
+49
+00:01:32,452 --> 00:01:36,118
+This project has a last commit with a lazy message.
+
+50
+00:01:36,118 --> 00:01:36,549
+Go in.
+
+51
+00:01:36,549 --> 00:01:37,196
+Type: CD,
+
+52
+00:01:37,196 --> 00:01:37,555
+site.
+
+53
+00:01:38,105 --> 00:01:41,860
+Look at the history. Type: git log, dash dash one line.
+
+54
+00:01:42,410 --> 00:01:44,007
+The top commit says wip.
+
+55
+00:01:44,007 --> 00:01:46,735
+Work in progress tells your team nothing.
+
+56
+00:01:46,735 --> 00:01:47,466
+Rewrite it.
+
+57
+00:01:47,466 --> 00:01:48,598
+Type: git commit,
+
+58
+00:01:48,598 --> 00:01:49,662
+dash dash amend,
+
+59
+00:01:49,662 --> 00:01:50,128
+dash M,
+
+60
+00:01:50,128 --> 00:01:50,527
+quote,
+
+61
+00:01:50,527 --> 00:01:51,525
+Add owner line,
+
+62
+00:01:51,525 --> 00:01:51,924
+quote.
+
+63
+00:01:52,474 --> 00:01:55,593
+Amend replaces the last commit with a new one.
+
+64
+00:01:55,593 --> 00:01:56,339
+Look again.
+
+65
+00:01:56,339 --> 00:01:57,288
+Type: git log,
+
+66
+00:01:57,288 --> 00:01:58,576
+dash dash one line.
+
+67
+00:01:59,126 --> 00:02:00,043
+Same position,
+
+68
+00:02:00,043 --> 00:02:01,025
+better message,
+
+69
+00:02:01,025 --> 00:02:02,401
+and the hash changed.
+
+70
+00:02:02,401 --> 00:02:06,135
+That is the proof that a new commit replaced the old one.
+
+71
+00:02:06,135 --> 00:02:07,052
+Forgot a file?
+
+72
+00:02:07,052 --> 00:02:07,641
+Stage it,
+
+73
+00:02:07,641 --> 00:02:10,196
+then amend with dash dash no dash edit,
+
+74
+00:02:10,196 --> 00:02:12,096
+and it joins the last commit.
+
+75
+00:02:12,096 --> 00:02:14,912
+Only amend commits you have not shared yet.
+
+76
+00:02:16,962 --> 00:02:18,310
+Now a real rebase.
+
+77
+00:02:18,310 --> 00:02:19,508
+In this project,
+
+78
+00:02:19,508 --> 00:02:23,401
+you are on a feature branch that diverged from main.
+
+79
+00:02:23,401 --> 00:02:23,850
+Go in.
+
+80
+00:02:23,850 --> 00:02:24,524
+Type: CD,
+
+81
+00:02:24,524 --> 00:02:24,898
+site.
+
+82
+00:02:25,448 --> 00:02:31,229
+Look at the picture. Type: git log, dash dash one line, dash dash graph, dash dash all.
+
+83
+00:02:31,779 --> 00:02:34,932
+Main has one commit that your branch does not have,
+
+84
+00:02:34,932 --> 00:02:37,900
+and your branch has two that main does not have.
+
+85
+00:02:37,900 --> 00:02:39,940
+Now rebase your branch onto main.
+
+86
+00:02:39,940 --> 00:02:41,424
+You stay on your branch,
+
+87
+00:02:41,424 --> 00:02:42,537
+and name the base.
+
+88
+00:02:42,537 --> 00:02:43,588
+Type: git rebase,
+
+89
+00:02:43,588 --> 00:02:43,897
+main.
+
+90
+00:02:44,447 --> 00:02:45,909
+Successfully rebased.
+
+91
+00:02:45,909 --> 00:02:47,998
+Git replayed your two commits.
+
+92
+00:02:47,998 --> 00:02:49,809
+Look at the picture again.
+
+93
+00:02:49,809 --> 00:02:50,784
+Type: git log,
+
+94
+00:02:50,784 --> 00:02:52,107
+dash dash one line,
+
+95
+00:02:52,107 --> 00:02:53,221
+dash dash graph,
+
+96
+00:02:53,221 --> 00:02:54,196
+dash dash all.
+
+97
+00:02:54,746 --> 00:02:55,938
+One straight line.
+
+98
+00:02:55,938 --> 00:02:58,519
+Notice the two commits have new hashes.
+
+99
+00:02:58,519 --> 00:02:59,711
+Now bring it home.
+
+100
+00:02:59,711 --> 00:03:00,836
+Type: git switch,
+
+101
+00:03:00,836 --> 00:03:01,167
+main.
+
+102
+00:03:01,717 --> 00:03:05,131
+On main. Merge the feature. Type: git merge, feature.
+
+103
+00:03:05,681 --> 00:03:06,562
+Fast forward!
+
+104
+00:03:06,562 --> 00:03:09,883
+Because the branch now sits right on top of main,
+
+105
+00:03:09,883 --> 00:03:11,780
+there is nothing to combine,
+
+106
+00:03:11,780 --> 00:03:13,813
+so Git just moves the pointer.
+
+107
+00:03:13,813 --> 00:03:14,627
+Final check.
+
+108
+00:03:14,627 --> 00:03:15,575
+Type: git log,
+
+109
+00:03:15,575 --> 00:03:16,863
+dash dash one line,
+
+110
+00:03:16,863 --> 00:03:17,947
+dash dash graph.
+
+111
+00:03:18,497 --> 00:03:23,639
+A perfectly linear history, with no merge commit. That is why teams love rebase.
+
+112
+00:03:25,689 --> 00:03:27,429
+Rebase can conflict too,
+
+113
+00:03:27,429 --> 00:03:28,589
+just like merge.
+
+114
+00:03:28,589 --> 00:03:31,343
+Here both sides changed the port line.
+
+115
+00:03:31,343 --> 00:03:31,778
+Go in.
+
+116
+00:03:31,778 --> 00:03:32,431
+Type: CD,
+
+117
+00:03:32,431 --> 00:03:32,793
+site.
+
+118
+00:03:33,343 --> 00:03:36,287
+Rebase onto main. Type: git rebase, main.
+
+119
+00:03:36,837 --> 00:03:37,441
+Conflict,
+
+120
+00:03:37,441 --> 00:03:38,515
+in app dot conf.
+
+121
+00:03:38,515 --> 00:03:41,133
+Git replays your commits one at a time,
+
+122
+00:03:41,133 --> 00:03:44,288
+and stopped at the first one that does not fit.
+
+123
+00:03:44,288 --> 00:03:45,765
+Ask Git where you are.
+
+124
+00:03:45,765 --> 00:03:46,906
+Type: git status.
+
+125
+00:03:47,456 --> 00:03:50,200
+Look at the first line: rebase in progress,
+
+126
+00:03:50,200 --> 00:03:52,370
+and the hint tells you what to do.
+
+127
+00:03:52,370 --> 00:03:53,263
+Open the file.
+
+128
+00:03:53,263 --> 00:03:53,901
+Type: cat,
+
+129
+00:03:53,901 --> 00:03:54,731
+app dot conf.
+
+130
+00:03:55,281 --> 00:03:55,788
+Careful,
+
+131
+00:03:55,788 --> 00:03:57,943
+in a rebase the sides are swapped.
+
+132
+00:03:57,943 --> 00:03:58,767
+Head is main,
+
+133
+00:03:58,767 --> 00:04:00,731
+the code you are rebasing onto.
+
+134
+00:04:00,731 --> 00:04:03,837
+The other side is your own commit being replayed.
+
+135
+00:04:03,837 --> 00:04:06,499
+The team wants port eight thousand eighty.
+
+136
+00:04:06,499 --> 00:04:07,829
+Write the final file.
+
+137
+00:04:07,829 --> 00:04:08,653
+Type: printf,
+
+138
+00:04:08,653 --> 00:04:10,301
+the text in single quotes,
+
+139
+00:04:10,301 --> 00:04:12,456
+port equals eight thousand eighty,
+
+140
+00:04:12,456 --> 00:04:13,216
+backslash N,
+
+141
+00:04:13,216 --> 00:04:14,484
+timeout equals five,
+
+142
+00:04:14,484 --> 00:04:15,245
+backslash N,
+
+143
+00:04:15,245 --> 00:04:16,956
+redirect into app dot conf.
+
+144
+00:04:17,506 --> 00:04:20,258
+Stage it. Type: git add, app dot conf.
+
+145
+00:04:20,808 --> 00:04:25,224
+Now tell Git to carry on. Type: git rebase, dash dash continue.
+
+146
+00:04:25,774 --> 00:04:29,514
+Git may open your editor to confirm the commit message.
+
+147
+00:04:29,514 --> 00:04:31,079
+Just save and close it.
+
+148
+00:04:31,079 --> 00:04:34,751
+In this recording that step is accepted automatically.
+
+149
+00:04:34,751 --> 00:04:37,132
+Your second commit applied cleanly.
+
+150
+00:04:37,132 --> 00:04:38,356
+Check the history.
+
+151
+00:04:38,356 --> 00:04:39,308
+Type: git log,
+
+152
+00:04:39,308 --> 00:04:40,600
+dash dash one line,
+
+153
+00:04:40,600 --> 00:04:41,688
+dash dash graph.
+
+154
+00:04:42,238 --> 00:04:43,598
+A straight line again.
+
+155
+00:04:43,598 --> 00:04:45,637
+And if you ever panic mid rebase,
+
+156
+00:04:45,637 --> 00:04:50,025
+git rebase dash dash abort takes you back to exactly where you started.
+
+157
+00:04:52,175 --> 00:04:56,527
+Now the golden rule. Never rebase commits that other people already have.
+
+158
+00:04:57,077 --> 00:04:58,845
+Rebasing creates new commits.
+
+159
+00:04:58,845 --> 00:05:01,589
+If a teammate already built on your old ones,
+
+160
+00:05:01,589 --> 00:05:04,028
+their history and yours no longer match,
+
+161
+00:05:04,028 --> 00:05:05,674
+and fixing that is painful.
+
+162
+00:05:06,224 --> 00:05:09,419
+So: rebase your own local branch before you share it,
+
+163
+00:05:09,419 --> 00:05:11,168
+to keep it clean and current.
+
+164
+00:05:11,168 --> 00:05:13,338
+Once it is pushed and others use it,
+
+165
+00:05:13,338 --> 00:05:14,182
+merge instead.
+
+166
+00:05:14,732 --> 00:05:15,725
+A simple guide.
+
+167
+00:05:15,725 --> 00:05:16,586
+Private work,
+
+168
+00:05:16,586 --> 00:05:17,579
+rebase is fine.
+
+169
+00:05:17,579 --> 00:05:18,374
+Shared work,
+
+170
+00:05:18,374 --> 00:05:18,771
+merge.
+
+171
+00:05:18,771 --> 00:05:19,963
+And when in doubt,
+
+172
+00:05:19,963 --> 00:05:20,360
+merge,
+
+173
+00:05:20,360 --> 00:05:23,009
+because merging never rewrites anything.
+
+174
+00:05:25,059 --> 00:05:27,832
+Your task, in your own Ubuntu virtual machine.
+
+175
+00:05:28,382 --> 00:05:30,529
+The lab is lab sixty dot S H,
+
+176
+00:05:30,529 --> 00:05:34,303
+in the academy slash lab folder of git hub dot com,
+
+177
+00:05:34,303 --> 00:05:35,783
+slash it dash waves,
+
+178
+00:05:35,783 --> 00:05:37,485
+slash dev ops dash A I.
+
+179
+00:05:37,485 --> 00:05:39,188
+Install it like before,
+
+180
+00:05:39,188 --> 00:05:40,372
+then run lab up.
+
+181
+00:05:40,922 --> 00:05:45,135
+It builds a repository with a feature branch that diverged from main.
+
+182
+00:05:45,135 --> 00:05:47,578
+The last commit on the feature says wip.
+
+183
+00:05:48,128 --> 00:05:51,861
+One: on the feature branch, amend the last commit to a clear message.
+
+184
+00:05:52,411 --> 00:05:54,886
+Two: rebase the feature branch onto main.
+
+185
+00:05:55,436 --> 00:05:57,939
+Three: switch to main and merge the feature,
+
+186
+00:05:57,939 --> 00:05:59,361
+so main has all the work,
+
+187
+00:05:59,361 --> 00:06:00,556
+with no merge commit.
+
+188
+00:06:01,106 --> 00:06:05,650
+Four: in answers dot text, write one number: how many commits main has now.
+
+189
+00:06:06,200 --> 00:06:11,640
+Then run lab check. Four pass lines. Remember: only rebase your own unshared work.
+
+190
+00:06:13,690 --> 00:06:15,674
+Six points, and you need all six.
+
+191
+00:06:16,224 --> 00:06:18,059
+The checker shows four pass lines.
+
+192
+00:06:18,609 --> 00:06:21,531
+The history is a straight line, with no merge commit.
+
+193
+00:06:22,081 --> 00:06:24,641
+The last commit has a clear message, not wip.
+
+194
+00:06:25,191 --> 00:06:28,007
+You can explain why rebasing changes the hashes.
+
+195
+00:06:28,557 --> 00:06:30,883
+The number in answers dot text is correct.
+
+196
+00:06:31,433 --> 00:06:33,075
+You ran lab down to clean up.
+
+197
+00:06:33,625 --> 00:06:35,247
+To pass, you need all six.
+
+198
+00:06:37,297 --> 00:06:40,134
+Your turn, in your own Ubuntu virtual machine.
+
+199
+00:06:40,684 --> 00:06:42,903
+One: install the lab, and run lab up.
+
+200
+00:06:43,453 --> 00:06:45,437
+Two: amend the last commit message.
+
+201
+00:06:45,987 --> 00:06:48,526
+Three: rebase the feature branch onto main.
+
+202
+00:06:49,076 --> 00:06:51,572
+Four: switch to main, and merge the feature.
+
+203
+00:06:52,122 --> 00:06:55,492
+Five: count the commits, write the number, and run lab check.
+
+204
+00:06:56,042 --> 00:06:57,514
+Six: run lab down.
+
+205
+00:06:58,064 --> 00:06:59,899
+Pause the video, and begin now.
+
+206
+00:07:15,449 --> 00:07:16,324
+Quick check.
+
+207
+00:07:16,874 --> 00:07:18,730
+What does rebase do to your commits?
+
+208
+00:07:19,280 --> 00:07:21,456
+Why does the hash change after an amend?
+
+209
+00:07:22,006 --> 00:07:23,798
+Which commits are safe to rebase?
+
+210
+00:07:24,348 --> 00:07:25,948
+How do you back out of a rebase?
+
+211
+00:07:26,498 --> 00:07:31,148
+Objective covered: M C zero seven, objective four, rebasing.
+
+212
+00:07:31,698 --> 00:07:33,768
+Pause the video, and answer out loud.
+
+213
+00:07:44,318 --> 00:07:47,667
+Next: remotes, fetch, pull, push, tags, and releases.
+
+214
+00:07:48,217 --> 00:07:51,545
+If this helped, like, share and subscribe, so you do not miss it.

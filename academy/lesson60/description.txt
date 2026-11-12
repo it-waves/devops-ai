@@ -1,0 +1,26 @@
+Lesson 60 of the DevOps Engineering Bootcamp, the fourth lesson of the Git and GitHub masterclass, from beginner to mastery. You learn rebasing: the other way to combine diverged work. You see how merge and rebase differ (a merge commit versus replaying your commits on top of the latest code), why rebasing and amending rewrite history with new hashes, and the golden rule: never rebase commits other people already have. Then, live on Ubuntu: fixing the last commit with git commit --amend, rebasing a feature branch onto main with git rebase, a fast-forward merge for a perfectly straight history, and a rebase conflict step by step (git status during a rebase, why the two sides are swapped, git add, git rebase --continue, and git rebase --abort as the escape hatch). The lab has a checker that says PASS or FAIL for four checks, a pass/fail rubric, and cleanup.
+
+Chapters
+0:00 Keep history a straight line
+0:37 Rebase versus merge
+1:28 Fix the last commit
+2:16 Rebase onto main
+3:25 Rebase conflicts
+4:52 The golden rule
+5:25 Your lab task
+6:13 Pass or fail rubric
+6:37 Your turn
+7:15 Quick check
+
+Objectives covered: MC07-O04 rebasing
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab60.sh and shortcuts60.sh) and academy/lesson60 (INSTALL.txt). Install with: sudo apt install -y git (if needed), then sudo install -m 755 lab60.sh /usr/local/sbin/ and run lab up, lab check and lab down after loading the short name with: source shortcuts60.sh (without it, use sudo lab60.sh up, check, down). You need an Ubuntu virtual machine with root and git. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Git 2.43, run in a private mount setup on the recording computer; the author name and email (Sam Lee) are made up, and the example repositories were prepared before recording so each segment starts from a known state. In the rebase conflict segment the editor that Git opens to confirm the commit message is accepted automatically for the recording; on your machine you save and close it. The lab was run end to end before this lesson: all four checks fail before the work, all four pass after a reference solution, and lab down leaves nothing behind. The on-screen rebase versus merge, golden rule and task screens are labelled illustrations, not captures. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Git branches, merging and conflicts https://youtu.be/Fg_H2BBJRM8
+Next lesson: remotes, fetch, pull, push, tags and releases.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#git #github #devops #gitrebase #versioncontrol #devopsbootcamp
