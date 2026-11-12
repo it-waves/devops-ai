@@ -1,0 +1,27 @@
+Lesson 49 of the DevOps Engineering Bootcamp, the third lesson of the Python for DevOps masterclass. Your code meets real data: you read and write files with open and a with block, load JSON, YAML and CSV, and read settings from environment variables. Every demo is typed live on Ubuntu 24.04: file modes w, a and r, json.load and json.dumps, yaml.safe_load (and why you never use the unsafe loader), csv.DictReader (and the trap that every CSV value is text, so you convert with int), and os.getenv with a default versus os.environ that fails loudly with a KeyError for a missing secret. The lesson ends with a lab and checker, a six-point pass or fail rubric and six tasks to do in your own virtual machine.
+
+Chapters
+0:00 Files, formats and config
+0:21 Why these formats matter
+0:49 Reading and writing files
+1:33 JSON
+2:47 YAML
+4:01 CSV
+5:13 Environment variables
+6:33 Get the lab and task
+7:22 Pass or fail rubric
+7:50 Your turn
+8:36 Quick check
+
+Objectives covered: MC06-O03
+
+Practice: work only in your own Ubuntu 24.04 virtual machine and type every command yourself. You need the PyYAML package: pip install pyyaml inside your virtual environment. Lab files: github.com/it-waves/devops-ai, folder academy/lesson49 (TASK.md, servers49.csv, config49.yaml and the checker check49.sh). Never put a real secret in a file or a command. The next lesson covers REST APIs: authentication, timeouts and pagination.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Python 3.12.3, run in a private mount setup on the recording computer. The small example files (files.py, servers.json, config.yaml and servers.csv) were prepared before recording and shown with cat. PyYAML was already installed on the recording computer, so the pip install step is described, not shown. The why-these-formats diagram is an illustration, not a capture. Typing is timed to the narration, and the yellow highlights were added afterwards. The checker was tested with a reference solution and with a failing file, but your own run of the lab is unverified until you do it.
+
+Previous lesson: https://youtu.be/tyv361iy6To
+Next lesson: REST APIs with authentication, timeouts and pagination.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#python #pythonfordevops #json #yaml #devopsbootcamp

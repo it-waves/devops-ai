@@ -1,0 +1,5 @@
+name,env,cpu
+web1,prod,72
+web2,prod,91
+db1,prod,55
+test1,dev,12

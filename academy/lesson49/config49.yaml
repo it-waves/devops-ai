@@ -1,0 +1,3 @@
+app: inventory
+limit: 80
+report: report.json

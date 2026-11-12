@@ -1,0 +1,6 @@
+app: inventory
+env: prod
+limit: 80
+hosts:
+  - web1
+  - web2

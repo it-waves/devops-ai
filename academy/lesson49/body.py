@@ -1,0 +1,97 @@
+RB = 'REAL RECORDING  ·  Ubuntu 24.04 on this computer'
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('h1', "Last lesson you wrote Python. Today your code meets real data."),
+  c('h2', "Files. JSON. YAML. CSV. And environment variables. The five places where data and settings hide in every DevOps job."),
+  c('h3', "Every demo is typed live on Ubuntu twenty-four oh four, so you can follow along."),
+ ]),
+ ('why', [
+  c('w1', "Why these five? Because almost every tool you will meet keeps its settings in one of them."),
+  c('w2', "Ansible, Kubernetes, Docker Compose and GitHub Actions all use YAML."),
+  c('w3', "APIs speak JSON. Exports from spreadsheets and monitoring tools arrive as CSV."),
+  c('w4', "And secrets and switches reach your program as environment variables."),
+  c('w5', "Read them safely, convert the types, and your script works on any machine."),
+ ]),
+ ('files', [
+  k('fl1', "First, plain files. Here is a small script called files dot P Y. Type: cat files dot P Y."),
+  k('fl2', "Three blocks, each with open, a file name, and a mode. W writes, and replaces the file. A appends to the end. With no mode, the file is read. The with block closes the file for you, even if something fails. Run it. Type: python three, files dot P Y."),
+  k('fl3', "Both lines came back, read from the file. Now look at the file itself. Type: cat notes dot T X T."),
+  c('fl4', "The same two lines. Use with open for every file, so files always get closed. And remember: W erases what was there, so choose the mode carefully."),
+ ]),
+ ('json', [
+  k('j1', "Next, JSON, the language of A P I s. Here is a small file. Type: cat servers dot jay son."),
+  k('j2', "Braces make an object, and square brackets make a list. They are exactly Python dictionaries and lists. Start Python. Type: python three, dash Q."),
+  k('j3', "Import the jay son module. Type: import jay son."),
+  k('j4', "Load the file into Python. Type: d, equals, jay son dot load, open, servers dot jay son, then two closing brackets."),
+  k('j5', "Nothing printed, but d now holds the data. Dig in. Type: d, square bracket, quote servers quote, close square bracket, square bracket, one, close square bracket, square bracket, quote name quote, close square bracket."),
+  k('j6', "Web two. A key, a position, then another key. Now go the other way, from Python to text. Type: jay son dot dumps, open, d, square bracket, quote servers quote, square bracket, zero, close square bracket, close."),
+  k('j7', "Text, ready to send to an A P I. Leave Python. Type: exit, open, close."),
+  c('j8', "JSON in, dictionaries and lists. Dictionaries and lists out. Use load for files, and loads with an S for text."),
+ ]),
+ ('yaml', [
+  k('y1', "Next, YAML, the format of Ansible, Kubernetes and Docker Compose. Here is a config file. Type: cat config dot yamel."),
+  k('y2', "No braces and no quotes. Indentation is the structure, just like Python, and a dash starts a list item. Start Python. Type: python three, dash Q."),
+  k('y3', "YAML is not built in. It needs the pie yamel package, installed with pip install pie yamel inside your virtual environment. It is already installed here. Type: import yamel."),
+  k('y4', "Load the file. Always use safe load. Type: cfg, equals, yamel dot safe underscore load, open, config dot yamel, then two closing brackets."),
+  k('y5', "Now ask for the limit. Type: cfg, square bracket, quote limit quote, close square bracket."),
+  k('y6', "Eighty, and it is a real number, not text. YAML keeps the types. Now the hosts. Type: cfg, square bracket, quote hosts quote, close square bracket."),
+  k('y7', "A Python list. Leave Python. Type: exit, open, close."),
+  c('y8', "Safe load builds only plain data. The plain load function can run code from an untrusted file, so avoid it."),
+ ]),
+ ('csv', [
+  k('s1', "Now CSV, the format of spreadsheets and exports. Type: cat servers dot C S V."),
+  k('s2', "A header row, then one row per server. Start Python. Type: python three, dash Q."),
+  k('s3', "Import the C S V module. Type: import C S V."),
+  k('s4', "Read the rows as dictionaries, one per line. Type: rows, equals, list, open bracket, C S V dot Dict Reader, open bracket, open, open bracket, servers dot C S V, and three closing brackets."),
+  k('s5', "Nothing printed. How many rows? Type: len, open, rows, close."),
+  k('s6', "Four servers. Look at the second one. Type: rows, square bracket, one, close square bracket."),
+  k('s7', "Spot the trap. The C P U is in quotes. C S V always gives you text. Convert it. Type: int, open, rows, square bracket, one, close square bracket, square bracket, quote C P U quote, close square bracket, close."),
+  k('s8', "Ninety-one, a real number. Leave Python. Type: exit, open, close."),
+  c('s9', "Rule: CSV always gives text. As text, nine is bigger than ninety-one, so always convert before you compare."),
+ ]),
+ ('env', [
+  k('e1', "Finally, environment variables. This is how secrets and switches reach your program, without living in the code. Set one in the shell. Type: export L I M I T equals eighty."),
+  k('e2', "Set, silently. Start Python. Type: python three, dash Q."),
+  k('e3', "Import the O S module. Type: import O S."),
+  k('e4', "Read the variable. Type: O S dot getenv, open, quote L I M I T quote, close."),
+  k('e5', "Eighty, but in quotes. Environment variables are always text. Add a default, and convert. Type: int, open, O S dot getenv, open, quote L I M I T quote, comma, quote fifty quote, close, close."),
+  k('e6', "Eighty. If the variable were missing, the default would be used. Try a variable that is missing. Type: O S dot getenv, open, quote R E G I O N quote, comma, quote E U dash west dash one quote, close."),
+  k('e7', "The default, so the program still works. But for a secret, you want a loud failure. Type: O S dot environ, square bracket, quote T O K E N quote, close square bracket."),
+  c('e8', "A key error. A missing secret should stop the program, not be guessed. And never type a real secret into a script or a command, and never commit one to git."),
+ ]),
+ ('task', [
+  c('t1', "Here is your task, with everything you need. The files are in the repository, and in the description."),
+  k('t2', "The repository is git hub dot com, slash it dash waves, slash dev ops dash A I."),
+  k('t3', "In the academy slash lesson forty-nine folder you will find the task file, the servers file, the config file, and the checker, check forty-nine dot S H."),
+  c('t4', "You write one file, report dot P Y. It reads the limit from the YAML config, reads the servers from the CSV, and reads the environment from a variable, with a default."),
+  c('t5', "Then it writes a JSON report. The checker runs it four ways and shows four pass lines."),
+  c('t6', "Do not open the solution file until you have really tried."),
+  c('t7', "Write your results in a report, with the commands and their output."),
+ ]),
+ ('rubric', [
+  c('b1', "Here is how your work is judged. Six points, and you need all six."),
+  c('b2', "The checker shows four pass lines."), c('b3', "The limit comes from the YAML file, loaded with safe load."),
+  c('b4', "The CPU values are converted to numbers."), c('b5', "The environment variable has a default."),
+  c('b6', "The JSON is written with a with block and json dump."), c('b7', "The report is complete, and you worked in your own virtual machine."), c('b8', "To pass, you need all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine."),
+  c('z2', "One: get the lesson folder, activate your virtual environment, and pip install pie yamel."),
+  c('z3', "Two: load the limit from the YAML file with safe load."),
+  c('z4', "Three: read the CSV, and convert the C P U to numbers."),
+  c('z5', "Four: read the environment from a variable, with a default."),
+  c('z6', "Five: write the JSON report with a with block."),
+  c('z7', "Six: run the checker, and write your report."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "Why use a with block when you open a file?"), c('f13', "Why must you convert a value read from a CSV file?"),
+  c('f14', "Which YAML function is the safe one?"), c('f15', "How do you read an environment variable with a default?"),
+  c('f16', "Objective covered: MC06-O03, files, JSON, YAML, CSV, and environment configuration."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next lesson: REST APIs, with authentication, timeouts, and pagination."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'h3': 0.5, 'w5': 0.5, 'fl4': 0.5, 'j8': 0.5, 'y8': 0.5, 's9': 0.5, 'e8': 0.5, 'j2': 0.3, 'y2': 0.3, 't7': 0.5, 'b8': 0.5, 'z8': 14.0, 'f17': 10.0}
+CHAP = {'why': 'Why these formats matter', 'files': 'Reading and writing files', 'json': 'JSON', 'yaml': 'YAML', 'csv': 'CSV', 'env': 'Environment variables', 'task': 'Get the lab and task', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

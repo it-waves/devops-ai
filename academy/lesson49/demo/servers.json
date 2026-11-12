@@ -1,0 +1,7 @@
+{
+  "env": "prod",
+  "servers": [
+    {"name": "web1", "cpu": 72},
+    {"name": "web2", "cpu": 91}
+  ]
+}
