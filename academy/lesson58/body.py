@@ -1,0 +1,95 @@
+
+RB = 'REAL RECORDING  ·  Ubuntu 24.04 on this computer'
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('y1', "Here is a mistake that has ended careers. Someone commits a file with a password inside, pushes it, and the password is now in history, for everyone, forever."),
+  c('y2', "Last lesson you made your first commits. Today you get control of them: what goes in, what stays out, and how to read the past."),
+  c('y3', "Three skills. Staging, so each commit holds one clean change. History, so you can find who changed what and why. And ignore files, so junk and secrets never get in."),
+  c('y4', "As always, there is a lab with a checker at the end."),
+ ]),
+ ('flow', [
+  c('d1', "First, a map. Git compares three snapshots: your working tree, the staging area, and the last commit."),
+  c('d2', "Git diff with no options compares the working tree to the staging area. It shows changes you have not staged yet."),
+  c('d3', "Git diff dash dash staged compares the staging area to the last commit. It shows exactly what the next commit will contain."),
+  c('d4', "And git diff head compares your working tree to the last commit, staged or not."),
+  c('d5', "Before every commit, run git diff dash dash staged. It is your last chance to catch a mistake."),
+ ]),
+ ('stage', [
+  k('s1', "Let us see it live. This project has one commit. Go in. Type: C D, site."),
+  k('s2', "Ask for the short status. Type: git status, dash S."),
+  k('s3', "Two files. The first column is the staging area, the second is the working tree. A space then M means modified, not staged. Two question marks mean untracked. Look at the change itself. Type: git diff."),
+  k('s4', "Minus lines were removed, plus lines were added. Stage just this file. Type: git add, index dot H T M L."),
+  k('s5', "Staged. Now the plain diff again. Type: git diff."),
+  k('s6', "Empty. Everything changed is now staged, so nothing is left to compare. Now ask what the commit will contain. Type: git diff, dash dash staged."),
+  k('s7', "The same change, now waiting in the staging area. Check the status. Type: git status, dash S."),
+  k('s8', "M in the first column: staged. The stylesheet is still untracked, so it stays out of this commit. That is how you keep one logical change per commit. If you stage something by mistake, take it back. Type: git restore, dash dash staged, index dot H T M L."),
+  k('s9', "Restore, with dash dash staged, only moves the file out of the staging area. Your edit is safe. Check once more. Type: git status, dash S."),
+  c('s10', "Back to a space and an M: modified, not staged. Nothing was lost. Staging is a safe workspace for building the perfect commit."),
+ ]),
+ ('msg', [
+  c('m1', "Now the commit message. Your future self, and your team, will read it more than they read the code."),
+  c('m2', "One: a short subject line, about fifty characters, in the imperative: Add stylesheet, not Added stylesheet or stuff."),
+  c('m3', "Two: a blank line, then, if needed, a body that explains why, not what. The diff already shows what."),
+  c('m4', "Three: one logical change per commit. If you need the word and in your subject, it is probably two commits."),
+  c('m5', "A good history is a readable story. A bad one is a pile of messages that say fix."),
+ ]),
+ ('hist', [
+  k('h1', "Now read the past. This project has four commits. Go in. Type: C D, site."),
+  k('h2', "Start with the compact view. Type: git log, dash dash one line."),
+  k('h3', "Newest first, one line each. For the full detail of the last two commits. Type: git log, dash N, two."),
+  k('h4', "Each commit shows its full hash, the author, the date and the message. You can see who and when. To see what changed in the top commit. Type: git show, dash dash stat, head."),
+  k('h5', "The header, then which files changed, and how many lines. Now follow a single file through history. Type: git log, dash dash one line, dash dash, index dot H T M L."),
+  k('h6', "Only the commits that touched that file. The two dashes mean: what follows is a path. Now see the file as it was in the very first commit. Head tilde three means three commits before head. Type: git show, head tilde three, colon, index dot H T M L."),
+  k('h7', "The original file, even though it has changed since. Last tool for the detective: for each line, which commit last changed it. Type: git blame, index dot H T M L."),
+  c('h8', "Each line, with the commit, the author and the date. When something looks wrong, blame tells you where to start asking. It is about understanding, not about blaming people."),
+ ]),
+ ('ignore', [
+  k('g1', "Now keeping junk out. This project has a debug log and a build folder that should never be committed. Go in. Type: C D, site."),
+  k('g2', "Ask what Git sees. Type: git status, dash S."),
+  k('g3', "The build folder and the log show as untracked, and the modified file is a cache file that was committed by mistake earlier. First the ignore file. Type: echo, debug dot log, redirect into dot git ignore."),
+  k('g4', "Now add the build folder, with a slash, so it matches a folder. Use two arrows to append. Type: echo, build slash, two arrows, dot git ignore."),
+  k('g5', "Check. Type: git status, dash S."),
+  k('g6', "Both disappeared. Only the ignore file itself is new, and you commit that so the whole team shares the rules. Ask why a file is ignored. Type: git check dash ignore, dash V, debug dot log."),
+  k('g7', "It names the file, the line number, and the exact pattern. Perfect for debugging. Now the trap. The cache file is already tracked. Add it to the ignore file. Type: echo, cache dot temp, two arrows, dot git ignore."),
+  k('g8', "Check the status. Type: git status, dash S."),
+  k('g9', "Still modified! Ignore rules only apply to untracked files. A file Git already tracks stays tracked. To stop tracking it, but keep it on disk. Type: git R M, dash dash cached, cache dot temp."),
+  k('g10', "Removed from tracking. Check. Type: git status, dash S."),
+  c('g11', "D in the first column: the next commit deletes it from the repository, but the file stays on your disk. One more warning: if a secret was already committed, ignoring it is not enough. It stays in history, so you must rotate the secret. We cover cleaning history in a later lesson."),
+ ]),
+ ('task', [
+  c('t1', "Your task, in your own Ubuntu virtual machine."),
+  k('t2', "The lab is lab fifty-eight dot S H, in the academy slash lab folder of git hub dot com, slash it dash waves, slash dev ops dash A I. Install it like before, then run lab up."),
+  c('t3', "It builds a repository with a real change to app dot conf, a personal notes file, junk files, and a cache file that was committed by mistake."),
+  c('t4', "One: create a dot git ignore so the debug log, the secrets file and the build folder are ignored."),
+  c('t5', "Two: stop tracking cache dot temp, but keep the file on disk."),
+  c('t6', "Three: commit only the app dot conf change, with a clear message. The notes file must stay uncommitted."),
+  c('t7', "Four: in answers dot text, write one number: how many commits touched app dot conf before yours."),
+  c('t8', "Then run lab check. Four pass lines. Before you commit, always run git diff dash dash staged."),
+ ]),
+ ('rubric', [
+  c('b1', "Six points, and you need all six."),
+  c('b2', "The checker shows four pass lines."), c('b3', "You reviewed the commit with git diff dash dash staged before committing."),
+  c('b4', "The commit message is clear, in the imperative."), c('b5', "You can explain why ignoring a tracked file does nothing."),
+  c('b6', "The number in answers dot text is correct."), c('b7', "You ran lab down to clean up."), c('b8', "To pass, you need all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine."),
+  c('z2', "One: install the lab, and run lab up."),
+  c('z3', "Two: write the ignore file, and check it with git check dash ignore."),
+  c('z4', "Three: untrack the cache file."),
+  c('z5', "Four: stage only app dot conf, review it, and commit."),
+  c('z6', "Five: find the answer with git log for that file, and run lab check."),
+  c('z7', "Six: run lab down."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "Which command shows what the next commit will contain?"), c('f13', "How do you take a file out of the staging area?"),
+  c('f14', "Why does ignoring a tracked file change nothing?"), c('f15', "How do you follow the history of one file?"),
+  c('f16', "Objective covered: M C zero seven, objective two, staging, history, and ignore files."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next: branches, merging, and conflicts."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'y4': 0.5, 'd5': 0.5, 's10': 0.5, 'm5': 0.5, 'h8': 0.5, 'g11': 0.6, 't8': 0.5, 'b8': 0.5, 'z8': 14.0, 'f17': 10.0}
+CHAP = {'flow': 'Three snapshots', 'stage': 'Stage with confidence', 'msg': 'Good commit messages', 'hist': 'Read the history', 'ignore': 'Ignore files', 'task': 'Your lab task', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

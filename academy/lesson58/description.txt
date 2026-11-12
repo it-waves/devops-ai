@@ -1,0 +1,26 @@
+Lesson 58 of the DevOps Engineering Bootcamp, the second lesson of the Git and GitHub masterclass, from beginner to mastery. You take control of what goes into a commit, how to read history, and how to keep junk and secrets out. You see the three snapshots Git compares (working tree, staging area, last commit) and which diff command compares which; then, live on Ubuntu, git status -s with its two columns, git diff, git add, git diff --staged and git restore --staged. You learn what makes a good commit message. You read the past with git log, git show, a single file's history and git blame, and you see the file as it was three commits ago. Finally, ignore files: .gitignore patterns, git check-ignore -v, the trap that ignoring a file Git already tracks does nothing, and git rm --cached to untrack it while keeping it on disk. The lab has a checker that says PASS or FAIL for four checks, a pass/fail rubric, and cleanup.
+
+Chapters
+0:00 Control what goes into Git
+0:35 Three snapshots
+1:10 Stage with confidence
+2:40 Good commit messages
+3:16 Read the history
+4:36 Ignore files
+6:26 Your lab task
+7:23 Pass or fail rubric
+7:48 Your turn
+8:29 Quick check
+
+Objectives covered: MC07-O02 staging, history and ignore files
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab58.sh and shortcuts58.sh) and academy/lesson58 (INSTALL.txt). Install with: sudo apt install -y git (if needed), then sudo install -m 755 lab58.sh /usr/local/sbin/ and run lab up, lab check and lab down after loading the short name with: source shortcuts58.sh (without it, use sudo lab58.sh up, check, down). You need an Ubuntu virtual machine with root and git. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with Git 2.43, run in a private mount setup on the recording computer; the author name and email (Sam Lee) are made up, and the example repositories were prepared before recording so each segment starts from a known state. The lab was run end to end before this lesson: all four checks fail before the work, all four pass after a reference solution, and lab down leaves nothing behind. The on-screen three snapshots, commit message and task screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Git from zero, repository, commit, clone and the .git folder https://youtu.be/rSyxwdl_NPE
+Next lesson: branches, merging, and conflicts.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#git #github #devops #gitignore #versioncontrol #devopsbootcamp

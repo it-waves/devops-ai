@@ -1,0 +1,979 @@
+1
+00:00:00,500 --> 00:00:03,164
+Here is a mistake that has ended careers.
+
+2
+00:00:03,164 --> 00:00:06,153
+Someone commits a file with a password inside,
+
+3
+00:00:06,153 --> 00:00:06,803
+pushes it,
+
+4
+00:00:06,803 --> 00:00:09,077
+and the password is now in history,
+
+5
+00:00:09,077 --> 00:00:09,922
+for everyone,
+
+6
+00:00:09,922 --> 00:00:10,441
+forever.
+
+7
+00:00:10,991 --> 00:00:13,441
+Last lesson you made your first commits.
+
+8
+00:00:13,441 --> 00:00:16,136
+Today you get control of them: what goes in,
+
+9
+00:00:16,136 --> 00:00:17,055
+what stays out,
+
+10
+00:00:17,055 --> 00:00:18,586
+and how to read the past.
+
+11
+00:00:19,136 --> 00:00:20,043
+Three skills.
+
+12
+00:00:20,043 --> 00:00:20,602
+Staging,
+
+13
+00:00:20,602 --> 00:00:23,255
+so each commit holds one clean change.
+
+14
+00:00:23,255 --> 00:00:23,813
+History,
+
+15
+00:00:23,813 --> 00:00:26,675
+so you can find who changed what and why.
+
+16
+00:00:26,675 --> 00:00:27,862
+And ignore files,
+
+17
+00:00:27,862 --> 00:00:30,165
+so junk and secrets never get in.
+
+18
+00:00:30,715 --> 00:00:33,531
+As always, there is a lab with a checker at the end.
+
+19
+00:00:35,581 --> 00:00:35,950
+First,
+
+20
+00:00:35,950 --> 00:00:36,320
+a map.
+
+21
+00:00:36,320 --> 00:00:39,276
+Git compares three snapshots: your working tree,
+
+22
+00:00:39,276 --> 00:00:40,323
+the staging area,
+
+23
+00:00:40,323 --> 00:00:41,554
+and the last commit.
+
+24
+00:00:42,104 --> 00:00:46,554
+Git diff with no options compares the working tree to the staging area.
+
+25
+00:00:46,554 --> 00:00:49,123
+It shows changes you have not staged yet.
+
+26
+00:00:49,673 --> 00:00:53,919
+Git diff dash dash staged compares the staging area to the last commit.
+
+27
+00:00:53,919 --> 00:00:56,969
+It shows exactly what the next commit will contain.
+
+28
+00:00:57,519 --> 00:01:01,807
+And git diff head compares your working tree to the last commit, staged or not.
+
+29
+00:01:02,357 --> 00:01:03,600
+Before every commit,
+
+30
+00:01:03,600 --> 00:01:05,464
+run git diff dash dash staged.
+
+31
+00:01:05,464 --> 00:01:08,074
+It is your last chance to catch a mistake.
+
+32
+00:01:10,124 --> 00:01:15,052
+Let us see it live. This project has one commit. Go in. Type: CD, site.
+
+33
+00:01:15,602 --> 00:01:19,357
+Ask for the short status. Type: git status, dash S.
+
+34
+00:01:19,907 --> 00:01:20,615
+Two files.
+
+35
+00:01:20,615 --> 00:01:23,235
+The first column is the staging area,
+
+36
+00:01:23,235 --> 00:01:25,430
+the second is the working tree.
+
+37
+00:01:25,430 --> 00:01:27,555
+A space then M means modified,
+
+38
+00:01:27,555 --> 00:01:28,334
+not staged.
+
+39
+00:01:28,334 --> 00:01:30,742
+Two question marks mean untracked.
+
+40
+00:01:30,742 --> 00:01:32,583
+Look at the change itself.
+
+41
+00:01:32,583 --> 00:01:33,645
+Type: git diff.
+
+42
+00:01:34,195 --> 00:01:36,089
+Minus lines were removed,
+
+43
+00:01:36,089 --> 00:01:37,755
+plus lines were added.
+
+44
+00:01:37,755 --> 00:01:39,345
+Stage just this file.
+
+45
+00:01:39,345 --> 00:01:40,405
+Type: git add,
+
+46
+00:01:40,405 --> 00:01:41,769
+index dot H T M L.
+
+47
+00:01:42,319 --> 00:01:45,519
+Staged. Now the plain diff again. Type: git diff.
+
+48
+00:01:46,069 --> 00:01:46,481
+Empty.
+
+49
+00:01:46,481 --> 00:01:48,752
+Everything changed is now staged,
+
+50
+00:01:48,752 --> 00:01:50,815
+so nothing is left to compare.
+
+51
+00:01:50,815 --> 00:01:53,361
+Now ask what the commit will contain.
+
+52
+00:01:53,361 --> 00:01:54,393
+Type: git diff,
+
+53
+00:01:54,393 --> 00:01:55,562
+dash dash staged.
+
+54
+00:01:56,112 --> 00:01:57,255
+The same change,
+
+55
+00:01:57,255 --> 00:01:59,541
+now waiting in the staging area.
+
+56
+00:01:59,541 --> 00:02:00,755
+Check the status.
+
+57
+00:02:00,755 --> 00:02:01,969
+Type: git status,
+
+58
+00:02:01,969 --> 00:02:02,469
+dash S.
+
+59
+00:02:03,019 --> 00:02:05,069
+M in the first column: staged.
+
+60
+00:02:05,069 --> 00:02:07,393
+The stylesheet is still untracked,
+
+61
+00:02:07,393 --> 00:02:09,511
+so it stays out of this commit.
+
+62
+00:02:09,511 --> 00:02:12,996
+That is how you keep one logical change per commit.
+
+63
+00:02:12,996 --> 00:02:15,320
+If you stage something by mistake,
+
+64
+00:02:15,320 --> 00:02:16,208
+take it back.
+
+65
+00:02:16,208 --> 00:02:17,438
+Type: git restore,
+
+66
+00:02:17,438 --> 00:02:18,600
+dash dash staged,
+
+67
+00:02:18,600 --> 00:02:19,830
+index dot H T M L.
+
+68
+00:02:20,380 --> 00:02:20,955
+Restore,
+
+69
+00:02:20,955 --> 00:02:22,538
+with dash dash staged,
+
+70
+00:02:22,538 --> 00:02:25,702
+only moves the file out of the staging area.
+
+71
+00:02:25,702 --> 00:02:26,997
+Your edit is safe.
+
+72
+00:02:26,997 --> 00:02:28,147
+Check once more.
+
+73
+00:02:28,147 --> 00:02:29,370
+Type: git status,
+
+74
+00:02:29,370 --> 00:02:29,873
+dash S.
+
+75
+00:02:30,423 --> 00:02:32,760
+Back to a space and an M: modified,
+
+76
+00:02:32,760 --> 00:02:33,495
+not staged.
+
+77
+00:02:33,495 --> 00:02:34,630
+Nothing was lost.
+
+78
+00:02:34,630 --> 00:02:38,637
+Staging is a safe workspace for building the perfect commit.
+
+79
+00:02:40,687 --> 00:02:42,026
+Now the commit message.
+
+80
+00:02:42,026 --> 00:02:43,016
+Your future self,
+
+81
+00:02:43,016 --> 00:02:43,831
+and your team,
+
+82
+00:02:43,831 --> 00:02:46,276
+will read it more than they read the code.
+
+83
+00:02:46,826 --> 00:02:48,559
+One: a short subject line,
+
+84
+00:02:48,559 --> 00:02:50,092
+about fifty characters,
+
+85
+00:02:50,092 --> 00:02:52,358
+in the imperative: Add stylesheet,
+
+86
+00:02:52,358 --> 00:02:54,357
+not Added stylesheet or stuff.
+
+87
+00:02:54,907 --> 00:02:56,108
+Two: a blank line,
+
+88
+00:02:56,108 --> 00:02:56,441
+then,
+
+89
+00:02:56,441 --> 00:02:57,108
+if needed,
+
+90
+00:02:57,108 --> 00:02:58,775
+a body that explains why,
+
+91
+00:02:58,775 --> 00:02:59,376
+not what.
+
+92
+00:02:59,376 --> 00:03:01,243
+The diff already shows what.
+
+93
+00:03:01,793 --> 00:03:04,078
+Three: one logical change per commit.
+
+94
+00:03:04,078 --> 00:03:06,611
+If you need the word and in your subject,
+
+95
+00:03:06,611 --> 00:03:08,278
+it is probably two commits.
+
+96
+00:03:08,828 --> 00:03:14,226
+A good history is a readable story. A bad one is a pile of messages that say fix.
+
+97
+00:03:16,276 --> 00:03:21,353
+Now read the past. This project has four commits. Go in. Type: CD, site.
+
+98
+00:03:21,903 --> 00:03:25,999
+Start with the compact view. Type: git log, dash dash one line.
+
+99
+00:03:26,549 --> 00:03:27,428
+Newest first,
+
+100
+00:03:27,428 --> 00:03:28,373
+one line each.
+
+101
+00:03:28,373 --> 00:03:31,346
+For the full detail of the last two commits.
+
+102
+00:03:31,346 --> 00:03:32,292
+Type: git log,
+
+103
+00:03:32,292 --> 00:03:32,764
+dash N,
+
+104
+00:03:32,764 --> 00:03:33,035
+two.
+
+105
+00:03:33,585 --> 00:03:35,674
+Each commit shows its full hash,
+
+106
+00:03:35,674 --> 00:03:36,392
+the author,
+
+107
+00:03:36,392 --> 00:03:38,024
+the date and the message.
+
+108
+00:03:38,024 --> 00:03:39,656
+You can see who and when.
+
+109
+00:03:39,656 --> 00:03:42,137
+To see what changed in the top commit.
+
+110
+00:03:42,137 --> 00:03:43,116
+Type: git show,
+
+111
+00:03:43,116 --> 00:03:44,096
+dash dash stat,
+
+112
+00:03:44,096 --> 00:03:44,422
+head.
+
+113
+00:03:44,972 --> 00:03:45,758
+The header,
+
+114
+00:03:45,758 --> 00:03:47,545
+then which files changed,
+
+115
+00:03:47,545 --> 00:03:48,903
+and how many lines.
+
+116
+00:03:48,903 --> 00:03:51,833
+Now follow a single file through history.
+
+117
+00:03:51,833 --> 00:03:52,834
+Type: git log,
+
+118
+00:03:52,834 --> 00:03:54,192
+dash dash one line,
+
+119
+00:03:54,192 --> 00:03:54,907
+dash dash,
+
+120
+00:03:54,907 --> 00:03:56,193
+index dot H T M L.
+
+121
+00:03:56,743 --> 00:03:59,402
+Only the commits that touched that file.
+
+122
+00:03:59,402 --> 00:04:02,328
+The two dashes mean: what follows is a path.
+
+123
+00:04:02,328 --> 00:04:05,784
+Now see the file as it was in the very first commit.
+
+124
+00:04:05,784 --> 00:04:09,042
+Head tilde three means three commits before head.
+
+125
+00:04:09,042 --> 00:04:10,039
+Type: git show,
+
+126
+00:04:10,039 --> 00:04:11,169
+head tilde three,
+
+127
+00:04:11,169 --> 00:04:11,568
+colon,
+
+128
+00:04:11,568 --> 00:04:12,765
+index dot H T M L.
+
+129
+00:04:13,315 --> 00:04:14,567
+The original file,
+
+130
+00:04:14,567 --> 00:04:16,863
+even though it has changed since.
+
+131
+00:04:16,863 --> 00:04:19,854
+Last tool for the detective: for each line,
+
+132
+00:04:19,854 --> 00:04:21,872
+which commit last changed it.
+
+133
+00:04:21,872 --> 00:04:22,985
+Type: git blame,
+
+134
+00:04:22,985 --> 00:04:24,237
+index dot H T M L.
+
+135
+00:04:24,787 --> 00:04:25,367
+Each line,
+
+136
+00:04:25,367 --> 00:04:26,294
+with the commit,
+
+137
+00:04:26,294 --> 00:04:27,685
+the author and the date.
+
+138
+00:04:27,685 --> 00:04:29,250
+When something looks wrong,
+
+139
+00:04:29,250 --> 00:04:31,453
+blame tells you where to start asking.
+
+140
+00:04:31,453 --> 00:04:32,960
+It is about understanding,
+
+141
+00:04:32,960 --> 00:04:34,409
+not about blaming people.
+
+142
+00:04:36,459 --> 00:04:37,941
+Now keeping junk out.
+
+143
+00:04:37,941 --> 00:04:43,517
+This project has a debug log and a build folder that should never be committed.
+
+144
+00:04:43,517 --> 00:04:43,940
+Go in.
+
+145
+00:04:43,940 --> 00:04:44,575
+Type: CD,
+
+146
+00:04:44,575 --> 00:04:44,928
+site.
+
+147
+00:04:45,478 --> 00:04:48,785
+Ask what Git sees. Type: git status, dash S.
+
+148
+00:04:49,335 --> 00:04:52,540
+The build folder and the log show as untracked,
+
+149
+00:04:52,540 --> 00:04:57,721
+and the modified file is a cache file that was committed by mistake earlier.
+
+150
+00:04:57,721 --> 00:04:59,221
+First the ignore file.
+
+151
+00:04:59,221 --> 00:04:59,971
+Type: echo,
+
+152
+00:04:59,971 --> 00:05:00,926
+debug dot log,
+
+153
+00:05:00,926 --> 00:05:02,903
+redirect into dot git ignore.
+
+154
+00:05:03,453 --> 00:05:05,152
+Now add the build folder,
+
+155
+00:05:05,152 --> 00:05:06,035
+with a slash,
+
+156
+00:05:06,035 --> 00:05:07,598
+so it matches a folder.
+
+157
+00:05:07,598 --> 00:05:09,297
+Use two arrows to append.
+
+158
+00:05:09,297 --> 00:05:10,044
+Type: echo,
+
+159
+00:05:10,044 --> 00:05:10,860
+build slash,
+
+160
+00:05:10,860 --> 00:05:11,607
+two arrows,
+
+161
+00:05:11,607 --> 00:05:12,626
+dot git ignore.
+
+162
+00:05:13,176 --> 00:05:15,438
+Check. Type: git status, dash S.
+
+163
+00:05:15,988 --> 00:05:17,207
+Both disappeared.
+
+164
+00:05:17,207 --> 00:05:19,718
+Only the ignore file itself is new,
+
+165
+00:05:19,718 --> 00:05:23,663
+and you commit that so the whole team shares the rules.
+
+166
+00:05:23,663 --> 00:05:25,529
+Ask why a file is ignored.
+
+167
+00:05:25,529 --> 00:05:27,537
+Type: git check dash ignore,
+
+168
+00:05:27,537 --> 00:05:28,039
+dash V,
+
+169
+00:05:28,039 --> 00:05:29,044
+debug dot log.
+
+170
+00:05:29,594 --> 00:05:30,838
+It names the file,
+
+171
+00:05:30,838 --> 00:05:31,945
+the line number,
+
+172
+00:05:31,945 --> 00:05:33,466
+and the exact pattern.
+
+173
+00:05:33,466 --> 00:05:34,987
+Perfect for debugging.
+
+174
+00:05:34,987 --> 00:05:35,886
+Now the trap.
+
+175
+00:05:35,886 --> 00:05:38,237
+The cache file is already tracked.
+
+176
+00:05:38,237 --> 00:05:40,035
+Add it to the ignore file.
+
+177
+00:05:40,035 --> 00:05:40,796
+Type: echo,
+
+178
+00:05:40,796 --> 00:05:41,833
+cache dot temp,
+
+179
+00:05:41,833 --> 00:05:42,594
+two arrows,
+
+180
+00:05:42,594 --> 00:05:43,631
+dot git ignore.
+
+181
+00:05:44,181 --> 00:05:47,338
+Check the status. Type: git status, dash S.
+
+182
+00:05:47,888 --> 00:05:48,999
+Still modified!
+
+183
+00:05:48,999 --> 00:05:52,185
+Ignore rules only apply to untracked files.
+
+184
+00:05:52,185 --> 00:05:55,149
+A file Git already tracks stays tracked.
+
+185
+00:05:55,149 --> 00:05:56,631
+To stop tracking it,
+
+186
+00:05:56,631 --> 00:05:58,112
+but keep it on disk.
+
+187
+00:05:58,112 --> 00:05:59,150
+Type: git R M,
+
+188
+00:05:59,150 --> 00:06:00,409
+dash dash cached,
+
+189
+00:06:00,409 --> 00:06:01,520
+cache dot temp.
+
+190
+00:06:02,070 --> 00:06:05,953
+Removed from tracking. Check. Type: git status, dash S.
+
+191
+00:06:06,503 --> 00:06:10,950
+D in the first column: the next commit deletes it from the repository,
+
+192
+00:06:10,950 --> 00:06:12,983
+but the file stays on your disk.
+
+193
+00:06:12,983 --> 00:06:16,287
+One more warning: if a secret was already committed,
+
+194
+00:06:16,287 --> 00:06:17,939
+ignoring it is not enough.
+
+195
+00:06:17,939 --> 00:06:19,210
+It stays in history,
+
+196
+00:06:19,210 --> 00:06:21,116
+so you must rotate the secret.
+
+197
+00:06:21,116 --> 00:06:23,911
+We cover cleaning history in a later lesson.
+
+198
+00:06:26,061 --> 00:06:28,834
+Your task, in your own Ubuntu virtual machine.
+
+199
+00:06:29,384 --> 00:06:31,944
+The lab is lab fifty-eight dot S H,
+
+200
+00:06:31,944 --> 00:06:35,675
+in the academy slash lab folder of git hub dot com,
+
+201
+00:06:35,675 --> 00:06:37,137
+slash it dash waves,
+
+202
+00:06:37,137 --> 00:06:38,820
+slash dev ops dash A I.
+
+203
+00:06:38,820 --> 00:06:40,502
+Install it like before,
+
+204
+00:06:40,502 --> 00:06:41,672
+then run lab up.
+
+205
+00:06:42,222 --> 00:06:46,015
+It builds a repository with a real change to app dot conf,
+
+206
+00:06:46,015 --> 00:06:47,454
+a personal notes file,
+
+207
+00:06:47,454 --> 00:06:48,173
+junk files,
+
+208
+00:06:48,173 --> 00:06:51,246
+and a cache file that was committed by mistake.
+
+209
+00:06:51,796 --> 00:06:54,669
+One: create a dot git ignore so the debug log,
+
+210
+00:06:54,669 --> 00:06:57,791
+the secrets file and the build folder are ignored.
+
+211
+00:06:58,341 --> 00:07:02,096
+Two: stop tracking cache dot temp, but keep the file on disk.
+
+212
+00:07:02,646 --> 00:07:05,316
+Three: commit only the app dot conf change,
+
+213
+00:07:05,316 --> 00:07:06,620
+with a clear message.
+
+214
+00:07:06,620 --> 00:07:08,918
+The notes file must stay uncommitted.
+
+215
+00:07:09,468 --> 00:07:11,102
+Four: in answers dot text,
+
+216
+00:07:11,102 --> 00:07:15,441
+write one number: how many commits touched app dot conf before yours.
+
+217
+00:07:15,991 --> 00:07:17,257
+Then run lab check.
+
+218
+00:07:17,257 --> 00:07:18,322
+Four pass lines.
+
+219
+00:07:18,322 --> 00:07:19,521
+Before you commit,
+
+220
+00:07:19,521 --> 00:07:21,986
+always run git diff dash dash staged.
+
+221
+00:07:24,036 --> 00:07:26,020
+Six points, and you need all six.
+
+222
+00:07:26,570 --> 00:07:28,405
+The checker shows four pass lines.
+
+223
+00:07:28,955 --> 00:07:32,880
+You reviewed the commit with git diff dash dash staged before committing.
+
+224
+00:07:33,430 --> 00:07:36,011
+The commit message is clear, in the imperative.
+
+225
+00:07:36,561 --> 00:07:39,655
+You can explain why ignoring a tracked file does nothing.
+
+226
+00:07:40,205 --> 00:07:42,530
+The number in answers dot text is correct.
+
+227
+00:07:43,080 --> 00:07:44,723
+You ran lab down to clean up.
+
+228
+00:07:45,273 --> 00:07:46,894
+To pass, you need all six.
+
+229
+00:07:48,944 --> 00:07:51,781
+Your turn, in your own Ubuntu virtual machine.
+
+230
+00:07:52,331 --> 00:07:54,550
+One: install the lab, and run lab up.
+
+231
+00:07:55,100 --> 00:07:59,025
+Two: write the ignore file, and check it with git check dash ignore.
+
+232
+00:07:59,575 --> 00:08:01,325
+Three: untrack the cache file.
+
+233
+00:08:01,875 --> 00:08:05,267
+Four: stage only app dot conf, review it, and commit.
+
+234
+00:08:05,817 --> 00:08:09,785
+Five: find the answer with git log for that file, and run lab check.
+
+235
+00:08:10,335 --> 00:08:11,807
+Six: run lab down.
+
+236
+00:08:12,357 --> 00:08:14,191
+Pause the video, and begin now.
+
+237
+00:08:29,741 --> 00:08:30,616
+Quick check.
+
+238
+00:08:31,166 --> 00:08:33,768
+Which command shows what the next commit will contain?
+
+239
+00:08:34,318 --> 00:08:36,729
+How do you take a file out of the staging area?
+
+240
+00:08:37,279 --> 00:08:39,818
+Why does ignoring a tracked file change nothing?
+
+241
+00:08:40,368 --> 00:08:42,565
+How do you follow the history of one file?
+
+242
+00:08:43,115 --> 00:08:49,280
+Objective covered: M C zero seven, objective two, staging, history, and ignore files.
+
+243
+00:08:49,830 --> 00:08:51,900
+Pause the video, and answer out loud.
+
+244
+00:09:02,450 --> 00:09:04,988
+Next: branches, merging, and conflicts.
+
+245
+00:09:05,538 --> 00:09:08,866
+If this helped, like, share and subscribe, so you do not miss it.
