@@ -1,0 +1,16 @@
+Install the lab (needs an Ubuntu virtual machine with root, python3 and curl):
+  sudo apt install -y python3 curl     # skip if already installed
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab68.sh /usr/local/sbin/
+  source shortcuts68.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab68 and starts CloudCart: the REST API on 127.0.0.1:5000 and the page on 127.0.0.1:8080
+  lab check               # five FAIL lines at the start; your goal is five PASS lines
+  lab down                # stops the app and removes /opt/lab68
+Without the shortcut, use: sudo lab68.sh up | check | down
+Your mission, all with curl against http://127.0.0.1:5000:
+  1. create a product named Mug, price 9, once (POST /api/products)
+  2. delete product 3 (DELETE /api/products/3)
+  3. in /opt/lab68/answers.txt write three lines, using the status codes you saw:  created: NNN   missing: NNN   bad: NNN
+     (created = your POST; missing = GET of a product that does not exist; bad = a POST with the price left out)
+Commands you will use: curl -i URL (show the status line and headers), curl -s URL | jq . (tidy JSON), curl -X POST -H 'Content-Type: application/json' -d '{...}' URL
+Run it only in your own virtual machine. It uses ports 5000 and 8080 on 127.0.0.1 and creates only /opt/lab68. Remove the installed script with: sudo rm /usr/local/sbin/lab68.sh

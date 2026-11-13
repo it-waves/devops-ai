@@ -1,0 +1,28 @@
+Lesson 68 of the DevOps Engineering Bootcamp, the second lesson of the Application Architecture and APIs masterclass. Every time an app loads something it sends a request and gets a response. Here you read both, line by line, with real commands against CloudCart, the tiny shop from the last lesson. You learn the parts of a request (method, path, headers, body) and of a response (status code, headers, body), send real requests with curl, read the status line, see jay son from the inside, and learn why a four oh four and a four hundred are your mistake while a five hundred is the server's. Then you meet REST: one address per thing, and four verbs that create, read and delete it. You create a product with POST, remove it with DELETE, and see the change appear on the real web page. You finish with a lab, a checker, a pass or fail rubric and your turn.
+
+Chapters
+0:00 Every tap asks a question
+0:29 Request and response
+1:06 Your first request
+2:09 Reading JSON
+2:40 Status codes
+3:45 REST endpoints
+4:15 Create and delete
+5:21 The page shows it
+5:46 Your lab task
+6:38 Pass or fail rubric
+7:06 Your turn
+7:45 Quick check
+
+Objectives covered: MC08-O02 Explain request-response, REST endpoints, HTTP status codes, and JSON payloads.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab68.sh and shortcuts68.sh) and academy/lesson68 (INSTALL.txt). Install with: sudo install -m 755 lab68.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts68.sh (without it, use sudo lab68.sh up, check, down). You need an Ubuntu virtual machine with root, python3 and curl. It uses ports 5000 and 8080 on 127.0.0.1. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount and network setup on the recording computer, and the two web page views are real Chrome screenshots of the same CloudCart app, before and after the curl commands. CloudCart is a tiny teaching app written for this course, using Python and an SQLite file, not a production system. The request and response diagrams and the REST table are labelled illustrations, not captures. The lab was run end to end before this lesson: it starts with all five checks failing, doing the tasks makes all five pass, and lab down leaves nothing behind. Your own run is unverified until you do it. The lab file names are invented, and lab is a short name I made for sudo lab68.sh. Typing is timed to the narration. The narration is synthetic speech.
+
+Previous lesson: Frontend vs Backend vs Database https://youtu.be/UQ43eJlnhC0
+Next lesson: testing endpoints like a pro, with curl options, headers, timing and API clients.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #api #rest #httpstatuscodes #json #curl #devopsbootcamp

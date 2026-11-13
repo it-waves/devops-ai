@@ -1,0 +1,867 @@
+1
+00:00:00,500 --> 00:00:04,831
+Every time an app loads something, it asks a question, and it gets an answer.
+
+2
+00:00:05,381 --> 00:00:06,557
+Open a weather app.
+
+3
+00:00:06,557 --> 00:00:09,528
+It asks a server: what is the weather in Boston?
+
+4
+00:00:09,528 --> 00:00:11,881
+The server answers: sixty-one degrees,
+
+5
+00:00:11,881 --> 00:00:12,314
+cloudy.
+
+6
+00:00:12,864 --> 00:00:15,120
+That question is called a request.
+
+7
+00:00:15,120 --> 00:00:17,243
+The answer is called a response.
+
+8
+00:00:17,243 --> 00:00:18,570
+Today you read both,
+
+9
+00:00:18,570 --> 00:00:19,433
+line by line,
+
+10
+00:00:19,433 --> 00:00:20,693
+with real commands.
+
+11
+00:00:21,243 --> 00:00:22,829
+Because when an app breaks,
+
+12
+00:00:22,829 --> 00:00:27,174
+the first thing a dev ops engineer checks is the request and the response.
+
+13
+00:00:29,224 --> 00:00:33,811
+A request has four parts: a method, a path, headers, and sometimes a body.
+
+14
+00:00:34,361 --> 00:00:35,922
+The method is the verb.
+
+15
+00:00:35,922 --> 00:00:37,823
+It says what you want to do.
+
+16
+00:00:37,823 --> 00:00:38,842
+Get means read.
+
+17
+00:00:38,842 --> 00:00:40,064
+Post means create.
+
+18
+00:00:40,064 --> 00:00:41,422
+Delete means remove.
+
+19
+00:00:41,972 --> 00:00:47,455
+The path says which thing. Slash API slash products slash one means: product number one.
+
+20
+00:00:48,005 --> 00:00:50,221
+Headers are labels about the message,
+
+21
+00:00:50,221 --> 00:00:52,258
+like what kind of data it carries.
+
+22
+00:00:52,258 --> 00:00:53,935
+The body is the data itself.
+
+23
+00:00:54,485 --> 00:00:58,453
+The response has three parts: a status code, headers, and a body.
+
+24
+00:00:59,003 --> 00:01:02,583
+The status code is a three digit number that says how it went.
+
+25
+00:01:02,583 --> 00:01:04,315
+It is the first thing to read.
+
+26
+00:01:06,365 --> 00:01:11,208
+Let us send a real request. Go into the shop. Type: CD, cloud cart.
+
+27
+00:01:11,758 --> 00:01:17,774
+This version of cloud cart has a full API. Start it. Type: dot slash start dot S H.
+
+28
+00:01:18,324 --> 00:01:20,305
+Ask for product number one.
+
+29
+00:01:20,305 --> 00:01:23,828
+The dash I flag also shows the response headers.
+
+30
+00:01:23,828 --> 00:01:24,635
+Type: curl,
+
+31
+00:01:24,635 --> 00:01:25,149
+dash I,
+
+32
+00:01:25,149 --> 00:01:29,993
+local host colon five thousand slash API slash products slash one.
+
+33
+00:01:30,543 --> 00:01:31,887
+Read it from the top.
+
+34
+00:01:31,887 --> 00:01:33,935
+The first line says two hundred,
+
+35
+00:01:33,935 --> 00:01:34,191
+O K.
+
+36
+00:01:34,191 --> 00:01:36,303
+That is the status code: success.
+
+37
+00:01:36,853 --> 00:01:37,893
+Then the headers.
+
+38
+00:01:37,893 --> 00:01:40,217
+Content type says the body is jay son.
+
+39
+00:01:40,217 --> 00:01:42,357
+Content length says how many bytes.
+
+40
+00:01:42,907 --> 00:01:44,484
+And after the blank line,
+
+41
+00:01:44,484 --> 00:01:46,313
+the body: the product itself.
+
+42
+00:01:46,313 --> 00:01:47,637
+That was one request,
+
+43
+00:01:47,637 --> 00:01:48,710
+and one response.
+
+44
+00:01:49,260 --> 00:01:51,305
+Now ask for the whole list.
+
+45
+00:01:51,305 --> 00:01:52,138
+Type: curl,
+
+46
+00:01:52,138 --> 00:01:52,668
+dash s,
+
+47
+00:01:52,668 --> 00:01:56,909
+local host colon five thousand slash API slash products,
+
+48
+00:01:56,909 --> 00:01:57,288
+pipe,
+
+49
+00:01:57,288 --> 00:01:57,591
+J Q,
+
+50
+00:01:57,591 --> 00:01:58,121
+dash C,
+
+51
+00:01:58,121 --> 00:01:58,576
+quote,
+
+52
+00:01:58,576 --> 00:02:00,091
+dot bracket bracket,
+
+53
+00:02:00,091 --> 00:02:00,545
+quote.
+
+54
+00:02:01,095 --> 00:02:01,879
+Same address,
+
+55
+00:02:01,879 --> 00:02:03,508
+without the one at the end.
+
+56
+00:02:03,508 --> 00:02:05,077
+Now you get every product.
+
+57
+00:02:05,077 --> 00:02:07,068
+The path decides what comes back.
+
+58
+00:02:09,118 --> 00:02:10,931
+That body is written in jay son.
+
+59
+00:02:11,481 --> 00:02:14,169
+It stands for java script object notation,
+
+60
+00:02:14,169 --> 00:02:16,153
+but every language can read it,
+
+61
+00:02:16,153 --> 00:02:18,649
+so it is the common language of A P Is.
+
+62
+00:02:19,199 --> 00:02:21,242
+Curly braces hold one object.
+
+63
+00:02:21,242 --> 00:02:23,497
+Each field has a name in quotes,
+
+64
+00:02:23,497 --> 00:02:24,061
+a colon,
+
+65
+00:02:24,061 --> 00:02:25,117
+then the value.
+
+66
+00:02:25,117 --> 00:02:26,527
+Text goes in quotes.
+
+67
+00:02:26,527 --> 00:02:27,583
+Numbers do not.
+
+68
+00:02:28,133 --> 00:02:29,846
+Square brackets hold a list.
+
+69
+00:02:29,846 --> 00:02:31,437
+Commas separate the items.
+
+70
+00:02:31,437 --> 00:02:32,476
+Forget one comma,
+
+71
+00:02:32,476 --> 00:02:34,128
+and the whole thing breaks.
+
+72
+00:02:34,678 --> 00:02:38,689
+J Q reads jay son and prints it tidy. You will use it every day.
+
+73
+00:02:40,639 --> 00:02:44,564
+Same shop, new session. Go in. Type: CD, cloud cart.
+
+74
+00:02:45,114 --> 00:02:48,165
+Start it. Type: dot slash start dot S H.
+
+75
+00:02:48,715 --> 00:02:52,072
+What if you ask for something that does not exist?
+
+76
+00:02:52,072 --> 00:02:53,415
+Product ninety-nine.
+
+77
+00:02:53,415 --> 00:02:54,154
+Type: curl,
+
+78
+00:02:54,154 --> 00:02:54,758
+dash s i,
+
+79
+00:02:54,758 --> 00:02:55,564
+the address,
+
+80
+00:02:55,564 --> 00:02:55,900
+pipe,
+
+81
+00:02:55,900 --> 00:02:56,236
+head,
+
+82
+00:02:56,236 --> 00:02:56,840
+dash one,
+
+83
+00:02:56,840 --> 00:02:58,720
+to show only the first line.
+
+84
+00:02:59,270 --> 00:03:04,070
+Four oh four. Not found. The server understood you, but there is no such product.
+
+85
+00:03:04,620 --> 00:03:06,972
+Good servers explain in the body too.
+
+86
+00:03:06,972 --> 00:03:08,371
+Type the same request,
+
+87
+00:03:08,371 --> 00:03:09,579
+without the dash i,
+
+88
+00:03:09,579 --> 00:03:10,914
+to see only the body.
+
+89
+00:03:11,464 --> 00:03:12,757
+Now a bad request.
+
+90
+00:03:12,757 --> 00:03:13,979
+Create a product,
+
+91
+00:03:13,979 --> 00:03:15,703
+but leave out the price.
+
+92
+00:03:15,703 --> 00:03:16,494
+Type: curl,
+
+93
+00:03:16,494 --> 00:03:17,141
+dash s i,
+
+94
+00:03:17,141 --> 00:03:18,218
+dash capital X,
+
+95
+00:03:18,218 --> 00:03:18,578
+post,
+
+96
+00:03:18,578 --> 00:03:19,081
+dash d,
+
+97
+00:03:19,081 --> 00:03:21,165
+the jay son in single quotes,
+
+98
+00:03:21,165 --> 00:03:22,386
+then the address,
+
+99
+00:03:22,386 --> 00:03:22,746
+pipe,
+
+100
+00:03:22,746 --> 00:03:23,105
+head,
+
+101
+00:03:23,105 --> 00:03:23,752
+dash one.
+
+102
+00:03:24,302 --> 00:03:27,779
+Four hundred. Bad request. The fault is in what you sent.
+
+103
+00:03:28,329 --> 00:03:29,271
+Now the pattern.
+
+104
+00:03:29,271 --> 00:03:30,920
+Two hundreds mean it worked.
+
+105
+00:03:30,920 --> 00:03:33,569
+Four hundreds mean the client made a mistake.
+
+106
+00:03:33,569 --> 00:03:35,689
+Five hundreds mean the server broke.
+
+107
+00:03:36,239 --> 00:03:37,941
+That one idea saves hours.
+
+108
+00:03:37,941 --> 00:03:40,101
+Four hundred: check your request.
+
+109
+00:03:40,101 --> 00:03:42,980
+Five hundred: check the server and its logs.
+
+110
+00:03:45,030 --> 00:03:47,292
+Most A P Is follow a style called rest.
+
+111
+00:03:47,292 --> 00:03:49,147
+Every thing has its own address,
+
+112
+00:03:49,147 --> 00:03:51,409
+and the method says what to do with it.
+
+113
+00:03:51,959 --> 00:03:56,268
+The thing is a noun. Here it is products, at slash API slash products.
+
+114
+00:03:56,818 --> 00:03:59,159
+Get on that address reads the list.
+
+115
+00:03:59,159 --> 00:04:00,899
+Get with an I D reads one.
+
+116
+00:04:00,899 --> 00:04:02,438
+Post creates a new one.
+
+117
+00:04:02,438 --> 00:04:03,709
+Delete removes one.
+
+118
+00:04:04,259 --> 00:04:08,995
+Same address, different verbs. Learn these four, and you can read almost any API.
+
+119
+00:04:09,545 --> 00:04:13,513
+There are also put and patch, for updating. Today we use these four.
+
+120
+00:04:15,563 --> 00:04:20,875
+Now change data. Same shop, new session. Go in. Type: CD, cloud cart.
+
+121
+00:04:21,425 --> 00:04:24,476
+Start it. Type: dot slash start dot S H.
+
+122
+00:04:25,026 --> 00:04:27,177
+Create a product with post.
+
+123
+00:04:27,177 --> 00:04:29,010
+Dash X sets the method.
+
+124
+00:04:29,010 --> 00:04:33,074
+Dash H adds a header that says the body is jay son.
+
+125
+00:04:33,074 --> 00:04:35,146
+Dash d is the body: a mug,
+
+126
+00:04:35,146 --> 00:04:36,023
+price nine.
+
+127
+00:04:36,023 --> 00:04:37,378
+Then the address.
+
+128
+00:04:37,928 --> 00:04:38,672
+Two oh one.
+
+129
+00:04:38,672 --> 00:04:39,213
+Created.
+
+130
+00:04:39,213 --> 00:04:42,799
+The location header says where the new product lives.
+
+131
+00:04:42,799 --> 00:04:45,032
+The body shows its new I D: four.
+
+132
+00:04:45,582 --> 00:04:47,267
+Ask for the list again.
+
+133
+00:04:47,267 --> 00:04:48,074
+Type: curl,
+
+134
+00:04:48,074 --> 00:04:48,587
+dash s,
+
+135
+00:04:48,587 --> 00:04:49,466
+the address,
+
+136
+00:04:49,466 --> 00:04:49,833
+pipe,
+
+137
+00:04:49,833 --> 00:04:50,126
+J Q,
+
+138
+00:04:50,126 --> 00:04:50,639
+dash C,
+
+139
+00:04:50,639 --> 00:04:51,079
+quote,
+
+140
+00:04:51,079 --> 00:04:52,545
+dot bracket bracket,
+
+141
+00:04:52,545 --> 00:04:52,984
+quote.
+
+142
+00:04:53,534 --> 00:04:54,803
+The mug is there.
+
+143
+00:04:54,803 --> 00:04:56,220
+The change is real,
+
+144
+00:04:56,220 --> 00:04:57,861
+saved in the database.
+
+145
+00:04:57,861 --> 00:04:58,906
+Now remove it.
+
+146
+00:04:58,906 --> 00:04:59,726
+Type: curl,
+
+147
+00:04:59,726 --> 00:05:00,398
+dash s i,
+
+148
+00:05:00,398 --> 00:05:01,517
+dash capital X,
+
+149
+00:05:01,517 --> 00:05:02,039
+delete,
+
+150
+00:05:02,039 --> 00:05:04,128
+the address of product four,
+
+151
+00:05:04,128 --> 00:05:04,501
+pipe,
+
+152
+00:05:04,501 --> 00:05:04,874
+head,
+
+153
+00:05:04,874 --> 00:05:05,545
+dash one.
+
+154
+00:05:06,095 --> 00:05:09,700
+Two oh four. No content. Success, with nothing to say.
+
+155
+00:05:10,250 --> 00:05:15,050
+Count what is left. Type: curl, dash s, the address, pipe, J Q, length.
+
+156
+00:05:15,600 --> 00:05:19,867
+Three again. Stop the shop. Type: dot slash stop dot S H.
+
+157
+00:05:21,917 --> 00:05:25,501
+Now see what a customer sees. This is the shop page, before.
+
+158
+00:05:26,051 --> 00:05:28,756
+I created a mug and deleted the notebook,
+
+159
+00:05:28,756 --> 00:05:30,009
+using only the API.
+
+160
+00:05:30,009 --> 00:05:32,252
+Reload the page: the mug is there,
+
+161
+00:05:32,252 --> 00:05:33,902
+and the notebook is gone.
+
+162
+00:05:34,452 --> 00:05:38,718
+The page was never edited. Only the data behind the API changed.
+
+163
+00:05:39,268 --> 00:05:41,422
+That is why the backend is separate.
+
+164
+00:05:41,422 --> 00:05:43,277
+Any client can change the data,
+
+165
+00:05:43,277 --> 00:05:44,772
+and every client sees it.
+
+166
+00:05:46,822 --> 00:05:49,595
+Your task, in your own Ubuntu virtual machine.
+
+167
+00:05:50,145 --> 00:05:52,705
+The lab is lab sixty-eight dot S H,
+
+168
+00:05:52,705 --> 00:05:56,436
+in the academy slash lab folder of git hub dot com,
+
+169
+00:05:56,436 --> 00:05:57,898
+slash it dash waves,
+
+170
+00:05:57,898 --> 00:05:59,581
+slash dev ops dash A I.
+
+171
+00:05:59,581 --> 00:06:01,263
+Install it like before,
+
+172
+00:06:01,263 --> 00:06:02,433
+then run lab up.
+
+173
+00:06:02,983 --> 00:06:06,267
+Cloud cart starts with its API on port five thousand.
+
+174
+00:06:06,267 --> 00:06:07,940
+Five things need your work,
+
+175
+00:06:07,940 --> 00:06:08,807
+all with curl.
+
+176
+00:06:09,357 --> 00:06:13,176
+One: create a product named mug, price nine, once. Use post.
+
+177
+00:06:13,726 --> 00:06:16,158
+Two: delete product number three, the notebook.
+
+178
+00:06:16,708 --> 00:06:18,410
+Three: in answers dot text,
+
+179
+00:06:18,410 --> 00:06:20,993
+write the status code your post returned,
+
+180
+00:06:20,993 --> 00:06:22,191
+like this: created,
+
+181
+00:06:22,191 --> 00:06:22,569
+colon,
+
+182
+00:06:22,569 --> 00:06:23,577
+then the number.
+
+183
+00:06:24,127 --> 00:06:28,014
+Four: do the same for asking for a product that does not exist,
+
+184
+00:06:28,014 --> 00:06:29,371
+with the word missing.
+
+185
+00:06:29,371 --> 00:06:32,148
+Five: and for a post with the price left out,
+
+186
+00:06:32,148 --> 00:06:33,258
+with the word bad.
+
+187
+00:06:33,808 --> 00:06:36,347
+Then run lab check. Five pass lines.
+
+188
+00:06:38,397 --> 00:06:40,381
+Six points, and you need all six.
+
+189
+00:06:40,931 --> 00:06:42,808
+The checker shows five pass lines.
+
+190
+00:06:43,358 --> 00:06:48,222
+You can point at the method, the path, and the status code in a curl dash i output.
+
+191
+00:06:48,772 --> 00:06:51,546
+You can explain four hundreds against five hundreds.
+
+192
+00:06:52,096 --> 00:06:54,528
+You can create and delete a product with curl.
+
+193
+00:06:55,078 --> 00:06:59,302
+You can read jay son: an object, a list, a text value, and a number.
+
+194
+00:06:59,852 --> 00:07:02,582
+You ran lab down, and nothing is left listening.
+
+195
+00:07:03,132 --> 00:07:04,754
+To pass, you need all six.
+
+196
+00:07:06,804 --> 00:07:09,641
+Your turn, in your own Ubuntu virtual machine.
+
+197
+00:07:10,191 --> 00:07:12,410
+One: install the lab, and run lab up.
+
+198
+00:07:12,960 --> 00:07:17,163
+Two: ask for product one with curl dash i, and read the status line.
+
+199
+00:07:17,713 --> 00:07:19,633
+Three: create the mug with post.
+
+200
+00:07:20,183 --> 00:07:21,825
+Four: delete product three.
+
+201
+00:07:22,375 --> 00:07:25,469
+Five: write answers dot text, then run lab check.
+
+202
+00:07:26,019 --> 00:07:27,491
+Six: run lab down.
+
+203
+00:07:28,041 --> 00:07:29,875
+Pause the video, and begin now.
+
+204
+00:07:45,425 --> 00:07:46,300
+Quick check.
+
+205
+00:07:46,850 --> 00:07:49,196
+What are the method and the path in a request?
+
+206
+00:07:49,746 --> 00:07:52,456
+What does a four oh four mean, and who made the mistake?
+
+207
+00:07:53,006 --> 00:07:56,142
+What is the difference between a four hundred and a five hundred?
+
+208
+00:07:56,692 --> 00:08:00,169
+Which method creates something, and which status code confirms it?
+
+209
+00:08:00,719 --> 00:08:03,317
+Objective covered: M C zero eight,
+
+210
+00:08:03,317 --> 00:08:05,151
+objective two: requests,
+
+211
+00:08:05,151 --> 00:08:05,915
+responses,
+
+212
+00:08:05,915 --> 00:08:06,297
+rest,
+
+213
+00:08:06,297 --> 00:08:07,290
+status codes,
+
+214
+00:08:07,290 --> 00:08:08,207
+and jay son.
+
+215
+00:08:08,757 --> 00:08:10,826
+Pause the video, and answer out loud.
+
+216
+00:08:21,376 --> 00:08:27,200
+Next: testing endpoints like a pro, with curl options, headers, timing, and API clients.
+
+217
+00:08:27,750 --> 00:08:31,078
+If this helped, like, share and subscribe, so you do not miss it.
