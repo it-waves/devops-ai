@@ -1,0 +1,20 @@
+Install the lab (needs an Ubuntu virtual machine with root and a JDK):
+  sudo apt install -y openjdk-21-jdk-headless      # skip if jar --version already works
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab84.sh /usr/local/sbin/
+  source shortcuts84.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab84: the orders service, build.sh, run-orders.sh, orders.env and TASKS.txt
+  lab check               # six FAIL lines at the start; your goal is six PASS lines
+  lab down                # cleanup when finished
+Without the shortcut, use: sudo lab84.sh up | check | down
+Work inside /opt/lab84 (also written in TASKS.txt). Run sh build.sh, then sh run-orders.sh, and keep going until it prints OK. The log is logs/orders.log.
+Your six checks:
+  1 sh build.sh passes (the unit tests are green)
+  2 the jar has a Main-Class
+  3 ORDERS_PORT in orders.env is a number
+  4 the heap limit in orders.env is 64 MB or more
+  5 sh run-orders.sh prints OK
+  6 report.txt in /opt/lab84: four lines covering the test, the manifest, the port and the heap
+Method for every fault: symptom, cause, fix one thing, verify. After each fix run again: the next symptom is the next clue.
+Cleanup proof: lab down, then ls /opt/lab84 (no such folder), ls /opt | grep -c lab84 (0), sudo rm /usr/local/sbin/lab84.sh, ls /usr/local/sbin | wc -l (0), pgrep -c java (0).
+Run it only in your own virtual machine. Write your full report from report_template.md in this folder.

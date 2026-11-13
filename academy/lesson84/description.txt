@@ -1,0 +1,28 @@
+Lesson 84 of the DevOps Engineering Bootcamp, the mastery lab for Java Fundamentals for DevOps. Release 1.4 of the CloudCart orders service will not ship, and you prove everything you learned in the last eight lessons. A lab builds the broken release with four hidden faults: a failing unit test, a jar with no main class, a port written in letters instead of a number, and a heap limit that is too small. A checker prints pass or fail for six checks. You fix the first fault live with me on a real Ubuntu machine, then you fix the other three yourself, write a short report file, and finish with a cleanup proof that nothing is left behind. The method is the same every time: read the symptom, find the cause, change one thing, and prove it.
+
+Chapters
+0:00 The release will not ship
+0:26 The scenario
+1:09 Get the lab
+2:09 Start the lab
+2:52 Four notes per fault
+3:11 Fault 1 live: failing test
+4:38 The report
+5:10 Your three faults
+6:00 Cleanup with proof
+6:54 Pass or fail rubric
+7:21 Your turn
+8:06 Quick check
+
+Objectives covered: the mastery evidence for MC09 Java Fundamentals for DevOps (building on objectives one to eight: JDK and JVM, compile and run, class path and configuration, startup flags, JAR and WAR, stack traces and logs, tests and build outputs, and diagnosing version, memory, port and class path failures)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab84.sh and shortcuts84.sh) and academy/lesson84 (INSTALL.txt and report_template.md). Install with: sudo install -m 755 lab84.sh /usr/local/sbin/ then load the short name with: source shortcuts84.sh, and run lab up, lab check and lab down (without the shortcut, use sudo lab84.sh up, check, down). You need an Ubuntu virtual machine with root and a JDK (for example: sudo apt install openjdk-21-jdk-headless). The lab writes the orders service, its build script and its launcher into /opt/lab84; lab down removes the folder. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with OpenJDK 21, run in a private mount and network setup on the recording computer. The scenario, report, hints, rubric, your turn and quiz screens are labelled illustrations, not captures. I fixed only the first fault live, and the other three are left to you. The lab was run end to end before this lesson: it fails 0 of 6 at the start, passes 6 of 6 after a reference solution, and lab down leaves nothing behind. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. File names are invented, and lab is a short name I made for sudo lab84.sh. Typing is timed to the narration. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Diagnose Java Errors: Version, Memory, Port, Classpath https://youtu.be/mFfJaIde5eo
+Next: the next masterclass, Maven.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #java #troubleshooting #jar #devopsbootcamp
