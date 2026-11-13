@@ -1,0 +1,26 @@
+Lesson 74 of the DevOps Engineering Bootcamp, the eighth lesson of the Application Architecture and APIs masterclass. A customer taps one button and a second later the products appear. But what really happened in that second? Here you draw CloudCart, the tiny shop from the last lessons, one part at a time: the browser, a web service on port 8080 that hands over the page, an API service on port 5000 that holds the rules and the data access, and a database that is just one file, so it has no port. You follow one request through seven steps, then prove it with real commands: you check which ports are listening, ask each layer for one answer, send a request with a label, and find that same label in two diaries, web.log and api.log. You stop only the API on purpose and see exactly what a customer would see: a page that loads, with no products. That gives you the method of fault isolation: start from the symptom, ask one layer at a time, and the first layer that fails is your suspect. You finish with a lab, a checker, a pass or fail rubric and your turn.
+
+Chapters
+0:00 One tap, four parts
+0:29 Draw the shop
+1:44 Check the parts
+2:35 Trace one request
+4:22 Which layer broke?
+5:34 Putting it together
+6:20 Your lab task
+7:25 Pass or fail rubric
+7:51 Your turn
+8:32 Quick check
+
+Objectives covered: MC08-O08 Draw CloudCart architecture and trace a request through it.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab74.sh and shortcuts74.sh) and academy/lesson74 (INSTALL.txt). Install with: sudo install -m 755 lab74.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts74.sh (without it, use sudo lab74.sh up, check, down). You need an Ubuntu virtual machine with root, python3 and curl. It uses ports 5000 and 8080 on 127.0.0.1. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount and network setup on the recording computer. CloudCart is a tiny teaching app written for this course, using Python and an SQLite file, not a production system. The architecture drawing and the summary cards are labelled illustrations, not captures. In a real browser the page itself would call the API; in this lesson curl plays the browser so you can see each step and its log line. The web service and the API each keep a simple diary, a format made for this course. The lab was run end to end before this lesson: it starts with all six checks failing, doing the tasks makes all six pass, and lab down leaves nothing behind. Your own run is unverified until you do it. The lab file names are invented, and lab is a short name I made for sudo lab74.sh. Typing is timed to the narration. The narration is synthetic speech.
+
+Previous lesson: health checks, readiness, logs and metrics https://youtu.be/MYhGuDPEd3A
+Next lesson: the Application Architecture and APIs mastery lesson, fix a broken shop on your own.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #architecture #api #requesttracing #troubleshooting #microservices #devopsbootcamp

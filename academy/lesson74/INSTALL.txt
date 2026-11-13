@@ -1,0 +1,18 @@
+Install the lab (needs an Ubuntu virtual machine with root, python3 and curl):
+  sudo apt install -y python3 curl    # skip if already installed
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab74.sh /usr/local/sbin/
+  source shortcuts74.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab74 and starts CloudCart: web service on 127.0.0.1:8080, API on 127.0.0.1:5000
+  lab check               # six FAIL lines at the start; your goal is six PASS lines
+  lab down                # stops the app and removes /opt/lab74
+Without the shortcut, use: sudo lab74.sh up | check | down | status
+Your mission, working inside /opt/lab74 (do not edit api.py or web.py):
+  1. save the listening ports:  ss -ltn > parts.txt
+  2. with the shop healthy, ask each layer:  ./layers.sh > layers-up.txt
+  3. trace one request: send  curl -s -H 'X-Request-Id: lab-74' localhost:8080 > /dev/null  and  curl -s -H 'X-Request-Id: lab-74' localhost:5000/api/products  then  grep lab-74 web.log api.log > trace.txt
+  4. break only the API:  ./api.sh stop  then  ./layers.sh > layers-down.txt
+  5. write in answers.txt three lines:  page: web   data: api   rows: database
+  6. start the API again:  ./api.sh start
+Commands you will use: ss -ltn, curl -s URL, curl -s -H 'Name: value' URL, grep, ./layers.sh, ./api.sh stop|start
+Run it only in your own virtual machine. It uses ports 5000 and 8080 on 127.0.0.1 and creates only /opt/lab74. Remove the installed script with: sudo rm /usr/local/sbin/lab74.sh

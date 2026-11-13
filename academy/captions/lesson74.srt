@@ -1,0 +1,823 @@
+1
+00:00:00,500 --> 00:00:01,994
+A customer taps one button,
+
+2
+00:00:01,994 --> 00:00:04,153
+and a second later the products appear.
+
+3
+00:00:04,153 --> 00:00:06,367
+But what really happened in that second?
+
+4
+00:00:06,917 --> 00:00:07,552
+Somewhere,
+
+5
+00:00:07,552 --> 00:00:09,013
+a page was handed over,
+
+6
+00:00:09,013 --> 00:00:10,346
+a question was asked,
+
+7
+00:00:10,346 --> 00:00:11,363
+a file was read,
+
+8
+00:00:11,363 --> 00:00:12,887
+and an answer came back.
+
+9
+00:00:12,887 --> 00:00:14,221
+Four different parts,
+
+10
+00:00:14,221 --> 00:00:15,301
+working together.
+
+11
+00:00:15,851 --> 00:00:17,686
+Today you draw the whole shop,
+
+12
+00:00:17,686 --> 00:00:18,481
+part by part.
+
+13
+00:00:18,481 --> 00:00:21,784
+Then you follow one single request through every part,
+
+14
+00:00:21,784 --> 00:00:23,680
+and you find it in the diaries.
+
+15
+00:00:24,230 --> 00:00:27,345
+And when something breaks, you will know which part to ask first.
+
+16
+00:00:29,395 --> 00:00:34,963
+Let us draw CloudCart, one part at a time. First, the customer, and the browser they use.
+
+17
+00:00:35,513 --> 00:00:37,706
+The first server is the web service,
+
+18
+00:00:37,706 --> 00:00:39,534
+on port eight thousand eighty.
+
+19
+00:00:39,534 --> 00:00:41,849
+Its only job is to hand over the page.
+
+20
+00:00:42,399 --> 00:00:43,822
+The second is the API,
+
+21
+00:00:43,822 --> 00:00:45,245
+on port five thousand.
+
+22
+00:00:45,245 --> 00:00:47,251
+It holds the rules of the shop,
+
+23
+00:00:47,251 --> 00:00:50,420
+and it is the only one allowed to touch the data.
+
+24
+00:00:50,970 --> 00:00:54,508
+And behind the API sits one file: shop dot D B.
+
+25
+00:00:54,508 --> 00:00:56,089
+That is the database.
+
+26
+00:00:56,089 --> 00:00:56,616
+A file,
+
+27
+00:00:56,616 --> 00:00:57,594
+not a server,
+
+28
+00:00:57,594 --> 00:00:58,949
+so it has no port.
+
+29
+00:00:59,499 --> 00:01:00,950
+Now trace one request.
+
+30
+00:01:00,950 --> 00:01:03,455
+Step one: the customer opens the shop,
+
+31
+00:01:03,455 --> 00:01:06,752
+and the browser asks the web service for the page.
+
+32
+00:01:07,302 --> 00:01:10,220
+Step two: the web service sends the page back.
+
+33
+00:01:10,220 --> 00:01:12,313
+The page carries a small program,
+
+34
+00:01:12,313 --> 00:01:14,406
+and it knows where the API lives.
+
+35
+00:01:14,956 --> 00:01:19,778
+Step three: that program, running in the browser, asks the API for the products.
+
+36
+00:01:20,328 --> 00:01:22,760
+Step four: the API asks the database.
+
+37
+00:01:23,310 --> 00:01:26,143
+Step five: the database returns the rows.
+
+38
+00:01:26,143 --> 00:01:29,045
+Step six: the API turns them into jay son,
+
+39
+00:01:29,045 --> 00:01:31,118
+and sends them to the browser.
+
+40
+00:01:31,668 --> 00:01:36,169
+Step seven: the browser draws the product cards. The customer sees the shop.
+
+41
+00:01:36,719 --> 00:01:41,946
+Seven steps, four parts. And one label, a request I D, can follow the whole way.
+
+42
+00:01:44,496 --> 00:01:47,611
+Go into the shop. Type: CD, cloud cart.
+
+43
+00:01:48,161 --> 00:01:51,211
+Start it. Type: dot slash start dot S H.
+
+44
+00:01:51,761 --> 00:01:53,205
+A drawing is only a claim.
+
+45
+00:01:53,205 --> 00:01:55,481
+Let us check it against the real machine.
+
+46
+00:01:55,481 --> 00:01:56,924
+Which ports are listening?
+
+47
+00:01:57,474 --> 00:01:59,458
+Type: S S, dash L T N.
+
+48
+00:02:01,508 --> 00:02:02,184
+Two lines.
+
+49
+00:02:02,184 --> 00:02:04,213
+Port five thousand is the API.
+
+50
+00:02:04,213 --> 00:02:07,324
+Port eight thousand eighty is the web service.
+
+51
+00:02:07,324 --> 00:02:09,286
+And no port for the database,
+
+52
+00:02:09,286 --> 00:02:11,044
+because it is just a file.
+
+53
+00:02:11,594 --> 00:02:14,386
+A second check: one answer from each layer.
+
+54
+00:02:14,386 --> 00:02:18,995
+A small script called layers dot S H asks the web service for the page,
+
+55
+00:02:18,995 --> 00:02:20,618
+and the API for the data.
+
+56
+00:02:21,168 --> 00:02:23,472
+Type: dot slash layers dot S H.
+
+57
+00:02:25,522 --> 00:02:27,826
+Web, two hundred. The page is served.
+
+58
+00:02:28,376 --> 00:02:33,411
+API, two hundred. The data is served. Two layers, two answers, both healthy.
+
+59
+00:02:35,461 --> 00:02:38,576
+Go into the shop. Type: CD, cloud cart.
+
+60
+00:02:39,126 --> 00:02:42,176
+Start it. Type: dot slash start dot S H.
+
+61
+00:02:42,726 --> 00:02:44,395
+Now we trace one request,
+
+62
+00:02:44,395 --> 00:02:44,995
+for real.
+
+63
+00:02:44,995 --> 00:02:46,263
+We give it a label,
+
+64
+00:02:46,263 --> 00:02:46,930
+trace one,
+
+65
+00:02:46,930 --> 00:02:48,532
+so we can find it later.
+
+66
+00:02:48,532 --> 00:02:51,068
+Step one: the customer opens the page.
+
+67
+00:02:51,618 --> 00:02:52,405
+Type: curl,
+
+68
+00:02:52,405 --> 00:02:52,905
+dash s,
+
+69
+00:02:52,905 --> 00:02:53,978
+dash capital H,
+
+70
+00:02:53,978 --> 00:02:54,694
+in quotes,
+
+71
+00:02:54,694 --> 00:02:55,695
+X request I D,
+
+72
+00:02:55,695 --> 00:02:56,124
+colon,
+
+73
+00:02:56,124 --> 00:02:56,840
+trace one,
+
+74
+00:02:56,840 --> 00:02:57,198
+then,
+
+75
+00:02:57,198 --> 00:02:58,414
+on the next line,
+
+76
+00:02:58,414 --> 00:02:59,201
+local host,
+
+77
+00:02:59,201 --> 00:02:59,630
+colon,
+
+78
+00:02:59,630 --> 00:03:01,204
+eight thousand eighty,
+
+79
+00:03:01,204 --> 00:03:03,564
+redirect to slash dev slash null.
+
+80
+00:03:05,914 --> 00:03:06,926
+Nothing printed,
+
+81
+00:03:06,926 --> 00:03:08,888
+because we threw the page away.
+
+82
+00:03:08,888 --> 00:03:12,367
+We only wanted the web service to write its diary line.
+
+83
+00:03:12,367 --> 00:03:15,593
+Step three: the page asks the API for the products,
+
+84
+00:03:15,593 --> 00:03:16,858
+with the same label.
+
+85
+00:03:17,408 --> 00:03:18,243
+Type: curl,
+
+86
+00:03:18,243 --> 00:03:18,774
+dash s,
+
+87
+00:03:18,774 --> 00:03:19,912
+dash capital H,
+
+88
+00:03:19,912 --> 00:03:20,671
+in quotes,
+
+89
+00:03:20,671 --> 00:03:21,733
+X request I D,
+
+90
+00:03:21,733 --> 00:03:22,188
+colon,
+
+91
+00:03:22,188 --> 00:03:22,947
+trace one,
+
+92
+00:03:22,947 --> 00:03:23,326
+then,
+
+93
+00:03:23,326 --> 00:03:24,616
+on the next line,
+
+94
+00:03:24,616 --> 00:03:25,450
+local host,
+
+95
+00:03:25,450 --> 00:03:25,905
+colon,
+
+96
+00:03:25,905 --> 00:03:26,968
+five thousand,
+
+97
+00:03:26,968 --> 00:03:28,864
+slash API slash products.
+
+98
+00:03:31,214 --> 00:03:33,952
+Step six: the data comes back as jay son,
+
+99
+00:03:33,952 --> 00:03:35,621
+a list of three products.
+
+100
+00:03:35,621 --> 00:03:38,425
+That is what the browser turns into cards.
+
+101
+00:03:38,975 --> 00:03:40,082
+Now the proof.
+
+102
+00:03:40,082 --> 00:03:42,216
+Both services keep a diary.
+
+103
+00:03:42,216 --> 00:03:44,271
+Search both for our label.
+
+104
+00:03:44,271 --> 00:03:45,141
+Type: grep,
+
+105
+00:03:45,141 --> 00:03:45,931
+trace one,
+
+106
+00:03:45,931 --> 00:03:46,880
+web dot log,
+
+107
+00:03:46,880 --> 00:03:47,828
+API dot log.
+
+108
+00:03:49,878 --> 00:03:53,612
+First line: the web service. It served the page for trace one.
+
+109
+00:03:54,162 --> 00:03:55,657
+Second line: the API.
+
+110
+00:03:55,657 --> 00:03:58,649
+It served the data for the same trace one.
+
+111
+00:03:58,649 --> 00:03:59,361
+One label,
+
+112
+00:03:59,361 --> 00:04:03,420
+two diaries: we followed one request across two services.
+
+113
+00:04:04,470 --> 00:04:10,102
+And the data itself lives in one place. Type: python three, show D B dot P Y.
+
+114
+00:04:12,152 --> 00:04:12,874
+Three rows.
+
+115
+00:04:12,874 --> 00:04:14,120
+The API read these,
+
+116
+00:04:14,120 --> 00:04:17,398
+and turned them into the jay son the customer saw.
+
+117
+00:04:17,398 --> 00:04:20,152
+That is the end of the road: the database.
+
+118
+00:04:22,202 --> 00:04:25,317
+Go into the shop. Type: CD, cloud cart.
+
+119
+00:04:25,867 --> 00:04:28,917
+Start it. Type: dot slash start dot S H.
+
+120
+00:04:29,467 --> 00:04:31,017
+When the shop breaks,
+
+121
+00:04:31,017 --> 00:04:33,601
+a customer only says: it is broken.
+
+122
+00:04:33,601 --> 00:04:35,963
+Your job is to find which layer.
+
+123
+00:04:35,963 --> 00:04:36,184
+So,
+
+124
+00:04:36,184 --> 00:04:37,291
+ask each layer.
+
+125
+00:04:37,291 --> 00:04:39,579
+Type: dot slash layers dot S H.
+
+126
+00:04:41,629 --> 00:04:47,283
+Both two hundred. Healthy. Now we break one layer on purpose. We stop only the API.
+
+127
+00:04:47,833 --> 00:04:50,393
+Type: dot slash API dot S H, stop.
+
+128
+00:04:51,943 --> 00:04:56,017
+Ask each layer again. Type: dot slash layers dot S H.
+
+129
+00:04:58,067 --> 00:05:00,521
+Web: still two hundred. The page loads.
+
+130
+00:05:01,071 --> 00:05:02,517
+API: zero zero zero.
+
+131
+00:05:02,517 --> 00:05:03,964
+Nobody is listening.
+
+132
+00:05:03,964 --> 00:05:07,146
+The customer sees a page with an empty shop.
+
+133
+00:05:07,146 --> 00:05:09,967
+And now you know exactly where to look.
+
+134
+00:05:10,517 --> 00:05:12,570
+That is the skill: a symptom,
+
+135
+00:05:12,570 --> 00:05:14,907
+then one question for each layer,
+
+136
+00:05:14,907 --> 00:05:18,234
+and the first layer that fails is your suspect.
+
+137
+00:05:18,234 --> 00:05:19,651
+Start the API again.
+
+138
+00:05:19,651 --> 00:05:21,633
+Type: dot slash API dot S H,
+
+139
+00:05:21,633 --> 00:05:22,058
+start.
+
+140
+00:05:23,608 --> 00:05:27,427
+And ask once more. Type: dot slash layers dot S H.
+
+141
+00:05:29,477 --> 00:05:32,101
+Both layers answer. The shop is whole again.
+
+142
+00:05:34,151 --> 00:05:37,308
+Let us put it together: a map, a path, and a method.
+
+143
+00:05:37,858 --> 00:05:41,634
+The map: a browser, a web service, an API, and a database.
+
+144
+00:05:42,184 --> 00:05:45,231
+The path: the page comes from the web service,
+
+145
+00:05:45,231 --> 00:05:47,086
+the data comes from the API,
+
+146
+00:05:47,086 --> 00:05:49,139
+and the API reads the database.
+
+147
+00:05:49,689 --> 00:05:51,564
+The label: one request I D,
+
+148
+00:05:51,564 --> 00:05:53,092
+written in each diary,
+
+149
+00:05:53,092 --> 00:05:55,940
+joins the pieces of one customer's visit.
+
+150
+00:05:56,490 --> 00:05:58,477
+The method: when something breaks,
+
+151
+00:05:58,477 --> 00:06:00,464
+start from what the customer sees,
+
+152
+00:06:00,464 --> 00:06:02,100
+and ask one layer at a time.
+
+153
+00:06:02,650 --> 00:06:05,970
+Page does not load: suspect the web service.
+
+154
+00:06:05,970 --> 00:06:09,290
+Page loads but no products: suspect the API.
+
+155
+00:06:09,290 --> 00:06:12,912
+API answers but not ready: suspect the database.
+
+156
+00:06:13,462 --> 00:06:18,859
+And when it is slow, read the metrics. A diagram you can trace is a system you can fix.
+
+157
+00:06:20,909 --> 00:06:23,682
+Your task, in your own Ubuntu virtual machine.
+
+158
+00:06:24,232 --> 00:06:26,868
+The lab is lab seventy-four dot S H,
+
+159
+00:06:26,868 --> 00:06:30,602
+in the academy slash lab folder of git hub dot com,
+
+160
+00:06:30,602 --> 00:06:32,066
+slash it dash waves,
+
+161
+00:06:32,066 --> 00:06:33,750
+slash dev ops dash A I.
+
+162
+00:06:33,750 --> 00:06:35,434
+Install it like before,
+
+163
+00:06:35,434 --> 00:06:36,239
+run lab up,
+
+164
+00:06:36,239 --> 00:06:39,827
+and work inside slash opt slash lab seventy-four.
+
+165
+00:06:40,377 --> 00:06:44,068
+One: list the listening ports, and save them in parts dot text.
+
+166
+00:06:44,618 --> 00:06:46,432
+Two: with the shop healthy,
+
+167
+00:06:46,432 --> 00:06:50,868
+run layers dot S H and save the output in layers dash up dot text.
+
+168
+00:06:51,418 --> 00:06:56,834
+Three: send one request with the I D lab dash seventy-four to the web service,
+
+169
+00:06:56,834 --> 00:06:58,292
+and again to the API.
+
+170
+00:06:58,292 --> 00:07:00,028
+Then search both diaries,
+
+171
+00:07:00,028 --> 00:07:02,597
+and save the lines in trace dot text.
+
+172
+00:07:03,147 --> 00:07:04,555
+Four: stop the API,
+
+173
+00:07:04,555 --> 00:07:06,407
+run layers dot S H again,
+
+174
+00:07:06,407 --> 00:07:10,038
+and save the output in layers dash down dot text.
+
+175
+00:07:10,588 --> 00:07:12,221
+Five: in answers dot text,
+
+176
+00:07:12,221 --> 00:07:14,231
+write which part gives the page,
+
+177
+00:07:14,231 --> 00:07:15,864
+which part gives the data,
+
+178
+00:07:15,864 --> 00:07:17,372
+and where the rows live.
+
+179
+00:07:17,922 --> 00:07:23,447
+Six: start the API again, so the shop is whole. Then run lab check. Six pass lines.
+
+180
+00:07:25,497 --> 00:07:27,481
+Six points, and you need all six.
+
+181
+00:07:28,031 --> 00:07:29,866
+The checker shows six pass lines.
+
+182
+00:07:30,416 --> 00:07:33,274
+You can draw the four parts, and name each one's job.
+
+183
+00:07:33,824 --> 00:07:36,726
+You can follow one request I D through two diaries.
+
+184
+00:07:37,276 --> 00:07:40,369
+You can say which layer is broken from what the customer sees.
+
+185
+00:07:40,919 --> 00:07:43,522
+You can explain why the database has no port.
+
+186
+00:07:44,072 --> 00:07:46,802
+You ran lab down, and nothing is left listening.
+
+187
+00:07:47,352 --> 00:07:48,974
+To pass, you need all six.
+
+188
+00:07:51,024 --> 00:07:53,861
+Your turn, in your own Ubuntu virtual machine.
+
+189
+00:07:54,411 --> 00:07:56,630
+One: install the lab, and run lab up.
+
+190
+00:07:57,180 --> 00:07:59,399
+Two: list the ports, and ask each layer.
+
+191
+00:07:59,949 --> 00:08:04,258
+Three: send a request with your own I D, and find it in both diaries.
+
+192
+00:08:04,808 --> 00:08:07,944
+Four: stop the API, and ask each layer again.
+
+193
+00:08:08,494 --> 00:08:11,566
+Five: write your answers, and start the API again.
+
+194
+00:08:12,116 --> 00:08:14,399
+Six: run lab check, then lab down.
+
+195
+00:08:14,949 --> 00:08:16,783
+Pause the video, and begin now.
+
+196
+00:08:32,333 --> 00:08:33,208
+Quick check.
+
+197
+00:08:33,758 --> 00:08:36,851
+Name the four parts of CloudCart, and what each one does.
+
+198
+00:08:37,401 --> 00:08:39,300
+What does a request I D let you do?
+
+199
+00:08:39,850 --> 00:08:43,711
+The page loads, but no products show. Which layer do you suspect?
+
+200
+00:08:44,261 --> 00:08:46,288
+Why does the database have no port?
+
+201
+00:08:46,838 --> 00:08:49,081
+Objective covered: M C zero eight,
+
+202
+00:08:49,081 --> 00:08:51,192
+objective eight: draw CloudCart,
+
+203
+00:08:51,192 --> 00:08:53,238
+and trace a request through it.
+
+204
+00:08:53,788 --> 00:08:55,857
+Pause the video, and answer out loud.
+
+205
+00:09:06,407 --> 00:09:11,506
+Next: the M C zero eight mastery lesson, where you fix a broken shop on your own.
+
+206
+00:09:12,056 --> 00:09:15,384
+If this helped, like, share and subscribe, so you do not miss it.
