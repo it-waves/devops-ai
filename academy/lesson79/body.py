@@ -1,0 +1,86 @@
+RB = 'REAL RECORDING  ·  Ubuntu 24.04'
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('h1', "The service is slow. Someone says: it only has a small heap. Someone else says: it is the wrong port. Nobody knows. Everyone guesses."),
+  c('h2', "You do not have to guess. A running Java process will tell you exactly how it was started, and what settings it is really using."),
+  c('h3', "Today you learn to ask it. Four questions: is it running, how was it started, what settings does it use, and what is hidden."),
+  c('h4', "You will use three small tools: J P S, proc, and J C M D."),
+ ]),
+ ('ideas', [
+  c('u1', "Four questions, four tools. All of them read a live process."),
+  c('u2', "One. Is it running? J P S lists Java processes. P grep finds them too."),
+  c('u3', "Two. How was it started? The proc folder holds the real command line. J C M D shows the arguments."),
+  c('u4', "Three. What settings does it use? J C M D, V M flags, and V M system properties."),
+  c('u5', "Four. What is hidden? Defaults chosen by the machine, and the Java tool options variable, which is added without anyone typing it."),
+  c('u6', "Three flag families. Dash capital X for the J V M. Dash X X for tuning. Dash capital D for your program."),
+ ]),
+ ('inspect', [
+  k('i0', "Go to the shop folder. Type: C D, shop."),
+  k('i1', "Start a small server in the background, with a heap limit, and two properties. Type: java, dash X M X, two five six M, dash X M S, sixty-four M, dash D server dot port equals nine zero nine zero, dash D currency equals E U R, server, and an ampersand."),
+  c('i1b', "It prints one line and keeps running. That is a service: it does not exit."),
+  k('i2', "Is it running? Type: J P S, dash L."),
+  c('i2b', "J P S lists Java processes by process I D, and main class. It also lists itself, because J P S is a Java program too."),
+  k('i3', "Another way. Type: P grep, dash A, java."),
+  c('i3b', "P grep with dash A prints the process I D and the full command line, flags included."),
+  k('i4', "Save the process I D in a variable. Type: P I D equals, dollar, open paren, P grep, dash F, server, close paren."),
+  k('i5', "Read the real command line from the proc folder. Type: T R, quote, backslash zero, quote, space, quote, space, quote, less than, slash proc, slash, dollar P I D, slash, command line, then a semicolon, and echo."),
+  c('i5b', "The kernel keeps it, with null bytes between words. T R turns them into spaces. This is the truth about how it started."),
+  k('i6', "Ask the J V M itself. Type: J C M D, dollar P I D, V M dot command line."),
+  c('i6b', "The J V M flags, the main class, and the class path. Notice the two dash D properties, and the heap flags."),
+ ]),
+ ('settings', [
+  k('s0', "Go to the shop. Type: C D, shop."),
+  k('s1', "Start the server again, quietly. Type: java, dash X M X, two five six M, dash X M S, sixty-four M, dash D server dot port equals nine zero nine zero, dash D currency equals E U R, server, then redirect output to dev null, and an ampersand."),
+  k('s2', "What settings is it really using? Type: J C M D, server, V M dot flags, then T R, then grep for max heap size, initial heap size, and use G one G C."),
+  c('s2b', "Max heap size is two hundred fifty-six megabytes, in bytes. Initial heap, sixty-four. And the garbage collector is G one. These are the values in use right now, not what somebody intended."),
+  k('s3', "And the properties. Type: J C M D, server, V M dot system properties, then grep for server dot port, and currency."),
+  c('s3b', "Both properties are there. Your program can read them. That is how a dash D flag reaches your code."),
+  k('s4', "What if nobody sets a heap limit? Type: java, dash X X plus print flags final, dash version, then grep max heap size."),
+  c('s4b', "The machine picked a default: a quarter of the memory. A container or a small virtual machine changes this number. Defaults depend on where Java runs."),
+  k('s5', "One more hidden setting. Type: Java tool options equals dash X M X, one hundred M, java, dash version, then head, dash N, one."),
+  c('s5b', "Picked up Java tool options. Java adds it to every launch, silently. If a service behaves strangely, check that variable."),
+ ]),
+ ('models', [
+  c('o1', "Three flag families, and one hidden source."),
+  c('o2', "Dash capital X: memory and J V M behavior. Dash X M X is the biggest heap."),
+  c('o3', "Dash capital D: a property for your program. Written before the class name."),
+  c('o4', "Dash X X: tuning, like the garbage collector. Use defaults until you can measure."),
+  c('o5', "And when the command line looks innocent, check Java tool options. Inspect first, change second."),
+ ]),
+ ('task', [
+  c('k1', "Your lab task. Lab seventy-nine starts a small server for you to inspect. Lab check judges your work."),
+  c('k2', "It lives at git hub dot com, slash it dash waves, slash dev ops dash A I, in academy, lab, lab seventy-nine dot S H."),
+  c('k3', "One: start the server with dash X M X, one nine two M, server dot port nine one nine one, and mode equals prod. Leave it running."),
+  c('k4', "Two: save its real command line from proc into command line dot text."),
+  c('k5', "Three: save the J V M flags, with J C M D, into flags dot text."),
+  c('k6', "Four: save the mode property into property dot text."),
+  c('k7', "Five: answers dot text, three lines. Heap flag: dash X M X. Property flag: dash D. Inspect tool: J C M D."),
+  c('k8', "Install, then lab up, lab check, and lab down. Lab down stops your server too."),
+ ]),
+ ('rubric', [
+  c('q1', "Pass or fail. You need all six."),
+  c('q2', "Five pass lines in lab check."), c('q3', "You can find the process I D of a Java service."),
+  c('q4', "You can read the true command line."), c('q5', "You can name the three flag families."),
+  c('q6', "You can show settings from a live process."), c('q7', "lab down, process stopped, nothing left behind."), c('q8', "To pass, all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine."),
+  c('z2', "One: lab up, and read the task file."),
+  c('z3', "Two: start the server with the flags from the task."),
+  c('z4', "Three: save its command line, flags, and property."),
+  c('z5', "Four: also try Java tool options, and compare."),
+  c('z6', "Five: write your answers, and lab check."),
+  c('z7', "Six: lab down, and prove nothing is left."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "Which tool lists Java processes?"), c('f13', "Where is the real command line of a process?"),
+  c('f14', "Which flag sets the maximum heap? Which sets a property?"), c('f15', "What is Java tool options?"),
+  c('f16', "Objective covered: M C zero nine, objective four."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next: jar versus war packaging."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'h4': 0.5, 'u6': 0.5, 'i6b': 0.5, 's5b': 0.5, 'o5': 0.5, 'k8': 0.5, 'q8': 0.5, 'z8': 14.0, 'f17': 10.0}
+CHAP = {'ideas': 'Four questions', 'inspect': 'Find the process', 'settings': 'Read its real settings', 'models': 'Three flag families', 'task': 'Your lab task', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

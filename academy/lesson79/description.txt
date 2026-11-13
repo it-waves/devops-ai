@@ -1,0 +1,25 @@
+Lesson 79 of the DevOps Engineering Bootcamp, the fourth lesson of Java Fundamentals for DevOps. When a Java service is slow or misbehaving, you do not have to guess how it was started: the running process will tell you. Four questions, four tools. Is it running? jps and pgrep. How was it started? The real command line in /proc, and jcmd VM.command_line. What settings is it using? jcmd VM.flags and jcmd VM.system_properties. What is hidden? Defaults chosen by the machine, and the JAVA_TOOL_OPTIONS variable that Java adds silently. On a real Ubuntu machine you start a small server with a heap limit and two properties, find it, read its true command line, read the flags and properties it is actually using, see the default maximum heap when nobody sets one, and watch "Picked up JAVA_TOOL_OPTIONS". You learn the three flag families: -X for the JVM, -D for your program, -XX for tuning. Then you do the lab task yourself: six points, all six must pass.
+
+Chapters
+0:00 Stop guessing, ask the process
+0:31 Four questions
+1:13 Find the process
+2:50 Read its real settings
+4:31 Three flag families
+4:59 Your lab task
+5:56 Pass or fail rubric
+6:19 Your turn
+6:59 Quick check
+
+Objectives covered: MC09-O04 (inspect Java process startup flags and runtime settings)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab79.sh and shortcuts79.sh) and academy/lesson79 (INSTALL.txt). Install with: sudo install -m 755 lab79.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts79.sh (without it, use sudo lab79.sh up, check, down). You need an Ubuntu virtual machine with root and a JDK (for example: sudo apt install openjdk-21-jdk-headless). The lab writes a tiny server into /opt/lab79; lab down stops any Java process whose command line contains Server and removes the folder. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with OpenJDK 21, run in a private mount and network setup on the recording computer. The ideas, flag families, task, rubric and quiz screens are labelled illustrations, not captures. The default maximum heap shown depends on the recording computer's memory; yours will differ. jcmd works on processes of the same user (or root). The lab was run end to end before this lesson: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing behind. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. The server and file names are invented, and lab is a short name I made for sudo lab79.sh. Typing is timed to the narration. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Java Packages, Classpath, Dependencies and Configuration for DevOps https://youtu.be/HxnTXPdwmPs
+Next: JAR versus WAR packaging.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #java #jcmd #linux #troubleshooting #devopsbootcamp

@@ -1,0 +1,799 @@
+1
+00:00:00,500 --> 00:00:01,803
+The service is slow.
+
+2
+00:00:01,803 --> 00:00:04,344
+Someone says: it only has a small heap.
+
+3
+00:00:04,344 --> 00:00:06,951
+Someone else says: it is the wrong port.
+
+4
+00:00:06,951 --> 00:00:07,798
+Nobody knows.
+
+5
+00:00:07,798 --> 00:00:08,905
+Everyone guesses.
+
+6
+00:00:09,455 --> 00:00:10,882
+You do not have to guess.
+
+7
+00:00:10,882 --> 00:00:14,534
+A running Java process will tell you exactly how it was started,
+
+8
+00:00:14,534 --> 00:00:16,645
+and what settings it is really using.
+
+9
+00:00:17,195 --> 00:00:18,734
+Today you learn to ask it.
+
+10
+00:00:18,734 --> 00:00:20,510
+Four questions: is it running,
+
+11
+00:00:20,510 --> 00:00:21,635
+how was it started,
+
+12
+00:00:21,635 --> 00:00:23,174
+what settings does it use,
+
+13
+00:00:23,174 --> 00:00:24,299
+and what is hidden.
+
+14
+00:00:24,849 --> 00:00:29,115
+You will use three small tools: J P S, proc, and J C M D.
+
+15
+00:00:31,165 --> 00:00:34,856
+Four questions, four tools. All of them read a live process.
+
+16
+00:00:35,406 --> 00:00:40,483
+One. Is it running? J P S lists Java processes. P grep finds them too.
+
+17
+00:00:41,033 --> 00:00:41,321
+Two.
+
+18
+00:00:41,321 --> 00:00:42,691
+How was it started?
+
+19
+00:00:42,691 --> 00:00:45,863
+The proc folder holds the real command line.
+
+20
+00:00:45,863 --> 00:00:47,881
+J C M D shows the arguments.
+
+21
+00:00:48,431 --> 00:00:54,490
+Three. What settings does it use? J C M D, V M flags, and V M system properties.
+
+22
+00:00:55,040 --> 00:00:55,355
+Four.
+
+23
+00:00:55,355 --> 00:00:56,303
+What is hidden?
+
+24
+00:00:56,303 --> 00:00:58,260
+Defaults chosen by the machine,
+
+25
+00:00:58,260 --> 00:01:00,471
+and the Java tool options variable,
+
+26
+00:01:00,471 --> 00:01:02,997
+which is added without anyone typing it.
+
+27
+00:01:03,547 --> 00:01:05,118
+Three flag families.
+
+28
+00:01:05,118 --> 00:01:07,397
+Dash capital X for the J V M.
+
+29
+00:01:07,397 --> 00:01:08,969
+Dash X X for tuning.
+
+30
+00:01:08,969 --> 00:01:11,483
+Dash capital D for your program.
+
+31
+00:01:13,533 --> 00:01:16,520
+Go to the shop folder. Type: CD, shop.
+
+32
+00:01:17,070 --> 00:01:20,027
+Start a small server in the background,
+
+33
+00:01:20,027 --> 00:01:21,392
+with a heap limit,
+
+34
+00:01:21,392 --> 00:01:22,832
+and two properties.
+
+35
+00:01:22,832 --> 00:01:23,666
+Type: java,
+
+36
+00:01:23,666 --> 00:01:24,500
+dash X M X,
+
+37
+00:01:24,500 --> 00:01:25,638
+two five six M,
+
+38
+00:01:25,638 --> 00:01:26,472
+dash X M S,
+
+39
+00:01:26,472 --> 00:01:27,457
+sixty-four M,
+
+40
+00:01:27,457 --> 00:01:31,248
+dash D server dot port equals nine zero nine zero,
+
+41
+00:01:31,248 --> 00:01:33,447
+dash D currency equals E U R,
+
+42
+00:01:33,447 --> 00:01:33,978
+server,
+
+43
+00:01:33,978 --> 00:01:35,267
+and an ampersand.
+
+44
+00:01:35,817 --> 00:01:40,169
+It prints one line and keeps running. That is a service: it does not exit.
+
+45
+00:01:40,719 --> 00:01:43,471
+Is it running? Type: J P S, dash L.
+
+46
+00:01:44,021 --> 00:01:47,519
+J P S lists Java processes by process I D,
+
+47
+00:01:47,519 --> 00:01:48,768
+and main class.
+
+48
+00:01:48,768 --> 00:01:50,516
+It also lists itself,
+
+49
+00:01:50,516 --> 00:01:53,514
+because J P S is a Java program too.
+
+50
+00:01:54,064 --> 00:01:57,072
+Another way. Type: P grep, dash A, java.
+
+51
+00:01:57,622 --> 00:02:02,870
+P grep with dash A prints the process I D and the full command line, flags included.
+
+52
+00:02:03,420 --> 00:02:06,187
+Save the process I D in a variable.
+
+53
+00:02:06,187 --> 00:02:07,688
+Type: P I D equals,
+
+54
+00:02:07,688 --> 00:02:08,241
+dollar,
+
+55
+00:02:08,241 --> 00:02:09,111
+open paren,
+
+56
+00:02:09,111 --> 00:02:09,664
+P grep,
+
+57
+00:02:09,664 --> 00:02:10,217
+dash F,
+
+58
+00:02:10,217 --> 00:02:10,771
+server,
+
+59
+00:02:10,771 --> 00:02:11,719
+close paren.
+
+60
+00:02:12,269 --> 00:02:15,705
+Read the real command line from the proc folder.
+
+61
+00:02:15,705 --> 00:02:16,421
+Type: T R,
+
+62
+00:02:16,421 --> 00:02:16,851
+quote,
+
+63
+00:02:16,851 --> 00:02:17,924
+backslash zero,
+
+64
+00:02:17,924 --> 00:02:18,354
+quote,
+
+65
+00:02:18,354 --> 00:02:18,783
+space,
+
+66
+00:02:18,783 --> 00:02:19,213
+quote,
+
+67
+00:02:19,213 --> 00:02:19,643
+space,
+
+68
+00:02:19,643 --> 00:02:20,072
+quote,
+
+69
+00:02:20,072 --> 00:02:20,788
+less than,
+
+70
+00:02:20,788 --> 00:02:21,575
+slash proc,
+
+71
+00:02:21,575 --> 00:02:22,005
+slash,
+
+72
+00:02:22,005 --> 00:02:22,936
+dollar P I D,
+
+73
+00:02:22,936 --> 00:02:23,365
+slash,
+
+74
+00:02:23,365 --> 00:02:24,296
+command line,
+
+75
+00:02:24,296 --> 00:02:25,513
+then a semicolon,
+
+76
+00:02:25,513 --> 00:02:26,157
+and echo.
+
+77
+00:02:26,707 --> 00:02:28,005
+The kernel keeps it,
+
+78
+00:02:28,005 --> 00:02:29,953
+with null bytes between words.
+
+79
+00:02:29,953 --> 00:02:31,706
+T R turns them into spaces.
+
+80
+00:02:31,706 --> 00:02:34,238
+This is the truth about how it started.
+
+81
+00:02:34,788 --> 00:02:41,358
+Ask the J V M itself. Type: J C M D, dollar P I D, V M dot command line.
+
+82
+00:02:41,908 --> 00:02:42,952
+The J V M flags,
+
+83
+00:02:42,952 --> 00:02:43,931
+the main class,
+
+84
+00:02:43,931 --> 00:02:45,171
+and the class path.
+
+85
+00:02:45,171 --> 00:02:47,324
+Notice the two dash D properties,
+
+86
+00:02:47,324 --> 00:02:48,564
+and the heap flags.
+
+87
+00:02:50,614 --> 00:02:53,131
+Go to the shop. Type: CD, shop.
+
+88
+00:02:53,681 --> 00:02:55,521
+Start the server again,
+
+89
+00:02:55,521 --> 00:02:56,161
+quietly.
+
+90
+00:02:56,161 --> 00:02:57,041
+Type: java,
+
+91
+00:02:57,041 --> 00:02:57,921
+dash X M X,
+
+92
+00:02:57,921 --> 00:02:59,121
+two five six M,
+
+93
+00:02:59,121 --> 00:03:00,001
+dash X M S,
+
+94
+00:03:00,001 --> 00:03:01,041
+sixty-four M,
+
+95
+00:03:01,041 --> 00:03:05,041
+dash D server dot port equals nine zero nine zero,
+
+96
+00:03:05,041 --> 00:03:07,361
+dash D currency equals E U R,
+
+97
+00:03:07,361 --> 00:03:07,921
+server,
+
+98
+00:03:07,921 --> 00:03:10,561
+then redirect output to dev null,
+
+99
+00:03:10,561 --> 00:03:11,921
+and an ampersand.
+
+100
+00:03:12,471 --> 00:03:15,197
+What settings is it really using?
+
+101
+00:03:15,197 --> 00:03:16,354
+Type: J C M D,
+
+102
+00:03:16,354 --> 00:03:16,932
+server,
+
+103
+00:03:16,932 --> 00:03:18,089
+V M dot flags,
+
+104
+00:03:18,089 --> 00:03:18,832
+then T R,
+
+105
+00:03:18,832 --> 00:03:21,145
+then grep for max heap size,
+
+106
+00:03:21,145 --> 00:03:22,632
+initial heap size,
+
+107
+00:03:22,632 --> 00:03:24,119
+and use G one G C.
+
+108
+00:03:24,669 --> 00:03:27,995
+Max heap size is two hundred fifty-six megabytes,
+
+109
+00:03:27,995 --> 00:03:28,606
+in bytes.
+
+110
+00:03:28,606 --> 00:03:29,488
+Initial heap,
+
+111
+00:03:29,488 --> 00:03:30,235
+sixty-four.
+
+112
+00:03:30,235 --> 00:03:32,610
+And the garbage collector is G one.
+
+113
+00:03:32,610 --> 00:03:35,189
+These are the values in use right now,
+
+114
+00:03:35,189 --> 00:03:37,021
+not what somebody intended.
+
+115
+00:03:37,571 --> 00:03:39,033
+And the properties.
+
+116
+00:03:39,033 --> 00:03:40,110
+Type: J C M D,
+
+117
+00:03:40,110 --> 00:03:40,648
+server,
+
+118
+00:03:40,648 --> 00:03:42,648
+V M dot system properties,
+
+119
+00:03:42,648 --> 00:03:44,955
+then grep for server dot port,
+
+120
+00:03:44,955 --> 00:03:45,955
+and currency.
+
+121
+00:03:46,505 --> 00:03:48,084
+Both properties are there.
+
+122
+00:03:48,084 --> 00:03:49,722
+Your program can read them.
+
+123
+00:03:49,722 --> 00:03:52,393
+That is how a dash D flag reaches your code.
+
+124
+00:03:52,943 --> 00:03:55,379
+What if nobody sets a heap limit?
+
+125
+00:03:55,379 --> 00:03:56,191
+Type: java,
+
+126
+00:03:56,191 --> 00:03:58,553
+dash X X plus print flags final,
+
+127
+00:03:58,553 --> 00:03:59,513
+dash version,
+
+128
+00:03:59,513 --> 00:04:01,285
+then grep max heap size.
+
+129
+00:04:01,835 --> 00:04:05,260
+The machine picked a default: a quarter of the memory.
+
+130
+00:04:05,260 --> 00:04:09,002
+A container or a small virtual machine changes this number.
+
+131
+00:04:09,002 --> 00:04:11,221
+Defaults depend on where Java runs.
+
+132
+00:04:11,771 --> 00:04:13,639
+One more hidden setting.
+
+133
+00:04:13,639 --> 00:04:16,906
+Type: Java tool options equals dash X M X,
+
+134
+00:04:16,906 --> 00:04:17,996
+one hundred M,
+
+135
+00:04:17,996 --> 00:04:18,385
+java,
+
+136
+00:04:18,385 --> 00:04:19,396
+dash version,
+
+137
+00:04:19,396 --> 00:04:20,174
+then head,
+
+138
+00:04:20,174 --> 00:04:20,719
+dash N,
+
+139
+00:04:20,719 --> 00:04:21,030
+one.
+
+140
+00:04:21,580 --> 00:04:23,489
+Picked up Java tool options.
+
+141
+00:04:23,489 --> 00:04:25,467
+Java adds it to every launch,
+
+142
+00:04:25,467 --> 00:04:26,081
+silently.
+
+143
+00:04:26,081 --> 00:04:28,195
+If a service behaves strangely,
+
+144
+00:04:28,195 --> 00:04:29,559
+check that variable.
+
+145
+00:04:31,609 --> 00:04:34,084
+Three flag families, and one hidden source.
+
+146
+00:04:34,634 --> 00:04:40,586
+Dash capital X: memory and J V M behavior. Dash X M X is the biggest heap.
+
+147
+00:04:41,136 --> 00:04:45,616
+Dash capital D: a property for your program. Written before the class name.
+
+148
+00:04:46,166 --> 00:04:51,328
+Dash X X: tuning, like the garbage collector. Use defaults until you can measure.
+
+149
+00:04:51,878 --> 00:04:54,493
+And when the command line looks innocent,
+
+150
+00:04:54,493 --> 00:04:56,023
+check Java tool options.
+
+151
+00:04:56,023 --> 00:04:56,916
+Inspect first,
+
+152
+00:04:56,916 --> 00:04:57,809
+change second.
+
+153
+00:04:59,859 --> 00:05:00,776
+Your lab task.
+
+154
+00:05:00,776 --> 00:05:04,576
+Lab seventy-nine starts a small server for you to inspect.
+
+155
+00:05:04,576 --> 00:05:06,344
+Lab check judges your work.
+
+156
+00:05:06,894 --> 00:05:09,085
+It lives at git hub dot com,
+
+157
+00:05:09,085 --> 00:05:10,649
+slash it dash waves,
+
+158
+00:05:10,649 --> 00:05:12,448
+slash dev ops dash A I,
+
+159
+00:05:12,448 --> 00:05:13,309
+in academy,
+
+160
+00:05:13,309 --> 00:05:13,621
+lab,
+
+161
+00:05:13,621 --> 00:05:15,577
+lab seventy-nine dot S H.
+
+162
+00:05:16,127 --> 00:05:18,851
+One: start the server with dash X M X,
+
+163
+00:05:18,851 --> 00:05:19,926
+one nine two M,
+
+164
+00:05:19,926 --> 00:05:22,363
+server dot port nine one nine one,
+
+165
+00:05:22,363 --> 00:05:23,868
+and mode equals prod.
+
+166
+00:05:23,868 --> 00:05:25,087
+Leave it running.
+
+167
+00:05:25,637 --> 00:05:30,096
+Two: save its real command line from proc into command line dot text.
+
+168
+00:05:30,646 --> 00:05:35,851
+Three: save the J V M flags, with J C M D, into flags dot text.
+
+169
+00:05:36,401 --> 00:05:39,494
+Four: save the mode property into property dot text.
+
+170
+00:05:40,044 --> 00:05:42,022
+Five: answers dot text,
+
+171
+00:05:42,022 --> 00:05:43,053
+three lines.
+
+172
+00:05:43,053 --> 00:05:44,944
+Heap flag: dash X M X.
+
+173
+00:05:44,944 --> 00:05:46,836
+Property flag: dash D.
+
+174
+00:05:46,836 --> 00:05:48,727
+Inspect tool: J C M D.
+
+175
+00:05:49,277 --> 00:05:54,440
+Install, then lab up, lab check, and lab down. Lab down stops your server too.
+
+176
+00:05:56,490 --> 00:05:58,559
+Pass or fail. You need all six.
+
+177
+00:05:59,109 --> 00:06:00,923
+Five pass lines in lab check.
+
+178
+00:06:01,473 --> 00:06:04,459
+You can find the process I D of a Java service.
+
+179
+00:06:05,009 --> 00:06:06,737
+You can read the true command line.
+
+180
+00:06:07,287 --> 00:06:09,250
+You can name the three flag families.
+
+181
+00:06:09,800 --> 00:06:11,976
+You can show settings from a live process.
+
+182
+00:06:12,526 --> 00:06:15,470
+lab down, process stopped, nothing left behind.
+
+183
+00:06:16,020 --> 00:06:17,321
+To pass, all six.
+
+184
+00:06:19,371 --> 00:06:22,208
+Your turn, in your own Ubuntu virtual machine.
+
+185
+00:06:22,758 --> 00:06:24,849
+One: lab up, and read the task file.
+
+186
+00:06:25,399 --> 00:06:28,151
+Two: start the server with the flags from the task.
+
+187
+00:06:28,701 --> 00:06:31,688
+Three: save its command line, flags, and property.
+
+188
+00:06:32,238 --> 00:06:35,374
+Four: also try Java tool options, and compare.
+
+189
+00:06:35,924 --> 00:06:38,206
+Five: write your answers, and lab check.
+
+190
+00:06:38,756 --> 00:06:41,338
+Six: lab down, and prove nothing is left.
+
+191
+00:06:41,888 --> 00:06:43,722
+Pause the video, and begin now.
+
+192
+00:06:59,272 --> 00:07:00,147
+Quick check.
+
+193
+00:07:00,697 --> 00:07:02,745
+Which tool lists Java processes?
+
+194
+00:07:03,295 --> 00:07:05,727
+Where is the real command line of a process?
+
+195
+00:07:06,277 --> 00:07:09,477
+Which flag sets the maximum heap? Which sets a property?
+
+196
+00:07:10,027 --> 00:07:11,669
+What is Java tool options?
+
+197
+00:07:12,219 --> 00:07:15,910
+Objective covered: M C zero nine, objective four.
+
+198
+00:07:16,460 --> 00:07:18,529
+Pause the video, and answer out loud.
+
+199
+00:07:29,079 --> 00:07:31,319
+Next: jar versus war packaging.
+
+200
+00:07:31,869 --> 00:07:35,197
+If this helped, like, share and subscribe, so you do not miss it.

@@ -1,0 +1,16 @@
+Install the lab (needs an Ubuntu virtual machine with root and a JDK):
+  sudo apt install -y openjdk-21-jdk-headless      # skip if jcmd -h already works
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab79.sh /usr/local/sbin/
+  source shortcuts79.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab79 with a tiny server (Server.java, already compiled) and TASKS.txt
+  lab check               # five FAIL lines at the start; your goal is five PASS lines
+  lab down                # stops the server and removes /opt/lab79
+Without the shortcut, use: sudo lab79.sh up | check | down
+Your five tasks (inside /opt/lab79; also written in TASKS.txt):
+  1 start the server and leave it running: java -Xmx192m -Dserver.port=9191 -Dmode=prod Server &
+  2 save its real command line: PID=$(pgrep -f Server) then tr '\0' ' ' < /proc/$PID/cmdline > cmdline.txt
+  3 save its JVM flags: jcmd Server VM.flags > flags.txt
+  4 save the mode property: jcmd Server VM.system_properties | grep mode > property.txt
+  5 answers.txt with exactly three lines: heap flag: -Xmx   property flag: -D   inspect tool: jcmd
+Run it only in your own virtual machine. lab down stops any Java process whose command line contains Server, then removes /opt/lab79; remove the installed script with: sudo rm /usr/local/sbin/lab79.sh
