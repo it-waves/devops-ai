@@ -1,0 +1,16 @@
+Install the lab (needs an Ubuntu virtual machine with root and a JDK):
+  sudo apt install -y openjdk-21-jdk-headless      # skip if javac -version already works
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab76.sh /usr/local/sbin/
+  source shortcuts76.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab76 with two tiny programs (Hello.java and ShopApp.java) and a TASKS.txt
+  lab check               # five FAIL lines at the start; your goal is five PASS lines
+  lab down                # cleanup when finished (also stops ShopApp)
+Without the shortcut, use: sudo lab76.sh up | check | down
+Your five tasks (inside /opt/lab76; also written in TASKS.txt):
+  1 versions.txt: the output of java -version and javac -version (java prints to stderr, so use 2>&1)
+  2 compile both programs (javac Hello.java ShopApp.java) and run java Hello
+  3 bytecode.txt: the output of javap -c Hello
+  4 start ShopApp in the background (java ShopApp > app.log &) and save jps -l into process.txt; leave it running for lab check
+  5 answers.txt with exactly three lines: javac: JDK   bytecode: .class   process: java
+Run it only in your own virtual machine. lab down removes /opt/lab76 and stops ShopApp; remove the installed script with: sudo rm /usr/local/sbin/lab76.sh

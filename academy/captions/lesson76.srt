@@ -1,0 +1,827 @@
+1
+00:00:00,500 --> 00:00:03,687
+Three sentences every DevOps engineer hears.
+
+2
+00:00:03,687 --> 00:00:04,773
+Java not found.
+
+3
+00:00:04,773 --> 00:00:07,163
+Class file has the wrong version.
+
+4
+00:00:07,163 --> 00:00:08,756
+It works on my laptop.
+
+5
+00:00:09,306 --> 00:00:13,412
+Behind all three sits one confusion: what is Java,
+
+6
+00:00:13,412 --> 00:00:13,987
+really?
+
+7
+00:00:13,987 --> 00:00:14,561
+Source,
+
+8
+00:00:14,561 --> 00:00:15,300
+bytecode,
+
+9
+00:00:15,300 --> 00:00:15,793
+J D K,
+
+10
+00:00:15,793 --> 00:00:16,286
+J R E,
+
+11
+00:00:16,286 --> 00:00:16,779
+J V M.
+
+12
+00:00:16,779 --> 00:00:19,653
+Five words people mix up every day.
+
+13
+00:00:20,203 --> 00:00:24,939
+Today you separate them, one at a time, and you prove each one on a real machine.
+
+14
+00:00:25,489 --> 00:00:29,499
+By the end, when a Java build fails, you will know which part is missing.
+
+15
+00:00:31,549 --> 00:00:36,498
+Here is the whole journey of a Java program, in five steps. Follow the parcel.
+
+16
+00:00:37,048 --> 00:00:37,316
+One.
+
+17
+00:00:37,316 --> 00:00:37,783
+Source.
+
+18
+00:00:37,783 --> 00:00:39,988
+A plain text file that you write,
+
+19
+00:00:39,988 --> 00:00:41,258
+ending in dot java.
+
+20
+00:00:41,258 --> 00:00:42,527
+Humans can read it.
+
+21
+00:00:42,527 --> 00:00:44,131
+Computers cannot run it.
+
+22
+00:00:44,681 --> 00:00:44,969
+Two.
+
+23
+00:00:44,969 --> 00:00:45,907
+The compiler,
+
+24
+00:00:45,907 --> 00:00:46,916
+called java C.
+
+25
+00:00:46,916 --> 00:00:49,655
+It reads the source and translates it.
+
+26
+00:00:49,655 --> 00:00:51,241
+It lives in the J D K,
+
+27
+00:00:51,241 --> 00:00:53,044
+the Java Development Kit.
+
+28
+00:00:53,594 --> 00:00:54,008
+Three.
+
+29
+00:00:54,008 --> 00:00:54,631
+Bytecode.
+
+30
+00:00:54,631 --> 00:00:56,497
+A file ending in dot class.
+
+31
+00:00:56,497 --> 00:00:58,087
+It is not machine code.
+
+32
+00:00:58,087 --> 00:01:01,475
+It is an instruction list for a made-up computer,
+
+33
+00:01:01,475 --> 00:01:04,516
+so it is the same on every operating system.
+
+34
+00:01:05,066 --> 00:01:05,448
+Four.
+
+35
+00:01:05,448 --> 00:01:06,210
+The J V M,
+
+36
+00:01:06,210 --> 00:01:08,116
+the Java Virtual Machine.
+
+37
+00:01:08,116 --> 00:01:09,793
+That made-up computer,
+
+38
+00:01:09,793 --> 00:01:11,166
+as a real program.
+
+39
+00:01:11,166 --> 00:01:13,758
+It reads the bytecode and runs it.
+
+40
+00:01:13,758 --> 00:01:15,741
+It ships inside the J R E,
+
+41
+00:01:15,741 --> 00:01:17,952
+the Java Runtime Environment.
+
+42
+00:01:18,502 --> 00:01:18,856
+Five.
+
+43
+00:01:18,856 --> 00:01:19,708
+The process.
+
+44
+00:01:19,708 --> 00:01:21,056
+When you type java,
+
+45
+00:01:21,056 --> 00:01:22,262
+and a class name,
+
+46
+00:01:22,262 --> 00:01:25,739
+the operating system starts a process named java,
+
+47
+00:01:25,739 --> 00:01:27,867
+and the J V M lives inside it.
+
+48
+00:01:28,417 --> 00:01:35,201
+Remember the nesting. The J D K contains the J R E. The J R E contains the J V M.
+
+49
+00:01:35,751 --> 00:01:40,700
+So: to build, you need the J D K. To only run, the J R E is enough.
+
+50
+00:01:42,750 --> 00:01:48,467
+Time to prove it, on a real Ubuntu machine. Go to the shop folder. Type: CD, shop.
+
+51
+00:01:49,017 --> 00:01:52,068
+First, the runner. Type: java, dash version.
+
+52
+00:01:52,618 --> 00:01:58,975
+Open J D K, version twenty-one. This is the runtime: the J V M, plus its libraries.
+
+53
+00:01:59,525 --> 00:02:02,896
+Now the compiler. Type: java C, dash version.
+
+54
+00:02:03,446 --> 00:02:04,601
+Java C twenty-one.
+
+55
+00:02:04,601 --> 00:02:06,589
+If this said command not found,
+
+56
+00:02:06,589 --> 00:02:09,668
+you would have a runtime but no development kit.
+
+57
+00:02:09,668 --> 00:02:12,939
+That is the most common surprise on a fresh server.
+
+58
+00:02:13,489 --> 00:02:16,631
+What does the runtime package install?
+
+59
+00:02:16,631 --> 00:02:17,788
+Type: D P K G,
+
+60
+00:02:17,788 --> 00:02:19,028
+dash capital L,
+
+61
+00:02:19,028 --> 00:02:19,937
+open J D K,
+
+62
+00:02:19,937 --> 00:02:20,847
+twenty-one,
+
+63
+00:02:20,847 --> 00:02:21,177
+jre,
+
+64
+00:02:21,177 --> 00:02:21,921
+headless,
+
+65
+00:02:21,921 --> 00:02:22,335
+pipe,
+
+66
+00:02:22,335 --> 00:02:22,748
+grep,
+
+67
+00:02:22,748 --> 00:02:24,071
+slash bin slash.
+
+68
+00:02:24,621 --> 00:02:31,213
+Only four tools: java, J package, key tool, and R M I registry. Notice: no compiler.
+
+69
+00:02:31,763 --> 00:02:33,748
+And the development kit?
+
+70
+00:02:33,748 --> 00:02:35,072
+Count its tools.
+
+71
+00:02:35,072 --> 00:02:36,230
+Type: D P K G,
+
+72
+00:02:36,230 --> 00:02:37,471
+dash capital L,
+
+73
+00:02:37,471 --> 00:02:38,381
+open J D K,
+
+74
+00:02:38,381 --> 00:02:39,291
+twenty-one,
+
+75
+00:02:39,291 --> 00:02:39,787
+J D K,
+
+76
+00:02:39,787 --> 00:02:40,531
+headless,
+
+77
+00:02:40,531 --> 00:02:40,945
+pipe,
+
+78
+00:02:40,945 --> 00:02:41,359
+grep,
+
+79
+00:02:41,359 --> 00:02:41,938
+dash C,
+
+80
+00:02:41,938 --> 00:02:43,261
+slash bin slash.
+
+81
+00:02:43,811 --> 00:02:45,426
+Twenty-four tools.
+
+82
+00:02:45,426 --> 00:02:46,054
+Java C,
+
+83
+00:02:46,054 --> 00:02:46,413
+jar,
+
+84
+00:02:46,413 --> 00:02:46,952
+J P S,
+
+85
+00:02:46,952 --> 00:02:48,298
+J cmd and more.
+
+86
+00:02:48,298 --> 00:02:50,541
+The J D K is the runtime,
+
+87
+00:02:50,541 --> 00:02:52,963
+plus the builder's toolbox.
+
+88
+00:02:55,013 --> 00:02:59,344
+Now step one to three, for real. Go to the shop. Type: CD, shop.
+
+89
+00:02:59,894 --> 00:03:03,200
+Here is the source. Type: cat, Hello dot java.
+
+90
+00:03:03,750 --> 00:03:09,596
+A class named Hello, and one method, main. Two lines print text. This is only text so far.
+
+91
+00:03:10,146 --> 00:03:13,388
+Compile it. Type: java C, Hello dot java.
+
+92
+00:03:13,938 --> 00:03:16,925
+No output. In Unix, silence means success.
+
+93
+00:03:17,475 --> 00:03:19,182
+What appeared? Type: L S.
+
+94
+00:03:19,732 --> 00:03:24,852
+A new file: Hello dot class. Same name, new extension. That is the bytecode.
+
+95
+00:03:25,402 --> 00:03:27,047
+Is it really not text?
+
+96
+00:03:27,047 --> 00:03:29,290
+Look at the first eight bytes.
+
+97
+00:03:29,290 --> 00:03:30,188
+Type: X X D,
+
+98
+00:03:30,188 --> 00:03:30,711
+dash L,
+
+99
+00:03:30,711 --> 00:03:31,160
+eight,
+
+100
+00:03:31,160 --> 00:03:32,356
+Hello dot class.
+
+101
+00:03:32,906 --> 00:03:33,600
+Cafe babe.
+
+102
+00:03:33,600 --> 00:03:37,140
+Every Java class file starts with these four bytes.
+
+103
+00:03:37,140 --> 00:03:37,487
+Then,
+
+104
+00:03:37,487 --> 00:03:38,459
+hex forty-one,
+
+105
+00:03:38,459 --> 00:03:42,762
+which is sixty-five: the bytecode version for Java twenty-one.
+
+106
+00:03:43,312 --> 00:03:45,595
+Now run it. Type: java, Hello.
+
+107
+00:03:46,145 --> 00:03:51,820
+Hello from Cloud Cart, on Java twenty-one. The J V M read the bytecode and ran it.
+
+108
+00:03:53,870 --> 00:03:58,670
+Let us look inside the bytecode. First go to the shop. Type: CD, shop.
+
+109
+00:03:59,220 --> 00:04:04,383
+Compile again, so the class file exists. Type: java C, Hello dot java.
+
+110
+00:04:04,933 --> 00:04:05,228
+Now,
+
+111
+00:04:05,228 --> 00:04:06,483
+the disassembler.
+
+112
+00:04:06,483 --> 00:04:07,443
+Type: java P,
+
+113
+00:04:07,443 --> 00:04:07,960
+dash C,
+
+114
+00:04:07,960 --> 00:04:08,403
+Hello,
+
+115
+00:04:08,403 --> 00:04:10,322
+then pipe to cut and head,
+
+116
+00:04:10,322 --> 00:04:12,463
+only to keep the screen tidy.
+
+117
+00:04:13,013 --> 00:04:14,149
+Not machine code.
+
+118
+00:04:14,149 --> 00:04:17,424
+Small steps for the made-up computer: get static,
+
+119
+00:04:17,424 --> 00:04:18,494
+load a constant,
+
+120
+00:04:18,494 --> 00:04:19,496
+invoke virtual.
+
+121
+00:04:19,496 --> 00:04:21,568
+That last one calls print line.
+
+122
+00:04:22,118 --> 00:04:22,831
+Any J V M,
+
+123
+00:04:22,831 --> 00:04:23,829
+on any system,
+
+124
+00:04:23,829 --> 00:04:25,254
+can run these steps.
+
+125
+00:04:25,254 --> 00:04:28,390
+That is why one class file works everywhere.
+
+126
+00:04:30,440 --> 00:04:34,067
+Last: the process. Go to the shop. Type: CD, shop.
+
+127
+00:04:34,617 --> 00:04:39,203
+Compile the second program. Type: java C, Shop App dot java.
+
+128
+00:04:39,753 --> 00:04:45,684
+Start it in the background. Type: java, Shop App, redirect to app dot log, and ampersand.
+
+129
+00:04:47,734 --> 00:04:53,238
+A process now runs. Ask the Java tool for the list. Type: J P S, dash L.
+
+130
+00:04:53,788 --> 00:05:00,017
+Shop App, with its process I D. J P S itself shows up too, because it is a Java program.
+
+131
+00:05:00,567 --> 00:05:07,095
+Now ask the operating system. Type: P S, dash C, java, dash O, pid, rss, args.
+
+132
+00:05:07,645 --> 00:05:08,262
+Same I D.
+
+133
+00:05:08,262 --> 00:05:12,238
+The operating system sees an ordinary process called java.
+
+134
+00:05:12,238 --> 00:05:14,569
+The memory column is in kilobytes.
+
+135
+00:05:14,569 --> 00:05:16,968
+The class name is only an argument.
+
+136
+00:05:17,518 --> 00:05:19,715
+Stop it. Type: kill, percent one.
+
+137
+00:05:20,265 --> 00:05:22,996
+Check again. Type: J P S, dash L.
+
+138
+00:05:23,546 --> 00:05:23,856
+Gone.
+
+139
+00:05:23,856 --> 00:05:24,972
+The process ended,
+
+140
+00:05:24,972 --> 00:05:27,142
+and the bytecode file is untouched.
+
+141
+00:05:27,142 --> 00:05:30,181
+The program and the process are different things.
+
+142
+00:05:32,231 --> 00:05:36,199
+Now use it. Three real error messages, and what each one tells you.
+
+143
+00:05:36,749 --> 00:05:42,594
+java, command not found. No runtime at all. Install a J R E or a J D K.
+
+144
+00:05:43,144 --> 00:05:43,660
+java C,
+
+145
+00:05:43,660 --> 00:05:44,987
+command not found.
+
+146
+00:05:44,987 --> 00:05:46,388
+You have a runtime,
+
+147
+00:05:46,388 --> 00:05:48,452
+but not the development kit.
+
+148
+00:05:48,452 --> 00:05:49,779
+Install the J D K.
+
+149
+00:05:50,329 --> 00:05:52,847
+Unsupported class file major version.
+
+150
+00:05:52,847 --> 00:05:56,250
+The bytecode is newer than the J V M that runs it.
+
+151
+00:05:56,250 --> 00:05:58,360
+Compile with the right version,
+
+152
+00:05:58,360 --> 00:05:59,993
+or run with a newer one.
+
+153
+00:06:00,543 --> 00:06:04,767
+Each message points at exactly one part of the journey. That is the skill.
+
+154
+00:06:06,817 --> 00:06:07,733
+Your lab task.
+
+155
+00:06:07,733 --> 00:06:11,003
+Lab seventy-six builds two small programs for you.
+
+156
+00:06:11,003 --> 00:06:12,769
+Lab check judges your work.
+
+157
+00:06:13,319 --> 00:06:15,535
+It lives at git hub dot com,
+
+158
+00:06:15,535 --> 00:06:17,117
+slash it dash waves,
+
+159
+00:06:17,117 --> 00:06:18,937
+slash dev ops dash A I,
+
+160
+00:06:18,937 --> 00:06:19,807
+in academy,
+
+161
+00:06:19,807 --> 00:06:20,124
+lab,
+
+162
+00:06:20,124 --> 00:06:22,023
+lab seventy-six dot S H.
+
+163
+00:06:22,573 --> 00:06:26,050
+One: save both version outputs into versions dot text.
+
+164
+00:06:26,600 --> 00:06:29,310
+Two: compile both programs, and run Hello.
+
+165
+00:06:29,860 --> 00:06:33,081
+Three: save the disassembly into byte code dot text.
+
+166
+00:06:33,631 --> 00:06:36,335
+Four: start Shop App in the background,
+
+167
+00:06:36,335 --> 00:06:37,375
+and save J P S,
+
+168
+00:06:37,375 --> 00:06:37,860
+dash L,
+
+169
+00:06:37,860 --> 00:06:39,386
+into process dot text.
+
+170
+00:06:39,386 --> 00:06:40,564
+Leave it running.
+
+171
+00:06:41,114 --> 00:06:46,532
+Five: write three lines in answers dot text: java C comes with the J D K,
+
+172
+00:06:46,532 --> 00:06:48,759
+byte code is a dot class file,
+
+173
+00:06:48,759 --> 00:06:51,653
+and the program runs as a java process.
+
+174
+00:06:52,203 --> 00:06:52,754
+Install,
+
+175
+00:06:52,754 --> 00:06:53,581
+then lab up,
+
+176
+00:06:53,581 --> 00:06:54,270
+lab check,
+
+177
+00:06:54,270 --> 00:06:55,166
+and lab down,
+
+178
+00:06:55,166 --> 00:06:57,646
+the same way as in the last lessons.
+
+179
+00:06:57,646 --> 00:07:00,608
+The shortcut file is shortcuts seventy-six.
+
+180
+00:07:02,658 --> 00:07:04,727
+Pass or fail. You need all six.
+
+181
+00:07:05,277 --> 00:07:07,091
+Five pass lines in lab check.
+
+182
+00:07:07,641 --> 00:07:12,569
+You can name the five parts: source, java C, bytecode, J V M, process.
+
+183
+00:07:13,119 --> 00:07:17,705
+You can say which one is in the J D K and which one is in the J R E.
+
+184
+00:07:18,255 --> 00:07:20,879
+You can show the cafe babe bytes of a class file.
+
+185
+00:07:21,429 --> 00:07:23,648
+You can show a process I D in two ways.
+
+186
+00:07:24,198 --> 00:07:26,673
+lab down, and nothing java left running.
+
+187
+00:07:27,223 --> 00:07:28,524
+To pass, all six.
+
+188
+00:07:30,574 --> 00:07:31,290
+Your turn,
+
+189
+00:07:31,290 --> 00:07:33,795
+in your own Ubuntu virtual machine.
+
+190
+00:07:33,795 --> 00:07:35,370
+Install a J D K first,
+
+191
+00:07:35,370 --> 00:07:37,017
+if you do not have one.
+
+192
+00:07:37,567 --> 00:07:39,657
+One: lab up, and read the task file.
+
+193
+00:07:40,207 --> 00:07:42,085
+Two: versions, compile, run.
+
+194
+00:07:42,635 --> 00:07:44,149
+Three: the disassembly.
+
+195
+00:07:44,699 --> 00:07:46,769
+Four: start the app, list the process.
+
+196
+00:07:47,319 --> 00:07:49,601
+Five: write your answers, and lab check.
+
+197
+00:07:50,151 --> 00:07:52,733
+Six: lab down, and prove nothing is left.
+
+198
+00:07:53,283 --> 00:07:55,117
+Pause the video, and begin now.
+
+199
+00:08:10,667 --> 00:08:11,542
+Quick check.
+
+200
+00:08:12,092 --> 00:08:14,950
+What turns source into bytecode, and which kit has it?
+
+201
+00:08:15,500 --> 00:08:17,911
+What do the first four bytes of a class file say?
+
+202
+00:08:18,461 --> 00:08:21,533
+Which part runs the bytecode, and what package ships it?
+
+203
+00:08:22,083 --> 00:08:24,472
+Is the program the same thing as the process?
+
+204
+00:08:25,022 --> 00:08:28,670
+Objective covered: M C zero nine, objective one.
+
+205
+00:08:29,220 --> 00:08:31,290
+Pause the video, and answer out loud.
+
+206
+00:08:41,840 --> 00:08:45,274
+Next: compile and run a small Java program, properly.
+
+207
+00:08:45,824 --> 00:08:49,152
+If this helped, like, share and subscribe, so you do not miss it.

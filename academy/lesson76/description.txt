@@ -1,0 +1,27 @@
+Lesson 76 of the DevOps Engineering Bootcamp, the first lesson of Java Fundamentals for DevOps. You will not write Java applications here; you will learn to tell the parts apart, because every Java problem you meet on call starts with "which part is missing?". The journey is five steps: source file (Hello.java), the compiler javac, bytecode (Hello.class), the JVM that reads it, and the operating system process that results. The JDK contains the JRE, and the JRE contains the JVM, so building needs the JDK while running only needs the JRE. You see the real installed tools listed, a program compiled and run, the first four bytes of the class file (cafe babe, the bytecode magic number), the disassembly with javap, and a running Java program shown as a PID two ways with jps and ps, then stopped. You also learn to read three common messages: java command not found, javac command not found, and unsupported class file major version, and which single part each one points at. Then you do the lab task yourself: six points, all six must pass.
+
+Chapters
+0:00 Which part is missing?
+0:31 The journey of a program
+1:42 JDK or JRE?
+2:54 Compile and run
+3:53 Inside the bytecode
+4:30 The process
+5:32 Reading the errors
+6:06 Your lab task
+7:02 Pass or fail rubric
+7:30 Your turn
+8:10 Quick check
+
+Objectives covered: MC09-O01 (JDK, JRE, JVM, source, bytecode and process)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab76.sh and shortcuts76.sh) and academy/lesson76 (INSTALL.txt). Install with: sudo install -m 755 lab76.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts76.sh (without it, use sudo lab76.sh up, check, down). You need an Ubuntu virtual machine with root and a JDK (for example: sudo apt install openjdk-21-jdk-headless). The lab starts one small Java program that runs until lab down. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with OpenJDK 21, run in a private mount and network setup on the recording computer. The journey map, error cards, task, rubric and quiz screens are labelled illustrations, not captures. Package lists and process numbers will differ on your machine. The lab was run end to end before this lesson: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing running or on disk. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. The lab file names are invented, and lab is a short name I made for sudo lab76.sh. Typing is timed to the narration. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Fix a Broken Shop: Application Architecture and APIs Mastery Lab https://youtu.be/8XUgTDs-QaA
+Next: compile and run a small Java program, properly.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #java #jdk #jvm #linux #devopsbootcamp
