@@ -1,0 +1,27 @@
+Lesson 69 of the DevOps Engineering Bootcamp, the third lesson of the Application Architecture and APIs masterclass. When an API is slow or broken, you do not guess: you look at the conversation. Here you test endpoints of CloudCart, the tiny shop from the last two lessons, with five real curl moves. See everything with verbose mode and read what curl sent and what came back. Read and send headers, including asking for C S V instead of jay son. Measure the time of two endpoints with a number, not a feeling. Learn why curl exits zero on a four oh four, and how the fail flag turns an error status into exit code twenty-two, the heart of every smoke test. Tag a request with a request I D and find it in the A P I log. You also meet a tiny A P I client script, and tour other clients: browser dev tools, Postman, Bruno and httpie. You finish with a lab, a checker, a pass or fail rubric and your turn.
+
+Chapters
+0:00 Slow, broken, or you?
+0:29 See everything with verbose
+1:23 Read and send headers
+2:16 Measure the time
+3:14 Exit codes
+4:06 Request IDs and logs
+5:10 Other API clients
+5:46 Your lab task
+6:55 Pass or fail rubric
+7:23 Your turn
+8:03 Quick check
+
+Objectives covered: MC08-O03 Use curl or an API client to inspect and test an endpoint.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab69.sh and shortcuts69.sh) and academy/lesson69 (INSTALL.txt). Install with: sudo install -m 755 lab69.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts69.sh (without it, use sudo lab69.sh up, check, down). You need an Ubuntu virtual machine with root, python3 and curl. It uses ports 5000 and 8080 on 127.0.0.1. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount and network setup on the recording computer. CloudCart is a tiny teaching app written for this course, using Python and an SQLite file, not a production system. The X-API-Version and X-Request-Id headers, the CSV export and the slow report endpoint were added to it for this lesson, so you have something to inspect. The tool tour is a labelled illustration, not a capture. The lab was run end to end before this lesson: it starts with all five checks failing, doing the tasks makes all five pass, and lab down leaves nothing behind. Your own run is unverified until you do it. The lab file names are invented, and lab is a short name I made for sudo lab69.sh. Typing is timed to the narration. The narration is synthetic speech.
+
+Previous lesson: HTTP Requests, Responses and Status Codes https://youtu.be/JpqMBzADCTA
+Next lesson: authentication, authorization, sessions, tokens and keeping secrets.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #api #curl #httpheaders #restapi #devopsbootcamp

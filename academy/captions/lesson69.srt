@@ -1,0 +1,1007 @@
+1
+00:00:00,500 --> 00:00:05,279
+Your API is slow. Or it is broken. Or the mistake is in your own request.
+
+2
+00:00:05,829 --> 00:00:07,253
+How do you find out which?
+
+3
+00:00:07,253 --> 00:00:08,185
+You do not guess.
+
+4
+00:00:08,185 --> 00:00:10,102
+You look at the whole conversation,
+
+5
+00:00:10,102 --> 00:00:10,650
+with curl.
+
+6
+00:00:11,200 --> 00:00:15,018
+Today you learn five moves: see everything with verbose mode,
+
+7
+00:00:15,018 --> 00:00:16,395
+read and send headers,
+
+8
+00:00:16,395 --> 00:00:17,459
+measure the time,
+
+9
+00:00:17,459 --> 00:00:18,586
+use the exit code,
+
+10
+00:00:18,586 --> 00:00:21,653
+and tag a request so you can find it in the logs.
+
+11
+00:00:22,203 --> 00:00:27,131
+These five moves cover most of what a dev ops engineer does to test an endpoint.
+
+12
+00:00:29,181 --> 00:00:32,296
+Go into the shop. Type: CD, cloud cart.
+
+13
+00:00:32,846 --> 00:00:35,896
+Start it. Type: dot slash start dot S H.
+
+14
+00:00:36,446 --> 00:00:37,799
+Ask for product one,
+
+15
+00:00:37,799 --> 00:00:39,963
+and show the whole conversation.
+
+16
+00:00:39,963 --> 00:00:40,707
+Type: curl,
+
+17
+00:00:40,707 --> 00:00:41,316
+dash s V,
+
+18
+00:00:41,316 --> 00:00:42,127
+the address,
+
+19
+00:00:42,127 --> 00:00:42,398
+two,
+
+20
+00:00:42,398 --> 00:00:43,277
+greater than,
+
+21
+00:00:43,277 --> 00:00:44,224
+ampersand one,
+
+22
+00:00:44,224 --> 00:00:44,562
+pipe,
+
+23
+00:00:44,562 --> 00:00:44,900
+grep,
+
+24
+00:00:44,900 --> 00:00:45,306
+quote,
+
+25
+00:00:45,306 --> 00:00:45,712
+caret,
+
+26
+00:00:45,712 --> 00:00:46,253
+bracket,
+
+27
+00:00:46,253 --> 00:00:46,929
+less than,
+
+28
+00:00:46,929 --> 00:00:47,808
+greater than,
+
+29
+00:00:47,808 --> 00:00:48,755
+close bracket,
+
+30
+00:00:48,755 --> 00:00:49,161
+space,
+
+31
+00:00:49,161 --> 00:00:49,702
+bracket,
+
+32
+00:00:49,702 --> 00:00:50,378
+capital A,
+
+33
+00:00:50,378 --> 00:00:51,392
+dash capital Z,
+
+34
+00:00:51,392 --> 00:00:52,339
+close bracket,
+
+35
+00:00:52,339 --> 00:00:52,745
+quote.
+
+36
+00:00:53,295 --> 00:00:57,360
+Every line that starts with a greater than sign is what curl sent.
+
+37
+00:00:57,360 --> 00:00:58,038
+The method,
+
+38
+00:00:58,038 --> 00:00:58,592
+the path,
+
+39
+00:00:58,592 --> 00:00:59,147
+the host,
+
+40
+00:00:59,147 --> 00:01:00,502
+and the accept header.
+
+41
+00:01:00,502 --> 00:01:02,042
+Curl added those for you.
+
+42
+00:01:02,592 --> 00:01:06,204
+Every line that starts with a less than sign is what came back.
+
+43
+00:01:06,204 --> 00:01:07,121
+The status line,
+
+44
+00:01:07,121 --> 00:01:08,096
+then the headers.
+
+45
+00:01:08,646 --> 00:01:11,267
+Two of them are custom: X API version,
+
+46
+00:01:11,267 --> 00:01:12,509
+and X request I D.
+
+47
+00:01:12,509 --> 00:01:13,475
+Remember them.
+
+48
+00:01:13,475 --> 00:01:15,131
+You will use both today.
+
+49
+00:01:15,681 --> 00:01:18,527
+Verbose mode is the first tool to reach for.
+
+50
+00:01:18,527 --> 00:01:20,596
+It shows the whole conversation,
+
+51
+00:01:20,596 --> 00:01:21,825
+in both directions.
+
+52
+00:01:23,875 --> 00:01:27,800
+Same shop, new session. Go in. Type: CD, cloud cart.
+
+53
+00:01:28,350 --> 00:01:31,401
+Start it. Type: dot slash start dot S H.
+
+54
+00:01:31,951 --> 00:01:33,697
+Ask for only the headers,
+
+55
+00:01:33,697 --> 00:01:34,605
+with no body.
+
+56
+00:01:34,605 --> 00:01:35,373
+Type: curl,
+
+57
+00:01:35,373 --> 00:01:36,560
+dash s capital I,
+
+58
+00:01:36,560 --> 00:01:38,586
+then the address of products.
+
+59
+00:01:39,136 --> 00:01:41,453
+Content type says what the body is.
+
+60
+00:01:41,453 --> 00:01:44,963
+X API version says which version of the API answered.
+
+61
+00:01:44,963 --> 00:01:47,413
+Headers are labels about the message.
+
+62
+00:01:47,963 --> 00:01:49,781
+You can send headers too.
+
+63
+00:01:49,781 --> 00:01:51,526
+Dash capital H adds one.
+
+64
+00:01:51,526 --> 00:01:54,798
+The accept header says which format you want.
+
+65
+00:01:54,798 --> 00:01:55,598
+Type: curl,
+
+66
+00:01:55,598 --> 00:01:56,107
+dash s,
+
+67
+00:01:56,107 --> 00:01:57,198
+dash capital H,
+
+68
+00:01:57,198 --> 00:01:57,634
+quote,
+
+69
+00:01:57,634 --> 00:01:58,143
+accept,
+
+70
+00:01:58,143 --> 00:01:58,580
+colon,
+
+71
+00:01:58,580 --> 00:01:59,816
+text slash C S V,
+
+72
+00:01:59,816 --> 00:02:00,252
+quote,
+
+73
+00:02:00,252 --> 00:02:01,488
+then the address.
+
+74
+00:02:02,038 --> 00:02:02,852
+Same address,
+
+75
+00:02:02,852 --> 00:02:03,917
+different format.
+
+76
+00:02:03,917 --> 00:02:06,108
+The server read your accept header,
+
+77
+00:02:06,108 --> 00:02:08,801
+and answered with C S V instead of jay son.
+
+78
+00:02:09,351 --> 00:02:14,620
+That is content negotiation. You ask with headers, and the server decides what to send.
+
+79
+00:02:16,670 --> 00:02:20,595
+Same shop, new session. Go in. Type: CD, cloud cart.
+
+80
+00:02:21,145 --> 00:02:24,196
+Start it. Type: dot slash start dot S H.
+
+81
+00:02:24,746 --> 00:02:26,253
+Is an endpoint slow?
+
+82
+00:02:26,253 --> 00:02:27,082
+Measure it.
+
+83
+00:02:27,082 --> 00:02:27,911
+Type: curl,
+
+84
+00:02:27,911 --> 00:02:28,439
+dash s,
+
+85
+00:02:28,439 --> 00:02:28,966
+dash O,
+
+86
+00:02:28,966 --> 00:02:30,549
+slash dev slash null,
+
+87
+00:02:30,549 --> 00:02:31,076
+dash W,
+
+88
+00:02:31,076 --> 00:02:31,528
+quote,
+
+89
+00:02:31,528 --> 00:02:32,131
+percent,
+
+90
+00:02:32,131 --> 00:02:32,583
+brace,
+
+91
+00:02:32,583 --> 00:02:33,563
+H T T P code,
+
+92
+00:02:33,563 --> 00:02:34,015
+brace,
+
+93
+00:02:34,015 --> 00:02:34,467
+space,
+
+94
+00:02:34,467 --> 00:02:35,070
+percent,
+
+95
+00:02:35,070 --> 00:02:35,522
+brace,
+
+96
+00:02:35,522 --> 00:02:36,351
+time total,
+
+97
+00:02:36,351 --> 00:02:36,803
+brace,
+
+98
+00:02:36,803 --> 00:02:37,708
+backslash N,
+
+99
+00:02:37,708 --> 00:02:38,160
+quote,
+
+100
+00:02:38,160 --> 00:02:39,441
+then the address,
+
+101
+00:02:39,441 --> 00:02:40,194
+slash API,
+
+102
+00:02:40,194 --> 00:02:41,023
+slash fast.
+
+103
+00:02:41,573 --> 00:02:44,385
+Dash O to dev null throws the body away.
+
+104
+00:02:44,385 --> 00:02:48,040
+Dash W prints only what we ask for: the status code,
+
+105
+00:02:48,040 --> 00:02:50,149
+and the total time in seconds.
+
+106
+00:02:50,699 --> 00:02:56,182
+Now the report endpoint. Same command, new path. Type it again, with report at the end.
+
+107
+00:02:58,332 --> 00:03:00,162
+Under a hundredth of a second,
+
+108
+00:03:00,162 --> 00:03:01,992
+against almost a whole second.
+
+109
+00:03:01,992 --> 00:03:04,188
+Now you know which endpoint is slow,
+
+110
+00:03:04,188 --> 00:03:05,042
+with a number,
+
+111
+00:03:05,042 --> 00:03:06,140
+and not a feeling.
+
+112
+00:03:06,690 --> 00:03:09,245
+Time total counts everything: connecting,
+
+113
+00:03:09,245 --> 00:03:09,744
+waiting,
+
+114
+00:03:09,744 --> 00:03:10,741
+and downloading.
+
+115
+00:03:10,741 --> 00:03:12,237
+That is enough to start.
+
+116
+00:03:14,287 --> 00:03:18,212
+Same shop, new session. Go in. Type: CD, cloud cart.
+
+117
+00:03:18,762 --> 00:03:21,813
+Start it. Type: dot slash start dot S H.
+
+118
+00:03:22,363 --> 00:03:24,355
+Ask for product ninety-nine,
+
+119
+00:03:24,355 --> 00:03:26,348
+then print curl's exit code.
+
+120
+00:03:26,348 --> 00:03:27,131
+Type: curl,
+
+121
+00:03:27,131 --> 00:03:27,629
+dash s,
+
+122
+00:03:27,629 --> 00:03:28,483
+the address,
+
+123
+00:03:28,483 --> 00:03:29,194
+semicolon,
+
+124
+00:03:29,194 --> 00:03:29,550
+echo,
+
+125
+00:03:29,550 --> 00:03:29,977
+quote,
+
+126
+00:03:29,977 --> 00:03:30,831
+exit equals,
+
+127
+00:03:30,831 --> 00:03:31,329
+dollar,
+
+128
+00:03:31,329 --> 00:03:32,325
+question mark,
+
+129
+00:03:32,325 --> 00:03:32,752
+quote.
+
+130
+00:03:33,302 --> 00:03:34,951
+The body says not found.
+
+131
+00:03:34,951 --> 00:03:36,325
+But look: exit zero.
+
+132
+00:03:36,325 --> 00:03:37,631
+Curl itself worked.
+
+133
+00:03:37,631 --> 00:03:40,310
+A four oh four is still a valid answer,
+
+134
+00:03:40,310 --> 00:03:42,028
+so curl calls it success.
+
+135
+00:03:42,578 --> 00:03:46,183
+Add dash F, for fail. Type the same command, with S F.
+
+136
+00:03:48,133 --> 00:03:49,613
+Now curl prints nothing,
+
+137
+00:03:49,613 --> 00:03:51,216
+and exits with twenty-two.
+
+138
+00:03:51,216 --> 00:03:54,853
+Twenty-two means: the server answered with an error status.
+
+139
+00:03:55,403 --> 00:03:57,584
+This is how a smoke test works.
+
+140
+00:03:57,584 --> 00:03:58,851
+One curl dash S F,
+
+141
+00:03:58,851 --> 00:04:01,595
+and the exit code is your pass or fail.
+
+142
+00:04:01,595 --> 00:04:04,128
+Scripts and CI pipelines stop on it.
+
+143
+00:04:06,178 --> 00:04:10,103
+Same shop, new session. Go in. Type: CD, cloud cart.
+
+144
+00:04:10,653 --> 00:04:13,704
+Start it. Type: dot slash start dot S H.
+
+145
+00:04:14,254 --> 00:04:17,330
+Tag a request with an I D that you choose.
+
+146
+00:04:17,330 --> 00:04:18,136
+Type: curl,
+
+147
+00:04:18,136 --> 00:04:18,648
+dash s,
+
+148
+00:04:18,648 --> 00:04:19,747
+dash capital H,
+
+149
+00:04:19,747 --> 00:04:20,186
+quote,
+
+150
+00:04:20,186 --> 00:04:21,212
+X request I D,
+
+151
+00:04:21,212 --> 00:04:21,651
+colon,
+
+152
+00:04:21,651 --> 00:04:23,116
+demo dash forty-two,
+
+153
+00:04:23,116 --> 00:04:23,556
+quote,
+
+154
+00:04:23,556 --> 00:04:24,068
+dash O,
+
+155
+00:04:24,068 --> 00:04:25,606
+slash dev slash null,
+
+156
+00:04:25,606 --> 00:04:27,950
+then the address of product one.
+
+157
+00:04:28,500 --> 00:04:31,389
+The API writes that I D into its log.
+
+158
+00:04:31,389 --> 00:04:33,419
+Look at the last log line.
+
+159
+00:04:33,419 --> 00:04:34,278
+Type: tail,
+
+160
+00:04:34,278 --> 00:04:34,824
+dash N,
+
+161
+00:04:34,824 --> 00:04:35,136
+one,
+
+162
+00:04:35,136 --> 00:04:36,073
+API dot log.
+
+163
+00:04:36,623 --> 00:04:38,221
+There it is: the method,
+
+164
+00:04:38,221 --> 00:04:38,820
+the path,
+
+165
+00:04:38,820 --> 00:04:39,552
+the status,
+
+166
+00:04:39,552 --> 00:04:40,151
+the time,
+
+167
+00:04:40,151 --> 00:04:41,016
+and your I D.
+
+168
+00:04:41,016 --> 00:04:43,279
+When a customer reports a problem,
+
+169
+00:04:43,279 --> 00:04:46,607
+an I D like this finds the exact line in the logs.
+
+170
+00:04:47,157 --> 00:04:47,539
+Last,
+
+171
+00:04:47,539 --> 00:04:53,721
+a tiny API client: a script that asks four endpoints and prints each status code.
+
+172
+00:04:53,721 --> 00:04:56,011
+Type: dot slash codes dot S H.
+
+173
+00:04:56,561 --> 00:04:57,346
+Two hundred,
+
+174
+00:04:57,346 --> 00:04:58,132
+two hundred,
+
+175
+00:04:58,132 --> 00:04:58,984
+four oh four,
+
+176
+00:04:58,984 --> 00:04:59,769
+two hundred.
+
+177
+00:04:59,769 --> 00:05:04,091
+A script like this is a smoke test you can run after every deploy.
+
+178
+00:05:04,641 --> 00:05:08,204
+Stop the shop. Type: dot slash stop dot S H.
+
+179
+00:05:10,254 --> 00:05:12,707
+Curl is not the only tool for this job.
+
+180
+00:05:13,257 --> 00:05:15,289
+Your browser has developer tools.
+
+181
+00:05:15,289 --> 00:05:18,306
+The network tab shows every request a page makes,
+
+182
+00:05:18,306 --> 00:05:20,276
+with its headers and its timing.
+
+183
+00:05:20,826 --> 00:05:21,941
+Graphical clients,
+
+184
+00:05:21,941 --> 00:05:23,489
+such as Postman or Bruno,
+
+185
+00:05:23,489 --> 00:05:24,666
+save your requests,
+
+186
+00:05:24,666 --> 00:05:26,586
+so a whole team can share them.
+
+187
+00:05:27,136 --> 00:05:31,104
+Command line clients, like http ie, print prettier output.
+
+188
+00:05:31,654 --> 00:05:37,329
+And scripts: a few lines of curl, run after every deploy, turn testing into automation.
+
+189
+00:05:37,879 --> 00:05:39,042
+Pick any of them.
+
+190
+00:05:39,042 --> 00:05:41,644
+The ideas are always the same: method,
+
+191
+00:05:41,644 --> 00:05:41,986
+path,
+
+192
+00:05:41,986 --> 00:05:42,534
+headers,
+
+193
+00:05:42,534 --> 00:05:42,876
+body,
+
+194
+00:05:42,876 --> 00:05:43,355
+status,
+
+195
+00:05:43,355 --> 00:05:44,108
+and timing.
+
+196
+00:05:46,158 --> 00:05:48,931
+Your task, in your own Ubuntu virtual machine.
+
+197
+00:05:49,481 --> 00:05:51,983
+The lab is lab sixty-nine dot S H,
+
+198
+00:05:51,983 --> 00:05:55,735
+in the academy slash lab folder of git hub dot com,
+
+199
+00:05:55,735 --> 00:05:57,206
+slash it dash waves,
+
+200
+00:05:57,206 --> 00:05:58,898
+slash dev ops dash A I.
+
+201
+00:05:58,898 --> 00:06:00,590
+Install it like before,
+
+202
+00:06:00,590 --> 00:06:01,768
+then run lab up,
+
+203
+00:06:01,768 --> 00:06:05,225
+and work inside slash opt slash lab sixty-nine.
+
+204
+00:06:05,775 --> 00:06:08,971
+One: read the API version from a response header,
+
+205
+00:06:08,971 --> 00:06:11,123
+and write it in answers dot text,
+
+206
+00:06:11,123 --> 00:06:12,362
+like this: version,
+
+207
+00:06:12,362 --> 00:06:12,753
+colon,
+
+208
+00:06:12,753 --> 00:06:13,797
+then the number.
+
+209
+00:06:14,347 --> 00:06:17,126
+Two: ask for the product list as C S V,
+
+210
+00:06:17,126 --> 00:06:18,836
+using the accept header,
+
+211
+00:06:18,836 --> 00:06:21,259
+and save it in products dot C S V.
+
+212
+00:06:21,809 --> 00:06:24,220
+Three: time slash API slash fast,
+
+213
+00:06:24,220 --> 00:06:26,193
+and slash API slash report.
+
+214
+00:06:26,193 --> 00:06:29,189
+Write the slower one in answers dot text,
+
+215
+00:06:29,189 --> 00:06:30,650
+after the word slow,
+
+216
+00:06:30,650 --> 00:06:31,089
+colon.
+
+217
+00:06:31,639 --> 00:06:33,441
+Four: write smoke dot S H.
+
+218
+00:06:33,441 --> 00:06:35,452
+It takes an optional address,
+
+219
+00:06:35,452 --> 00:06:37,255
+and exits zero on success,
+
+220
+00:06:37,255 --> 00:06:39,057
+and non zero on any error.
+
+221
+00:06:39,057 --> 00:06:41,068
+Even when the server is down.
+
+222
+00:06:41,618 --> 00:06:45,565
+Five: send any request with the header X request I D,
+
+223
+00:06:45,565 --> 00:06:46,012
+colon,
+
+224
+00:06:46,012 --> 00:06:47,949
+lab sixty-nine dash trace,
+
+225
+00:06:47,949 --> 00:06:50,109
+so it appears in the API log.
+
+226
+00:06:50,659 --> 00:06:53,197
+Then run lab check. Five pass lines.
+
+227
+00:06:55,247 --> 00:06:57,231
+Six points, and you need all six.
+
+228
+00:06:57,781 --> 00:06:59,658
+The checker shows five pass lines.
+
+229
+00:07:00,208 --> 00:07:03,984
+You can read the request and the response in curl verbose output.
+
+230
+00:07:04,534 --> 00:07:06,433
+You can send a header, and read one.
+
+231
+00:07:06,983 --> 00:07:10,226
+You can measure an endpoint, and name the slow one with a number.
+
+232
+00:07:10,776 --> 00:07:15,981
+You can explain why curl exits zero on a four oh four, and how dash F changes that.
+
+233
+00:07:16,531 --> 00:07:19,262
+You ran lab down, and nothing is left listening.
+
+234
+00:07:19,812 --> 00:07:21,433
+To pass, you need all six.
+
+235
+00:07:23,483 --> 00:07:26,320
+Your turn, in your own Ubuntu virtual machine.
+
+236
+00:07:26,870 --> 00:07:29,089
+One: install the lab, and run lab up.
+
+237
+00:07:29,639 --> 00:07:31,964
+Two: read the headers, and write the version.
+
+238
+00:07:32,514 --> 00:07:34,733
+Three: save the C S V export.
+
+239
+00:07:35,283 --> 00:07:38,227
+Four: time both endpoints, and write the slow one.
+
+240
+00:07:38,777 --> 00:07:42,553
+Five: write smoke dot S H, and send your request I D.
+
+241
+00:07:43,103 --> 00:07:45,386
+Six: run lab check, then lab down.
+
+242
+00:07:45,936 --> 00:07:47,770
+Pause the video, and begin now.
+
+243
+00:08:03,320 --> 00:08:04,195
+Quick check.
+
+244
+00:08:04,745 --> 00:08:08,051
+What does curl verbose show you, and what do the two arrows mean?
+
+245
+00:08:08,601 --> 00:08:10,287
+How do you send a header with curl?
+
+246
+00:08:10,837 --> 00:08:14,741
+Why does curl exit zero on a four oh four, and what changes that?
+
+247
+00:08:15,291 --> 00:08:16,933
+What is a request I D for?
+
+248
+00:08:17,483 --> 00:08:19,957
+Objective covered: M C zero eight,
+
+249
+00:08:19,957 --> 00:08:24,395
+objective three: testing endpoints with curl and API clients.
+
+250
+00:08:24,945 --> 00:08:27,015
+Pause the video, and answer out loud.
+
+251
+00:08:37,565 --> 00:08:41,618
+Next: who are you? Authentication, tokens, and keeping secrets.
+
+252
+00:08:42,168 --> 00:08:45,496
+If this helped, like, share and subscribe, so you do not miss it.
