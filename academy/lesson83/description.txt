@@ -1,0 +1,25 @@
+Lesson 83 of the DevOps Engineering Bootcamp, the eighth lesson of Java Fundamentals for DevOps. When a Java program will not start, the error looks long and scary, but the first line names the problem, and the cause is almost always one of four. Unsupported class version: the class was built by a newer Java than the one running it, so you rebuild it with the Java you have. Out of memory, Java heap space: the program needs more than its limit, so you raise the limit with the X M X option. Bind exception, address already in use: another program owns the port, so you free it or pick another. No class definition found: a class the program needs is missing from the class path, so you put its jar on the dash cp option. On a real Ubuntu machine you run four broken launcher scripts, read only the top lines of each error, find the cause with a one line command, change one thing, and run again until each prints OK. Then you do the lab task yourself: five checks, all must pass.
+
+Chapters
+0:00 Four ways Java fails
+0:24 Four failures
+1:06 Version and memory
+2:39 Port and class path
+4:09 How to diagnose
+4:28 Your lab task
+5:16 Pass or fail rubric
+5:37 Your turn
+6:16 Quick check
+
+Objectives covered: MC09-O08 (diagnose version mismatch, memory, port and classpath failures)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab83.sh and shortcuts83.sh) and academy/lesson83 (INSTALL.txt). Install with: sudo install -m 755 lab83.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts83.sh (without it, use sudo lab83.sh up, check, down). You need an Ubuntu virtual machine with root and a JDK (for example: sudo apt install openjdk-21-jdk-headless). The lab writes four small programs and their launcher scripts into /opt/lab83; lab down removes the folder. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with OpenJDK 21, run in a private mount and network setup on the recording computer. The ideas, task, rubric and quiz screens are labelled illustrations, not captures. The version mismatch is staged: this computer has only one Java, so the lab raises the version number inside the class file to 69, which is a newer Java than 21, to produce the same error you would see with a real newer compiler. The other three failures are real: a real out of memory, a real second server on a taken port, and a real missing jar. Exact error text depends on your Java version. The lab was run end to end before this lesson: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing behind. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. File names are invented, and lab is a short name I made for sudo lab83.sh. Typing is timed to the narration. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Java Tests and Build Outputs: Red, Green, Exit Codes https://youtu.be/zCvIEzF5UJI
+Next: The Java mastery lab: four faults, one report.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #java #troubleshooting #classpath #devopsbootcamp

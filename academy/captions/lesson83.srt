@@ -1,0 +1,491 @@
+1
+00:00:00,500 --> 00:00:05,407
+Your Java app will not start. The error is long, and scary. Most people panic.
+
+2
+00:00:05,957 --> 00:00:08,223
+But a Java failure is a short story.
+
+3
+00:00:08,223 --> 00:00:09,735
+The first line names it.
+
+4
+00:00:09,735 --> 00:00:12,442
+And the cause is almost always one of four.
+
+5
+00:00:12,992 --> 00:00:15,956
+Today you meet all four: the wrong Java version,
+
+6
+00:00:15,956 --> 00:00:16,820
+out of memory,
+
+7
+00:00:16,820 --> 00:00:18,178
+a port already in use,
+
+8
+00:00:18,178 --> 00:00:19,413
+and a missing class.
+
+9
+00:00:19,963 --> 00:00:22,139
+You read each error, name it, and fix it.
+
+10
+00:00:24,189 --> 00:00:26,173
+Four failures, four first lines.
+
+11
+00:00:26,723 --> 00:00:26,985
+One.
+
+12
+00:00:26,985 --> 00:00:28,691
+Unsupported class version.
+
+13
+00:00:28,691 --> 00:00:32,626
+The class was built by a newer Java than the one running it.
+
+14
+00:00:32,626 --> 00:00:34,659
+Fix: rebuild it with this Java.
+
+15
+00:00:35,209 --> 00:00:35,500
+Two.
+
+16
+00:00:35,500 --> 00:00:36,520
+Out of memory,
+
+17
+00:00:36,520 --> 00:00:37,685
+Java heap space.
+
+18
+00:00:37,685 --> 00:00:40,526
+The program needed more than its limit.
+
+19
+00:00:40,526 --> 00:00:43,148
+Fix: a bigger limit with dash X M X,
+
+20
+00:00:43,148 --> 00:00:44,532
+or less memory use.
+
+21
+00:00:45,082 --> 00:00:45,485
+Three.
+
+22
+00:00:45,485 --> 00:00:47,030
+Address already in use,
+
+23
+00:00:47,030 --> 00:00:48,173
+a bind exception.
+
+24
+00:00:48,173 --> 00:00:50,794
+Another program already owns that port.
+
+25
+00:00:50,794 --> 00:00:52,070
+Fix: free the port,
+
+26
+00:00:52,070 --> 00:00:53,146
+or pick another.
+
+27
+00:00:53,696 --> 00:00:54,050
+Four.
+
+28
+00:00:54,050 --> 00:00:55,894
+No class definition found.
+
+29
+00:00:55,894 --> 00:00:59,511
+A class the program needs is not on the class path.
+
+30
+00:00:59,511 --> 00:01:01,568
+Fix: put its jar on dash C P.
+
+31
+00:01:02,118 --> 00:01:04,614
+Read the first line. It names the problem.
+
+32
+00:01:06,664 --> 00:01:09,651
+Go to the shop folder. Type: CD, shop.
+
+33
+00:01:10,201 --> 00:01:15,854
+Failure one. Type: sh run-version.sh
+
+34
+00:01:15,984 --> 00:01:22,107
+Unsupported class version. Built as version sixty-nine. This Java knows up to sixty-five.
+
+35
+00:01:22,657 --> 00:01:27,777
+Which Java is running? Type: java --version | head -1
+
+36
+00:01:27,907 --> 00:01:31,619
+Java twenty-one. It runs class versions up to sixty-five.
+
+37
+00:01:32,169 --> 00:01:41,897
+Which version is the class? Type: od -An -tu1 -j7 -N1 ver/classes/cloudcart/Greeter.class
+
+38
+00:01:42,027 --> 00:01:42,766
+Sixty-nine.
+
+39
+00:01:42,766 --> 00:01:44,446
+That is Java twenty-five.
+
+40
+00:01:44,446 --> 00:01:47,403
+In this lab I raised that number on purpose,
+
+41
+00:01:47,403 --> 00:01:50,091
+because this computer has only one Java.
+
+42
+00:01:50,641 --> 00:01:53,928
+The fix: rebuild it from source with this Java.
+
+43
+00:01:53,928 --> 00:01:57,915
+Type: javac -d ver/classes ver/src/cloudcart/Greeter.java
+
+44
+00:01:58,045 --> 00:02:02,184
+Run it again. Type: sh run-version.sh
+
+45
+00:02:02,314 --> 00:02:04,618
+O K. Built for the Java that runs it.
+
+46
+00:02:05,168 --> 00:02:09,264
+Failure two. Type: sh run-memory.sh
+
+47
+00:02:09,394 --> 00:02:14,045
+Out of memory error. Java heap space. The program wanted more than its limit.
+
+48
+00:02:14,595 --> 00:02:19,331
+What is the limit? Type: grep Xmx run-memory.sh
+
+49
+00:02:19,461 --> 00:02:24,794
+Dash X M X sixteen M. Sixteen megabytes. This program needs sixty-four.
+
+50
+00:02:25,344 --> 00:02:30,208
+Raise it with sed. Type: sed -i 's/-Xmx16m/-Xmx256m/' run-memory.sh
+
+51
+00:02:30,338 --> 00:02:34,455
+Run it again. Type: sh run-memory.sh
+
+52
+00:02:34,585 --> 00:02:37,380
+Two failures fixed, each by reading one line.
+
+53
+00:02:39,430 --> 00:02:42,417
+Go to the shop folder. Type: CD, shop.
+
+54
+00:02:42,967 --> 00:02:52,289
+Failure three. Type: sh run-port.sh 2>&1 | head -4
+
+55
+00:02:52,419 --> 00:02:57,582
+The first server got the port. The second hit a bind exception. Address already in use.
+
+56
+00:02:58,132 --> 00:03:02,655
+Who asked for what? Type: grep Server run-port.sh
+
+57
+00:03:02,785 --> 00:03:06,838
+Both servers ask for port eighteen oh eight three. Only one can have it.
+
+58
+00:03:07,388 --> 00:03:09,410
+Give the second one its own port.
+
+59
+00:03:09,410 --> 00:03:13,148
+Type: sed -i 's/Server 18083 ||/Server 18084 ||/' run-port.sh
+
+60
+00:03:13,278 --> 00:03:17,225
+Run it again. Type: sh run-port.sh
+
+61
+00:03:17,355 --> 00:03:19,381
+Two servers, two ports. Fixed.
+
+62
+00:03:19,931 --> 00:03:29,318
+Failure four. Type: sh run-classpath.sh 2>&1 | head -4
+
+63
+00:03:29,448 --> 00:03:30,993
+No class definition found.
+
+64
+00:03:30,993 --> 00:03:32,895
+The tool needs the helper class,
+
+65
+00:03:32,895 --> 00:03:35,272
+and the helper is not on the class path.
+
+66
+00:03:35,822 --> 00:03:41,241
+What class path does it use? Type: grep java run-classpath.sh
+
+67
+00:03:41,371 --> 00:03:43,888
+Only the classes folder. Where is the helper?
+
+68
+00:03:44,438 --> 00:03:48,065
+Look in the lib folder. Type: ls cp/lib
+
+69
+00:03:48,195 --> 00:03:52,077
+Helper dot jar. It exists. It is just not on the class path.
+
+70
+00:03:52,627 --> 00:03:53,028
+Add it.
+
+71
+00:03:53,028 --> 00:03:57,833
+Type: sed -i 's|-cp cp/classes |-cp cp/classes:cp/lib/helper.jar |' run-classpath.sh
+
+72
+00:03:59,963 --> 00:04:04,208
+Run it again. Type: sh run-classpath.sh
+
+73
+00:04:04,338 --> 00:04:07,730
+Four failures. Four first lines. Four small fixes.
+
+74
+00:04:09,780 --> 00:04:11,636
+How to diagnose, in this order.
+
+75
+00:04:12,186 --> 00:04:15,279
+First, read the first error line. It names the failure.
+
+76
+00:04:15,829 --> 00:04:20,715
+Second, find the cause. The version, the limit, the owner of the port, or the class path.
+
+77
+00:04:21,265 --> 00:04:23,441
+Third, change one thing, and run again.
+
+78
+00:04:23,991 --> 00:04:26,615
+One change at a time. Then you know what fixed it.
+
+79
+00:04:28,665 --> 00:04:29,518
+Your lab task.
+
+80
+00:04:29,518 --> 00:04:32,929
+Lab eighty-three gives you four broken launcher scripts.
+
+81
+00:04:32,929 --> 00:04:34,574
+Lab check judges your work.
+
+82
+00:04:35,124 --> 00:04:37,218
+It lives at git hub dot com,
+
+83
+00:04:37,218 --> 00:04:38,713
+slash it dash waves,
+
+84
+00:04:38,713 --> 00:04:40,432
+slash dev ops dash A I,
+
+85
+00:04:40,432 --> 00:04:41,255
+in academy,
+
+86
+00:04:41,255 --> 00:04:41,554
+lab,
+
+87
+00:04:41,554 --> 00:04:43,423
+lab eighty-three dot S H.
+
+88
+00:04:43,973 --> 00:04:47,450
+One: run dash version. Rebuild the class with this Java.
+
+89
+00:04:48,000 --> 00:04:53,035
+Two: run dash memory. Raise the heap limit to two hundred fifty-six megabytes.
+
+90
+00:04:53,585 --> 00:04:57,894
+Three: run dash port. Give the second server port eighteen oh eight four.
+
+91
+00:04:58,444 --> 00:05:02,284
+Four: run dash class path. Put the helper jar on the class path.
+
+92
+00:05:02,834 --> 00:05:07,677
+Five: diag dot text. Four lines, one exception name for each failure.
+
+93
+00:05:08,227 --> 00:05:08,751
+Install,
+
+94
+00:05:08,751 --> 00:05:09,537
+then lab up,
+
+95
+00:05:09,537 --> 00:05:10,192
+lab check,
+
+96
+00:05:10,192 --> 00:05:11,044
+and lab down,
+
+97
+00:05:11,044 --> 00:05:11,830
+like before.
+
+98
+00:05:11,830 --> 00:05:14,712
+The shortcut file is shortcuts eighty-three.
+
+99
+00:05:16,762 --> 00:05:18,831
+Pass or fail. You need all six.
+
+100
+00:05:19,381 --> 00:05:21,195
+Five pass lines in lab check.
+
+101
+00:05:21,745 --> 00:05:24,305
+You can name each exception from its first line.
+
+102
+00:05:24,855 --> 00:05:26,647
+You can explain a version mismatch.
+
+103
+00:05:27,197 --> 00:05:28,818
+You can explain a port in use.
+
+104
+00:05:29,368 --> 00:05:31,544
+You can explain a missing class path entry.
+
+105
+00:05:32,094 --> 00:05:34,014
+lab down, nothing left behind.
+
+106
+00:05:34,564 --> 00:05:35,865
+To pass, all six.
+
+107
+00:05:37,915 --> 00:05:40,752
+Your turn, in your own Ubuntu virtual machine.
+
+108
+00:05:41,302 --> 00:05:43,393
+One: lab up, and read the task file.
+
+109
+00:05:43,943 --> 00:05:47,314
+Two: run each script, and read only the first error line.
+
+110
+00:05:47,864 --> 00:05:49,997
+Three: fix the version and the memory.
+
+111
+00:05:50,547 --> 00:05:52,659
+Four: fix the port and the class path.
+
+112
+00:05:53,209 --> 00:05:55,918
+Five: write diag dot text, and lab check.
+
+113
+00:05:56,468 --> 00:05:59,050
+Six: lab down, and prove nothing is left.
+
+114
+00:05:59,600 --> 00:06:01,434
+Pause the video, and begin now.
+
+115
+00:06:16,984 --> 00:06:17,859
+Quick check.
+
+116
+00:06:18,409 --> 00:06:21,545
+Which exception means a class was built by a newer Java?
+
+117
+00:06:22,095 --> 00:06:23,823
+What does dash X M X set?
+
+118
+00:06:24,373 --> 00:06:26,229
+What does address already in use mean?
+
+119
+00:06:26,779 --> 00:06:29,125
+What does no class definition found point to?
+
+120
+00:06:29,675 --> 00:06:33,323
+Objective covered: M C zero nine, objective eight.
+
+121
+00:06:33,873 --> 00:06:35,943
+Pause the video, and answer out loud.
+
+122
+00:06:46,493 --> 00:06:48,455
+Next: the Java mastery lab.
+
+123
+00:06:49,005 --> 00:06:52,333
+If this helped, like, share and subscribe, so you do not miss it.

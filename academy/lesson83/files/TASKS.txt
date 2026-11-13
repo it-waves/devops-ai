@@ -1,0 +1,12 @@
+Tasks (work inside /opt/lab83, then run: lab check)
+Four scripts fail. For each one: run it, read the first error line, find the cause, fix it so it prints OK.
+1  sh run-version.sh     the class was built for a newer Java. Rebuild it from ver/src with this JDK:
+                         javac -d ver/classes ver/src/cloudcart/Greeter.java
+2  sh run-memory.sh      the heap limit is too small. Edit the script: raise -Xmx16m to -Xmx256m
+3  sh run-port.sh        two servers want the same port. Edit the script: the second server gets 18084
+4  sh run-classpath.sh   a dependency jar is missing from -cp. Edit the script: -cp cp/classes:cp/lib/helper.jar
+5  diag.txt, exactly these four lines (exception name per fault):
+     version: UnsupportedClassVersionError
+     memory: OutOfMemoryError
+     port: BindException
+     classpath: NoClassDefFoundError

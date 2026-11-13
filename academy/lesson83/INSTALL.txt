@@ -1,0 +1,16 @@
+Install the lab (needs an Ubuntu virtual machine with root and a JDK):
+  sudo apt install -y openjdk-21-jdk-headless      # skip if jar --version already works
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab83.sh /usr/local/sbin/
+  source shortcuts83.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab83: four programs, four launcher scripts, and TASKS.txt
+  lab check               # five FAIL lines at the start; your goal is five PASS lines
+  lab down                # cleanup when finished
+Without the shortcut, use: sudo lab83.sh up | check | down
+Your five tasks (inside /opt/lab83; also written in TASKS.txt). For each script: run it, read the first error line, fix the cause, run again until it prints OK.
+  1 sh run-version.sh     rebuild the class with this JDK: javac -d ver/classes ver/src/cloudcart/Greeter.java
+  2 sh run-memory.sh      raise -Xmx16m to -Xmx256m in the script
+  3 sh run-port.sh        give the second server port 18084 in the script
+  4 sh run-classpath.sh   add cp/lib/helper.jar to -cp in the script
+  5 diag.txt with exactly four lines: version: UnsupportedClassVersionError   memory: OutOfMemoryError   port: BindException   classpath: NoClassDefFoundError
+Run it only in your own virtual machine. lab down removes /opt/lab83; remove the installed script with: sudo rm /usr/local/sbin/lab83.sh
