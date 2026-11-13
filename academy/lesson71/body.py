@@ -1,0 +1,93 @@
+RB = 'REAL RECORDING  ·  Ubuntu 24.04'
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('h1', "Your app runs on your laptop, on a test server, and in production. Same code, three different places. How does it know which one it is in?"),
+  c('h2', "If you edit the code for each place, you will ship the wrong settings, sooner or later."),
+  c('h3', "Today you learn four ideas: configuration, which lives outside the code. Environment variables, which override it. Feature flags, which switch features on and off. And fail fast, which stops a bad setting at the door."),
+  c('h4', "Change behaviour, without changing code. That is the whole trick."),
+ ]),
+ ('layers', [
+  k('y1', "Go into the shop. Type: C D, cloud cart."),
+  k('y2', "Start it. Type: dot slash start dot S H."),
+  c('y3', "This version has a settings file. Show it. Type: cat, app dot conf.", "This version has a settings file. Show it. Type: cat, app dot conf."),
+  c('y4', "Plain text. Key, equals, value. A comment, a store name, and a currency. No code, so anyone can read it, and nobody needs to recompile anything."),
+  c('y5', "Now ask the running A P I what it actually uses. Type: curl, dash s, the address, slash A P I slash config, pipe, J Q.", "Now ask the running A P I what it actually uses. Type: curl, dash s, the address, slash A P I slash config, pipe, J Q."),
+  c('y6', "Look at the brackets. Store name and currency come from app dot conf. But port and flag discount say default. Nobody set them, so the value written in the code is used."),
+  c('y7', "So there are three layers: the default in the code, the settings file, and, as you will see next, the environment."),
+ ]),
+ ('env', [
+  k('e1', "Same shop, new session. Go in. Type: C D, cloud cart."),
+  c('e2', "An environment variable is a setting you hand to one program, when you start it. Put the variable before the command. Type: store name equals, blue shop in quotes, then dot slash start dot S H.", "An environment variable is a setting you hand to one program, when you start it. Put the variable before the command. Type: STORE_NAME equals, quote, Blue Shop, quote, then dot slash start dot S H."),
+  c('e3', "Nothing in the code changed. Nothing in app dot conf changed. Ask the A P I again."),
+  c('e4', "Same command as before. Type: curl, dash s, the address, slash A P I slash config, pipe, J Q.", "Same command as before. Type: curl, dash s, the address, slash A P I slash config, pipe, J Q."),
+  c('e5', "Blue Shop, and the bracket says environment. The environment beats the settings file. That is the order of power: environment, then file, then default."),
+  c('e6', "The variable lived only for that one start. Start again with no variable. Type: dot slash start dot S H.", "The variable lived only for that one start. Start again with no variable. Type: dot slash start dot S H."),
+  c('e7', "Check the store name once more. Type: curl, dash s, the config address, pipe, J Q, dash R, dot store name.", "Check the store name once more. Type: curl, dash s, the config address, pipe, J Q, dash R, dot store name."),
+  c('e8', "Back to the file value. Same program, same file, different environment, different behaviour. That is how one build runs in every place."),
+ ]),
+ ('flags', [
+  k('f1', "Go into the shop. Type: C D, cloud cart."),
+  k('f1a', "Start it. Type: dot slash start dot S H."),
+  c('f2', "Now a feature flag: a setting that turns a feature on or off. First, how does product one look today? Type: curl, dash s, the products address, pipe, J Q, dash C, dot, bracket, zero, close bracket.", "Now a feature flag: a setting that turns a feature on or off. First, how does product one look today? Type: curl, dash s, the products address, pipe, J Q, dash C, quote, dot, bracket, zero, close bracket, quote."),
+  c('f3', "The backpack costs thirty-nine dollars. The new discount feature is already in the code, but the flag is off, so nobody sees it."),
+  c('f4', "Switch it on, with no new code. Start with the flag. Type: flag discount equals on, then dot slash start dot S H.", "Switch it on, with no new code. Start with the flag. Type: FLAG_DISCOUNT equals on, then dot slash start dot S H."),
+  c('f5', "Look at the backpack again. Same command as before.", "Look at the backpack again. Same command as before."),
+  c('f6', "Thirty-five ten. Ten percent off. The feature is live."),
+  c('f7', "This is why teams love flags. You can ship code that is switched off, turn it on for everyone, or turn it back off in seconds, if something breaks. Deploying and releasing become two separate decisions."),
+ ]),
+ ('failfast', [
+  k('x1', "Go into the shop. Type: C D, cloud cart."),
+  c('x2', "What if someone sets a bad value? Start the A P I by hand, with a port that is not a number. Type: port equals A B C, python three, A P I dot P Y.", "What if someone sets a bad value? Start the A P I by hand, with a port that is not a number. Type: PORT equals A B C, python three, A P I dot P Y."),
+  c('x3', "It refuses to start, and it says exactly why: port must be a number, got A B C. Failing fast, with a clear message, is far better than starting half broken."),
+  c('x4', "Check how it ended. Type: echo, dollar, question mark.", "Check how it ended. Type: echo, dollar, question mark."),
+  c('x5', "Exit code one. Anything other than zero means failure, and that is what lets a deploy pipeline stop. Validate your settings at startup, and never guess."),
+ ]),
+ ('models', [
+  c('m1', "Let us put the ideas together."),
+  c('m2', "Configuration: settings that differ between places belong outside the code. A file, or the environment."),
+  c('m3', "Order of power: the environment beats the file, and the file beats the default. Learn the order of your tool, because it decides which value wins."),
+  c('m4', "Same build everywhere. You build once, then run it in test and in production, with different settings. This idea is called the twelve factor app."),
+  c('m5', "Feature flags: ship code switched off, release by flipping a flag, and roll back by flipping it back. Remove old flags, so they do not pile up."),
+  c('m6', "Secrets are configuration too, but special: they never go in the settings file, and never in git. Use a private file or a secrets manager."),
+  c('m7', "And fail fast. Check every setting at startup, and refuse to run with a bad one."),
+  c('m8', "In real systems, tools like docker, kubernetes, and the cloud inject these variables for you. The idea stays exactly the same."),
+ ]),
+ ('task', [
+  c('k1', "Your task, in your own Ubuntu virtual machine."),
+  k('k2', "The lab is lab seventy-one dot S H, in the academy slash lab folder of git hub dot com, slash it dash waves, slash dev ops dash A I. Install it like before, then run lab up, and work inside slash opt slash lab seventy-one."),
+  c('k3', "One: start the A P I with store name set to Blue Shop in the environment, and save the config answer in E N V dot text."),
+  c('k4', "Two: start it with the discount flag on, and save the products answer in flag dot text."),
+  c('k5', "Three: start the A P I by hand with a bad port, and write the exit code in answers dot text, like this: fail fast, colon, then the number."),
+  c('k6', "Four: change the currency in app dot conf to E U R, and restart with no variables."),
+  c('k7', "Five: do all of it without editing a single line of A P I dot P Y."),
+  c('k8', "Then run lab check. Five pass lines."),
+ ]),
+ ('rubric', [
+  c('q1', "Six points, and you need all six."),
+  c('q2', "The checker shows five pass lines."), c('q3', "You can explain why settings live outside the code."),
+  c('q4', "You can give the order of power: environment, file, default."),
+  c('q5', "You can explain a feature flag, and why it separates deploy from release."),
+  c('q6', "You can explain fail fast, and read an exit code."),
+  c('q7', "You ran lab down, and nothing is left listening."), c('q8', "To pass, you need all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine."),
+  c('z2', "One: install the lab, and run lab up."),
+  c('z3', "Two: override the store name, and save the config."),
+  c('z4', "Three: switch on the flag, and save the products."),
+  c('z5', "Four: break the port, and write the exit code."),
+  c('z6', "Five: set the currency in the file, then restart."),
+  c('z7', "Six: run lab check, then lab down."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "Which wins: the environment, the settings file, or the default?"), c('f13', "How do you switch a feature on without deploying new code?"),
+  c('f14', "Why is the same build in every environment a good idea?"), c('f15', "What should a program do when it is given a bad setting?"),
+  c('f16', "Objective covered: M C zero eight, objective five: configuration, environment variables, and feature flags."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next: stateful and stateless services, and persistent data."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'y5': 1.0, 'e2': 1.5, 'e4': 1.0, 'e6': 1.5, 'f2': 1.0, 'f4': 1.5, 'f5': 1.8, 'x2': 1.5, 'h4': 0.5, 'y7': 0.5, 'e8': 0.5, 'f7': 0.5, 'x5': 0.5, 'm8': 0.5, 'k8': 0.5, 'q8': 0.5, 'z8': 14.0, 'f17': 10.0}
+CHAP = {'layers': 'Config: three layers', 'env': 'Environment variables', 'flags': 'Feature flags', 'failfast': 'Fail fast', 'models': 'Twelve factor ideas', 'task': 'Your lab task', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

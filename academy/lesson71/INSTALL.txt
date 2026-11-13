@@ -1,0 +1,17 @@
+Install the lab (needs an Ubuntu virtual machine with root, python3 and curl):
+  sudo apt install -y python3 curl jq    # skip if already installed
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab71.sh /usr/local/sbin/
+  source shortcuts71.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab71 and starts CloudCart with settings: the API on 127.0.0.1:5000
+  lab check               # five FAIL lines at the start; your goal is five PASS lines
+  lab down                # stops the app and removes /opt/lab71
+Without the shortcut, use: sudo lab71.sh up | check | down | status
+Your mission, working inside /opt/lab71 (do not edit api.py):
+  1. start with  STORE_NAME="Blue Shop" ./start.sh  and save  curl -s localhost:5000/api/config  in env.txt
+  2. start with  FLAG_DISCOUNT=on ./start.sh  and save  curl -s localhost:5000/api/products  in flag.txt
+  3. run  PORT=abc python3 api.py  and add its exit code to answers.txt:  failfast: N
+  4. set CURRENCY=EUR in app.conf, then restart with no variables:  ./start.sh
+  5. api.py must stay exactly as it came
+Commands you will use: VAR=value ./start.sh, curl -s URL, echo $?, jq (needed)
+Run it only in your own virtual machine. It uses ports 5000 and 8080 on 127.0.0.1 and creates only /opt/lab71. Remove the installed script with: sudo rm /usr/local/sbin/lab71.sh

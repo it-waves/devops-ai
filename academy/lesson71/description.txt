@@ -1,0 +1,26 @@
+Lesson 71 of the DevOps Engineering Bootcamp, the fifth lesson of the Application Architecture and APIs masterclass. Your app runs on a laptop, a test server and in production: same code, three different places. How does it know which one it is in? Here you give CloudCart, the tiny shop from the last lessons, real settings, and watch them work with real commands. Configuration lives outside the code, in a plain settings file. Environment variables override the file when you start the program. You see the order of power: environment, then file, then default. A feature flag switches a feature on or off without new code, so deploying and releasing become two separate decisions. And fail fast: a bad setting stops the program at the door with a clear message and a non-zero exit code. You finish with a lab, a checker, a pass or fail rubric and your turn.
+
+Chapters
+0:00 Same code, three places
+0:34 Config: three layers
+1:26 Environment variables
+2:37 Feature flags
+3:41 Fail fast
+4:23 Twelve factor ideas
+5:25 Your lab task
+6:25 Pass or fail rubric
+6:52 Your turn
+7:31 Quick check
+
+Objectives covered: MC08-O05 Explain configuration, environment variables, and feature flags.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab71.sh and shortcuts71.sh) and academy/lesson71 (INSTALL.txt). Install with: sudo install -m 755 lab71.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts71.sh (without it, use sudo lab71.sh up, check, down). You need an Ubuntu virtual machine with root, python3, curl and jq. It uses ports 5000 and 8080 on 127.0.0.1. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount and network setup on the recording computer. CloudCart is a tiny teaching app written for this course, using Python and an SQLite file, not a production system. Its configuration and feature flag are simplified teaching versions: real systems often use a flag service, a secrets manager and orchestrator settings, but the idea is the same. The twelve factor summary is a labelled illustration, not a capture. The lab was run end to end before this lesson: it starts with all five checks failing, doing the tasks makes all five pass, and lab down leaves nothing behind. Your own run is unverified until you do it. The lab file names are invented, and lab is a short name I made for sudo lab71.sh. Typing is timed to the narration. The narration is synthetic speech.
+
+Previous lesson: API authentication explained https://youtu.be/A_5nNcmqsU8
+Next lesson: stateful and stateless services, and persistent data.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #api #environmentvariables #featureflags #twelvefactor #devopsbootcamp
