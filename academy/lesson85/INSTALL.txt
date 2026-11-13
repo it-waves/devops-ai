@@ -1,0 +1,16 @@
+Install the lab (needs an Ubuntu virtual machine with root, a JDK, Maven and internet access to Maven Central):
+  sudo apt install -y openjdk-21-jdk-headless maven
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab85.sh /usr/local/sbin/
+  source shortcuts85.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab85: a project that will not build, and TASKS.txt
+  lab check               # five FAIL lines at the start; your goal is five PASS lines
+  lab down                # cleanup when finished
+Without the shortcut, use: sudo lab85.sh up | check | down
+Your five tasks (inside /opt/lab85/shop; also written in /opt/lab85/TASKS.txt):
+  1 pom.xml coordinates   groupId com.cloudcart, artifactId cart-api, version 1.0.0
+  2 standard layout       move the source to src/main/java/cloudcart/ and the test to src/test/java/cloudcart/
+  3 dependencies          commons-lang3 (org.apache.commons) 3.14.0, and junit (junit:junit) 4.13.2 with scope test
+  4 build                 mvn -B package ends with BUILD SUCCESS and makes target/cart-api-1.0.0.jar
+  5 tree.txt              mvn -B dependency:tree > tree.txt
+Run it only in your own virtual machine. lab down removes /opt/lab85; remove the installed script with: sudo rm /usr/local/sbin/lab85.sh

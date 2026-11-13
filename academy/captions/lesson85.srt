@@ -1,0 +1,619 @@
+1
+00:00:00,500 --> 00:00:05,812
+You get a Java project. You type M V N package. And it builds. What just happened?
+
+2
+00:00:06,362 --> 00:00:07,646
+Maven read one file,
+
+3
+00:00:07,646 --> 00:00:08,160
+the pom.
+
+4
+00:00:08,160 --> 00:00:09,765
+It knew the project name,
+
+5
+00:00:09,765 --> 00:00:10,536
+the folders,
+
+6
+00:00:10,536 --> 00:00:11,435
+the libraries,
+
+7
+00:00:11,435 --> 00:00:12,719
+and the build steps.
+
+8
+00:00:13,269 --> 00:00:15,367
+Today you learn to read that file,
+
+9
+00:00:15,367 --> 00:00:17,342
+the folder layout Maven expects,
+
+10
+00:00:17,342 --> 00:00:19,008
+and how it finds a library.
+
+11
+00:00:19,558 --> 00:00:21,755
+Then you fix a broken project yourself.
+
+12
+00:00:22,305 --> 00:00:23,364
+One honest note.
+
+13
+00:00:23,364 --> 00:00:26,605
+My recording computer cannot reach Maven Central,
+
+14
+00:00:26,605 --> 00:00:29,846
+so these demos use a local copy of the libraries.
+
+15
+00:00:29,846 --> 00:00:32,823
+The commands are the same ones you will type.
+
+16
+00:00:34,373 --> 00:00:37,850
+A pom is an X M L file. Four parts matter first.
+
+17
+00:00:38,400 --> 00:00:38,710
+One.
+
+18
+00:00:38,710 --> 00:00:39,639
+Coordinates.
+
+19
+00:00:39,639 --> 00:00:40,413
+Group I D,
+
+20
+00:00:40,413 --> 00:00:41,420
+artifact I D,
+
+21
+00:00:41,420 --> 00:00:42,349
+and version.
+
+22
+00:00:42,349 --> 00:00:43,046
+Together,
+
+23
+00:00:43,046 --> 00:00:43,510
+G A V.
+
+24
+00:00:43,510 --> 00:00:45,291
+They name your project,
+
+25
+00:00:45,291 --> 00:00:46,685
+and every library,
+
+26
+00:00:46,685 --> 00:00:47,382
+uniquely.
+
+27
+00:00:47,932 --> 00:00:51,537
+Two. Properties. Settings like the Java release, written once.
+
+28
+00:00:52,087 --> 00:00:52,467
+Three.
+
+29
+00:00:52,467 --> 00:00:53,290
+Dependencies.
+
+30
+00:00:53,290 --> 00:00:54,747
+The libraries you need.
+
+31
+00:00:54,747 --> 00:00:57,343
+Each one is named by its own coordinates,
+
+32
+00:00:57,343 --> 00:00:58,103
+and a scope.
+
+33
+00:00:58,653 --> 00:01:03,389
+Four. Build. The plugins that compile, test and package, with their versions pinned.
+
+34
+00:01:03,939 --> 00:01:04,820
+And one rule.
+
+35
+00:01:04,820 --> 00:01:06,854
+Convention over configuration.
+
+36
+00:01:06,854 --> 00:01:09,226
+Put files where Maven expects them,
+
+37
+00:01:09,226 --> 00:01:11,192
+and you write almost nothing.
+
+38
+00:01:13,242 --> 00:01:15,104
+Where do libraries live?
+
+39
+00:01:15,104 --> 00:01:16,345
+In a repository.
+
+40
+00:01:16,345 --> 00:01:18,595
+A repository is only folders,
+
+41
+00:01:18,595 --> 00:01:20,457
+shown here over H T T P.
+
+42
+00:01:20,457 --> 00:01:22,086
+This is a local copy,
+
+43
+00:01:22,086 --> 00:01:23,482
+not Maven Central.
+
+44
+00:01:24,032 --> 00:01:28,064
+The group I D, org dot apache dot commons, becomes folders.
+
+45
+00:01:33,114 --> 00:01:35,887
+Next, the artifact I D, commons lang three.
+
+46
+00:01:36,437 --> 00:01:39,083
+Then the version, three point fourteen point zero.
+
+47
+00:01:39,933 --> 00:01:41,012
+Inside: the jar,
+
+48
+00:01:41,012 --> 00:01:41,552
+the pom,
+
+49
+00:01:41,552 --> 00:01:42,834
+and checksum files.
+
+50
+00:01:42,834 --> 00:01:44,859
+Every library has its own pom,
+
+51
+00:01:44,859 --> 00:01:46,546
+with its own coordinates.
+
+52
+00:01:49,996 --> 00:01:54,433
+Maven Central uses this exact layout. Same folders, same names.
+
+53
+00:01:56,383 --> 00:01:59,540
+Go to the demo project. Type: CD, demo.
+
+54
+00:02:00,090 --> 00:02:04,912
+Read the top of the pom. Type: head -16 pom.xml
+
+55
+00:02:05,042 --> 00:02:06,174
+The coordinates.
+
+56
+00:02:06,174 --> 00:02:07,518
+Com dot cloud cart,
+
+57
+00:02:07,518 --> 00:02:08,438
+greeter demo,
+
+58
+00:02:08,438 --> 00:02:10,278
+one point zero point zero.
+
+59
+00:02:10,278 --> 00:02:12,188
+That is the project's name.
+
+60
+00:02:12,738 --> 00:02:17,496
+Maven expects standard folders. Type: find src -type f
+
+61
+00:02:17,626 --> 00:02:22,042
+Main code under source, main, java. Tests under source, test, java.
+
+62
+00:02:22,592 --> 00:02:27,306
+Which Maven is this? Type: mvn -v | head -1
+
+63
+00:02:27,436 --> 00:02:29,506
+Maven three point nine point eleven.
+
+64
+00:02:30,056 --> 00:02:36,114
+Build it. Type: mvn -B -q package 2>&1 | head -3
+
+65
+00:02:36,244 --> 00:02:36,883
+It fails.
+
+66
+00:02:36,883 --> 00:02:41,782
+The package org dot apache dot commons dot lang three does not exist.
+
+67
+00:02:41,782 --> 00:02:45,332
+The code imports a library the pom never declared.
+
+68
+00:02:47,382 --> 00:02:50,539
+Go to the demo project. Type: CD, demo.
+
+69
+00:02:51,089 --> 00:02:56,359
+Where is the library used? Type: grep import src/main/java/cloudcart/Hello.java
+
+70
+00:02:56,489 --> 00:03:00,905
+It imports string utils from commons lang three. So the pom must declare it.
+
+71
+00:03:01,455 --> 00:03:05,337
+Here is the block to add. Type: cat dep.xml
+
+72
+00:03:05,467 --> 00:03:10,694
+Group I D, artifact I D, version. Three coordinates. That is a dependency.
+
+73
+00:03:11,244 --> 00:03:19,159
+Insert it into the pom. Type: sed -i '/<dependencies>/r dep.xml' pom.xml
+
+74
+00:03:19,289 --> 00:03:25,155
+Build again. Type: mvn -B package | grep -E 'Tests run:|BUILD'
+
+75
+00:03:25,285 --> 00:03:26,427
+While Maven works,
+
+76
+00:03:26,427 --> 00:03:27,758
+it compiles the code,
+
+77
+00:03:27,758 --> 00:03:29,471
+compiles and runs the test,
+
+78
+00:03:29,471 --> 00:03:30,612
+and packs the jar.
+
+79
+00:03:30,612 --> 00:03:32,197
+That takes a few seconds.
+
+80
+00:03:35,247 --> 00:03:37,999
+One test ran, none failed. Build success.
+
+81
+00:03:38,549 --> 00:03:42,581
+What did it make? Type: ls target/*.jar
+
+82
+00:03:42,711 --> 00:03:47,341
+The jar is named from the coordinates. Artifact I D, dash, version.
+
+83
+00:03:47,891 --> 00:03:54,803
+See the dependency tree. Type: mvn -B dependency:tree | grep 'jar:'
+
+84
+00:03:55,433 --> 00:03:56,264
+Our project.
+
+85
+00:03:56,264 --> 00:03:58,202
+One library to compile with.
+
+86
+00:03:58,202 --> 00:03:58,687
+J unit,
+
+87
+00:03:58,687 --> 00:03:59,725
+for tests only,
+
+88
+00:03:59,725 --> 00:04:01,110
+with its own helper.
+
+89
+00:04:01,110 --> 00:04:03,049
+Test scope is never shipped.
+
+90
+00:04:03,599 --> 00:04:11,428
+Where did that jar come from? Type: find ~/.m2 -name 'commons-lang3-3*.jar'
+
+91
+00:04:11,558 --> 00:04:13,652
+Cached in your local repository,
+
+92
+00:04:13,652 --> 00:04:16,204
+under the same folders we just browsed.
+
+93
+00:04:16,204 --> 00:04:18,363
+The next build needs no download.
+
+94
+00:04:20,413 --> 00:04:22,973
+How Maven finds a library, in this order.
+
+95
+00:04:23,523 --> 00:04:23,937
+First,
+
+96
+00:04:23,937 --> 00:04:25,456
+your local repository,
+
+97
+00:04:25,456 --> 00:04:27,804
+the dot M two folder in your home.
+
+98
+00:04:27,804 --> 00:04:29,185
+If the jar is there,
+
+99
+00:04:29,185 --> 00:04:29,944
+it is used.
+
+100
+00:04:30,494 --> 00:04:31,029
+If not,
+
+101
+00:04:31,029 --> 00:04:32,556
+a remote repository.
+
+102
+00:04:32,556 --> 00:04:33,396
+By default,
+
+103
+00:04:33,396 --> 00:04:34,465
+Maven Central.
+
+104
+00:04:34,465 --> 00:04:35,916
+Maven downloads it,
+
+105
+00:04:35,916 --> 00:04:37,214
+and keeps a copy.
+
+106
+00:04:37,764 --> 00:04:42,799
+The path comes from the coordinates. Same coordinates, same file, on any computer.
+
+107
+00:04:43,349 --> 00:04:46,314
+So pin your versions. Same version, same build.
+
+108
+00:04:48,364 --> 00:04:49,232
+Your lab task.
+
+109
+00:04:49,232 --> 00:04:52,705
+Lab eighty-five gives you a project that will not build.
+
+110
+00:04:52,705 --> 00:04:54,380
+Lab check judges your work.
+
+111
+00:04:54,930 --> 00:04:57,075
+It lives at git hub dot com,
+
+112
+00:04:57,075 --> 00:04:58,607
+slash it dash waves,
+
+113
+00:04:58,607 --> 00:05:00,369
+slash dev ops dash A I,
+
+114
+00:05:00,369 --> 00:05:01,212
+in academy,
+
+115
+00:05:01,212 --> 00:05:01,518
+lab,
+
+116
+00:05:01,518 --> 00:05:03,357
+lab eighty-five dot S H.
+
+117
+00:05:03,907 --> 00:05:10,072
+One: set the coordinates. Com dot cloud cart, cart API, one point zero point zero.
+
+118
+00:05:10,622 --> 00:05:15,891
+Two: move the source into source, main, java, and the test into source, test, java.
+
+119
+00:05:16,441 --> 00:05:18,564
+Three: declare commons lang three,
+
+120
+00:05:18,564 --> 00:05:20,562
+three point fourteen point zero,
+
+121
+00:05:20,562 --> 00:05:21,249
+and J unit,
+
+122
+00:05:21,249 --> 00:05:23,122
+four point thirteen point two,
+
+123
+00:05:23,122 --> 00:05:24,121
+with scope test.
+
+124
+00:05:24,671 --> 00:05:30,367
+Four: M V N package. It must end in build success, and make the cart API jar.
+
+125
+00:05:30,917 --> 00:05:34,181
+Five: save the dependency tree into tree dot text.
+
+126
+00:05:34,731 --> 00:05:37,090
+Install a J D K and Maven first.
+
+127
+00:05:37,090 --> 00:05:37,974
+Then lab up,
+
+128
+00:05:37,974 --> 00:05:38,711
+lab check,
+
+129
+00:05:38,711 --> 00:05:39,669
+and lab down.
+
+130
+00:05:39,669 --> 00:05:42,838
+The shortcut file is shortcuts eighty-five.
+
+131
+00:05:44,888 --> 00:05:46,957
+Pass or fail. You need all six.
+
+132
+00:05:47,507 --> 00:05:49,321
+Five pass lines in lab check.
+
+133
+00:05:49,871 --> 00:05:51,641
+You can name the three coordinates.
+
+134
+00:05:52,191 --> 00:05:54,090
+You can explain the standard folders.
+
+135
+00:05:54,640 --> 00:05:57,051
+You can explain compile scope and test scope.
+
+136
+00:05:57,601 --> 00:05:59,990
+You can say where Maven caches a library.
+
+137
+00:06:00,540 --> 00:06:02,460
+lab down, nothing left behind.
+
+138
+00:06:03,010 --> 00:06:04,311
+To pass, all six.
+
+139
+00:06:06,361 --> 00:06:09,198
+Your turn, in your own Ubuntu virtual machine.
+
+140
+00:06:09,748 --> 00:06:11,839
+One: lab up, and read the task file.
+
+141
+00:06:12,389 --> 00:06:15,610
+Two: run M V N package, and read the first error.
+
+142
+00:06:16,160 --> 00:06:18,550
+Three: fix the coordinates and the folders.
+
+143
+00:06:19,100 --> 00:06:21,105
+Four: declare the two dependencies.
+
+144
+00:06:21,655 --> 00:06:24,599
+Five: build, save tree dot text, and lab check.
+
+145
+00:06:25,149 --> 00:06:27,730
+Six: lab down, and prove nothing is left.
+
+146
+00:06:28,280 --> 00:06:30,115
+Pause the video, and begin now.
+
+147
+00:06:45,665 --> 00:06:46,540
+Quick check.
+
+148
+00:06:47,090 --> 00:06:49,074
+Which three values are the coordinates?
+
+149
+00:06:49,624 --> 00:06:51,053
+Where must main code live?
+
+150
+00:06:51,603 --> 00:06:53,075
+Which scope is not shipped?
+
+151
+00:06:53,625 --> 00:06:56,292
+Where does Maven keep a downloaded library?
+
+152
+00:06:56,842 --> 00:07:00,063
+Objective covered: M C ten, objective one.
+
+153
+00:07:00,613 --> 00:07:02,682
+Pause the video, and answer out loud.
+
+154
+00:07:13,232 --> 00:07:15,174
+Next: the Maven lifecycle.
+
+155
+00:07:15,724 --> 00:07:19,052
+If this helped, like, share and subscribe, so you do not miss it.
