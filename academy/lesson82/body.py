@@ -1,0 +1,88 @@
+RB = 'REAL RECORDING  ·  Ubuntu 24.04'
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('h1', "The pipeline builds your Java app. Red, or green. One number decides which."),
+  c('h2', "That number is the exit code. A test is just a program that checks results, and tells the pipeline what happened."),
+  c('h3', "Today you run a test that fails, read why, fix the bug, and watch it turn green."),
+  c('h4', "Then you see where the build puts its output, and why you can always delete it."),
+ ]),
+ ('ideas', [
+  c('u1', "Four facts about tests and builds."),
+  c('u2', "One. A test is a program. It runs your code, compares the result to what you expect, and prints pass or fail."),
+  c('u3', "Two. A failing test exits with a non-zero code. Zero means green. Anything else means red."),
+  c('u4', "Three. A pipeline never reads your mind. It reads the exit code. Non-zero stops the build."),
+  c('u5', "Four. Build output, classes and jars, goes in its own folder, away from the source. You can delete it and rebuild at any time."),
+  c('u6', "Source is precious. Output is disposable."),
+ ]),
+ ('tests', [
+  k('t0', "Go to the shop folder. Type: C D, shop."),
+  k('t1', "Compile the main code into its own folder. Type: java C, dash D, out slash main, then the source path."),
+  k('t2', "Compile the test, and tell java where the main classes are. Type: java C, dash C P, out slash main, dash D, out slash test, then the test path."),
+  k('t3', "Run the test. Type: java, dash C P, out slash main, colon, out slash test, then com dot cloud cart dot cart test."),
+  c('t3b', "Two pass, one fail. Ten percent off two hundred should be one eighty. The code returned twenty."),
+  k('t4', "Now the exit code. Type: echo, dollar sign, question mark."),
+  c('t4b', "One. Not zero. This is what a pipeline sees. Red."),
+  c('t5', "The bug: the discount function returns the discount, not the price after it. Fix it with sed. Type: sed, dash I, quote, s, pipe, total slash ten, pipe, total minus total slash ten, pipe, quote, then the source path.", "The bug: the discount function returns the discount, not the price after it. Fix it with sed. Type: sed, dash I, then the substitution, and the source path."),
+  k('t6', "Rebuild the main code. Type: java C, dash D, out slash main, then the source path."),
+  k('t7', "Run the test again. Type: java, dash C P, out slash main, colon, out slash test, then com dot cloud cart dot cart test."),
+  c('t7b', "Three pass, zero failed. Green."),
+  k('t8', "And the exit code. Type: echo, dollar sign, question mark."),
+  c('t8b', "Zero. Green. The pipeline moves on."),
+ ]),
+ ('outputs', [
+  k('b0', "Go to the shop folder. Type: C D, shop."),
+  k('b1', "Build the main code. Type: java C, dash D, out slash main, then the source path."),
+  k('b2', "Build the test. Type: java C, dash C P, out slash main, dash D, out slash test, then the test path."),
+  k('b3', "Where did the output go? Type: find, out, dash type, f, pipe, sort."),
+  c('b3b', "Two class files, in two folders under out. Main and test are kept apart. The source folder is untouched."),
+  k('b4', "Package the main classes only. Type: jar, C F, cloud cart dot jar, dash C, out slash main, space, dot."),
+  k('b5', "Look inside. Type: jar, T F, cloud cart dot jar."),
+  c('b5b', "The cart class is in. The test is not. You ship the code, not its tests."),
+  k('b6', "Now throw the build away. Type: R M, dash R, out, cloud cart dot jar."),
+  k('b7', "List the folder. Type: L S."),
+  c('b7b', "Only the source is left. One command rebuilds everything. That is why you never edit output, and never commit it."),
+ ]),
+ ('models', [
+  c('o1', "Reading a build, in this order."),
+  c('o2', "First, the exit code. Zero is green. Anything else is red."),
+  c('o3', "Second, the test output. Which test failed, what was expected, what was returned."),
+  c('o4', "Third, the output folder. Classes, jars, and reports live there. Delete and rebuild when in doubt."),
+  c('o5', "Red tells you something is wrong. The output tells you what."),
+ ]),
+ ('task', [
+  c('k1', "Your lab task. Lab eighty-two gives you a cart class with a bug, and its test. Lab check judges your work."),
+  c('k2', "It lives at git hub dot com, slash it dash waves, slash dev ops dash A I, in academy, lab, lab eighty-two dot S H."),
+  c('k3', "One: compile main into out slash main, and the test into out slash test."),
+  c('k4', "Two: run the test before fixing anything, and save the output into test dash before dot text."),
+  c('k5', "Three: fix the bug in cart dot java, and rebuild."),
+  c('k6', "Four: run the test again into test dash after dot text, and pack only the main classes into cloud cart dot jar."),
+  c('k7', "Five: answers dot text, three lines. A failed test exits with non-zero. The build output folder is out. The jar holds compiled classes."),
+  c('k8', "Install, then lab up, lab check, and lab down, like before. The shortcut file is shortcuts eighty-two."),
+ ]),
+ ('rubric', [
+  c('q1', "Pass or fail. You need all six."),
+  c('q2', "Five pass lines in lab check."), c('q3', "You can say what a test is."),
+  c('q4', "You can read a failing test."), c('q5', "You can explain exit codes."),
+  c('q6', "You can find and rebuild the output."), c('q7', "lab down, nothing left behind."), c('q8', "To pass, all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine."),
+  c('z2', "One: lab up, and read the task file."),
+  c('z3', "Two: compile, run the test, and save the failing result."),
+  c('z4', "Three: fix the bug, and rebuild."),
+  c('z5', "Four: run the test again, and build the jar."),
+  c('z6', "Five: write your answers, and lab check."),
+  c('z7', "Six: lab down, and prove nothing is left."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "What is a test, in one sentence?"), c('f13', "What exit code means green?"),
+  c('f14', "What does a pipeline read to decide red or green?"), c('f15', "Why is it safe to delete the output folder?"),
+  c('f16', "Objective covered: M C zero nine, objective seven."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next: diagnosing Java failures."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'h4': 0.5, 'u6': 0.5, 'b7b': 0.5, 'o5': 0.5, 'k8': 0.5, 'q8': 0.5, 'z8': 14.0, 'f17': 10.0, 't8b': 0.5}
+CHAP = {'ideas': 'Four facts', 'tests': 'Red, fix, green', 'outputs': 'Build outputs', 'models': 'Reading a build', 'task': 'Your lab task', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

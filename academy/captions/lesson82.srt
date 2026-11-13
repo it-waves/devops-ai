@@ -1,0 +1,659 @@
+1
+00:00:00,500 --> 00:00:05,471
+The pipeline builds your Java app. Red, or green. One number decides which.
+
+2
+00:00:06,021 --> 00:00:07,787
+That number is the exit code.
+
+3
+00:00:07,787 --> 00:00:10,529
+A test is just a program that checks results,
+
+4
+00:00:10,529 --> 00:00:12,783
+and tells the pipeline what happened.
+
+5
+00:00:13,333 --> 00:00:18,176
+Today you run a test that fails, read why, fix the bug, and watch it turn green.
+
+6
+00:00:18,726 --> 00:00:22,651
+Then you see where the build puts its output, and why you can always delete it.
+
+7
+00:00:24,701 --> 00:00:26,600
+Four facts about tests and builds.
+
+8
+00:00:27,150 --> 00:00:27,409
+One.
+
+9
+00:00:27,409 --> 00:00:28,705
+A test is a program.
+
+10
+00:00:28,705 --> 00:00:29,872
+It runs your code,
+
+11
+00:00:29,872 --> 00:00:32,399
+compares the result to what you expect,
+
+12
+00:00:32,399 --> 00:00:33,955
+and prints pass or fail.
+
+13
+00:00:34,505 --> 00:00:40,884
+Two. A failing test exits with a non-zero code. Zero means green. Anything else means red.
+
+14
+00:00:41,434 --> 00:00:47,343
+Three. A pipeline never reads your mind. It reads the exit code. Non-zero stops the build.
+
+15
+00:00:47,893 --> 00:00:48,224
+Four.
+
+16
+00:00:48,224 --> 00:00:49,086
+Build output,
+
+17
+00:00:49,086 --> 00:00:50,213
+classes and jars,
+
+18
+00:00:50,213 --> 00:00:51,738
+goes in its own folder,
+
+19
+00:00:51,738 --> 00:00:53,130
+away from the source.
+
+20
+00:00:53,130 --> 00:00:55,914
+You can delete it and rebuild at any time.
+
+21
+00:00:56,464 --> 00:00:59,280
+Source is precious. Output is disposable.
+
+22
+00:01:01,330 --> 00:01:04,317
+Go to the shop folder. Type: CD, shop.
+
+23
+00:01:04,867 --> 00:01:07,856
+Compile the main code into its own folder.
+
+24
+00:01:07,856 --> 00:01:08,782
+Type: java C,
+
+25
+00:01:08,782 --> 00:01:09,280
+dash D,
+
+26
+00:01:09,280 --> 00:01:10,348
+out slash main,
+
+27
+00:01:10,348 --> 00:01:11,843
+then the source path.
+
+28
+00:01:12,393 --> 00:01:13,641
+Compile the test,
+
+29
+00:01:13,641 --> 00:01:16,651
+and tell java where the main classes are.
+
+30
+00:01:16,651 --> 00:01:17,605
+Type: java C,
+
+31
+00:01:17,605 --> 00:01:18,266
+dash C P,
+
+32
+00:01:18,266 --> 00:01:19,367
+out slash main,
+
+33
+00:01:19,367 --> 00:01:19,881
+dash D,
+
+34
+00:01:19,881 --> 00:01:20,982
+out slash test,
+
+35
+00:01:20,982 --> 00:01:22,377
+then the test path.
+
+36
+00:01:22,927 --> 00:01:23,976
+Run the test.
+
+37
+00:01:23,976 --> 00:01:24,865
+Type: java,
+
+38
+00:01:24,865 --> 00:01:25,591
+dash C P,
+
+39
+00:01:25,591 --> 00:01:26,803
+out slash main,
+
+40
+00:01:26,803 --> 00:01:27,287
+colon,
+
+41
+00:01:27,287 --> 00:01:28,498
+out slash test,
+
+42
+00:01:28,498 --> 00:01:31,567
+then com dot cloud cart dot cart test.
+
+43
+00:01:32,117 --> 00:01:32,674
+Two pass,
+
+44
+00:01:32,674 --> 00:01:33,231
+one fail.
+
+45
+00:01:33,231 --> 00:01:36,265
+Ten percent off two hundred should be one eighty.
+
+46
+00:01:36,265 --> 00:01:37,813
+The code returned twenty.
+
+47
+00:01:38,363 --> 00:01:42,373
+Now the exit code. Type: echo, dollar sign, question mark.
+
+48
+00:01:42,923 --> 00:01:46,123
+One. Not zero. This is what a pipeline sees. Red.
+
+49
+00:01:46,673 --> 00:01:49,150
+The bug: the discount function returns the discount,
+
+50
+00:01:49,150 --> 00:01:50,246
+not the price after it.
+
+51
+00:01:50,246 --> 00:01:51,008
+Fix it with sed.
+
+52
+00:01:51,008 --> 00:01:51,484
+Type: sed,
+
+53
+00:01:51,484 --> 00:01:51,817
+dash I,
+
+54
+00:01:51,817 --> 00:01:52,103
+quote,
+
+55
+00:01:52,103 --> 00:01:52,198
+s,
+
+56
+00:01:52,198 --> 00:01:52,437
+pipe,
+
+57
+00:01:52,437 --> 00:01:53,199
+total slash ten,
+
+58
+00:01:53,199 --> 00:01:53,437
+pipe,
+
+59
+00:01:53,437 --> 00:01:54,770
+total minus total slash ten,
+
+60
+00:01:54,770 --> 00:01:55,009
+pipe,
+
+61
+00:01:55,009 --> 00:01:55,294
+quote,
+
+62
+00:01:55,294 --> 00:01:56,295
+then the source path.
+
+63
+00:01:56,845 --> 00:02:02,327
+Rebuild the main code. Type: java C, dash D, out slash main, then the source path.
+
+64
+00:02:02,877 --> 00:02:04,373
+Run the test again.
+
+65
+00:02:04,373 --> 00:02:05,239
+Type: java,
+
+66
+00:02:05,239 --> 00:02:05,948
+dash C P,
+
+67
+00:02:05,948 --> 00:02:07,129
+out slash main,
+
+68
+00:02:07,129 --> 00:02:07,601
+colon,
+
+69
+00:02:07,601 --> 00:02:08,782
+out slash test,
+
+70
+00:02:08,782 --> 00:02:11,773
+then com dot cloud cart dot cart test.
+
+71
+00:02:12,323 --> 00:02:14,606
+Three pass, zero failed. Green.
+
+72
+00:02:15,156 --> 00:02:19,039
+And the exit code. Type: echo, dollar sign, question mark.
+
+73
+00:02:19,589 --> 00:02:22,127
+Zero. Green. The pipeline moves on.
+
+74
+00:02:24,177 --> 00:02:27,164
+Go to the shop folder. Type: CD, shop.
+
+75
+00:02:27,714 --> 00:02:33,068
+Build the main code. Type: java C, dash D, out slash main, then the source path.
+
+76
+00:02:33,618 --> 00:02:34,747
+Build the test.
+
+77
+00:02:34,747 --> 00:02:35,725
+Type: java C,
+
+78
+00:02:35,725 --> 00:02:36,402
+dash C P,
+
+79
+00:02:36,402 --> 00:02:37,531
+out slash main,
+
+80
+00:02:37,531 --> 00:02:38,058
+dash D,
+
+81
+00:02:38,058 --> 00:02:39,186
+out slash test,
+
+82
+00:02:39,186 --> 00:02:40,616
+then the test path.
+
+83
+00:02:41,166 --> 00:02:45,646
+Where did the output go? Type: find, out, dash type, f, pipe, sort.
+
+84
+00:02:46,196 --> 00:02:47,260
+Two class files,
+
+85
+00:02:47,260 --> 00:02:48,924
+in two folders under out.
+
+86
+00:02:48,924 --> 00:02:50,853
+Main and test are kept apart.
+
+87
+00:02:50,853 --> 00:02:52,916
+The source folder is untouched.
+
+88
+00:02:53,466 --> 00:02:55,864
+Package the main classes only.
+
+89
+00:02:55,864 --> 00:02:56,663
+Type: jar,
+
+90
+00:02:56,663 --> 00:02:56,983
+C F,
+
+91
+00:02:56,983 --> 00:02:58,502
+cloud cart dot jar,
+
+92
+00:02:58,502 --> 00:02:59,062
+dash C,
+
+93
+00:02:59,062 --> 00:03:00,261
+out slash main,
+
+94
+00:03:00,261 --> 00:03:00,741
+space,
+
+95
+00:03:00,741 --> 00:03:01,060
+dot.
+
+96
+00:03:01,610 --> 00:03:05,493
+Look inside. Type: jar, T F, cloud cart dot jar.
+
+97
+00:03:06,043 --> 00:03:10,288
+The cart class is in. The test is not. You ship the code, not its tests.
+
+98
+00:03:10,838 --> 00:03:16,044
+Now throw the build away. Type: R M, dash R, out, cloud cart dot jar.
+
+99
+00:03:16,594 --> 00:03:18,663
+List the folder. Type: L S.
+
+100
+00:03:19,213 --> 00:03:20,726
+Only the source is left.
+
+101
+00:03:20,726 --> 00:03:22,743
+One command rebuilds everything.
+
+102
+00:03:22,743 --> 00:03:24,886
+That is why you never edit output,
+
+103
+00:03:24,886 --> 00:03:26,146
+and never commit it.
+
+104
+00:03:28,196 --> 00:03:29,924
+Reading a build, in this order.
+
+105
+00:03:30,474 --> 00:03:34,357
+First, the exit code. Zero is green. Anything else is red.
+
+106
+00:03:34,907 --> 00:03:39,685
+Second, the test output. Which test failed, what was expected, what was returned.
+
+107
+00:03:40,235 --> 00:03:40,634
+Third,
+
+108
+00:03:40,634 --> 00:03:41,832
+the output folder.
+
+109
+00:03:41,832 --> 00:03:42,364
+Classes,
+
+110
+00:03:42,364 --> 00:03:42,697
+jars,
+
+111
+00:03:42,697 --> 00:03:44,227
+and reports live there.
+
+112
+00:03:44,227 --> 00:03:46,422
+Delete and rebuild when in doubt.
+
+113
+00:03:46,972 --> 00:03:50,193
+Red tells you something is wrong. The output tells you what.
+
+114
+00:03:52,243 --> 00:03:53,119
+Your lab task.
+
+115
+00:03:53,119 --> 00:03:56,184
+Lab eighty-two gives you a cart class with a bug,
+
+116
+00:03:56,184 --> 00:03:56,997
+and its test.
+
+117
+00:03:56,997 --> 00:03:58,686
+Lab check judges your work.
+
+118
+00:03:59,236 --> 00:04:01,367
+It lives at git hub dot com,
+
+119
+00:04:01,367 --> 00:04:02,890
+slash it dash waves,
+
+120
+00:04:02,890 --> 00:04:04,641
+slash dev ops dash A I,
+
+121
+00:04:04,641 --> 00:04:05,479
+in academy,
+
+122
+00:04:05,479 --> 00:04:05,783
+lab,
+
+123
+00:04:05,783 --> 00:04:07,534
+lab eighty-two dot S H.
+
+124
+00:04:08,084 --> 00:04:12,650
+One: compile main into out slash main, and the test into out slash test.
+
+125
+00:04:13,200 --> 00:04:15,805
+Two: run the test before fixing anything,
+
+126
+00:04:15,805 --> 00:04:19,045
+and save the output into test dash before dot text.
+
+127
+00:04:19,595 --> 00:04:22,816
+Three: fix the bug in cart dot java, and rebuild.
+
+128
+00:04:23,366 --> 00:04:26,918
+Four: run the test again into test dash after dot text,
+
+129
+00:04:26,918 --> 00:04:30,470
+and pack only the main classes into cloud cart dot jar.
+
+130
+00:04:31,020 --> 00:04:32,766
+Five: answers dot text,
+
+131
+00:04:32,766 --> 00:04:33,676
+three lines.
+
+132
+00:04:33,676 --> 00:04:36,257
+A failed test exits with non-zero.
+
+133
+00:04:36,257 --> 00:04:38,609
+The build output folder is out.
+
+134
+00:04:38,609 --> 00:04:40,962
+The jar holds compiled classes.
+
+135
+00:04:41,512 --> 00:04:42,043
+Install,
+
+136
+00:04:42,043 --> 00:04:42,840
+then lab up,
+
+137
+00:04:42,840 --> 00:04:43,504
+lab check,
+
+138
+00:04:43,504 --> 00:04:44,368
+and lab down,
+
+139
+00:04:44,368 --> 00:04:45,165
+like before.
+
+140
+00:04:45,165 --> 00:04:47,954
+The shortcut file is shortcuts eighty-two.
+
+141
+00:04:50,004 --> 00:04:52,073
+Pass or fail. You need all six.
+
+142
+00:04:52,623 --> 00:04:54,437
+Five pass lines in lab check.
+
+143
+00:04:54,987 --> 00:04:56,501
+You can say what a test is.
+
+144
+00:04:57,051 --> 00:04:58,630
+You can read a failing test.
+
+145
+00:04:59,180 --> 00:05:00,908
+You can explain exit codes.
+
+146
+00:05:01,458 --> 00:05:03,506
+You can find and rebuild the output.
+
+147
+00:05:04,056 --> 00:05:05,976
+lab down, nothing left behind.
+
+148
+00:05:06,526 --> 00:05:07,827
+To pass, all six.
+
+149
+00:05:09,877 --> 00:05:12,714
+Your turn, in your own Ubuntu virtual machine.
+
+150
+00:05:13,264 --> 00:05:15,355
+One: lab up, and read the task file.
+
+151
+00:05:15,905 --> 00:05:19,297
+Two: compile, run the test, and save the failing result.
+
+152
+00:05:19,847 --> 00:05:21,788
+Three: fix the bug, and rebuild.
+
+153
+00:05:22,338 --> 00:05:24,877
+Four: run the test again, and build the jar.
+
+154
+00:05:25,427 --> 00:05:27,710
+Five: write your answers, and lab check.
+
+155
+00:05:28,260 --> 00:05:30,841
+Six: lab down, and prove nothing is left.
+
+156
+00:05:31,391 --> 00:05:33,226
+Pause the video, and begin now.
+
+157
+00:05:48,776 --> 00:05:49,651
+Quick check.
+
+158
+00:05:50,201 --> 00:05:52,035
+What is a test, in one sentence?
+
+159
+00:05:52,585 --> 00:05:54,185
+What exit code means green?
+
+160
+00:05:54,735 --> 00:05:57,402
+What does a pipeline read to decide red or green?
+
+161
+00:05:57,952 --> 00:06:00,341
+Why is it safe to delete the output folder?
+
+162
+00:06:00,891 --> 00:06:04,689
+Objective covered: M C zero nine, objective seven.
+
+163
+00:06:05,239 --> 00:06:07,308
+Pause the video, and answer out loud.
+
+164
+00:06:17,858 --> 00:06:20,183
+Next: diagnosing Java failures.
+
+165
+00:06:20,733 --> 00:06:24,061
+If this helped, like, share and subscribe, so you do not miss it.

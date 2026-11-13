@@ -1,0 +1,25 @@
+Lesson 82 of the DevOps Engineering Bootcamp, the seventh lesson of Java Fundamentals for DevOps. A build can finish and still be wrong, and the only way to know is to run a test. A test is a small program that calls your code with a known input and compares the answer with the one you expect. Four facts to remember. A test prints PASS or FAIL. The exit code tells scripts and pipelines the result: zero is green, anything else is red. The failing line shows which test broke, what was expected and what came back. The build output folder holds generated files, so you can delete it and rebuild. On a real Ubuntu machine you compile the main code and the test into separate folders, run the test and watch it fail on a discount bug, read the failing line, check the exit code, fix one line, rebuild, and run again until it is green with exit code zero. Then you list the build output with find, pack only the main classes into a JAR, check with jar tf that no test is inside, throw the build away and see that only source remains. Then you do the lab task yourself: five checks, all must pass.
+
+Chapters
+0:00 Build is not proof
+0:24 Four facts
+1:01 Red, fix, green
+2:24 Build outputs
+3:28 Reading a build
+3:52 Your lab task
+4:50 Pass or fail rubric
+5:09 Your turn
+5:48 Quick check
+
+Objectives covered: MC09-O07 (run tests and understand build outputs)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab82.sh and shortcuts82.sh) and academy/lesson82 (INSTALL.txt). Install with: sudo install -m 755 lab82.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts82.sh (without it, use sudo lab82.sh up, check, down). You need an Ubuntu virtual machine with root and a JDK (for example: sudo apt install openjdk-21-jdk-headless). The lab writes a small shop class, its test and a task file into /opt/lab82; lab down removes the folder. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with OpenJDK 21, run in a private mount and network setup on the recording computer. The ideas, task, rubric and quiz screens are labelled illustrations, not captures. The test is a tiny hand-written program, not a test framework such as JUnit; real projects use a framework, and the exit code idea is the same. The exact output depends on your Java version. The lab was run end to end before this lesson: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing behind. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. File names are invented, and lab is a short name I made for sudo lab82.sh. Typing is timed to the narration. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Read Stack Traces, Exceptions and Logs in Java Apps https://youtu.be/hqhhMc46o_8
+Next: Diagnosing Java failures: version, memory, port and classpath.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #java #testing #exitcodes #devopsbootcamp

@@ -63,7 +63,7 @@ Checklist order (not Docker; Docker comes later in the checklist). One lesson pe
 | L79 | MC09-O04 | Inspect Java process startup flags and runtime settings | Published o-SAF4sZ5QY (Nov 13, Public, playlist, end screen); captions published |
 | L80 | MC09-O05 | JAR vs WAR | Published iQKfoocs6hs (Nov 13, Public, playlist, end screen); captions published |
 | L81 | MC09-O06 | Stack traces, exceptions, application logs | Published hqhhMc46o_8 (Nov 13, Public, playlist, end screen); captions pending |
-| L82 | MC09-O07 | Java tests and build outputs | Not started |
+| L82 | MC09-O07 | Java tests and build outputs | Built; uploading |
 | L83 | MC09-O08 | Diagnose version mismatch, memory, port, classpath failures | Not started |
 | L84 | MC09 mastery | Four-fault Java lab, checker, report, cleanup proof | Not started |
 
