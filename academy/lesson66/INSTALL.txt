@@ -1,0 +1,14 @@
+Install the lab (needs an Ubuntu virtual machine with root and git):
+  sudo apt install -y git      # skip if git is already installed
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab66.sh /usr/local/sbin/
+  source shortcuts66.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab66/work (your repository) and /opt/lab66/origin.git (the shared copy), with four faults
+  lab check               # four FAIL lines at the start; your goal is four PASS lines
+  lab down                # cleanup when finished
+Without the shortcut, use: sudo lab66.sh up | check | down
+Your four faults (in /opt/lab66/work): 1 a secret (.env) was committed in the last commit: take it out of history, ignore it, keep the commit Add API settings  2 merge feature/discount into main and resolve the conflict in price.txt (keep price=12 and discount=5)  3 run ./check.sh, fix what it reports in a new commit, and turn on the gate: git config core.hooksPath .githooks  4 push main to origin, then create an annotated tag v1.0.0 and push the tag.
+Tip: fix the secret before you push, because pushed history is shared.
+If git asks who you are: git config --global user.name "Your Name" and git config --global user.email you@example.com
+Run it only in your own virtual machine. It creates only /opt/lab66; lab down removes it, and you remove the installed script with: sudo rm /usr/local/sbin/lab66.sh
+Write your report from report_template.md in this folder.

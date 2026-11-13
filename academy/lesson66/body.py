@@ -1,0 +1,105 @@
+
+RB = 'REAL RECORDING  ·  Ubuntu 24.04'
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('h1', "One wrong push, and a password is public. One bad merge, and the team loses a day. Mastery in Git means you can prevent both, and prove it."),
+  c('h2', "This is the mastery lesson for Git and Git hub. You have learned nine skills. Now you prove them on a real mess, with a lab, a checker, and a report."),
+  c('h3', "I will fix the first fault live. You fix the other three."),
+ ]),
+ ('scenario', [
+  c('sc1', "Meet a small team's shop repository. Four things are wrong, and the checker says fail for all of them."),
+  c('sc2', "The checker prints pass or fail for four checks."),
+  k('sc3', "One: a secret was committed by mistake. Take it out of history, and make Git ignore it."),
+  k('sc4', "Two: the discount branch must be merged into main, and the conflict resolved."),
+  k('sc5', "Three: the team checks fail. Fix them, and turn on the gate."),
+  k('sc6', "Four: push main, and release it with an annotated tag."),
+  c('sc7', "Your mission: four pass lines, with proof for every fix."),
+ ]),
+ ('getlab', [
+  c('g1', "Before we start, here is where everything lives. It is also in the description."),
+  k('g2', "The repository is git hub dot com, slash it dash waves, slash dev ops dash A I."),
+  k('g3', "The lab is one file: lab sixty-six dot S H, in the academy slash lab folder. Your report template and install notes are in academy slash lesson sixty-six."),
+  k('g4', "Install it in three steps. Clone the repository. Go to the lab folder. Install the script into slash U S R slash local slash S bin."),
+  c('g5', "Three commands run everything. Lab up builds the problems. Lab check prints pass or fail for each. Lab down removes it all."),
+  k('g6', "Lab is a short name. Source the shortcuts file, and it runs sue do, lab sixty-six dot S H, for you."),
+  c('g7', "You need an Ubuntu virtual machine with root and git. Run it only in your own machine."),
+ ]),
+ ('start', [
+  k('st1', "Now for real. I have cloned the repository, and the lab files are in a folder called lab. Type: C D, lab."),
+  k('st2', "List what is here. Type: L S."),
+  k('st3', "The lab script and the shortcuts file. Install the script. Type: sue do, install, dash m, seven five five, lab sixty-six dot S H, slash U S R slash local slash S bin."),
+  k('st4', "Load the short names. Type: source, shortcuts sixty-six dot S H."),
+  k('st5', "Build the lab. Type: lab up."),
+  k('st6', "Now ask the checker. Type: lab check."),
+  c('st7', "Four FAIL lines. That is your starting point. Copy them into your report."),
+ ]),
+ ('notes', [
+  c('n1', "Keep four notes for every fault."),
+  c('n2', "One: the symptom, in the exact words of the error, or the exact wrong output."),
+  c('n3', "Two: the cause, and the command that proved it."),
+  c('n4', "Three: the fix. One change only."),
+  c('n5', "Four: the proof, the output after the fix."),
+  c('n6', "Notes turn a lucky fix into evidence."),
+ ]),
+ ('fix1', [
+  k('f1', "Fault two, live. The checker says the discount branch is not merged. Go to the repository. Type: C D, slash opt, slash lab sixty-six, slash work."),
+  c('f2', "Look at the branches first. Type: git log, dash dash one line, dash dash graph, dash dash all.", "Look at the branches first. Type: git log, dash dash one line, dash dash graph, dash dash all."),
+  k('f3', "Note one, the symptom: the discount branch sits apart from main. Now merge it. Type: git merge, feature slash discount."),
+  c('f4', "A conflict, in price dot text. Both branches changed the same line. Note two, the cause. Look inside. Type: cat, price dot text."),
+  k('f5', "The markers show both versions. We keep both: the new price from main, and the discount from the branch. Type: echo, quote, price equals twelve, quote, arrow, price dot text."),
+  k('f6', "Add the discount line. Type: echo, quote, discount equals five, quote, two arrows, price dot text."),
+  k('f7', "Note three, the fix. Mark the conflict as resolved. Type: git add, price dot text."),
+  k('f8', "Finish the merge. Type: git commit, dash dash no dash edit."),
+  c('f9', "Note four, the proof. Ask the checker. Type: lab check."),
+  c('f10', "One PASS, three FAIL. One fault down, one change at a time, with proof. Now it is your turn for the other three."),
+ ]),
+ ('report', [
+  c('r1', "Your report has five parts. The template is in the lesson folder."),
+  c('r2', "Setup: the checker output at the start."),
+  c('r3', "Each fault, with its four notes."),
+  c('r4', "The final checker output, all four lines saying pass."),
+  c('r5', "Where you got stuck, and what unstuck you. Honest notes are worth more than a perfect story."),
+  c('r6', "And the cleanup proof, which we do next."),
+ ]),
+ ('hints', [
+  c('y1', "Your three faults. No spoilers, only directions. And order matters: fix the secret before you push, because pushed history is shared."),
+  c('y2', "Check one: a secret is in the last commit. Take the file out of tracking, make Git ignore it, and change that commit instead of adding a new one. Then ask Git if the secret is still anywhere. Which log flag searches the history for a word?"),
+  c('y3', "Check three: run the check script and read the failing line. Fix exactly what it says, in a new commit. Then turn on the gate."),
+  c('y4', "Check four: push main through the gate. Then make an annotated tag, which needs a message, and push the tag by name."),
+  c('y5', "Same method every time: symptom, check, fix one thing, verify."),
+ ]),
+ ('cleanup', [
+  k('c1', "When you finish, clean up, and prove it. Type: lab down."),
+  k('c2', "Proof one: is the lab folder gone? Type: L S, slash opt, slash lab sixty-six."),
+  k('c3', "No such file or directory. Proof two: count it in opt. Type: L S, slash opt, pipe, grep dash c, lab sixty-six."),
+  k('c4', "Zero. Now remove the lab script itself. Type: sue do, R M, slash U S R slash local slash S bin slash lab sixty-six dot S H."),
+  k('c5', "Proof three: is anything left in S bin? Type: L S, slash U S R slash local slash S bin, pipe, W C, dash l."),
+  c('c6', "Zero. Everything is removed. Paste these proofs into your report."),
+ ]),
+ ('rubric', [
+  c('b1', "Here is how your work is judged. Six points, and you need all six."),
+  c('b2', "The checker shows four pass lines."), c('b3', "Every fault has a symptom, a cause, a fix, and a proof."),
+  c('b4', "You changed one thing at a time."), c('b5', "The report is complete, including where you got stuck."),
+  c('b6', "The cleanup proof shows nothing left behind."), c('b7', "You ran it only in your own virtual machine."), c('b8', "To pass, you need all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine. Take your time. Mastery is slow and exact."),
+  c('z2', "One: clone the repository and install the lab."),
+  c('z3', "Two: run lab up, and save the checker output."),
+  c('z4', "Three: fix the three remaining faults, with four notes each."),
+  c('z5', "Four: write the report from the template."),
+  c('z6', "Five: run the checker. All four lines must say pass."),
+  c('z7', "Six: clean up, and paste the proof."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "Why must you remove a secret before you push?"), c('f13', "What does a merge conflict mean, and how do you finish it?"),
+  c('f14', "What does the pre push gate protect?"), c('f15', "What proves your cleanup worked?"),
+  c('f16', "Mastery evidence covered: M C zero seven, building on objectives one to nine, in the Git and Git hub masterclass."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next: application architecture and A P Is."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'h3': 0.5, 'sc7': 0.5, 'g7': 0.8, 'st5': 2.0, 'st6': 1.0, 'st7': 0.5, 'n6': 0.5, 'f3': 0.5, 'f8': 0.5, 'f10': 0.5, 'r6': 0.4, 'y5': 0.5, 'c1': 1.0, 'c6': 0.5, 'b8': 0.5, 'z8': 14.0, 'f17': 10.0}
+CHAP = {'scenario': 'The scenario', 'getlab': 'Get the lab', 'start': 'Start the lab', 'notes': 'Four notes per fault', 'fix1': 'Fault 2 live: merge conflict', 'report': 'The report', 'hints': 'Your three faults', 'cleanup': 'Cleanup with proof', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

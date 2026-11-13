@@ -1,0 +1,767 @@
+1
+00:00:00,500 --> 00:00:01,477
+One wrong push,
+
+2
+00:00:01,477 --> 00:00:03,105
+and a password is public.
+
+3
+00:00:03,105 --> 00:00:04,016
+One bad merge,
+
+4
+00:00:04,016 --> 00:00:05,644
+and the team loses a day.
+
+5
+00:00:05,644 --> 00:00:08,379
+Mastery in Git means you can prevent both,
+
+6
+00:00:08,379 --> 00:00:09,225
+and prove it.
+
+7
+00:00:09,775 --> 00:00:12,651
+This is the mastery lesson for Git and Git hub.
+
+8
+00:00:12,651 --> 00:00:14,425
+You have learned nine skills.
+
+9
+00:00:14,425 --> 00:00:16,506
+Now you prove them on a real mess,
+
+10
+00:00:16,506 --> 00:00:17,179
+with a lab,
+
+11
+00:00:17,179 --> 00:00:17,791
+a checker,
+
+12
+00:00:17,791 --> 00:00:18,586
+and a report.
+
+13
+00:00:19,136 --> 00:00:22,101
+I will fix the first fault live. You fix the other three.
+
+14
+00:00:24,151 --> 00:00:26,301
+Meet a small team's shop repository.
+
+15
+00:00:26,301 --> 00:00:27,616
+Four things are wrong,
+
+16
+00:00:27,616 --> 00:00:30,124
+and the checker says fail for all of them.
+
+17
+00:00:30,674 --> 00:00:33,341
+The checker prints pass or fail for four checks.
+
+18
+00:00:33,891 --> 00:00:38,862
+One: a secret was committed by mistake. Take it out of history, and make Git ignore it.
+
+19
+00:00:39,412 --> 00:00:43,934
+Two: the discount branch must be merged into main, and the conflict resolved.
+
+20
+00:00:44,484 --> 00:00:47,983
+Three: the team checks fail. Fix them, and turn on the gate.
+
+21
+00:00:48,533 --> 00:00:51,904
+Four: push main, and release it with an annotated tag.
+
+22
+00:00:52,454 --> 00:00:55,803
+Your mission: four pass lines, with proof for every fix.
+
+23
+00:00:57,853 --> 00:01:02,056
+Before we start, here is where everything lives. It is also in the description.
+
+24
+00:01:02,606 --> 00:01:08,280
+The repository is git hub dot com, slash it dash waves, slash dev ops dash A I.
+
+25
+00:01:08,830 --> 00:01:11,866
+The lab is one file: lab sixty-six dot S H,
+
+26
+00:01:11,866 --> 00:01:14,125
+in the academy slash lab folder.
+
+27
+00:01:14,125 --> 00:01:19,561
+Your report template and install notes are in academy slash lesson sixty-six.
+
+28
+00:01:20,111 --> 00:01:21,992
+Install it in three steps.
+
+29
+00:01:21,992 --> 00:01:23,511
+Clone the repository.
+
+30
+00:01:23,511 --> 00:01:25,030
+Go to the lab folder.
+
+31
+00:01:25,030 --> 00:01:29,370
+Install the script into slash U S R slash local slash S bin.
+
+32
+00:01:29,920 --> 00:01:31,941
+Three commands run everything.
+
+33
+00:01:31,941 --> 00:01:33,760
+Lab up builds the problems.
+
+34
+00:01:33,760 --> 00:01:36,388
+Lab check prints pass or fail for each.
+
+35
+00:01:36,388 --> 00:01:38,005
+Lab down removes it all.
+
+36
+00:01:38,555 --> 00:01:39,965
+Lab is a short name.
+
+37
+00:01:39,965 --> 00:01:41,799
+Source the shortcuts file,
+
+38
+00:01:41,799 --> 00:01:43,138
+and it runs sue do,
+
+39
+00:01:43,138 --> 00:01:44,690
+lab sixty-six dot S H,
+
+40
+00:01:44,690 --> 00:01:45,254
+for you.
+
+41
+00:01:45,804 --> 00:01:50,924
+You need an Ubuntu virtual machine with root and git. Run it only in your own machine.
+
+42
+00:01:53,274 --> 00:01:54,206
+Now for real.
+
+43
+00:01:54,206 --> 00:01:56,285
+I have cloned the repository,
+
+44
+00:01:56,285 --> 00:01:59,510
+and the lab files are in a folder called lab.
+
+45
+00:01:59,510 --> 00:02:00,155
+Type: CD,
+
+46
+00:02:00,155 --> 00:02:00,442
+lab.
+
+47
+00:02:00,992 --> 00:02:03,147
+List what is here. Type: L S.
+
+48
+00:02:03,697 --> 00:02:06,791
+The lab script and the shortcuts file.
+
+49
+00:02:06,791 --> 00:02:08,339
+Install the script.
+
+50
+00:02:08,339 --> 00:02:09,398
+Type: sue do,
+
+51
+00:02:09,398 --> 00:02:10,049
+install,
+
+52
+00:02:10,049 --> 00:02:10,619
+dash m,
+
+53
+00:02:10,619 --> 00:02:11,922
+seven five five,
+
+54
+00:02:11,922 --> 00:02:13,714
+lab sixty-six dot S H,
+
+55
+00:02:13,714 --> 00:02:16,646
+slash U S R slash local slash S bin.
+
+56
+00:02:17,196 --> 00:02:21,932
+Load the short names. Type: source, shortcuts sixty-six dot S H.
+
+57
+00:02:22,482 --> 00:02:24,509
+Build the lab. Type: lab up.
+
+58
+00:02:27,059 --> 00:02:29,640
+Now ask the checker. Type: lab check.
+
+59
+00:02:31,190 --> 00:02:35,350
+Four FAIL lines. That is your starting point. Copy them into your report.
+
+60
+00:02:37,400 --> 00:02:39,149
+Keep four notes for every fault.
+
+61
+00:02:39,699 --> 00:02:44,243
+One: the symptom, in the exact words of the error, or the exact wrong output.
+
+62
+00:02:44,793 --> 00:02:47,225
+Two: the cause, and the command that proved it.
+
+63
+00:02:47,775 --> 00:02:50,058
+Three: the fix. One change only.
+
+64
+00:02:50,608 --> 00:02:53,040
+Four: the proof, the output after the fix.
+
+65
+00:02:53,590 --> 00:02:55,745
+Notes turn a lucky fix into evidence.
+
+66
+00:02:57,795 --> 00:02:58,547
+Fault two,
+
+67
+00:02:58,547 --> 00:02:58,923
+live.
+
+68
+00:02:58,923 --> 00:03:02,759
+The checker says the discount branch is not merged.
+
+69
+00:03:02,759 --> 00:03:04,338
+Go to the repository.
+
+70
+00:03:04,338 --> 00:03:05,015
+Type: CD,
+
+71
+00:03:05,015 --> 00:03:05,767
+slash opt,
+
+72
+00:03:05,767 --> 00:03:07,272
+slash lab sixty-six,
+
+73
+00:03:07,272 --> 00:03:08,099
+slash work.
+
+74
+00:03:08,649 --> 00:03:10,492
+Look at the branches first.
+
+75
+00:03:10,492 --> 00:03:11,448
+Type: git log,
+
+76
+00:03:11,448 --> 00:03:12,745
+dash dash one line,
+
+77
+00:03:12,745 --> 00:03:13,837
+dash dash graph,
+
+78
+00:03:13,837 --> 00:03:14,793
+dash dash all.
+
+79
+00:03:15,343 --> 00:03:15,926
+Note one,
+
+80
+00:03:15,926 --> 00:03:19,422
+the symptom: the discount branch sits apart from main.
+
+81
+00:03:19,422 --> 00:03:20,263
+Now merge it.
+
+82
+00:03:20,263 --> 00:03:21,299
+Type: git merge,
+
+83
+00:03:21,299 --> 00:03:22,788
+feature slash discount.
+
+84
+00:03:23,838 --> 00:03:24,657
+A conflict,
+
+85
+00:03:24,657 --> 00:03:25,996
+in price dot text.
+
+86
+00:03:25,996 --> 00:03:28,674
+Both branches changed the same line.
+
+87
+00:03:28,674 --> 00:03:29,344
+Note two,
+
+88
+00:03:29,344 --> 00:03:30,088
+the cause.
+
+89
+00:03:30,088 --> 00:03:30,981
+Look inside.
+
+90
+00:03:30,981 --> 00:03:31,725
+Type: cat,
+
+91
+00:03:31,725 --> 00:03:32,841
+price dot text.
+
+92
+00:03:33,391 --> 00:03:35,459
+The markers show both versions.
+
+93
+00:03:35,459 --> 00:03:37,993
+We keep both: the new price from main,
+
+94
+00:03:37,993 --> 00:03:40,194
+and the discount from the branch.
+
+95
+00:03:40,194 --> 00:03:40,928
+Type: echo,
+
+96
+00:03:40,928 --> 00:03:41,328
+quote,
+
+97
+00:03:41,328 --> 00:03:42,662
+price equals twelve,
+
+98
+00:03:42,662 --> 00:03:43,062
+quote,
+
+99
+00:03:43,062 --> 00:03:43,463
+arrow,
+
+100
+00:03:43,463 --> 00:03:44,463
+price dot text.
+
+101
+00:03:45,013 --> 00:03:46,584
+Add the discount line.
+
+102
+00:03:46,584 --> 00:03:47,370
+Type: echo,
+
+103
+00:03:47,370 --> 00:03:47,798
+quote,
+
+104
+00:03:47,798 --> 00:03:49,298
+discount equals five,
+
+105
+00:03:49,298 --> 00:03:49,727
+quote,
+
+106
+00:03:49,727 --> 00:03:50,512
+two arrows,
+
+107
+00:03:50,512 --> 00:03:51,584
+price dot text.
+
+108
+00:03:52,134 --> 00:03:57,659
+Note three, the fix. Mark the conflict as resolved. Type: git add, price dot text.
+
+109
+00:03:58,209 --> 00:04:02,220
+Finish the merge. Type: git commit, dash dash no dash edit.
+
+110
+00:04:03,270 --> 00:04:06,832
+Note four, the proof. Ask the checker. Type: lab check.
+
+111
+00:04:07,382 --> 00:04:07,966
+One PASS,
+
+112
+00:04:07,966 --> 00:04:08,678
+three FAIL.
+
+113
+00:04:08,678 --> 00:04:09,650
+One fault down,
+
+114
+00:04:09,650 --> 00:04:11,011
+one change at a time,
+
+115
+00:04:11,011 --> 00:04:11,724
+with proof.
+
+116
+00:04:11,724 --> 00:04:14,316
+Now it is your turn for the other three.
+
+117
+00:04:16,366 --> 00:04:20,142
+Your report has five parts. The template is in the lesson folder.
+
+118
+00:04:20,692 --> 00:04:22,825
+Setup: the checker output at the start.
+
+119
+00:04:23,375 --> 00:04:24,997
+Each fault, with its four notes.
+
+120
+00:04:25,547 --> 00:04:28,704
+The final checker output, all four lines saying pass.
+
+121
+00:04:29,254 --> 00:04:30,382
+Where you got stuck,
+
+122
+00:04:30,382 --> 00:04:31,567
+and what unstuck you.
+
+123
+00:04:31,567 --> 00:04:34,331
+Honest notes are worth more than a perfect story.
+
+124
+00:04:34,881 --> 00:04:36,951
+And the cleanup proof, which we do next.
+
+125
+00:04:38,901 --> 00:04:40,032
+Your three faults.
+
+126
+00:04:40,032 --> 00:04:40,786
+No spoilers,
+
+127
+00:04:40,786 --> 00:04:41,792
+only directions.
+
+128
+00:04:41,792 --> 00:04:44,934
+And order matters: fix the secret before you push,
+
+129
+00:04:44,934 --> 00:04:47,008
+because pushed history is shared.
+
+130
+00:04:47,558 --> 00:04:50,119
+Check one: a secret is in the last commit.
+
+131
+00:04:50,119 --> 00:04:51,949
+Take the file out of tracking,
+
+132
+00:04:51,949 --> 00:04:53,108
+make Git ignore it,
+
+133
+00:04:53,108 --> 00:04:56,218
+and change that commit instead of adding a new one.
+
+134
+00:04:56,218 --> 00:04:58,963
+Then ask Git if the secret is still anywhere.
+
+135
+00:04:58,963 --> 00:05:01,830
+Which log flag searches the history for a word?
+
+136
+00:05:02,380 --> 00:05:05,855
+Check three: run the check script and read the failing line.
+
+137
+00:05:05,855 --> 00:05:07,304
+Fix exactly what it says,
+
+138
+00:05:07,304 --> 00:05:08,231
+in a new commit.
+
+139
+00:05:08,231 --> 00:05:09,505
+Then turn on the gate.
+
+140
+00:05:10,055 --> 00:05:12,418
+Check four: push main through the gate.
+
+141
+00:05:12,418 --> 00:05:14,055
+Then make an annotated tag,
+
+142
+00:05:14,055 --> 00:05:15,388
+which needs a message,
+
+143
+00:05:15,388 --> 00:05:16,903
+and push the tag by name.
+
+144
+00:05:17,453 --> 00:05:21,677
+Same method every time: symptom, check, fix one thing, verify.
+
+145
+00:05:23,727 --> 00:05:27,119
+When you finish, clean up, and prove it. Type: lab down.
+
+146
+00:05:28,669 --> 00:05:34,301
+Proof one: is the lab folder gone? Type: L S, slash opt, slash lab sixty-six.
+
+147
+00:05:34,851 --> 00:05:36,947
+No such file or directory.
+
+148
+00:05:36,947 --> 00:05:39,124
+Proof two: count it in opt.
+
+149
+00:05:39,124 --> 00:05:39,930
+Type: L S,
+
+150
+00:05:39,930 --> 00:05:40,736
+slash opt,
+
+151
+00:05:40,736 --> 00:05:41,139
+pipe,
+
+152
+00:05:41,139 --> 00:05:42,106
+grep dash c,
+
+153
+00:05:42,106 --> 00:05:43,235
+lab sixty-six.
+
+154
+00:05:43,785 --> 00:05:44,221
+Zero.
+
+155
+00:05:44,221 --> 00:05:47,096
+Now remove the lab script itself.
+
+156
+00:05:47,096 --> 00:05:48,228
+Type: sue do,
+
+157
+00:05:48,228 --> 00:05:48,577
+R M,
+
+158
+00:05:48,577 --> 00:05:54,153
+slash U S R slash local slash S bin slash lab sixty-six dot S H.
+
+159
+00:05:54,703 --> 00:05:57,899
+Proof three: is anything left in S bin?
+
+160
+00:05:57,899 --> 00:05:58,719
+Type: L S,
+
+161
+00:05:58,719 --> 00:06:01,669
+slash U S R slash local slash S bin,
+
+162
+00:06:01,669 --> 00:06:02,079
+pipe,
+
+163
+00:06:02,079 --> 00:06:02,407
+W C,
+
+164
+00:06:02,407 --> 00:06:02,980
+dash l.
+
+165
+00:06:03,530 --> 00:06:07,498
+Zero. Everything is removed. Paste these proofs into your report.
+
+166
+00:06:09,548 --> 00:06:13,473
+Here is how your work is judged. Six points, and you need all six.
+
+167
+00:06:14,023 --> 00:06:15,858
+The checker shows four pass lines.
+
+168
+00:06:16,408 --> 00:06:19,608
+Every fault has a symptom, a cause, a fix, and a proof.
+
+169
+00:06:20,158 --> 00:06:21,907
+You changed one thing at a time.
+
+170
+00:06:22,457 --> 00:06:25,273
+The report is complete, including where you got stuck.
+
+171
+00:06:25,823 --> 00:06:28,170
+The cleanup proof shows nothing left behind.
+
+172
+00:06:28,720 --> 00:06:31,109
+You ran it only in your own virtual machine.
+
+173
+00:06:31,659 --> 00:06:33,281
+To pass, you need all six.
+
+174
+00:06:35,331 --> 00:06:41,198
+Your turn, in your own Ubuntu virtual machine. Take your time. Mastery is slow and exact.
+
+175
+00:06:41,748 --> 00:06:44,521
+One: clone the repository and install the lab.
+
+176
+00:06:45,071 --> 00:06:47,887
+Two: run lab up, and save the checker output.
+
+177
+00:06:48,437 --> 00:06:51,658
+Three: fix the three remaining faults, with four notes each.
+
+178
+00:06:52,208 --> 00:06:54,320
+Four: write the report from the template.
+
+179
+00:06:54,870 --> 00:06:58,049
+Five: run the checker. All four lines must say pass.
+
+180
+00:06:58,599 --> 00:07:00,562
+Six: clean up, and paste the proof.
+
+181
+00:07:01,112 --> 00:07:02,946
+Pause the video, and begin now.
+
+182
+00:07:18,496 --> 00:07:19,371
+Quick check.
+
+183
+00:07:19,921 --> 00:07:22,267
+Why must you remove a secret before you push?
+
+184
+00:07:22,817 --> 00:07:25,804
+What does a merge conflict mean, and how do you finish it?
+
+185
+00:07:26,354 --> 00:07:28,146
+What does the pre push gate protect?
+
+186
+00:07:28,696 --> 00:07:30,253
+What proves your cleanup worked?
+
+187
+00:07:30,803 --> 00:07:33,695
+Mastery evidence covered: M C zero seven,
+
+188
+00:07:33,695 --> 00:07:36,164
+building on objectives one to nine,
+
+189
+00:07:36,164 --> 00:07:38,633
+in the Git and Git hub masterclass.
+
+190
+00:07:39,183 --> 00:07:41,252
+Pause the video, and answer out loud.
+
+191
+00:07:51,802 --> 00:07:54,682
+Next: application architecture and A P Is.
+
+192
+00:07:55,232 --> 00:07:58,560
+If this helped, like, share and subscribe, so you do not miss it.

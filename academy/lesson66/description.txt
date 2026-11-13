@@ -1,0 +1,28 @@
+Lesson 66 of the DevOps Engineering Bootcamp, the mastery scenario for the Git and GitHub masterclass. A small team's repository has four faults and a checker script says PASS or FAIL for each: a secret (.env) was committed and must be taken out of history and ignored, the feature/discount branch must be merged into main with its conflict in price.txt resolved, the team checks (check.sh) must pass and the pre-push gate must be switched on with core.hooksPath, and main must be pushed to origin with an annotated tag v1.0.0. You see where to get the lab, the lab built and checked (four FAIL lines), and the merge-conflict fault fixed live with four notes: the exact symptom, the cause and the command that proved it, the single change, and the proof afterwards. Then you fix the other three yourself, write the report from the template, and clean up with proof that nothing is left behind.
+
+Chapters
+0:00 Mastery evidence
+0:23 The scenario
+0:57 Get the lab
+1:52 Start the lab
+2:36 Four notes per fault
+2:57 Merge conflict live
+4:15 The report
+4:38 Your three faults
+5:23 Cleanup with proof
+6:09 Pass or fail rubric
+6:34 Your turn
+7:18 Quick check
+
+Objectives covered: MC07 mastery evidence (builds on MC07-O01 to MC07-O09)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab66.sh and shortcuts66.sh) and academy/lesson66 (INSTALL.txt and report_template.md). Install with: sudo install -m 755 lab66.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts66.sh (without it, use sudo lab66.sh up, check, down). You need an Ubuntu virtual machine with root and git. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount setup on the recording computer. The lab was run end to end before this lesson: the four faults make all four checks fail, one reference solution makes all four pass, and lab down leaves nothing behind. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. I fix only the merge conflict on screen, so the rest is still yours to solve. The shared origin in the lab is a local folder, not a real GitHub repository, and the secret value is a made-up demo string. The lab file names are invented, and lab is a short name I made for sudo lab66.sh. The on-screen guide, scenario and report screens are labelled illustrations, not captures. Typing is timed to the narration. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Ship a team release with automated checks https://youtu.be/Am9LcPHwVqE
+Next masterclass: Application architecture and APIs.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#git #github #devops #versioncontrol #ubuntu #devopsbootcamp
