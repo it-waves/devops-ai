@@ -1,0 +1,17 @@
+Install the lab (needs an Ubuntu virtual machine with root, python3 and curl):
+  sudo apt install -y python3 curl jq    # skip if already installed
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab72.sh /usr/local/sbin/
+  source shortcuts72.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab72 and starts CloudCart with a cart: the API on 127.0.0.1:5000
+  lab check               # five FAIL lines at the start; your goal is five PASS lines
+  lab down                # stops the app and removes /opt/lab72
+Without the shortcut, use: sudo lab72.sh up | check | down | status
+Your mission, working inside /opt/lab72 (do not edit api.py):
+  1. start the second copy with ./second.sh (port 5001), add item 1 with  curl -s -X POST localhost:5000/api/cart/1  and save  curl -s localhost:5001/api/cart  in split.txt
+  2. restart both with STORAGE=db (./start.sh, then ./second.sh), add item 2 on port 5000, and save the cart of port 5001 in shared.txt
+  3. restart with  STORAGE=db ./start.sh  and make sure the cart on port 5000 still has item 2
+  4. add to answers.txt:  state: shop.db
+  5. start the second copy again with  STORAGE=db ./second.sh  so both servers run
+Commands you will use: curl -s URL, curl -s -X POST URL, VAR=value ./start.sh (jq not needed)
+Run it only in your own virtual machine. It uses ports 5000, 5001 and 8080 on 127.0.0.1 and creates only /opt/lab72. Remove the installed script with: sudo rm /usr/local/sbin/lab72.sh

@@ -1,0 +1,663 @@
+1
+00:00:00,500 --> 00:00:01,744
+Your shop is busy,
+
+2
+00:00:01,744 --> 00:00:04,024
+so you run two copies of the API.
+
+3
+00:00:04,024 --> 00:00:07,340
+A customer adds an item to the cart on copy one.
+
+4
+00:00:07,340 --> 00:00:09,759
+Their next click lands on copy two.
+
+5
+00:00:10,309 --> 00:00:11,566
+Where is their cart?
+
+6
+00:00:11,566 --> 00:00:13,327
+If it lives inside copy one,
+
+7
+00:00:13,327 --> 00:00:15,277
+copy two has never heard of it,
+
+8
+00:00:15,277 --> 00:00:17,541
+and the customer sees an empty cart.
+
+9
+00:00:18,091 --> 00:00:20,312
+Today you learn four ideas: state,
+
+10
+00:00:20,312 --> 00:00:22,533
+which is what a program remembers.
+
+11
+00:00:22,533 --> 00:00:24,297
+Stateful against stateless.
+
+12
+00:00:24,297 --> 00:00:25,342
+Persistent data,
+
+13
+00:00:25,342 --> 00:00:26,975
+which survives a restart.
+
+14
+00:00:26,975 --> 00:00:29,653
+And why scaling out depends on all of it.
+
+15
+00:00:30,203 --> 00:00:33,595
+You will watch a cart vanish, then fix it, with real commands.
+
+16
+00:00:35,645 --> 00:00:38,760
+Go into the shop. Type: CD, cloud cart.
+
+17
+00:00:39,310 --> 00:00:42,360
+Start it. Type: dot slash start dot S H.
+
+18
+00:00:42,910 --> 00:00:44,993
+Add product one to the cart.
+
+19
+00:00:44,993 --> 00:00:45,811
+Type: curl,
+
+20
+00:00:45,811 --> 00:00:46,331
+dash s,
+
+21
+00:00:46,331 --> 00:00:47,447
+dash capital X,
+
+22
+00:00:47,447 --> 00:00:47,819
+post,
+
+23
+00:00:47,819 --> 00:00:48,711
+the address,
+
+24
+00:00:48,711 --> 00:00:51,017
+slash API slash cart slash one.
+
+25
+00:00:52,567 --> 00:00:54,464
+The cart now holds one item.
+
+26
+00:00:54,464 --> 00:00:58,257
+This API keeps the cart in a list inside its own memory.
+
+27
+00:00:58,257 --> 00:00:59,138
+Read it back.
+
+28
+00:00:59,688 --> 00:01:03,250
+Type: curl, dash s, the address, slash API slash cart.
+
+29
+00:01:03,800 --> 00:01:05,187
+There it is: item one,
+
+30
+00:01:05,187 --> 00:01:06,953
+and the storage says memory.
+
+31
+00:01:06,953 --> 00:01:09,979
+That memory belongs to this one running process.
+
+32
+00:01:09,979 --> 00:01:10,862
+That is state.
+
+33
+00:01:11,412 --> 00:01:17,428
+Now restart the server, as happens in every deploy. Type: dot slash start dot S H.
+
+34
+00:01:19,478 --> 00:01:22,315
+And read the cart again. Same command as before.
+
+35
+00:01:23,865 --> 00:01:24,267
+Empty.
+
+36
+00:01:24,267 --> 00:01:25,405
+The cart is gone.
+
+37
+00:01:25,405 --> 00:01:27,346
+Memory dies with the process.
+
+38
+00:01:27,346 --> 00:01:31,630
+Anything that must survive a restart cannot live only in memory.
+
+39
+00:01:33,680 --> 00:01:36,795
+Go into the shop. Type: CD, cloud cart.
+
+40
+00:01:37,345 --> 00:01:40,395
+Start it. Type: dot slash start dot S H.
+
+41
+00:01:40,945 --> 00:01:47,239
+Now run a second copy, on port five thousand and one. Type: dot slash second dot S H.
+
+42
+00:01:49,289 --> 00:01:50,067
+Two servers,
+
+43
+00:01:50,067 --> 00:01:50,715
+same code,
+
+44
+00:01:50,715 --> 00:01:51,947
+same database file.
+
+45
+00:01:51,947 --> 00:01:55,255
+A load balancer would spread customers across them.
+
+46
+00:01:55,255 --> 00:01:57,459
+Add an item through the first one.
+
+47
+00:01:58,009 --> 00:02:03,940
+Type: curl, dash s, dash capital X, post, the address, slash API slash cart slash one.
+
+48
+00:02:05,490 --> 00:02:05,815
+Done,
+
+49
+00:02:05,815 --> 00:02:07,504
+on instance five thousand.
+
+50
+00:02:07,504 --> 00:02:11,143
+Now the customer's next click goes to the second server.
+
+51
+00:02:11,143 --> 00:02:14,002
+Ask port five thousand and one for the cart.
+
+52
+00:02:14,552 --> 00:02:20,397
+Type: curl, dash s, the address with port five thousand and one, slash API slash cart.
+
+53
+00:02:22,447 --> 00:02:22,824
+Empty.
+
+54
+00:02:22,824 --> 00:02:24,833
+The second server knows nothing.
+
+55
+00:02:24,833 --> 00:02:28,976
+The customer lost their cart just by being sent to another server.
+
+56
+00:02:28,976 --> 00:02:32,303
+A server that remembers things like this is stateful.
+
+57
+00:02:34,353 --> 00:02:37,468
+Go into the shop. Type: CD, cloud cart.
+
+58
+00:02:38,018 --> 00:02:40,747
+The fix: keep state out of the server,
+
+59
+00:02:40,747 --> 00:02:42,543
+and in a shared database.
+
+60
+00:02:42,543 --> 00:02:44,698
+Start with storage set to D B.
+
+61
+00:02:44,698 --> 00:02:46,494
+Type: storage equals D B,
+
+62
+00:02:46,494 --> 00:02:48,578
+then dot slash start dot S H.
+
+63
+00:02:50,628 --> 00:02:56,942
+Start the second copy the same way. Type: storage equals D B, dot slash second dot S H.
+
+64
+00:02:58,992 --> 00:03:01,697
+Add item two through the first server.
+
+65
+00:03:01,697 --> 00:03:02,480
+Type: curl,
+
+66
+00:03:02,480 --> 00:03:02,978
+dash s,
+
+67
+00:03:02,978 --> 00:03:04,045
+dash capital X,
+
+68
+00:03:04,045 --> 00:03:04,401
+post,
+
+69
+00:03:04,401 --> 00:03:05,255
+the address,
+
+70
+00:03:05,255 --> 00:03:07,462
+slash API slash cart slash two.
+
+71
+00:03:09,012 --> 00:03:11,977
+Now ask the other server, port five thousand and one.
+
+72
+00:03:12,527 --> 00:03:18,372
+Type: curl, dash s, the address with port five thousand and one, slash API slash cart.
+
+73
+00:03:20,422 --> 00:03:20,968
+Item two,
+
+74
+00:03:20,968 --> 00:03:22,606
+seen from the other server.
+
+75
+00:03:22,606 --> 00:03:24,791
+Both servers read the same database,
+
+76
+00:03:24,791 --> 00:03:27,217
+so it does not matter which one answers.
+
+77
+00:03:27,217 --> 00:03:29,766
+Now the servers keep no cart of their own.
+
+78
+00:03:29,766 --> 00:03:30,918
+They are stateless.
+
+79
+00:03:31,468 --> 00:03:37,954
+One more test: restart everything. Type: storage equals D B, dot slash start dot S H.
+
+80
+00:03:40,004 --> 00:03:44,718
+Read the cart. Type: curl, dash s, the address, slash API slash cart.
+
+81
+00:03:46,268 --> 00:03:47,026
+Still there.
+
+82
+00:03:47,026 --> 00:03:48,921
+The data survived the restart,
+
+83
+00:03:48,921 --> 00:03:51,131
+because it lives in a file on disk.
+
+84
+00:03:51,131 --> 00:03:52,647
+That is persistent data.
+
+85
+00:03:53,197 --> 00:03:57,080
+See the file. Type: L S, dash L, shop dot D B.
+
+86
+00:03:57,630 --> 00:04:01,711
+That one file is now the most precious thing on this machine.
+
+87
+00:04:01,711 --> 00:04:03,785
+Persistent data needs a backup,
+
+88
+00:04:03,785 --> 00:04:06,997
+and in real life a volume or a managed database.
+
+89
+00:04:06,997 --> 00:04:08,603
+Servers can be replaced.
+
+90
+00:04:08,603 --> 00:04:09,406
+Data cannot.
+
+91
+00:04:11,456 --> 00:04:13,141
+Let us put the ideas together.
+
+92
+00:04:13,691 --> 00:04:19,025
+State is what a program remembers between requests: a cart, a login, a counter.
+
+93
+00:04:19,575 --> 00:04:23,674
+A stateful service keeps that state in its own memory or disk.
+
+94
+00:04:23,674 --> 00:04:24,533
+It is simple,
+
+95
+00:04:24,533 --> 00:04:26,583
+but you cannot just add copies,
+
+96
+00:04:26,583 --> 00:04:28,236
+and a restart loses data.
+
+97
+00:04:28,786 --> 00:04:32,042
+A stateless service keeps nothing between requests.
+
+98
+00:04:32,042 --> 00:04:34,086
+Any copy can answer any request,
+
+99
+00:04:34,086 --> 00:04:35,490
+so you can add copies,
+
+100
+00:04:35,490 --> 00:04:36,384
+remove copies,
+
+101
+00:04:36,384 --> 00:04:37,470
+and replace them,
+
+102
+00:04:37,470 --> 00:04:37,917
+freely.
+
+103
+00:04:38,467 --> 00:04:40,348
+The state does not disappear.
+
+104
+00:04:40,348 --> 00:04:43,073
+It moves to a backing service: a database,
+
+105
+00:04:43,073 --> 00:04:43,592
+a cache,
+
+106
+00:04:43,592 --> 00:04:44,760
+or object storage.
+
+107
+00:04:45,310 --> 00:04:47,509
+Persistent data survives restarts.
+
+108
+00:04:47,509 --> 00:04:50,356
+Put it on a volume or in a managed database,
+
+109
+00:04:50,356 --> 00:04:51,326
+and back it up.
+
+110
+00:04:51,876 --> 00:04:55,932
+Tokens and settings work the same way: keep them outside the server,
+
+111
+00:04:55,932 --> 00:04:57,423
+so any copy can use them.
+
+112
+00:04:57,973 --> 00:04:59,138
+In real systems,
+
+113
+00:04:59,138 --> 00:05:00,230
+docker volumes,
+
+114
+00:05:00,230 --> 00:05:02,414
+kubernetes persistent volumes,
+
+115
+00:05:02,414 --> 00:05:05,036
+and cloud databases do exactly this.
+
+116
+00:05:05,036 --> 00:05:06,783
+The idea stays the same.
+
+117
+00:05:08,833 --> 00:05:11,606
+Your task, in your own Ubuntu virtual machine.
+
+118
+00:05:12,156 --> 00:05:14,721
+The lab is lab seventy-two dot S H,
+
+119
+00:05:14,721 --> 00:05:18,459
+in the academy slash lab folder of git hub dot com,
+
+120
+00:05:18,459 --> 00:05:19,924
+slash it dash waves,
+
+121
+00:05:19,924 --> 00:05:21,610
+slash dev ops dash A I.
+
+122
+00:05:21,610 --> 00:05:23,295
+Install it like before,
+
+123
+00:05:23,295 --> 00:05:24,468
+then run lab up,
+
+124
+00:05:24,468 --> 00:05:27,986
+and work inside slash opt slash lab seventy-two.
+
+125
+00:05:28,536 --> 00:05:30,963
+One: with the default memory storage,
+
+126
+00:05:30,963 --> 00:05:32,407
+start the second copy,
+
+127
+00:05:32,407 --> 00:05:35,491
+add item one to the cart on port five thousand,
+
+128
+00:05:35,491 --> 00:05:39,821
+and save the cart of port five thousand and one in split dot text.
+
+129
+00:05:40,371 --> 00:05:43,272
+Two: restart both with storage set to D B,
+
+130
+00:05:43,272 --> 00:05:44,170
+add item two,
+
+131
+00:05:44,170 --> 00:05:48,798
+and save the cart of port five thousand and one in shared dot text.
+
+132
+00:05:49,348 --> 00:05:51,361
+Three: restart with storage D B,
+
+133
+00:05:51,361 --> 00:05:55,513
+and make sure the cart on port five thousand still holds item two.
+
+134
+00:05:56,063 --> 00:06:02,006
+Four: write the answer to this question in answers dot text: where does the cart live now?
+
+135
+00:06:02,006 --> 00:06:03,128
+Like this: state,
+
+136
+00:06:03,128 --> 00:06:03,525
+colon,
+
+137
+00:06:03,525 --> 00:06:04,383
+shop dot D B.
+
+138
+00:06:04,933 --> 00:06:09,669
+Five: leave the second copy running, so both servers answer with the same cart.
+
+139
+00:06:10,219 --> 00:06:12,758
+Then run lab check. Five pass lines.
+
+140
+00:06:14,808 --> 00:06:16,792
+Six points, and you need all six.
+
+141
+00:06:17,342 --> 00:06:19,219
+The checker shows five pass lines.
+
+142
+00:06:19,769 --> 00:06:22,265
+You can explain state, and give an example.
+
+143
+00:06:22,815 --> 00:06:25,183
+You can explain stateful against stateless.
+
+144
+00:06:25,733 --> 00:06:28,912
+You can explain why scaling out needs stateless servers.
+
+145
+00:06:29,462 --> 00:06:32,790
+You can explain persistent data, and why it needs a backup.
+
+146
+00:06:33,340 --> 00:06:36,071
+You ran lab down, and nothing is left listening.
+
+147
+00:06:36,621 --> 00:06:38,242
+To pass, you need all six.
+
+148
+00:06:40,292 --> 00:06:43,129
+Your turn, in your own Ubuntu virtual machine.
+
+149
+00:06:43,679 --> 00:06:45,898
+One: install the lab, and run lab up.
+
+150
+00:06:46,448 --> 00:06:50,224
+Two: watch the cart vanish on the second server, and save the proof.
+
+151
+00:06:50,774 --> 00:06:53,441
+Three: switch to the database, and share the cart.
+
+152
+00:06:53,991 --> 00:06:56,721
+Four: restart, and check the data survived.
+
+153
+00:06:57,271 --> 00:07:00,493
+Five: write your answer, and keep both servers running.
+
+154
+00:07:01,043 --> 00:07:03,325
+Six: run lab check, then lab down.
+
+155
+00:07:03,875 --> 00:07:05,710
+Pause the video, and begin now.
+
+156
+00:07:21,260 --> 00:07:22,135
+Quick check.
+
+157
+00:07:22,685 --> 00:07:23,623
+What is state?
+
+158
+00:07:24,173 --> 00:07:26,541
+Why did the cart vanish on the second server?
+
+159
+00:07:27,091 --> 00:07:28,713
+What makes a service stateless?
+
+160
+00:07:29,263 --> 00:07:32,356
+Where should persistent data live, and what must you do with it?
+
+161
+00:07:32,906 --> 00:07:35,355
+Objective covered: M C zero eight,
+
+162
+00:07:35,355 --> 00:07:38,740
+objective six: stateful and stateless services,
+
+163
+00:07:38,740 --> 00:07:40,181
+and persistent data.
+
+164
+00:07:40,731 --> 00:07:42,800
+Pause the video, and answer out loud.
+
+165
+00:07:53,350 --> 00:07:56,763
+Next: health checks, readiness, logs, metrics, and errors.
+
+166
+00:07:57,313 --> 00:08:00,641
+If this helped, like, share and subscribe, so you do not miss it.

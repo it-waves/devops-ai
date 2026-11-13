@@ -1,0 +1,25 @@
+Lesson 72 of the DevOps Engineering Bootcamp, the sixth lesson of the Application Architecture and APIs masterclass. You add an item to the cart, the shop restarts, and the cart is empty. Why? Here you use CloudCart, the tiny shop from the last lessons, and watch it with real commands. A cart kept in memory dies with the process. Start a second copy of the server and the next click may land on a cart that does not know you. You then move the state out of the server and into the database: both servers agree, and a restart changes nothing. That is the difference between a stateful service and a stateless one, and why persistent data lives in a database or a volume, with a backup. You finish with a lab, a checker, a pass or fail rubric and your turn.
+
+Chapters
+0:00 Where is the cart?
+0:35 State lives in memory
+1:33 Two servers, one cart
+2:33 Stateless and persistent
+4:11 Stateful or stateless
+5:08 Your lab task
+6:14 Pass or fail rubric
+6:39 Your turn
+7:20 Quick check
+
+Objectives covered: MC08-O06 Explain stateful and stateless services, and persistent data.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab72.sh and shortcuts72.sh) and academy/lesson72 (INSTALL.txt). Install with: sudo install -m 755 lab72.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts72.sh (without it, use sudo lab72.sh up, check, down). You need an Ubuntu virtual machine with root, python3, curl and jq. It uses ports 5000, 5001 and 8080 on 127.0.0.1. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount and network setup on the recording computer. CloudCart is a tiny teaching app written for this course, using Python and an SQLite file, not a production system. Two copies on two ports stand in for two servers behind a load balancer; real systems use managed databases, volumes and orchestrators. The stateful or stateless summary is a labelled illustration, not a capture. The lab was run end to end before this lesson: it starts with all five checks failing, doing the tasks makes all five pass, and lab down leaves nothing behind. Your own run is unverified until you do it. The lab file names are invented, and lab is a short name I made for sudo lab72.sh. Typing is timed to the narration. The narration is synthetic speech.
+
+Previous lesson: configuration, environment variables and feature flags https://youtu.be/V04hBJTwThQ
+Next lesson: health checks, readiness, logs, metrics and errors.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #api #stateless #stateful #persistentdata #devopsbootcamp
