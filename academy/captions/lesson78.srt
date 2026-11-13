@@ -1,0 +1,707 @@
+1
+00:00:00,500 --> 00:00:06,452
+It compiled on my laptop. On the server: class not found. Every Java team has lived this.
+
+2
+00:00:07,002 --> 00:00:08,459
+The code did not change.
+
+3
+00:00:08,459 --> 00:00:10,463
+What changed is where Java looks,
+
+4
+00:00:10,463 --> 00:00:12,527
+and what the environment tells it.
+
+5
+00:00:13,077 --> 00:00:16,544
+Today you learn four ideas that explain it: packages,
+
+6
+00:00:16,544 --> 00:00:17,525
+the class path,
+
+7
+00:00:17,525 --> 00:00:18,376
+dependencies,
+
+8
+00:00:18,376 --> 00:00:20,992
+and configuration from outside the code.
+
+9
+00:00:21,542 --> 00:00:24,187
+Then you break the class path on purpose, and fix it.
+
+10
+00:00:26,237 --> 00:00:29,458
+Four ideas. We will prove each one on a real machine.
+
+11
+00:00:30,008 --> 00:00:30,292
+One.
+
+12
+00:00:30,292 --> 00:00:32,209
+A package is a folder path.
+
+13
+00:00:32,209 --> 00:00:36,682
+The class com dot cloud cart dot main lives in the folders com,
+
+14
+00:00:36,682 --> 00:00:37,462
+cloud cart,
+
+15
+00:00:37,462 --> 00:00:38,456
+main dot java.
+
+16
+00:00:39,006 --> 00:00:39,292
+Two.
+
+17
+00:00:39,292 --> 00:00:43,577
+The class path is the list of places Java looks for classes.
+
+18
+00:00:43,577 --> 00:00:45,148
+Folders and jar files,
+
+19
+00:00:45,148 --> 00:00:47,220
+separated by colons on Linux.
+
+20
+00:00:47,770 --> 00:00:48,150
+Three.
+
+21
+00:00:48,150 --> 00:00:50,749
+A dependency is code somebody else wrote,
+
+22
+00:00:50,749 --> 00:00:52,651
+usually shipped as a jar file.
+
+23
+00:00:52,651 --> 00:00:54,490
+You add it to the class path.
+
+24
+00:00:55,040 --> 00:00:55,371
+Four.
+
+25
+00:00:55,371 --> 00:00:59,352
+Configuration lives outside the code: environment variables,
+
+26
+00:00:59,352 --> 00:01:02,272
+and properties you pass with dash capital D.
+
+27
+00:01:02,822 --> 00:01:07,366
+Same program, different environment, different behavior. That is the whole point.
+
+28
+00:01:09,416 --> 00:01:12,403
+Go to the shop folder. Type: CD, shop.
+
+29
+00:01:12,953 --> 00:01:17,646
+What do we have? Type: find, src, lib, dash type, f, pipe, sort.
+
+30
+00:01:18,196 --> 00:01:23,871
+One source file, inside folders that match its package. And one jar file, our dependency.
+
+31
+00:01:24,421 --> 00:01:30,927
+Read the source. Type: cat, src, slash, com, slash, cloud cart, slash, main dot java.
+
+32
+00:01:31,477 --> 00:01:33,505
+Line one declares the package.
+
+33
+00:01:33,505 --> 00:01:36,750
+Line three imports a class from another package,
+
+34
+00:01:36,750 --> 00:01:38,846
+com dot cloud cart dot pricing.
+
+35
+00:01:38,846 --> 00:01:41,483
+That class is not in our source folder.
+
+36
+00:01:42,033 --> 00:01:43,409
+Compile it as it is.
+
+37
+00:01:43,409 --> 00:01:44,304
+Type: java C,
+
+38
+00:01:44,304 --> 00:01:44,786
+dash D,
+
+39
+00:01:44,786 --> 00:01:45,061
+out,
+
+40
+00:01:45,061 --> 00:01:46,507
+then the source path.
+
+41
+00:01:46,507 --> 00:01:49,329
+Dash D says where to put the class files.
+
+42
+00:01:49,879 --> 00:01:53,548
+Package com dot cloud cart dot pricing does not exist.
+
+43
+00:01:53,548 --> 00:01:56,946
+Java C looked in its class path and found nothing.
+
+44
+00:01:56,946 --> 00:02:00,140
+The second error is only a result of the first.
+
+45
+00:02:00,690 --> 00:02:03,824
+Now tell java C where the dependency is.
+
+46
+00:02:03,824 --> 00:02:04,842
+Type: java C,
+
+47
+00:02:04,842 --> 00:02:05,547
+dash C P,
+
+48
+00:02:05,547 --> 00:02:07,584
+lib slash pricing dot jar,
+
+49
+00:02:07,584 --> 00:02:08,132
+dash D,
+
+50
+00:02:08,132 --> 00:02:08,446
+out,
+
+51
+00:02:08,446 --> 00:02:10,013
+and the source path.
+
+52
+00:02:10,563 --> 00:02:14,168
+Silence. It compiled, because the jar was on the class path.
+
+53
+00:02:14,718 --> 00:02:18,707
+Look at the output folder. Type: find, out, dash type, f.
+
+54
+00:02:19,257 --> 00:02:22,381
+The class file sits in folders that match the package.
+
+55
+00:02:22,381 --> 00:02:24,463
+Java builds the folder path for you.
+
+56
+00:02:25,013 --> 00:02:29,919
+What is inside the jar? Type: jar, T F, lib slash pricing dot jar.
+
+57
+00:02:30,469 --> 00:02:33,020
+A jar is just an archive of class files,
+
+58
+00:02:33,020 --> 00:02:34,742
+with the same folder paths.
+
+59
+00:02:34,742 --> 00:02:36,400
+The tax class is in there.
+
+60
+00:02:36,950 --> 00:02:37,503
+Run it.
+
+61
+00:02:37,503 --> 00:02:40,898
+The class path now needs the output folder,
+
+62
+00:02:40,898 --> 00:02:41,845
+and the jar,
+
+63
+00:02:41,845 --> 00:02:43,267
+joined by a colon.
+
+64
+00:02:43,267 --> 00:02:44,135
+Type: java,
+
+65
+00:02:44,135 --> 00:02:44,846
+dash C P,
+
+66
+00:02:44,846 --> 00:02:47,688
+out colon lib slash pricing dot jar,
+
+67
+00:02:47,688 --> 00:02:49,899
+com dot cloud cart dot main.
+
+68
+00:02:50,449 --> 00:02:50,805
+Total,
+
+69
+00:02:50,805 --> 00:02:51,873
+one hundred eight.
+
+70
+00:02:51,873 --> 00:02:53,771
+The tax class came from the jar.
+
+71
+00:02:53,771 --> 00:02:55,372
+Notice the full class name,
+
+72
+00:02:55,372 --> 00:02:56,380
+with its package.
+
+73
+00:02:58,430 --> 00:03:00,947
+Go to the shop. Type: CD, shop.
+
+74
+00:03:01,497 --> 00:03:02,785
+Compile it again,
+
+75
+00:03:02,785 --> 00:03:04,301
+with the dependency.
+
+76
+00:03:04,301 --> 00:03:05,286
+Type: java C,
+
+77
+00:03:05,286 --> 00:03:05,968
+dash C P,
+
+78
+00:03:05,968 --> 00:03:07,938
+lib slash pricing dot jar,
+
+79
+00:03:07,938 --> 00:03:08,468
+dash D,
+
+80
+00:03:08,468 --> 00:03:08,771
+out,
+
+81
+00:03:08,771 --> 00:03:10,287
+and the source path.
+
+82
+00:03:10,837 --> 00:03:14,132
+Now the classic mistake: run without the jar.
+
+83
+00:03:14,132 --> 00:03:14,938
+Type: java,
+
+84
+00:03:14,938 --> 00:03:15,597
+dash C P,
+
+85
+00:03:15,597 --> 00:03:15,889
+out,
+
+86
+00:03:15,889 --> 00:03:16,988
+the class name,
+
+87
+00:03:16,988 --> 00:03:19,551
+then redirect errors to the screen,
+
+88
+00:03:19,551 --> 00:03:19,917
+pipe,
+
+89
+00:03:19,917 --> 00:03:20,283
+head,
+
+90
+00:03:20,283 --> 00:03:20,796
+dash N,
+
+91
+00:03:20,796 --> 00:03:21,162
+five.
+
+92
+00:03:21,712 --> 00:03:24,144
+Look: store and currency print first.
+
+93
+00:03:24,144 --> 00:03:26,969
+The program only needs the tax class later,
+
+94
+00:03:26,969 --> 00:03:28,086
+so it fails late,
+
+95
+00:03:28,086 --> 00:03:30,058
+with no class def found error.
+
+96
+00:03:30,058 --> 00:03:33,147
+A missing jar on the server shows up like this.
+
+97
+00:03:33,697 --> 00:03:39,435
+Another mistake: no class path at all. Type: java, com dot cloud cart dot main.
+
+98
+00:03:39,985 --> 00:03:42,102
+Could not find or load main class.
+
+99
+00:03:42,102 --> 00:03:44,219
+Java looked in the current folder,
+
+100
+00:03:44,219 --> 00:03:46,087
+and found no com folder there.
+
+101
+00:03:46,637 --> 00:03:47,849
+Now configuration.
+
+102
+00:03:47,849 --> 00:03:51,013
+The program reads a variable called store name.
+
+103
+00:03:51,013 --> 00:03:52,966
+Type: store name equals Bean,
+
+104
+00:03:52,966 --> 00:03:56,130
+then the java command with the full class path.
+
+105
+00:03:56,680 --> 00:03:57,458
+Store: Bean.
+
+106
+00:03:57,458 --> 00:04:00,438
+We changed behavior without touching the code.
+
+107
+00:04:00,438 --> 00:04:01,993
+An environment variable,
+
+108
+00:04:01,993 --> 00:04:03,613
+set for this one command.
+
+109
+00:04:04,163 --> 00:04:05,231
+And a property.
+
+110
+00:04:05,231 --> 00:04:06,014
+Type: java,
+
+111
+00:04:06,014 --> 00:04:08,079
+dash D currency equals E U R,
+
+112
+00:04:08,079 --> 00:04:10,499
+then the class path and the class.
+
+113
+00:04:11,049 --> 00:04:12,115
+Currency: E U R.
+
+114
+00:04:12,115 --> 00:04:12,714
+Same jar,
+
+115
+00:04:12,714 --> 00:04:13,846
+same class files,
+
+116
+00:04:13,846 --> 00:04:15,111
+different settings.
+
+117
+00:04:15,111 --> 00:04:16,044
+In production,
+
+118
+00:04:16,044 --> 00:04:18,175
+these come from the environment.
+
+119
+00:04:20,225 --> 00:04:21,974
+Three messages, three fixes.
+
+120
+00:04:22,524 --> 00:04:28,092
+Package does not exist, at compile time. Add the jar to java C with dash C P.
+
+121
+00:04:28,642 --> 00:04:33,549
+No class def found error, at run time. Add the jar to the java class path.
+
+122
+00:04:34,099 --> 00:04:36,211
+Could not find or load main class.
+
+123
+00:04:36,211 --> 00:04:37,702
+Use the full class name,
+
+124
+00:04:37,702 --> 00:04:40,435
+and put the output folder in the class path.
+
+125
+00:04:40,985 --> 00:04:43,521
+And remember: configuration is not a bug.
+
+126
+00:04:43,521 --> 00:04:47,108
+Check the variables and properties before you change code.
+
+127
+00:04:49,158 --> 00:04:50,067
+Your lab task.
+
+128
+00:04:50,067 --> 00:04:53,507
+Lab seventy-eight builds a small project and its jar.
+
+129
+00:04:53,507 --> 00:04:55,259
+Lab check judges your work.
+
+130
+00:04:55,809 --> 00:04:57,927
+It lives at git hub dot com,
+
+131
+00:04:57,927 --> 00:04:59,439
+slash it dash waves,
+
+132
+00:04:59,439 --> 00:05:01,178
+slash dev ops dash A I,
+
+133
+00:05:01,178 --> 00:05:02,010
+in academy,
+
+134
+00:05:02,010 --> 00:05:02,313
+lab,
+
+135
+00:05:02,313 --> 00:05:04,279
+lab seventy-eight dot S H.
+
+136
+00:05:04,829 --> 00:05:09,053
+One: compile Main with the jar on the class path, into the out folder.
+
+137
+00:05:09,603 --> 00:05:14,189
+Two: run it with the full class path. Save the output into run dot text.
+
+138
+00:05:14,739 --> 00:05:17,184
+Three: run it with store name Bean,
+
+139
+00:05:17,184 --> 00:05:18,512
+and currency E U R.
+
+140
+00:05:18,512 --> 00:05:21,097
+Save the output into config dot text.
+
+141
+00:05:21,647 --> 00:05:26,255
+Four: run it with the jar missing, and save the error into fail dot text.
+
+142
+00:05:26,805 --> 00:05:28,529
+Five: answers dot text,
+
+143
+00:05:28,529 --> 00:05:29,429
+three lines.
+
+144
+00:05:29,429 --> 00:05:31,003
+Package: folder path.
+
+145
+00:05:31,003 --> 00:05:33,178
+Class path: where java looks.
+
+146
+00:05:33,178 --> 00:05:34,527
+Dependency: a jar.
+
+147
+00:05:35,077 --> 00:05:35,610
+Install,
+
+148
+00:05:35,610 --> 00:05:36,409
+then lab up,
+
+149
+00:05:36,409 --> 00:05:37,074
+lab check,
+
+150
+00:05:37,074 --> 00:05:37,939
+and lab down,
+
+151
+00:05:37,939 --> 00:05:38,738
+like before.
+
+152
+00:05:38,738 --> 00:05:41,733
+The shortcut file is shortcuts seventy-eight.
+
+153
+00:05:43,783 --> 00:05:45,852
+Pass or fail. You need all six.
+
+154
+00:05:46,402 --> 00:05:48,216
+Five pass lines in lab check.
+
+155
+00:05:48,766 --> 00:05:51,134
+You can say how a package maps to folders.
+
+156
+00:05:51,684 --> 00:05:54,201
+You can build a class path with a folder and a jar.
+
+157
+00:05:54,751 --> 00:05:58,548
+You can say when the jar is needed: compile time and run time.
+
+158
+00:05:59,098 --> 00:06:02,874
+You can change behavior with an environment variable and a property.
+
+159
+00:06:03,424 --> 00:06:05,344
+lab down, nothing left behind.
+
+160
+00:06:05,894 --> 00:06:07,196
+To pass, all six.
+
+161
+00:06:09,246 --> 00:06:12,083
+Your turn, in your own Ubuntu virtual machine.
+
+162
+00:06:12,633 --> 00:06:14,724
+One: lab up, and read the task file.
+
+163
+00:06:15,274 --> 00:06:16,981
+Two: compile with the jar.
+
+164
+00:06:17,531 --> 00:06:20,027
+Three: run, and run with configuration.
+
+165
+00:06:20,577 --> 00:06:23,137
+Four: break the class path, and keep the error.
+
+166
+00:06:23,687 --> 00:06:25,969
+Five: write your answers, and lab check.
+
+167
+00:06:26,519 --> 00:06:29,101
+Six: lab down, and prove nothing is left.
+
+168
+00:06:29,651 --> 00:06:31,485
+Pause the video, and begin now.
+
+169
+00:06:47,035 --> 00:06:47,910
+Quick check.
+
+170
+00:06:48,460 --> 00:06:50,422
+How does a package name map to the disk?
+
+171
+00:06:50,972 --> 00:06:52,402
+What goes in the class path?
+
+172
+00:06:52,952 --> 00:06:56,834
+When do you need a dependency: compile time, run time, or both?
+
+173
+00:06:57,384 --> 00:06:59,816
+Two ways to configure a program from outside?
+
+174
+00:07:00,366 --> 00:07:04,057
+Objective covered: M C zero nine, objective three.
+
+175
+00:07:04,607 --> 00:07:06,676
+Pause the video, and answer out loud.
+
+176
+00:07:17,226 --> 00:07:19,786
+Next: inspect a running Java process.
+
+177
+00:07:20,336 --> 00:07:23,664
+If this helped, like, share and subscribe, so you do not miss it.

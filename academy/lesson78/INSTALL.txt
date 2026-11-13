@@ -1,0 +1,16 @@
+Install the lab (needs an Ubuntu virtual machine with root and a JDK):
+  sudo apt install -y openjdk-21-jdk-headless      # skip if javac -version already works
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab78.sh /usr/local/sbin/
+  source shortcuts78.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab78 with a small project (Main.java) and lib/pricing.jar, plus TASKS.txt
+  lab check               # five FAIL lines at the start; your goal is five PASS lines
+  lab down                # cleanup when finished
+Without the shortcut, use: sudo lab78.sh up | check | down
+Your five tasks (inside /opt/lab78; also written in TASKS.txt):
+  1 compile Main with the jar on the class path: javac -cp lib/pricing.jar -d out src/com/cloudcart/Main.java
+  2 run it with the full class path (java -cp out:lib/pricing.jar com.cloudcart.Main) and save the output into run.txt
+  3 run it again with STORE_NAME=Bean and -Dcurrency=EUR and save the output into config.txt
+  4 run it WITHOUT the jar (java -cp out com.cloudcart.Main) and save the error into fail.txt (2> fail.txt)
+  5 answers.txt with exactly three lines: package: folder path   classpath: where java looks for classes   dependency: a jar on the classpath
+Run it only in your own virtual machine. lab down removes /opt/lab78; remove the installed script with: sudo rm /usr/local/sbin/lab78.sh
