@@ -1,0 +1,18 @@
+Install the lab (needs an Ubuntu virtual machine with root, python3 and curl):
+  sudo apt install -y python3 curl    # skip if already installed
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab73.sh /usr/local/sbin/
+  source shortcuts73.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab73 and starts CloudCart: the API on 127.0.0.1:5000
+  lab check               # six FAIL lines at the start; your goal is six PASS lines
+  lab down                # stops the app and removes /opt/lab73
+Without the shortcut, use: sudo lab73.sh up | check | down | status
+Your mission, working inside /opt/lab73 (do not edit api.py):
+  1. with the shop healthy, run  ./probe.sh > up.txt
+  2. move the database away with  mv shop.db shop.db.off  and run  ./probe.sh > down.txt
+  3. while it is broken, send  curl -s -H 'X-Request-Id: lab-73' localhost:5000/api/products  and save its log line:  grep lab-73 api.log > rid.txt
+  4. save the metrics:  curl -s localhost:5000/metrics > metrics.txt
+  5. write in answers.txt two lines:  restart: healthz   and   traffic: readyz
+  6. put the database back with  mv shop.db.off shop.db
+Commands you will use: curl -s URL, curl -s -H 'Name: value' URL, mv, grep, cat
+Run it only in your own virtual machine. It uses ports 5000 and 8080 on 127.0.0.1 and creates only /opt/lab73. Remove the installed script with: sudo rm /usr/local/sbin/lab73.sh

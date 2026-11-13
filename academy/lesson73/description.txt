@@ -1,0 +1,26 @@
+Lesson 73 of the DevOps Engineering Bootcamp, the seventh lesson of the Application Architecture and APIs masterclass. It is three in the morning, your shop is slow and some customers see errors. Who finds out first, you or the customers? Here you give CloudCart, the tiny shop from the last lessons, the tools to explain itself, and break its database on purpose to watch them work with real commands. A health check says the program is alive. A readiness check says it can do its job right now. You see why they are two different questions: not alive means restart, alive but not ready means stop sending customers. Then you follow an error upward from the database to the customer: a clean message with a request ID for the customer, the real cause in the log, and the ID that connects them. You read an access log with its levels, then read metrics, counters such as five X X responses that a monitoring tool turns into graphs and alerts. You finish with a lab, a checker, a pass or fail rubric and your turn.
+
+Chapters
+0:00 Is the shop OK?
+0:32 Alive or ready
+2:06 Errors travel upward
+3:52 Logs: the diary
+5:20 Metrics: the numbers
+6:40 Putting it together
+7:36 Your lab task
+8:35 Pass or fail rubric
+9:03 Your turn
+9:43 Quick check
+
+Objectives covered: MC08-O07 Explain health checks, readiness, logs, metrics, and error propagation.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab73.sh and shortcuts73.sh) and academy/lesson73 (INSTALL.txt). Install with: sudo install -m 755 lab73.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts73.sh (without it, use sudo lab73.sh up, check, down). You need an Ubuntu virtual machine with root, python3 and curl. It uses ports 5000 and 8080 on 127.0.0.1. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount and network setup on the recording computer. CloudCart is a tiny teaching app written for this course, using Python and an SQLite file, not a production system. Its probes, log format and metrics page are simplified teaching versions: real systems usually run probes through an orchestrator such as Kubernetes, collect metrics with a tool such as Prometheus, and ship logs to a central platform, but the ideas are the same. The failing database is simulated by moving the database file away. The traffic script only pretends to be five customers. The summary cards are labelled illustrations, not captures. The lab was run end to end before this lesson: it starts with all six checks failing, doing the tasks makes all six pass, and lab down leaves nothing behind. Your own run is unverified until you do it. The lab file names are invented, and lab is a short name I made for sudo lab73.sh. Typing is timed to the narration. The narration is synthetic speech.
+
+Previous lesson: stateful and stateless services, and persistent data https://youtu.be/wcivyJ2Io3g
+Next lesson: draw CloudCart and trace one request through every part.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #healthcheck #readiness #logging #metrics #monitoring #devopsbootcamp
