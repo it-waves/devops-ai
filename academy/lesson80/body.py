@@ -1,0 +1,86 @@
+RB = 'REAL RECORDING  ·  Ubuntu 24.04'
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('h1', "Your build gives you a file. Dev says: ship the jar. Ops says: it is a war. The server says nothing and does not start."),
+  c('h2', "Jar and war are both just archives. The difference is what is inside, and who is supposed to run them."),
+  c('h3', "Today you build both, open both, and try to run both. Then you know exactly which one your server needs."),
+  c('h4', "And you will see why one of them refuses to run."),
+ ]),
+ ('ideas', [
+  c('u1', "Four facts. We will prove each one."),
+  c('u2', "One. A jar is a zip file of class files, plus a manifest. It is for libraries and for programs."),
+  c('u3', "Two. A jar runs by itself, with java dash jar, only if its manifest names a main class."),
+  c('u4', "Three. A war is a web application: pages, a W E B dash I N F folder, and its libraries. It needs a servlet container, like Tomcat."),
+  c('u5', "Four. A modern shortcut: a fat jar carries its own web server inside, so it runs by itself. That is how most Spring Boot services ship."),
+  c('u6', "Same format underneath. Different contract with the server."),
+ ]),
+ ('jar', [
+  k('j0', "Go to the shop folder. Type: C D, shop."),
+  k('j1', "Compile the program into an output folder. Type: java C, dash D, out, then the source path."),
+  k('j2', "Pack the class files into a jar. Type: jar, C F, app dot jar, dash C, out, space, dot."),
+  c('j2b', "C is create, F is the file name. Dash C moves into the out folder first, so the paths inside are clean."),
+  k('j3', "Run it. Type: java, dash jar, app dot jar."),
+  c('j3b', "No main manifest attribute. The jar has the class, but nobody told java which class to start."),
+  k('j4', "Build it again, with an entry point. Type: jar, C F E, app dot jar, com dot cloud cart dot hello, dash C, out, space, dot."),
+  c('j4b', "The E in C F E names the main class. It is written into the manifest."),
+  k('j5', "Run it again. Type: java, dash jar, app dot jar."),
+  c('j5b', "Cloud cart is ready. One file, one command. That is why jars are easy to ship."),
+  k('j6', "Look at the manifest. Type: unzip, dash P, app dot jar, space, M E T A dash I N F, slash, manifest dot M F."),
+  c('j6b', "There it is: Main dash Class. A jar is a zip file with this one small text file that matters."),
+ ]),
+ ('war', [
+  k('w0', "Go to the shop folder. Type: C D, shop."),
+  k('w1', "A web application is a folder with a fixed layout. Type: find, war, dash type, f, pipe, sort."),
+  c('w1b', "An index page, and a W E B dash I N F folder. Inside: web dot X M L, the configuration, and a lib folder for libraries."),
+  k('w2', "Pack it as a war. Type: jar, C F, shop dot war, dash C, war, space, dot."),
+  k('w3', "List what is inside. Type: jar, T F, shop dot war."),
+  c('w3b', "Same tool, same zip format. The layout is the contract: the container looks for W E B dash I N F."),
+  k('w4', "Now try to run it like a jar. Type: java, dash jar, shop dot war."),
+  c('w4b', "The same error. A war has no main class. It is not a program. It is a package for a server."),
+  k('w5', "Peek at the configuration. Type: unzip, dash P, shop dot war, space, W E B dash I N F, slash, web dot X M L, then pipe, head, dash N, three."),
+  c('w5b', "To run it, you drop the war into a servlet container, like Tomcat, which starts it. This lesson does not run Tomcat. It shows you the file the container expects."),
+ ]),
+ ('models', [
+  c('o1', "Which one does your server need?"),
+  c('o2', "A jar with a main class: run it with java dash jar. Common for services and tools."),
+  c('o3', "A war: a web app for a servlet container. Common for older or shared application servers."),
+  c('o4', "A fat jar: a jar with a web server and libraries inside. Runs alone, like a war that carries its own container."),
+  c('o5', "Check the manifest, check the layout, then choose. Do not guess by the file name."),
+ ]),
+ ('task', [
+  c('k1', "Your lab task. Lab eighty builds a project with a source file and a web folder. Lab check judges your work."),
+  c('k2', "It lives at git hub dot com, slash it dash waves, slash dev ops dash A I, in academy, lab, lab eighty dot S H."),
+  c('k3', "One: compile hello into the out folder."),
+  c('k4', "Two: build app dot jar with an entry point, run it with java dash jar, and save the output into jar dash run dot text."),
+  c('k5', "Three: build shop dot war from the war folder."),
+  c('k6', "Four: save the list of its contents into war dash list dot text."),
+  c('k7', "Five: answers dot text, three lines. Jar runs with: java dash jar. War needs: a servlet container. Manifest holds: main class."),
+  c('k8', "Install, then lab up, lab check, and lab down, like before. The shortcut file is shortcuts eighty."),
+ ]),
+ ('rubric', [
+  c('q1', "Pass or fail. You need all six."),
+  c('q2', "Five pass lines in lab check."), c('q3', "You can say what a jar contains."),
+  c('q4', "You can make a jar runnable."), c('q5', "You can say what a war needs to run."),
+  c('q6', "You can read a manifest and a layout."), c('q7', "lab down, nothing left behind."), c('q8', "To pass, all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine."),
+  c('z2', "One: lab up, and read the task file."),
+  c('z3', "Two: compile, and build the jar. Make it run."),
+  c('z4', "Three: build the war, and list it."),
+  c('z5', "Four: try java dash jar on the war, and read the error."),
+  c('z6', "Five: write your answers, and lab check."),
+  c('z7', "Six: lab down, and prove nothing is left."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "What is a jar, in one sentence?"), c('f13', "What makes a jar runnable with java dash jar?"),
+  c('f14', "What does a war need to run?"), c('f15', "What is a fat jar?"),
+  c('f16', "Objective covered: M C zero nine, objective five."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next: stack traces, exceptions and logs."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'h4': 0.5, 'u6': 0.5, 'j6b': 0.5, 'w5b': 0.5, 'o5': 0.5, 'k8': 0.5, 'q8': 0.5, 'z8': 14.0, 'f17': 10.0}
+CHAP = {'ideas': 'Four facts', 'jar': 'Build and run a jar', 'war': 'Build and open a war', 'models': 'Which one do you need?', 'task': 'Your lab task', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

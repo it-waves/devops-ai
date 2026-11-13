@@ -1,0 +1,25 @@
+Lesson 80 of the DevOps Engineering Bootcamp, the fifth lesson of Java Fundamentals for DevOps. Developers say "ship the jar", operations says "it is a war", and the server stays silent. A jar and a war are the same zip format with different contracts. Four facts: a jar is a zip of class files plus META-INF/MANIFEST.MF; a runnable jar has a Main-Class in the manifest, so java -jar works; a war holds WEB-INF/web.xml and WEB-INF/lib and needs a servlet container such as Tomcat; a fat jar carries its own web server and runs by itself. On a real Ubuntu machine you compile a class, pack it with jar cf, run it and meet "no main manifest attribute", add the entry point with jar cfe, run it again and read the manifest. Then you pack a web folder into a war, list it, try java -jar on it and see why it is not a program, and read web.xml. Then you do the lab task yourself: five checks, all must pass.
+
+Chapters
+0:00 Jar or war?
+0:26 Four facts
+1:08 Build and run a jar
+2:24 Build and open a war
+3:39 Which one does your server need?
+4:08 Your lab task
+5:02 Pass or fail rubric
+5:22 Your turn
+6:01 Quick check
+
+Objectives covered: MC09-O05 (build, run and inspect JAR and WAR packages)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab80.sh and shortcuts80.sh) and academy/lesson80 (INSTALL.txt). Install with: sudo install -m 755 lab80.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts80.sh (without it, use sudo lab80.sh up, check, down). You need an Ubuntu virtual machine with root and a JDK (for example: sudo apt install openjdk-21-jdk-headless). The lab writes files into /opt/lab80; lab down removes the folder. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with OpenJDK 21, run in a private mount and network setup on the recording computer. The ideas, task, rubric and quiz screens are labelled illustrations, not captures. I did not run a real servlet container in this lesson; the war is only built and inspected. The lab was run end to end before this lesson: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing behind. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. File names are invented, and lab is a short name I made for sudo lab80.sh. Typing is timed to the narration. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Inspect Java Process Flags and Runtime Settings https://youtu.be/o-SAF4sZ5QY
+Next: stack traces, exceptions and logs.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #java #jar #war #devopsbootcamp
