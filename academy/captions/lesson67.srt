@@ -1,0 +1,751 @@
+1
+00:00:00,500 --> 00:00:05,599
+You tap Buy in a shopping app. A spinner turns for half a second, and then it says: done.
+
+2
+00:00:06,149 --> 00:00:10,223
+In that half second, at least three different programs just talked to each other.
+
+3
+00:00:10,773 --> 00:00:13,114
+Today you meet all three: the frontend,
+
+4
+00:00:13,114 --> 00:00:13,834
+the backend,
+
+5
+00:00:13,834 --> 00:00:14,854
+and the database.
+
+6
+00:00:14,854 --> 00:00:18,155
+And then you take a real app apart with your own hands.
+
+7
+00:00:18,705 --> 00:00:20,558
+Because as a dev ops engineer,
+
+8
+00:00:20,558 --> 00:00:21,546
+you will deploy,
+
+9
+00:00:21,546 --> 00:00:21,916
+scale,
+
+10
+00:00:21,916 --> 00:00:23,214
+and fix these pieces.
+
+11
+00:00:23,214 --> 00:00:25,190
+So you must know which is which.
+
+12
+00:00:27,240 --> 00:00:30,867
+Think of a restaurant. The dining room, the kitchen, and the pantry.
+
+13
+00:00:31,417 --> 00:00:33,599
+The frontend is the dining room.
+
+14
+00:00:33,599 --> 00:00:36,872
+It is what the customer sees and touches: pages,
+
+15
+00:00:36,872 --> 00:00:37,418
+buttons,
+
+16
+00:00:37,418 --> 00:00:37,827
+forms.
+
+17
+00:00:37,827 --> 00:00:39,395
+It runs in the browser.
+
+18
+00:00:39,945 --> 00:00:41,580
+The backend is the kitchen.
+
+19
+00:00:41,580 --> 00:00:42,730
+It holds the rules.
+
+20
+00:00:42,730 --> 00:00:43,941
+It checks the order,
+
+21
+00:00:43,941 --> 00:00:45,152
+works out the price,
+
+22
+00:00:45,152 --> 00:00:46,665
+and decides what happens.
+
+23
+00:00:47,215 --> 00:00:49,028
+The database is the pantry.
+
+24
+00:00:49,028 --> 00:00:49,901
+It remembers.
+
+25
+00:00:49,901 --> 00:00:50,505
+Products,
+
+26
+00:00:50,505 --> 00:00:50,908
+users,
+
+27
+00:00:50,908 --> 00:00:51,377
+orders,
+
+28
+00:00:51,377 --> 00:00:52,586
+all stored safely,
+
+29
+00:00:52,586 --> 00:00:54,533
+even when the power goes off.
+
+30
+00:00:55,083 --> 00:00:56,836
+They talk in a fixed order.
+
+31
+00:00:56,836 --> 00:00:58,719
+The browser asks the backend.
+
+32
+00:00:58,719 --> 00:01:00,666
+The backend asks the database.
+
+33
+00:01:00,666 --> 00:01:02,549
+Then the answer travels back.
+
+34
+00:01:03,099 --> 00:01:08,902
+One more word. A monolith is when all of it lives in one program, running as one process.
+
+35
+00:01:09,452 --> 00:01:12,623
+A service is a smaller program that does one job.
+
+36
+00:01:12,623 --> 00:01:13,853
+Split the monolith,
+
+37
+00:01:13,853 --> 00:01:15,212
+and you get services.
+
+38
+00:01:17,262 --> 00:01:23,171
+Let us see a real one. A tiny shop called cloud cart. Go in. Type: CD, cloud cart.
+
+39
+00:01:23,721 --> 00:01:25,620
+Look around. Type: L S.
+
+40
+00:01:26,170 --> 00:01:32,933
+app dot P Y is the whole shop in one file. Start it. Type: dot slash start dot S H, mono.
+
+41
+00:01:33,483 --> 00:01:35,202
+Now act like a browser.
+
+42
+00:01:35,202 --> 00:01:36,473
+Ask for the page.
+
+43
+00:01:36,473 --> 00:01:37,295
+Type: curl,
+
+44
+00:01:37,295 --> 00:01:37,819
+dash S,
+
+45
+00:01:37,819 --> 00:01:38,641
+local host,
+
+46
+00:01:38,641 --> 00:01:39,090
+colon,
+
+47
+00:01:39,090 --> 00:01:40,734
+eight zero eight zero,
+
+48
+00:01:40,734 --> 00:01:41,108
+pipe,
+
+49
+00:01:41,108 --> 00:01:41,482
+head,
+
+50
+00:01:41,482 --> 00:01:42,229
+dash four.
+
+51
+00:01:42,779 --> 00:01:44,967
+That is the frontend: H T M L,
+
+52
+00:01:44,967 --> 00:01:46,134
+the page itself.
+
+53
+00:01:46,134 --> 00:01:47,665
+Now ask for the data.
+
+54
+00:01:47,665 --> 00:01:48,467
+Type: curl,
+
+55
+00:01:48,467 --> 00:01:48,978
+dash S,
+
+56
+00:01:48,978 --> 00:01:53,645
+local host colon eight zero eight zero slash API slash products,
+
+57
+00:01:53,645 --> 00:01:54,009
+pipe,
+
+58
+00:01:54,009 --> 00:01:54,301
+J Q,
+
+59
+00:01:54,301 --> 00:01:54,812
+dash C,
+
+60
+00:01:54,812 --> 00:01:55,249
+quote,
+
+61
+00:01:55,249 --> 00:01:55,541
+dot,
+
+62
+00:01:55,541 --> 00:01:56,489
+open bracket,
+
+63
+00:01:56,489 --> 00:01:57,510
+close bracket,
+
+64
+00:01:57,510 --> 00:01:57,947
+quote.
+
+65
+00:01:58,497 --> 00:02:01,380
+That is the backend talking: plain data,
+
+66
+00:02:01,380 --> 00:02:02,676
+in jay son format.
+
+67
+00:02:02,676 --> 00:02:04,046
+J Q only tidies it,
+
+68
+00:02:04,046 --> 00:02:05,559
+one product per line.
+
+69
+00:02:06,109 --> 00:02:12,189
+Where does the backend get it? From the database. Type: python three, show D B dot P Y.
+
+70
+00:02:12,739 --> 00:02:14,599
+The same three products,
+
+71
+00:02:14,599 --> 00:02:17,468
+stored in a file called shop dot D B.
+
+72
+00:02:17,468 --> 00:02:19,793
+Now count the running servers.
+
+73
+00:02:19,793 --> 00:02:20,569
+Type: S S,
+
+74
+00:02:20,569 --> 00:02:21,421
+dash L T N.
+
+75
+00:02:21,971 --> 00:02:22,816
+One listener,
+
+76
+00:02:22,816 --> 00:02:24,571
+port eight zero eight zero.
+
+77
+00:02:24,571 --> 00:02:27,755
+The page and the data come from the same process.
+
+78
+00:02:27,755 --> 00:02:28,990
+That is a monolith.
+
+79
+00:02:31,040 --> 00:02:34,347
+Now split it. Go in. Type: CD, cloud cart.
+
+80
+00:02:34,897 --> 00:02:39,441
+Same shop, two services. Type: dot slash start dot S H, split.
+
+81
+00:02:39,991 --> 00:02:43,340
+What is listening now? Type: S S, dash L T N.
+
+82
+00:02:43,890 --> 00:02:44,951
+Two listeners.
+
+83
+00:02:44,951 --> 00:02:47,527
+Port five thousand is the backend.
+
+84
+00:02:47,527 --> 00:02:50,785
+Port eight zero eight zero is the frontend.
+
+85
+00:02:50,785 --> 00:02:52,679
+Ask the backend directly.
+
+86
+00:02:52,679 --> 00:02:53,512
+Type: curl,
+
+87
+00:02:53,512 --> 00:02:54,042
+dash S,
+
+88
+00:02:54,042 --> 00:02:58,285
+local host colon five thousand slash API slash products,
+
+89
+00:02:58,285 --> 00:02:58,664
+pipe,
+
+90
+00:02:58,664 --> 00:02:58,967
+J Q,
+
+91
+00:02:58,967 --> 00:02:59,497
+dash C,
+
+92
+00:02:59,497 --> 00:02:59,952
+quote,
+
+93
+00:02:59,952 --> 00:03:01,846
+dot bracket zero bracket,
+
+94
+00:03:01,846 --> 00:03:02,301
+quote.
+
+95
+00:03:02,851 --> 00:03:03,602
+Only data.
+
+96
+00:03:03,602 --> 00:03:04,204
+No page.
+
+97
+00:03:04,204 --> 00:03:05,482
+Now the frontend.
+
+98
+00:03:05,482 --> 00:03:07,962
+Which address does its page call?
+
+99
+00:03:07,962 --> 00:03:08,789
+Type: curl,
+
+100
+00:03:08,789 --> 00:03:09,315
+dash S,
+
+101
+00:03:09,315 --> 00:03:12,247
+local host colon eight zero eight zero,
+
+102
+00:03:12,247 --> 00:03:12,622
+pipe,
+
+103
+00:03:12,622 --> 00:03:12,998
+grep,
+
+104
+00:03:12,998 --> 00:03:14,051
+five thousand.
+
+105
+00:03:14,601 --> 00:03:15,480
+There it is.
+
+106
+00:03:15,480 --> 00:03:19,585
+The page itself calls the backend at port five thousand.
+
+107
+00:03:19,585 --> 00:03:20,538
+Two programs,
+
+108
+00:03:20,538 --> 00:03:21,125
+one job.
+
+109
+00:03:21,125 --> 00:03:22,224
+Stop them both.
+
+110
+00:03:22,224 --> 00:03:24,350
+Type: dot slash stop dot S H.
+
+111
+00:03:24,900 --> 00:03:26,585
+Clean. Nothing left running.
+
+112
+00:03:28,635 --> 00:03:32,774
+Now see it the way a customer does. Open the shop in a real browser.
+
+113
+00:03:33,324 --> 00:03:38,465
+This is the frontend: the page, drawn by the browser, with cards, colors, and prices.
+
+114
+00:03:39,015 --> 00:03:41,618
+Where did those names and prices come from?
+
+115
+00:03:41,618 --> 00:03:43,253
+The page asked the backend,
+
+116
+00:03:43,253 --> 00:03:45,372
+and the backend asked the database.
+
+117
+00:03:45,922 --> 00:03:48,005
+Open the backend's own address,
+
+118
+00:03:48,005 --> 00:03:50,021
+and there is no design at all.
+
+119
+00:03:50,021 --> 00:03:50,962
+Just the data,
+
+120
+00:03:50,962 --> 00:03:51,701
+as jay son.
+
+121
+00:03:51,701 --> 00:03:52,440
+Same facts,
+
+122
+00:03:52,440 --> 00:03:53,112
+two faces.
+
+123
+00:03:53,662 --> 00:03:58,270
+The frontend is for people. The backend is for programs. Remember that sentence.
+
+124
+00:04:00,320 --> 00:04:04,608
+So which is better, a monolith or services? Neither. It is a trade.
+
+125
+00:04:05,158 --> 00:04:07,092
+Services can scale separately.
+
+126
+00:04:07,092 --> 00:04:09,155
+A busy backend gets more copies,
+
+127
+00:04:09,155 --> 00:04:11,025
+and the frontend stays small.
+
+128
+00:04:11,575 --> 00:04:15,841
+They can be deployed separately. Fix a button, and you do not touch the backend.
+
+129
+00:04:16,391 --> 00:04:19,165
+And one can fail without taking everything down.
+
+130
+00:04:19,715 --> 00:04:20,986
+But there is a price.
+
+131
+00:04:20,986 --> 00:04:21,834
+More programs,
+
+132
+00:04:21,834 --> 00:04:22,500
+more ports,
+
+133
+00:04:22,500 --> 00:04:23,650
+more network calls,
+
+134
+00:04:23,650 --> 00:04:26,435
+and more places to look when something breaks.
+
+135
+00:04:26,985 --> 00:04:28,771
+So a small team starts simple,
+
+136
+00:04:28,771 --> 00:04:30,260
+and splits when it hurts.
+
+137
+00:04:30,260 --> 00:04:32,165
+Your job is to know both shapes,
+
+138
+00:04:32,165 --> 00:04:33,833
+and to see them on a server.
+
+139
+00:04:34,383 --> 00:04:39,375
+Remember the commands: S S shows what is listening, and curl shows what each one says.
+
+140
+00:04:41,425 --> 00:04:44,198
+Your task, in your own Ubuntu virtual machine.
+
+141
+00:04:44,748 --> 00:04:47,353
+The lab is lab sixty-seven dot S H,
+
+142
+00:04:47,353 --> 00:04:51,148
+in the academy slash lab folder of git hub dot com,
+
+143
+00:04:51,148 --> 00:04:52,636
+slash it dash waves,
+
+144
+00:04:52,636 --> 00:04:54,348
+slash dev ops dash A I.
+
+145
+00:04:54,348 --> 00:04:56,059
+Install it like before,
+
+146
+00:04:56,059 --> 00:04:57,250
+then run lab up.
+
+147
+00:04:57,800 --> 00:05:02,119
+It starts cloud cart as one monolith on port eight zero eight zero.
+
+148
+00:05:02,119 --> 00:05:03,666
+Your job is to split it.
+
+149
+00:05:04,216 --> 00:05:08,888
+One: start the backend alone, so port five thousand answers with the product list.
+
+150
+00:05:09,438 --> 00:05:14,537
+Two: make the frontend serve the page on port eight zero eight zero, and call the backend.
+
+151
+00:05:15,087 --> 00:05:17,875
+Three: the two must be separate processes.
+
+152
+00:05:17,875 --> 00:05:21,060
+Read start dot S H; the answer is already there.
+
+153
+00:05:21,610 --> 00:05:23,361
+Four: in answers dot text,
+
+154
+00:05:23,361 --> 00:05:24,708
+write one line: D B,
+
+155
+00:05:24,708 --> 00:05:25,112
+colon,
+
+156
+00:05:25,112 --> 00:05:28,074
+then the service that talks to the database.
+
+157
+00:05:28,624 --> 00:05:31,120
+Then run lab check. Four pass lines.
+
+158
+00:05:33,170 --> 00:05:35,154
+Six points, and you need all six.
+
+159
+00:05:35,704 --> 00:05:37,539
+The checker shows four pass lines.
+
+160
+00:05:38,089 --> 00:05:40,158
+You can show the backend alone with curl.
+
+161
+00:05:40,708 --> 00:05:43,396
+You can show who listens on which port with S S.
+
+162
+00:05:43,946 --> 00:05:48,234
+You can explain frontend, backend, and database in one sentence each.
+
+163
+00:05:48,784 --> 00:05:51,813
+You can explain one benefit and one cost of splitting.
+
+164
+00:05:52,363 --> 00:05:55,094
+You ran lab down, and nothing is left listening.
+
+165
+00:05:55,644 --> 00:05:57,265
+To pass, you need all six.
+
+166
+00:05:59,315 --> 00:06:02,152
+Your turn, in your own Ubuntu virtual machine.
+
+167
+00:06:02,702 --> 00:06:04,921
+One: install the lab, and run lab up.
+
+168
+00:06:05,471 --> 00:06:08,842
+Two: run S S dash L T N, and find the monolith.
+
+169
+00:06:09,392 --> 00:06:11,440
+Three: split it, with the start script.
+
+170
+00:06:11,990 --> 00:06:17,536
+Four: curl the backend on port five thousand, and the page on port eight zero eight zero.
+
+171
+00:06:18,086 --> 00:06:21,180
+Five: write answers dot text, then run lab check.
+
+172
+00:06:21,730 --> 00:06:23,202
+Six: run lab down.
+
+173
+00:06:23,752 --> 00:06:25,586
+Pause the video, and begin now.
+
+174
+00:06:41,136 --> 00:06:42,011
+Quick check.
+
+175
+00:06:42,561 --> 00:06:44,907
+What does the frontend do, and where does it run?
+
+176
+00:06:45,457 --> 00:06:48,081
+What does the backend do that the frontend should not?
+
+177
+00:06:48,631 --> 00:06:50,637
+Why does a database exist at all?
+
+178
+00:06:51,187 --> 00:06:54,472
+Name one benefit and one cost of splitting a monolith.
+
+179
+00:06:55,022 --> 00:06:57,595
+Objective covered: M C zero eight,
+
+180
+00:06:57,595 --> 00:06:58,655
+objective one,
+
+181
+00:06:58,655 --> 00:06:59,336
+frontend,
+
+182
+00:06:59,336 --> 00:06:59,941
+backend,
+
+183
+00:06:59,941 --> 00:07:00,622
+monolith,
+
+184
+00:07:00,622 --> 00:07:01,228
+service,
+
+185
+00:07:01,228 --> 00:07:02,211
+and database.
+
+186
+00:07:02,761 --> 00:07:04,831
+Pause the video, and answer out loud.
+
+187
+00:07:15,381 --> 00:07:19,306
+Next: requests, responses, rest, status codes, and jay son.
+
+188
+00:07:19,856 --> 00:07:23,184
+If this helped, like, share and subscribe, so you do not miss it.

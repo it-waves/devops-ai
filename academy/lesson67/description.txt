@@ -1,0 +1,26 @@
+Lesson 67 of the DevOps Engineering Bootcamp, the first lesson of the Application Architecture and APIs masterclass. You tap Buy in a shopping app and at least three programs talk to each other. Here you meet them: the frontend (what the customer sees, running in the browser), the backend (the rules and decisions) and the database (the memory). You run a tiny shop called CloudCart as one process, a monolith, and see the page, the data and the database file with real commands. Then you split it into two services and see two listeners with ss. A real Chrome view shows the same data two ways: a designed page for people and raw JSON for programs. You finish with the trade-off, one benefit and one cost of splitting, then a lab with a checker, a pass or fail rubric and your turn.
+
+Chapters
+0:00 One tap, three programs
+0:27 Three roles
+1:17 One process: a monolith
+2:31 Two services
+3:28 The browser view
+4:00 The trade-off
+4:41 Your lab task
+5:33 Pass or fail rubric
+5:59 Your turn
+6:41 Quick check
+
+Objectives covered: MC08-O01 Distinguish frontend, backend, monolith, service, and database responsibilities.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab67.sh and shortcuts67.sh) and academy/lesson67 (INSTALL.txt). Install with: sudo install -m 755 lab67.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts67.sh (without it, use sudo lab67.sh up, check, down). You need an Ubuntu virtual machine with root, python3 and curl. It uses ports 8080 and 5000 on 127.0.0.1. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount and network setup on the recording computer, and the two browser views are real Chrome screenshots of the same CloudCart app. CloudCart is a tiny teaching app written for this course, using Python and an SQLite file, not a production system. The lab was run end to end before this lesson: it starts as a monolith so all four checks fail, splitting it and writing answers.txt makes all four pass, and lab down leaves nothing behind. The splitting commands are for you to run yourself, and your own run is unverified until you do it. The lab file names are invented, and lab is a short name I made for sudo lab67.sh. The on-screen restaurant and trade-off screens are labelled illustrations, not captures. Typing is timed to the narration. The narration is synthetic speech.
+
+Previous lesson: Git and GitHub mastery, fix a real repository https://youtu.be/AlitiFNEuw4
+Next lesson: requests, responses, REST endpoints, status codes and JSON.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #applicationarchitecture #frontend #backend #api #devopsbootcamp
