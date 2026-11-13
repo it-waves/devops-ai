@@ -1,0 +1,16 @@
+Install the lab (needs an Ubuntu virtual machine with root, a JDK, Maven and internet access to Maven Central):
+  sudo apt install -y openjdk-21-jdk-headless maven
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab86.sh /usr/local/sbin/
+  source shortcuts86.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab86: a project whose tests fail, and TASKS.txt
+  lab check               # five FAIL lines at the start; your goal is five PASS lines
+  lab down                # cleanup when finished
+Without the shortcut, use: sudo lab86.sh up | check | down
+Your five tasks (inside /opt/lab86/shop; also written in /opt/lab86/TASKS.txt):
+  1 fix the bug in src/main/java/cloudcart/Price.java until mvn -B clean test shows Tests run: 3, Failures: 0
+  2 mvn -B package | grep -E '^\[INFO\] --- ' > goals.txt   (six goals in lifecycle order)
+  3 mvn -B package -DskipTests | grep -E 'skipped|Tests run' > skip.txt   (tests are skipped)
+  4 the checker builds the jar itself: mvn -B clean verify must make target/cart-pricing-1.0.0.jar
+  5 finish with mvn -B clean so the target folder is gone
+Run it only in your own virtual machine. lab down removes /opt/lab86; remove the installed script with: sudo rm /usr/local/sbin/lab86.sh

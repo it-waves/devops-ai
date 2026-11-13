@@ -1,0 +1,108 @@
+RB = 'REAL RECORDING  ·  Ubuntu 24.04, offline repo'
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('h1', "You type M V N package. Maven prints a wall of lines. Which ones matter?"),
+  c('h2', "Package is not one step. It is the end of a chain, and Maven runs the whole chain, in a fixed order."),
+  c('h3', "Today you learn that order, the life cycle, and which tool runs at each step."),
+  c('h4', "You will see it live, then break it on purpose, then fix a failing project yourself."),
+  c('h5', "One honest note. My recording computer cannot reach Maven Central, so these demos use a local copy of the libraries and plug ins. The commands are the same ones you will type."),
+ ]),
+ ('ideas', [
+  c('u1', "Maven has three built-in life cycles. Clean. Default. And site, for documentation."),
+  c('u2', "Clean has one job. Delete the target folder."),
+  c('u3', "Default builds your project. Its main phases, in order: validate, compile, test, package, verify, install, deploy."),
+  c('u4', "The golden rule. Run a phase, and Maven runs every phase before it."),
+  c('u5', "So M V N package also compiles, and also runs your tests. You never ask for those separately."),
+  c('u6', "And a phase on its own does nothing. It is an empty slot, waiting for a plug in."),
+ ]),
+ ('bind', [
+  c('b1', "Plug ins do the real work. Each plug in offers goals, and Maven binds a goal to a phase."),
+  c('b2', "Phase: compile. Goal: compiler, compile."),
+  c('b3', "Phase: test. Goal: sure fire, test. Sure fire is the plug in that runs your unit tests."),
+  c('b4', "Phase: package. Goal: jar, jar. It packs your classes into a jar."),
+  c('b5', "And two more run before compile: resources, resources, which copies your files, and the same again for test resources."),
+  c('b6', "Remember the shape: phase, then the goal bound to it. We are about to see it live."),
+ ]),
+ ('life', [
+  k('p0', "Go to the demo project. Type: C D, demo."),
+  c('p1', "Start small. Type: mvn -B compile | grep -E '^\\[INFO\\] --- |BUILD' | cut -c8-", "Start small, only the compile phase. Type: M V N, dash B, compile, then grep for the goal lines and the word build, and cut away the first seven characters."),
+  c('p1b', "Two goals ran. Resources, then compiler compile. Build success. Nothing else."),
+  c('p2', "What did that leave behind? Type: ls target", "What did that leave behind? Type: L S, target."),
+  c('p2b', "The compiled classes. No jar yet, and no test results."),
+  c('p3', "Now the test phase. Type: mvn -B test | grep -E '^\\[INFO\\] --- |Tests run:.*Skipped: 0$|BUILD' | cut -c8-", "Now the test phase, with the same filter, plus the test summary line."),
+  c('p3w', "Sure fire starts a fresh Java process for the tests. That takes a few seconds."),
+  c('p3b', "Look at the order. Resources, compile, test resources, test compile, then sure fire. Compile ran again, because test comes after it. One test ran, no failures."),
+  c('p4', "Now package. Type: mvn -B package | grep -E '^\\[INFO\\] --- |BUILD' | cut -c8-", "Now the package phase, with the goal filter."),
+  c('p4w', "Same chain again, one step longer."),
+  c('p4b', "The same five goals, and then one more. Jar, jar. Package is the last stop of that chain."),
+  c('p5', "Look inside target. Type: ls target", "Look inside target. Type: L S, target."),
+  c('p5b', "The jar, the test classes, and the sure fire reports folder. Everything the chain produced."),
+  c('p6', "You can skip the tests. Type: mvn -B package -DskipTests | grep -E 'skipped|BUILD'", "You can skip the tests. Type: M V N, dash B, package, dash capital D, skip tests, then grep for the words skipped and build."),
+  c('p6b', "Tests are skipped, and the build still succeeds. Useful in a hurry, but never as a habit."),
+  c('p7', "Now the other life cycle. Type: mvn -B clean | grep -E '^\\[INFO\\] --- |BUILD' | cut -c8-", "Now the clean life cycle. Type: M V N, dash B, clean, and the same filter."),
+  c('p7b', "One goal: clean, clean."),
+  c('p8', "Check the folder. Type: ls target", "Check the folder. Type: L S, target."),
+  c('p8b', "Gone. Clean deleted the whole target folder, so the next build starts fresh."),
+ ]),
+ ('fail', [
+  k('x0', "Go to the demo project. Type: C D, demo."),
+  c('x1', "Now break it on purpose. Type: sed -i 's/Hello, /Hi, /' src/main/java/cloudcart/Hello.java", "Now break it on purpose. Type: sed, dash I, a pattern that changes the greeting, and the path to hello dot java."),
+  c('x1b', "The code now says Hi, but the test still expects Hello."),
+  c('x2', "Build the package. Type: mvn -B package | grep -E '^\\[INFO\\] --- |Tests run:.*Skipped: 0$|BUILD' | cut -c8-", "Build the package. Type: M V N, dash B, package, and the same filter."),
+  c('x2w', "Wait for sure fire to finish."),
+  c('x2b', "The test failed, and Maven stopped. There is no jar goal in the list. Build failure."),
+  c('x3', "So is there a jar? Type: ls target/*.jar", "So is there a jar? Type: L S, target, slash, star, dot jar."),
+  c('x3b', "No such file. A failed phase stops every phase after it. That is the safety net."),
+  c('x4', "Fix the greeting. Type: sed -i 's/Hi, /Hello, /' src/main/java/cloudcart/Hello.java", "Fix the greeting. Type: sed, dash I, the reverse pattern, and the same path."),
+  c('x5', "Now the full chain. Type: mvn -B clean verify | grep -E 'Tests run:.*Skipped: 0$|BUILD' | cut -c8-", "Now clean and verify together. Type: M V N, dash B, clean, verify, then filter for the test summary and the build result."),
+  c('x5w', "Two life cycles in one command. Clean first, then the whole default chain, up to verify."),
+  c('x5b', "One test, no failures, build success. Verify is the last quality gate before you install or deploy."),
+ ]),
+ ('flags', [
+  c('g1', "Five things to carry with you."),
+  c('g2', "One. You can chain life cycles. M V N clean package starts fresh every time. In a pipeline, that is the safe habit."),
+  c('g3', "Two. Dash capital D, skip tests, skips running the tests. Never skip them to hide a failure."),
+  c('g4', "Three. Dash B is batch mode. Plain text, no colours. Use it in a pipeline."),
+  c('g5', "Four. Dash Q is quiet. It prints errors only."),
+  c('g6', "Five. Read the first error. Maven prints the failing phase and goal. Start there, not at the bottom."),
+ ]),
+ ('task', [
+  c('k1', "Your lab task. Lab eighty-six gives you a project whose tests fail. Lab check judges your work."),
+  c('k2', "It lives at git hub dot com, slash it dash waves, slash dev ops dash A I, in academy, lab, lab eighty-six dot S H."),
+  c('k3', "One: run M V N test, read the failure, and fix the bug in price dot java, until three tests pass."),
+  c('k4', "Two: save the list of goals from M V N package into goals dot text, with the grep from the task file."),
+  c('k5', "Three: save the skip tests output into skip dot text. It must say tests are skipped."),
+  c('k6', "Four: the checker builds the jar itself, with M V N clean verify. Your fix must make that succeed."),
+  c('k7', "Five: finish with M V N clean, so the target folder is gone."),
+  c('k8', "Install a J D K and Maven first. Then lab up, lab check, and lab down. The shortcut file is shortcuts eighty-six."),
+ ]),
+ ('rubric', [
+  c('q1', "Pass or fail. You need all six."),
+  c('q2', "Five pass lines in lab check."), c('q3', "You can list the default phases in order."),
+  c('q4', "You can explain why package also runs the tests."), c('q5', "You can name the goal bound to compile, test and package."),
+  c('q6', "You can say what clean deletes."), c('q7', "lab down, nothing left behind."), c('q8', "To pass, all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine."),
+  c('z2', "One: lab up, and read the task file."),
+  c('z3', "Two: run M V N test, and read the first failure."),
+  c('z4', "Three: fix the bug until three tests pass."),
+  c('z5', "Four: save goals dot text and skip dot text."),
+  c('z6', "Five: finish with M V N clean, and lab check."),
+  c('z7', "Six: lab down, and prove nothing is left."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "Name the default phases, in order."), c('f13', "Why does package also run the tests?"),
+  c('f14', "Which goal is bound to the package phase?"), c('f15', "What does clean delete?"),
+  c('f16', "Objective covered: M C ten, objective two."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next: plug ins, properties, profiles and reproducible builds."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'p1': 5.0, 'p6': 5.0, 'p3': 3.2, 'p4': 2.9, 'x2': 2.4, 'x4': 0.8, 'p3w': 9.0, 'p4w': 9.0, 'x2w': 9.0, 'x5w': 9.0, 'u6': 0.5, 'b6': 0.5, 'g6': 0.5, 'k8': 0.5, 'q8': 0.5, 'z8': 14.0, 'f17': 10.0}
+import os as _os, json as _json
+_xp = '/home/claude/academy/lesson86/extra.json'
+if _os.path.exists(_xp): EXTRA.update(_json.load(open(_xp)))
+CHAP = {'ideas': 'The three life cycles', 'bind': 'Phases and goals', 'life': 'Live: compile, test, package, clean', 'fail': 'When a phase fails', 'flags': 'Five habits', 'task': 'Your lab task', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

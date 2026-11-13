@@ -1,0 +1,26 @@
+Lesson 86 of the DevOps Engineering Bootcamp, the second lesson of Maven. M V N package is not one step, it is the end of a chain that Maven runs in a fixed order. You learn the three built-in life cycles (clean, default and site), the default phases in order (validate, compile, test, package, verify, install, deploy), the golden rule that running a phase runs every phase before it, and how plugin goals are bound to phases (resources, compiler:compile, surefire:test, jar:jar). You watch each phase run live, see what it leaves in the target folder, skip the tests with -DskipTests, clean the project, and then break a test on purpose to see the chain stop before the jar. Then you fix a failing project yourself: five checks, all must pass.
+
+Chapters
+0:00 Package is a chain, not a step
+0:35 The three life cycles
+1:12 Phases and goals
+1:48 Live: compile, test, package, clean
+4:01 When a phase fails
+5:29 Five habits
+6:03 Your lab task
+7:00 Pass or fail rubric
+7:23 Your turn
+8:03 Quick check
+
+Objectives covered: MC10-O02 (clean, compile, test, package and verify lifecycles)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab86.sh and shortcuts86.sh). Install with: sudo install -m 755 lab86.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts86.sh (without it, use sudo lab86.sh up, check, down). You need an Ubuntu virtual machine with root, a JDK and Maven (for example: sudo apt install -y openjdk-21-jdk-headless maven) and internet access to Maven Central. The lab writes a small project into /opt/lab86; lab down removes the folder. Only run it in your own virtual machine.
+
+Honest notes: the terminal segments are real recordings on Ubuntu 24.04 with Maven 3.9.11 and OpenJDK 21. My recording computer cannot reach Maven Central, so the libraries and plugins came from a local copy built from Ubuntu's packaged Maven files; on a normal machine Maven downloads them from Central and the first build prints many download lines that I did not show. The filters on the commands (grep and cut) only keep the goal lines so the chain is easy to read. The ideas, task, rubric and quiz screens are labelled illustrations, not captures. The lab was run end to end before this lesson with Ubuntu's copy of the libraries: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing behind. On your machine it downloads from Maven Central, which I could not test, and only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. Maven build times vary. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Maven POM Explained: Coordinates, Layout, Dependencies https://youtu.be/8-9vtioWIA0
+Next: Maven plugins, properties, profiles and reproducible builds.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #maven #java #buildtools #devopsbootcamp
