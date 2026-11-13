@@ -1,0 +1,799 @@
+1
+00:00:00,500 --> 00:00:01,610
+The shop is down.
+
+2
+00:00:01,610 --> 00:00:03,437
+Customers see an empty page.
+
+3
+00:00:03,437 --> 00:00:06,896
+Your manager asks one question: which part is broken,
+
+4
+00:00:06,896 --> 00:00:08,201
+and how do you know?
+
+5
+00:00:08,751 --> 00:00:13,073
+This is the mastery lesson for application architecture and A P Is.
+
+6
+00:00:13,073 --> 00:00:15,007
+You have learned eight skills.
+
+7
+00:00:15,007 --> 00:00:16,878
+Now you prove them on a real,
+
+8
+00:00:16,878 --> 00:00:17,652
+broken shop,
+
+9
+00:00:17,652 --> 00:00:18,361
+with a lab,
+
+10
+00:00:18,361 --> 00:00:19,006
+a checker,
+
+11
+00:00:19,006 --> 00:00:19,845
+and a report.
+
+12
+00:00:20,395 --> 00:00:23,360
+I will fix the first fault live. You fix the other three.
+
+13
+00:00:25,410 --> 00:00:26,392
+Meet Cloud Cart,
+
+14
+00:00:26,392 --> 00:00:27,988
+released with four faults.
+
+15
+00:00:27,988 --> 00:00:29,523
+Here is the map you drew,
+
+16
+00:00:29,523 --> 00:00:31,426
+with a red pin on each problem.
+
+17
+00:00:31,976 --> 00:00:36,861
+Pin one, on the API: it listens on the wrong port. That is configuration.
+
+18
+00:00:37,411 --> 00:00:41,891
+Pin two, on the database: the file is missing, so the shop is not ready.
+
+19
+00:00:42,441 --> 00:00:47,284
+Pin three, on the secrets file: it is readable by everyone. That is security.
+
+20
+00:00:47,834 --> 00:00:48,387
+Pin four,
+
+21
+00:00:48,387 --> 00:00:53,359
+on the request path: nobody can show one request travelling through both diaries.
+
+22
+00:00:53,909 --> 00:00:57,749
+The checker prints pass or fail for four checks, and all four fail.
+
+23
+00:00:58,299 --> 00:01:01,649
+Your mission: four pass lines, with proof for every fix.
+
+24
+00:01:03,699 --> 00:01:07,902
+Before we start, here is where everything lives. It is also in the description.
+
+25
+00:01:08,452 --> 00:01:14,126
+The repository is git hub dot com, slash it dash waves, slash dev ops dash A I.
+
+26
+00:01:14,676 --> 00:01:17,894
+The lab is one file: lab seventy-five dot S H,
+
+27
+00:01:17,894 --> 00:01:20,132
+in the academy slash lab folder.
+
+28
+00:01:20,132 --> 00:01:25,727
+Your report template and install notes are in academy slash lesson seventy-five.
+
+29
+00:01:26,277 --> 00:01:28,158
+Install it in three steps.
+
+30
+00:01:28,158 --> 00:01:29,677
+Clone the repository.
+
+31
+00:01:29,677 --> 00:01:31,196
+Go to the lab folder.
+
+32
+00:01:31,196 --> 00:01:35,536
+Install the script into slash U S R slash local slash S bin.
+
+33
+00:01:36,086 --> 00:01:38,107
+Three commands run everything.
+
+34
+00:01:38,107 --> 00:01:39,926
+Lab up builds the problems.
+
+35
+00:01:39,926 --> 00:01:42,554
+Lab check prints pass or fail for each.
+
+36
+00:01:42,554 --> 00:01:44,171
+Lab down removes it all.
+
+37
+00:01:44,721 --> 00:01:46,114
+Lab is a short name.
+
+38
+00:01:46,114 --> 00:01:47,925
+Source the shortcuts file,
+
+39
+00:01:47,925 --> 00:01:49,249
+and it runs sue do,
+
+40
+00:01:49,249 --> 00:01:50,990
+lab seventy-five dot S H,
+
+41
+00:01:50,990 --> 00:01:51,548
+for you.
+
+42
+00:01:52,098 --> 00:01:54,931
+You need an Ubuntu virtual machine with root,
+
+43
+00:01:54,931 --> 00:01:56,317
+python three and curl.
+
+44
+00:01:56,317 --> 00:01:59,213
+It uses ports five thousand and eighty eighty.
+
+45
+00:01:59,213 --> 00:02:01,228
+Run it only in your own machine.
+
+46
+00:02:03,578 --> 00:02:04,510
+Now for real.
+
+47
+00:02:04,510 --> 00:02:06,589
+I have cloned the repository,
+
+48
+00:02:06,589 --> 00:02:09,814
+and the lab files are in a folder called lab.
+
+49
+00:02:09,814 --> 00:02:10,459
+Type: CD,
+
+50
+00:02:10,459 --> 00:02:10,746
+lab.
+
+51
+00:02:11,296 --> 00:02:13,451
+List what is here. Type: L S.
+
+52
+00:02:14,001 --> 00:02:17,068
+The lab script and the shortcuts file.
+
+53
+00:02:17,068 --> 00:02:18,602
+Install the script.
+
+54
+00:02:18,602 --> 00:02:19,651
+Type: sue do,
+
+55
+00:02:19,651 --> 00:02:20,297
+install,
+
+56
+00:02:20,297 --> 00:02:20,862
+dash m,
+
+57
+00:02:20,862 --> 00:02:22,154
+seven five five,
+
+58
+00:02:22,154 --> 00:02:24,172
+lab seventy-five dot S H,
+
+59
+00:02:24,172 --> 00:02:27,078
+slash U S R slash local slash S bin.
+
+60
+00:02:27,628 --> 00:02:32,492
+Load the short names. Type: source, shortcuts seventy-five dot S H.
+
+61
+00:02:33,042 --> 00:02:35,069
+Build the lab. Type: lab up.
+
+62
+00:02:37,619 --> 00:02:40,200
+Now ask the checker. Type: lab check.
+
+63
+00:02:41,750 --> 00:02:45,910
+Four FAIL lines. That is your starting point. Copy them into your report.
+
+64
+00:02:47,960 --> 00:02:49,709
+Keep four notes for every fault.
+
+65
+00:02:50,259 --> 00:02:55,059
+One: the symptom, in the exact words of the output, or the exact wrong answer.
+
+66
+00:02:55,609 --> 00:02:58,041
+Two: the cause, and the command that proved it.
+
+67
+00:02:58,591 --> 00:03:00,874
+Three: the fix. One change only.
+
+68
+00:03:01,424 --> 00:03:03,856
+Four: the proof, the output after the fix.
+
+69
+00:03:04,406 --> 00:03:06,561
+Notes turn a lucky fix into evidence.
+
+70
+00:03:08,611 --> 00:03:09,345
+Fault one,
+
+71
+00:03:09,345 --> 00:03:09,713
+live.
+
+72
+00:03:09,713 --> 00:03:12,724
+The checker says the API does not answer.
+
+73
+00:03:12,724 --> 00:03:13,825
+Go to the shop.
+
+74
+00:03:13,825 --> 00:03:14,486
+Type: CD,
+
+75
+00:03:14,486 --> 00:03:15,221
+slash opt,
+
+76
+00:03:15,221 --> 00:03:16,910
+slash lab seventy-five.
+
+77
+00:03:17,460 --> 00:03:21,961
+Method first: ask each layer. Type: dot slash layers dot S H.
+
+78
+00:03:22,511 --> 00:03:23,161
+Note one,
+
+79
+00:03:23,161 --> 00:03:24,028
+the symptom.
+
+80
+00:03:24,028 --> 00:03:25,545
+The web page answers.
+
+81
+00:03:25,545 --> 00:03:30,746
+The API gives zero zero zero: nobody is listening on port five thousand.
+
+82
+00:03:31,296 --> 00:03:34,858
+Who is listening, then? Type: S S, dash L T N.
+
+83
+00:03:35,408 --> 00:03:37,918
+Port eighty eighty is the web service.
+
+84
+00:03:37,918 --> 00:03:40,361
+And something listens on fifty fifty,
+
+85
+00:03:40,361 --> 00:03:41,549
+not five thousand.
+
+86
+00:03:41,549 --> 00:03:42,144
+Note two,
+
+87
+00:03:42,144 --> 00:03:45,115
+the cause: the API started on the wrong port.
+
+88
+00:03:45,665 --> 00:03:49,526
+Where does the port come from? Type: grep, port, app dot conf.
+
+89
+00:03:50,076 --> 00:03:55,388
+There it is: port equals fifty fifty. The configuration is wrong. The code is fine.
+
+90
+00:03:55,938 --> 00:03:56,769
+Note three,
+
+91
+00:03:56,769 --> 00:03:57,374
+the fix.
+
+92
+00:03:57,374 --> 00:03:58,583
+One change only.
+
+93
+00:03:58,583 --> 00:03:59,338
+Type: sed,
+
+94
+00:03:59,338 --> 00:03:59,867
+dash I,
+
+95
+00:03:59,867 --> 00:04:03,796
+then a substitution that sets port to five thousand,
+
+96
+00:04:03,796 --> 00:04:05,005
+in app dot conf.
+
+97
+00:04:05,555 --> 00:04:08,926
+A running program does not re-read its settings.
+
+98
+00:04:08,926 --> 00:04:09,699
+Restart it.
+
+99
+00:04:09,699 --> 00:04:11,806
+Type: dot slash start dot S H.
+
+100
+00:04:13,856 --> 00:04:19,168
+Note four, the proof. Ask each layer again. Type: dot slash layers dot S H.
+
+101
+00:04:19,718 --> 00:04:20,992
+The API now answers,
+
+102
+00:04:20,992 --> 00:04:22,457
+but with five oh three,
+
+103
+00:04:22,457 --> 00:04:23,095
+not ready.
+
+104
+00:04:23,095 --> 00:04:24,369
+The symptom changed,
+
+105
+00:04:24,369 --> 00:04:27,236
+and that is progress: this is the next fault,
+
+106
+00:04:27,236 --> 00:04:28,447
+and the next layer,
+
+107
+00:04:28,447 --> 00:04:29,275
+the database.
+
+108
+00:04:29,825 --> 00:04:32,406
+Now ask the checker. Type: lab check.
+
+109
+00:04:32,956 --> 00:04:33,542
+One PASS,
+
+110
+00:04:33,542 --> 00:04:34,258
+three FAIL.
+
+111
+00:04:34,258 --> 00:04:35,235
+One fault down,
+
+112
+00:04:35,235 --> 00:04:35,951
+one change,
+
+113
+00:04:35,951 --> 00:04:36,667
+with proof.
+
+114
+00:04:36,667 --> 00:04:39,271
+Now it is your turn for the other three.
+
+115
+00:04:41,321 --> 00:04:45,097
+Your report has five parts. The template is in the lesson folder.
+
+116
+00:04:45,647 --> 00:04:47,780
+Setup: the checker output at the start.
+
+117
+00:04:48,330 --> 00:04:49,952
+Each fault, with its four notes.
+
+118
+00:04:50,502 --> 00:04:53,659
+The final checker output, all four lines saying pass.
+
+119
+00:04:54,209 --> 00:04:55,337
+Where you got stuck,
+
+120
+00:04:55,337 --> 00:04:56,522
+and what unstuck you.
+
+121
+00:04:56,522 --> 00:04:59,286
+Honest notes are worth more than a perfect story.
+
+122
+00:04:59,836 --> 00:05:01,906
+And the cleanup proof, which we do next.
+
+123
+00:05:03,856 --> 00:05:05,044
+Your three faults.
+
+124
+00:05:05,044 --> 00:05:05,836
+No spoilers,
+
+125
+00:05:05,836 --> 00:05:06,892
+only directions.
+
+126
+00:05:06,892 --> 00:05:08,872
+And remember: after every fix,
+
+127
+00:05:08,872 --> 00:05:10,258
+ask the layers again,
+
+128
+00:05:10,258 --> 00:05:13,029
+because the next symptom is the next clue.
+
+129
+00:05:13,579 --> 00:05:16,299
+Check two: the API answers but is not ready.
+
+130
+00:05:16,299 --> 00:05:18,091
+Which endpoint tells you why?
+
+131
+00:05:18,091 --> 00:05:21,737
+Look in the lab folder for the file the database should be,
+
+132
+00:05:21,737 --> 00:05:24,085
+and think about what changed its name.
+
+133
+00:05:24,085 --> 00:05:25,569
+Fix it with one command.
+
+134
+00:05:26,119 --> 00:05:28,879
+Check three: a secrets file must be private.
+
+135
+00:05:28,879 --> 00:05:30,385
+Read its mode with stat,
+
+136
+00:05:30,385 --> 00:05:34,401
+and compare it with what the rubric of the security lesson said.
+
+137
+00:05:34,401 --> 00:05:35,719
+One command fixes it.
+
+138
+00:05:36,269 --> 00:05:38,100
+Check four: log in as alice,
+
+139
+00:05:38,100 --> 00:05:40,716
+with the password from the secrets file,
+
+140
+00:05:40,716 --> 00:05:41,959
+and keep the token.
+
+141
+00:05:41,959 --> 00:05:46,537
+Call the orders endpoint with that token and the label M C zero eight.
+
+142
+00:05:46,537 --> 00:05:48,957
+Request the page with the same label.
+
+143
+00:05:48,957 --> 00:05:51,507
+Then search both diaries for the label,
+
+144
+00:05:51,507 --> 00:05:54,189
+and save what you find in trace dot text.
+
+145
+00:05:54,739 --> 00:05:58,984
+Same method every time: symptom, layer, fix one thing, verify.
+
+146
+00:06:01,034 --> 00:06:04,426
+When you finish, clean up, and prove it. Type: lab down.
+
+147
+00:06:05,976 --> 00:06:11,672
+Proof one: is the lab folder gone? Type: L S, slash opt, slash lab seventy-five.
+
+148
+00:06:12,222 --> 00:06:14,270
+No such file or directory.
+
+149
+00:06:14,270 --> 00:06:16,396
+Proof two: count it in opt.
+
+150
+00:06:16,396 --> 00:06:17,183
+Type: L S,
+
+151
+00:06:17,183 --> 00:06:17,971
+slash opt,
+
+152
+00:06:17,971 --> 00:06:18,365
+pipe,
+
+153
+00:06:18,365 --> 00:06:19,310
+grep dash c,
+
+154
+00:06:19,310 --> 00:06:20,649
+lab seventy-five.
+
+155
+00:06:21,199 --> 00:06:23,737
+Zero. Now remove the lab script itself.
+
+156
+00:06:24,287 --> 00:06:31,477
+Type: sue do, R M, slash U S R slash local slash S bin slash lab seventy-five dot S H.
+
+157
+00:06:32,027 --> 00:06:35,223
+Proof three: is anything left in S bin?
+
+158
+00:06:35,223 --> 00:06:36,042
+Type: L S,
+
+159
+00:06:36,042 --> 00:06:38,993
+slash U S R slash local slash S bin,
+
+160
+00:06:38,993 --> 00:06:39,403
+pipe,
+
+161
+00:06:39,403 --> 00:06:39,730
+W C,
+
+162
+00:06:39,730 --> 00:06:40,304
+dash l.
+
+163
+00:06:40,854 --> 00:06:41,622
+Zero.
+
+164
+00:06:42,172 --> 00:06:46,581
+Proof four: is anything still listening on port eighty eighty?
+
+165
+00:06:46,581 --> 00:06:47,292
+Type: S S,
+
+166
+00:06:47,292 --> 00:06:48,074
+dash L T N,
+
+167
+00:06:48,074 --> 00:06:48,430
+pipe,
+
+168
+00:06:48,430 --> 00:06:49,283
+grep dash c,
+
+169
+00:06:49,283 --> 00:06:50,279
+eighty eighty.
+
+170
+00:06:50,829 --> 00:06:51,510
+Zero again.
+
+171
+00:06:51,510 --> 00:06:52,749
+The shop is stopped,
+
+172
+00:06:52,749 --> 00:06:54,359
+and everything is removed.
+
+173
+00:06:54,359 --> 00:06:56,589
+Paste these proofs into your report.
+
+174
+00:06:58,639 --> 00:07:02,564
+Here is how your work is judged. Six points, and you need all six.
+
+175
+00:07:03,114 --> 00:07:04,949
+The checker shows four pass lines.
+
+176
+00:07:05,499 --> 00:07:08,699
+Every fault has a symptom, a cause, a fix, and a proof.
+
+177
+00:07:09,249 --> 00:07:10,998
+You changed one thing at a time.
+
+178
+00:07:11,548 --> 00:07:14,364
+The report is complete, including where you got stuck.
+
+179
+00:07:14,914 --> 00:07:18,733
+The cleanup proof shows nothing left behind, and nothing still listening.
+
+180
+00:07:19,283 --> 00:07:21,672
+You ran it only in your own virtual machine.
+
+181
+00:07:22,222 --> 00:07:23,844
+To pass, you need all six.
+
+182
+00:07:25,894 --> 00:07:31,761
+Your turn, in your own Ubuntu virtual machine. Take your time. Mastery is slow and exact.
+
+183
+00:07:32,311 --> 00:07:35,084
+One: clone the repository and install the lab.
+
+184
+00:07:35,634 --> 00:07:38,450
+Two: run lab up, and save the checker output.
+
+185
+00:07:39,000 --> 00:07:42,221
+Three: fix the three remaining faults, with four notes each.
+
+186
+00:07:42,771 --> 00:07:44,883
+Four: write the report from the template.
+
+187
+00:07:45,433 --> 00:07:48,612
+Five: run the checker. All four lines must say pass.
+
+188
+00:07:49,162 --> 00:07:51,125
+Six: clean up, and paste the proof.
+
+189
+00:07:51,675 --> 00:07:53,509
+Pause the video, and begin now.
+
+190
+00:08:09,059 --> 00:08:09,934
+Quick check.
+
+191
+00:08:10,484 --> 00:08:14,260
+Which layer do you suspect when the page loads but no products appear?
+
+192
+00:08:14,810 --> 00:08:18,372
+Why does a fix sometimes change the symptom instead of ending it?
+
+193
+00:08:18,922 --> 00:08:21,013
+What does one request label let you do?
+
+194
+00:08:21,563 --> 00:08:23,120
+What proves your cleanup worked?
+
+195
+00:08:23,670 --> 00:08:26,520
+Mastery evidence covered: M C zero eight,
+
+196
+00:08:26,520 --> 00:08:29,021
+building on objectives one to eight,
+
+197
+00:08:29,021 --> 00:08:32,844
+in the application architecture and A P Is masterclass.
+
+198
+00:08:33,394 --> 00:08:35,463
+Pause the video, and answer out loud.
+
+199
+00:08:46,013 --> 00:08:47,741
+Next: the next masterclass.
+
+200
+00:08:48,291 --> 00:08:51,619
+If this helped, like, share and subscribe, so you do not miss it.

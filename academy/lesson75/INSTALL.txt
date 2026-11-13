@@ -1,0 +1,17 @@
+Install the lab (needs an Ubuntu virtual machine with root, python3 and curl):
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab75.sh /usr/local/sbin/
+  source shortcuts75.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab75 (the CloudCart shop, with four faults) and starts it
+  lab check               # four FAIL lines at the start; your goal is four PASS lines
+  lab down                # cleanup when finished (also stops the shop)
+Without the shortcut, use: sudo lab75.sh up | check | down
+Ports used: 8080 (web service) and 5000 (API), on 127.0.0.1 only. Everything lives in /opt/lab75.
+Your four checks:
+  1 the web page loads and the API answers on port 5000
+  2 the shop is ready: /readyz says ready
+  3 secrets.env is private (mode 600)
+  4 trace.txt in /opt/lab75 shows one request labelled mc08 in both web.log and api.log (a logged-in 200 for /api/orders)
+Method for every fault: symptom, which layer, fix one thing, verify. After each fix, ask the layers again: the next symptom is the next clue.
+Run it only in your own virtual machine. lab down removes /opt/lab75; remove the installed script with: sudo rm /usr/local/sbin/lab75.sh
+Write your report from report_template.md in this folder.

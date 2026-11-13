@@ -1,0 +1,28 @@
+Lesson 75 of the DevOps Engineering Bootcamp, the mastery scenario for the Application Architecture and APIs masterclass. CloudCart, the tiny shop from the last lessons, was released with four faults, and a checker script says PASS or FAIL for each: the API listens on the wrong port, the shop is not ready because its database file is missing, the secrets file is readable by everyone, and nobody can show one labelled request travelling through both the web diary and the API diary. You see where to get the lab, the lab built and checked (four FAIL lines), and the first fault fixed live with four notes: the exact symptom, the cause and the command that proved it, the single change, and the proof afterwards. Watch how the fix changes the symptom from "no answer" to "not ready": that is progress, and it points to the next layer. Then you fix the other three yourself, write the report from the template, and clean up with proof that nothing is left behind and nothing is still listening.
+
+Chapters
+0:00 The shop is down
+0:25 The scenario
+1:03 Get the lab
+2:03 Start the lab
+2:47 Four notes per fault
+3:08 Wrong port live
+4:41 The report
+5:03 Your three faults
+6:00 Cleanup with proof
+6:58 Pass or fail rubric
+7:25 Your turn
+8:08 Quick check
+
+Objectives covered: MC08 mastery evidence (builds on MC08-O01 to MC08-O08)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab75.sh and shortcuts75.sh) and academy/lesson75 (INSTALL.txt and report_template.md). Install with: sudo install -m 755 lab75.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts75.sh (without it, use sudo lab75.sh up, check, down). You need an Ubuntu virtual machine with root, python3 and curl. It uses ports 5000 and 8080 on 127.0.0.1. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount and network setup on the recording computer. CloudCart is a tiny teaching app written for this course, not a production system. The lab was run end to end before this lesson: the four faults make all four checks fail, one reference solution makes all four pass, and lab down leaves nothing behind. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. I fix only the wrong port on screen, so the rest is still yours to solve. The architecture map, scenario and report screens are labelled illustrations, not captures. The password in the lab is a made-up demo value. The lab file names are invented, and lab is a short name I made for sudo lab75.sh. Typing is timed to the narration. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Draw the architecture and trace one request https://youtu.be/yd8s3dzQsq0
+Next masterclass: coming next in the bootcamp.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #api #architecture #troubleshooting #linux #devopsbootcamp
