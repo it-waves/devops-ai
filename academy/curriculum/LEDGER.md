@@ -58,7 +58,7 @@ Checklist order (not Docker; Docker comes later in the checklist). One lesson pe
 | Lesson | Objectives | Topic | Status |
 |---|---|---|---|
 | L76 | MC09-O01 | JDK, JRE, JVM, source, bytecode, application process | Published zW3hMJk4awQ (Nov 13, Public, playlist, end screen); captions published (Nov 13) |
-| L77 | MC09-O02 | Compile and run a small Java program | Built (7:12); upload in progress |
+| L77 | MC09-O02 | Compile and run a small Java program | Published aLx38atlfXA (Nov 13, Public, playlist, end screen); captions pending |
 | L78 | MC09-O03 | Packages, classpath, dependencies, environment configuration | Not started |
 | L79 | MC09-O04 | Inspect Java process startup flags and runtime settings | Not started |
 | L80 | MC09-O05 | JAR vs WAR packaging | Not started |
