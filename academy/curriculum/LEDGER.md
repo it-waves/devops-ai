@@ -65,7 +65,7 @@ Checklist order (not Docker; Docker comes later in the checklist). One lesson pe
 | L81 | MC09-O06 | Stack traces, exceptions, application logs | Published hqhhMc46o_8 (Nov 13, Public, playlist, end screen); captions published |
 | L82 | MC09-O07 | Java tests and build outputs | Published zCvIEzF5UJI (6:25); captions published |
 | L83 | MC09-O08 | Diagnose version mismatch, memory, port, classpath failures | Published mFfJaIde5eo (6:53); captions published |
-| L84 | MC09 mastery | Four-fault Java lab, checker, report, cleanup proof | Next masterclass: MC10 Maven | Published jAyQWuY_Dn8 (8:46); captions pending (real recording; lab tested 0/6 to 6/6, down clean; fault 1 live, 3 left to learner) |
+| L84 | MC09 mastery | Four-fault Java lab, checker, report, cleanup proof | Next masterclass: MC10 Maven | Published jAyQWuY_Dn8 (8:46); captions published (real recording; lab tested 0/6 to 6/6, down clean; fault 1 live, 3 left to learner) |
 
 ## MC04 Linux Administration (10 objectives + mastery) - locked lesson order
 Lesson numbers continue after L25. One lesson per objective, then the mastery scenario. Each lesson: live terminal, vim (not nano), demo + independent task + pass/fail rubric. The mastery lesson shows lab info on screen (repo, files, install, shortcuts).
