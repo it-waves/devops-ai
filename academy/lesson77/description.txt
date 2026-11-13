@@ -1,0 +1,25 @@
+Lesson 77 of the DevOps Engineering Bootcamp, the second lesson of Java Fundamentals for DevOps. You write nothing fancy here; you learn the edit, compile, run loop and, more importantly, how to read what Java tells you when it fails. Four small rules explain almost every beginner failure: the public class name must match the file name, a program starts in main, javac wants a file name while java wants a class name, and the words after the class name arrive in args. On a real Ubuntu machine you run a program in one step with a single source file, compile it to a class file, run it with an argument, run it with none, and read its exit code (zero means success, anything else means failure). Then you break things on purpose: a missing semicolon, a class and file name that do not match, and a wrong class name at run time. You learn to read each message in four parts and to ask the first question every time: did it fail at compile time or at run time? Then you do the lab task yourself: six points, all six must pass.
+
+Chapters
+0:00 Red text is a map
+0:31 Four small rules
+1:10 Compile and run
+2:38 Break it on purpose
+3:57 Compile time or run time?
+4:34 Your lab task
+5:31 Pass or fail rubric
+5:57 Your turn
+6:34 Quick check
+
+Objectives covered: MC09-O02 (compile and run a small Java program)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab77.sh and shortcuts77.sh) and academy/lesson77 (INSTALL.txt). Install with: sudo install -m 755 lab77.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts77.sh (without it, use sudo lab77.sh up, check, down). You need an Ubuntu virtual machine with root and a JDK (for example: sudo apt install openjdk-21-jdk-headless). The lab writes two small Java programs into /opt/lab77 and removes them on lab down. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with OpenJDK 21, run in a private mount and network setup on the recording computer. The rules, comparison, task, rubric and quiz screens are labelled illustrations, not captures. The exact wording of javac messages can differ slightly between Java versions. Running a single source file with java works from Java 11 on. The lab was run end to end before this lesson: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing behind. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. The lab file names are invented, and lab is a short name I made for sudo lab77.sh. Typing is timed to the narration. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: JDK vs JRE vs JVM: From Java Source to a Running Process https://youtu.be/zW3hMJk4awQ
+Next: packages, classpath and dependencies.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #java #javac #linux #troubleshooting #devopsbootcamp
