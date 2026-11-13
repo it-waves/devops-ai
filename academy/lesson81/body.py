@@ -1,0 +1,85 @@
+RB = 'REAL RECORDING  ·  Ubuntu 24.04'
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('h1', "The app crashes. A wall of text scrolls past. Most people see noise, and start guessing."),
+  c('h2', "But a stack trace is not noise. It is a map, written by the program itself, of exactly what went wrong, and where."),
+  c('h3', "Today you learn to read one in ten seconds. Then you find the same failure in a log file."),
+  c('h4', "No guessing. Four questions, and the answers are already on the screen."),
+ ]),
+ ('ideas', [
+  c('u1', "Four questions. Every stack trace answers them."),
+  c('u2', "One. What happened? The first line. The exception name, then the message."),
+  c('u3', "Two. Where? The lines that start with: at. The top one is where it happened. Each line below is who called it."),
+  c('u4', "Three. Which code is mine? Skip the Java internals. Find the first line with your own package name."),
+  c('u5', "Four. Why, really? Look for: Caused by. The last one is the root cause."),
+  c('u6', "Then you confirm it in the log: a time, a level, and a message."),
+ ]),
+ ('trace', [
+  k('t0', "Go to the shop folder. Type: C D, shop."),
+  k('t1', "Compile the program. Type: java C, dash D, out, then the source path."),
+  k('t2', "Run it. Type: java, dash C P, out, com dot cloud cart dot checkout."),
+  c('t2b', "First line. Illegal state exception: cannot price order. That is what happened, in words the developer chose."),
+  c('t2c', "Now the Caused by line. Number format exception, for input string: x five. That is the root cause. A price arrived as x five, and x five is not a number."),
+  c('t2d', "Below it, the java dot base lines are Java's own code. Skip them. The first line with our package is: Checkout dot price, line five. That is where our code gave the bad value to parse int."),
+  k('t3', "Check the exit code. Type: echo, dollar sign, question mark."),
+  c('t3b', "One. Not zero. The program failed, and a script or a pipeline can see that."),
+  k('t4', "Long traces need scanning. Type: java, dash C P, out, com dot cloud cart dot checkout, space, two, greater than, ampersand, one, pipe, grep, dash N, quote, Caused by, quote."),
+  c('t4b', "Stack traces go to standard error. Two greater than ampersand one sends them down the pipe. Grep finds the root cause line in one second, with its line number."),
+ ]),
+ ('logs', [
+  k('l0', "Go to the shop folder. Type: C D, shop."),
+  k('l1', "Look at the newest log lines. Type: tail, dash N, five, app dot log."),
+  c('l1b', "Each line: a time, a level, a message. Info is normal. Warn is suspicious. Error is a failure."),
+  k('l2', "How many errors? Type: grep, dash C, error, app dot log."),
+  c('l2b', "Grep dash C counts matching lines. Two errors."),
+  k('l3', "Show them. Type: grep, error, app dot log."),
+  c('l3b', "Two failed orders: ten forty-two, and ten forty-four."),
+  k('l4', "The lines after an error matter too. Type: grep, dash A, two, error, app dot log."),
+  c('l4b', "Dash A two prints two lines after each match: the stack frames the app logged. Checkout dot process, line twenty. The same place as the trace. Trace and log tell one story."),
+  k('l5', "Warnings come first. Type: grep, warn, app dot log."),
+  c('l5b', "Slow price lookups. Early signals, before the failures."),
+ ]),
+ ('models', [
+  c('o1', "Where to look, in this order."),
+  c('o2', "First, the exit code. Zero is success. Anything else is a failure."),
+  c('o3', "Second, the log. Grep for error, count them, read the lines after."),
+  c('o4', "Third, the trace. What happened, where, which line is yours, and the last Caused by."),
+  c('o5', "Facts first. Fixes second."),
+ ]),
+ ('task', [
+  c('k1', "Your lab task. Lab eighty-one gives you a program that crashes, and a log file. Lab check judges your work."),
+  c('k2', "It lives at git hub dot com, slash it dash waves, slash dev ops dash A I, in academy, lab, lab eighty-one dot S H."),
+  c('k3', "One: compile checkout into the out folder."),
+  c('k4', "Two: run it, and save only the error output into crash dot text."),
+  c('k5', "Three: save every error line of the log into errors dot text."),
+  c('k6', "Four: save how many error lines there are into count dot text."),
+  c('k7', "Five: answers dot text, three lines. Top exception, root cause, and bad value. Read crash dot text to find them."),
+  c('k8', "Install, then lab up, lab check, and lab down, like before. The shortcut file is shortcuts eighty-one."),
+ ]),
+ ('rubric', [
+  c('q1', "Pass or fail. You need all six."),
+  c('q2', "Five pass lines in lab check."), c('q3', "You can say what happened, from the first line."),
+  c('q4', "You can find the root cause."), c('q5', "You can find your own code in a trace."),
+  c('q6', "You can find the same failure in the log."), c('q7', "lab down, nothing left behind."), c('q8', "To pass, all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine."),
+  c('z2', "One: lab up, and read the task file."),
+  c('z3', "Two: compile and run. Save the error output."),
+  c('z4', "Three: grep the log. Save the errors and the count."),
+  c('z5', "Four: read the trace. Find the root cause and the bad value."),
+  c('z6', "Five: write your answers, and lab check."),
+  c('z7', "Six: lab down, and prove nothing is left."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "What does the first line of a stack trace tell you?"), c('f13', "Which line is the root cause?"),
+  c('f14', "How do you find your own code in a trace?"), c('f15', "How do you count errors in a log?"),
+  c('f16', "Objective covered: M C zero nine, objective six."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next: Java tests and build outputs."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'h4': 0.5, 'u6': 0.5, 'l5b': 0.5, 'o5': 0.5, 'k8': 0.5, 'q8': 0.5, 'z8': 14.0, 'f17': 10.0, 't4b': 0.5}
+CHAP = {'ideas': 'Four questions', 'trace': 'Read a stack trace', 'logs': 'Read the log', 'models': 'Where to look', 'task': 'Your lab task', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

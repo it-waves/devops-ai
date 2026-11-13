@@ -1,0 +1,25 @@
+Lesson 81 of the DevOps Engineering Bootcamp, the sixth lesson of Java Fundamentals for DevOps. When a Java app crashes, a wall of text scrolls past, and most people start guessing. A stack trace is a map of what went wrong and where. Four questions, four answers. What happened? The first line: the exception name and message. Where? The "at" lines: the top one is the failure, the lines below are who called it. Which code is mine? The first line with your own package name. Why, really? The last "Caused by" is the root cause. On a real Ubuntu machine you compile and run a small program that crashes, read its trace, check the exit code, and scan a long trace with 2>&1 and grep. Then you read an application log: tail, grep -c to count errors, grep to list them, grep -A2 to see the lines after an error, and grep for warnings that come first. Then you do the lab task yourself: five checks, all must pass.
+
+Chapters
+0:00 A map, not noise
+0:25 Four questions
+0:57 Read a stack trace
+2:17 Read the log
+3:15 Where to look
+3:36 Your lab task
+4:25 Pass or fail rubric
+4:46 Your turn
+5:26 Quick check
+
+Objectives covered: MC09-O06 (read basic stack traces, exceptions and application logs)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab81.sh and shortcuts81.sh) and academy/lesson81 (INSTALL.txt). Install with: sudo install -m 755 lab81.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts81.sh (without it, use sudo lab81.sh up, check, down). You need an Ubuntu virtual machine with root and a JDK (for example: sudo apt install openjdk-21-jdk-headless). The lab writes a small program and a log file into /opt/lab81; lab down removes the folder. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04 with OpenJDK 21, run in a private mount and network setup on the recording computer. The ideas, task, rubric and quiz screens are labelled illustrations, not captures. The log file is a prepared sample written for this lesson, not output from a live server; its line numbers match the program in the lab. The exact lines of a trace depend on your Java version. The lab was run end to end before this lesson: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing behind. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. File names are invented, and lab is a short name I made for sudo lab81.sh. Typing is timed to the narration. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: JAR vs WAR: Build, Run and Inspect Java Packages https://youtu.be/iQKfoocs6hs
+Next: Java tests and build outputs.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #java #stacktrace #logging #devopsbootcamp

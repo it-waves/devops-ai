@@ -1,0 +1,14 @@
+2026-11-13 09:14:01 INFO  Checkout started order=1041
+2026-11-13 09:14:01 INFO  Order paid order=1041 total=30
+2026-11-13 09:14:02 INFO  Checkout started order=1042
+2026-11-13 09:14:03 WARN  Slow price lookup item=a7 ms=1840
+2026-11-13 09:14:04 ERROR Cannot price order order=1042
+    at com.cloudcart.Checkout.process(Checkout.java:20)
+    at com.cloudcart.Checkout.main(Checkout.java:26)
+2026-11-13 09:14:05 INFO  Checkout started order=1043
+2026-11-13 09:14:05 INFO  Order paid order=1043 total=45
+2026-11-13 09:14:09 WARN  Slow price lookup item=b2 ms=2210
+2026-11-13 09:14:12 ERROR Cannot price order order=1044
+    at com.cloudcart.Checkout.process(Checkout.java:20)
+    at com.cloudcart.Checkout.main(Checkout.java:26)
+2026-11-13 09:14:13 INFO  Checkout started order=1045

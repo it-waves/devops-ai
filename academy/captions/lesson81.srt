@@ -1,0 +1,551 @@
+1
+00:00:00,500 --> 00:00:05,919
+The app crashes. A wall of text scrolls past. Most people see noise, and start guessing.
+
+2
+00:00:06,469 --> 00:00:08,375
+But a stack trace is not noise.
+
+3
+00:00:08,375 --> 00:00:09,112
+It is a map,
+
+4
+00:00:09,112 --> 00:00:10,957
+written by the program itself,
+
+5
+00:00:10,957 --> 00:00:12,617
+of exactly what went wrong,
+
+6
+00:00:12,617 --> 00:00:13,231
+and where.
+
+7
+00:00:13,781 --> 00:00:19,136
+Today you learn to read one in ten seconds. Then you find the same failure in a log file.
+
+8
+00:00:19,686 --> 00:00:23,739
+No guessing. Four questions, and the answers are already on the screen.
+
+9
+00:00:25,789 --> 00:00:28,584
+Four questions. Every stack trace answers them.
+
+10
+00:00:29,134 --> 00:00:33,123
+One. What happened? The first line. The exception name, then the message.
+
+11
+00:00:33,673 --> 00:00:33,917
+Two.
+
+12
+00:00:33,917 --> 00:00:34,283
+Where?
+
+13
+00:00:34,283 --> 00:00:36,112
+The lines that start with: at.
+
+14
+00:00:36,112 --> 00:00:38,125
+The top one is where it happened.
+
+15
+00:00:38,125 --> 00:00:40,137
+Each line below is who called it.
+
+16
+00:00:40,687 --> 00:00:41,060
+Three.
+
+17
+00:00:41,060 --> 00:00:42,243
+Which code is mine?
+
+18
+00:00:42,243 --> 00:00:43,736
+Skip the Java internals.
+
+19
+00:00:43,736 --> 00:00:46,660
+Find the first line with your own package name.
+
+20
+00:00:47,210 --> 00:00:51,456
+Four. Why, really? Look for: Caused by. The last one is the root cause.
+
+21
+00:00:52,006 --> 00:00:55,675
+Then you confirm it in the log: a time, a level, and a message.
+
+22
+00:00:57,725 --> 00:01:00,712
+Go to the shop folder. Type: CD, shop.
+
+23
+00:01:01,262 --> 00:01:05,912
+Compile the program. Type: java C, dash D, out, then the source path.
+
+24
+00:01:06,462 --> 00:01:11,348
+Run it. Type: java, dash C P, out, com dot cloud cart dot checkout.
+
+25
+00:01:11,898 --> 00:01:12,602
+First line.
+
+26
+00:01:12,602 --> 00:01:15,418
+Illegal state exception: cannot price order.
+
+27
+00:01:15,418 --> 00:01:16,826
+That is what happened,
+
+28
+00:01:16,826 --> 00:01:18,682
+in words the developer chose.
+
+29
+00:01:19,232 --> 00:01:20,863
+Now the Caused by line.
+
+30
+00:01:20,863 --> 00:01:22,565
+Number format exception,
+
+31
+00:01:22,565 --> 00:01:24,338
+for input string: x five.
+
+32
+00:01:24,338 --> 00:01:25,969
+That is the root cause.
+
+33
+00:01:25,969 --> 00:01:27,813
+A price arrived as x five,
+
+34
+00:01:27,813 --> 00:01:29,728
+and x five is not a number.
+
+35
+00:01:30,278 --> 00:01:30,880
+Below it,
+
+36
+00:01:30,880 --> 00:01:33,824
+the java dot base lines are Java's own code.
+
+37
+00:01:33,824 --> 00:01:34,493
+Skip them.
+
+38
+00:01:34,493 --> 00:01:38,174
+The first line with our package is: Checkout dot price,
+
+39
+00:01:38,174 --> 00:01:38,843
+line five.
+
+40
+00:01:38,843 --> 00:01:42,523
+That is where our code gave the bad value to parse int.
+
+41
+00:01:43,073 --> 00:01:47,190
+Check the exit code. Type: echo, dollar sign, question mark.
+
+42
+00:01:47,740 --> 00:01:52,242
+One. Not zero. The program failed, and a script or a pipeline can see that.
+
+43
+00:01:52,792 --> 00:01:54,859
+Long traces need scanning.
+
+44
+00:01:54,859 --> 00:01:55,734
+Type: java,
+
+45
+00:01:55,734 --> 00:01:56,450
+dash C P,
+
+46
+00:01:56,450 --> 00:01:56,768
+out,
+
+47
+00:01:56,768 --> 00:01:59,313
+com dot cloud cart dot checkout,
+
+48
+00:01:59,313 --> 00:01:59,790
+space,
+
+49
+00:01:59,790 --> 00:02:00,108
+two,
+
+50
+00:02:00,108 --> 00:02:01,142
+greater than,
+
+51
+00:02:01,142 --> 00:02:01,937
+ampersand,
+
+52
+00:02:01,937 --> 00:02:02,255
+one,
+
+53
+00:02:02,255 --> 00:02:02,653
+pipe,
+
+54
+00:02:02,653 --> 00:02:03,051
+grep,
+
+55
+00:02:03,051 --> 00:02:03,607
+dash N,
+
+56
+00:02:03,607 --> 00:02:04,085
+quote,
+
+57
+00:02:04,085 --> 00:02:04,880
+Caused by,
+
+58
+00:02:04,880 --> 00:02:05,357
+quote.
+
+59
+00:02:05,907 --> 00:02:07,990
+Stack traces go to standard error.
+
+60
+00:02:07,990 --> 00:02:11,421
+Two greater than ampersand one sends them down the pipe.
+
+61
+00:02:11,421 --> 00:02:14,178
+Grep finds the root cause line in one second,
+
+62
+00:02:14,178 --> 00:02:15,464
+with its line number.
+
+63
+00:02:17,514 --> 00:02:20,501
+Go to the shop folder. Type: CD, shop.
+
+64
+00:02:21,051 --> 00:02:25,936
+Look at the newest log lines. Type: tail, dash N, five, app dot log.
+
+65
+00:02:26,486 --> 00:02:27,780
+Each line: a time,
+
+66
+00:02:27,780 --> 00:02:28,356
+a level,
+
+67
+00:02:28,356 --> 00:02:29,075
+a message.
+
+68
+00:02:29,075 --> 00:02:30,153
+Info is normal.
+
+69
+00:02:30,153 --> 00:02:31,520
+Warn is suspicious.
+
+70
+00:02:31,520 --> 00:02:32,886
+Error is a failure.
+
+71
+00:02:33,436 --> 00:02:37,255
+How many errors? Type: grep, dash C, error, app dot log.
+
+72
+00:02:37,805 --> 00:02:40,706
+Grep dash C counts matching lines. Two errors.
+
+73
+00:02:41,256 --> 00:02:44,072
+Show them. Type: grep, error, app dot log.
+
+74
+00:02:44,622 --> 00:02:48,078
+Two failed orders: ten forty-two, and ten forty-four.
+
+75
+00:02:48,628 --> 00:02:53,919
+The lines after an error matter too. Type: grep, dash A, two, error, app dot log.
+
+76
+00:02:54,469 --> 00:02:59,857
+Dash A two prints two lines after each match: the stack frames the app logged.
+
+77
+00:02:59,857 --> 00:03:01,308
+Checkout dot process,
+
+78
+00:03:01,308 --> 00:03:02,136
+line twenty.
+
+79
+00:03:02,136 --> 00:03:04,071
+The same place as the trace.
+
+80
+00:03:04,071 --> 00:03:06,074
+Trace and log tell one story.
+
+81
+00:03:06,624 --> 00:03:10,293
+Warnings come first. Type: grep, warn, app dot log.
+
+82
+00:03:10,843 --> 00:03:14,257
+Slow price lookups. Early signals, before the failures.
+
+83
+00:03:16,307 --> 00:03:17,822
+Where to look, in this order.
+
+84
+00:03:18,372 --> 00:03:22,724
+First, the exit code. Zero is success. Anything else is a failure.
+
+85
+00:03:23,274 --> 00:03:27,156
+Second, the log. Grep for error, count them, read the lines after.
+
+86
+00:03:27,706 --> 00:03:32,272
+Third, the trace. What happened, where, which line is yours, and the last Caused by.
+
+87
+00:03:32,822 --> 00:03:34,720
+Facts first. Fixes second.
+
+88
+00:03:36,770 --> 00:03:37,677
+Your lab task.
+
+89
+00:03:37,677 --> 00:03:40,789
+Lab eighty-one gives you a program that crashes,
+
+90
+00:03:40,789 --> 00:03:41,761
+and a log file.
+
+91
+00:03:41,761 --> 00:03:43,511
+Lab check judges your work.
+
+92
+00:03:44,061 --> 00:03:46,199
+It lives at git hub dot com,
+
+93
+00:03:46,199 --> 00:03:47,725
+slash it dash waves,
+
+94
+00:03:47,725 --> 00:03:49,481
+slash dev ops dash A I,
+
+95
+00:03:49,481 --> 00:03:50,320
+in academy,
+
+96
+00:03:50,320 --> 00:03:50,626
+lab,
+
+97
+00:03:50,626 --> 00:03:52,381
+lab eighty-one dot S H.
+
+98
+00:03:52,931 --> 00:03:55,342
+One: compile checkout into the out folder.
+
+99
+00:03:55,892 --> 00:04:00,137
+Two: run it, and save only the error output into crash dot text.
+
+100
+00:04:00,687 --> 00:04:04,314
+Three: save every error line of the log into errors dot text.
+
+101
+00:04:04,864 --> 00:04:08,320
+Four: save how many error lines there are into count dot text.
+
+102
+00:04:08,870 --> 00:04:10,576
+Five: answers dot text,
+
+103
+00:04:10,576 --> 00:04:11,466
+three lines.
+
+104
+00:04:11,466 --> 00:04:12,504
+Top exception,
+
+105
+00:04:12,504 --> 00:04:13,320
+root cause,
+
+106
+00:04:13,320 --> 00:04:14,358
+and bad value.
+
+107
+00:04:14,358 --> 00:04:16,806
+Read crash dot text to find them.
+
+108
+00:04:17,356 --> 00:04:17,889
+Install,
+
+109
+00:04:17,889 --> 00:04:18,689
+then lab up,
+
+110
+00:04:18,689 --> 00:04:19,355
+lab check,
+
+111
+00:04:19,355 --> 00:04:20,221
+and lab down,
+
+112
+00:04:20,221 --> 00:04:21,021
+like before.
+
+113
+00:04:21,021 --> 00:04:23,820
+The shortcut file is shortcuts eighty-one.
+
+114
+00:04:25,870 --> 00:04:27,939
+Pass or fail. You need all six.
+
+115
+00:04:28,489 --> 00:04:30,303
+Five pass lines in lab check.
+
+116
+00:04:30,853 --> 00:04:33,114
+You can say what happened, from the first line.
+
+117
+00:04:33,664 --> 00:04:35,136
+You can find the root cause.
+
+118
+00:04:35,686 --> 00:04:37,627
+You can find your own code in a trace.
+
+119
+00:04:38,177 --> 00:04:40,204
+You can find the same failure in the log.
+
+120
+00:04:40,754 --> 00:04:42,674
+lab down, nothing left behind.
+
+121
+00:04:43,224 --> 00:04:44,525
+To pass, all six.
+
+122
+00:04:46,575 --> 00:04:49,412
+Your turn, in your own Ubuntu virtual machine.
+
+123
+00:04:49,962 --> 00:04:52,053
+One: lab up, and read the task file.
+
+124
+00:04:52,603 --> 00:04:55,568
+Two: compile and run. Save the error output.
+
+125
+00:04:56,118 --> 00:04:59,148
+Three: grep the log. Save the errors and the count.
+
+126
+00:04:59,698 --> 00:05:03,346
+Four: read the trace. Find the root cause and the bad value.
+
+127
+00:05:03,896 --> 00:05:06,178
+Five: write your answers, and lab check.
+
+128
+00:05:06,728 --> 00:05:09,310
+Six: lab down, and prove nothing is left.
+
+129
+00:05:09,860 --> 00:05:11,694
+Pause the video, and begin now.
+
+130
+00:05:27,244 --> 00:05:28,119
+Quick check.
+
+131
+00:05:28,669 --> 00:05:31,037
+What does the first line of a stack trace tell you?
+
+132
+00:05:31,587 --> 00:05:33,208
+Which line is the root cause?
+
+133
+00:05:33,758 --> 00:05:35,827
+How do you find your own code in a trace?
+
+134
+00:05:36,377 --> 00:05:38,127
+How do you count errors in a log?
+
+135
+00:05:38,677 --> 00:05:42,410
+Objective covered: M C zero nine, objective six.
+
+136
+00:05:42,960 --> 00:05:45,029
+Pause the video, and answer out loud.
+
+137
+00:05:55,579 --> 00:05:57,926
+Next: Java tests and build outputs.
+
+138
+00:05:58,476 --> 00:06:01,804
+If this helped, like, share and subscribe, so you do not miss it.
