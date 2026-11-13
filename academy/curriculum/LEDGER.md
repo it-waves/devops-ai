@@ -52,6 +52,21 @@ Lesson numbers continue from MC01 (global numbering, L9-L16). One lesson per obj
 ## MC02 mastery (catch-up) - DEFERRED by owner on 2026-11-10: "after the program we can come back to fix that"
 Scenario, lab (lab/lab26.sh, verified end to end) and script are built; sources in academy/deferred_mc02_mastery. Narration not yet generated. Resume after the whole program. Do not renumber it ahead of MC04.
 
+## MC09 Java Fundamentals for DevOps (8 objectives + mastery) - locked lesson order
+Checklist order (not Docker; Docker comes later in the checklist). One lesson per objective, then the mastery scenario. JDK 21 on the recording machine; demo app is a tiny CloudCart Java program. Each lesson: live terminal, demo + independent task with lab (up/check/down) + pass/fail rubric. The mastery lesson shows lab info on screen.
+
+| Lesson | Objectives | Topic | Status |
+|---|---|---|---|
+| L76 | MC09-O01 | JDK, JRE, JVM, source, bytecode, application process | Not started |
+| L77 | MC09-O02 | Compile and run a small Java program | Not started |
+| L78 | MC09-O03 | Packages, classpath, dependencies, environment configuration | Not started |
+| L79 | MC09-O04 | Inspect Java process startup flags and runtime settings | Not started |
+| L80 | MC09-O05 | JAR vs WAR packaging | Not started |
+| L81 | MC09-O06 | Stack traces, exceptions, application logs | Not started |
+| L82 | MC09-O07 | Java tests and build outputs | Not started |
+| L83 | MC09-O08 | Diagnose version mismatch, memory, port, classpath failures | Not started |
+| L84 | MC09 mastery | Four-fault Java lab, checker, report, cleanup proof | Not started |
+
 ## MC04 Linux Administration (10 objectives + mastery) - locked lesson order
 Lesson numbers continue after L25. One lesson per objective, then the mastery scenario. Each lesson: live terminal, vim (not nano), demo + independent task + pass/fail rubric. The mastery lesson shows lab info on screen (repo, files, install, shortcuts).
 
