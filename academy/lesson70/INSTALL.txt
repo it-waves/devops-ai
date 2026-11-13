@@ -1,0 +1,17 @@
+Install the lab (needs an Ubuntu virtual machine with root, python3 and curl):
+  sudo apt install -y python3 curl jq    # skip if already installed
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab70.sh /usr/local/sbin/
+  source shortcuts70.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab70 and starts CloudCart with login: the API on 127.0.0.1:5000
+  lab check               # five FAIL lines at the start; your goal is five PASS lines
+  lab down                # stops the app and removes /opt/lab70
+Without the shortcut, use: sudo lab70.sh up | check | down | status
+Your mission, all with curl against http://127.0.0.1:5000, working inside /opt/lab70:
+  1. log in as bob (POST /api/login, password in the lab up message) and save only his token in token.txt
+  2. GET /api/orders with no token and add to answers.txt:  nologin: NNN
+  3. as bob, try DELETE /api/products/1 and add to answers.txt:  forbidden: NNN
+  4. find alice's password in secrets.env, log in as alice, and DELETE /api/products/3 with her token
+  5. make secrets.env private to its owner (chmod 600)
+Commands you will use: curl -s -X POST -d '{"user":"bob","password":"..."}' URL, jq -r .token (jq needed), curl -H "Authorization: Bearer $TOKEN" URL, chmod 600
+Run it only in your own virtual machine. It uses ports 5000 and 8080 on 127.0.0.1 and creates only /opt/lab70. Remove the installed script with: sudo rm /usr/local/sbin/lab70.sh

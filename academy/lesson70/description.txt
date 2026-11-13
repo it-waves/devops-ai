@@ -1,0 +1,25 @@
+Lesson 70 of the DevOps Engineering Bootcamp, the fourth lesson of the Application Architecture and APIs masterclass. Anyone on the internet can send a request to your A P I, so how does it know who is asking? Here you add login to CloudCart, the tiny shop from the last lessons, and watch it work with real commands. Authentication proves who you are: a wrong password gets a four oh one, the right one gets a token. Authorization decides what you may do: you send the token in an authorization header with the word Bearer, a customer can read orders but is refused a delete with a four oh three, and an admin is allowed. You learn the difference between a four oh one and a four oh three, sessions against tokens, and how to keep secrets out of code and git: read from the environment, lock the file with mode six hundred. You finish with a lab, a checker, a pass or fail rubric and your turn.
+
+Chapters
+0:00 Who is asking?
+0:32 Log in: authentication
+1:33 Tokens, 401 and 403
+3:27 Keeping secrets
+4:38 Sessions and tokens
+5:32 Your lab task
+6:30 Pass or fail rubric
+6:59 Your turn
+7:39 Quick check
+
+Objectives covered: MC08-O04 Explain authentication, authorization, sessions, tokens, and secrets.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab70.sh and shortcuts70.sh) and academy/lesson70 (INSTALL.txt). Install with: sudo install -m 755 lab70.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts70.sh (without it, use sudo lab70.sh up, check, down). You need an Ubuntu virtual machine with root, python3 and curl. It uses ports 5000 and 8080 on 127.0.0.1. Only run it in your own virtual machine.
+
+Honest notes: every terminal segment is a real recording of real commands on Ubuntu 24.04, run in a private mount and network setup on the recording computer. CloudCart is a tiny teaching app written for this course, using Python and an SQLite file, not a production system. Its login is a simplified teaching version: the demo passwords are made up, tokens are plain random strings kept in memory, and a real system would hash passwords, use H T T P S and add multi factor sign in. The session and token comparison is a labelled illustration, not a capture. The lab was run end to end before this lesson: it starts with all five checks failing, doing the tasks makes all five pass, and lab down leaves nothing behind. Your own run is unverified until you do it. The lab file names are invented, and lab is a short name I made for sudo lab70.sh. Typing is timed to the narration. The narration is synthetic speech.
+
+Previous lesson: curl for APIs: Test Any Endpoint https://youtu.be/lUMJrbSiHys
+Next lesson: configuration, environment variables and feature flags.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #api #authentication #bearertoken #httpstatuscodes #devopsbootcamp

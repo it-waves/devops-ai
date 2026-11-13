@@ -1,0 +1,927 @@
+1
+00:00:00,500 --> 00:00:05,684
+Anyone on the internet can send a request to your API. So how does it know who is asking?
+
+2
+00:00:06,234 --> 00:00:10,970
+Without an answer, anyone could read every order, and anyone could delete your products.
+
+3
+00:00:11,520 --> 00:00:15,328
+Today you learn the answer in four ideas: authentication,
+
+4
+00:00:15,328 --> 00:00:16,731
+which is who you are.
+
+5
+00:00:16,731 --> 00:00:17,666
+Authorization,
+
+6
+00:00:17,666 --> 00:00:19,336
+which is what you may do.
+
+7
+00:00:19,336 --> 00:00:19,804
+Tokens,
+
+8
+00:00:19,804 --> 00:00:21,942
+which prove it on every request.
+
+9
+00:00:21,942 --> 00:00:22,744
+And secrets,
+
+10
+00:00:22,744 --> 00:00:24,213
+which must never leak.
+
+11
+00:00:24,763 --> 00:00:29,149
+And you will meet two numbers every dev ops engineer reads: four oh one,
+
+12
+00:00:29,149 --> 00:00:30,246
+and four oh three.
+
+13
+00:00:32,296 --> 00:00:35,411
+Go into the shop. Type: CD, cloud cart.
+
+14
+00:00:35,961 --> 00:00:36,578
+Start it.
+
+15
+00:00:36,578 --> 00:00:38,638
+Type: dot slash start dot S H.
+
+16
+00:00:38,638 --> 00:00:42,275
+This version reads its passwords from a secrets file.
+
+17
+00:00:42,825 --> 00:00:45,806
+Authentication means proving who you are.
+
+18
+00:00:45,806 --> 00:00:47,332
+Try to log in as Bob,
+
+19
+00:00:47,332 --> 00:00:49,076
+with the wrong password.
+
+20
+00:00:49,076 --> 00:00:49,876
+Type: curl,
+
+21
+00:00:49,876 --> 00:00:50,530
+dash s i,
+
+22
+00:00:50,530 --> 00:00:51,621
+dash capital X,
+
+23
+00:00:51,621 --> 00:00:51,984
+post,
+
+24
+00:00:51,984 --> 00:00:52,493
+dash d,
+
+25
+00:00:52,493 --> 00:00:54,601
+the jay son in single quotes,
+
+26
+00:00:54,601 --> 00:00:55,836
+then the address,
+
+27
+00:00:55,836 --> 00:00:57,508
+slash API slash log in,
+
+28
+00:00:57,508 --> 00:00:57,872
+pipe,
+
+29
+00:00:57,872 --> 00:00:58,235
+head,
+
+30
+00:00:58,235 --> 00:00:58,889
+dash one.
+
+31
+00:01:00,439 --> 00:01:01,210
+Four oh one.
+
+32
+00:01:01,210 --> 00:01:02,044
+Unauthorized.
+
+33
+00:01:02,044 --> 00:01:04,420
+The server does not know who you are.
+
+34
+00:01:04,420 --> 00:01:05,511
+Despite the name,
+
+35
+00:01:05,511 --> 00:01:07,309
+it means: not authenticated.
+
+36
+00:01:07,859 --> 00:01:10,070
+Now log in with the right password.
+
+37
+00:01:10,070 --> 00:01:11,459
+Type the same command,
+
+38
+00:01:11,459 --> 00:01:13,039
+with Bob's real password,
+
+39
+00:01:13,039 --> 00:01:14,365
+and without the head.
+
+40
+00:01:17,415 --> 00:01:17,938
+Success.
+
+41
+00:01:17,938 --> 00:01:21,273
+The server gives you a token: a long random string.
+
+42
+00:01:21,273 --> 00:01:23,562
+It also says your role is customer,
+
+43
+00:01:23,562 --> 00:01:25,458
+and the token lasts one hour.
+
+44
+00:01:26,008 --> 00:01:27,371
+The token is your proof.
+
+45
+00:01:27,371 --> 00:01:29,133
+You send it with every request,
+
+46
+00:01:29,133 --> 00:01:31,235
+so you never send the password again.
+
+47
+00:01:33,285 --> 00:01:37,210
+Same shop, new session. Go in. Type: CD, cloud cart.
+
+48
+00:01:37,760 --> 00:01:40,811
+Start it. Type: dot slash start dot S H.
+
+49
+00:01:41,361 --> 00:01:42,770
+Orders are private.
+
+50
+00:01:42,770 --> 00:01:44,771
+Ask for them with no token.
+
+51
+00:01:44,771 --> 00:01:45,587
+Type: curl,
+
+52
+00:01:45,587 --> 00:01:46,254
+dash s i,
+
+53
+00:01:46,254 --> 00:01:47,143
+the address,
+
+54
+00:01:47,143 --> 00:01:48,848
+slash API slash orders,
+
+55
+00:01:48,848 --> 00:01:49,219
+pipe,
+
+56
+00:01:49,219 --> 00:01:49,590
+head,
+
+57
+00:01:49,590 --> 00:01:50,257
+dash one.
+
+58
+00:01:50,807 --> 00:01:53,367
+Four oh one again. No token, no entry.
+
+59
+00:01:53,917 --> 00:01:54,964
+Log in as Bob,
+
+60
+00:01:54,964 --> 00:01:57,433
+and keep the token in a variable.
+
+61
+00:01:57,433 --> 00:01:58,855
+Type: token equals,
+
+62
+00:01:58,855 --> 00:01:59,379
+dollar,
+
+63
+00:01:59,379 --> 00:01:59,977
+bracket,
+
+64
+00:01:59,977 --> 00:02:01,399
+the log in command,
+
+65
+00:02:01,399 --> 00:02:01,773
+pipe,
+
+66
+00:02:01,773 --> 00:02:02,072
+J Q,
+
+67
+00:02:02,072 --> 00:02:02,596
+dash R,
+
+68
+00:02:02,596 --> 00:02:03,344
+dot token,
+
+69
+00:02:03,344 --> 00:02:04,392
+close bracket.
+
+70
+00:02:06,942 --> 00:02:09,071
+Now send the token in a header.
+
+71
+00:02:09,071 --> 00:02:11,475
+The header is called authorization,
+
+72
+00:02:11,475 --> 00:02:14,360
+and its value starts with the word Bearer.
+
+73
+00:02:14,360 --> 00:02:15,115
+Type: curl,
+
+74
+00:02:15,115 --> 00:02:15,596
+dash s,
+
+75
+00:02:15,596 --> 00:02:16,627
+dash capital H,
+
+76
+00:02:16,627 --> 00:02:17,039
+quote,
+
+77
+00:02:17,039 --> 00:02:18,000
+authorization,
+
+78
+00:02:18,000 --> 00:02:18,412
+colon,
+
+79
+00:02:18,412 --> 00:02:18,893
+Bearer,
+
+80
+00:02:18,893 --> 00:02:19,305
+space,
+
+81
+00:02:19,305 --> 00:02:20,198
+dollar token,
+
+82
+00:02:20,198 --> 00:02:20,610
+quote,
+
+83
+00:02:20,610 --> 00:02:22,259
+then the orders address.
+
+84
+00:02:22,809 --> 00:02:27,758
+Bob sees his orders. The server looked up the token, and knew he is Bob, a customer.
+
+85
+00:02:28,308 --> 00:02:29,551
+Now authorization,
+
+86
+00:02:29,551 --> 00:02:32,243
+which means what you are allowed to do.
+
+87
+00:02:32,243 --> 00:02:33,969
+Can Bob delete a product?
+
+88
+00:02:33,969 --> 00:02:34,728
+Type: curl,
+
+89
+00:02:34,728 --> 00:02:35,350
+dash s i,
+
+90
+00:02:35,350 --> 00:02:36,385
+dash capital X,
+
+91
+00:02:36,385 --> 00:02:36,868
+delete,
+
+92
+00:02:36,868 --> 00:02:38,594
+the authorization header,
+
+93
+00:02:38,594 --> 00:02:40,458
+the address of product one,
+
+94
+00:02:40,458 --> 00:02:40,803
+pipe,
+
+95
+00:02:40,803 --> 00:02:41,148
+head,
+
+96
+00:02:41,148 --> 00:02:41,770
+dash one.
+
+97
+00:02:43,820 --> 00:02:44,729
+Four oh three.
+
+98
+00:02:44,729 --> 00:02:45,378
+Forbidden.
+
+99
+00:02:45,378 --> 00:02:47,780
+The server knows exactly who you are,
+
+100
+00:02:47,780 --> 00:02:49,533
+and the answer is still no.
+
+101
+00:02:49,533 --> 00:02:51,350
+Your role does not allow it.
+
+102
+00:02:51,900 --> 00:02:53,232
+Now log in as Alice,
+
+103
+00:02:53,232 --> 00:02:53,897
+the admin,
+
+104
+00:02:53,897 --> 00:02:55,162
+and keep her token.
+
+105
+00:02:55,162 --> 00:02:56,693
+Same command as before,
+
+106
+00:02:56,693 --> 00:02:58,556
+with Alice and her password.
+
+107
+00:03:04,106 --> 00:03:07,498
+Now try the delete again, as Alice. Delete product two.
+
+108
+00:03:12,848 --> 00:03:18,096
+Two oh four. Deleted. Same request, different token, different role, different answer.
+
+109
+00:03:18,646 --> 00:03:20,001
+Remember the difference.
+
+110
+00:03:20,001 --> 00:03:22,203
+Four oh one: I do not know who you are.
+
+111
+00:03:22,203 --> 00:03:24,122
+Four oh three: I know who you are,
+
+112
+00:03:24,122 --> 00:03:25,025
+and you may not.
+
+113
+00:03:27,075 --> 00:03:30,190
+Go into the shop. Type: CD, cloud cart.
+
+114
+00:03:30,740 --> 00:03:33,147
+Alice's password lives in a file,
+
+115
+00:03:33,147 --> 00:03:34,315
+not in the code.
+
+116
+00:03:34,315 --> 00:03:36,869
+List the file with its permissions.
+
+117
+00:03:36,869 --> 00:03:37,598
+Type: L S,
+
+118
+00:03:37,598 --> 00:03:38,109
+dash L,
+
+119
+00:03:38,109 --> 00:03:39,422
+secrets dot E N V.
+
+120
+00:03:39,972 --> 00:03:41,920
+Look at the start: dash R W,
+
+121
+00:03:41,920 --> 00:03:42,406
+dash R,
+
+122
+00:03:42,406 --> 00:03:42,893
+dash R.
+
+123
+00:03:42,893 --> 00:03:45,536
+Everyone on this computer can read it.
+
+124
+00:03:45,536 --> 00:03:47,761
+Anyone could read the passwords.
+
+125
+00:03:47,761 --> 00:03:48,804
+That is a leak.
+
+126
+00:03:49,354 --> 00:03:54,944
+Make it private to its owner. Type: C H mod, six hundred, secrets dot E N V.
+
+127
+00:03:55,494 --> 00:03:58,912
+Six hundred means: the owner can read and write,
+
+128
+00:03:58,912 --> 00:04:01,191
+and nobody else can do anything.
+
+129
+00:04:01,191 --> 00:04:02,260
+Check it again.
+
+130
+00:04:02,260 --> 00:04:02,972
+Type: L S,
+
+131
+00:04:02,972 --> 00:04:03,470
+dash L,
+
+132
+00:04:03,470 --> 00:04:04,752
+secrets dot E N V.
+
+133
+00:04:05,302 --> 00:04:07,704
+Now only dash R W at the start.
+
+134
+00:04:07,704 --> 00:04:08,324
+Private.
+
+135
+00:04:08,324 --> 00:04:11,887
+Last check: is a password written in the code?
+
+136
+00:04:11,887 --> 00:04:13,901
+Search for Bob's password,
+
+137
+00:04:13,901 --> 00:04:15,605
+and count the matches.
+
+138
+00:04:15,605 --> 00:04:16,458
+Type: grep,
+
+139
+00:04:16,458 --> 00:04:16,999
+dash C,
+
+140
+00:04:16,999 --> 00:04:18,239
+paper dash kite,
+
+141
+00:04:18,239 --> 00:04:19,169
+API dot P Y.
+
+142
+00:04:19,719 --> 00:04:20,577
+Zero matches.
+
+143
+00:04:20,577 --> 00:04:23,546
+The code only names the environment variable.
+
+144
+00:04:23,546 --> 00:04:26,251
+The password itself is never in the code,
+
+145
+00:04:26,251 --> 00:04:28,231
+so it can never end up in git.
+
+146
+00:04:28,781 --> 00:04:32,795
+The rules: keep secrets in the environment or a private file.
+
+147
+00:04:32,795 --> 00:04:33,980
+Never in the code.
+
+148
+00:04:33,980 --> 00:04:34,835
+Never in git.
+
+149
+00:04:34,835 --> 00:04:36,546
+And never in a screenshot.
+
+150
+00:04:38,596 --> 00:04:40,281
+Let us put the ideas together.
+
+151
+00:04:40,831 --> 00:04:43,038
+Authentication answers: who are you?
+
+152
+00:04:43,038 --> 00:04:43,712
+You log in,
+
+153
+00:04:43,712 --> 00:04:45,918
+and the server checks your password.
+
+154
+00:04:45,918 --> 00:04:47,573
+A failure is a four oh one.
+
+155
+00:04:48,123 --> 00:04:50,437
+Authorization answers: what may you do?
+
+156
+00:04:50,437 --> 00:04:52,098
+The server checks your role.
+
+157
+00:04:52,098 --> 00:04:53,819
+A failure is a four oh three.
+
+158
+00:04:54,369 --> 00:04:58,465
+After log in, the server needs to remember you. There are two common ways.
+
+159
+00:04:59,015 --> 00:05:01,452
+A session: the server keeps a record of you,
+
+160
+00:05:01,452 --> 00:05:03,612
+and gives you a cookie with its number.
+
+161
+00:05:03,612 --> 00:05:04,775
+The server remembers.
+
+162
+00:05:05,325 --> 00:05:07,920
+A token: you carry the proof yourself,
+
+163
+00:05:07,920 --> 00:05:08,739
+in a header,
+
+164
+00:05:08,739 --> 00:05:09,900
+on every request.
+
+165
+00:05:09,900 --> 00:05:11,676
+This is what our API does.
+
+166
+00:05:11,676 --> 00:05:14,339
+The token can be a plain random string,
+
+167
+00:05:14,339 --> 00:05:15,432
+or a signed one,
+
+168
+00:05:15,432 --> 00:05:16,525
+such as a J W T.
+
+169
+00:05:17,075 --> 00:05:17,779
+Either way,
+
+170
+00:05:17,779 --> 00:05:20,339
+a token is a password with a short life.
+
+171
+00:05:20,339 --> 00:05:21,619
+Protect it like one,
+
+172
+00:05:21,619 --> 00:05:22,771
+and let it expire.
+
+173
+00:05:23,321 --> 00:05:24,453
+In real systems,
+
+174
+00:05:24,453 --> 00:05:25,585
+add more: M F A,
+
+175
+00:05:25,585 --> 00:05:27,071
+and hashed passwords.
+
+176
+00:05:27,071 --> 00:05:30,467
+But the pattern you saw today is the foundation.
+
+177
+00:05:32,517 --> 00:05:35,290
+Your task, in your own Ubuntu virtual machine.
+
+178
+00:05:35,840 --> 00:05:38,120
+The lab is lab seventy dot S H,
+
+179
+00:05:38,120 --> 00:05:41,870
+in the academy slash lab folder of git hub dot com,
+
+180
+00:05:41,870 --> 00:05:43,341
+slash it dash waves,
+
+181
+00:05:43,341 --> 00:05:45,033
+slash dev ops dash A I.
+
+182
+00:05:45,033 --> 00:05:46,724
+Install it like before,
+
+183
+00:05:46,724 --> 00:05:47,901
+then run lab up,
+
+184
+00:05:47,901 --> 00:05:51,136
+and work inside slash opt slash lab seventy.
+
+185
+00:05:51,686 --> 00:05:52,997
+One: log in as Bob,
+
+186
+00:05:52,997 --> 00:05:55,551
+with the password in the lab message,
+
+187
+00:05:55,551 --> 00:05:57,207
+and save only the token,
+
+188
+00:05:57,207 --> 00:05:58,449
+in token dot text.
+
+189
+00:05:58,999 --> 00:06:01,501
+Two: ask for the orders with no token,
+
+190
+00:06:01,501 --> 00:06:04,530
+and write the status code in answers dot text,
+
+191
+00:06:04,530 --> 00:06:05,913
+like this: no log in,
+
+192
+00:06:05,913 --> 00:06:06,308
+colon,
+
+193
+00:06:06,308 --> 00:06:07,362
+then the number.
+
+194
+00:06:07,912 --> 00:06:08,811
+Three: as Bob,
+
+195
+00:06:08,811 --> 00:06:10,481
+try to delete product one.
+
+196
+00:06:10,481 --> 00:06:13,500
+Write the status code after the word forbidden,
+
+197
+00:06:13,500 --> 00:06:13,885
+colon.
+
+198
+00:06:14,435 --> 00:06:17,850
+Four: find Alice's password in secrets dot E N V,
+
+199
+00:06:17,850 --> 00:06:18,965
+log in as Alice,
+
+200
+00:06:18,965 --> 00:06:20,707
+and delete product three.
+
+201
+00:06:21,257 --> 00:06:25,332
+Five: make secrets dot E N V private, with mode six hundred.
+
+202
+00:06:25,882 --> 00:06:28,420
+Then run lab check. Five pass lines.
+
+203
+00:06:30,470 --> 00:06:32,454
+Six points, and you need all six.
+
+204
+00:06:33,004 --> 00:06:34,881
+The checker shows five pass lines.
+
+205
+00:06:35,431 --> 00:06:40,061
+You can explain authentication against authorization, with an example of each.
+
+206
+00:06:40,611 --> 00:06:43,192
+You can explain four oh one against four oh three.
+
+207
+00:06:43,742 --> 00:06:47,113
+You can send a bearer token, and say where a token comes from.
+
+208
+00:06:47,663 --> 00:06:52,548
+You can say why secrets stay out of code and out of git, and how to lock a secrets file.
+
+209
+00:06:53,098 --> 00:06:55,829
+You ran lab down, and nothing is left listening.
+
+210
+00:06:56,379 --> 00:06:58,000
+To pass, you need all six.
+
+211
+00:07:00,050 --> 00:07:02,887
+Your turn, in your own Ubuntu virtual machine.
+
+212
+00:07:03,437 --> 00:07:05,656
+One: install the lab, and run lab up.
+
+213
+00:07:06,206 --> 00:07:08,681
+Two: log in as Bob, and save the token.
+
+214
+00:07:09,231 --> 00:07:12,793
+Three: meet a four oh one, and a four oh three, and write them down.
+
+215
+00:07:13,343 --> 00:07:16,245
+Four: log in as Alice, and delete product three.
+
+216
+00:07:16,795 --> 00:07:18,672
+Five: lock the secrets file.
+
+217
+00:07:19,222 --> 00:07:21,505
+Six: run lab check, then lab down.
+
+218
+00:07:22,055 --> 00:07:23,889
+Pause the video, and begin now.
+
+219
+00:07:39,439 --> 00:07:40,314
+Quick check.
+
+220
+00:07:40,864 --> 00:07:44,320
+What is the difference between authentication and authorization?
+
+221
+00:07:44,870 --> 00:07:48,582
+Four oh one or four oh three: the server does not know who you are?
+
+222
+00:07:49,132 --> 00:07:51,606
+How does a bearer token travel with a request?
+
+223
+00:07:52,156 --> 00:07:54,588
+Why must a secret never be written in the code?
+
+224
+00:07:55,138 --> 00:07:57,674
+Objective covered: M C zero eight,
+
+225
+00:07:57,674 --> 00:07:59,985
+objective four: authentication,
+
+226
+00:07:59,985 --> 00:08:01,029
+authorization,
+
+227
+00:08:01,029 --> 00:08:01,700
+sessions,
+
+228
+00:08:01,700 --> 00:08:02,222
+tokens,
+
+229
+00:08:02,222 --> 00:08:03,117
+and secrets.
+
+230
+00:08:03,667 --> 00:08:05,736
+Pause the video, and answer out loud.
+
+231
+00:08:16,286 --> 00:08:20,276
+Next: configuration, environment variables, and feature flags.
+
+232
+00:08:20,826 --> 00:08:24,154
+If this helped, like, share and subscribe, so you do not miss it.
