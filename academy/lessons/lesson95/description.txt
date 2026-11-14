@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab95.sh and shortcu
 Honest notes: the terminal segment is a real recording with real Gradle 8.14.3 and real Maven Central. A copy of Gradle was already stored on the recording machine because the Gradle download site is blocked there, so the first ./gradlew on your machine will download it once. The lab was run end to end before this lesson: it fails 0 of 5 at the start and passes 5 of 5 after the fixes; lab down leaves nothing behind. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. The parts, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: Maven mastery, one real job: fix and ship cart-core to Nexus https://youtu.be/Wre3xD-Hqh8
-Next: Gradle build, test and dependency inspection (MC11-O02).
+Next: Gradle Test and Dependencies: Fix a Failing Test, Read the Dependency Tree https://youtu.be/bt0hwLXN1Rc
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
