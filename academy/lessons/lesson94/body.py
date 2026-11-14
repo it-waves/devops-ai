@@ -1,0 +1,98 @@
+RB = 'REAL RECORDING  ·  real Central + real Nexus'
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('h1', "Eight Maven lessons. Today is the proof."),
+  c('h2', "Not a new tool. One real job, from a broken project to a published build, using everything you learned."),
+  c('h3', "Cart core does not compile. A test fails. The jar changes every time you build it. And it must reach a real Nexus, with a login."),
+  c('h4', "You will watch me do it, live, then you do it alone, and a checker judges your result."),
+  c('h5', "One honest note. The three problems are planted by me, the build, the repository and the checks are all real."),
+ ]),
+ ('skills', [
+  c('a1', "This is the mastery evidence for the Maven domain. Six skills, in one scenario."),
+  c('a2', "Read a failed build, and name the cause. Lesson ninety-two."),
+  c('a3', "Inspect the dependency tree, and fix a version. Lessons eighty-nine and ninety-one."),
+  c('a4', "Run the lifecycle, and let a test prove the code. Lesson eighty-six."),
+  c('a5', "Make the build reproducible, so the same input gives the same jar. Lesson eighty-seven."),
+  c('a6', "Publish to a repository manager, with the password outside every file. Lessons ninety and ninety-one."),
+  c('a7', "And document it: what you did, what went wrong, and how you clean up."),
+ ]),
+ ('live', [
+  k('p0', "Go into the project. Type: C D, slash opt, slash lab ninety-four, slash cart dash core."),
+  c('p1', "Put the Nexus password in a variable, from the locked file. Type: export C O R P underscore PASS equals dollar, parenthesis, cat, dot dot, slash pass dot text.", "Put the Nexus password into the variable corp pass, from the locked file. We need it for the end."),
+  k('p2', "List the folder. Type: L S."),
+  c('p2b', "A pom, a settings file, and the source. This is the project we ship."),
+  c('b1', "Step one. Build it, and show only the compile error. Type: M V N, dash B, clean package, and grep.", "Step one. Build it, and keep only the part that says which symbol Java cannot find."),
+  c('b1w', "Maven resolves the dependencies, then compiles."),
+  c('b1b', "Cannot find symbol. A method called truncate. The code is fine. The library we asked for may be too old."),
+  c('d1', "Look at the dependency tree, and keep the line about lang three. Type: M V N, dependency colon tree, and grep dash O.", "Look at the dependency tree, and keep only the name and version of commons lang three, with grep."),
+  c('d1b', "Commons lang three, version three point four. Truncate arrived later. The cause is the version."),
+  c('d2', "Fix the cause, with sed. Three point four becomes three, fourteen, zero. The dependency stays.", "Fix the cause. Replace three point four with three, fourteen, zero, with sed. The dependency stays."),
+  c('b2', "Build again, and keep the line that compares the two values.", "Build again, and keep the line that compares the expected value with the real one."),
+  c('b2w', "It compiles now. Then the tests run."),
+  c('b2b', "Expected Cloud, but was Clou. We moved forward: the code compiles, and a test proves a real bug."),
+  c('f1', "Fix the code, not the test. The code cuts four letters. It should cut five.", "Fix the code, not the test. The code keeps four letters. It should keep five."),
+  c('b3', "Build once more, and keep the test summary and the build line.", "Build once more, and keep the test summary and the build line."),
+  c('b3w', "The tests run again."),
+  c('b3b', "Tests run, one. Failures, zero. Build success. The tests prove it, and we never skipped one."),
+  c('r1', "Next, a harder question. Is this build reproducible? Build twice, and print the first sixteen letters of the checksum of the jar.", "Is this build reproducible? Build twice, and print the first sixteen letters of the checksum of the jar."),
+  c('r1w', "Two builds, two seconds apart."),
+  c('r1b', "Two different checksums, from the same source. Maven put the build time inside the jar. You cannot prove what you shipped."),
+  c('r2', "Fix it with one property: the output timestamp. A fixed date. Type: sed, and add it to the properties.", "Fix it with one property, the output timestamp, a fixed date, added to the properties of the pom."),
+  c('r3', "Same test again. Build twice, and print the checksums.", "Same test again. Build twice, and print the checksums."),
+  c('r3w', "Two builds, two seconds apart."),
+  c('r3b', "The same checksum twice. Same input, same jar. That is a reproducible build."),
+  c('u1', "Now publish. Build with the settings file, and keep only the name of the uploaded jar.", "Now publish. Deploy with the settings file, and keep only the name of the uploaded jar."),
+  c('u1w', "Maven builds, and uploads to Nexus with the login from the variable."),
+  c('u1b', "Uploaded. A snapshot of cart core, with its build number."),
+  c('u2', "Prove it from the server. Ask Nexus how many jars corp snapshots holds.", "Prove it from the server. Ask Nexus how many jars corp snapshots holds."),
+  c('u2b', "One. The server says it has our jar."),
+  c('u3', "Last proof. Does the password appear in any project file? Count it in the pom and the settings.", "Last proof. Does the password appear in any project file? Count it, in the pom and in the settings."),
+  c('u3b', "Zero in both. The password lived only in the environment. That is how you ship safely."),
+ ]),
+ ('task', [
+  c('k1', "Your mastery task. The same journey, on your own project."),
+  c('k2', "One: build it, read the first error, and fix the cause. Keep the dependency."),
+  c('k3', "Two: fix the code so the test passes. Do not edit the test, and do not skip it."),
+  c('k4', "Three: make the build reproducible. Two builds, the same checksum."),
+  c('k5', "Four: publish to Nexus. The password stays in the variable."),
+  c('k6', "Five: write report dot text. Result, trouble, and cleanup, in three lines."),
+ ]),
+ ('labinfo', [
+  c('i1', "Here is where to find everything. Pause on this screen if you need to write it down."),
+  c('i2', "The lab lives on git hub, at it dash waves, slash dev ops dash A I, in the folder academy, slash lab."),
+  c('i3', "Two files: lab ninety-four dot S H, and shortcuts ninety-four dot S H."),
+  c('i4', "Install it, in your Ubuntu virtual machine: sudo install, dash m seven five five, lab ninety-four dot S H, into slash usr, slash local, slash S bin."),
+  c('i5', "Load the short name with: source shortcuts ninety-four dot S H. Then you can type: lab up, lab check, and lab down."),
+  c('i6', "You need a J D K, Maven, curl and python three, about three gigabytes of memory, and an internet connection. The first lab up downloads Nexus, about five hundred megabytes."),
+  c('i7', "Lab down stops Nexus and removes everything. Only run it in your own virtual machine."),
+ ]),
+ ('rubric', [
+  c('q1', "Pass or fail. You need all six."),
+  c('q2', "Five pass lines in lab check."), c('q3', "You fixed the cause every time, never a symptom."),
+  c('q4', "No skip tests, and the test file is untouched."), c('q5', "Two builds give the same checksum."),
+  c('q6', "The password is in no file."), c('q7', "Report dot text tells the story, and lab down leaves nothing behind."), c('q8', "To pass, all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine."),
+  c('z2', "One: lab up, and read the task file."),
+  c('z3', "Two: build, and read only the first error."),
+  c('z4', "Three: fix the version, then the code, then the timestamp."),
+  c('z5', "Four: deploy, and check it in Nexus."),
+  c('z6', "Five: write report dot text, and lab check."),
+  c('z7', "Six: lab down, and prove nothing is left."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "Which tool shows you the version of a library you did not choose?"), c('f13', "Why must the build be reproducible?"),
+  c('f14', "Where does the password live?"), c('f15', "What goes in the report?"),
+  c('f16', "Domain mastery covered: M C ten, Maven."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next: Gradle, the other big build tool."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'a7': 0.5, 'k6': 0.5, 'i7': 0.5, 'q8': 0.5, 'z8': 14.0, 'f17': 10.0, 'b1w': 5.0, 'b2w': 6.0, 'b3w': 6.0, 'r1w': 14.0, 'r3w': 14.0, 'u1w': 10.0}
+import os as _os, json as _json
+_xp = '/home/claude/academy/lesson94/extra.json'
+if _os.path.exists(_xp): EXTRA.update(_json.load(open(_xp)))
+CHAP = {'skills': 'The six skills of Maven mastery', 'live': 'Live: ship cart-core, from broken to published', 'task': 'Your mastery task', 'labinfo': 'Where to find the lab', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}

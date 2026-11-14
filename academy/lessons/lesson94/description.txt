@@ -1,0 +1,24 @@
+Lesson 94 of the DevOps Engineering Bootcamp, the tenth and final lesson of Maven. One real job proves six skills: a project called cart-core is broken, and you fix it and ship it to a real Nexus repository. In one continuous terminal recording you read a failed build, find a version problem with the dependency tree, make a test pass, make the jar identical on every build, and deploy with a password kept outside the project files. Then you do the same job yourself in the lab.
+
+Chapters
+0:00 Maven mastery, one real job
+0:33 The six skills
+1:12 Live: ship cart-core, from broken to published
+5:16 Your lab task
+5:45 Where to find the lab
+6:42 Pass or fail rubric
+7:06 Your turn
+7:46 Recap
+
+Objectives covered: MC10 Mastery evidence (diagnose a failing build, fix a dependency version, pass a test, make a reproducible jar, publish to Nexus without a password in files, document the result)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab94.sh and shortcuts94.sh). Install with: sudo install -m 755 lab94.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts94.sh. You need an Ubuntu virtual machine with root, a JDK, Maven, python3 and curl (for example: sudo apt install -y openjdk-21-jdk-headless maven python3 curl), internet access and about 3 GB of free memory. The first lab up downloads Sonatype Nexus Repository Community Edition 3.98.1 from download.sonatype.com, starts it on port 8081 as a dedicated user, and sets a password for you (saved in /opt/lab94/pass.txt). lab down stops Nexus and removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal segment is a real recording against real Maven Central and a real Sonatype Nexus Repository Community Edition 3.98.1. I planted the three problems in cart-core myself so they would be repeatable. The skills, task, rubric and recap screens are labelled illustrations, not captures. The lab was run end to end before this lesson: it fails 0 of 5 at the start and passes 5 of 5 after the fixes; lab down leaves nothing behind. By running the lab you accept the Nexus Community Edition license, so read it first. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Maven Nexus Cleanup: Schedule Delete SNAPSHOT Task, Live on Real Nexus https://youtu.be/-OZkDeta8BY
+Next: Gradle, the second build tool.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #maven #nexus #reproduciblebuilds #devopsbootcamp #java

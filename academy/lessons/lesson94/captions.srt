@@ -1,0 +1,639 @@
+1
+00:00:00,500 --> 00:00:02,975
+Eight Maven lessons. Today is the proof.
+
+2
+00:00:03,525 --> 00:00:04,494
+Not a new tool.
+
+3
+00:00:04,494 --> 00:00:05,335
+One real job,
+
+4
+00:00:05,335 --> 00:00:08,114
+from a broken project to a published build,
+
+5
+00:00:08,114 --> 00:00:09,989
+using everything you learned.
+
+6
+00:00:10,539 --> 00:00:12,392
+Cart core does not compile.
+
+7
+00:00:12,392 --> 00:00:13,284
+A test fails.
+
+8
+00:00:13,284 --> 00:00:16,030
+The jar changes every time you build it.
+
+9
+00:00:16,030 --> 00:00:18,158
+And it must reach a real Nexus,
+
+10
+00:00:18,158 --> 00:00:19,051
+with a login.
+
+11
+00:00:19,601 --> 00:00:24,294
+You will watch me do it, live, then you do it alone, and a checker judges your result.
+
+12
+00:00:24,844 --> 00:00:25,868
+One honest note.
+
+13
+00:00:25,868 --> 00:00:28,236
+The three problems are planted by me,
+
+14
+00:00:28,236 --> 00:00:28,876
+the build,
+
+15
+00:00:28,876 --> 00:00:31,628
+the repository and the checks are all real.
+
+16
+00:00:33,178 --> 00:00:38,255
+This is the mastery evidence for the Maven domain. Six skills, in one scenario.
+
+17
+00:00:38,805 --> 00:00:42,219
+Read a failed build, and name the cause. Lesson ninety-two.
+
+18
+00:00:42,769 --> 00:00:47,782
+Inspect the dependency tree, and fix a version. Lessons eighty-nine and ninety-one.
+
+19
+00:00:48,332 --> 00:00:52,513
+Run the lifecycle, and let a test prove the code. Lesson eighty-six.
+
+20
+00:00:53,063 --> 00:00:58,589
+Make the build reproducible, so the same input gives the same jar. Lesson eighty-seven.
+
+21
+00:00:59,139 --> 00:01:01,290
+Publish to a repository manager,
+
+22
+00:01:01,290 --> 00:01:03,778
+with the password outside every file.
+
+23
+00:01:03,778 --> 00:01:05,795
+Lessons ninety and ninety-one.
+
+24
+00:01:06,345 --> 00:01:10,163
+And document it: what you did, what went wrong, and how you clean up.
+
+25
+00:01:12,213 --> 00:01:18,592
+Go into the project. Type: CD, slash opt, slash lab ninety-four, slash cart dash core.
+
+26
+00:01:19,142 --> 00:01:20,421
+Put the Nexus password in a variable,
+
+27
+00:01:20,421 --> 00:01:21,147
+from the locked file.
+
+28
+00:01:21,147 --> 00:01:22,911
+Type: export C O R P underscore PASS equals dollar,
+
+29
+00:01:22,911 --> 00:01:23,326
+parenthesis,
+
+30
+00:01:23,326 --> 00:01:23,464
+cat,
+
+31
+00:01:23,464 --> 00:01:23,741
+dot dot,
+
+32
+00:01:23,741 --> 00:01:24,432
+slash pass dot text.
+
+33
+00:01:24,982 --> 00:01:27,052
+List the folder. Type: L S.
+
+34
+00:01:27,602 --> 00:01:31,740
+A pom, a settings file, and the source. This is the project we ship.
+
+35
+00:01:32,290 --> 00:01:32,795
+Step one.
+
+36
+00:01:32,795 --> 00:01:33,300
+Build it,
+
+37
+00:01:33,300 --> 00:01:35,096
+and show only the compile error.
+
+38
+00:01:35,096 --> 00:01:35,770
+Type: M V N,
+
+39
+00:01:35,770 --> 00:01:36,162
+dash B,
+
+40
+00:01:36,162 --> 00:01:36,948
+clean package,
+
+41
+00:01:36,948 --> 00:01:37,453
+and grep.
+
+42
+00:01:39,703 --> 00:01:42,796
+Maven resolves the dependencies, then compiles.
+
+43
+00:01:48,346 --> 00:01:49,635
+Cannot find symbol.
+
+44
+00:01:49,635 --> 00:01:51,330
+A method called truncate.
+
+45
+00:01:51,330 --> 00:01:52,482
+The code is fine.
+
+46
+00:01:52,482 --> 00:01:55,194
+The library we asked for may be too old.
+
+47
+00:01:55,744 --> 00:01:56,802
+Look at the dependency tree,
+
+48
+00:01:56,802 --> 00:01:58,123
+and keep the line about lang three.
+
+49
+00:01:58,123 --> 00:01:58,576
+Type: M V N,
+
+50
+00:01:58,576 --> 00:01:59,407
+dependency colon tree,
+
+51
+00:01:59,407 --> 00:02:00,011
+and grep dash O.
+
+52
+00:02:02,161 --> 00:02:03,351
+Commons lang three,
+
+53
+00:02:03,351 --> 00:02:04,916
+version three point four.
+
+54
+00:02:04,916 --> 00:02:06,356
+Truncate arrived later.
+
+55
+00:02:06,356 --> 00:02:07,921
+The cause is the version.
+
+56
+00:02:08,471 --> 00:02:09,401
+Fix the cause,
+
+57
+00:02:09,401 --> 00:02:09,998
+with sed.
+
+58
+00:02:09,998 --> 00:02:12,056
+Three point four becomes three,
+
+59
+00:02:12,056 --> 00:02:12,654
+fourteen,
+
+60
+00:02:12,654 --> 00:02:12,986
+zero.
+
+61
+00:02:12,986 --> 00:02:14,380
+The dependency stays.
+
+62
+00:02:15,530 --> 00:02:20,309
+Build again, and keep the line that compares the two values.
+
+63
+00:02:20,859 --> 00:02:23,056
+It compiles now. Then the tests run.
+
+64
+00:02:29,606 --> 00:02:30,584
+Expected Cloud,
+
+65
+00:02:30,584 --> 00:02:31,430
+but was Clou.
+
+66
+00:02:31,430 --> 00:02:33,776
+We moved forward: the code compiles,
+
+67
+00:02:33,776 --> 00:02:35,665
+and a test proves a real bug.
+
+68
+00:02:36,215 --> 00:02:40,482
+Fix the code, not the test. The code cuts four letters. It should cut five.
+
+69
+00:02:42,732 --> 00:02:45,910
+Build once more, and keep the test summary and the build line.
+
+70
+00:02:49,060 --> 00:02:50,298
+The tests run again.
+
+71
+00:02:56,848 --> 00:02:57,550
+Tests run,
+
+72
+00:02:57,550 --> 00:02:57,830
+one.
+
+73
+00:02:57,830 --> 00:02:58,462
+Failures,
+
+74
+00:02:58,462 --> 00:02:58,813
+zero.
+
+75
+00:02:58,813 --> 00:02:59,796
+Build success.
+
+76
+00:02:59,796 --> 00:03:01,130
+The tests prove it,
+
+77
+00:03:01,130 --> 00:03:02,885
+and we never skipped one.
+
+78
+00:03:03,435 --> 00:03:03,672
+Next,
+
+79
+00:03:03,672 --> 00:03:04,526
+a harder question.
+
+80
+00:03:04,526 --> 00:03:05,807
+Is this build reproducible?
+
+81
+00:03:05,807 --> 00:03:06,377
+Build twice,
+
+82
+00:03:06,377 --> 00:03:09,366
+and print the first sixteen letters of the checksum of the jar.
+
+83
+00:03:13,316 --> 00:03:15,086
+Two builds, two seconds apart.
+
+84
+00:03:29,636 --> 00:03:31,035
+Two different checksums,
+
+85
+00:03:31,035 --> 00:03:32,258
+from the same source.
+
+86
+00:03:32,258 --> 00:03:34,589
+Maven put the build time inside the jar.
+
+87
+00:03:34,589 --> 00:03:36,570
+You cannot prove what you shipped.
+
+88
+00:03:37,120 --> 00:03:39,854
+Fix it with one property: the output timestamp.
+
+89
+00:03:39,854 --> 00:03:40,611
+A fixed date.
+
+90
+00:03:40,611 --> 00:03:41,192
+Type: sed,
+
+91
+00:03:41,192 --> 00:03:42,880
+and add it to the properties.
+
+92
+00:03:48,030 --> 00:03:51,294
+Same test again. Build twice, and print the checksums.
+
+93
+00:03:57,944 --> 00:03:59,714
+Two builds, two seconds apart.
+
+94
+00:04:14,264 --> 00:04:19,470
+The same checksum twice. Same input, same jar. That is a reproducible build.
+
+95
+00:04:20,020 --> 00:04:25,246
+Now publish. Build with the settings file, and keep only the name of the uploaded jar.
+
+96
+00:04:29,296 --> 00:04:33,499
+Maven builds, and uploads to Nexus with the login from the variable.
+
+97
+00:04:44,049 --> 00:04:47,206
+Uploaded. A snapshot of cart core, with its build number.
+
+98
+00:04:47,756 --> 00:04:52,322
+Prove it from the server. Ask Nexus how many jars corp snapshots holds.
+
+99
+00:05:00,572 --> 00:05:02,684
+One. The server says it has our jar.
+
+100
+00:05:03,234 --> 00:05:03,887
+Last proof.
+
+101
+00:05:03,887 --> 00:05:06,561
+Does the password appear in any project file?
+
+102
+00:05:06,561 --> 00:05:08,759
+Count it in the pom and the settings.
+
+103
+00:05:09,309 --> 00:05:14,621
+Zero in both. The password lived only in the environment. That is how you ship safely.
+
+104
+00:05:16,171 --> 00:05:19,606
+Your mastery task. The same journey, on your own project.
+
+105
+00:05:20,156 --> 00:05:24,550
+One: build it, read the first error, and fix the cause. Keep the dependency.
+
+106
+00:05:25,100 --> 00:05:29,708
+Two: fix the code so the test passes. Do not edit the test, and do not skip it.
+
+107
+00:05:30,258 --> 00:05:34,248
+Three: make the build reproducible. Two builds, the same checksum.
+
+108
+00:05:34,798 --> 00:05:38,403
+Four: publish to Nexus. The password stays in the variable.
+
+109
+00:05:38,953 --> 00:05:43,753
+Five: write report dot text. Result, trouble, and cleanup, in three lines.
+
+110
+00:05:45,803 --> 00:05:50,006
+Here is where to find everything. Pause on this screen if you need to write it down.
+
+111
+00:05:50,556 --> 00:05:52,255
+The lab lives on git hub,
+
+112
+00:05:52,255 --> 00:05:53,410
+at it dash waves,
+
+113
+00:05:53,410 --> 00:05:54,973
+slash dev ops dash A I,
+
+114
+00:05:54,973 --> 00:05:56,468
+in the folder academy,
+
+115
+00:05:56,468 --> 00:05:57,148
+slash lab.
+
+116
+00:05:57,698 --> 00:06:02,732
+Two files: lab ninety-four dot S H, and shortcuts ninety-four dot S H.
+
+117
+00:06:03,282 --> 00:06:04,152
+Install it,
+
+118
+00:06:04,152 --> 00:06:07,708
+in your Ubuntu virtual machine: sudo install,
+
+119
+00:06:07,708 --> 00:06:09,525
+dash m seven five five,
+
+120
+00:06:09,525 --> 00:06:11,422
+lab ninety-four dot S H,
+
+121
+00:06:11,422 --> 00:06:12,607
+into slash usr,
+
+122
+00:06:12,607 --> 00:06:13,555
+slash local,
+
+123
+00:06:13,555 --> 00:06:14,504
+slash S bin.
+
+124
+00:06:15,054 --> 00:06:19,218
+Load the short name with: source shortcuts ninety-four dot S H.
+
+125
+00:06:19,218 --> 00:06:20,936
+Then you can type: lab up,
+
+126
+00:06:20,936 --> 00:06:21,597
+lab check,
+
+127
+00:06:21,597 --> 00:06:22,456
+and lab down.
+
+128
+00:06:23,006 --> 00:06:24,190
+You need a J D K,
+
+129
+00:06:24,190 --> 00:06:24,608
+Maven,
+
+130
+00:06:24,608 --> 00:06:26,141
+curl and python three,
+
+131
+00:06:26,141 --> 00:06:28,370
+about three gigabytes of memory,
+
+132
+00:06:28,370 --> 00:06:30,250
+and an internet connection.
+
+133
+00:06:30,250 --> 00:06:32,549
+The first lab up downloads Nexus,
+
+134
+00:06:32,549 --> 00:06:34,569
+about five hundred megabytes.
+
+135
+00:06:35,119 --> 00:06:40,538
+Lab down stops Nexus and removes everything. Only run it in your own virtual machine.
+
+136
+00:06:42,588 --> 00:06:44,657
+Pass or fail. You need all six.
+
+137
+00:06:45,207 --> 00:06:47,021
+Five pass lines in lab check.
+
+138
+00:06:47,571 --> 00:06:50,216
+You fixed the cause every time, never a symptom.
+
+139
+00:06:50,766 --> 00:06:53,689
+No skip tests, and the test file is untouched.
+
+140
+00:06:54,239 --> 00:06:55,988
+Two builds give the same checksum.
+
+141
+00:06:56,538 --> 00:06:58,138
+The password is in no file.
+
+142
+00:06:58,688 --> 00:07:02,933
+Report dot text tells the story, and lab down leaves nothing behind.
+
+143
+00:07:03,483 --> 00:07:04,785
+To pass, all six.
+
+144
+00:07:06,835 --> 00:07:09,672
+Your turn, in your own Ubuntu virtual machine.
+
+145
+00:07:10,222 --> 00:07:12,313
+One: lab up, and read the task file.
+
+146
+00:07:12,863 --> 00:07:15,338
+Two: build, and read only the first error.
+
+147
+00:07:15,888 --> 00:07:19,130
+Three: fix the version, then the code, then the timestamp.
+
+148
+00:07:19,680 --> 00:07:21,835
+Four: deploy, and check it in Nexus.
+
+149
+00:07:22,385 --> 00:07:25,158
+Five: write report dot text, and lab check.
+
+150
+00:07:25,708 --> 00:07:28,290
+Six: lab down, and prove nothing is left.
+
+151
+00:07:28,840 --> 00:07:30,674
+Pause the video, and begin now.
+
+152
+00:07:46,224 --> 00:07:47,099
+Quick check.
+
+153
+00:07:47,649 --> 00:07:50,934
+Which tool shows you the version of a library you did not choose?
+
+154
+00:07:51,484 --> 00:07:53,575
+Why must the build be reproducible?
+
+155
+00:07:54,125 --> 00:07:55,554
+Where does the password live?
+
+156
+00:07:56,104 --> 00:07:57,491
+What goes in the report?
+
+157
+00:07:58,041 --> 00:08:01,070
+Domain mastery covered: M C ten, Maven.
+
+158
+00:08:01,620 --> 00:08:03,689
+Pause the video, and answer out loud.
+
+159
+00:08:14,239 --> 00:08:16,778
+Next: Gradle, the other big build tool.
+
+160
+00:08:17,328 --> 00:08:20,656
+If this helped, like, share and subscribe, so you do not miss it.
