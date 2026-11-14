@@ -3,7 +3,8 @@ def s_hook(C, D, dur):
     E.append(Pop(card(700, 140, ACC, 'mvn deploy', [('upload to the shared repo', TXT)], 46, 30), 100, 300, C['h2']))
     E.append(Pop(card(700, 140, WARN, 'snapshot or release', [('two kinds of version', TXT)], 46, 30), 100, 480, C['h3']))
     E.append(Pop(card(760, 180, BAD, 'HTTP 409', [('release already exists', TXT)], 52, 40), 900, 440, C['h4']))
-    E.append(takeaway('Publish once. Never overwrite a release.', 900, C['h4'] + 1.5, GOOD, 1700)); return E
+    E.append(Pop(card(1100, 140, VIO, 'CloudCart v0  ·  cart-core', [('one module becomes a shared package', TXT)], 46, 30), 100, 660, C['h6']))
+    E.append(takeaway('Publish once. Never overwrite a release.', 900, C['h6'] + 1.0, GOOD, 1700)); return E
 def _list(title, sub, first, items, take=None, tcid=None, h=130, w=1700, y0=330, gap=150):
     def f(C, D, dur):
         E = head(title, sub, C[first])
@@ -16,19 +17,19 @@ s_rule = _list('Why a release is immutable', 'Same version, same code. Always.',
 def s_task(C, D, dur):
     E = head('Your lab task', 'lab91.sh: a project and a repo that takes uploads. lab check judges you.', C['k1']); E.append(ill(C['k1'] + 0.2, 1400, 170))
     E.append(Pop(card(1700, 100, ACC, '', [], 4), 100, 330, C['k2'])); E.append(El(T('github.com/it-waves/devops-ai   ›   academy/lab/lab91.sh', 'mono', 32, TXT, align='left'), 140, 360, C['k2'] + 0.3, anim='fade'))
-    steps = [('1  Snapshot', [('export CORP_PASS', TXT), ('mvn -s ... deploy', TXT)], 'k3', ACC), ('2  Release', [('version 1.0.0', TXT), ('deploy', TXT)], 'k4', VIO), ('3  Again', [('deploy fails 409', TXT), ('conflict.txt', TXT)], 'k5', BAD), ('4  Next', [('version 1.0.1', TXT), ('deploy', TXT)], 'k6', GOOD), ('5  why.txt', [('one sentence', TXT), ('word: release', TXT)], 'k7', PINK), ('6  Check', [('lab check', TXT), ('then lab down', TXT)], 'k8', WARN)]
+    steps = [('1  Repos (UI)', [('corp-snapshots', TXT), ('corp-releases', TXT)], 'k3', ACC), ('2  Snapshot', [('export CORP_PASS', TXT), ('mvn -s ... deploy', TXT)], 'k4', VIO), ('3  Release', [('version 1.0.0', TXT), ('deploy', TXT)], 'k5', GOOD), ('4  Again', [('409: conflict.txt', TXT), ('event id: ui.txt', TXT)], 'k6', BAD), ('5  Next + why', [('1.0.1, deploy', TXT), ('why.txt', TXT)], 'k7', PINK), ('6  Check', [('lab check', TXT), ('then lab down', TXT)], 'k8', WARN)]
     for i, (n, ls, cid, col) in enumerate(steps): E.append(Pop(card(540, 190 if len(ls) < 3 else 240, col, n, ls, 40, 28), 100 + (i % 3) * 590, 470 + (i // 3) * 270, C[cid]))
     return E
 def s_rubric(C, D, dur):
     E = head('Pass or fail rubric', 'Six points. All six to pass.', C['q1'])
-    items = [('Five PASS lines', 'q2'), ('Snapshot vs release', 'q3'), ('Why 409 happens', 'q4'), ('Fix = new version', 'q5'), ('No password in files', 'q6'), ('lab down, nothing left', 'q7')]
+    items = [('Five PASS lines', 'q2'), ('Snapshot vs release', 'q3'), ('Why 409 happens', 'q4'), ('Fix = new version', 'q5'), ('Repos made in the UI', 'q6'), ('lab down, nothing left', 'q7')]
     for i, (n, cid) in enumerate(items):
         x = 100 + (i % 2) * 880; y = 340 + (i // 2) * 170
         E.append(Pop(card(840, 140, [ACC, VIO, GOOD, WARN, PINK, ACC][i], '', [(f'{i + 1}   {n}', TXT)], 4, 34), x, y, C[cid])); E.append(Pop(icon('check', 48, TXT, GOOD), x + 770, y + 46, C[cid] + 0.4))
     E.append(Pop(badge('Pass = all six', F('x', 48), INK, GOOD, padx=34, pady=16, r=30), 100, 870, C['q8'])); return E
 def s_yourturn(C, D, dur):
     E = head('Your turn', 'Your own VM only. Slow and exact.', C['z1'])
-    it = [('1  Start', 'lab up, read the task file', PINK, 'z2'), ('2  Snapshot', 'deploy 1.0.0-SNAPSHOT', ACC, 'z3'), ('3  Release', 'deploy, again, save 409', VIO, 'z4'), ('4  Next', 'publish 1.0.1', WARN, 'z5'), ('5  Explain, check', 'why.txt, then lab check', BAD, 'z6'), ('6  Clean up', 'lab down, prove it', GOOD, 'z7')]
+    it = [('1  Start', 'lab up, read the task file', PINK, 'z2'), ('2  Repos (UI)', 'create both in the web page', ACC, 'z3'), ('3  Deploy', 'snapshot, then release', VIO, 'z4'), ('4  Again', '409, event id in ui.txt', WARN, 'z5'), ('5  Next + check', '1.0.1, why.txt, lab check', BAD, 'z6'), ('6  Clean up', 'lab down, prove it', GOOD, 'z7')]
     grid6(E, C, it)
     E.append(Pop(badge('PAUSE  ·  do it before you continue', F('b', 38), INK, PINK, padx=30, pady=16), 100, 880, C['z8'])); return E
 def s_recap(C, D, dur):
@@ -41,7 +42,7 @@ def s_recap(C, D, dur):
     pb = badge('PAUSE  ·  answer aloud', F('b', 34), INK, PINK, padx=26, pady=14); E.append(Pop(pb, 100, 860, C['f17']))
     E.append(El(T('Next: diagnose build failures', 'x', 46, ACC, maxw=1700), 100, 960, C['f18'])); E.append(Pop(badge('LIKE  ·  SHARE  ·  SUBSCRIBE', F('b', 34), INK, GOOD, padx=26, pady=14), 100 + pb.width + 40, 860, C['f19']))
     return E
-s_deploy = _lab('Live: deploy snapshot, release, 409', 'Upload twice, publish a release, break the rule.', 'd0', RB, [('d1', 'pom.xml', 'two upload addresses, id corp', ACC), ('d3', 'deploy snapshot', 'one jar with a timestamp', VIO), ('d4', 'deploy again', 'two jars, no refusal', GOOD), ('d5', 'version 1.0.0', 'no SNAPSHOT: a release', WARN), ('d6', 'deploy release', 'published', GOOD), ('d7', 'deploy it again', '409 Conflict', BAD)])
+s_deploy = _lab('Live: create repos in the UI, deploy, 409', 'A browser and a terminal, one continuous recording.', 'u0', RB, [('u2', 'web UI: log in', 'create repository', ACC), ('u3', 'corp-snapshots', 'snapshot, allow redeploy', WARN), ('u5', 'corp-releases', 'release, disable redeploy', GOOD), ('d4', 'mvn deploy', 'snapshot twice, release once', VIO), ('d7', 'deploy again', '409 Conflict', BAD), ('v3', 'web UI: package', 'builds, checksums, events', ACC)])
 FN = dict(hook=s_hook, what=s_what, rule=s_rule, deploy=s_deploy, task=s_task, rubric=s_rubric, yourturn=s_yourturn, recap=s_recap)
 _GL = dict(what=('link', ACC), rule=('test', BAD), task=('test', GOOD), rubric=('test', GOOD), yourturn=('board', VIO))
 def _wrap(name, fn):

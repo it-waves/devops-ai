@@ -18,7 +18,6 @@ mount -t proc proc $R/proc; mount --rbind /dev $R/dev; mount --rbind /sys $R/sys
 S=$(cat /tmp/lstage 2>/dev/null)
 hostname lab; echo '127.0.0.1 lab' >> $E/hosts
 sed -i 's/^student:[^:]*:/student:*:/' $E/shadow
-ip link set lo up
 mount -t tmpfs tmpfs $R/usr/local/sbin
 mount -t tmpfs tmpfs $R/usr/local/bin
 ln -s /usr/bin/python3.12 $R/usr/local/bin/python3; ln -s /usr/bin/python3.12 $R/usr/local/bin/python
@@ -28,12 +27,13 @@ ln -sf /opt/maven/bin/mvn $R/usr/local/bin/mvn
 rm -rf /home/student/.m2 /home/student/demo; mkdir -p /home/student/.m2; cp /home/claude/academy/lesson91/settings.xml.src /home/student/.m2/settings.xml; chown -R student /home/student/.m2
 cp -r /home/claude/academy/lesson91/files/demo $R/tmp/demo91; chmod -R a+rX $R/tmp/demo91
 $SU sh -c 'mkdir -p ~/demo && cp -r /tmp/demo91/. ~/demo/'
-mkdir -p /home/student/store/snapshots /home/student/store/releases; chown -R student /home/student/store
+mkdir -p /home/student/store; chown -R student /home/student/store
 printf 'corp-7q4m2\n' > /home/student/.corp-pass; chmod 600 /home/student/.corp-pass; chown student /home/student/.corp-pass
 cp /home/claude/academy/lesson91/srv.py $R/tmp/srv.py; chmod a+r $R/tmp/srv.py
 printf '<settings><mirrors><mirror><id>offline-pkg</id><mirrorOf>external:*</mirrorOf><url>file:///opt/m2mirror</url></mirror></mirrors></settings>\n' > $E/gs91.xml
 printf '%s\n' 'export MAVEN_ARGS="-gs /etc/gs91.xml"' >> $E/ps1rc
 $SU sh -c 'nohup python3 /tmp/srv.py ~/store dev "$(cat ~/.corp-pass)" 8082 >/dev/null 2>&1 &'
 sleep 1
-case $S in deploy) $SU sh -c 'export MAVEN_ARGS="-gs /etc/gs91.xml"; cp -r ~/demo /tmp/warm && cd /tmp/warm && REPO_PASS=$(cat ~/.corp-pass) mvn -B -q deploy >/dev/null 2>&1; rm -rf /tmp/warm ~/.m2/repository/com/cloudcart ~/store/snapshots/* ~/store/releases/*' ;; esac
+case $S in deploy) $SU sh -c 'export MAVEN_ARGS="-gs /etc/gs91.xml"; cp -r ~/demo /tmp/warm && cd /tmp/warm && P=$(cat ~/.corp-pass); curl -s -c /tmp/cj -o /dev/null -d "u=dev&p=$P" localhost:8082/ui/login; curl -s -b /tmp/cj -o /dev/null -d "name=corp-snapshots&type=snapshot&policy=allow" localhost:8082/ui/create; REPO_PASS=$P mvn -B -q deploy >/dev/null 2>&1; rm -rf /tmp/warm ~/.m2/repository/com/cloudcart; rm -rf ~/store/* ~/store/.[a-z]*' ;; esac
+touch /home/student/.ready; chown student /home/student/.ready
 exec chroot $R "$@"
