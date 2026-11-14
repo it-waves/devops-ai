@@ -1,0 +1,16 @@
+Install the lab (needs an Ubuntu virtual machine with root, a JDK, Maven, unzip and internet access to Maven Central for the build plugins):
+  sudo apt install -y openjdk-21-jdk-headless maven unzip
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab89.sh /usr/local/sbin/
+  source shortcuts89.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab89: two tiny libraries in a local repo, a web project that builds a jar, and TASKS.txt
+  lab check               # five FAIL lines at the start; your goal is five PASS lines
+  lab down                # cleanup when finished
+Without the shortcut, use: sudo lab89.sh up | check | down
+Your five tasks (inside /opt/lab89/shop; also written in /opt/lab89/TASKS.txt):
+  1 packaging  war, and finalName cloudcart
+  2 build      mvn -B clean package ends in BUILD SUCCESS and makes target/cloudcart.war
+  3 contents   unzip -l target/cloudcart.war > contents.txt (index.html, WEB-INF/web.xml, Cart.class)
+  4 libraries  util 2.0 inside the WAR; liba with scope provided, so not inside
+  5 why        why.txt: one sentence with the words provided and server (or container)
+Run it only in your own virtual machine. lab down removes /opt/lab89; remove the installed script with: sudo rm /usr/local/sbin/lab89.sh

@@ -1,0 +1,25 @@
+Lesson 89 of the DevOps Engineering Bootcamp, the fifth lesson of Maven. A jar is not something you can hand to a web server. You learn what a WAR (web archive) is and how a servlet container such as Tomcat uses it, how to change one line in the pom (the packaging) to build it, and the strict layout inside: public pages on top, the private WEB-INF folder with web.xml, your compiled classes and the lib folder of library jars. You also learn the difference between compile and provided scope, why a library the server already supplies must stay out of the WAR, and how to prove what is inside with unzip. In the live demo you build a jar, switch to a WAR, list its contents, mark a library provided and see it disappear. Then you do it yourself: five checks, all must pass.
+
+Chapters
+0:00 We cannot deploy a jar
+0:36 What is a WAR
+1:05 Inside a WAR
+1:37 Compile vs provided
+2:06 Live: build and inspect a WAR
+3:43 Your lab task
+4:39 Pass or fail rubric
+5:02 Your turn
+5:41 Quick check
+
+Objectives covered: MC10-O05 (package as a WAR and verify contents)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab89.sh and shortcuts89.sh). Install with: sudo install -m 755 lab89.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts89.sh (without it, use sudo lab89.sh up, check, down). You need an Ubuntu virtual machine with root, a JDK, Maven and unzip (for example: sudo apt install -y openjdk-21-jdk-headless maven unzip) and internet access to Maven Central for the build plugins. The lab writes two tiny libraries into a local folder and a small web project into /opt/lab89; lab down removes the folder. Only run it in your own virtual machine.
+
+Honest notes: the terminal segments are real recordings on Ubuntu 24.04 with Maven 3.9.11 and OpenJDK 21. My recording computer cannot reach Maven Central, so the plugins (including the WAR plugin 3.3.2) came from a local copy built from Ubuntu's packaged Maven files, and the libraries (util and liba) are tiny ones I made in a local folder; on a normal machine Maven downloads the plugins from Central. I did not deploy the WAR to a server in this lesson: it covers building it and checking its contents, and the page and web.xml are minimal. The ideas, task, rubric and quiz screens are labelled illustrations, not captures. The lab was run end to end before this lesson: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing behind. On your machine the plugins download from Maven Central, which I could not test, and only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Maven Dependency Trees and Version Conflicts Explained https://youtu.be/SPowiHbCCZ8
+Next: Maven repository mirrors and credentials.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #maven #java #war #devopsbootcamp

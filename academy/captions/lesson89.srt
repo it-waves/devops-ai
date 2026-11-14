@@ -1,0 +1,459 @@
+1
+00:00:00,500 --> 00:00:05,556
+You built a jar. You gave it to the operations team. They said, we cannot deploy that.
+
+2
+00:00:06,106 --> 00:00:08,230
+A web application is not a jar.
+
+3
+00:00:08,230 --> 00:00:11,588
+A server like tomcat expects a different package,
+
+4
+00:00:11,588 --> 00:00:11,999
+a war,
+
+5
+00:00:11,999 --> 00:00:13,850
+with a fixed layout inside.
+
+6
+00:00:14,400 --> 00:00:19,712
+Today you package cloud cart as a war, open it up, and check exactly what is inside.
+
+7
+00:00:20,262 --> 00:00:23,441
+Then you decide which libraries go in, and which stay out.
+
+8
+00:00:23,991 --> 00:00:25,011
+One honest note.
+
+9
+00:00:25,011 --> 00:00:28,134
+My recording computer cannot reach Maven Central,
+
+10
+00:00:28,134 --> 00:00:31,193
+so the libraries come from a small local folder.
+
+11
+00:00:31,193 --> 00:00:34,508
+The commands and the contents are what you will see.
+
+12
+00:00:36,058 --> 00:00:40,517
+A war is a web archive. It is a zip file, with the extension dot war.
+
+13
+00:00:41,067 --> 00:00:43,167
+You hand it to a servlet container,
+
+14
+00:00:43,167 --> 00:00:44,067
+such as tomcat.
+
+15
+00:00:44,067 --> 00:00:46,827
+The container unpacks it and serves your site.
+
+16
+00:00:47,377 --> 00:00:48,852
+A jar holds classes.
+
+17
+00:00:48,852 --> 00:00:52,023
+A war holds a whole web application: pages,
+
+18
+00:00:52,023 --> 00:00:52,687
+settings,
+
+19
+00:00:52,687 --> 00:00:54,310
+classes and libraries.
+
+20
+00:00:54,860 --> 00:00:59,831
+In Maven you do not run a new tool. You change one line in the pom: the packaging.
+
+21
+00:01:00,381 --> 00:01:03,943
+Packaging jar, makes a jar. Packaging war, makes a war.
+
+22
+00:01:05,993 --> 00:01:09,726
+A war has a strict layout. The container expects it exactly.
+
+23
+00:01:10,276 --> 00:01:15,012
+Files in the top folder, like index dot H T M L, are public pages.
+
+24
+00:01:15,562 --> 00:01:19,040
+The folder web inf is private. Browsers can never reach it.
+
+25
+00:01:19,590 --> 00:01:21,894
+Inside web inf: web dot X M L,
+
+26
+00:01:21,894 --> 00:01:22,892
+the settings.
+
+27
+00:01:22,892 --> 00:01:23,506
+Classes,
+
+28
+00:01:23,506 --> 00:01:24,966
+your compiled code.
+
+29
+00:01:24,966 --> 00:01:25,580
+And lib,
+
+30
+00:01:25,580 --> 00:01:26,886
+the library jars.
+
+31
+00:01:27,436 --> 00:01:31,560
+Maven builds this layout for you from your source folders: source,
+
+32
+00:01:31,560 --> 00:01:31,872
+main,
+
+33
+00:01:31,872 --> 00:01:32,310
+webapp,
+
+34
+00:01:32,310 --> 00:01:35,372
+plus your compiled classes and your dependencies.
+
+35
+00:01:37,422 --> 00:01:40,473
+Which libraries go in the war? That depends on the scope.
+
+36
+00:01:41,023 --> 00:01:46,996
+Compile scope, the default. Needed to build and to run. Maven copies it into web inf lib.
+
+37
+00:01:47,546 --> 00:01:53,114
+Provided scope. Needed to build, but the server already has it. Maven does not package it.
+
+38
+00:01:53,664 --> 00:01:56,032
+A classic example is the servlet API.
+
+39
+00:01:56,032 --> 00:01:57,696
+The container supplies it.
+
+40
+00:01:57,696 --> 00:01:59,360
+If you pack your own copy,
+
+41
+00:01:59,360 --> 00:02:00,960
+you can break the server.
+
+42
+00:02:01,510 --> 00:02:04,859
+So the rule: when the server supplies it, mark it provided.
+
+43
+00:02:06,909 --> 00:02:10,066
+Go to the demo project. Type: CD, demo.
+
+44
+00:02:10,616 --> 00:02:17,187
+First, build it as it is. Type: mvn -B -q clean package && ls target
+
+45
+00:02:17,317 --> 00:02:19,557
+Quiet mode, so only problems print.
+
+46
+00:02:26,107 --> 00:02:31,952
+A jar. Cart web, one point zero point zero, dot jar. Not deployable on a server.
+
+47
+00:02:32,502 --> 00:02:36,470
+Change the packaging. Type: sed -i 's/<packaging>jar/<packaging>war/' pom.xml
+
+48
+00:02:37,500 --> 00:02:43,794
+Name the file. Type: sed -i '/<build>/a  <finalName>cloudcart</finalName>' pom.xml
+
+49
+00:02:43,924 --> 00:02:45,822
+Build again. Type: mvn -B -q clean package && ls target
+
+50
+00:02:47,952 --> 00:02:49,531
+Same command as before.
+
+51
+00:02:56,081 --> 00:03:00,412
+Now there is a cloud cart dot war. And a folder with the unpacked version.
+
+52
+00:03:00,962 --> 00:03:05,890
+Look inside. Type: unzip -Z1 target/cloudcart.war | grep -v '/$'
+
+53
+00:03:06,020 --> 00:03:06,662
+The page,
+
+54
+00:03:06,662 --> 00:03:07,447
+at the top.
+
+55
+00:03:07,447 --> 00:03:09,303
+In web inf: web dot X M L,
+
+56
+00:03:09,303 --> 00:03:11,016
+the compiled cart class,
+
+57
+00:03:11,016 --> 00:03:13,870
+and two jars in lib: you till and lib A.
+
+58
+00:03:14,420 --> 00:03:15,988
+But lib A is supplied by the server.
+
+59
+00:03:15,988 --> 00:03:16,729
+Mark it provided.
+
+60
+00:03:16,729 --> 00:03:19,647
+Type: sed -i '/<artifactId>liba/a  <scope>provided</scope>' pom.xml
+
+61
+00:03:20,777 --> 00:03:21,438
+Rebuild and list again.
+
+62
+00:03:21,438 --> 00:03:23,678
+Type: mvn -B -q clean package && unzip -Z1 target/cloudcart.war | grep -v '/$'
+
+63
+00:03:27,608 --> 00:03:28,568
+Almost done.
+
+64
+00:03:36,118 --> 00:03:36,966
+Lib A is gone.
+
+65
+00:03:36,966 --> 00:03:38,601
+Only you till stays in lib.
+
+66
+00:03:38,601 --> 00:03:39,752
+The war is smaller,
+
+67
+00:03:39,752 --> 00:03:41,750
+and cannot clash with the server.
+
+68
+00:03:43,300 --> 00:03:44,193
+Your lab task.
+
+69
+00:03:44,193 --> 00:03:47,637
+Lab eighty-nine gives you a project that builds a jar.
+
+70
+00:03:47,637 --> 00:03:49,359
+Lab check judges your work.
+
+71
+00:03:49,909 --> 00:03:52,064
+It lives at git hub dot com,
+
+72
+00:03:52,064 --> 00:03:53,604
+slash it dash waves,
+
+73
+00:03:53,604 --> 00:03:55,375
+slash dev ops dash A I,
+
+74
+00:03:55,375 --> 00:03:56,222
+in academy,
+
+75
+00:03:56,222 --> 00:03:56,530
+lab,
+
+76
+00:03:56,530 --> 00:03:58,378
+lab eighty-nine dot S H.
+
+77
+00:03:58,928 --> 00:04:02,832
+One: set the packaging to war, and the final name to cloud cart.
+
+78
+00:04:03,382 --> 00:04:07,649
+Two: M V N clean package must make target, cloud cart dot war.
+
+79
+00:04:08,199 --> 00:04:13,212
+Three: save the contents of the war into contents dot text, with unzip dash l.
+
+80
+00:04:13,762 --> 00:04:18,946
+Four: you till must be inside the war. Lib A must not be, so give it provided scope.
+
+81
+00:04:19,496 --> 00:04:21,995
+Five: one sentence in why dot text,
+
+82
+00:04:21,995 --> 00:04:24,780
+about why a provided library stays out.
+
+83
+00:04:24,780 --> 00:04:26,422
+Use the words provided,
+
+84
+00:04:26,422 --> 00:04:28,136
+and server or container.
+
+85
+00:04:28,686 --> 00:04:29,863
+Install a J D K,
+
+86
+00:04:29,863 --> 00:04:31,481
+Maven and unzip first.
+
+87
+00:04:31,481 --> 00:04:32,364
+Then lab up,
+
+88
+00:04:32,364 --> 00:04:33,100
+lab check,
+
+89
+00:04:33,100 --> 00:04:34,056
+and lab down.
+
+90
+00:04:34,056 --> 00:04:37,219
+The shortcut file is shortcuts eighty-nine.
+
+91
+00:04:39,269 --> 00:04:41,338
+Pass or fail. You need all six.
+
+92
+00:04:41,888 --> 00:04:43,702
+Five pass lines in lab check.
+
+93
+00:04:44,252 --> 00:04:46,769
+You can explain what a war is, and what is in it.
+
+94
+00:04:47,319 --> 00:04:50,754
+You can state the layout: pages on top, web inf private.
+
+95
+00:04:51,304 --> 00:04:53,885
+You can explain compile and provided scope.
+
+96
+00:04:54,435 --> 00:04:56,312
+You can list the contents with unzip.
+
+97
+00:04:56,862 --> 00:04:58,782
+lab down, nothing left behind.
+
+98
+00:04:59,332 --> 00:05:00,634
+To pass, all six.
+
+99
+00:05:02,684 --> 00:05:05,521
+Your turn, in your own Ubuntu virtual machine.
+
+100
+00:05:06,071 --> 00:05:08,162
+One: lab up, and read the task file.
+
+101
+00:05:08,712 --> 00:05:11,635
+Two: change the packaging, and set the final name.
+
+102
+00:05:12,185 --> 00:05:14,894
+Three: build, and save contents dot text.
+
+103
+00:05:15,444 --> 00:05:17,833
+Four: mark lib A provided, and rebuild.
+
+104
+00:05:18,383 --> 00:05:20,837
+Five: write why dot text, and lab check.
+
+105
+00:05:21,387 --> 00:05:23,968
+Six: lab down, and prove nothing is left.
+
+106
+00:05:24,518 --> 00:05:26,353
+Pause the video, and begin now.
+
+107
+00:05:41,903 --> 00:05:42,778
+Quick check.
+
+108
+00:05:43,328 --> 00:05:44,288
+What is a war?
+
+109
+00:05:44,838 --> 00:05:46,267
+Which folder is private?
+
+110
+00:05:46,817 --> 00:05:48,993
+Which scope keeps a library out of the war?
+
+111
+00:05:49,543 --> 00:05:51,399
+Which command lists what is inside?
+
+112
+00:05:51,949 --> 00:05:55,298
+Objective covered: M C ten, objective five.
+
+113
+00:05:55,848 --> 00:05:57,918
+Pause the video, and answer out loud.
+
+114
+00:06:08,468 --> 00:06:11,113
+Next: repository mirrors and credentials.
+
+115
+00:06:11,663 --> 00:06:14,991
+If this helped, like, share and subscribe, so you do not miss it.
