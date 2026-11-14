@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab94.sh and shortcu
 Honest notes: the terminal segment is a real recording against real Maven Central and a real Sonatype Nexus Repository Community Edition 3.98.1. I planted the three problems in cart-core myself so they would be repeatable. The skills, task, rubric and recap screens are labelled illustrations, not captures. The lab was run end to end before this lesson: it fails 0 of 5 at the start and passes 5 of 5 after the fixes; lab down leaves nothing behind. By running the lab you accept the Nexus Community Edition license, so read it first. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. Your own run is unverified until you do it.
 
 Previous lesson: Maven Nexus Cleanup: Schedule Delete SNAPSHOT Task, Live on Real Nexus https://youtu.be/-OZkDeta8BY
-Next: Gradle, the second build tool.
+Next: Gradle Basics: Project, Wrapper, Build Script and Task Graph https://youtu.be/6TC53cZApV8
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
