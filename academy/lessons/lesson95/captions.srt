@@ -1,0 +1,899 @@
+1
+00:00:00,500 --> 00:00:06,260
+Maven is one build tool. Gradle is the other big one, and many teams use it every day.
+
+2
+00:00:06,810 --> 00:00:12,634
+In this lesson you read a real Gradle project, file by file, and you learn four ideas.
+
+3
+00:00:13,184 --> 00:00:16,747
+The project. The build script. The wrapper. And the task graph.
+
+4
+00:00:17,297 --> 00:00:19,143
+You will watch all of it live,
+
+5
+00:00:19,143 --> 00:00:20,189
+on a real Gradle,
+
+6
+00:00:20,189 --> 00:00:23,142
+from the simplest command to a task of your own.
+
+7
+00:00:23,692 --> 00:00:26,807
+Then you do it alone, and a checker judges your result.
+
+8
+00:00:27,357 --> 00:00:30,706
+One idea first: everything Gradle does is a task.
+
+9
+00:00:32,256 --> 00:00:34,816
+Four ideas explain every Gradle build.
+
+10
+00:00:35,366 --> 00:00:39,483
+One, the project. A folder, with a settings file that gives it a name.
+
+11
+00:00:40,033 --> 00:00:40,276
+Two,
+
+12
+00:00:40,276 --> 00:00:41,306
+the build script,
+
+13
+00:00:41,306 --> 00:00:42,337
+build dot gradle.
+
+14
+00:00:42,337 --> 00:00:43,610
+It lists the plugins,
+
+15
+00:00:43,610 --> 00:00:44,337
+the version,
+
+16
+00:00:44,337 --> 00:00:46,156
+and where libraries come from.
+
+17
+00:00:46,706 --> 00:00:47,159
+Three,
+
+18
+00:00:47,159 --> 00:00:48,065
+the wrapper.
+
+19
+00:00:48,065 --> 00:00:49,197
+A small script,
+
+20
+00:00:49,197 --> 00:00:49,876
+gradle W,
+
+21
+00:00:49,876 --> 00:00:55,161
+that downloads and runs the exact Gradle version the project asks for.
+
+22
+00:00:55,161 --> 00:00:57,501
+Nobody installs Gradle by hand.
+
+23
+00:00:58,051 --> 00:00:58,407
+Four,
+
+24
+00:00:58,407 --> 00:00:58,835
+tasks.
+
+25
+00:00:58,835 --> 00:01:01,188
+Everything Gradle does is a task,
+
+26
+00:01:01,188 --> 00:01:03,471
+and tasks depend on other tasks.
+
+27
+00:01:03,471 --> 00:01:05,539
+That chain is the task graph.
+
+28
+00:01:06,089 --> 00:01:11,379
+Maven gives you a fixed lifecycle. Gradle lets you shape the graph. Let us see it live.
+
+29
+00:01:13,429 --> 00:01:19,402
+Go into the project. Type: CD, slash opt, slash lab ninety-five, slash cartcore.
+
+30
+00:01:19,952 --> 00:01:22,022
+List the folder. Type: L S.
+
+31
+00:01:22,572 --> 00:01:23,913
+Five things matter.
+
+32
+00:01:23,913 --> 00:01:25,113
+Build dot gradle,
+
+33
+00:01:25,113 --> 00:01:26,313
+the build script.
+
+34
+00:01:26,313 --> 00:01:27,725
+Settings dot gradle,
+
+35
+00:01:27,725 --> 00:01:29,208
+the project settings.
+
+36
+00:01:29,208 --> 00:01:29,844
+Gradle W,
+
+37
+00:01:29,844 --> 00:01:31,185
+the wrapper script,
+
+38
+00:01:31,185 --> 00:01:33,303
+with its folder called gradle.
+
+39
+00:01:33,303 --> 00:01:34,715
+And the source code,
+
+40
+00:01:34,715 --> 00:01:35,350
+in S R C.
+
+41
+00:01:35,900 --> 00:01:39,826
+Open the project settings. Type: cat, settings dot gradle.
+
+42
+00:01:40,376 --> 00:01:40,980
+One line.
+
+43
+00:01:40,980 --> 00:01:43,399
+The root project is named cart core.
+
+44
+00:01:43,399 --> 00:01:45,347
+This name is used in the jar,
+
+45
+00:01:45,347 --> 00:01:46,690
+and in every report.
+
+46
+00:01:47,240 --> 00:01:48,678
+Now the build script,
+
+47
+00:01:48,678 --> 00:01:50,321
+without its empty lines.
+
+48
+00:01:50,321 --> 00:01:51,075
+Type: grep,
+
+49
+00:01:51,075 --> 00:01:51,554
+dash v,
+
+50
+00:01:51,554 --> 00:01:51,965
+quote,
+
+51
+00:01:51,965 --> 00:01:52,376
+caret,
+
+52
+00:01:52,376 --> 00:01:52,855
+dollar,
+
+53
+00:01:52,855 --> 00:01:53,266
+quote,
+
+54
+00:01:53,266 --> 00:01:54,430
+build dot gradle.
+
+55
+00:01:54,980 --> 00:01:55,953
+Plugins: java.
+
+56
+00:01:55,953 --> 00:01:58,108
+That one word adds the compile,
+
+57
+00:01:58,108 --> 00:01:59,428
+test and jar tasks.
+
+58
+00:01:59,428 --> 00:02:01,931
+Group and version name the artifact.
+
+59
+00:02:01,931 --> 00:02:04,989
+Repositories says where libraries come from.
+
+60
+00:02:04,989 --> 00:02:07,630
+And the jar block sets the main class.
+
+61
+00:02:08,180 --> 00:02:09,269
+Now the wrapper.
+
+62
+00:02:09,269 --> 00:02:13,080
+Keep only the download address from its properties file.
+
+63
+00:02:13,080 --> 00:02:13,829
+Type: grep,
+
+64
+00:02:13,829 --> 00:02:15,122
+distribution U R L,
+
+65
+00:02:15,122 --> 00:02:16,619
+then the path: gradle,
+
+66
+00:02:16,619 --> 00:02:17,572
+slash wrapper,
+
+67
+00:02:17,572 --> 00:02:20,362
+slash gradle dash wrapper dot properties.
+
+68
+00:02:20,912 --> 00:02:22,088
+The exact address,
+
+69
+00:02:22,088 --> 00:02:24,114
+on services dot gradle dot org,
+
+70
+00:02:24,114 --> 00:02:28,231
+and the exact version: Gradle eight point fourteen point three.
+
+71
+00:02:28,231 --> 00:02:29,276
+Every developer,
+
+72
+00:02:29,276 --> 00:02:30,779
+and every build server,
+
+73
+00:02:30,779 --> 00:02:32,282
+gets this same version.
+
+74
+00:02:32,832 --> 00:02:33,844
+One honest note.
+
+75
+00:02:33,844 --> 00:02:36,878
+In my recording studio that download is blocked,
+
+76
+00:02:36,878 --> 00:02:39,976
+so a copy of the same version was already stored.
+
+77
+00:02:39,976 --> 00:02:40,987
+On your machine,
+
+78
+00:02:40,987 --> 00:02:42,694
+the first run downloads it,
+
+79
+00:02:42,694 --> 00:02:44,907
+about one hundred thirty megabytes.
+
+80
+00:02:45,457 --> 00:02:46,608
+Run the wrapper,
+
+81
+00:02:46,608 --> 00:02:48,335
+and ask for its version.
+
+82
+00:02:48,335 --> 00:02:50,134
+Type: dot slash gradle W,
+
+83
+00:02:50,134 --> 00:02:51,429
+dash dash version,
+
+84
+00:02:51,429 --> 00:02:52,796
+and keep two lines.
+
+85
+00:02:54,846 --> 00:02:57,452
+Gradle eight point fourteen point three,
+
+86
+00:02:57,452 --> 00:02:58,690
+on Java twenty-one.
+
+87
+00:02:58,690 --> 00:03:00,579
+The project chose its Gradle.
+
+88
+00:03:00,579 --> 00:03:02,078
+You did not install it.
+
+89
+00:03:02,628 --> 00:03:04,110
+Everything is a task.
+
+90
+00:03:04,110 --> 00:03:06,509
+List the tasks of the build group.
+
+91
+00:03:06,509 --> 00:03:08,274
+Type: dot slash gradle W,
+
+92
+00:03:08,274 --> 00:03:08,697
+tasks,
+
+93
+00:03:08,697 --> 00:03:10,744
+dash dash group equals build,
+
+94
+00:03:10,744 --> 00:03:12,932
+and keep the lines with a dash.
+
+95
+00:03:15,282 --> 00:03:15,896
+Assemble,
+
+96
+00:03:15,896 --> 00:03:16,306
+build,
+
+97
+00:03:16,306 --> 00:03:16,853
+classes,
+
+98
+00:03:16,853 --> 00:03:17,263
+clean,
+
+99
+00:03:17,263 --> 00:03:17,536
+jar.
+
+100
+00:03:17,536 --> 00:03:18,902
+Each line is a task,
+
+101
+00:03:18,902 --> 00:03:20,336
+with its description.
+
+102
+00:03:20,336 --> 00:03:22,727
+Build is the one you will use most.
+
+103
+00:03:23,277 --> 00:03:24,639
+Now the task graph.
+
+104
+00:03:24,639 --> 00:03:26,860
+Ask Gradle what build would do,
+
+105
+00:03:26,860 --> 00:03:28,079
+without doing it.
+
+106
+00:03:28,079 --> 00:03:29,870
+Type: dot slash gradle W,
+
+107
+00:03:29,870 --> 00:03:30,300
+build,
+
+108
+00:03:30,300 --> 00:03:30,802
+dash m,
+
+109
+00:03:30,802 --> 00:03:32,450
+and head dash n twelve.
+
+110
+00:03:34,500 --> 00:03:35,440
+Compile java,
+
+111
+00:03:35,440 --> 00:03:36,379
+then classes,
+
+112
+00:03:36,379 --> 00:03:37,029
+then jar,
+
+113
+00:03:37,029 --> 00:03:38,041
+then assemble,
+
+114
+00:03:38,041 --> 00:03:38,474
+check,
+
+115
+00:03:38,474 --> 00:03:39,775
+and finally build.
+
+116
+00:03:39,775 --> 00:03:41,870
+The dash m flag is a dry run.
+
+117
+00:03:41,870 --> 00:03:43,315
+It prints the order,
+
+118
+00:03:43,315 --> 00:03:44,544
+and runs nothing.
+
+119
+00:03:44,544 --> 00:03:46,639
+This order is the task graph.
+
+120
+00:03:47,189 --> 00:03:48,620
+Now run it for real.
+
+121
+00:03:48,620 --> 00:03:51,410
+Keep the build line and the task count.
+
+122
+00:03:51,410 --> 00:03:53,199
+Type: dot slash gradle W,
+
+123
+00:03:53,199 --> 00:03:53,628
+build,
+
+124
+00:03:53,628 --> 00:03:54,272
+and grep.
+
+125
+00:03:56,322 --> 00:03:57,487
+Build successful.
+
+126
+00:03:57,487 --> 00:03:58,927
+Two actionable tasks,
+
+127
+00:03:58,927 --> 00:03:59,818
+two executed.
+
+128
+00:03:59,818 --> 00:04:01,258
+It compiled the code,
+
+129
+00:04:01,258 --> 00:04:02,423
+and made the jar.
+
+130
+00:04:02,973 --> 00:04:04,488
+Run the same command again.
+
+131
+00:04:08,138 --> 00:04:09,559
+Two actionable tasks,
+
+132
+00:04:09,559 --> 00:04:10,575
+two up to date.
+
+133
+00:04:10,575 --> 00:04:11,658
+Nothing changed,
+
+134
+00:04:11,658 --> 00:04:13,147
+so Gradle did no work.
+
+135
+00:04:13,147 --> 00:04:18,292
+That is why Gradle is fast: it skips every task whose inputs did not change.
+
+136
+00:04:18,842 --> 00:04:22,725
+Change the build script, with sed. The version becomes one point one.
+
+137
+00:04:24,775 --> 00:04:25,861
+Build quietly,
+
+138
+00:04:25,861 --> 00:04:27,257
+and list the jars.
+
+139
+00:04:27,257 --> 00:04:29,196
+Type: dot slash gradle W,
+
+140
+00:04:29,196 --> 00:04:29,661
+build,
+
+141
+00:04:29,661 --> 00:04:30,204
+dash q,
+
+142
+00:04:30,204 --> 00:04:30,902
+then L S,
+
+143
+00:04:30,902 --> 00:04:31,367
+build,
+
+144
+00:04:31,367 --> 00:04:32,220
+slash libs.
+
+145
+00:04:34,570 --> 00:04:35,967
+A new jar: cart core,
+
+146
+00:04:35,967 --> 00:04:36,899
+one point one.
+
+147
+00:04:36,899 --> 00:04:41,024
+The version in the script became the version in the file name.
+
+148
+00:04:41,024 --> 00:04:42,221
+The old jar stays,
+
+149
+00:04:42,221 --> 00:04:43,552
+until you run clean.
+
+150
+00:04:44,102 --> 00:04:44,412
+Last,
+
+151
+00:04:44,412 --> 00:04:45,590
+a task of your own.
+
+152
+00:04:45,590 --> 00:04:48,628
+Add one line to the script: a task called report,
+
+153
+00:04:48,628 --> 00:04:49,992
+that depends on build,
+
+154
+00:04:49,992 --> 00:04:52,720
+and prints the project name and the version.
+
+155
+00:04:55,170 --> 00:04:59,053
+Run it. Type: dot slash gradle W, dash q, report.
+
+156
+00:05:01,103 --> 00:05:01,709
+Cart core,
+
+157
+00:05:01,709 --> 00:05:02,557
+one point one.
+
+158
+00:05:02,557 --> 00:05:03,406
+Your task ran,
+
+159
+00:05:03,406 --> 00:05:06,618
+and it read the name and the version from the script,
+
+160
+00:05:06,618 --> 00:05:07,951
+not from your fingers.
+
+161
+00:05:08,501 --> 00:05:11,872
+Does build run first? Ask for the graph, and keep two lines.
+
+162
+00:05:13,922 --> 00:05:14,320
+Build,
+
+163
+00:05:14,320 --> 00:05:15,384
+and then report.
+
+164
+00:05:15,384 --> 00:05:16,846
+Because of depends on,
+
+165
+00:05:16,846 --> 00:05:18,441
+Gradle runs build first.
+
+166
+00:05:18,441 --> 00:05:20,834
+One line of yours changed the graph.
+
+167
+00:05:22,384 --> 00:05:25,904
+Your task. The same journey, on your own project, in the lab.
+
+168
+00:05:26,454 --> 00:05:28,157
+One: in build dot gradle,
+
+169
+00:05:28,157 --> 00:05:30,405
+set the version to one point one,
+
+170
+00:05:30,405 --> 00:05:31,086
+and build.
+
+171
+00:05:31,086 --> 00:05:34,561
+The jar must be named cart core dash one point one.
+
+172
+00:05:35,111 --> 00:05:39,527
+Two: add a task named report, that prints the project name and the version.
+
+173
+00:05:40,077 --> 00:05:42,210
+Three: make report depend on build.
+
+174
+00:05:42,760 --> 00:05:47,880
+Four: save the task graph, from dash dash dry dash run, in graph dot text.
+
+175
+00:05:48,430 --> 00:05:52,782
+Five: write notes dot text, three lines: settings, wrapper, and task.
+
+176
+00:05:54,832 --> 00:05:59,035
+Here is where to find everything. Pause on this screen if you need to write it down.
+
+177
+00:05:59,585 --> 00:06:01,284
+The lab lives on git hub,
+
+178
+00:06:01,284 --> 00:06:02,439
+at it dash waves,
+
+179
+00:06:02,439 --> 00:06:04,002
+slash dev ops dash A I,
+
+180
+00:06:04,002 --> 00:06:05,497
+in the folder academy,
+
+181
+00:06:05,497 --> 00:06:06,177
+slash lab.
+
+182
+00:06:06,727 --> 00:06:12,017
+Two files: lab ninety-five dot S H, and shortcuts ninety-five dot S H.
+
+183
+00:06:12,567 --> 00:06:13,443
+Install it,
+
+184
+00:06:13,443 --> 00:06:17,026
+in your Ubuntu virtual machine: sudo install,
+
+185
+00:06:17,026 --> 00:06:18,858
+dash m seven five five,
+
+186
+00:06:18,858 --> 00:06:20,769
+lab ninety-five dot S H,
+
+187
+00:06:20,769 --> 00:06:21,963
+into slash usr,
+
+188
+00:06:21,963 --> 00:06:22,919
+slash local,
+
+189
+00:06:22,919 --> 00:06:23,874
+slash S bin.
+
+190
+00:06:24,424 --> 00:06:28,636
+Load the short name with: source shortcuts ninety-five dot S H.
+
+191
+00:06:28,636 --> 00:06:30,374
+Then you can type: lab up,
+
+192
+00:06:30,374 --> 00:06:31,043
+lab check,
+
+193
+00:06:31,043 --> 00:06:31,912
+and lab down.
+
+194
+00:06:32,462 --> 00:06:33,603
+You need a J D K,
+
+195
+00:06:33,603 --> 00:06:35,080
+curl and python three,
+
+196
+00:06:35,080 --> 00:06:37,026
+about one gigabyte of memory,
+
+197
+00:06:37,026 --> 00:06:38,839
+and an internet connection.
+
+198
+00:06:38,839 --> 00:06:41,121
+The first lab up downloads Gradle,
+
+199
+00:06:41,121 --> 00:06:43,470
+about one hundred thirty megabytes.
+
+200
+00:06:44,020 --> 00:06:48,308
+Lab down removes everything. Only run it in your own virtual machine.
+
+201
+00:06:50,358 --> 00:06:52,427
+Pass or fail. You need all six.
+
+202
+00:06:52,977 --> 00:06:54,791
+Five pass lines in lab check.
+
+203
+00:06:55,341 --> 00:06:58,263
+The version comes from the script, not typed by hand.
+
+204
+00:06:58,813 --> 00:07:01,139
+You used the wrapper, not another Gradle.
+
+205
+00:07:01,689 --> 00:07:03,758
+Graph dot text shows the right order.
+
+206
+00:07:04,308 --> 00:07:06,441
+Notes dot text is in your own words.
+
+207
+00:07:06,991 --> 00:07:08,847
+Lab down leaves nothing behind.
+
+208
+00:07:09,397 --> 00:07:10,699
+To pass, all six.
+
+209
+00:07:12,749 --> 00:07:15,586
+Your turn, in your own Ubuntu virtual machine.
+
+210
+00:07:16,136 --> 00:07:18,227
+One: lab up, and read the task file.
+
+211
+00:07:18,777 --> 00:07:21,593
+Two: open the project, and look at every file.
+
+212
+00:07:22,143 --> 00:07:24,852
+Three: change the version, and build with the wrapper.
+
+213
+00:07:25,402 --> 00:07:28,581
+Four: add the report task, and make it depend on build.
+
+214
+00:07:29,131 --> 00:07:32,310
+Five: save the graph, write the notes, and run lab check.
+
+215
+00:07:32,860 --> 00:07:35,441
+Six: lab down, and prove nothing is left.
+
+216
+00:07:35,991 --> 00:07:37,826
+Pause the video, and begin now.
+
+217
+00:07:53,376 --> 00:07:54,251
+Quick check.
+
+218
+00:07:54,801 --> 00:07:56,827
+Which file gives the project its name?
+
+219
+00:07:57,377 --> 00:07:59,425
+What does the wrapper do, and why use it?
+
+220
+00:07:59,975 --> 00:08:01,234
+What is a task graph?
+
+221
+00:08:01,784 --> 00:08:03,235
+What does up to date mean?
+
+222
+00:08:03,785 --> 00:08:10,078
+Objective covered: M C eleven, objective one, Gradle projects, wrapper, scripts and tasks.
+
+223
+00:08:10,628 --> 00:08:12,697
+Pause the video, and answer out loud.
+
+224
+00:08:23,247 --> 00:08:27,343
+Next: building, testing and inspecting dependencies with Gradle.
+
+225
+00:08:27,893 --> 00:08:31,221
+If this helped, like, share and subscribe, so you do not miss it.

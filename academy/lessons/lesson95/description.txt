@@ -1,0 +1,24 @@
+Lesson 95 of the DevOps Engineering Bootcamp, the first lesson of Gradle, the second big Java build tool. You read a real Gradle 8.14.3 project file by file, see why the wrapper pins the exact Gradle version, learn what the build script declares, and watch the task graph run, skip and re-run work. Then you change the version, add your own task and prove its place in the graph in the lab.
+
+Chapters
+0:00 Gradle, the other big build tool
+0:32 The four ideas of Gradle
+1:13 Live: project, wrapper, script, task graph
+5:22 Your lab task
+5:54 Where to find the lab
+6:50 Pass or fail rubric
+7:12 Your turn
+7:53 Quick check
+
+Objectives covered: MC11-O01 (explain the Gradle project, build script, wrapper and task graph, and run a build)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab95.sh and shortcuts95.sh). Install with: sudo install -m 755 lab95.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts95.sh. You need an Ubuntu virtual machine with root, a JDK, python3 and curl (for example: sudo apt install -y openjdk-21-jdk-headless python3 curl), internet access and about 1 GB of free memory. The first lab up downloads Gradle 8.14.3 (about 130 MB) and creates the cartcore project in /opt/lab95. lab down removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal segment is a real recording with real Gradle 8.14.3 and real Maven Central. A copy of Gradle was already stored on the recording machine because the Gradle download site is blocked there, so the first ./gradlew on your machine will download it once. The lab was run end to end before this lesson: it fails 0 of 5 at the start and passes 5 of 5 after the fixes; lab down leaves nothing behind. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. The parts, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Maven mastery, one real job: fix and ship cart-core to Nexus https://youtu.be/Wre3xD-Hqh8
+Next: Gradle build, test and dependency inspection (MC11-O02).
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #gradle #java #buildtools #devopsbootcamp
