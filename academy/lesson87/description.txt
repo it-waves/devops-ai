@@ -1,0 +1,26 @@
+Lesson 87 of the DevOps Engineering Bootcamp, the third lesson of Maven. Same code, same pom, two builds, two different jars: you find out why, and fix it. You learn what a plugin and its configuration block do (for example, setting the main class in the jar manifest so java -jar works), how properties work (define once, use as dollar-brace names, filter them into files, and why a value from the command line with -D beats the pom), how profiles switch a named set of changes on with -P (for example dev and prod), and how to make a build reproducible with one property, project.build.outputTimestamp, so two builds give a byte-identical jar with the same SHA-256 hash. Then you fix a project yourself: five checks, all must pass.
+
+Chapters
+0:00 Same code, two different jars
+0:34 Plugins
+1:05 Properties
+1:33 Profiles
+1:55 Live: plugin, property, profile
+3:36 Reproducible builds
+5:12 Your lab task
+6:06 Pass or fail rubric
+6:29 Your turn
+7:07 Quick check
+
+Objectives covered: MC10-O03 (plugins, properties, profiles, reproducible builds)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab87.sh and shortcuts87.sh). Install with: sudo install -m 755 lab87.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts87.sh (without it, use sudo lab87.sh up, check, down). You need an Ubuntu virtual machine with root, a JDK and Maven (for example: sudo apt install -y openjdk-21-jdk-headless maven) and internet access to Maven Central. The lab writes a small project into /opt/lab87; lab down removes the folder. Only run it in your own virtual machine.
+
+Honest notes: the terminal segments are real recordings on Ubuntu 24.04 with Maven 3.9.11 and OpenJDK 21. My recording computer cannot reach Maven Central, so the plugins came from a local copy built from Ubuntu's packaged Maven files; on a normal machine Maven downloads them from Central. The hash values on screen are from my machine and will differ on yours; what matters is that two builds differ without the timestamp property and match with it. Reproducibility here is for this small project with these plugin versions; larger projects can need more settings. The ideas, task, rubric and quiz screens are labelled illustrations, not captures. The lab was run end to end before this lesson with Ubuntu's copy of the plugins: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing behind. On your machine it downloads from Maven Central, which I could not test, and only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Maven Lifecycle Explained: Compile, Test, Package, Clean https://youtu.be/Yqb9BILu0fw
+Next: Maven dependency trees and version conflicts.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #maven #java #buildtools #devopsbootcamp
