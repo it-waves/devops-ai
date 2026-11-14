@@ -76,7 +76,7 @@ EOF_X
       <plugin><artifactId>maven-clean-plugin</artifactId><version>3.2.0</version></plugin>
       <plugin><artifactId>maven-resources-plugin</artifactId><version>3.3.0</version></plugin>
       <plugin><artifactId>maven-compiler-plugin</artifactId><version>3.10.1</version></plugin>
-      <plugin><artifactId>maven-surefire-plugin</artifactId><version>2.22.3</version></plugin>
+      <plugin><artifactId>maven-surefire-plugin</artifactId><version>2.22.2</version></plugin>
       <plugin><artifactId>maven-jar-plugin</artifactId><version>3.3.0</version></plugin>
     </plugins>
   </build>

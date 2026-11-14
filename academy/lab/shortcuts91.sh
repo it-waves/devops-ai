@@ -1,1 +1,1 @@
-lab() { sudo /usr/local/sbin/lab91.sh "$@"; }
+lab() { sudo --preserve-env=NEXUS_PASS /usr/local/sbin/lab91.sh "$@"; }

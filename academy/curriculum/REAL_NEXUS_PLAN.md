@@ -25,3 +25,14 @@ Hosts now allowed in sandbox: repo1.maven.org, repo.maven.apache.org, download.s
 - Create form: Name, Online, Version policy (Release/Snapshot/Mixed), Layout policy, Content Disposition, ... Storage: Blob store, Strict content type validation, Deployment policy (Allow redeploy / Disable redeploy / Allow redeploy only / Deployment policy) further down.
 ## Standing rule (owner, 2026-11-14): every demo goes from SIMPLE to ADVANCED
 Order inside each live demo: orient (tour) > basic action > variation > failure case > advanced (groups, proxy cache, dedicated deployer user/role, automation). Applies to all lessons, labs and mastery scenarios.
+## Standing rule (owner, 2026-11-14): same explanation + illustration quality for ALL demo/practical lessons
+Owner praised the explanations and illustrations; keep that level in every demo lesson going forward (DevOps is mostly practical): explain each major screen/command for beginners, add a diagram or illustrated card next to the live recording, keep lessons practical-first.
+
+## Verified facts (lab91 real-Nexus test, 0/5 -> 5/5)
+- "Disable redeploy" = REST writePolicy ALLOW_ONCE (DENY = read-only; even the first release deploy fails with 400 "is read-only").
+- Real refusal text: `status code: 409 ... cannot be updated as asset already exists and redeploy is not allowed (409)` (NOT 400). Lab check 3 expects 409 + "redeploy is not allowed".
+- maven-surefire-plugin 2.22.3 does not exist on Central; use 2.22.2.
+- Failed admin logins trigger HTTP 429 throttling: change the password/accept EULA before any authenticated REST call.
+- Java in this sandbox needs JAVA_TOOL_OPTIONS (proxy); keep it set, filter the "Picked up" line.
+- Start Nexus with setsid nohup ... < /dev/null so pipes (| tail) do not hang; wipe /home/student/.m2 for clean runs.
+- Search index lags a few seconds after deploy (sleep 3-5 before search API).
