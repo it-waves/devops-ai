@@ -1,0 +1,515 @@
+1
+00:00:00,500 --> 00:00:05,684
+Your build runs on your laptop, and fails on the server, with a four oh one. Unauthorized.
+
+2
+00:00:06,234 --> 00:00:09,957
+Your company keeps its libraries in a private repository.
+
+3
+00:00:09,957 --> 00:00:11,067
+It needs a login.
+
+4
+00:00:11,067 --> 00:00:13,679
+And that login must never end up in git.
+
+5
+00:00:14,229 --> 00:00:16,202
+Today you learn what a mirror is,
+
+6
+00:00:16,202 --> 00:00:18,234
+where Maven looks for credentials,
+
+7
+00:00:18,234 --> 00:00:20,565
+and how to hand over a password safely.
+
+8
+00:00:21,115 --> 00:00:22,566
+Then you set it up yourself.
+
+9
+00:00:23,116 --> 00:00:24,262
+One honest note.
+
+10
+00:00:24,262 --> 00:00:29,417
+The company repository in this lesson is a small local server I started,
+
+11
+00:00:29,417 --> 00:00:30,348
+with a login.
+
+12
+00:00:30,348 --> 00:00:35,002
+The real thing is a repository manager like nexus or artifactory,
+
+13
+00:00:35,002 --> 00:00:37,580
+but Maven sees the same four oh one.
+
+14
+00:00:39,130 --> 00:00:42,842
+A repository is where Maven downloads libraries from.
+
+15
+00:00:42,842 --> 00:00:44,383
+Your pom can name one,
+
+16
+00:00:44,383 --> 00:00:46,063
+with a repository block.
+
+17
+00:00:46,613 --> 00:00:51,392
+A mirror is a detour. Maven asks the mirror, instead of the original address.
+
+18
+00:00:51,942 --> 00:00:57,126
+Companies use mirrors for speed, for control, and because the mirror can cache everything.
+
+19
+00:00:57,676 --> 00:00:59,221
+A mirror matches by id.
+
+20
+00:00:59,221 --> 00:01:05,335
+Mirror of libs means: every request for the repository with the id libs goes to the mirror.
+
+21
+00:01:05,885 --> 00:01:07,919
+So the pom keeps the public address,
+
+22
+00:01:07,919 --> 00:01:11,197
+and each developer's settings decide where it really goes.
+
+23
+00:01:13,247 --> 00:01:18,175
+Two files configure Maven. The pom belongs to the project, and lives in git.
+
+24
+00:01:18,725 --> 00:01:21,773
+The settings dot X M L file belongs to you.
+
+25
+00:01:21,773 --> 00:01:23,829
+It lives in your home folder,
+
+26
+00:01:23,829 --> 00:01:24,751
+in dot m two.
+
+27
+00:01:24,751 --> 00:01:25,530
+Not in git.
+
+28
+00:01:26,080 --> 00:01:31,499
+Mirrors go here, and so do servers. A server block holds a user name and a password.
+
+29
+00:01:32,049 --> 00:01:34,097
+The link between them is the id.
+
+30
+00:01:34,097 --> 00:01:35,889
+The server with the id corp,
+
+31
+00:01:35,889 --> 00:01:38,193
+matches the mirror with the id corp.
+
+32
+00:01:38,743 --> 00:01:44,119
+If the ids differ by one letter, Maven sends no password, and you get the four oh one.
+
+33
+00:01:46,169 --> 00:01:48,814
+Where does the password itself go? Three rules.
+
+34
+00:01:49,364 --> 00:01:49,617
+One.
+
+35
+00:01:49,617 --> 00:01:50,691
+Never in the pom,
+
+36
+00:01:50,691 --> 00:01:52,523
+and never in any file in git.
+
+37
+00:01:52,523 --> 00:01:55,935
+Anyone who can read the project can read the password.
+
+38
+00:01:56,485 --> 00:01:56,782
+Two.
+
+39
+00:01:56,782 --> 00:01:57,672
+In settings,
+
+40
+00:01:57,672 --> 00:02:00,121
+refer to an environment variable.
+
+41
+00:02:00,121 --> 00:02:00,641
+Dollar,
+
+42
+00:02:00,641 --> 00:02:01,086
+brace,
+
+43
+00:02:01,086 --> 00:02:01,680
+env dot,
+
+44
+00:02:01,680 --> 00:02:02,348
+the name.
+
+45
+00:02:02,348 --> 00:02:05,168
+The real value stays outside the file.
+
+46
+00:02:05,718 --> 00:02:11,392
+Three. Lock down the files. C H mod six hundred means: only you can read the file.
+
+47
+00:02:11,942 --> 00:02:15,382
+Maven can also encrypt passwords with a master password.
+
+48
+00:02:15,382 --> 00:02:17,163
+It is better than plain text,
+
+49
+00:02:17,163 --> 00:02:21,094
+but an environment variable from a secret store is better still.
+
+50
+00:02:23,144 --> 00:02:26,301
+Go to the demo project. Type: CD, demo.
+
+51
+00:02:26,851 --> 00:02:32,590
+Look at the settings file. Type: cat, tilde, slash, dot m two, slash settings dot X M L.
+
+52
+00:02:33,140 --> 00:02:33,737
+A server,
+
+53
+00:02:33,737 --> 00:02:34,864
+with the id corp,
+
+54
+00:02:34,864 --> 00:02:37,782
+and the password as an environment variable.
+
+55
+00:02:37,782 --> 00:02:38,644
+And a mirror,
+
+56
+00:02:38,644 --> 00:02:39,772
+with the same id,
+
+57
+00:02:39,772 --> 00:02:40,103
+corp,
+
+58
+00:02:40,103 --> 00:02:41,695
+for the repository libs.
+
+59
+00:02:42,245 --> 00:02:49,477
+Now build, without the password. Type: mvn -B -q clean package, then filter the error.
+
+60
+00:02:50,027 --> 00:02:52,245
+Maven asks the mirror for the libraries.
+
+61
+00:02:58,795 --> 00:03:04,299
+Four oh one. Unauthorized. The server exists, but Maven has no password to send.
+
+62
+00:03:04,849 --> 00:03:06,379
+Give it the password,
+
+63
+00:03:06,379 --> 00:03:07,764
+from a locked file.
+
+64
+00:03:07,764 --> 00:03:10,022
+Type: export REPO_PASS= dollar,
+
+65
+00:03:10,022 --> 00:03:10,897
+parenthesis,
+
+66
+00:03:10,897 --> 00:03:13,447
+cat tilde slash dot corp dash pass.
+
+67
+00:03:13,997 --> 00:03:16,898
+Build again. Type: mvn -B -q clean package && ls target slash star dot jar
+
+68
+00:03:18,528 --> 00:03:20,469
+Now it downloads, with the login.
+
+69
+00:03:28,019 --> 00:03:32,777
+A jar. The build works, and the password never appeared in a command, or a file.
+
+70
+00:03:33,327 --> 00:03:39,492
+Prove it. Search every file here for the password.
+
+71
+00:03:40,842 --> 00:03:45,258
+Nothing found. The password lives only in the variable, and in the locked file.
+
+72
+00:03:45,808 --> 00:03:52,187
+Last, lock the settings file. Type: chmod 600, then stat, to show the permissions.
+
+73
+00:03:53,637 --> 00:03:59,311
+Dash, r w, and dashes. Only the owner can read or write. Both files are locked.
+
+74
+00:04:00,861 --> 00:04:01,816
+Your lab task.
+
+75
+00:04:01,816 --> 00:04:05,975
+Lab ninety gives you a project and a repository with a login.
+
+76
+00:04:05,975 --> 00:04:07,816
+Lab check judges your work.
+
+77
+00:04:08,366 --> 00:04:10,533
+It lives at git hub dot com,
+
+78
+00:04:10,533 --> 00:04:12,081
+slash it dash waves,
+
+79
+00:04:12,081 --> 00:04:13,862
+slash dev ops dash A I,
+
+80
+00:04:13,862 --> 00:04:14,713
+in academy,
+
+81
+00:04:14,713 --> 00:04:15,023
+lab,
+
+82
+00:04:15,023 --> 00:04:16,494
+lab ninety dot S H.
+
+83
+00:04:17,044 --> 00:04:18,858
+One: in settings dot X M L,
+
+84
+00:04:18,858 --> 00:04:20,874
+add a server with the id corp,
+
+85
+00:04:20,874 --> 00:04:21,747
+the user dev,
+
+86
+00:04:21,747 --> 00:04:25,577
+and the password from the environment variable corp pass.
+
+87
+00:04:26,127 --> 00:04:28,324
+Two: add a mirror with the id corp,
+
+88
+00:04:28,324 --> 00:04:29,830
+for the repository libs,
+
+89
+00:04:29,830 --> 00:04:32,655
+with the address on port eight zero nine one.
+
+90
+00:04:33,205 --> 00:04:36,149
+Three: lock the file with C H mod six hundred.
+
+91
+00:04:36,699 --> 00:04:39,812
+Four: set the variable from the password file,
+
+92
+00:04:39,812 --> 00:04:42,587
+and build with dash s settings dot X M L.
+
+93
+00:04:42,587 --> 00:04:44,550
+It must end in build success.
+
+94
+00:04:45,100 --> 00:04:47,512
+Five: one sentence in why dot text,
+
+95
+00:04:47,512 --> 00:04:50,682
+about why the password must not be in the pom.
+
+96
+00:04:50,682 --> 00:04:51,923
+Use the words pom,
+
+97
+00:04:51,923 --> 00:04:53,164
+and git or commit.
+
+98
+00:04:53,714 --> 00:04:56,136
+Install a J D K and Maven first.
+
+99
+00:04:56,136 --> 00:04:57,044
+Then lab up,
+
+100
+00:04:57,044 --> 00:04:57,801
+lab check,
+
+101
+00:04:57,801 --> 00:04:58,785
+and lab down.
+
+102
+00:04:58,785 --> 00:05:01,661
+The shortcut file is shortcuts ninety.
+
+103
+00:05:01,661 --> 00:05:03,780
+The check downloads plugins,
+
+104
+00:05:03,780 --> 00:05:04,764
+so be online.
+
+105
+00:05:06,814 --> 00:05:08,883
+Pass or fail. You need all six.
+
+106
+00:05:09,433 --> 00:05:11,247
+Five pass lines in lab check.
+
+107
+00:05:11,797 --> 00:05:14,335
+You can explain a mirror, and what mirror of means.
+
+108
+00:05:14,885 --> 00:05:18,085
+You can explain why server and mirror ids must match.
+
+109
+00:05:18,635 --> 00:05:21,622
+No password in any file, only in the environment.
+
+110
+00:05:22,172 --> 00:05:24,753
+The settings file is locked, mode six hundred.
+
+111
+00:05:25,303 --> 00:05:27,223
+lab down, nothing left behind.
+
+112
+00:05:27,773 --> 00:05:29,075
+To pass, all six.
+
+113
+00:05:31,125 --> 00:05:33,962
+Your turn, in your own Ubuntu virtual machine.
+
+114
+00:05:34,512 --> 00:05:36,603
+One: lab up, and read the task file.
+
+115
+00:05:37,153 --> 00:05:39,009
+Two: write the server and the mirror.
+
+116
+00:05:39,559 --> 00:05:40,860
+Three: lock the file.
+
+117
+00:05:41,410 --> 00:05:43,352
+Four: set the variable, and build.
+
+118
+00:05:43,902 --> 00:05:46,355
+Five: write why dot text, and lab check.
+
+119
+00:05:46,905 --> 00:05:49,486
+Six: lab down, and prove nothing is left.
+
+120
+00:05:50,036 --> 00:05:51,871
+Pause the video, and begin now.
+
+121
+00:06:07,421 --> 00:06:08,296
+Quick check.
+
+122
+00:06:08,846 --> 00:06:09,998
+What does a mirror do?
+
+123
+00:06:10,548 --> 00:06:12,276
+Which file holds credentials?
+
+124
+00:06:12,826 --> 00:06:14,788
+How do you keep a password out of the file?
+
+125
+00:06:15,338 --> 00:06:16,661
+What does four oh one mean?
+
+126
+00:06:17,211 --> 00:06:20,475
+Objective covered: M C ten, objective six.
+
+127
+00:06:21,025 --> 00:06:23,094
+Pause the video, and answer out loud.
+
+128
+00:06:33,644 --> 00:06:36,460
+Next: publish snapshot and release artifacts.
+
+129
+00:06:37,010 --> 00:06:40,338
+If this helped, like, share and subscribe, so you do not miss it.
