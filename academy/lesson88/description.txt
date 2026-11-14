@@ -1,0 +1,25 @@
+Lesson 88 of the DevOps Engineering Bootcamp, the fourth lesson of Maven. Your build worked yesterday and fails today, and you changed nothing: a library you never asked for changed version. You learn the difference between direct and transitive dependencies, how to read the tree with mvn dependency:tree, how to see what Maven left out with -Dverbose, how Maven chooses a version (nearest wins, and on a tie the first declared wins, not the newest), and three ways to fix a conflict: dependencyManagement, an exclusion, or declaring the dependency directly. In the live demo you see a real conflict turn into a compile error, pin the version, and prove the fix with the tree. Then you solve a conflict yourself: five checks, all must pass.
+
+Chapters
+0:00 The build that broke by itself
+0:40 Transitive dependencies
+1:09 How Maven chooses
+1:44 Three ways to fix it
+2:12 Live: find and fix a conflict
+4:50 Your lab task
+5:49 Pass or fail rubric
+6:13 Your turn
+6:53 Quick check
+
+Objectives covered: MC10-O04 (dependency trees and version conflicts)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab88.sh and shortcuts88.sh). Install with: sudo install -m 755 lab88.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts88.sh (without it, use sudo lab88.sh up, check, down). You need an Ubuntu virtual machine with root, a JDK and Maven (for example: sudo apt install -y openjdk-21-jdk-headless maven) and internet access to Maven Central for the build plugins. The lab writes two tiny libraries into a local folder and a small project into /opt/lab88; lab down removes the folder. Only run it in your own virtual machine.
+
+Honest notes: the terminal segments are real recordings on Ubuntu 24.04 with Maven 3.9.11 and OpenJDK 21. My recording computer cannot reach Maven Central, so the plugins came from a local copy built from Ubuntu's packaged Maven files, and the two libraries (liba and libb) are tiny ones I made in a local folder to produce a conflict on purpose; real conflicts look the same in the tree. The ideas, task, rubric and quiz screens are labelled illustrations, not captures. The lab was run end to end before this lesson: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing behind. On your machine the plugins download from Maven Central, which I could not test, and only one style of solution was tested, so a different valid approach (such as an exclusion) could be judged wrongly by the checker. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Maven Plugins, Properties, Profiles and Reproducible Builds https://youtu.be/HFQ_mFYXuMc
+Next: packaging CloudCart as a WAR and checking what is inside.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #maven #java #dependencies #devopsbootcamp

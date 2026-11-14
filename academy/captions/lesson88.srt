@@ -1,0 +1,603 @@
+1
+00:00:00,500 --> 00:00:02,272
+Your build worked yesterday.
+
+2
+00:00:02,272 --> 00:00:03,221
+Today it fails,
+
+3
+00:00:03,221 --> 00:00:04,740
+and you changed nothing.
+
+4
+00:00:04,740 --> 00:00:07,967
+A library you never asked for just changed version.
+
+5
+00:00:08,517 --> 00:00:11,205
+That is the world of transitive dependencies.
+
+6
+00:00:11,205 --> 00:00:13,236
+Libraries pull in other libraries,
+
+7
+00:00:13,236 --> 00:00:17,178
+and sometimes two of them want different versions of the same one.
+
+8
+00:00:17,728 --> 00:00:20,507
+Today you learn to read the dependency tree,
+
+9
+00:00:20,507 --> 00:00:21,580
+see the conflict,
+
+10
+00:00:21,580 --> 00:00:23,412
+understand how Maven chooses,
+
+11
+00:00:23,412 --> 00:00:24,107
+and fix it.
+
+12
+00:00:24,657 --> 00:00:26,427
+Then you solve a conflict yourself.
+
+13
+00:00:26,977 --> 00:00:28,029
+One honest note.
+
+14
+00:00:28,029 --> 00:00:31,251
+My recording computer cannot reach Maven Central,
+
+15
+00:00:31,251 --> 00:00:35,327
+so the demos use two tiny libraries I built in a local folder.
+
+16
+00:00:35,327 --> 00:00:39,009
+The commands and the tree are exactly what you will see.
+
+17
+00:00:40,559 --> 00:00:43,418
+A direct dependency is one you write in your pom.
+
+18
+00:00:43,968 --> 00:00:47,360
+A transitive dependency is one your dependency needs.
+
+19
+00:00:47,360 --> 00:00:48,576
+You never wrote it.
+
+20
+00:00:48,576 --> 00:00:50,112
+Maven brings it for you.
+
+21
+00:00:50,662 --> 00:00:53,234
+Your project asks for lib A and lib B.
+
+22
+00:00:53,234 --> 00:00:54,656
+Lib A needs you till,
+
+23
+00:00:54,656 --> 00:00:55,468
+version one.
+
+24
+00:00:55,468 --> 00:00:56,889
+Lib B needs you till,
+
+25
+00:00:56,889 --> 00:00:57,702
+version two.
+
+26
+00:00:58,252 --> 00:01:02,134
+Only one version can go on the class path. So Maven must choose.
+
+27
+00:01:02,684 --> 00:01:07,932
+That clash is a version conflict. It is common, and it is quiet, until something breaks.
+
+28
+00:01:09,982 --> 00:01:11,166
+How Maven chooses.
+
+29
+00:01:11,166 --> 00:01:12,678
+Rule one: nearest wins.
+
+30
+00:01:12,678 --> 00:01:16,361
+The version closest to your project in the tree is used.
+
+31
+00:01:16,911 --> 00:01:21,028
+Rule two: if two are the same distance, the first one declared wins.
+
+32
+00:01:21,578 --> 00:01:22,378
+In our case,
+
+33
+00:01:22,378 --> 00:01:24,245
+you till is two levels away,
+
+34
+00:01:24,245 --> 00:01:25,179
+through lib A,
+
+35
+00:01:25,179 --> 00:01:26,846
+and also two levels away,
+
+36
+00:01:26,846 --> 00:01:27,780
+through lib B.
+
+37
+00:01:27,780 --> 00:01:28,180
+A tie.
+
+38
+00:01:28,180 --> 00:01:29,780
+Lib A is declared first,
+
+39
+00:01:29,780 --> 00:01:31,114
+so version one wins.
+
+40
+00:01:31,664 --> 00:01:33,697
+The newest version does not win.
+
+41
+00:01:33,697 --> 00:01:34,777
+The nearest does,
+
+42
+00:01:34,777 --> 00:01:35,602
+or the first.
+
+43
+00:01:35,602 --> 00:01:37,317
+That surprises many people.
+
+44
+00:01:37,867 --> 00:01:42,966
+Version one is chosen, but our code needs a method that only exists in version two.
+
+45
+00:01:45,016 --> 00:01:46,765
+Three ways to fix a conflict.
+
+46
+00:01:47,315 --> 00:01:47,563
+One.
+
+47
+00:01:47,563 --> 00:01:48,924
+Dependency management.
+
+48
+00:01:48,924 --> 00:01:51,275
+Pin the version for the whole project,
+
+49
+00:01:51,275 --> 00:01:52,079
+in one place.
+
+50
+00:01:52,079 --> 00:01:53,502
+This is the best habit.
+
+51
+00:01:54,052 --> 00:01:58,937
+Two. An exclusion. Tell Maven: from this dependency, leave that library out.
+
+52
+00:01:59,487 --> 00:01:59,888
+Three.
+
+53
+00:01:59,888 --> 00:02:01,222
+Declare it yourself,
+
+54
+00:02:01,222 --> 00:02:01,822
+directly.
+
+55
+00:02:01,822 --> 00:02:03,891
+A direct dependency is nearest,
+
+56
+00:02:03,891 --> 00:02:04,625
+so it wins.
+
+57
+00:02:04,625 --> 00:02:05,025
+Quick,
+
+58
+00:02:05,025 --> 00:02:06,293
+but easy to forget.
+
+59
+00:02:06,843 --> 00:02:11,173
+We will use the first one, dependency management. Then prove it with the tree.
+
+60
+00:02:13,223 --> 00:02:16,380
+Go to the demo project. Type: CD, demo.
+
+61
+00:02:16,930 --> 00:02:25,805
+Print the tree. Type: mvn -B dependency:tree | grep 'jar:' | cut -c8-
+
+62
+00:02:25,935 --> 00:02:29,967
+Maven reads every pom, direct and transitive. A few seconds.
+
+63
+00:02:35,517 --> 00:02:36,887
+Read it like folders.
+
+64
+00:02:36,887 --> 00:02:38,387
+Our project at the top.
+
+65
+00:02:38,387 --> 00:02:38,778
+Lib A,
+
+66
+00:02:38,778 --> 00:02:39,626
+and under it,
+
+67
+00:02:39,626 --> 00:02:40,474
+you till one.
+
+68
+00:02:40,474 --> 00:02:41,192
+Then lib B.
+
+69
+00:02:41,742 --> 00:02:50,659
+Now ask for the details. Type: mvn -B dependency:tree -Dverbose | grep omitted | cut -c8-
+
+70
+00:02:50,789 --> 00:02:53,669
+Verbose mode also lists what Maven left out.
+
+71
+00:03:00,219 --> 00:03:00,996
+There it is.
+
+72
+00:03:00,996 --> 00:03:02,551
+You till two point zero,
+
+73
+00:03:02,551 --> 00:03:05,206
+omitted for conflict with one point zero.
+
+74
+00:03:05,206 --> 00:03:06,825
+Lib B wanted version two,
+
+75
+00:03:06,825 --> 00:03:07,408
+and lost.
+
+76
+00:03:07,958 --> 00:03:09,725
+Focus on one library.
+
+77
+00:03:09,725 --> 00:03:17,046
+Type: mvn -B dependency:tree -Dincludes=com.cloudcart.lib:util | grep 'jar:' | cut -c8-
+
+78
+00:03:17,176 --> 00:03:21,251
+Includes keeps only the path to one library. Useful in a big tree.
+
+79
+00:03:27,801 --> 00:03:30,852
+Only the path to you till. Version one, through lib A.
+
+80
+00:03:31,402 --> 00:03:37,802
+Now the build. Type: mvn -B -q compile 2>&1 | head -4
+
+81
+00:03:37,932 --> 00:03:39,852
+Quiet mode, so only errors show.
+
+82
+00:03:46,402 --> 00:03:46,996
+It fails.
+
+83
+00:03:46,996 --> 00:03:48,251
+Cannot find symbol,
+
+84
+00:03:48,251 --> 00:03:48,648
+shout.
+
+85
+00:03:48,648 --> 00:03:51,752
+That method is only in you till two point zero.
+
+86
+00:03:51,752 --> 00:03:53,932
+The conflict is now a real error.
+
+87
+00:03:54,482 --> 00:03:58,877
+Here is the fix, as a block. Type: cat dm.xml
+
+88
+00:03:59,007 --> 00:04:00,481
+Dependency management,
+
+89
+00:04:00,481 --> 00:04:03,094
+with you till pinned to two point zero.
+
+90
+00:04:03,094 --> 00:04:04,166
+No jar is added.
+
+91
+00:04:04,166 --> 00:04:05,841
+It only sets the version,
+
+92
+00:04:05,841 --> 00:04:07,583
+wherever you till appears.
+
+93
+00:04:08,133 --> 00:04:16,496
+Insert it into the pom. Type: sed -i '/<\/properties>/r dm.xml' pom.xml
+
+94
+00:04:16,626 --> 00:04:18,823
+Print the tree again. Type: mvn -B dependency:tree | grep 'jar:' | cut -c8-
+
+95
+00:04:21,553 --> 00:04:23,132
+Same command as before.
+
+96
+00:04:28,682 --> 00:04:33,524
+You till is now two point zero, under lib A. Lib A did not change. The pin did.
+
+97
+00:04:34,074 --> 00:04:39,109
+Build again. Type: mvn -B -q compile && echo built
+
+98
+00:04:39,239 --> 00:04:40,220
+Almost there.
+
+99
+00:04:46,770 --> 00:04:49,373
+Built. Conflict found, understood, and fixed.
+
+100
+00:04:50,923 --> 00:04:51,774
+Your lab task.
+
+101
+00:04:51,774 --> 00:04:55,361
+Lab eighty-eight gives you a build with a version conflict.
+
+102
+00:04:55,361 --> 00:04:57,003
+Lab check judges your work.
+
+103
+00:04:57,553 --> 00:04:59,609
+It lives at git hub dot com,
+
+104
+00:04:59,609 --> 00:05:01,077
+slash it dash waves,
+
+105
+00:05:01,077 --> 00:05:02,766
+slash dev ops dash A I,
+
+106
+00:05:02,766 --> 00:05:03,573
+in academy,
+
+107
+00:05:03,573 --> 00:05:03,867
+lab,
+
+108
+00:05:03,867 --> 00:05:05,702
+lab eighty-eight dot S H.
+
+109
+00:05:06,252 --> 00:05:08,022
+One: before you fix anything,
+
+110
+00:05:08,022 --> 00:05:11,927
+save the verbose tree lines with omitted into conflict dot text.
+
+111
+00:05:12,477 --> 00:05:14,865
+Two: pin you till to two point zero,
+
+112
+00:05:14,865 --> 00:05:17,188
+with a dependency management block.
+
+113
+00:05:17,188 --> 00:05:19,112
+Do not delete lib A or lib B.
+
+114
+00:05:19,662 --> 00:05:23,224
+Three: M V N clean package must end in build success.
+
+115
+00:05:23,774 --> 00:05:26,562
+Four: save the new tree into tree dot text.
+
+116
+00:05:26,562 --> 00:05:28,961
+It must show you till two point zero,
+
+117
+00:05:28,961 --> 00:05:30,388
+and no one point zero.
+
+118
+00:05:30,938 --> 00:05:33,764
+Five: write one sentence in why dot text,
+
+119
+00:05:33,764 --> 00:05:36,934
+about the rule Maven used to pick version one.
+
+120
+00:05:36,934 --> 00:05:38,381
+Use the word nearest,
+
+121
+00:05:38,381 --> 00:05:39,002
+or first.
+
+122
+00:05:39,552 --> 00:05:41,833
+Install a J D K and Maven first.
+
+123
+00:05:41,833 --> 00:05:42,689
+Then lab up,
+
+124
+00:05:42,689 --> 00:05:43,402
+lab check,
+
+125
+00:05:43,402 --> 00:05:44,329
+and lab down.
+
+126
+00:05:44,329 --> 00:05:47,466
+The shortcut file is shortcuts eighty-eight.
+
+127
+00:05:49,516 --> 00:05:51,585
+Pass or fail. You need all six.
+
+128
+00:05:52,135 --> 00:05:53,949
+Five pass lines in lab check.
+
+129
+00:05:54,499 --> 00:05:57,592
+You can read a dependency tree, direct and transitive.
+
+130
+00:05:58,142 --> 00:06:01,619
+You can state the two rules: nearest wins, then first declared.
+
+131
+00:06:02,169 --> 00:06:04,431
+You can name three ways to fix a conflict.
+
+132
+00:06:04,981 --> 00:06:07,946
+You can find a conflict with dash capital D verbose.
+
+133
+00:06:08,496 --> 00:06:10,416
+lab down, nothing left behind.
+
+134
+00:06:10,966 --> 00:06:12,267
+To pass, all six.
+
+135
+00:06:14,317 --> 00:06:17,154
+Your turn, in your own Ubuntu virtual machine.
+
+136
+00:06:17,704 --> 00:06:19,795
+One: lab up, and read the task file.
+
+137
+00:06:20,345 --> 00:06:24,377
+Two: save the conflict into conflict dot text, before any fix.
+
+138
+00:06:24,927 --> 00:06:27,487
+Three: add the dependency management block.
+
+139
+00:06:28,037 --> 00:06:30,341
+Four: build, and save tree dot text.
+
+140
+00:06:30,891 --> 00:06:33,344
+Five: write why dot text, and lab check.
+
+141
+00:06:33,894 --> 00:06:36,476
+Six: lab down, and prove nothing is left.
+
+142
+00:06:37,026 --> 00:06:38,860
+Pause the video, and begin now.
+
+143
+00:06:54,410 --> 00:06:55,285
+Quick check.
+
+144
+00:06:55,835 --> 00:06:57,733
+What is a transitive dependency?
+
+145
+00:06:58,283 --> 00:07:00,161
+Which version wins in a conflict?
+
+146
+00:07:00,711 --> 00:07:02,695
+Name two ways to fix a conflict.
+
+147
+00:07:03,245 --> 00:07:04,973
+Which flag shows what was omitted?
+
+148
+00:07:05,523 --> 00:07:08,808
+Objective covered: M C ten, objective four.
+
+149
+00:07:09,358 --> 00:07:11,427
+Pause the video, and answer out loud.
+
+150
+00:07:21,977 --> 00:07:24,623
+Next: package the cloud cart app as a war.
+
+151
+00:07:25,173 --> 00:07:28,501
+If this helped, like, share and subscribe, so you do not miss it.

@@ -1,0 +1,16 @@
+Install the lab (needs an Ubuntu virtual machine with root, a JDK, Maven and internet access to Maven Central for the build plugins):
+  sudo apt install -y openjdk-21-jdk-headless maven
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab88.sh /usr/local/sbin/
+  source shortcuts88.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab88: two tiny libraries in a local repo, a project with a version conflict, and TASKS.txt
+  lab check               # five FAIL lines at the start; your goal is five PASS lines
+  lab down                # cleanup when finished
+Without the shortcut, use: sudo lab88.sh up | check | down
+Your five tasks (inside /opt/lab88/shop; also written in /opt/lab88/TASKS.txt):
+  1 find   mvn -B dependency:tree -Dverbose | grep omitted > conflict.txt, before any fix
+  2 fix    dependencyManagement block pinning util 2.0 (keep liba and libb)
+  3 build  mvn -B clean package ends in BUILD SUCCESS
+  4 tree   mvn -B dependency:tree > tree.txt shows util 2.0 and no util 1.0
+  5 why    why.txt: one sentence containing nearest or first
+Run it only in your own virtual machine. lab down removes /opt/lab88; remove the installed script with: sudo rm /usr/local/sbin/lab88.sh
