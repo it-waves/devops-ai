@@ -1,0 +1,16 @@
+Install the lab (needs an Ubuntu virtual machine with root, a JDK, Maven, python3 and internet access to Maven Central for the build plugins):
+  sudo apt install -y openjdk-21-jdk-headless maven python3
+  git clone https://github.com/it-waves/devops-ai && cd devops-ai/academy/lab
+  sudo install -m 755 lab91.sh /usr/local/sbin/
+  source shortcuts91.sh   # gives you the short name lab used in the video
+  lab up                  # builds /opt/lab91: a project, a stand-in repository manager (web page) on port 8092, pass.txt and TASKS.txt
+  lab check               # five FAIL lines at the start; your goal is five PASS lines
+  lab down                # stops the server and cleans up when finished
+Without the shortcut, use: sudo lab91.sh up | check | down
+Your five tasks (inside /opt/lab91/shop; also written in /opt/lab91/TASKS.txt). Web page: http://localhost:8092/ui  user dev, password in /opt/lab91/pass.txt
+  1 repos     in the web page, Create repository twice: corp-snapshots (Snapshot, Allow redeploy) and corp-releases (Release, Disable redeploy)
+  2 snapshot  export CORP_PASS=$(cat /opt/lab91/pass.txt); mvn -B -s settings.xml deploy  (version 1.0.0-SNAPSHOT); find it under Browse
+  3 release   change the version in pom.xml to 1.0.0 and deploy it
+  4 again     deploy 1.0.0 a second time; it fails: save the 'status code' line into conflict.txt, then write a red REJECTED event id from the Events page into ui.txt
+  5 next+why  change the version to 1.0.1 and deploy it; why.txt: one sentence with the word release and one of immutable, reproducible, overwrite, changed
+Run it only in your own virtual machine. lab down removes /opt/lab91; remove the installed script with: sudo rm /usr/local/sbin/lab91.sh

@@ -1,5 +1,5 @@
 #!/bin/sh
-unset JAVA_TOOL_OPTIONS
+MO="$JAVA_TOOL_OPTIONS"; unset JAVA_TOOL_OPTIONS
 # builds a clean standard-layout root view for the recordings (private copy of /etc with sudo for the student), then runs the command inside it
 R=/tmp/lroot; F=/tmp/fixvarlog
 mount --make-rprivate / 2>/dev/null
@@ -22,18 +22,13 @@ mount -t tmpfs tmpfs $R/usr/local/sbin
 mount -t tmpfs tmpfs $R/usr/local/bin
 ln -s /usr/bin/python3.12 $R/usr/local/bin/python3; ln -s /usr/bin/python3.12 $R/usr/local/bin/python
 SU="chroot $R runuser -u student -- env -u JAVA_TOOL_OPTIONS HOME=/home/student LANG=C.UTF-8"
-mkdir -p $R/opt/maven $R/opt/m2mirror; mount --bind /opt/maven $R/opt/maven; mount --bind /opt/m2mirror $R/opt/m2mirror
+mkdir -p $R/opt/maven; mount --bind /opt/maven $R/opt/maven
 ln -sf /opt/maven/bin/mvn $R/usr/local/bin/mvn
-rm -rf /home/student/.m2 /home/student/demo; mkdir -p /home/student/.m2; cp /home/claude/academy/lesson91/settings.xml.src /home/student/.m2/settings.xml; chown -R student /home/student/.m2
+printf '%s\n' "export MAVEN_OPTS='$MO'" >> $E/ps1rc
+rm -rf /home/student/.m2 /home/student/demo; mkdir -p /home/student/.m2; chown -R student /home/student/.m2
 cp -r /home/claude/academy/lesson91/files/demo $R/tmp/demo91; chmod -R a+rX $R/tmp/demo91
 $SU sh -c 'mkdir -p ~/demo && cp -r /tmp/demo91/. ~/demo/'
-mkdir -p /home/student/store; chown -R student /home/student/store
-printf 'corp-7q4m2\n' > /home/student/.corp-pass; chmod 600 /home/student/.corp-pass; chown student /home/student/.corp-pass
-cp /home/claude/academy/lesson91/srv.py $R/tmp/srv.py; chmod a+r $R/tmp/srv.py
-printf '<settings><mirrors><mirror><id>offline-pkg</id><mirrorOf>external:*</mirrorOf><url>file:///opt/m2mirror</url></mirror></mirrors></settings>\n' > $E/gs91.xml
-printf '%s\n' 'export MAVEN_ARGS="-gs /etc/gs91.xml"' >> $E/ps1rc
-$SU sh -c 'nohup python3 /tmp/srv.py ~/store dev "$(cat ~/.corp-pass)" 8082 >/dev/null 2>&1 &'
-sleep 1
-case $S in deploy) $SU sh -c 'export MAVEN_ARGS="-gs /etc/gs91.xml"; cp -r ~/demo /tmp/warm && cd /tmp/warm && P=$(cat ~/.corp-pass); curl -s -c /tmp/cj -o /dev/null -d "u=dev&p=$P" localhost:8082/ui/login; curl -s -b /tmp/cj -o /dev/null -d "name=corp-snapshots&type=snapshot&policy=allow" localhost:8082/ui/create; REPO_PASS=$P mvn -B -q deploy >/dev/null 2>&1; rm -rf /tmp/warm ~/.m2/repository/com/cloudcart; rm -rf ~/store/* ~/store/.[a-z]*' ;; esac
+$SU sh -c "export MAVEN_OPTS='$MO'; cp -r ~/demo /tmp/warm && cd /tmp/warm && mvn -B -q -DaltDeploymentRepository=w::default::file:///tmp/wd deploy >/tmp/warm.log 2>&1; rm -rf /tmp/warm"
+printf 'Corp-7q4m2-Nexus1\n' > /home/student/.corp-pass; chmod 600 /home/student/.corp-pass; chown student /home/student/.corp-pass
 touch /home/student/.ready; chown student /home/student/.ready
 exec chroot $R "$@"

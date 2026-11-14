@@ -1,24 +1,32 @@
-Lesson 91 of the DevOps Engineering Bootcamp, the seventh lesson of Maven. Your jar works on your laptop, but your teammates cannot use it until you publish it with mvn deploy. This is CloudCart v0: one module, cart-core, becomes a shared package. You learn install versus deploy, snapshot versus release, and the distributionManagement block. Then a full live demo in a web page and a terminal, in one continuous recording: you log in to a repository manager, create a snapshot repository and a release repository, deploy a snapshot twice and see two timestamped jars arrive, publish release 1.0.0, then deploy it again and watch HTTP 409 Conflict appear on the Events page. The fix is never an overwrite: publish 1.0.1. Then you do the lab yourself: five checks, all must pass.
+Lesson 91 of the DevOps Engineering Bootcamp, the seventh lesson of Maven. Your jar works on your laptop, but your teammates cannot use it until you publish it with mvn deploy. This lesson is a live demo on a real Sonatype Nexus Repository, from the very first login to a working package feed. You learn install vs deploy, snapshot vs release, and the distributionManagement block. Then the rule that surprises everybody: a release can never be replaced.
+
+The demo goes from simple to advanced: the first-run setup wizard, a tour of the Nexus screens (sidebar, repository list, hosted vs proxy vs group), creating corp-snapshots and corp-releases with the right policies, deploying a snapshot twice (two timestamped builds), publishing a release, the HTTP 409 refusal when you deploy it again, browsing the result and its SHA-1 checksum, then the advanced part: the maven-public group and a Maven Central proxy cache filled by your own build. The fix for a bad release is never an overwrite: publish 1.0.1.
 
 Chapters
 0:00 The jar is only on your laptop
-0:58 Install vs deploy, snapshot vs release
-1:36 Why a release is immutable
-2:15 Live: create repos in the UI, deploy, 409
-6:03 Your lab task
-7:05 Pass or fail rubric
-7:28 Your turn
-8:06 Quick check
+0:57 Install vs deploy, snapshot vs release
+1:40 Why a release is immutable
+2:20 Live: first login and the setup wizard
+4:01 Tour of the Nexus screens
+5:11 Create the two repositories
+6:46 Deploy a snapshot, then a release
+8:36 The 409 rule
+9:04 Browse and the SHA-1 checksum
+10:01 Advanced: group and Maven Central proxy cache
+12:03 Your lab task
+13:24 Pass or fail rubric
+13:48 Your turn
+14:33 Quick check
 
 Objectives covered: MC10-O07 (publish snapshot and release artifacts to a repository manager)
 
-Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab91.sh and shortcuts91.sh). Install with: sudo install -m 755 lab91.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts91.sh (without it, use sudo lab91.sh up, check, down). You need an Ubuntu virtual machine with root, a JDK, Maven and python3 (for example: sudo apt install -y openjdk-21-jdk-headless maven python3) and internet access to Maven Central for the build plugins. The lab starts a small local stand-in repository manager with a web page and a login on port 8092 (open http://localhost:8092/ui, user dev, password in /opt/lab91/pass.txt), writes a project into /opt/lab91, and lab down stops the server and removes the folder. Read TASKS.txt in that folder: you create the two repositories in the web page yourself. Only run it in your own virtual machine.
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab91.sh and shortcuts91.sh). Install with: sudo install -m 755 lab91.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts91.sh (without it, use sudo --preserve-env=NEXUS_PASS lab91.sh up, check, down). You need an Ubuntu virtual machine with root, a JDK, Maven, python3 and curl (for example: sudo apt install -y openjdk-21-jdk-headless maven python3 curl), internet access, about 3 GB of free memory and 1.5 GB of disk. The first lab up downloads Sonatype Nexus Repository Community Edition 3.98.1 (about 525 MB) from download.sonatype.com, writes a project into /opt/lab91 and starts Nexus on port 8081 as a dedicated user. lab down stops Nexus and removes everything. Only run it in your own virtual machine.
 
-Honest notes: the browser and terminal segments are one real continuous recording on Ubuntu 24.04 with Maven 3.9.11 and OpenJDK 21. The repository manager in the demo is a small local stand-in web app I wrote that accepts uploads with a login and refuses to overwrite a release; it is not Nexus or Artifactory. Real managers follow the same rule, but their screens and error texts differ, and I did not test one. The real Nexus gets its own masterclass later, where CloudCart v1 uses it. The password on screen is a throwaway demo value that only exists in my recording environment. My recording computer cannot reach Maven Central, so the plugins came from a local copy built from Ubuntu's packaged Maven files through an extra mirror that is not shown. The ideas, task, rubric and quiz screens are labelled illustrations, not captures. The lab was run end to end before this lesson: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing behind. On your machine the plugins download from Maven Central, which I could not test, and only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. Your own run is unverified until you do it.
+Honest notes: the browser and terminal segments are one real, continuous recording on Ubuntu 24.04 with Maven and OpenJDK 21, against a real Nexus Repository Community Edition 3.98.1 and the real Maven Central. The Nexus license agreement is yours to read and accept in your own lab; I accepted it for the demo instance only. The setup wizard also asks you to acknowledge a required daily usage report; if Nexus cannot send it for 30 days it becomes read only, which matters for a long-lived server but not for this lab. The admin password on screen is a throwaway value that only exists in my recording environment; never show or reuse a real one. I used Nexus's classic screens. Your Nexus may show the new look first, and menus or colors can differ in other versions. The ideas, task, rubric and quiz screens are labelled illustrations, not captures. The lab was run end to end before this lesson: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing behind; only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. Your own run is unverified until you do it.
 
 Previous lesson: Maven Mirrors and Credentials: Keep Your Repository Password Safe https://youtu.be/DqiKh0ygf9U
 Next: diagnosing offline, checksum, login and test failures.
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
-#devops #maven #java #artifacts #devopsbootcamp
+#devops #maven #nexus #java #artifacts #devopsbootcamp

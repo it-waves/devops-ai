@@ -63,725 +63,1197 @@ you repeat this on real nexus,
 and CloudCart version one wires it into the pipeline.
 
 17
-00:00:41,053 --> 00:00:42,203
+00:00:41,053 --> 00:00:42,180
 One honest note.
 
 18
-00:00:42,203 --> 00:00:47,382
-The company repository in this lesson is a small local stand-in I wrote,
+00:00:42,180 --> 00:00:44,856
+The repository in this lesson is real.
 
 19
-00:00:47,382 --> 00:00:49,396
-with a login and a web page.
+00:00:44,856 --> 00:00:47,111
+It is Sonatype Nexus Repository,
 
 20
-00:00:49,396 --> 00:00:54,071
-The real thing is a repository manager like nexus or artifactory,
+00:00:47,111 --> 00:00:48,378
+Community Edition,
 
 21
-00:00:54,071 --> 00:00:56,733
-but Maven uploads to it the same way.
+00:00:48,378 --> 00:00:49,928
+running on my machine.
 
 22
-00:00:58,283 --> 00:01:02,063
-Install copies your jar into your own dot m two folder.
+00:00:49,928 --> 00:00:52,816
+Its license agreement is yours to accept,
 
 23
-00:01:02,063 --> 00:01:04,880
-Deploy uploads it to a remote repository,
+00:00:52,816 --> 00:00:55,986
+and it needs about three gigabytes of memory.
 
 24
-00:01:04,880 --> 00:01:06,667
-so others can download it.
+00:00:57,536 --> 00:01:01,316
+Install copies your jar into your own dot m two folder.
 
 25
-00:01:07,217 --> 00:01:09,117
-A repository manager usually has two repositories,
+00:01:01,316 --> 00:01:04,133
+Deploy uploads it to a remote repository,
 
 26
-00:01:09,117 --> 00:01:10,599
-one for snapshots and one for releases.
+00:01:04,133 --> 00:01:05,920
+so others can download it.
 
 27
-00:01:10,599 --> 00:01:11,967
-You create each one in its web page,
+00:01:06,470 --> 00:01:09,948
+A repository manager usually has two repositories,
 
 28
-00:01:11,967 --> 00:01:13,638
-and choose its type and its redeploy policy.
+00:01:09,948 --> 00:01:12,660
+one for snapshots and one for releases.
 
 29
-00:01:14,188 --> 00:01:16,056
-A snapshot is work in progress.
+00:01:12,660 --> 00:01:15,164
+You create each one in its web page,
 
 30
-00:01:16,056 --> 00:01:18,224
-The version ends with dash snapshot.
+00:01:15,164 --> 00:01:18,225
+and choose its type and its redeploy policy.
 
 31
-00:01:18,224 --> 00:01:20,332
-You may publish it again and again.
+00:01:18,775 --> 00:01:20,642
+A snapshot is work in progress.
 
 32
-00:01:20,882 --> 00:01:26,322
-A release is final. The version has no snapshot. Once published, it can never be replaced.
+00:01:20,642 --> 00:01:22,810
+The version ends with dash snapshot.
 
 33
-00:01:26,872 --> 00:01:28,717
-The pom says where to upload.
+00:01:22,810 --> 00:01:24,919
+You may publish it again and again.
 
 34
-00:01:28,717 --> 00:01:31,071
-In the block distribution management,
+00:01:25,469 --> 00:01:30,909
+A release is final. The version has no snapshot. Once published, it can never be replaced.
 
 35
-00:01:31,071 --> 00:01:32,726
-one address for snapshots,
+00:01:31,459 --> 00:01:33,304
+The pom says where to upload.
 
 36
-00:01:32,726 --> 00:01:34,062
-and one for releases.
+00:01:33,304 --> 00:01:35,658
+In the block distribution management,
 
 37
-00:01:36,112 --> 00:01:39,931
-Why can a release never be replaced? Because other people built on it.
+00:01:35,658 --> 00:01:37,312
+one address for snapshots,
 
 38
-00:01:40,481 --> 00:01:43,867
-If the jar for one dot zero dot zero changed tomorrow,
+00:01:37,312 --> 00:01:38,648
+and one for releases.
 
 39
-00:01:43,867 --> 00:01:46,062
-an old build could not be repeated.
+00:01:40,698 --> 00:01:44,517
+Why can a release never be replaced? Because other people built on it.
 
 40
-00:01:46,062 --> 00:01:48,758
-The same version would mean different code.
+00:01:45,067 --> 00:01:48,453
+If the jar for one dot zero dot zero changed tomorrow,
 
 41
-00:01:49,308 --> 00:01:51,169
-So the repository refuses.
+00:01:48,453 --> 00:01:50,648
+an old build could not be repeated.
 
 42
-00:01:51,169 --> 00:01:52,886
-It answers four oh nine,
+00:01:50,648 --> 00:01:53,344
+The same version would mean different code.
 
 43
-00:01:52,886 --> 00:01:53,531
-conflict.
+00:01:53,894 --> 00:01:55,755
+So the repository refuses.
 
 44
-00:01:53,531 --> 00:01:56,107
-The right fix is never to overwrite.
+00:01:55,755 --> 00:01:57,472
+It answers four oh nine,
 
 45
-00:01:56,107 --> 00:01:58,183
-Publish one dot zero dot one.
+00:01:57,472 --> 00:01:58,117
+conflict.
 
 46
-00:01:58,733 --> 00:02:00,365
-A snapshot is different.
+00:01:58,117 --> 00:02:00,693
+The right fix is never to overwrite.
 
 47
-00:02:00,365 --> 00:02:01,997
-Maven adds a time stamp,
+00:02:00,693 --> 00:02:02,769
+Publish one dot zero dot one.
 
 48
-00:02:01,997 --> 00:02:03,970
-so each upload is a new file,
+00:02:03,319 --> 00:02:04,951
+A snapshot is different.
 
 49
-00:02:03,970 --> 00:02:05,602
-and the newest one wins.
+00:02:04,951 --> 00:02:06,583
+Maven adds a time stamp,
 
 50
-00:02:06,152 --> 00:02:07,048
-And the login?
+00:02:06,583 --> 00:02:08,556
+so each upload is a new file,
 
 51
-00:02:07,048 --> 00:02:08,584
-The same as last lesson.
+00:02:08,556 --> 00:02:10,188
+and the newest one wins.
 
 52
-00:02:08,584 --> 00:02:09,544
-A server block,
+00:02:10,738 --> 00:02:11,634
+And the login?
 
 53
-00:02:09,544 --> 00:02:10,632
-with the same id,
+00:02:11,634 --> 00:02:13,170
+The same as last lesson.
 
 54
-00:02:10,632 --> 00:02:13,576
-and the password from an environment variable.
+00:02:13,170 --> 00:02:14,130
+A server block,
 
 55
-00:02:15,626 --> 00:02:18,017
-Start in the repository's web page.
+00:02:14,130 --> 00:02:15,218
+with the same id,
 
 56
-00:02:18,017 --> 00:02:19,041
-Open a browser,
+00:02:15,218 --> 00:02:18,162
+and the password from an environment variable.
 
 57
-00:02:19,041 --> 00:02:20,476
-and go to local host,
+00:02:20,212 --> 00:02:21,688
+Start in the browser.
 
 58
-00:02:20,476 --> 00:02:22,047
-port eighty-eighty-two,
+00:02:21,688 --> 00:02:22,883
+Go to local host,
 
 59
-00:02:22,047 --> 00:02:22,730
-slash U I.
+00:02:22,883 --> 00:02:24,500
+port eighty-eighty-one.
 
 60
-00:02:24,280 --> 00:02:29,549
-It asks for a login. The user is dev, and the password is the one from our locked file.
+00:02:24,500 --> 00:02:27,523
+This is the real Sonatype Nexus Repository,
 
 61
-00:02:31,599 --> 00:02:33,122
-No repositories yet.
+00:02:27,523 --> 00:02:28,788
+Community Edition.
 
 62
-00:02:33,122 --> 00:02:35,709
-A repository manager starts empty,
+00:02:31,338 --> 00:02:37,203
+The login page tells you where the first password lives: a file called admin dot password.
 
 63
-00:02:35,709 --> 00:02:38,754
-and you create each repository yourself.
+00:02:37,203 --> 00:02:38,245
+In your own lab,
 
 64
-00:02:38,754 --> 00:02:40,581
-Click create repository.
+00:02:38,245 --> 00:02:39,223
+read that file,
 
 65
-00:02:42,131 --> 00:02:44,178
-First the snapshot repository.
+00:02:39,223 --> 00:02:40,917
+and paste the password in.
 
 66
-00:02:44,178 --> 00:02:46,362
-The name is corp dash snapshots.
+00:02:40,917 --> 00:02:42,090
+The user is admin.
 
 67
-00:02:46,362 --> 00:02:47,795
-The type is snapshot.
+00:02:49,640 --> 00:02:52,432
+Nexus now makes you choose your own password.
 
 68
-00:02:47,795 --> 00:02:50,046
-And the policy is allow redeploy,
+00:02:52,432 --> 00:02:53,549
+Pick a strong one,
 
 69
-00:02:50,046 --> 00:02:52,776
-because a snapshot changes all the time.
+00:02:53,549 --> 00:02:55,224
+and keep it somewhere safe.
 
 70
-00:02:56,326 --> 00:02:58,929
-Create it. Then the same again, for releases.
+00:02:55,224 --> 00:02:57,520
+This one is a throwaway for the demo.
 
 71
-00:03:02,479 --> 00:03:04,554
-The name is corp dash releases.
+00:02:57,520 --> 00:02:59,816
+Never show a real password on screen.
 
 72
-00:03:04,554 --> 00:03:05,892
-The type is release.
+00:03:05,366 --> 00:03:08,459
+It signs you out, so log in again, with the new password.
 
 73
-00:03:05,892 --> 00:03:08,235
-And the policy is disable redeploy,
+00:03:16,009 --> 00:03:20,105
+A short setup wizard starts. Step one is a welcome. Click next.
 
 74
-00:03:08,235 --> 00:03:11,247
-so a published release can never be replaced.
+00:03:23,655 --> 00:03:25,908
+Step two is the license agreement.
 
 75
-00:03:14,797 --> 00:03:16,013
-Two repositories.
+00:03:25,908 --> 00:03:26,969
+In your own lab,
 
 76
-00:03:16,013 --> 00:03:17,801
-Each has its own address,
+00:03:26,969 --> 00:03:27,499
+read it,
 
 77
-00:03:17,801 --> 00:03:19,733
-ending in slash repository,
+00:03:27,499 --> 00:03:29,420
+and accept only if you agree.
 
 78
-00:03:19,733 --> 00:03:20,806
-slash its name.
+00:03:29,420 --> 00:03:30,348
+For this demo,
 
 79
-00:03:20,806 --> 00:03:23,095
-Maven needs these two addresses.
+00:03:30,348 --> 00:03:31,143
+I accept it.
 
 80
-00:03:25,145 --> 00:03:28,303
-Now the terminal. Go to the demo project. Type: CD, demo.
+00:03:34,693 --> 00:03:36,696
+Step three is anonymous access.
 
 81
-00:03:28,853 --> 00:03:32,002
-Look at the upload addresses in the pom.
+00:03:36,696 --> 00:03:37,859
+Leave it disabled,
 
 82
-00:03:32,002 --> 00:03:32,789
-Type: sed,
+00:03:37,859 --> 00:03:41,477
+so nobody can download your packages without logging in.
 
 83
-00:03:32,789 --> 00:03:33,341
-dash n,
+00:03:44,027 --> 00:03:46,165
+Step four is a required notice.
 
 84
-00:03:33,341 --> 00:03:35,230
-eleven comma twenty-two,
+00:03:46,165 --> 00:03:49,130
+Nexus sends a small usage report every day.
 
 85
-00:03:35,230 --> 00:03:35,388
-p,
+00:03:49,130 --> 00:03:51,682
+If it cannot be sent for thirty days,
 
 86
-00:03:35,388 --> 00:03:36,490
-pom dot X M L.
+00:03:51,682 --> 00:03:53,820
+the instance becomes read only.
 
 87
-00:03:37,040 --> 00:03:38,570
-The same two addresses,
+00:03:53,820 --> 00:03:54,716
+Tick the box,
 
 88
-00:03:38,570 --> 00:03:40,100
-snapshots and releases.
+00:03:54,716 --> 00:03:55,889
+and click finish.
 
 89
-00:03:40,100 --> 00:03:41,564
-Both with the id corp,
+00:04:01,439 --> 00:04:02,995
+This is the dashboard.
 
 90
-00:03:41,564 --> 00:03:43,227
-so one login serves both.
+00:04:02,995 --> 00:04:04,126
+Now the sidebar,
 
 91
-00:03:43,777 --> 00:03:44,866
-Set the password from the locked file.
+00:04:04,126 --> 00:04:04,975
+on the left.
 
 92
-00:03:44,866 --> 00:03:45,927
-Type: export REPO_PASS equals dollar,
+00:04:04,975 --> 00:04:05,683
+Dashboard.
 
 93
-00:03:45,927 --> 00:03:46,272
-parenthesis,
+00:04:05,683 --> 00:04:06,178
+Search,
 
 94
-00:03:46,272 --> 00:03:46,386
-cat,
+00:04:06,178 --> 00:04:07,451
+to find a package.
 
 95
-00:03:46,386 --> 00:03:46,558
-tilde,
+00:04:07,451 --> 00:04:07,946
+Browse,
 
 96
-00:03:46,558 --> 00:03:46,730
-slash,
+00:04:07,946 --> 00:04:09,926
+to look inside a repository.
 
 97
-00:03:46,730 --> 00:03:47,275
-dot corp dash pass.
+00:04:09,926 --> 00:04:10,422
+Upload,
 
 98
-00:03:47,825 --> 00:03:53,564
-Deploy the snapshot. Type: mvn dash B dash q deploy, then list the snapshot repository.
+00:04:10,422 --> 00:04:11,978
+to add a file by hand.
 
 99
-00:03:54,514 --> 00:03:56,327
-Maven builds, then uploads.
+00:04:11,978 --> 00:04:12,756
+The shield,
 
 100
-00:04:03,877 --> 00:04:06,267
-One jar, with a time stamp in its name.
+00:04:12,756 --> 00:04:14,170
+for security health.
 
 101
-00:04:06,817 --> 00:04:11,041
-Deploy it again. The same command.
+00:04:14,170 --> 00:04:15,090
+And the gear,
 
 102
-00:04:13,491 --> 00:04:14,685
-A second upload.
+00:04:15,090 --> 00:04:16,009
+for settings.
 
 103
-00:04:21,235 --> 00:04:25,545
-Two jars now. Each upload is a new file, and nothing was refused.
+00:04:20,559 --> 00:04:23,262
+Nexus has a new look and a classic look.
 
 104
-00:04:26,095 --> 00:04:31,748
-Now make it a release. Remove the word snapshot from the version, with sed.
+00:04:23,262 --> 00:04:25,491
+Most guides show the classic one,
 
 105
-00:04:32,298 --> 00:04:35,626
-Version one dot zero dot zero. No snapshot.
+00:04:25,491 --> 00:04:27,585
+so click switch to classic U I.
 
 106
-00:04:36,176 --> 00:04:40,336
-Deploy it. Type: mvn dash B dash q deploy, then list the release repository.
+00:04:27,585 --> 00:04:28,531
+Then the gear,
 
 107
-00:04:42,786 --> 00:04:43,981
-Uploading the release.
+00:04:28,531 --> 00:04:29,409
+for settings,
 
 108
-00:04:50,531 --> 00:04:51,939
-The release is published.
+00:04:29,409 --> 00:04:30,558
+and repositories.
 
 109
-00:04:52,489 --> 00:04:57,694
-Now the rule. Deploy the same version again, and keep only the error.
+00:04:30,558 --> 00:04:32,719
+This list is the heart of Nexus.
 
 110
-00:04:58,244 --> 00:05:00,057
-Same version, second time.
+00:04:34,269 --> 00:04:36,356
+Each row is one repository.
 
 111
-00:05:06,607 --> 00:05:07,486
-Four oh nine.
+00:04:36,356 --> 00:04:37,052
+Its name.
 
 112
-00:05:07,486 --> 00:05:08,095
-Conflict.
+00:04:37,052 --> 00:04:37,748
+Its type,
 
 113
-00:05:08,095 --> 00:05:10,530
-The repository protects the release.
+00:04:37,748 --> 00:04:38,289
+hosted,
 
 114
-00:05:10,530 --> 00:05:11,815
-To change anything,
+00:04:38,289 --> 00:04:38,752
+proxy,
 
 115
-00:05:11,815 --> 00:05:13,370
-you need a new version.
+00:04:38,752 --> 00:04:39,448
+or group.
 
 116
-00:05:13,920 --> 00:05:17,120
-Back to the web page. Click browse, to see what arrived.
+00:04:39,448 --> 00:04:40,298
+Its format,
 
 117
-00:05:19,170 --> 00:05:23,309
-The snapshot repository now holds two uploaded jars. Open it.
+00:04:40,298 --> 00:04:41,458
+here maven two.
 
 118
-00:05:23,859 --> 00:05:24,842
-One component,
+00:04:41,458 --> 00:04:42,308
+Its status.
 
 119
-00:05:24,842 --> 00:05:25,544
-cart core,
+00:04:42,308 --> 00:04:43,699
+And a copy button,
 
 120
-00:05:25,544 --> 00:05:28,915
-with the version one dot zero dot zero snapshot.
+00:04:43,699 --> 00:04:44,936
+for its address.
 
 121
-00:05:28,915 --> 00:05:30,109
-Open the version.
+00:04:45,486 --> 00:04:47,992
+Hosted means it stores what you upload.
 
 122
-00:05:32,159 --> 00:05:32,748
-Two jars.
+00:04:47,992 --> 00:04:50,692
+Proxy means it fetches from another place,
 
 123
-00:05:32,748 --> 00:05:34,712
-Each has its own build number,
+00:04:50,692 --> 00:04:51,784
+and keeps a copy.
 
 124
-00:05:34,712 --> 00:05:35,432
-time stamp,
+00:04:51,784 --> 00:04:55,705
+Group means it joins several repositories behind one address.
 
 125
-00:05:35,432 --> 00:05:36,871
-and shaw one checksum.
+00:04:56,255 --> 00:04:57,758
+Four came with Nexus.
 
 126
-00:05:36,871 --> 00:05:38,246
-Nothing was replaced.
+00:04:57,758 --> 00:05:01,411
+Maven central is a proxy of the real Maven Central.
 
 127
-00:05:38,246 --> 00:05:38,639
-Below,
+00:05:01,411 --> 00:05:03,129
+Maven public is a group.
 
 128
-00:05:38,639 --> 00:05:43,743
-the dependency block a teammate pastes into their own pom to use your package.
+00:05:03,129 --> 00:05:06,423
+Maven releases and maven snapshots are hosted.
 
 129
-00:05:44,293 --> 00:05:50,352
-Now the release repository. One jar, version one dot zero dot zero. Fixed forever.
+00:05:06,423 --> 00:05:08,142
+Your team keeps its own.
 
 130
-00:05:52,402 --> 00:05:52,714
-Last,
+00:05:08,142 --> 00:05:09,503
+Let us create them.
 
 131
-00:05:52,714 --> 00:05:53,711
-the events page.
+00:05:11,053 --> 00:05:15,149
+Click create repository. Choose the recipe, maven two, hosted.
 
 132
-00:05:53,711 --> 00:05:55,145
-Every upload is logged.
+00:05:27,699 --> 00:05:29,861
+The name is corp dash snapshots.
 
 133
-00:05:55,145 --> 00:05:57,514
-The red lines are the refused uploads,
+00:05:29,861 --> 00:05:31,957
+The version policy is snapshot,
 
 134
-00:05:57,514 --> 00:05:58,324
-four oh nine,
+00:05:31,957 --> 00:05:35,336
+so this repository accepts only snapshot versions.
 
 135
-00:05:58,324 --> 00:05:59,758
-each with an event I D.
+00:05:42,886 --> 00:05:45,499
+The deployment policy is allow redeploy,
 
 136
-00:05:59,758 --> 00:06:02,002
-Your lab asks for one of those I Ds.
+00:05:45,499 --> 00:05:48,373
+because a snapshot is replaced all the time.
 
 137
-00:06:03,552 --> 00:06:04,429
-Your lab task.
+00:05:48,373 --> 00:05:49,157
+Scroll down,
 
 138
-00:06:04,429 --> 00:06:09,563
-Lab ninety-one gives you a project and an empty repository server with a web page.
+00:05:49,157 --> 00:05:50,267
+and click create.
 
 139
-00:06:09,563 --> 00:06:11,253
-Lab check judges your work.
+00:05:59,817 --> 00:06:03,849
+Now the same again, for releases. The name is corp dash releases.
 
 140
-00:06:11,803 --> 00:06:13,990
-It lives at git hub dot com,
+00:06:16,399 --> 00:06:18,445
+The defaults are exactly right.
 
 141
-00:06:13,990 --> 00:06:15,552
-slash it dash waves,
+00:06:18,445 --> 00:06:20,424
+The version policy is release.
 
 142
-00:06:15,552 --> 00:06:17,348
-slash dev ops dash A I,
+00:06:20,424 --> 00:06:23,459
+And the deployment policy is disable redeploy,
 
 143
-00:06:17,348 --> 00:06:18,207
-in academy,
+00:06:23,459 --> 00:06:26,428
+so a published release can never be replaced.
 
 144
-00:06:18,207 --> 00:06:18,519
-lab,
+00:06:26,428 --> 00:06:27,087
+Create it.
 
 145
-00:06:18,519 --> 00:06:20,315
-lab ninety-one dot S H.
+00:06:35,637 --> 00:06:37,131
+Two new repositories.
 
 146
-00:06:20,865 --> 00:06:22,067
-One: open the web page,
+00:06:37,131 --> 00:06:38,908
+Each has its own address,
 
 147
-00:06:22,067 --> 00:06:22,432
-log in,
+00:06:38,908 --> 00:06:40,828
+ending in slash repository,
 
 148
-00:06:22,432 --> 00:06:24,104
-and create the two repositories,
+00:06:40,828 --> 00:06:41,895
+slash its name.
 
 149
-00:06:24,104 --> 00:06:25,149
-corp dash snapshots,
+00:06:41,895 --> 00:06:44,171
+Maven needs these two addresses.
 
 150
-00:06:25,149 --> 00:06:26,350
-and corp dash releases,
+00:06:46,721 --> 00:06:50,795
+Now the terminal. Go to the demo project. Type: CD, demo.
 
 151
-00:06:26,350 --> 00:06:27,969
-with the right type and policy.
+00:06:51,345 --> 00:06:54,477
+Look at the upload addresses in the pom.
 
 152
-00:06:28,519 --> 00:06:30,781
-Two: set the variable corp pass from the password file,
+00:06:54,477 --> 00:06:55,260
+Type: sed,
 
 153
-00:06:30,781 --> 00:06:31,767
-and deploy the snapshot,
+00:06:55,260 --> 00:06:55,808
+dash n,
 
 154
-00:06:31,767 --> 00:06:33,042
-with dash s settings dot X M L.
+00:06:55,808 --> 00:06:57,844
+twelve comma twenty-one p,
 
 155
-00:06:33,592 --> 00:06:38,925
-Three: change the version to one dot zero dot zero, and deploy the release.
+00:06:57,844 --> 00:06:58,940
+pom dot X M L.
 
 156
-00:06:39,475 --> 00:06:40,013
-Four: deploy it again.
+00:06:59,490 --> 00:07:02,026
+Snapshots go to corp dash snapshots.
 
 157
-00:06:40,013 --> 00:06:40,330
-It must fail.
+00:07:02,026 --> 00:07:04,421
+Releases go to corp dash releases.
 
 158
-00:06:40,330 --> 00:06:41,380
-Save the error line into conflict dot text.
+00:07:04,421 --> 00:07:05,900
+Both use the id corp,
 
 159
-00:06:41,380 --> 00:06:42,528
-Then find a rejected upload on the events page,
+00:07:05,900 --> 00:07:07,661
+so one login serves both.
 
 160
-00:06:42,528 --> 00:06:43,529
-and write its event I D into ui dot text.
+00:07:08,211 --> 00:07:09,397
+Set the password from a locked file.
 
 161
-00:06:44,079 --> 00:06:45,769
-Five: publish one dot zero dot one,
+00:07:09,397 --> 00:07:11,142
+Type: export N E X U S underscore PASS equals dollar,
 
 162
-00:06:45,769 --> 00:06:47,653
-and write one sentence in why dot text,
+00:07:11,142 --> 00:07:11,538
+parenthesis,
 
 163
-00:06:47,653 --> 00:06:49,827
-about why a release is never published twice.
+00:07:11,538 --> 00:07:11,669
+cat,
 
 164
-00:06:49,827 --> 00:06:50,841
-Use the word release.
+00:07:11,669 --> 00:07:11,867
+tilde,
 
 165
-00:06:51,391 --> 00:06:52,572
-Install a J D K,
+00:07:11,867 --> 00:07:12,065
+slash,
 
 166
-00:06:52,572 --> 00:06:54,711
-Maven and python three first.
+00:07:12,065 --> 00:07:12,691
+dot corp dash pass.
 
 167
-00:06:54,711 --> 00:06:55,597
-Then lab up,
+00:07:14,741 --> 00:07:15,390
+Deploy the snapshot.
 
 168
-00:06:55,597 --> 00:06:56,334
-lab check,
+00:07:15,390 --> 00:07:15,780
+Type: M V N,
 
 169
-00:06:56,334 --> 00:06:57,294
-and lab down.
+00:07:15,780 --> 00:07:16,007
+dash B,
 
 170
-00:06:57,294 --> 00:07:00,392
-The shortcut file is shortcuts ninety-one.
+00:07:16,007 --> 00:07:16,234
+dash s,
 
 171
-00:07:00,392 --> 00:07:02,827
-The check downloads plugins once,
+00:07:16,234 --> 00:07:16,851
+settings dot X M L,
 
 172
-00:07:02,827 --> 00:07:03,786
-so be online.
+00:07:16,851 --> 00:07:17,078
+deploy.
 
 173
-00:07:05,836 --> 00:07:07,905
-Pass or fail. You need all six.
+00:07:17,078 --> 00:07:18,149
+Then keep only the uploaded path,
 
 174
-00:07:08,455 --> 00:07:10,269
-Five pass lines in lab check.
+00:07:18,149 --> 00:07:18,474
+with grep.
 
 175
-00:07:10,819 --> 00:07:12,803
-You can explain snapshot and release.
+00:07:19,424 --> 00:07:21,920
+Maven builds, then uploads to Nexus.
 
 176
-00:07:13,353 --> 00:07:16,190
-You can explain why the second release deploy fails.
+00:07:34,470 --> 00:07:35,839
+First the repository,
 
 177
-00:07:16,740 --> 00:07:19,215
-The fix is a new version, never an overwrite.
+00:07:35,839 --> 00:07:37,142
+corp dash snapshots.
 
 178
-00:07:19,765 --> 00:07:21,727
-You created both repositories in the web page.
+00:07:37,142 --> 00:07:38,055
+Then the path,
 
 179
-00:07:22,277 --> 00:07:24,197
-lab down, nothing left behind.
+00:07:38,055 --> 00:07:40,075
+and the jar name: a time stamp,
 
 180
-00:07:24,747 --> 00:07:26,049
-To pass, all six.
+00:07:40,075 --> 00:07:41,313
+and a build number,
 
 181
-00:07:28,099 --> 00:07:30,936
-Your turn, in your own Ubuntu virtual machine.
+00:07:41,313 --> 00:07:41,574
+one.
 
 182
-00:07:31,486 --> 00:07:33,577
-One: lab up, and read the task file.
+00:07:42,124 --> 00:07:44,193
+Deploy it again. The same command.
 
 183
-00:07:34,127 --> 00:07:35,706
-Two: in the web page, create the two repositories.
+00:07:46,643 --> 00:07:47,838
+A second upload.
 
 184
-00:07:36,256 --> 00:07:39,840
-Three: deploy the snapshot, then the release.
+00:07:57,388 --> 00:08:02,359
+Build number two, a new time stamp. Nothing was replaced, and nothing was refused.
 
 185
-00:07:40,390 --> 00:07:42,822
-Four: deploy the release again, save the error, and read an event I D in the web page.
+00:08:02,909 --> 00:08:08,562
+Now make it a release. Remove the word snapshot from the version, with sed.
 
 186
-00:07:43,372 --> 00:07:45,825
-Five: publish one dot zero dot one, write why dot text, and lab check.
+00:08:11,612 --> 00:08:14,940
+Version one dot zero dot zero. No snapshot.
 
 187
-00:07:46,375 --> 00:07:48,956
-Six: lab down, and prove nothing is left.
+00:08:15,490 --> 00:08:16,642
+Deploy it. The same command.
 
 188
-00:07:49,506 --> 00:07:51,341
-Pause the video, and begin now.
+00:08:19,092 --> 00:08:20,287
+Uploading the release.
 
 189
-00:08:06,891 --> 00:08:07,766
-Quick check.
+00:08:29,837 --> 00:08:35,682
+Published. This time the jar name has no time stamp. It is just one dot zero dot zero.
 
 190
-00:08:08,316 --> 00:08:10,854
-What is the difference between install and deploy?
+00:08:36,232 --> 00:08:41,437
+Now the rule. Deploy the same version again, and keep only the line with the status code.
 
 191
-00:08:11,404 --> 00:08:14,391
-Snapshot or release: which can be uploaded twice?
+00:08:44,487 --> 00:08:46,301
+Same version, second time.
 
 192
-00:08:14,941 --> 00:08:16,349
-What does four oh nine mean?
+00:08:55,851 --> 00:08:56,709
+Four oh nine,
 
 193
-00:08:16,899 --> 00:08:19,054
-What do you do when a release has a bug?
+00:08:56,709 --> 00:08:57,303
+conflict.
 
 194
-00:08:19,604 --> 00:08:22,953
-Objective covered: M C ten, objective seven.
+00:08:57,303 --> 00:08:59,877
+Nexus says the redeploy is not allowed.
 
 195
-00:08:23,503 --> 00:08:25,572
-Pause the video, and answer out loud.
+00:08:59,877 --> 00:09:01,527
+The release is protected.
 
 196
-00:08:36,122 --> 00:08:40,218
-Next: diagnose offline, checksum, login and test failures.
+00:09:01,527 --> 00:09:02,781
+To change anything,
 
 197
-00:08:40,768 --> 00:08:44,096
+00:09:02,781 --> 00:09:04,299
+you need a new version.
+
+198
+00:09:04,849 --> 00:09:07,899
+Back to the browser. Click browse, to see what arrived.
+
+199
+00:09:09,949 --> 00:09:15,048
+Open corp dash snapshots. Nexus shows a tree. Group, project, then the version.
+
+200
+00:09:18,598 --> 00:09:21,271
+Under one dot zero dot zero snapshot,
+
+201
+00:09:21,271 --> 00:09:22,138
+two uploads.
+
+202
+00:09:22,138 --> 00:09:22,860
+Build one,
+
+203
+00:09:22,860 --> 00:09:23,871
+and build two.
+
+204
+00:09:23,871 --> 00:09:25,894
+Each has its own time stamp.
+
+205
+00:09:28,444 --> 00:09:29,314
+Click the jar.
+
+206
+00:09:29,314 --> 00:09:31,364
+The summary names the repository,
+
+207
+00:09:31,364 --> 00:09:32,047
+the format,
+
+208
+00:09:32,047 --> 00:09:32,669
+the group,
+
+209
+00:09:32,669 --> 00:09:33,414
+the project,
+
+210
+00:09:33,414 --> 00:09:34,160
+the version,
+
+211
+00:09:34,160 --> 00:09:34,719
+the path,
+
+212
+00:09:34,719 --> 00:09:35,527
+and the size.
+
+213
+00:09:38,077 --> 00:09:38,864
+Scroll down,
+
+214
+00:09:38,864 --> 00:09:40,307
+and the hashes appear.
+
+215
+00:09:40,307 --> 00:09:43,652
+The shaw one checksum is a fingerprint of the file.
+
+216
+00:09:43,652 --> 00:09:44,964
+If one byte changes,
+
+217
+00:09:44,964 --> 00:09:45,685
+it changes.
+
+218
+00:09:45,685 --> 00:09:48,637
+Your lab asks for the one of the release jar.
+
+219
+00:09:52,187 --> 00:09:58,053
+Now corp dash releases. One jar, version one dot zero dot zero. Fixed forever.
+
+220
+00:10:01,603 --> 00:10:03,106
+Now the advanced part.
+
+221
+00:10:03,106 --> 00:10:06,725
+Your build also downloads plugins from Maven Central,
+
+222
+00:10:06,725 --> 00:10:07,477
+every time.
+
+223
+00:10:07,477 --> 00:10:10,345
+Companies send that traffic through Nexus,
+
+224
+00:10:10,345 --> 00:10:11,438
+so it is faster,
+
+225
+00:10:11,438 --> 00:10:12,462
+and controlled.
+
+226
+00:10:13,012 --> 00:10:15,303
+Open the repositories list again,
+
+227
+00:10:15,303 --> 00:10:16,900
+and click maven public.
+
+228
+00:10:16,900 --> 00:10:17,872
+It is a group,
+
+229
+00:10:17,872 --> 00:10:20,649
+and it lists its members: maven central,
+
+230
+00:10:20,649 --> 00:10:21,690
+maven releases,
+
+231
+00:10:21,690 --> 00:10:23,079
+and maven snapshots.
+
+232
+00:10:23,079 --> 00:10:23,912
+One address,
+
+233
+00:10:23,912 --> 00:10:25,023
+for all of them.
+
+234
+00:10:28,573 --> 00:10:29,369
+Tell Maven to use it.
+
+235
+00:10:29,369 --> 00:10:30,924
+A mirror block in a second settings file.
+
+236
+00:10:30,924 --> 00:10:31,493
+The id is corp,
+
+237
+00:10:31,493 --> 00:10:32,707
+and the address is maven public.
+
+238
+00:10:32,707 --> 00:10:33,010
+Show it,
+
+239
+00:10:33,010 --> 00:10:33,351
+with sed.
+
+240
+00:10:35,401 --> 00:10:40,351
+Build with an empty cache, through the mirror, and count the files that arrive from Nexus.
+
+241
+00:10:43,901 --> 00:10:47,975
+Nexus fetches each plugin from Maven Central, and stores a copy.
+
+242
+00:11:33,525 --> 00:11:37,941
+Many files, all through Nexus. The next build will find them already stored.
+
+243
+00:11:38,491 --> 00:11:39,440
+In the browser,
+
+244
+00:11:39,440 --> 00:11:40,198
+open browse,
+
+245
+00:11:40,198 --> 00:11:41,653
+and then maven central.
+
+246
+00:11:41,653 --> 00:11:45,572
+Those are the files Nexus fetched from the real Maven Central.
+
+247
+00:11:45,572 --> 00:11:46,837
+They are stored now.
+
+248
+00:11:46,837 --> 00:11:47,343
+A cache,
+
+249
+00:11:47,343 --> 00:11:48,923
+filled by your own build.
+
+250
+00:11:54,473 --> 00:11:56,362
+Next in the nexus masterclass,
+
+251
+00:11:56,362 --> 00:11:58,503
+you add a dedicated deployer user,
+
+252
+00:11:58,503 --> 00:12:00,392
+with only the rights it needs,
+
+253
+00:12:00,392 --> 00:12:02,217
+instead of the admin account.
+
+254
+00:12:03,767 --> 00:12:04,714
+Your lab task.
+
+255
+00:12:04,714 --> 00:12:08,842
+Lab ninety-one installs a real Nexus on your virtual machine,
+
+256
+00:12:08,842 --> 00:12:10,601
+with a project to publish.
+
+257
+00:12:10,601 --> 00:12:12,428
+Lab check judges your work.
+
+258
+00:12:12,978 --> 00:12:15,165
+It lives at git hub dot com,
+
+259
+00:12:15,165 --> 00:12:16,727
+slash it dash waves,
+
+260
+00:12:16,727 --> 00:12:18,523
+slash dev ops dash A I,
+
+261
+00:12:18,523 --> 00:12:19,382
+in academy,
+
+262
+00:12:19,382 --> 00:12:19,694
+lab,
+
+263
+00:12:19,694 --> 00:12:21,490
+lab ninety-one dot S H.
+
+264
+00:12:22,040 --> 00:12:23,371
+One: open the web page,
+
+265
+00:12:23,371 --> 00:12:25,166
+log in with the first password,
+
+266
+00:12:25,166 --> 00:12:26,612
+choose your own password,
+
+267
+00:12:26,612 --> 00:12:27,886
+and finish the wizard.
+
+268
+00:12:28,436 --> 00:12:31,923
+Two: create corp dash snapshots and corp dash releases,
+
+269
+00:12:31,923 --> 00:12:35,220
+with the right version policy and deployment policy.
+
+270
+00:12:35,770 --> 00:12:38,249
+Three: set the variable nexus pass,
+
+271
+00:12:38,249 --> 00:12:39,950
+and deploy the snapshot,
+
+272
+00:12:39,950 --> 00:12:42,146
+with dash s settings dot X M L.
+
+273
+00:12:42,146 --> 00:12:45,618
+Then change the version to one dot zero dot zero,
+
+274
+00:12:45,618 --> 00:12:47,247
+and deploy the release.
+
+275
+00:12:47,797 --> 00:12:49,841
+Four: deploy the release again.
+
+276
+00:12:49,841 --> 00:12:50,699
+It must fail.
+
+277
+00:12:50,699 --> 00:12:53,535
+Save the error line into conflict dot text.
+
+278
+00:12:53,535 --> 00:12:56,964
+Then find the shaw one of the release jar in browse,
+
+279
+00:12:56,964 --> 00:12:59,338
+and write it into shaw one dot text.
+
+280
+00:12:59,888 --> 00:13:02,315
+Five: publish one dot zero dot one,
+
+281
+00:13:02,315 --> 00:13:05,019
+and write one sentence in why dot text,
+
+282
+00:13:05,019 --> 00:13:08,139
+about why a release is never published twice.
+
+283
+00:13:08,139 --> 00:13:09,595
+Use the word release.
+
+284
+00:13:10,145 --> 00:13:11,298
+Install a J D K,
+
+285
+00:13:11,298 --> 00:13:13,387
+Maven and python three first,
+
+286
+00:13:13,387 --> 00:13:16,701
+and keep about three gigabytes of memory free.
+
+287
+00:13:16,701 --> 00:13:19,079
+The first lab up downloads Nexus,
+
+288
+00:13:19,079 --> 00:13:20,736
+five hundred megabytes.
+
+289
+00:13:20,736 --> 00:13:21,816
+Then lab check,
+
+290
+00:13:21,816 --> 00:13:22,753
+and lab down.
+
+291
+00:13:24,803 --> 00:13:26,872
+Pass or fail. You need all six.
+
+292
+00:13:27,422 --> 00:13:29,236
+Five pass lines in lab check.
+
+293
+00:13:29,786 --> 00:13:31,770
+You can explain snapshot and release.
+
+294
+00:13:32,320 --> 00:13:35,157
+You can explain why the second release deploy fails.
+
+295
+00:13:35,707 --> 00:13:38,182
+The fix is a new version, never an overwrite.
+
+296
+00:13:38,732 --> 00:13:42,081
+You created both repositories in the Nexus web page.
+
+297
+00:13:42,631 --> 00:13:44,551
+lab down, nothing left behind.
+
+298
+00:13:45,101 --> 00:13:46,402
+To pass, all six.
+
+299
+00:13:48,452 --> 00:13:51,289
+Your turn, in your own Ubuntu virtual machine.
+
+300
+00:13:51,839 --> 00:13:55,338
+One: lab up, read the task file, and finish the Nexus wizard.
+
+301
+00:13:55,888 --> 00:13:58,896
+Two: in the web page, create the two repositories.
+
+302
+00:13:59,446 --> 00:14:01,771
+Three: deploy the snapshot, then the release.
+
+303
+00:14:02,321 --> 00:14:07,079
+Four: deploy the release again, save the error, and copy the shaw one from browse.
+
+304
+00:14:07,629 --> 00:14:12,386
+Five: publish one dot zero dot one, write why dot text, and lab check.
+
+305
+00:14:12,936 --> 00:14:15,517
+Six: lab down, and prove nothing is left.
+
+306
+00:14:16,067 --> 00:14:17,902
+Pause the video, and begin now.
+
+307
+00:14:33,452 --> 00:14:34,327
+Quick check.
+
+308
+00:14:34,877 --> 00:14:37,415
+What is the difference between install and deploy?
+
+309
+00:14:37,965 --> 00:14:40,952
+Snapshot or release: which can be uploaded twice?
+
+310
+00:14:41,502 --> 00:14:42,910
+What does four oh nine mean?
+
+311
+00:14:43,460 --> 00:14:45,615
+What do you do when a release has a bug?
+
+312
+00:14:46,165 --> 00:14:49,514
+Objective covered: M C ten, objective seven.
+
+313
+00:14:50,064 --> 00:14:52,133
+Pause the video, and answer out loud.
+
+314
+00:15:02,683 --> 00:15:06,779
+Next: diagnose offline, checksum, login and test failures.
+
+315
+00:15:07,329 --> 00:15:10,657
 If this helped, like, share and subscribe, so you do not miss it.
