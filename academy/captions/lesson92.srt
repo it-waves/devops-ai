@@ -1,0 +1,879 @@
+1
+00:00:00,500 --> 00:00:03,743
+Red text. Forty lines of it. And the build is broken.
+
+2
+00:00:04,293 --> 00:00:09,775
+Most people panic here. They copy the whole error into a search box, and try random fixes.
+
+3
+00:00:10,325 --> 00:00:13,496
+Today you learn to read a failed build in ten seconds.
+
+4
+00:00:13,496 --> 00:00:14,612
+Four real failures,
+
+5
+00:00:14,612 --> 00:00:16,256
+each with a different cause.
+
+6
+00:00:16,806 --> 00:00:18,918
+A version that does not exist.
+
+7
+00:00:18,918 --> 00:00:20,044
+An offline flag.
+
+8
+00:00:20,044 --> 00:00:21,100
+A failing test.
+
+9
+00:00:21,100 --> 00:00:24,550
+And a four oh one from a real repository manager.
+
+10
+00:00:25,100 --> 00:00:27,393
+You will see every one of them happen,
+
+11
+00:00:27,393 --> 00:00:28,962
+on the real Maven Central,
+
+12
+00:00:28,962 --> 00:00:30,169
+and on a real Nexus.
+
+13
+00:00:30,169 --> 00:00:31,799
+Then you fix them yourself.
+
+14
+00:00:32,349 --> 00:00:33,437
+One honest note.
+
+15
+00:00:33,437 --> 00:00:35,954
+Every failure in this lesson is real,
+
+16
+00:00:35,954 --> 00:00:38,267
+and the lab you get does the same.
+
+17
+00:00:38,267 --> 00:00:40,172
+I only planted the mistakes,
+
+18
+00:00:40,172 --> 00:00:41,260
+a wrong version,
+
+19
+00:00:41,260 --> 00:00:41,736
+a flag,
+
+20
+00:00:41,736 --> 00:00:42,144
+a bug,
+
+21
+00:00:42,144 --> 00:00:43,165
+and a wrong id.
+
+22
+00:00:44,715 --> 00:00:49,664
+First, how to read a failed build. Maven prints a lot. Only a few lines matter.
+
+23
+00:00:50,214 --> 00:00:50,794
+Step one.
+
+24
+00:00:50,794 --> 00:00:54,915
+Skip everything until the first line that starts with E R R O R.
+
+25
+00:00:54,915 --> 00:00:57,233
+The ones above it are just progress.
+
+26
+00:00:57,783 --> 00:00:58,400
+Step two.
+
+27
+00:00:58,400 --> 00:01:00,250
+Find the stage that failed.
+
+28
+00:01:00,250 --> 00:01:03,471
+Maven works in order: resolve the dependencies,
+
+29
+00:01:03,471 --> 00:01:04,019
+compile,
+
+30
+00:01:04,019 --> 00:01:04,979
+run the tests,
+
+31
+00:01:04,979 --> 00:01:05,527
+package.
+
+32
+00:01:06,077 --> 00:01:06,861
+Step three.
+
+33
+00:01:06,861 --> 00:01:07,930
+Read the cause,
+
+34
+00:01:07,930 --> 00:01:08,999
+in plain words.
+
+35
+00:01:08,999 --> 00:01:10,068
+Could not find.
+
+36
+00:01:10,068 --> 00:01:11,066
+Cannot access,
+
+37
+00:01:11,066 --> 00:01:12,207
+in offline mode.
+
+38
+00:01:12,207 --> 00:01:12,920
+Tests run,
+
+39
+00:01:12,920 --> 00:01:13,561
+failures.
+
+40
+00:01:13,561 --> 00:01:15,272
+Status code four oh one.
+
+41
+00:01:15,822 --> 00:01:16,489
+Step four.
+
+42
+00:01:16,489 --> 00:01:17,424
+Fix the cause.
+
+43
+00:01:17,424 --> 00:01:18,359
+Never hide it.
+
+44
+00:01:18,359 --> 00:01:19,962
+No dash O to go offline,
+
+45
+00:01:19,962 --> 00:01:20,897
+no skip tests,
+
+46
+00:01:20,897 --> 00:01:24,035
+and never delete the dependency that complains.
+
+47
+00:01:24,585 --> 00:01:29,492
+Hiding a failure is how a broken build reaches the server. We always fix the cause.
+
+48
+00:01:31,542 --> 00:01:35,446
+Here are today's four failures, from the simplest to the most advanced.
+
+49
+00:01:35,996 --> 00:01:36,266
+One.
+
+50
+00:01:36,266 --> 00:01:37,886
+Could not find artifact.
+
+51
+00:01:37,886 --> 00:01:41,058
+The pom asks for a version that does not exist.
+
+52
+00:01:41,058 --> 00:01:43,420
+Maven Central answers four oh four.
+
+53
+00:01:43,970 --> 00:01:44,228
+Two.
+
+54
+00:01:44,228 --> 00:01:46,677
+Cannot access central in offline mode.
+
+55
+00:01:46,677 --> 00:01:49,965
+A hidden dash O is stopping Maven from downloading.
+
+56
+00:01:50,515 --> 00:01:55,464
+Three. Tests run, failures. The code compiles, but a test proves the code is wrong.
+
+57
+00:01:56,014 --> 00:01:56,390
+Four.
+
+58
+00:01:56,390 --> 00:01:58,198
+Status code four oh one.
+
+59
+00:01:58,198 --> 00:02:01,586
+A real repository manager that needs a login,
+
+60
+00:02:01,586 --> 00:02:03,694
+and Maven sent the wrong id.
+
+61
+00:02:04,244 --> 00:02:08,639
+Every message points to its own cause. Learn the phrase, and you know where to look.
+
+62
+00:02:10,689 --> 00:02:16,620
+Now the real thing. Go to the lab folder. Type: CD, slash opt, slash lab ninety-two.
+
+63
+00:02:17,170 --> 00:02:20,075
+Lab ninety-two sets up four small projects,
+
+64
+00:02:20,075 --> 00:02:23,047
+and a real Nexus on port eight oh eight one.
+
+65
+00:02:23,047 --> 00:02:25,682
+The login password is in a locked file.
+
+66
+00:02:26,232 --> 00:02:27,720
+Put the password in a variable.
+
+67
+00:02:27,720 --> 00:02:30,168
+Type: export C O R P underscore PASS equals dollar,
+
+68
+00:02:30,168 --> 00:02:30,744
+parenthesis,
+
+69
+00:02:30,744 --> 00:02:31,608
+cat pass dot text.
+
+70
+00:02:32,158 --> 00:02:34,227
+List the folder. Type: L S.
+
+71
+00:02:34,777 --> 00:02:39,961
+Four projects. Not found, offline, tests, and login. We take them in this order.
+
+72
+00:02:40,511 --> 00:02:44,180
+Failure one. Go into not found. Type: CD, not found.
+
+73
+00:02:44,730 --> 00:02:45,081
+Build it,
+
+74
+00:02:45,081 --> 00:02:46,951
+and keep only the line that says could not find.
+
+75
+00:02:46,951 --> 00:02:47,419
+Type: M V N,
+
+76
+00:02:47,419 --> 00:02:47,692
+dash B,
+
+77
+00:02:47,692 --> 00:02:48,003
+package,
+
+78
+00:02:48,003 --> 00:02:48,549
+and then grep.
+
+79
+00:02:50,399 --> 00:02:52,788
+Maven is resolving the dependencies.
+
+80
+00:02:57,338 --> 00:02:58,874
+Could not find artifact.
+
+81
+00:02:58,874 --> 00:03:00,090
+Commons lang three,
+
+82
+00:03:00,090 --> 00:03:00,986
+version three,
+
+83
+00:03:00,986 --> 00:03:01,562
+fourteen,
+
+84
+00:03:01,562 --> 00:03:02,330
+ninety-nine.
+
+85
+00:03:02,330 --> 00:03:04,954
+The name of the cause is in the sentence.
+
+86
+00:03:05,504 --> 00:03:09,344
+Which line of the pom asks for it? Type: grep, dash n, three fourteen, pom dot X M L.
+
+87
+00:03:09,894 --> 00:03:13,116
+Line sixteen. Version three, fourteen, ninety-nine.
+
+88
+00:03:13,666 --> 00:03:14,565
+Does that version exist?
+
+89
+00:03:14,565 --> 00:03:15,577
+Ask the real Maven Central.
+
+90
+00:03:15,577 --> 00:03:15,802
+First,
+
+91
+00:03:15,802 --> 00:03:16,963
+keep its address in a variable.
+
+92
+00:03:16,963 --> 00:03:17,525
+Type: M equals,
+
+93
+00:03:17,525 --> 00:03:17,750
+https,
+
+94
+00:03:17,750 --> 00:03:18,762
+repo one dot maven dot org,
+
+95
+00:03:18,762 --> 00:03:19,362
+slash maven two.
+
+96
+00:03:19,912 --> 00:03:24,562
+Then the folder of this library, on Central.
+
+97
+00:03:25,112 --> 00:03:26,613
+Now count how many times Central lists version three,
+
+98
+00:03:26,613 --> 00:03:26,867
+fourteen,
+
+99
+00:03:26,867 --> 00:03:27,207
+ninety-nine.
+
+100
+00:03:27,207 --> 00:03:27,518
+Type: curl,
+
+101
+00:03:27,518 --> 00:03:27,717
+dash s,
+
+102
+00:03:27,717 --> 00:03:28,056
+the address,
+
+103
+00:03:28,056 --> 00:03:29,075
+slash maven dash metadata dot X M L,
+
+104
+00:03:29,075 --> 00:03:29,528
+and grep dash c.
+
+105
+00:03:30,078 --> 00:03:32,830
+Zero. Central has never heard of that version.
+
+106
+00:03:33,380 --> 00:03:36,388
+Count version three, fourteen, zero.
+
+107
+00:03:38,238 --> 00:03:42,740
+One. That one exists. The cause is a wrong version, not a broken network.
+
+108
+00:03:43,290 --> 00:03:47,983
+Fix the cause. Replace ninety-nine with zero. Type: sed, dash i, and the replacement.
+
+109
+00:03:48,533 --> 00:03:51,306
+Build again, and keep only the build line.
+
+110
+00:03:51,856 --> 00:03:54,672
+Now Maven downloads the library from Central.
+
+111
+00:04:01,222 --> 00:04:05,852
+Build success. One cause, one line fixed, and the dependency is still there.
+
+112
+00:04:06,402 --> 00:04:11,266
+Failure two. Go into offline. Type: CD, dot dot, slash offline.
+
+113
+00:04:11,816 --> 00:04:14,610
+Build, and keep only the words about offline mode.
+
+114
+00:04:17,860 --> 00:04:20,804
+Same dependency, same Central, a different failure.
+
+115
+00:04:25,354 --> 00:04:30,154
+Cannot access central. Offline mode. Maven is not even trying the network.
+
+116
+00:04:30,704 --> 00:04:39,088
+Who told Maven to stay offline? Type: cat, dot M V N, slash maven dot config.
+
+117
+00:04:39,638 --> 00:04:40,090
+Dash O.
+
+118
+00:04:40,090 --> 00:04:40,993
+A hidden file,
+
+119
+00:04:40,993 --> 00:04:41,961
+in the project,
+
+120
+00:04:41,961 --> 00:04:43,573
+adds it to every command.
+
+121
+00:04:43,573 --> 00:04:47,766
+Offline mode only works when everything is already in your cache.
+
+122
+00:04:48,316 --> 00:04:53,330
+Remove the file. Type: R M, dot M V N, slash maven dot config.
+
+123
+00:04:53,880 --> 00:04:56,653
+Build again.
+
+124
+00:04:57,203 --> 00:04:58,675
+Downloading from Central.
+
+125
+00:05:05,225 --> 00:05:06,290
+Build success.
+
+126
+00:05:06,290 --> 00:05:07,962
+A flag is a cause too.
+
+127
+00:05:07,962 --> 00:05:11,004
+When a build only works on your machine,
+
+128
+00:05:11,004 --> 00:05:12,144
+look for flags,
+
+129
+00:05:12,144 --> 00:05:13,133
+in dot M V N,
+
+130
+00:05:13,133 --> 00:05:15,870
+and in M A V E N underscore A R G S.
+
+131
+00:05:16,420 --> 00:05:21,050
+Failure three. Go into tests. Type: CD, dot dot, slash tests.
+
+132
+00:05:21,600 --> 00:05:26,442
+Build, and keep only the line that compares two numbers.
+
+133
+00:05:26,992 --> 00:05:29,403
+Maven compiles, then runs the tests.
+
+134
+00:05:35,953 --> 00:05:37,328
+Expected nine hundred,
+
+135
+00:05:37,328 --> 00:05:39,327
+but was nine hundred and ninety.
+
+136
+00:05:39,327 --> 00:05:40,452
+The code compiled.
+
+137
+00:05:40,452 --> 00:05:43,014
+The test is telling us the code is wrong.
+
+138
+00:05:43,564 --> 00:05:47,276
+Which line computes the discount? Type: grep, dash n, off equals, and the file.
+
+139
+00:05:48,426 --> 00:05:49,739
+Cents times percent,
+
+140
+00:05:49,739 --> 00:05:51,315
+divided by one thousand.
+
+141
+00:05:51,315 --> 00:05:55,911
+A discount of ten percent on one thousand cents should be one hundred.
+
+142
+00:05:55,911 --> 00:05:56,896
+This gives ten.
+
+143
+00:05:57,446 --> 00:06:01,136
+Fix the code, not the test. Divide by one hundred.
+
+144
+00:06:03,086 --> 00:06:05,838
+Build, and keep the test summary and the build line.
+
+145
+00:06:08,488 --> 00:06:09,726
+The tests run again.
+
+146
+00:06:16,276 --> 00:06:16,995
+Tests run,
+
+147
+00:06:16,995 --> 00:06:17,283
+two.
+
+148
+00:06:17,283 --> 00:06:17,930
+Failures,
+
+149
+00:06:17,930 --> 00:06:18,290
+zero.
+
+150
+00:06:18,290 --> 00:06:19,297
+Build success.
+
+151
+00:06:19,297 --> 00:06:22,318
+Never skip the tests to make this go away.
+
+152
+00:06:22,318 --> 00:06:25,556
+A test that fails is the build doing its job.
+
+153
+00:06:26,106 --> 00:06:31,823
+Failure four, the advanced one. Go into login. Type: CD, dot dot, slash login.
+
+154
+00:06:32,373 --> 00:06:34,885
+This project has its own settings file.
+
+155
+00:06:34,885 --> 00:06:37,204
+It sends every download to a mirror,
+
+156
+00:06:37,204 --> 00:06:38,170
+the real Nexus,
+
+157
+00:06:38,170 --> 00:06:39,008
+with a login.
+
+158
+00:06:39,558 --> 00:06:44,144
+Build with that settings file, and keep the status code.
+
+159
+00:06:45,894 --> 00:06:48,177
+Maven asks Nexus for its first file.
+
+160
+00:06:53,727 --> 00:06:58,740
+Status code four oh one. Unauthorized. The server is there, but it does not know us.
+
+161
+00:06:59,290 --> 00:07:01,701
+Look at the ids in the settings file. Type: grep, id, settings dot X M L.
+
+162
+00:07:02,251 --> 00:07:04,667
+The server is called corp dash repo.
+
+163
+00:07:04,667 --> 00:07:06,411
+The mirror is called corp.
+
+164
+00:07:06,411 --> 00:07:07,888
+One name is different,
+
+165
+00:07:07,888 --> 00:07:09,632
+so Maven sent no password.
+
+166
+00:07:10,182 --> 00:07:14,321
+Fix the id. Make the server match the mirror.
+
+167
+00:07:14,871 --> 00:07:18,668
+Build again. The password comes from the variable we set at the start.
+
+168
+00:07:19,518 --> 00:07:22,420
+Now Maven logs in, and downloads through Nexus.
+
+169
+00:07:34,970 --> 00:07:39,023
+Build success. Same Nexus, same password, one id changed.
+
+170
+00:07:39,573 --> 00:07:45,013
+Last, the proof. Ask Nexus directly, with no login, and print only the status.
+
+171
+00:07:47,163 --> 00:07:50,747
+Four oh one. Nexus refuses anyone without a login.
+
+172
+00:07:51,297 --> 00:07:54,924
+Now ask again, with the user and the password.
+
+173
+00:08:00,474 --> 00:08:05,530
+Two hundred. Four oh one means: I am here, but who are you. Two hundred means: come in.
+
+174
+00:08:07,080 --> 00:08:13,096
+Your lab task. Lab ninety-two gives you four broken projects. Lab check judges your fixes.
+
+175
+00:08:13,646 --> 00:08:15,800
+It lives at git hub dot com,
+
+176
+00:08:15,800 --> 00:08:17,338
+slash it dash waves,
+
+177
+00:08:17,338 --> 00:08:19,107
+slash dev ops dash A I,
+
+178
+00:08:19,107 --> 00:08:19,953
+in academy,
+
+179
+00:08:19,953 --> 00:08:20,261
+lab,
+
+180
+00:08:20,261 --> 00:08:22,030
+lab ninety-two dot S H.
+
+181
+00:08:22,580 --> 00:08:28,041
+One: not found. Read which version is missing, and fix the version. Keep the dependency.
+
+182
+00:08:28,591 --> 00:08:31,727
+Two: offline. Find the hidden flag, and remove it.
+
+183
+00:08:32,277 --> 00:08:36,800
+Three: tests. Fix the code. Do not skip the tests, and do not edit the test.
+
+184
+00:08:37,350 --> 00:08:43,238
+Four: login. Make the server id match the mirror id. The password stays in the variable.
+
+185
+00:08:43,788 --> 00:08:45,298
+Five: in diag dot text,
+
+186
+00:08:45,298 --> 00:08:46,414
+write four lines,
+
+187
+00:08:46,414 --> 00:08:47,464
+one per failure,
+
+188
+00:08:47,464 --> 00:08:49,761
+naming the cause in your own words.
+
+189
+00:08:50,311 --> 00:08:52,741
+Install a J D K and Maven first.
+
+190
+00:08:52,741 --> 00:08:53,652
+Then lab up,
+
+191
+00:08:53,652 --> 00:08:54,411
+lab check,
+
+192
+00:08:54,411 --> 00:08:55,398
+and lab down.
+
+193
+00:08:55,398 --> 00:08:57,903
+The first lab up downloads Nexus,
+
+194
+00:08:57,903 --> 00:09:00,104
+about five hundred megabytes,
+
+195
+00:09:00,104 --> 00:09:02,002
+so be online and patient.
+
+196
+00:09:04,052 --> 00:09:06,121
+Pass or fail. You need all six.
+
+197
+00:09:06,671 --> 00:09:08,485
+Five pass lines in lab check.
+
+198
+00:09:09,035 --> 00:09:11,808
+You can tell the four failures apart by their message.
+
+199
+00:09:12,358 --> 00:09:14,406
+You fix the cause, never a symptom.
+
+200
+00:09:14,956 --> 00:09:18,455
+No dash O, no skip tests, no deleted dependency.
+
+201
+00:09:19,005 --> 00:09:21,522
+diag dot text names the four causes.
+
+202
+00:09:22,072 --> 00:09:23,992
+lab down, nothing left behind.
+
+203
+00:09:24,542 --> 00:09:25,843
+To pass, all six.
+
+204
+00:09:27,893 --> 00:09:30,730
+Your turn, in your own Ubuntu virtual machine.
+
+205
+00:09:31,280 --> 00:09:33,371
+One: lab up, and read the task file.
+
+206
+00:09:33,921 --> 00:09:37,206
+Two: build each project, and read only the first error.
+
+207
+00:09:37,756 --> 00:09:39,975
+Three: name the cause, in your own words.
+
+208
+00:09:40,525 --> 00:09:42,680
+Four: fix the cause, and build again.
+
+209
+00:09:43,230 --> 00:09:45,939
+Five: write diag dot text, and lab check.
+
+210
+00:09:46,489 --> 00:09:49,070
+Six: lab down, and prove nothing is left.
+
+211
+00:09:49,620 --> 00:09:51,455
+Pause the video, and begin now.
+
+212
+00:10:07,005 --> 00:10:07,880
+Quick check.
+
+213
+00:10:08,430 --> 00:10:10,968
+Which line of a failed build do you read first?
+
+214
+00:10:11,518 --> 00:10:13,481
+What does four oh four from Central mean?
+
+215
+00:10:14,031 --> 00:10:15,908
+Why is skip tests never the fix?
+
+216
+00:10:16,458 --> 00:10:17,781
+What does four oh one mean?
+
+217
+00:10:18,331 --> 00:10:21,531
+Objective covered: M C ten, objective eight.
+
+218
+00:10:22,081 --> 00:10:24,150
+Pause the video, and answer out loud.
+
+219
+00:10:34,700 --> 00:10:37,751
+Next: the maven wrapper, and a build you can repeat.
+
+220
+00:10:38,301 --> 00:10:41,629
+If this helped, like, share and subscribe, so you do not miss it.

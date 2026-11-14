@@ -1,0 +1,31 @@
+Lesson 92 of the DevOps Engineering Bootcamp, the eighth lesson of Maven. A broken build prints forty lines of red, but only one line matters. This lesson is a live terminal demo of four real failures, from simple to advanced, each fixed at its cause: a dependency version that does not exist (checked against the real Maven Central), a hidden offline flag, a failing unit test, and a 401 Unauthorized from a real Sonatype Nexus Repository that needs a login.
+
+You learn a four-step way to read any failed build (first ERROR line, which stage failed, the cause in words, fix the cause), and why the shortcuts never work: no dash o, no skip tests, no deleted dependency. Then you do the lab yourself.
+
+Chapters
+0:00 Red text, broken build
+0:44 How to read a failed build
+1:31 Four failures, four causes
+2:10 Live: the lab folder and the password
+2:40 Failure 1: could not find artifact (404)
+4:06 Failure 2: offline mode
+5:16 Failure 3: a failing test
+6:26 Failure 4: 401 on a real Nexus
+7:39 Proof: 401 without login, 200 with login
+8:06 Your lab task
+9:03 Pass or fail rubric
+9:27 Your turn
+10:06 Quick check
+
+Objectives covered: MC10-O08 (diagnose and fix common Maven build failures: offline, missing artifact, authentication and test failures)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab92.sh and shortcuts92.sh). Install with: sudo install -m 755 lab92.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts92.sh. You need an Ubuntu virtual machine with root, a JDK, Maven, python3 and curl (for example: sudo apt install -y openjdk-21-jdk-headless maven python3 curl), internet access, about 3 GB of free memory and 2 GB of disk. The first lab up downloads Sonatype Nexus Repository Community Edition 3.98.1 (about 525 MB) from download.sonatype.com, starts it on port 8081 as a dedicated user, and sets an admin password for you (saved in /opt/lab92/pass.txt). lab down stops Nexus and removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal segment is one real, continuous recording on Ubuntu 24.04 with Maven and OpenJDK 21, against the real Maven Central and a real Nexus Repository Community Edition 3.98.1. Every error message is real; I planted the mistakes myself (a wrong version, a dash o flag in dot mvn, a division bug, and a server id that differs from the mirror id). The lab sets up Nexus for you, so by running lab up you accept the Nexus Community Edition license; read it first. The ideas, task, rubric and quiz screens are labelled illustrations, not captures. The lab was run end to end before this lesson: it fails 0 of 5 at the start, passes 5 of 5 after a reference solution, and lab down leaves nothing behind; only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Maven Deploy to Nexus: Snapshot vs Release, Live on Real Nexus https://youtu.be/oaRDe2rvijQ
+Next: the Maven wrapper and builds you can repeat.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #maven #troubleshooting #nexus #java #devopsbootcamp

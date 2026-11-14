@@ -1,6 +1,6 @@
 rm -rf /home/student/.m2
 L=/home/claude/devops-ai/academy/lab/lab92.sh
-export SUDO_USER=student
+export SUDO_USER=student ACCEPT_NEXUS_EULA=yes
 pkill -u nexus java 2>/dev/null; sleep 3
 sh $L down >/dev/null; sh $L up > /tmp/up92.out 2>&1; tail -3 /tmp/up92.out
 echo "-- start"; sh $L check | tail -7

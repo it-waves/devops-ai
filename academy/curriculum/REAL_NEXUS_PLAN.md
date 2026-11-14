@@ -36,3 +36,30 @@ Owner praised the explanations and illustrations; keep that level in every demo 
 - Java in this sandbox needs JAVA_TOOL_OPTIONS (proxy); keep it set, filter the "Picked up" line.
 - Start Nexus with setsid nohup ... < /dev/null so pipes (| tail) do not hang; wipe /home/student/.m2 for clean runs.
 - Search index lags a few seconds after deploy (sleep 3-5 before search API).
+
+## Real UI coordinates (Chrome incognito, 1080x600, zoom 80%) - L91
+- Processes die between turns: restart Xvfb (setsid nohup Xvfb :97 -screen 0 1080x600x24) + /tmp/nx/reset.sh each turn; do recording in one turn.
+- Login (no info box): user (540,384); with first-login info box (540,465). Wizard: Get Started (719,531); set password New (540,314), Confirm (540,380), Next (738,531) -> signed out; log in again; Get Started; Welcome Next (738,531); EULA box (338,481), Next (738,531); Anonymous Next (737,531); Telemetry: scroll down 6 clicks at (540,400), box (338,483), Finish (733,531). Telemetry text: read-only after 30 days without telemetry.
+- Repositories page: localhost:8081/#admin/repository/repositories ; Create repository (335,191). Recipe list: scroll wheel at (660,400); maven2 (hosted) row around y=312 after [12 down, 7 up, 4 down, 1 up] from top (list is alphabetical; ~4.7 rows/click) -> click (350,312).
+- Form (top): Name (652,223) [(652,223) both before/after error]; Version policy select (610,356) after name typed -> options Release(320,377) Snapshot(323,396) Mixed(314,416); defaults Release + Disable redeploy. After 3 wheel clicks: Deployment policy select (610,399): Allow redeploy (345,418), Disable redeploy (345,438), Read-only (345,458). After 12+ wheel clicks: Create repository (339,560).
+- Repos list after create: toast "Repository updated: corp-snapshots"; Name column truncated at 80% zoom.
+
+## Owner request (2026-11-14 10:01): Nexus "job" (scheduled task) UI demo
+- Create a Nexus job (Settings > System > Tasks: e.g. "Delete unused snapshot", "Admin - Compact blob store", cleanup policy) as a very illustrative, fully visible UI demo; show every screen on the UI.
+- Standing rule for ALL UI demos going forward: highest creativity, accuracy, excellence; something never seen before (annotated callouts, zoomed regions, before/after states, live results, clear narration). Queue after L92 (candidate: extra lesson in MC10 or inside the MC10 Mastery lesson).
+
+## Owner instruction (2026-11-14 10:13): keep reusable resources in the sandbox
+Do NOT delete resources needed by future lessons (Nexus tarball /tmp/ncache/nexus.tgz, extracted /tmp/nx, ~/.m2 caches, Docker images later, base images, tool downloads). Only remove what a lab's own `down` removes. Reuse when the later lesson (e.g. Nexus job/tasks UI demo, MC10 Mastery, Docker) arrives.
+## Owner feedback (2026-11-14 10:03) for all UI/terminal demos
+- Cursor/UI element sync: the cursor must be easy to follow (highlight halo + click ripple), move to the element BEFORE it is named/clicked, and each highlight/callout must be in sync with the narration.
+- Text must never spill outside its box/card/frame (measure and wrap/shrink; check every card in QA).
+
+## QUALITY GATES (owner 10:23): run BEFORE every recording so nothing is re-recorded
+1. `python3 common/preflight.py lessonNN --fix` : typing fits its cue (+0.7 s slack; writes extra.json), cmd order = script order, HL rows match real output rows (wrap at 71 cols), commands wrapping >2 rows flagged. Must print PASSED.
+2. Lab: lab test script 0/N -> N/N, down clean (run before recording).
+3. Resources warmed in enter.sh (caches primed, only the demo's own downloads cold); reuse /tmp/ncache, /tmp/nx.
+4. After recording: contact-sheet review of every clip, then render, QA frames (text inside boxes, highlights on the right row), listen to narration spot checks.
+5. UI demos: cursor halo + click ripple, cursor moves before the element is named, callouts synced, no text spill.
+
+## TIME MANAGEMENT (owner 11:09): get it right the first time
+Budget per lesson (typical): script+scenes 20 min, lab build+test 15, preflight 2, record 10, render 10, QA 10, metadata+upload+captions 25 = ~90 min. Log start/end time of every stage in LEDGER notes. Run slow jobs (render, lab test, download) in parallel with writing the next step; poll with `until` loops, never fixed sleeps. Do every check BEFORE the slow step (preflight, text-fit, badge widths, lab test) so no stage repeats. Lessons learned L92: badge text clipped (check width of every label), EXTRA timing (preflight gate), lab clutter (hide helper dirs), line numbers in narration (verify against real output).

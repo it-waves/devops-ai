@@ -10,15 +10,16 @@ PORT=8081
 NV=3.98.1-01
 NURL=https://download.sonatype.com/nexus/3/nexus-$NV-linux-x86_64.tar.gz
 NU=nexus92
+NX=$D/.nx
 stopnx() { pkill -u $NU java 2>/dev/null; sleep 3; true; }
 down() { stopnx; rm -rf "${D:?}" /tmp/lab92-chk; id $NU >/dev/null 2>&1 && userdel $NU 2>/dev/null; true; }
 startnx() {
   curl -s -o /dev/null http://127.0.0.1:$PORT/service/rest/v1/status && return 0
-  : > $D/nexus.log; chown $NU:$NU $D/nexus.log
-  su $NU -c "cd $D/nexus/bin && setsid nohup ./nexus run > $D/nexus.log 2>&1 < /dev/null &"
+  : > $NX/nexus.log; chown $NU:$NU $NX/nexus.log
+  su $NU -c "cd $NX/nexus/bin && setsid nohup ./nexus run > $NX/nexus.log 2>&1 < /dev/null &"
   printf 'starting Nexus (about a minute) '
   for i in $(seq 1 90); do sleep 3; [ "$(curl -s -o /dev/null -w %{http_code} http://127.0.0.1:$PORT/service/rest/v1/status)" = 200 ] && { echo ok; return 0; }; printf '.'; done
-  echo; echo "Nexus did not start: see $D/nexus.log"; return 1
+  echo; echo "Nexus did not start: see $NX/nexus.log"; return 1
 }
 proj() { # dir [dependency version] : a project skeleton in $D/<dir>
   p=$D/$1; mkdir -p $p/src/main/java/cloudcart
@@ -58,19 +59,23 @@ EOF_P
 up() {
   for t in javac mvn curl python3; do command -v $t >/dev/null 2>&1 || { echo "$t not found: run  sudo apt install -y openjdk-21-jdk-headless maven curl python3"; exit 1; }; done
   [ "$(id -u)" = 0 ] || { echo "run with sudo"; exit 1; }
-  down; mkdir -p $D
-  id $NU >/dev/null 2>&1 || useradd -r -m -d $D/nexus-home -s /bin/bash $NU
+  if [ "$ACCEPT_NEXUS_EULA" != yes ]; then
+    echo "This lab installs Sonatype Nexus Repository Community Edition, which has its own license (the Community Edition End User License Agreement from Sonatype). Read it before you continue."
+    printf 'Type yes to accept it for this practice machine: '; read ans </dev/tty 2>/dev/null; [ "$ans" = yes ] || { echo "not accepted: nothing was installed"; exit 1; }
+  fi
+  down; mkdir -p $NX
+  id $NU >/dev/null 2>&1 || useradd -r -m -d $NX/nexus-home -s /bin/bash $NU
   echo "downloading Nexus $NV (about 525 MB) from download.sonatype.com ..."
-  curl -fL --progress-bar -o $D/nexus.tgz $NURL || { echo "download failed"; exit 1; }
-  mkdir -p $D/nexus.tmp && tar xzf $D/nexus.tgz -C $D/nexus.tmp && mv $D/nexus.tmp/nexus-$NV $D/nexus && mv $D/nexus.tmp/sonatype-work $D/sonatype-work && rm -rf "${D:?}/nexus.tgz" "${D:?}/nexus.tmp"
-  mkdir -p $D/sonatype-work/nexus3/etc
-  printf 'application-port=%s\n' $PORT > $D/sonatype-work/nexus3/etc/nexus.properties
-  sed -i 's/^-Xms.*/-Xms1200m/; s/^-Xmx.*/-Xmx1200m/' $D/nexus/bin/nexus.vmoptions
-  chown -R $NU:$NU $D/nexus $D/sonatype-work; chmod 755 $D
+  curl -fL --progress-bar -o $NX/nexus.tgz $NURL || { echo "download failed"; exit 1; }
+  mkdir -p $NX/nexus.tmp && tar xzf $NX/nexus.tgz -C $NX/nexus.tmp && mv $NX/nexus.tmp/nexus-$NV $NX/nexus && mv $NX/nexus.tmp/sonatype-work $NX/sonatype-work && rm -rf "${NX:?}/nexus.tgz" "${NX:?}/nexus.tmp"
+  mkdir -p $NX/sonatype-work/nexus3/etc
+  printf 'application-port=%s\n' $PORT > $NX/sonatype-work/nexus3/etc/nexus.properties
+  sed -i 's/^-Xms.*/-Xms1200m/; s/^-Xmx.*/-Xmx1200m/' $NX/nexus/bin/nexus.vmoptions
+  chown -R $NU:$NU $NX/nexus $NX/sonatype-work; chmod 755 $D $NX
   startnx || exit 1
   # headless setup: your own admin password, licence accepted, anonymous access OFF (this is what makes the 401 real)
-  for i in $(seq 1 40); do [ -f $D/sonatype-work/nexus3/admin.password ] && break; sleep 3; done
-  A=$(cat $D/sonatype-work/nexus3/admin.password); P="corp-$(date +%s | sha256sum | cut -c1-12)"
+  for i in $(seq 1 40); do [ -f $NX/sonatype-work/nexus3/admin.password ] && break; sleep 3; done
+  A=$(cat $NX/sonatype-work/nexus3/admin.password); P="corp-$(date +%s | sha256sum | cut -c1-12)"
   curl -s -o /dev/null -u admin:$A -X PUT -H 'Content-Type: text/plain' -d "$P" http://127.0.0.1:$PORT/service/rest/v1/security/users/admin/change-password
   curl -s -u admin:$P http://127.0.0.1:$PORT/service/rest/v1/system/eula > $D/eula.json
   python3 -c "import json;d=json.load(open('$D/eula.json'));d['accepted']=True;json.dump(d,open('$D/eula.json','w'))"
@@ -80,7 +85,7 @@ up() {
   # 1 notfound: a version that does not exist on Maven Central
   proj notfound 3.14.99
   # 2 offline: a hidden maven.config holds -o
-  proj offline; mkdir -p $D/offline/.mvn; printf -- '-o\n' > $D/offline/.mvn/maven.config
+  proj offline 3.13.0; mkdir -p $D/offline/.mvn; printf -- '-o\n' > $D/offline/.mvn/maven.config
   # 3 tests: a rounding bug
   proj tests
   sed -i 's#  <dependencies>#  <dependencies>\n    <dependency>\n      <groupId>junit</groupId>\n      <artifactId>junit</artifactId>\n      <version>4.13.2</version>\n      <scope>test</scope>\n    </dependency>#' $D/tests/pom.xml
