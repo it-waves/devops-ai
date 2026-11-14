@@ -63,3 +63,15 @@ Do NOT delete resources needed by future lessons (Nexus tarball /tmp/ncache/nexu
 
 ## TIME MANAGEMENT (owner 11:09): get it right the first time
 Budget per lesson (typical): script+scenes 20 min, lab build+test 15, preflight 2, record 10, render 10, QA 10, metadata+upload+captions 25 = ~90 min. Log start/end time of every stage in LEDGER notes. Run slow jobs (render, lab test, download) in parallel with writing the next step; poll with `until` loops, never fixed sleeps. Do every check BEFORE the slow step (preflight, text-fit, badge widths, lab test) so no stage repeats. Lessons learned L92: badge text clipped (check width of every label), EXTRA timing (preflight gate), lab clutter (hide helper dirs), line numbers in narration (verify against real output).
+
+## Nexus job demo (candidate L93) - VERIFIED real UI flow (Nov 14)
+- Fresh Nexus shows a Welcome wizard after first login: Get Started (719,531) -> Next (738,531) -> choose Disable anonymous (338,483) -> Next (733,531) -> Finish (733,531). Then Switch to Classic UI (815,109)->(887,303). Direct URL: localhost:8081/#admin/system/tasks
+- Tasks list: Create task (318,191); built-ins: Cleanup service, Cleanup unused m.., ECR Token Refresh, Malicious Risk On.., Repository Evaluat.., System - Repositor..
+- Select a Type filter (990,220) type SNAPSHOT -> "Maven - Delete SNAPSHOT" row (380,276) (also "Delete unused SNAPSHOT").
+- Form (top): Task enabled checkbox, Task name field (600,289), Notification email, Send notification on (Failure), Repository dropdown (arrow 912,487; options All, corp-snapshots (332,526), maven-public, maven-snapshots). Scroll down (xdotool click 5=down, 4=up): Minimum snapshot count (default 1), Snapshot retention days (default 30 -> set 0 for demo), Remove if released, Grace period, Task frequency dropdown (Manual/Once/Hourly/Daily/Weekly/Monthly/Advanced cron), Create task (322,559).
+- After create: toast "Task created", row in list (340,347 when sorted). Detail page: Delete task, Run (396,190), Stop, Summary/Settings tabs; Run opens Confirm dialog Yes (507,380); status goes Running then Waiting, Last result Ok.
+- REAL RESULT: min count 1 + retention 0 on corp-snapshots: 4 cart-core snapshot jars (..163452-1 .. 163515-4) -> only ..163515-4 remains. Setup: /tmp/demo92 deployed 4x to repo corp-snapshots (admin / Corp-7q4m2-Nexus1).
+- Tooling in /tmp/ex.py (xdotool helper; lost between turns, trivial to recreate). Still to build: cursor halo/ripple compositing, scenes, script, preflight, record.
+
+## Owner rule (Nov 14, 11:48): CLI <-> UI switches
+Going forward, in any lesson taught mostly in the CLI, when a point comes where students would benefit from quickly SEEING something in a UI (a console, web page, dashboard), switch to the UI briefly, show it, then continue teaching. Be creative and innovative with these switches; keep cursor halo + narration sync.

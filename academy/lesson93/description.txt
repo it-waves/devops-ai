@@ -1,0 +1,27 @@
+Lesson 93 of the DevOps Engineering Bootcamp, the ninth lesson of Maven. Every build deploys a new snapshot, so a repository fills with thousands of old files. This lesson is a live recording of a real Sonatype Nexus Repository: four real deploys in the terminal, then the same four builds in the browser, then a scheduled "Delete SNAPSHOT" task created, run and proven in the UI.
+
+You see the Browse tree, the Blob Stores screen, the Tasks list, the task form field by field (repository, minimum snapshot count, retention days, frequency, time), the Run confirmation, the status that needs a refresh, and the API check that only the newest build is left. Then you do the lab yourself.
+
+Chapters
+0:00 Old snapshots fill the disk
+0:47 Why a scheduled task
+1:36 Live: four builds, Nexus first login, Browse and Blob Stores
+4:00 Live: create the Delete SNAPSHOT task
+6:00 Live: run it, refresh, proof
+7:55 Your lab task
+8:57 Pass or fail rubric
+9:17 Your turn
+9:44 Quick check
+
+Objectives covered: MC10-O09 (schedule and verify a Nexus cleanup task for Maven snapshots)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab93.sh and shortcuts93.sh). Install with: sudo install -m 755 lab93.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts93.sh. You need an Ubuntu virtual machine with root, a JDK, Maven, python3 and curl (for example: sudo apt install -y openjdk-21-jdk-headless maven python3 curl), internet access, about 3 GB of free memory and 2 GB of disk. The first lab up downloads Sonatype Nexus Repository Community Edition 3.98.1 (about 525 MB) from download.sonatype.com, starts it on port 8081 as a dedicated user, and sets an admin password for you (saved in /opt/lab93/pass.txt). lab down stops Nexus and removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal and browser segment is one real recording of a real Nexus Repository Community Edition 3.98.1 on Ubuntu 24.04 with Maven and OpenJDK 21. In the recording I set the minimum snapshot count to 1 and the retention to 0 days so the demo cleans immediately; a real team usually keeps the default retention of 30 days. Nexus removes the files from its blob store later, during its own housekeeping, so the blob count does not drop right after the task runs. The first login shows a setup wizard and a usage-data notice that I accepted; by running the lab you accept the Nexus Community Edition license, so read it first. The ideas, task, rubric and quiz screens are labelled illustrations, not captures. The lab was run end to end before this lesson: it fails 0 of 5 at the start, 2 of 5 after the task is created and run, and passes 5 of 5 with the notes file; lab down leaves nothing behind. Only one style of solution was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. Your own run is unverified until you do it.
+
+Previous lesson: Maven Build Failures: Fix 404, Offline, Test and 401 Errors https://youtu.be/GqqWAJp_nBU
+Next: the Maven wrapper and builds you can repeat.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #maven #nexus #snapshots #devopsbootcamp #java
