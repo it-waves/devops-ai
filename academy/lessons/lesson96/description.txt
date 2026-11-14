@@ -1,0 +1,24 @@
+Lesson 96 of the DevOps Engineering Bootcamp, the second lesson of Gradle. A real Gradle 8.14.3 build fails because one unit test fails. You read the failure, find the bug in the program (not in the test), fix it, and see the test pass. Then you read the dependency tree of a real project, see Gradle choose commons-lang3 3.12.0 over the 3.9 you asked for, and ask Gradle why with dependencyInsight. Then you do the same job yourself in the lab.
+
+Chapters
+0:00 Build, test, inspect
+0:36 Four ideas of a trusted build
+1:24 Live: fix a failing test, read the dependency tree
+5:04 Your lab task
+5:36 Where to find the lab
+6:30 Pass or fail rubric
+6:57 Your turn
+7:36 Quick check
+
+Objectives covered: MC11-O02 (build, test and dependency inspection with Gradle: failing test, test results, dependency tree, dependencyInsight, version conflict resolution)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab96.sh and shortcuts96.sh). Install with: sudo install -m 755 lab96.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts96.sh. You need an Ubuntu virtual machine with root, a JDK, python3 and curl (for example: sudo apt install -y openjdk-21-jdk-headless python3 curl), internet access and about 1 GB of free memory. The first lab up downloads Gradle 8.14.3 (about 130 MB) and the project libraries (JUnit and Apache Commons) from Maven Central. lab down removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal segment is a real recording with real Gradle 8.14.3 and real libraries from Maven Central. On the recording machine the Gradle download site is blocked, so a stored copy of Gradle and of the libraries was put in place first; on your machine the first run downloads them once. I planted the bug in the discount calculation myself so it is repeatable. The HTML test report is shown by its file name, not opened in a browser. The lab was run end to end before this lesson: it fails 0 of 5 at the start and passes 5 of 5 after the fixes; lab down leaves nothing behind. Only one style of fix was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. The parts, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Gradle Basics: Project, Wrapper, Build Script and Task Graph, Live https://youtu.be/6TC53cZApV8
+Next: Gradle dependencies, repositories and plugins (MC11-O03).
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #gradle #java #junit #dependencies #devopsbootcamp

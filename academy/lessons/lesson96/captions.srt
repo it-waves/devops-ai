@@ -1,0 +1,895 @@
+1
+00:00:00,500 --> 00:00:02,962
+Last lesson you read a Gradle project.
+
+2
+00:00:02,962 --> 00:00:05,813
+Today it does real work: it tests your code,
+
+3
+00:00:05,813 --> 00:00:07,497
+and it pulls in libraries.
+
+4
+00:00:08,047 --> 00:00:13,167
+And real work breaks. A test fails. Two libraries want different versions of a third.
+
+5
+00:00:13,717 --> 00:00:18,859
+Gradle gives you three commands to find the cause: build, test, and dependencies.
+
+6
+00:00:19,409 --> 00:00:22,243
+You will watch a real failing test get fixed,
+
+7
+00:00:22,243 --> 00:00:25,518
+then see exactly which library version Gradle chose,
+
+8
+00:00:25,518 --> 00:00:26,022
+and why.
+
+9
+00:00:26,572 --> 00:00:29,687
+Then you do it alone, and a checker judges your result.
+
+10
+00:00:30,237 --> 00:00:34,503
+One idea first: when something fails, ask Gradle. It will tell you.
+
+11
+00:00:36,053 --> 00:00:39,872
+Four ideas turn a Gradle build into something you can trust.
+
+12
+00:00:40,422 --> 00:00:40,679
+One,
+
+13
+00:00:40,679 --> 00:00:41,709
+the build chain.
+
+14
+00:00:41,709 --> 00:00:42,803
+Build runs check,
+
+15
+00:00:42,803 --> 00:00:43,833
+check runs test,
+
+16
+00:00:43,833 --> 00:00:45,443
+and test runs your tests.
+
+17
+00:00:45,443 --> 00:00:47,824
+A failing test stops the whole build.
+
+18
+00:00:48,374 --> 00:00:48,678
+Two,
+
+19
+00:00:48,678 --> 00:00:49,743
+the test task.
+
+20
+00:00:49,743 --> 00:00:50,883
+It runs J unit,
+
+21
+00:00:50,883 --> 00:00:54,761
+and writes two results: an X M L file for machines,
+
+22
+00:00:54,761 --> 00:00:57,270
+and an H T M L report for people.
+
+23
+00:00:57,820 --> 00:00:58,231
+Three,
+
+24
+00:00:58,231 --> 00:00:59,122
+dependencies.
+
+25
+00:00:59,122 --> 00:01:01,725
+Implementation is for code that ships.
+
+26
+00:01:01,725 --> 00:01:05,287
+Test implementation is for code that only tests use.
+
+27
+00:01:05,837 --> 00:01:06,186
+Four,
+
+28
+00:01:06,186 --> 00:01:06,954
+inspection.
+
+29
+00:01:06,954 --> 00:01:09,608
+The dependencies task prints the tree.
+
+30
+00:01:09,608 --> 00:01:12,401
+Dependency insight explains one library.
+
+31
+00:01:12,401 --> 00:01:13,798
+When versions clash,
+
+32
+00:01:13,798 --> 00:01:15,544
+Gradle picks the highest.
+
+33
+00:01:16,094 --> 00:01:19,833
+Maven does this with plug ins and the dependency tree goal.
+
+34
+00:01:19,833 --> 00:01:21,481
+Gradle does it with tasks.
+
+35
+00:01:21,481 --> 00:01:22,686
+Let us see it live.
+
+36
+00:01:24,736 --> 00:01:30,645
+Go into the project. Type: CD, slash opt, slash lab ninety-six, slash cartcore.
+
+37
+00:01:31,195 --> 00:01:36,849
+Find the code. Type: find, src, dash name, quote, star dot java, quote.
+
+38
+00:01:37,399 --> 00:01:38,352
+Three files.
+
+39
+00:01:38,352 --> 00:01:40,735
+Cart and Main are the program,
+
+40
+00:01:40,735 --> 00:01:41,451
+in S R C,
+
+41
+00:01:41,451 --> 00:01:41,848
+main.
+
+42
+00:01:41,848 --> 00:01:43,596
+Cart test is the test,
+
+43
+00:01:43,596 --> 00:01:44,311
+in S R C,
+
+44
+00:01:44,311 --> 00:01:44,708
+test.
+
+45
+00:01:44,708 --> 00:01:46,615
+Gradle keeps them apart.
+
+46
+00:01:47,165 --> 00:01:48,425
+Now the libraries.
+
+47
+00:01:48,425 --> 00:01:51,787
+Show the dependencies block of the build script.
+
+48
+00:01:51,787 --> 00:01:52,557
+Type: grep,
+
+49
+00:01:52,557 --> 00:01:53,958
+dash capital A five,
+
+50
+00:01:53,958 --> 00:01:54,378
+quote,
+
+51
+00:01:54,378 --> 00:01:54,798
+caret,
+
+52
+00:01:54,798 --> 00:01:55,709
+dependencies,
+
+53
+00:01:55,709 --> 00:01:56,129
+quote,
+
+54
+00:01:56,129 --> 00:01:57,319
+build dot gradle.
+
+55
+00:01:57,869 --> 00:02:01,077
+Implementation means: ships with the program.
+
+56
+00:02:01,077 --> 00:02:02,004
+Commons text,
+
+57
+00:02:02,004 --> 00:02:03,644
+and commons lang three,
+
+58
+00:02:03,644 --> 00:02:05,640
+at version three point nine.
+
+59
+00:02:05,640 --> 00:02:06,424
+Below them,
+
+60
+00:02:06,424 --> 00:02:08,420
+test implementation: J unit,
+
+61
+00:02:08,420 --> 00:02:09,775
+used only by tests.
+
+62
+00:02:09,775 --> 00:02:12,056
+Keep commons lang three in mind.
+
+63
+00:02:12,606 --> 00:02:13,604
+Run the build.
+
+64
+00:02:13,604 --> 00:02:15,743
+Keep the lines about failures.
+
+65
+00:02:15,743 --> 00:02:17,525
+Type: dot slash gradle W,
+
+66
+00:02:17,525 --> 00:02:17,953
+build,
+
+67
+00:02:17,953 --> 00:02:18,594
+then two,
+
+68
+00:02:18,594 --> 00:02:19,521
+greater than,
+
+69
+00:02:19,521 --> 00:02:20,519
+ampersand one,
+
+70
+00:02:20,519 --> 00:02:21,161
+and grep.
+
+71
+00:02:23,211 --> 00:02:24,332
+Task test failed.
+
+72
+00:02:24,332 --> 00:02:24,992
+Cart test,
+
+73
+00:02:24,992 --> 00:02:26,378
+ten percent discount,
+
+74
+00:02:26,378 --> 00:02:26,840
+failed.
+
+75
+00:02:26,840 --> 00:02:27,895
+Three tests ran,
+
+76
+00:02:27,895 --> 00:02:28,621
+one failed,
+
+77
+00:02:28,621 --> 00:02:30,337
+so the whole build failed.
+
+78
+00:02:30,337 --> 00:02:32,448
+That is the build chain at work.
+
+79
+00:02:32,998 --> 00:02:34,147
+What went wrong?
+
+80
+00:02:34,147 --> 00:02:35,152
+Run the tests,
+
+81
+00:02:35,152 --> 00:02:37,450
+and keep only the word expected,
+
+82
+00:02:37,450 --> 00:02:38,670
+and what follows.
+
+83
+00:02:38,670 --> 00:02:40,465
+Type: dot slash gradle W,
+
+84
+00:02:40,465 --> 00:02:40,824
+test,
+
+85
+00:02:40,824 --> 00:02:41,973
+and grep dash O,
+
+86
+00:02:41,973 --> 00:02:42,619
+expected.
+
+87
+00:02:44,669 --> 00:02:46,005
+Expected forty-five,
+
+88
+00:02:46,005 --> 00:02:47,607
+but the code gave forty.
+
+89
+00:02:47,607 --> 00:02:48,542
+Fifty dollars,
+
+90
+00:02:48,542 --> 00:02:49,945
+with ten percent off,
+
+91
+00:02:49,945 --> 00:02:51,347
+should be forty-five.
+
+92
+00:02:51,347 --> 00:02:52,883
+We got fifty minus ten.
+
+93
+00:02:53,433 --> 00:02:55,138
+Find the code behind it.
+
+94
+00:02:55,138 --> 00:02:56,416
+Type: grep dash N,
+
+95
+00:02:56,416 --> 00:02:57,766
+dash capital A two,
+
+96
+00:02:57,766 --> 00:02:58,548
+total with,
+
+97
+00:02:58,548 --> 00:03:00,750
+then the path to cart dot java.
+
+98
+00:03:01,300 --> 00:03:02,339
+Line twenty-two.
+
+99
+00:03:02,339 --> 00:03:03,962
+It subtracts the percent,
+
+100
+00:03:03,962 --> 00:03:06,299
+as if ten percent meant ten dollars.
+
+101
+00:03:06,299 --> 00:03:07,988
+The bug is in the program,
+
+102
+00:03:07,988 --> 00:03:09,026
+not in the test.
+
+103
+00:03:09,026 --> 00:03:10,260
+We fix the program.
+
+104
+00:03:10,810 --> 00:03:15,055
+Fix it with sed. Subtract the percentage of the total, instead of the number.
+
+105
+00:03:20,805 --> 00:03:23,813
+Run the tests again. Keep the failed and build lines.
+
+106
+00:03:26,963 --> 00:03:28,055
+Build successful.
+
+107
+00:03:28,055 --> 00:03:28,826
+No failures.
+
+108
+00:03:28,826 --> 00:03:30,817
+The test that was red is green,
+
+109
+00:03:30,817 --> 00:03:32,937
+and the test file did not change.
+
+110
+00:03:33,487 --> 00:03:35,643
+Machines read the X M L result.
+
+111
+00:03:35,643 --> 00:03:37,035
+Pull out the counts.
+
+112
+00:03:37,035 --> 00:03:37,800
+Type: grep,
+
+113
+00:03:37,800 --> 00:03:38,426
+dash O H,
+
+114
+00:03:38,426 --> 00:03:39,609
+then the pattern,
+
+115
+00:03:39,609 --> 00:03:41,209
+and the results folder.
+
+116
+00:03:43,259 --> 00:03:44,091
+Tests three,
+
+117
+00:03:44,091 --> 00:03:44,991
+skipped zero,
+
+118
+00:03:44,991 --> 00:03:45,961
+failures zero.
+
+119
+00:03:45,961 --> 00:03:48,663
+A build server reads exactly this file,
+
+120
+00:03:48,663 --> 00:03:50,257
+to decide pass or fail.
+
+121
+00:03:50,807 --> 00:03:53,254
+People read the H T M L report.
+
+122
+00:03:53,254 --> 00:03:54,517
+List its folder.
+
+123
+00:03:54,517 --> 00:03:55,306
+Type: L S,
+
+124
+00:03:55,306 --> 00:03:55,779
+build,
+
+125
+00:03:55,779 --> 00:03:56,885
+slash reports,
+
+126
+00:03:56,885 --> 00:03:57,832
+slash tests,
+
+127
+00:03:57,832 --> 00:03:58,700
+slash test.
+
+128
+00:04:00,750 --> 00:04:03,040
+Index dot H T M L is the report.
+
+129
+00:04:03,040 --> 00:04:06,832
+In your own virtual machine you open it in a browser.
+
+130
+00:04:06,832 --> 00:04:08,263
+It lists every test,
+
+131
+00:04:08,263 --> 00:04:10,051
+with its time and result.
+
+132
+00:04:10,601 --> 00:04:12,349
+Now the dependency tree.
+
+133
+00:04:12,349 --> 00:04:14,389
+Show the runtime class path,
+
+134
+00:04:14,389 --> 00:04:16,355
+and keep the commons lines.
+
+135
+00:04:16,355 --> 00:04:18,176
+Type: dot slash gradle W,
+
+136
+00:04:18,176 --> 00:04:19,123
+dependencies,
+
+137
+00:04:19,123 --> 00:04:20,871
+dash dash configuration,
+
+138
+00:04:20,871 --> 00:04:22,255
+runtime class path,
+
+139
+00:04:22,255 --> 00:04:22,911
+and grep.
+
+140
+00:04:25,261 --> 00:04:27,691
+Commons text brings commons lang three,
+
+141
+00:04:27,691 --> 00:04:29,373
+version three point twelve.
+
+142
+00:04:29,373 --> 00:04:31,990
+But our script asked for three point nine.
+
+143
+00:04:31,990 --> 00:04:34,483
+The arrow says it all: three point nine,
+
+144
+00:04:34,483 --> 00:04:36,165
+becomes three point twelve.
+
+145
+00:04:36,165 --> 00:04:37,847
+Gradle took the higher one.
+
+146
+00:04:38,397 --> 00:04:39,550
+Ask Gradle why.
+
+147
+00:04:39,550 --> 00:04:41,472
+Type: dot slash gradle W,
+
+148
+00:04:41,472 --> 00:04:42,933
+dependency insight,
+
+149
+00:04:42,933 --> 00:04:44,547
+dash dash dependency,
+
+150
+00:04:44,547 --> 00:04:46,007
+commons lang three,
+
+151
+00:04:46,007 --> 00:04:47,391
+the configuration,
+
+152
+00:04:47,391 --> 00:04:48,083
+and grep.
+
+153
+00:04:50,433 --> 00:04:53,218
+Selection reasons: by conflict resolution,
+
+154
+00:04:53,218 --> 00:04:56,402
+between three point twelve and three point nine.
+
+155
+00:04:56,402 --> 00:04:57,197
+Not a guess.
+
+156
+00:04:57,197 --> 00:04:59,187
+Gradle told you which version,
+
+157
+00:04:59,187 --> 00:04:59,718
+and why.
+
+158
+00:04:59,718 --> 00:05:00,779
+Look here first,
+
+159
+00:05:00,779 --> 00:05:03,233
+whenever a library behaves strangely.
+
+160
+00:05:04,783 --> 00:05:08,303
+Your task. The same journey, on your own project, in the lab.
+
+161
+00:05:08,853 --> 00:05:10,130
+One: run the tests.
+
+162
+00:05:10,130 --> 00:05:10,802
+One fails.
+
+163
+00:05:10,802 --> 00:05:12,617
+Fix the bug in the program,
+
+164
+00:05:12,617 --> 00:05:13,692
+not in the test,
+
+165
+00:05:13,692 --> 00:05:15,104
+until all three pass.
+
+166
+00:05:15,654 --> 00:05:19,494
+Two: find the H T M L test report, and note its path.
+
+167
+00:05:20,044 --> 00:05:23,500
+Three: save the runtime class path tree in deps dot text.
+
+168
+00:05:24,050 --> 00:05:29,170
+Four: save the dependency insight for commons lang three in insight dot text.
+
+169
+00:05:29,720 --> 00:05:34,178
+Five: write notes dot text, three lines: version, why, and report.
+
+170
+00:05:36,228 --> 00:05:40,431
+Here is where to find everything. Pause on this screen if you need to write it down.
+
+171
+00:05:40,981 --> 00:05:42,680
+The lab lives on git hub,
+
+172
+00:05:42,680 --> 00:05:43,835
+at it dash waves,
+
+173
+00:05:43,835 --> 00:05:45,398
+slash dev ops dash A I,
+
+174
+00:05:45,398 --> 00:05:46,893
+in the folder academy,
+
+175
+00:05:46,893 --> 00:05:47,573
+slash lab.
+
+176
+00:05:48,123 --> 00:05:53,328
+Two files: lab ninety-six dot S H, and shortcuts ninety-six dot S H.
+
+177
+00:05:53,878 --> 00:05:54,765
+Install it,
+
+178
+00:05:54,765 --> 00:05:58,394
+in your Ubuntu virtual machine: sudo install,
+
+179
+00:05:58,394 --> 00:06:00,249
+dash m seven five five,
+
+180
+00:06:00,249 --> 00:06:02,104
+lab ninety-six dot S H,
+
+181
+00:06:02,104 --> 00:06:03,313
+into slash usr,
+
+182
+00:06:03,313 --> 00:06:04,281
+slash local,
+
+183
+00:06:04,281 --> 00:06:05,249
+slash S bin.
+
+184
+00:06:05,799 --> 00:06:09,993
+Load the short name with: source shortcuts ninety-six dot S H.
+
+185
+00:06:09,993 --> 00:06:11,752
+Then you can type: lab up,
+
+186
+00:06:11,752 --> 00:06:12,429
+lab check,
+
+187
+00:06:12,429 --> 00:06:13,308
+and lab down.
+
+188
+00:06:13,858 --> 00:06:15,030
+You need a J D K,
+
+189
+00:06:15,030 --> 00:06:16,546
+curl and python three,
+
+190
+00:06:16,546 --> 00:06:18,546
+about one gigabyte of memory,
+
+191
+00:06:18,546 --> 00:06:20,407
+and an internet connection.
+
+192
+00:06:20,407 --> 00:06:22,751
+The first lab up downloads Gradle,
+
+193
+00:06:22,751 --> 00:06:23,991
+and the libraries.
+
+194
+00:06:24,541 --> 00:06:28,829
+Lab down removes everything. Only run it in your own virtual machine.
+
+195
+00:06:30,879 --> 00:06:32,948
+Pass or fail. You need all six.
+
+196
+00:06:33,498 --> 00:06:35,312
+Five pass lines in lab check.
+
+197
+00:06:35,862 --> 00:06:39,424
+The bug is fixed in the program, and the test file is untouched.
+
+198
+00:06:39,974 --> 00:06:42,300
+You used the wrapper, not another Gradle.
+
+199
+00:06:42,850 --> 00:06:47,074
+Deps dot text and insight dot text come from real Gradle runs.
+
+200
+00:06:47,624 --> 00:06:50,909
+Notes dot text names the real version, in your own words.
+
+201
+00:06:51,459 --> 00:06:53,315
+Lab down leaves nothing behind.
+
+202
+00:06:53,865 --> 00:06:55,166
+To pass, all six.
+
+203
+00:06:57,216 --> 00:07:00,053
+Your turn, in your own Ubuntu virtual machine.
+
+204
+00:07:00,603 --> 00:07:02,694
+One: lab up, and read the task file.
+
+205
+00:07:03,244 --> 00:07:05,505
+Two: run the tests, and read the failure.
+
+206
+00:07:06,055 --> 00:07:08,765
+Three: fix the program, and run the tests again.
+
+207
+00:07:09,315 --> 00:07:12,557
+Four: print the dependency tree, and ask for the insight.
+
+208
+00:07:13,107 --> 00:07:15,518
+Five: write the notes, and run lab check.
+
+209
+00:07:16,068 --> 00:07:18,649
+Six: lab down, and prove nothing is left.
+
+210
+00:07:19,199 --> 00:07:21,034
+Pause the video, and begin now.
+
+211
+00:07:36,584 --> 00:07:37,459
+Quick check.
+
+212
+00:07:38,009 --> 00:07:40,142
+Why does a failing test stop the build?
+
+213
+00:07:40,692 --> 00:07:44,127
+Which file does a build server read, and which does a person read?
+
+214
+00:07:44,677 --> 00:07:48,581
+What is the difference between implementation and test implementation?
+
+215
+00:07:49,131 --> 00:07:51,371
+Two libraries want different versions.
+
+216
+00:07:51,371 --> 00:07:52,728
+Which does Gradle pick,
+
+217
+00:07:52,728 --> 00:07:54,379
+and which command proves it?
+
+218
+00:07:54,929 --> 00:07:57,154
+Objective covered: M C eleven,
+
+219
+00:07:57,154 --> 00:07:58,193
+objective two,
+
+220
+00:07:58,193 --> 00:07:59,157
+Gradle build,
+
+221
+00:07:59,157 --> 00:08:01,457
+test and dependency inspection.
+
+222
+00:08:02,007 --> 00:08:04,076
+Pause the video, and answer out loud.
+
+223
+00:08:14,626 --> 00:08:18,423
+Next: dependencies, repositories and plug ins in depth.
+
+224
+00:08:18,973 --> 00:08:22,301
+If this helped, like, share and subscribe, so you do not miss it.
