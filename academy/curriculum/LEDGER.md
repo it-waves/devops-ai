@@ -160,7 +160,7 @@ UI needed: Maven Central search site (central.sonatype.com) for coordinates and 
 | L111 | MC12-O08 | Tomcat Health Checks: Recover From a Failed Deployment | Published https://youtu.be/Mr9egqvwxY8, 9:42, captions and end screen done; L110 Next line updated |
 | L112 | MC12 mastery evidence | Tomcat Mastery: Fix and Harden an Inherited Server. Published https://youtu.be/xONw85H5URM, 8:48, captions and end screen done; L111 Next line updated. Real Tomcat 10.1.34, one continuous terminal job (404 and log, redeploy, health, ss 0.0.0.0 to 127.0.0.1, stop word, health.sh, report); lab112 tested 0/5 to 5/5, down clean; lab info shown on screen |
 | L113 | CloudCart v0 · 1/5 | CloudCart v0: Meet the App and Use It Like a Customer | Published https://youtu.be/jecx02ezHyw, 11:15, captions and end screen done; L112 Next line updated. Real CloudCart 0.2.0 on Tomcat 10.1.34, one continuous recording, lab113 0/5 to 5/5 |
-| L114 | CloudCart v0 · 2/5 | Project layout and the Maven build | Planned |
+| L114 | CloudCart v0 · 2/5 | CloudCart v0: The Project Layout and the Maven Build | Published https://youtu.be/t2uorB6lHNo, 10:20, captions done; L113 Next line updated. Real Maven 3.9 build on Maven Central, terminal recording, lab114 0/5 to 5/5 |
 | L115 | CloudCart v0 · 3/5 | Deploy to Tomcat: webapps and the Manager UI | Planned |
 | L116 | CloudCart v0 · 4/5 | Run it like a customer, fix it like an engineer | Planned |
 | L117 | CloudCart v0 · 5/5 | v0 mastery evidence: clean clone, build, deploy, verify, tag cloudcart-v0 | Planned |
