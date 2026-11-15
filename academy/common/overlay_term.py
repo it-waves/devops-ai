@@ -20,6 +20,13 @@ for scene, info in clips.items():
         en = f"enable='between(t,{a:.2f},{b:.2f})'"
         hl += f",drawbox=x={x0}:y={y}:w={x1 - x0}:h={h}:color=0xffd24a@0.22:t=fill:{en},drawbox=x={x0}:y={y}:w={x1 - x0}:h={h}:color=0xffd24a@0.95:t=3:{en}"
         if label: hl += f",drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:text='{label.replace(chr(37), chr(92) * 2 + chr(37))}':fontsize=20:fontcolor=0x0b1a1e:box=1:boxcolor=0xffd24a:boxborderw=6:x={lx}:y={(6 + 30 * lrow + 4) if lrow is not None else y + (h - 22) // 2}:{en}"
-    f = f"[1:v]setpts=PTS-STARTPTS{hl},scale=1080:600[c];[0:v][c]overlay=110:342:enable='gte(t,{st})':eof_action=repeat,format=yuv420p[o]"
+    ui = getattr(V, 'UIFULL', {}).get(scene)
+    if ui:
+        (c0, f0, c1, f1) = ui; tot = lambda q: dur[q] + V.EXTRA.get(q, 0)
+        ua = C[c0] + f0 * tot(c0); ub = C[c1] + f1 * tot(c1) + 0.9
+        lab = "drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:text='REAL RECORDING  \u00b7  full screen':fontsize=26:fontcolor=0x0b1a1e:box=1:boxcolor=0x7fe0d0:boxborderw=10:x=24:y=1010"
+        f = f"[1:v]setpts=PTS-STARTPTS,split[a][b];[a]crop=1080:600:0:0{hl},scale=1080:600[c];[0:v][c]overlay=110:342:enable='gte(t,{st})*not(between(t,{ua:.2f},{ub:.2f}))':eof_action=repeat[o1];[b]scale=1920:1080,{lab}[fs];[o1][fs]overlay=0:0:enable='between(t,{ua:.2f},{ub:.2f})':eof_action=repeat,format=yuv420p[o]"
+    else:
+        f = f"[1:v]setpts=PTS-STARTPTS{hl},scale=1080:600[c];[0:v][c]overlay=110:342:enable='gte(t,{st})':eof_action=repeat,format=yuv420p[o]"
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', base, '-ss', '1.0', '-i', info['file'], '-filter_complex', f, '-map', '[o]', '-an', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '17', '-t', str(dur_of(base)), B + scene + '.mp4'], check=True)
     print('overlay', scene, round(st, 1))

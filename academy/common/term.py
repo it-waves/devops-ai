@@ -1,13 +1,13 @@
 """Live terminal recording helpers (any lesson). Xvfb :97 1080x600, xterm running a clean student shell.
 Usage: from term import *; xterm_start(); r = Run(LD, scene) ; r.type_at(cid, text) ... r.end()"""
 import os, sys, time, json, subprocess, importlib, re
-WIN = [1080, 600]; DISP = ':97'; E97 = dict(os.environ, DISPLAY=DISP)
+WIN = [1080, 600]; XSIZE = '1080x600'; DISP = ':97'; E97 = dict(os.environ, DISPLAY=DISP)
 PS1 = r'\[\e[1;32m\]student@lab\[\e[0m\]:\[\e[1;36m\]\w\[\e[0m\]$ '
 def sh(*a, **k): return subprocess.run(list(map(str, a)), env=E97, **k)
 def xt(*a): sh('xdotool', *a)
 def ensure_x():
     if subprocess.run(['pgrep', '-f', 'Xvfb ' + DISP], capture_output=True).returncode:
-        subprocess.Popen(['Xvfb', DISP, '-screen', '0', '1080x600x24'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL); time.sleep(2)
+        subprocess.Popen(['Xvfb', DISP, '-screen', '0', XSIZE + 'x24'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL); time.sleep(2)
 def reset_home():
     subprocess.run('find /home/student -mindepth 1 -delete', shell=True)
 def xterm_start(prefix=None):

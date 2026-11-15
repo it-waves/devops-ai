@@ -1,0 +1,23 @@
+Lesson 110 of the DevOps Engineering Bootcamp: lock down the Tomcat Manager. A default Manager with admin and admin, a readable users file, an open address rule and a live shutdown port is an invitation. You prove the weak setup works, then fix four layers: replace the weak user with ops and a long password in tomcat-users.xml, protect the file with chmod 600 and check that Tomcat does not run as root, restrict the RemoteCIDRValve in the Manager context.xml to 127.0.0.0/8, and turn the shutdown port off in server.xml after showing that one word sent to port 8096 stops Tomcat. A full screen Chrome recording then signs in as ops and tours the Manager page: applications table, buttons, deploy section and server information.
+
+Chapters
+0:00 Why lock down the Manager
+0:26 Four layers
+1:00 Live: lock down the Manager
+9:18 Your lab task
+9:50 Where to find the lab
+10:44 Pass or fail rubric
+11:10 Your turn
+11:48 Quick check
+Objectives covered: MC12-O07 (secure the Tomcat manager interfaces and service permissions)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab110.sh and shortcuts110.sh). Install with: sudo install -m 755 lab110.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts110.sh. You need any Linux machine with root, a JDK and curl (for example: sudo apt install -y openjdk-21-jdk-headless curl), internet access, about 1 GB of free memory and ports 8086 and 8096 free. No systemd is needed. The first lab up downloads Tomcat 10.1.34 from archive.apache.org (about 14 MB). lab down stops Tomcat and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal and the full screen Chrome segment are one real, continuous recording with real Apache Tomcat 10.1.34. The lab was run end to end: it passes 0 of 5 at the start and 5 of 5 after the tasks, and lab down leaves nothing behind. The password shown is a throwaway test value for this lab; never reuse it and never publish a real one. The narration is synthetic speech. The hook, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Put nginx in Front of Tomcat: Reverse Proxy and HTTPS https://youtu.be/uE9pDj2fr28
+Next: health monitoring and recovering a failed deployment.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #tomcat #security #devopsbootcamp

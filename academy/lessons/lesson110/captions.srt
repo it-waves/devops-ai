@@ -1,0 +1,819 @@
+1
+00:00:00,500 --> 00:00:04,168
+Tomcat comes with a powerful web page: the Manager.
+
+2
+00:00:04,168 --> 00:00:06,398
+Anyone who signs in can deploy,
+
+3
+00:00:06,398 --> 00:00:06,758
+stop,
+
+4
+00:00:06,758 --> 00:00:08,628
+or remove any application.
+
+5
+00:00:09,178 --> 00:00:12,804
+And the default setup is full of small risks: a weak user,
+
+6
+00:00:12,804 --> 00:00:14,242
+a file anyone can read,
+
+7
+00:00:14,242 --> 00:00:15,493
+and a shutdown word.
+
+8
+00:00:16,043 --> 00:00:20,459
+Today you lock it down, one layer at a time, and prove that each layer works.
+
+9
+00:00:21,009 --> 00:00:25,830
+A strong user, tight file permissions, a restricted address, and no shutdown port.
+
+10
+00:00:27,380 --> 00:00:28,724
+Four layers, in order.
+
+11
+00:00:29,274 --> 00:00:30,486
+One: a strong user.
+
+12
+00:00:30,486 --> 00:00:32,590
+Remove the default admin account,
+
+13
+00:00:32,590 --> 00:00:33,865
+and create your own,
+
+14
+00:00:33,865 --> 00:00:35,205
+with a long password.
+
+15
+00:00:35,755 --> 00:00:36,934
+Two: tight files.
+
+16
+00:00:36,934 --> 00:00:39,085
+The users file holds passwords,
+
+17
+00:00:39,085 --> 00:00:41,166
+so only its owner may read it.
+
+18
+00:00:41,166 --> 00:00:44,011
+And Tomcat itself must never run as root.
+
+19
+00:00:44,561 --> 00:00:49,830
+Three: a restricted address. A valve tells the Manager to answer only to this machine.
+
+20
+00:00:50,380 --> 00:00:56,161
+Four: no shutdown port. By default, anyone on the machine can stop Tomcat with one word.
+
+21
+00:00:56,711 --> 00:00:58,845
+User, files, address, shutdown.
+
+22
+00:01:00,895 --> 00:01:05,652
+Go to the lab folder. Type: cd /opt/lab110.
+
+23
+00:01:07,202 --> 00:01:09,101
+Look around. Type: ls.
+
+24
+00:01:12,651 --> 00:01:19,435
+Start Tomcat, and keep only the last line.
+
+25
+00:01:27,985 --> 00:01:38,630
+Check the cart, on port 8086.
+
+26
+00:01:49,180 --> 00:01:51,932
+Two hundred. The app works. Now the Manager.
+
+27
+00:01:52,482 --> 00:01:56,024
+Ask for the Manager page, with no user.
+
+28
+00:02:00,574 --> 00:02:03,880
+Four oh one: you must sign in. Good. But who can sign in?
+
+29
+00:02:04,430 --> 00:02:09,550
+Try the user admin, with the password admin.
+
+30
+00:02:14,100 --> 00:02:14,856
+Two hundred!
+
+31
+00:02:14,856 --> 00:02:16,995
+The default user gets straight in.
+
+32
+00:02:16,995 --> 00:02:19,701
+Every attacker tries admin and admin first.
+
+33
+00:02:19,701 --> 00:02:21,652
+This is the first thing to fix.
+
+34
+00:02:22,202 --> 00:02:28,176
+Read the users file.
+
+35
+00:02:31,726 --> 00:02:32,236
+A role,
+
+36
+00:02:32,236 --> 00:02:33,258
+manager-gui.
+
+37
+00:02:33,258 --> 00:02:34,717
+And one user: admin,
+
+38
+00:02:34,717 --> 00:02:36,468
+with the password admin,
+
+39
+00:02:36,468 --> 00:02:37,490
+in plain text.
+
+40
+00:02:37,490 --> 00:02:40,189
+Because the passwords are plain text,
+
+41
+00:02:40,189 --> 00:02:42,670
+the file itself must be protected.
+
+42
+00:02:43,220 --> 00:02:46,697
+Edit the file in V I M.
+
+43
+00:02:51,247 --> 00:02:52,314
+Go to line four,
+
+44
+00:02:52,314 --> 00:02:54,048
+and change the whole line.
+
+45
+00:02:54,048 --> 00:02:55,115
+A new user: ops.
+
+46
+00:02:55,115 --> 00:02:56,582
+Its own long password,
+
+47
+00:02:56,582 --> 00:02:57,449
+with letters,
+
+48
+00:02:57,449 --> 00:02:57,916
+a dash,
+
+49
+00:02:57,916 --> 00:02:58,650
+and digits.
+
+50
+00:03:07,200 --> 00:03:09,055
+Twelve characters or more.
+
+51
+00:03:09,055 --> 00:03:11,196
+The role stays: manager-gui.
+
+52
+00:03:11,196 --> 00:03:12,195
+Save and quit.
+
+53
+00:03:12,195 --> 00:03:13,122
+In real life,
+
+54
+00:03:13,122 --> 00:03:16,191
+the password comes from a password manager,
+
+55
+00:03:16,191 --> 00:03:17,546
+never from a video.
+
+56
+00:03:22,096 --> 00:03:27,366
+Now permissions. Who can read the file?
+
+57
+00:03:30,916 --> 00:03:36,676
+R W, R, R: every user on this machine can read it. That includes the passwords.
+
+58
+00:03:37,226 --> 00:03:40,084
+Make it private.
+
+59
+00:03:42,634 --> 00:03:45,941
+Six hundred: the owner reads and writes. Nobody else.
+
+60
+00:03:46,491 --> 00:03:48,219
+Check it again.
+
+61
+00:03:51,769 --> 00:03:54,436
+R W, then dashes. Only the owner.
+
+62
+00:03:54,986 --> 00:03:58,975
+Who runs Tomcat?
+
+63
+00:04:02,525 --> 00:04:03,055
+Student,
+
+64
+00:04:03,055 --> 00:04:03,650
+not root.
+
+65
+00:04:03,650 --> 00:04:05,636
+If someone breaks into Tomcat,
+
+66
+00:04:05,636 --> 00:04:07,158
+they get a normal user,
+
+67
+00:04:07,158 --> 00:04:08,614
+not the whole machine.
+
+68
+00:04:08,614 --> 00:04:10,269
+Never run Tomcat as root.
+
+69
+00:04:10,819 --> 00:04:15,299
+Now the address. Find the valve in the Manager's context file.
+
+70
+00:04:18,849 --> 00:04:23,681
+A remote CI D R valve decides which addresses may use the Manager.
+
+71
+00:04:23,681 --> 00:04:25,511
+This list says: everyone.
+
+72
+00:04:25,511 --> 00:04:27,854
+0.0.0.0,
+
+73
+00:04:27,854 --> 00:04:28,659
+/0.
+
+74
+00:04:28,659 --> 00:04:32,246
+Anyone who can reach the port can try to sign in.
+
+75
+00:04:32,796 --> 00:04:35,186
+Edit it. Keep only this machine.
+
+76
+00:04:39,736 --> 00:04:41,778
+Search for the zero address.
+
+77
+00:04:41,778 --> 00:04:44,988
+Then substitute: remove the two open ranges,
+
+78
+00:04:44,988 --> 00:04:49,220
+and keep only 127.0.0.0,
+
+79
+00:04:49,220 --> 00:04:50,095
+/8,
+
+80
+00:04:50,095 --> 00:04:51,554
+and colon colon one.
+
+81
+00:04:55,104 --> 00:04:56,150
+Save and quit.
+
+82
+00:04:58,700 --> 00:05:00,257
+Check the result.
+
+83
+00:05:03,807 --> 00:05:04,843
+Loop back only.
+
+84
+00:05:04,843 --> 00:05:07,743
+The Manager answers to this machine alone.
+
+85
+00:05:07,743 --> 00:05:08,847
+For remote work,
+
+86
+00:05:08,847 --> 00:05:10,228
+use an SSH tunnel.
+
+87
+00:05:10,778 --> 00:05:14,874
+The last layer: the shutdown port. Is it open?
+
+88
+00:05:18,424 --> 00:05:21,296
+Tomcat listens on 8096,
+
+89
+00:05:21,296 --> 00:05:22,731
+for local connections.
+
+90
+00:05:22,731 --> 00:05:25,015
+Anyone on this machine can connect,
+
+91
+00:05:25,015 --> 00:05:26,190
+and send one word.
+
+92
+00:05:26,740 --> 00:05:34,804
+Send the word shutdown.
+
+93
+00:05:39,354 --> 00:05:44,644
+No password. No login. Tomcat obeys. Wait three seconds, and check the cart.
+
+94
+00:05:45,194 --> 00:05:47,925
+Check the cart again.
+
+95
+00:05:54,475 --> 00:06:00,534
+000. Nothing answers. Tomcat stopped, from one word. We must close that door.
+
+96
+00:06:01,084 --> 00:06:04,604
+Edit server.xml, and turn the shutdown port off.
+
+97
+00:06:09,154 --> 00:06:10,673
+Search for Server port.
+
+98
+00:06:10,673 --> 00:06:14,437
+Replace eighty ninety-six with minus one: no port at all.
+
+99
+00:06:14,437 --> 00:06:15,362
+Save and quit.
+
+100
+00:06:18,912 --> 00:06:21,685
+Start Tomcat again, with all four changes.
+
+101
+00:06:27,235 --> 00:06:29,880
+Tomcat reads every file again, at startup.
+
+102
+00:06:30,430 --> 00:06:32,564
+Check the cart.
+
+103
+00:06:43,114 --> 00:06:44,756
+Two hundred. Still working.
+
+104
+00:06:45,306 --> 00:06:48,976
+The old user: admin and admin.
+
+105
+00:06:53,526 --> 00:06:56,043
+Four oh one. The default account is gone.
+
+106
+00:06:56,593 --> 00:07:00,454
+The new user: ops, and the long password.
+
+107
+00:07:06,004 --> 00:07:08,223
+Two hundred. Only your user gets in.
+
+108
+00:07:08,773 --> 00:07:10,394
+Try the shutdown word again.
+
+109
+00:07:13,944 --> 00:07:17,443
+Connection refused. The door is closed. The word does nothing.
+
+110
+00:07:17,993 --> 00:07:21,988
+Now the browser: the way a human administrator sees it.
+
+111
+00:07:21,988 --> 00:07:23,150
+Open localhost,
+
+112
+00:07:23,150 --> 00:07:25,474
+colon 8086,
+
+113
+00:07:25,474 --> 00:07:26,491
+/manager,
+
+114
+00:07:26,491 --> 00:07:27,508
+/html.
+
+115
+00:07:40,058 --> 00:07:44,687
+The browser asks you to sign in. First, the old default: admin, and admin.
+
+116
+00:07:53,237 --> 00:07:56,906
+Refused: it asks again. Now ops, and the strong password.
+
+117
+00:08:07,456 --> 00:08:09,918
+The Tomcat Web Application Manager.
+
+118
+00:08:09,918 --> 00:08:11,607
+At the top: the message,
+
+119
+00:08:11,607 --> 00:08:11,888
+O K,
+
+120
+00:08:11,888 --> 00:08:13,436
+and the Manager links,
+
+121
+00:08:13,436 --> 00:08:14,350
+applications,
+
+122
+00:08:14,350 --> 00:08:14,702
+help,
+
+123
+00:08:14,702 --> 00:08:15,968
+and server status.
+
+124
+00:08:20,518 --> 00:08:22,303
+Applications: the root app,
+
+125
+00:08:22,303 --> 00:08:22,897
+our cart,
+
+126
+00:08:22,897 --> 00:08:24,417
+and the Manager itself.
+
+127
+00:08:24,417 --> 00:08:25,673
+Each row has start,
+
+128
+00:08:25,673 --> 00:08:26,003
+stop,
+
+129
+00:08:26,003 --> 00:08:26,466
+reload,
+
+130
+00:08:26,466 --> 00:08:27,325
+and undeploy.
+
+131
+00:08:27,325 --> 00:08:29,836
+These buttons can take your site down,
+
+132
+00:08:29,836 --> 00:08:31,356
+so the sign-in matters.
+
+133
+00:08:37,906 --> 00:08:39,275
+Scroll down: Deploy.
+
+134
+00:08:39,275 --> 00:08:41,808
+You can upload a war file and run it.
+
+135
+00:08:41,808 --> 00:08:42,972
+Whoever signs in,
+
+136
+00:08:42,972 --> 00:08:44,683
+runs code on your server.
+
+137
+00:08:44,683 --> 00:08:47,695
+That is the real reason to lock the Manager.
+
+138
+00:08:47,695 --> 00:08:50,023
+And below: the server information.
+
+139
+00:09:00,573 --> 00:09:04,072
+Clean up. The shutdown port is off, so use the force option.
+
+140
+00:09:08,622 --> 00:09:09,160
+Stopped,
+
+141
+00:09:09,160 --> 00:09:10,708
+through its P I D file,
+
+142
+00:09:10,708 --> 00:09:12,122
+not through the port.
+
+143
+00:09:12,122 --> 00:09:13,939
+Four layers: a strong user,
+
+144
+00:09:13,939 --> 00:09:14,747
+tight files,
+
+145
+00:09:14,747 --> 00:09:16,160
+a restricted address,
+
+146
+00:09:16,160 --> 00:09:17,304
+no shutdown port.
+
+147
+00:09:18,854 --> 00:09:21,905
+Your task. Lock down a real Tomcat Manager.
+
+148
+00:09:22,455 --> 00:09:25,932
+One: start Tomcat, and see that admin and admin gets in.
+
+149
+00:09:26,482 --> 00:09:27,746
+Two: remove admin.
+
+150
+00:09:27,746 --> 00:09:28,519
+Create ops,
+
+151
+00:09:28,519 --> 00:09:30,696
+with twelve characters or more.
+
+152
+00:09:30,696 --> 00:09:34,418
+Then protect the users file with chmod 600.
+
+153
+00:09:34,968 --> 00:09:39,555
+Three: edit the Manager's context file, so that only this machine is allowed.
+
+154
+00:09:40,105 --> 00:09:45,459
+Four: turn off the shutdown port, restart Tomcat, and stop it later with the force option.
+
+155
+00:09:46,009 --> 00:09:48,612
+Then run lab check. All five must pass.
+
+156
+00:09:50,662 --> 00:09:54,865
+Here is where to find everything. Pause on this screen if you need to write it down.
+
+157
+00:09:55,415 --> 00:09:57,063
+The lab lives on GitHub,
+
+158
+00:09:57,063 --> 00:09:58,230
+at it-waves,
+
+159
+00:09:58,230 --> 00:09:59,809
+/devops-ai,
+
+160
+00:09:59,809 --> 00:10:01,320
+in the folder academy,
+
+161
+00:10:01,320 --> 00:10:02,007
+/lab.
+
+162
+00:10:02,557 --> 00:10:07,570
+Two files: lab110.sh, and shortcuts110.sh.
+
+163
+00:10:08,120 --> 00:10:09,046
+Install it,
+
+164
+00:10:09,046 --> 00:10:11,992
+on any Linux machine: sudo install,
+
+165
+00:10:11,992 --> 00:10:13,928
+dash m seven five five,
+
+166
+00:10:13,928 --> 00:10:15,611
+lab110.sh,
+
+167
+00:10:15,611 --> 00:10:16,873
+into /usr,
+
+168
+00:10:16,873 --> 00:10:17,883
+/local,
+
+169
+00:10:17,883 --> 00:10:18,893
+/sbin.
+
+170
+00:10:19,443 --> 00:10:24,286
+Load the short name with: source shortcuts110.sh. You get: lab.
+
+171
+00:10:24,836 --> 00:10:25,958
+You need a J D K,
+
+172
+00:10:25,958 --> 00:10:26,552
+and curl,
+
+173
+00:10:26,552 --> 00:10:28,467
+about one gigabyte of memory,
+
+174
+00:10:28,467 --> 00:10:33,154
+and ports 8086 and 8096 free.
+
+175
+00:10:33,154 --> 00:10:34,607
+No system D is needed.
+
+176
+00:10:35,157 --> 00:10:37,638
+Lab check tests your Manager lockdown.
+
+177
+00:10:37,638 --> 00:10:40,576
+Lab down stops Tomcat and removes everything.
+
+178
+00:10:40,576 --> 00:10:42,666
+Only run it on your own machine.
+
+179
+00:10:44,716 --> 00:10:46,785
+Pass or fail. You need all six.
+
+180
+00:10:47,335 --> 00:10:49,149
+Five pass lines in lab check.
+
+181
+00:10:49,699 --> 00:10:52,259
+Tomcat answers on 8086.
+
+182
+00:10:52,809 --> 00:10:57,715
+Admin and admin are refused. Ops signs in, with twelve characters or more.
+
+183
+00:10:58,265 --> 00:11:01,913
+The users file is mode 600, and Tomcat is not root.
+
+184
+00:11:02,463 --> 00:11:05,045
+The Manager valve allows only this machine.
+
+185
+00:11:05,595 --> 00:11:07,088
+The shutdown port is off.
+
+186
+00:11:07,638 --> 00:11:08,939
+To pass, all six.
+
+187
+00:11:10,989 --> 00:11:12,760
+Your turn, on your own machine.
+
+188
+00:11:13,310 --> 00:11:16,040
+One: lab up, read the task list, start Tomcat.
+
+189
+00:11:16,590 --> 00:11:19,918
+Two: replace admin with ops, and chmod the file.
+
+190
+00:11:20,468 --> 00:11:22,687
+Three: restrict the valve to this machine.
+
+191
+00:11:23,237 --> 00:11:25,797
+Four: turn off the shutdown port, and restart.
+
+192
+00:11:26,347 --> 00:11:27,798
+Five: run lab check.
+
+193
+00:11:28,348 --> 00:11:30,929
+Six: lab down, and prove nothing is left.
+
+194
+00:11:31,479 --> 00:11:33,314
+Pause the video, and begin now.
+
+195
+00:11:48,864 --> 00:11:49,739
+Quick check.
+
+196
+00:11:50,289 --> 00:11:52,465
+Why must the default admin user go?
+
+197
+00:11:53,015 --> 00:11:54,913
+Who may read the users file, and why?
+
+198
+00:11:55,463 --> 00:11:58,023
+What does the remote CI D R valve decide?
+
+199
+00:11:58,573 --> 00:12:00,664
+What can anyone do with the shutdown port?
+
+200
+00:12:01,214 --> 00:12:03,263
+Objective covered: M C twelve,
+
+201
+00:12:03,263 --> 00:12:04,356
+objective seven,
+
+202
+00:12:04,356 --> 00:12:07,977
+secure management interfaces and service permissions.
+
+203
+00:12:08,527 --> 00:12:10,596
+Pause the video, and answer out loud.
+
+204
+00:12:21,146 --> 00:12:24,730
+Next: health monitoring, and recovering a failed deployment.
+
+205
+00:12:25,280 --> 00:12:28,608
+If this helped, like, share and subscribe, so you do not miss it.
