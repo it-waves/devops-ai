@@ -1,0 +1,24 @@
+Lesson 106 of the DevOps Engineering Bootcamp: deploy a web application to Tomcat, prove that it works, ship a bad release on purpose, and roll it back. You build a WAR with Maven (packaging war and the final name decide the path /cart), keep every build in a releases folder, deploy by copying the WAR into webapps, verify with the home page and a /health check, deploy version 2.0 over it, watch /health fail with a 500, and roll back by copying the 1.0 WAR over the bad one. Then, in the same continuous screen recording, you see each state in a real Chrome window: the working page, the health page, Tomcat's own 500 error page, and the recovered page.
+
+Chapters
+0:00 Why releases need a way back
+0:25 The release loop
+1:08 Live: deploy, break, roll back
+8:09 Your lab task
+8:44 Where to find the lab
+9:47 Pass or fail rubric
+10:12 Your turn
+10:53 Quick check
+
+Objectives covered: MC12-O03 (deploy a Maven-built WAR to Tomcat, verify it, redeploy a new version and roll back)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab106.sh and shortcuts106.sh). Install with: sudo install -m 755 lab106.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts106.sh. You need an Ubuntu virtual machine with root, a JDK, Maven, curl and unzip (for example: sudo apt install -y openjdk-21-jdk-headless maven curl unzip), internet access and about 1 GB of free memory. The first lab up downloads Tomcat 10.1.34 from archive.apache.org (about 14 MB), and your first Maven build downloads plugins from Maven Central. Port 8080 must be free. lab down stops Tomcat and removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal and browser segment is one real, continuous recording with real Apache Tomcat 10.1.34 and real Maven builds. The recording machine is a sandbox, so it has no firewall or systemd service (the service comes in lesson 107), and Maven's plugin cache was warmed before recording, so your first build will take longer than mine while it downloads. Tomcat checks for new WAR files every few seconds, so each deploy took up to about 12 seconds to show; the video waits for it. The lab was run end to end before this lesson: it passes 0 of 5 at the start and 5 of 5 after the tasks, and lab down leaves nothing behind. The narration is synthetic speech. The hook, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Install Tomcat Safely on Linux: Verify, User, Run https://youtu.be/Vcptz-XPdNs
+Next: ports, environment variables and running Tomcat as a systemd service.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #tomcat #maven #java #devopsbootcamp
