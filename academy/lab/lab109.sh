@@ -59,10 +59,12 @@ Neither is running. All commands run as you (no sudo): the ports are above 1024.
      openssl req -x509 -newkey rsa:2048 -nodes -keyout tls/cart.key -out tls/cart.crt -days 30 -subj /CN=localhost
 3  Create nginx/conf.d/cart.conf with a server that listens on 8443 with ssl, uses the two files, and proxies everything to http://127.0.0.1:8084
    Add:  proxy_set_header X-Forwarded-Proto \$scheme;   and   proxy_set_header X-Forwarded-For \$remote_addr;
-   Test it:  nginx -p $D/nginx -c nginx.conf -t     Start:  nginx -p $D/nginx -c nginx.conf
+   Short name for the long nginx command (it is in shortcuts109.sh):
+     ng() { nginx -p $D/nginx -c nginx.conf -e $D/nginx/logs/error.log "\$@"; }
+   Test it:  ng -t     Start:  ng
    then  curl -k https://localhost:8443/cart/whoami.jsp  must show  forwarded-proto=https  and  client=127.0.0.1
 4  Add a second server to cart.conf: listen 8085, and return 301 https://localhost:8443\$request_uri;
-   then reload:  nginx -p $D/nginx -c nginx.conf -s reload
+   then reload:  ng -s reload
 Then:  lab check     (all 5 must pass)       and later:  lab down
 EOF_K
   chown "$OWNER": $D/TASKS.txt

@@ -1,0 +1,24 @@
+Lesson 109 of the DevOps Engineering Bootcamp: put nginx in front of Tomcat. Tomcat answers in plain text on port 8084, so you add a reverse proxy that ends TLS. You make a self-signed certificate and key with openssl, write an nginx server block for HTTPS on port 8443 with proxy_pass to Tomcat, test it with nginx -t, and see why curl refuses the certificate without -k. Then you read the whoami page to see that Tomcat does not know the request was secure, add the X-Forwarded-Proto and X-Forwarded-For headers, and prove the app now sees them. A second server block on port 8085 redirects plain HTTP to HTTPS with a 301. In the same continuous screen recording, Chrome shows the "Your connection is not private" warning, the cart over HTTPS and the redirect.
+
+Chapters
+0:00 Why a reverse proxy
+0:33 Four ideas
+1:12 Live: certificate, proxy, headers, redirect
+9:48 Your lab task
+10:18 Where to find the lab
+11:23 Pass or fail rubric
+11:56 Your turn
+12:34 Quick check
+
+Objectives covered: MC12-O06 (a reverse proxy in front of Tomcat and TLS termination)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab109.sh and shortcuts109.sh). Install with: sudo install -m 755 lab109.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts109.sh. You need any Linux machine with root, nginx, openssl, a JDK and curl (for example: sudo apt install -y nginx openssl openjdk-21-jdk-headless curl), internet access, about 1 GB of free memory and ports 8084, 8085 and 8443 free. No systemd is needed, and the lab runs its own nginx from the lab folder, so the system one is not touched. The first lab up downloads Tomcat 10.1.34 from archive.apache.org (about 14 MB). lab down stops both servers and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal and browser segment is one real, continuous recording with real Apache Tomcat 10.1.34 and nginx 1.24.0. The lab was run end to end: it passes 0 of 5 at the start and 5 of 5 after the tasks, and lab down leaves nothing behind. The certificate is self-signed, so the browser warning is expected; never click through a warning for a site you do not own. The narration is synthetic speech. The hook, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Read Tomcat Logs: Diagnose a Startup Failure and 500 Errors https://youtu.be/2PVEzs0K2kA
+Next: secure the Tomcat manager interfaces and the service permissions.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #tomcat #nginx #tls #devopsbootcamp
