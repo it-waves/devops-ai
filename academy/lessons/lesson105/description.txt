@@ -1,0 +1,24 @@
+Lesson 105 of the DevOps Engineering Bootcamp: install and run Apache Tomcat the right way on a real Linux machine. Most Tomcat problems start on day one: a file downloaded without checking it, unpacked as root and started as root. You verify the download against Apache's published SHA-512 checksum, create a dedicated system user with no login shell, unpack Tomcat with tar, give the files to that user with chown, start it as that user, and prove it with the process list, a status code and the Server startup line in catalina.out. Then, in the same continuous screen recording, you tour Tomcat's real web interface in Chrome: the welcome page, the Manager App sign-in and its 401 page, and the servlet examples.
+
+Chapters
+0:00 Why the install matters
+0:27 The five steps
+1:10 Live: install and run
+6:37 Your lab task
+7:08 Where to find the lab
+8:11 Pass or fail rubric
+8:41 Your turn
+9:20 Quick check
+
+Objectives covered: MC12-O02 (install and run Tomcat on a Linux host: verify, dedicated user, ownership, start, logs)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab105.sh and shortcuts105.sh). Install with: sudo install -m 755 lab105.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts105.sh. You need an Ubuntu virtual machine with root, a JDK and curl (for example: sudo apt install -y openjdk-21-jdk-headless curl), internet access and about 1 GB of free memory. The first lab up downloads Tomcat 10.1.34 and its checksum from archive.apache.org (about 14 MB). The lab creates a user called tomcat, so that name must be free on your machine. lab down stops Tomcat, removes that user and removes everything else. Only run it in your own virtual machine.
+
+Honest notes: the terminal and browser segment is one real, continuous recording with real Apache Tomcat 10.1.34, downloaded from archive.apache.org just before recording. The recording machine is a sandbox, not a full server, so it has no firewall or systemd service; running Tomcat as a service comes in lesson 107. The Manager App is only shown up to its sign-in, because a fresh install has no users on purpose; setting it up safely is lesson 110. The lab was run end to end before this lesson: it passes 0 of 5 at the start and 5 of 5 after the tasks, and lab down leaves nothing behind. The narration is synthetic speech. The hook, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Tomcat Basics: The 5 Pieces and a Real Deploy https://youtu.be/r8Rg2RXOWjQ
+Next: deploy a WAR built with Maven, redeploy it, and roll it back.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #tomcat #linux #java #devopsbootcamp

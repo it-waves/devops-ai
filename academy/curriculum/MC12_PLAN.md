@@ -3,6 +3,7 @@
 Order (simple to advanced, one objective per lesson, UI where it teaches, then a mastery evidence lesson with lab info on screen):
 - L104 MC12-O01 servlet container, JVM, WAR, connectors, contexts (what Tomcat is; folders; a real Tomcat started, hello page)
 - L105 MC12-O02 install and run Tomcat on a disposable Linux host (real download, startup.sh, catalina.out, port 8080, Manager UI tour)
+  (L105 note: the Manager UI tour was cut to the sign-in and 401 page; the secured Manager comes in L110)
 - L106 MC12-O03 deploy, verify, redeploy, roll back a WAR (built with Maven, the default build tool)
 - L107 MC12-O04 ports, environment, application properties, systemd unit
 - L108 MC12-O05 catalina and application logs, diagnose startup failures
