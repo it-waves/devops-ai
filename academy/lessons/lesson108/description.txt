@@ -1,0 +1,24 @@
+Lesson 108 of the DevOps Engineering Bootcamp: read Tomcat's logs and diagnose two real failures. Tomcat starts, but the cart app returns 404; you read the SEVERE lines in the catalina log, follow them to the localhost log, find the ClassNotFoundException for a mistyped listener class in web.xml, fix it and restart. Then a health page returns 500; you read the "Caused by" line (NoSuchFileException), create the missing file, and prove the fix. You also read the localhost access log, see each status code, and count the 500 answers with grep -c. In the same continuous screen recording, Chrome shows Tomcat's own HTTP 500 error page, and why the log tells you more than the browser does.
+
+Chapters
+0:00 Why read the logs
+0:28 Four logs
+1:07 Live: logs and failures
+7:55 Your lab task
+8:28 Where to find the lab
+9:28 Pass or fail rubric
+9:55 Your turn
+10:36 Quick check
+
+Objectives covered: MC12-O05 (read Tomcat's catalina and application logs and diagnose startup failures)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab108.sh and shortcuts108.sh). Install with: sudo install -m 755 lab108.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts108.sh. You need any Linux machine with root, a JDK and curl (for example: sudo apt install -y openjdk-21-jdk-headless curl), internet access, about 1 GB of free memory and port 8082 free. No systemd is needed. The first lab up downloads Tomcat 10.1.34 from archive.apache.org (about 14 MB). lab down stops Tomcat and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal and browser segment is one real, continuous recording with real Apache Tomcat 10.1.34 (from a copy stored on the recording machine). The lab was run end to end: it passes 0 of 5 at the start and 5 of 5 after the tasks, and lab down leaves nothing behind. The count of 500 answers in the video is four because Chrome's own request counted too; your number will depend on how many times you request the health page. The narration is synthetic speech. The hook, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Run Tomcat as a systemd Service: Port, Environment, Restart https://youtu.be/u0GSyzxynlA
+Next: put a reverse proxy in front of Tomcat and handle TLS.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #tomcat #logs #linux #devopsbootcamp
