@@ -1,0 +1,1055 @@
+1
+00:00:00,500 --> 00:00:05,769
+In lesson one, you used CloudCart. In lesson two, you built it. Today, you deploy it.
+
+2
+00:00:06,319 --> 00:00:11,802
+Deploy means one thing: put the war file where Tomcat can find it, and let Tomcat run it.
+
+3
+00:00:12,352 --> 00:00:13,918
+You will do it two ways.
+
+4
+00:00:13,918 --> 00:00:14,439
+By hand,
+
+5
+00:00:14,439 --> 00:00:15,875
+with one copy command.
+
+6
+00:00:15,875 --> 00:00:17,245
+And from the Manager,
+
+7
+00:00:17,245 --> 00:00:20,245
+the web page Tomcat gives every administrator.
+
+8
+00:00:20,795 --> 00:00:21,513
+By the end,
+
+9
+00:00:21,513 --> 00:00:24,120
+one Tomcat runs two copies of CloudCart.
+
+10
+00:00:24,120 --> 00:00:25,881
+And you remove one of them,
+
+11
+00:00:25,881 --> 00:00:26,598
+on purpose.
+
+12
+00:00:28,148 --> 00:00:31,220
+Here is what to expect, from the first minute to the last.
+
+13
+00:00:31,770 --> 00:00:36,442
+One: see an empty Tomcat. It runs, but it has no CloudCart inside.
+
+14
+00:00:36,992 --> 00:00:42,048
+Two: deploy by hand. Copy one file, and watch Tomcat unpack it and start it.
+
+15
+00:00:42,598 --> 00:00:47,078
+Three: the Manager. A web page where you deploy, and remove, with the mouse.
+
+16
+00:00:47,628 --> 00:00:51,084
+Four: your turn. A lab, where one check judges all of it.
+
+17
+00:00:51,634 --> 00:00:56,083
+And two lessons ahead: run it like a customer and fix it like an engineer,
+
+18
+00:00:56,083 --> 00:00:58,247
+then prove it all from a clean copy.
+
+19
+00:00:58,797 --> 00:01:00,760
+See it, copy it, click it, prove it.
+
+20
+00:01:02,810 --> 00:01:06,223
+Before we deploy, one picture: how Tomcat finds an app.
+
+21
+00:01:06,773 --> 00:01:09,931
+Tomcat watches one folder. It is called webapps.
+
+22
+00:01:10,481 --> 00:01:12,028
+Drop a war file in it.
+
+23
+00:01:12,028 --> 00:01:14,421
+The file name becomes the address.
+
+24
+00:01:14,421 --> 00:01:17,094
+cloudcart.war becomes /cloudcart.
+
+25
+00:01:17,644 --> 00:01:22,743
+Tomcat unpacks the war into a folder with the same name, and starts the app inside it.
+
+26
+00:01:23,293 --> 00:01:27,197
+Remove the war, and Tomcat stops the app, and deletes that folder.
+
+27
+00:01:27,747 --> 00:01:28,421
+File name,
+
+28
+00:01:28,421 --> 00:01:28,961
+address,
+
+29
+00:01:28,961 --> 00:01:29,434
+unpack,
+
+30
+00:01:29,434 --> 00:01:29,838
+start.
+
+31
+00:01:29,838 --> 00:01:31,053
+Keep this picture.
+
+32
+00:01:31,053 --> 00:01:33,077
+The Manager does the same job,
+
+33
+00:01:33,077 --> 00:01:33,955
+with buttons.
+
+34
+00:01:35,505 --> 00:01:40,497
+Go to the lab folder.
+
+35
+00:01:42,047 --> 00:01:43,946
+Look around. Type: L S.
+
+36
+00:01:44,496 --> 00:01:45,202
+Two files,
+
+37
+00:01:45,202 --> 00:01:46,121
+and a folder.
+
+38
+00:01:46,121 --> 00:01:48,312
+Tomcat is in the tomcat folder.
+
+39
+00:01:48,312 --> 00:01:49,160
+And the app,
+
+40
+00:01:49,160 --> 00:01:50,644
+packed in a war file,
+
+41
+00:01:50,644 --> 00:01:52,623
+twice: once named cloudcart,
+
+42
+00:01:52,623 --> 00:01:54,037
+and once named shop.
+
+43
+00:01:54,037 --> 00:01:54,956
+The same app,
+
+44
+00:01:54,956 --> 00:01:56,016
+with two names.
+
+45
+00:01:56,566 --> 00:02:01,280
+Look inside webapps.
+
+46
+00:02:01,830 --> 00:02:07,718
+One folder only: manager. That is Tomcat's own admin app. CloudCart is not here.
+
+47
+00:02:08,268 --> 00:02:13,623
+Start Tomcat, and keep the last line.
+
+48
+00:02:14,173 --> 00:02:18,290
+Tomcat started. It is running, but it has no CloudCart to serve.
+
+49
+00:02:18,840 --> 00:02:28,910
+Ask for CloudCart, and keep the first line.
+
+50
+00:02:29,460 --> 00:02:30,295
+Four oh four.
+
+51
+00:02:30,295 --> 00:02:30,937
+Not found.
+
+52
+00:02:30,937 --> 00:02:32,157
+The server is fine.
+
+53
+00:02:32,157 --> 00:02:33,506
+The app is not there.
+
+54
+00:02:33,506 --> 00:02:34,726
+Now the same thing,
+
+55
+00:02:34,726 --> 00:02:35,689
+in the browser.
+
+56
+00:02:36,239 --> 00:02:41,722
+Open Chrome, and go to localhost:8089/cloudcart.
+
+57
+00:02:46,972 --> 00:02:48,104
+The same answer,
+
+58
+00:02:48,104 --> 00:02:50,865
+as a page: HTTP status four oh four.
+
+59
+00:02:50,865 --> 00:02:51,785
+Tomcat is on,
+
+60
+00:02:51,785 --> 00:02:54,758
+and says: I found nothing at this address.
+
+61
+00:02:55,308 --> 00:03:00,962
+Now the Manager. Go to /manager/html. The browser asks who you are.
+
+62
+00:03:05,012 --> 00:03:10,091
+Tomcat never lets anyone into the Manager without a name and a password.
+
+63
+00:03:10,091 --> 00:03:10,866
+In the lab,
+
+64
+00:03:10,866 --> 00:03:12,136
+they are deployer,
+
+65
+00:03:12,136 --> 00:03:14,605
+and ship-it-115.
+
+66
+00:03:14,605 --> 00:03:16,721
+They live in one file: tomcat,
+
+67
+00:03:16,721 --> 00:03:17,074
+conf,
+
+68
+00:03:17,074 --> 00:03:19,049
+tomcat-users.xml.
+
+69
+00:03:19,599 --> 00:03:22,557
+This is the Tomcat Web Application Manager.
+
+70
+00:03:22,557 --> 00:03:23,314
+At the top,
+
+71
+00:03:23,314 --> 00:03:24,483
+the message line.
+
+72
+00:03:24,483 --> 00:03:25,309
+It says OK,
+
+73
+00:03:25,309 --> 00:03:27,304
+or tells you what went wrong.
+
+74
+00:03:27,304 --> 00:03:29,092
+Read it after every click.
+
+75
+00:03:29,642 --> 00:03:29,978
+Next,
+
+76
+00:03:29,978 --> 00:03:30,649
+the links.
+
+77
+00:03:30,649 --> 00:03:31,856
+List applications,
+
+78
+00:03:31,856 --> 00:03:32,862
+two help pages,
+
+79
+00:03:32,862 --> 00:03:34,070
+and server status,
+
+80
+00:03:34,070 --> 00:03:36,149
+which shows memory and threads.
+
+81
+00:03:36,699 --> 00:03:40,221
+Then the heart of the page: the Applications table.
+
+82
+00:03:40,221 --> 00:03:42,500
+One row for each app Tomcat runs.
+
+83
+00:03:42,500 --> 00:03:42,915
+Today,
+
+84
+00:03:42,915 --> 00:03:44,572
+only the manager itself.
+
+85
+00:03:44,572 --> 00:03:46,092
+The columns: the path,
+
+86
+00:03:46,092 --> 00:03:47,542
+which is the address.
+
+87
+00:03:47,542 --> 00:03:48,371
+The version.
+
+88
+00:03:48,371 --> 00:03:49,545
+The display name.
+
+89
+00:03:49,545 --> 00:03:50,097
+Running,
+
+90
+00:03:50,097 --> 00:03:51,064
+true or false.
+
+91
+00:03:51,064 --> 00:03:51,686
+Sessions,
+
+92
+00:03:51,686 --> 00:03:53,274
+the visitors right now.
+
+93
+00:03:53,274 --> 00:03:54,448
+And the commands.
+
+94
+00:03:54,998 --> 00:03:55,916
+Four commands.
+
+95
+00:03:55,916 --> 00:03:57,556
+Start brings an app back.
+
+96
+00:03:57,556 --> 00:03:58,933
+Stop switches it off,
+
+97
+00:03:58,933 --> 00:04:00,441
+but keeps it installed.
+
+98
+00:04:00,441 --> 00:04:02,343
+Reload restarts it from disk.
+
+99
+00:04:02,343 --> 00:04:03,654
+Undeploy removes it.
+
+100
+00:04:03,654 --> 00:04:09,228
+For the manager itself they are plain text: you cannot remove the tool you are using.
+
+101
+00:04:09,778 --> 00:04:10,170
+Below,
+
+102
+00:04:10,170 --> 00:04:11,412
+the Deploy section.
+
+103
+00:04:11,412 --> 00:04:13,635
+The first form deploys a war file,
+
+104
+00:04:13,635 --> 00:04:14,419
+or a folder,
+
+105
+00:04:14,419 --> 00:04:16,380
+that is already on the server.
+
+106
+00:04:16,380 --> 00:04:17,361
+A context path,
+
+107
+00:04:17,361 --> 00:04:19,322
+which is the address you want.
+
+108
+00:04:19,322 --> 00:04:20,956
+And the path of the file.
+
+109
+00:04:21,506 --> 00:04:24,564
+The second form uploads a war from your own computer,
+
+110
+00:04:24,564 --> 00:04:25,545
+with choose file.
+
+111
+00:04:25,545 --> 00:04:26,757
+We use the first one,
+
+112
+00:04:26,757 --> 00:04:29,122
+because our war is already on the server.
+
+113
+00:04:29,672 --> 00:04:32,597
+Scroll down to the end: Server information.
+
+114
+00:04:32,597 --> 00:04:33,889
+The Tomcat version,
+
+115
+00:04:33,889 --> 00:04:35,114
+the JVM version,
+
+116
+00:04:35,114 --> 00:04:36,542
+the operating system,
+
+117
+00:04:36,542 --> 00:04:37,426
+and the host.
+
+118
+00:04:37,426 --> 00:04:38,650
+When someone says,
+
+119
+00:04:38,650 --> 00:04:40,147
+it works on my server,
+
+120
+00:04:40,147 --> 00:04:41,235
+look here first.
+
+121
+00:04:41,785 --> 00:04:51,492
+Method one, by hand. Copy the war into webapps, and name it cloudcart.war.
+
+122
+00:04:52,042 --> 00:04:53,866
+That is the whole deployment.
+
+123
+00:04:53,866 --> 00:04:56,697
+Tomcat looks at the folder every few seconds.
+
+124
+00:04:56,697 --> 00:04:57,263
+Wait ten,
+
+125
+00:04:57,263 --> 00:04:58,207
+and look again.
+
+126
+00:04:58,757 --> 00:05:02,640
+Wait, then list webapps.
+
+127
+00:05:03,190 --> 00:05:04,367
+Three names now.
+
+128
+00:05:04,367 --> 00:05:04,956
+manager,
+
+129
+00:05:04,956 --> 00:05:05,692
+as before.
+
+130
+00:05:05,692 --> 00:05:06,722
+cloudcart.war,
+
+131
+00:05:06,722 --> 00:05:08,120
+the file we copied.
+
+132
+00:05:08,120 --> 00:05:10,181
+And a new folder: cloudcart.
+
+133
+00:05:10,181 --> 00:05:11,947
+Tomcat unpacked the war,
+
+134
+00:05:11,947 --> 00:05:14,155
+and started the app inside it.
+
+135
+00:05:14,705 --> 00:05:16,787
+Back to the browser.
+
+136
+00:05:16,787 --> 00:05:19,182
+Open the Manager again,
+
+137
+00:05:19,182 --> 00:05:24,284
+at the same address: localhost:8089/manager/html.
+
+138
+00:05:24,834 --> 00:05:26,730
+A new row: /cloudcart.
+
+139
+00:05:26,730 --> 00:05:27,714
+Running: true.
+
+140
+00:05:27,714 --> 00:05:28,557
+No sessions,
+
+141
+00:05:28,557 --> 00:05:30,735
+because nobody has visited yet.
+
+142
+00:05:30,735 --> 00:05:32,983
+Tomcat found the app on its own.
+
+143
+00:05:33,533 --> 00:05:34,563
+Click the path,
+
+144
+00:05:34,563 --> 00:05:35,799
+and the app opens.
+
+145
+00:05:35,799 --> 00:05:37,584
+Scroll down to the footer.
+
+146
+00:05:37,584 --> 00:05:41,154
+Version zero point two point oh: the same CloudCart,
+
+147
+00:05:41,154 --> 00:05:42,321
+deployed by hand,
+
+148
+00:05:42,321 --> 00:05:43,282
+with one copy.
+
+149
+00:05:43,832 --> 00:05:49,230
+Method two, the Manager. Open the same address again, and look at the table: two rows now.
+
+150
+00:05:53,580 --> 00:05:58,422
+In the deploy form, the context path is the address you want. Type: /shop.
+
+151
+00:05:58,972 --> 00:06:02,101
+And the path of the war on the server: file,
+
+152
+00:06:02,101 --> 00:06:02,528
+colon,
+
+153
+00:06:02,528 --> 00:06:03,239
+/opt,
+
+154
+00:06:03,239 --> 00:06:04,803
+/lab115,
+
+155
+00:06:04,803 --> 00:06:06,155
+/shop.war.
+
+156
+00:06:06,155 --> 00:06:07,079
+Click deploy.
+
+157
+00:06:07,629 --> 00:06:09,144
+The message says: OK,
+
+158
+00:06:09,144 --> 00:06:12,451
+deployed application at context path /shop.
+
+159
+00:06:12,451 --> 00:06:14,173
+And a third row appeared.
+
+160
+00:06:14,173 --> 00:06:14,930
+One Tomcat,
+
+161
+00:06:14,930 --> 00:06:16,790
+two copies of the same app,
+
+162
+00:06:16,790 --> 00:06:18,168
+under two addresses.
+
+163
+00:06:18,718 --> 00:06:19,831
+Click /shop.
+
+164
+00:06:19,831 --> 00:06:21,206
+The same store opens.
+
+165
+00:06:21,206 --> 00:06:23,759
+Scroll to the footer: the same version.
+
+166
+00:06:23,759 --> 00:06:26,116
+Look at the address bar: /shop.
+
+167
+00:06:26,116 --> 00:06:26,771
+This time,
+
+168
+00:06:26,771 --> 00:06:28,211
+you chose the address.
+
+169
+00:06:28,761 --> 00:06:30,567
+Now remove the first copy.
+
+170
+00:06:30,567 --> 00:06:32,165
+Open the Manager again,
+
+171
+00:06:32,165 --> 00:06:33,554
+at the same address.
+
+172
+00:06:33,554 --> 00:06:35,569
+Find the /cloudcart row,
+
+173
+00:06:35,569 --> 00:06:36,889
+and click undeploy.
+
+174
+00:06:38,739 --> 00:06:39,025
+OK,
+
+175
+00:06:39,025 --> 00:06:42,033
+undeployed application at /cloudcart.
+
+176
+00:06:42,033 --> 00:06:43,178
+The row is gone.
+
+177
+00:06:43,178 --> 00:06:44,396
+Only the manager,
+
+178
+00:06:44,396 --> 00:06:45,327
+and the shop,
+
+179
+00:06:45,327 --> 00:06:45,971
+are left.
+
+180
+00:06:46,521 --> 00:06:49,624
+Open /cloudcart again: type the address,
+
+181
+00:06:49,624 --> 00:06:50,727
+and press enter.
+
+182
+00:06:50,727 --> 00:06:51,623
+Four oh four.
+
+183
+00:06:51,623 --> 00:06:51,968
+Gone,
+
+184
+00:06:51,968 --> 00:06:53,829
+as if it had never existed.
+
+185
+00:06:53,829 --> 00:06:56,036
+And /shop is still running.
+
+186
+00:06:56,586 --> 00:07:01,514
+Look at the disk.
+
+187
+00:07:02,064 --> 00:07:03,306
+The cloudcart war,
+
+188
+00:07:03,306 --> 00:07:04,342
+and its folder,
+
+189
+00:07:04,342 --> 00:07:04,963
+are gone.
+
+190
+00:07:04,963 --> 00:07:07,379
+And the Manager left shop.war here,
+
+191
+00:07:07,379 --> 00:07:08,483
+with its folder,
+
+192
+00:07:08,483 --> 00:07:10,554
+exactly like the copy by hand.
+
+193
+00:07:11,104 --> 00:07:17,910
+Stop Tomcat, and keep the last line.
+
+194
+00:07:19,460 --> 00:07:20,228
+Stopped.
+
+195
+00:07:20,778 --> 00:07:25,855
+Is the port free? Count the lines.
+
+196
+00:07:26,405 --> 00:07:32,186
+Zero. Nothing listens. Two ways to deploy, and one way to remove. All on a real server.
+
+197
+00:07:33,736 --> 00:07:37,555
+Your task. Deploy CloudCart two ways, remove one, and prove it.
+
+198
+00:07:38,105 --> 00:07:42,883
+One: lab up. Then start Tomcat. It starts with no CloudCart inside.
+
+199
+00:07:43,433 --> 00:07:44,361
+Two: by hand.
+
+200
+00:07:44,361 --> 00:07:47,429
+Copy the war into webapps as cloudcart.war,
+
+201
+00:07:47,429 --> 00:07:47,786
+wait,
+
+202
+00:07:47,786 --> 00:07:48,999
+and open the app.
+
+203
+00:07:48,999 --> 00:07:50,355
+Then run lab check,
+
+204
+00:07:50,355 --> 00:07:51,711
+so that it sees it.
+
+205
+00:07:52,261 --> 00:07:56,442
+Three: in the Manager, deploy shop.war with the path /shop.
+
+206
+00:07:56,992 --> 00:08:00,107
+Four: in the Manager, undeploy /cloudcart.
+
+207
+00:08:00,657 --> 00:08:02,269
+Five: write answers.txt,
+
+208
+00:08:02,269 --> 00:08:03,075
+three lines.
+
+209
+00:08:03,075 --> 00:08:04,888
+The apps the Manager lists,
+
+210
+00:08:04,888 --> 00:08:07,441
+and two answers about folders on disk.
+
+211
+00:08:07,991 --> 00:08:11,084
+Six: lab check, five checks, and then lab down.
+
+212
+00:08:13,134 --> 00:08:17,337
+Here is where to find everything. Pause on this screen if you need to write it down.
+
+213
+00:08:17,887 --> 00:08:19,535
+The lab lives on GitHub,
+
+214
+00:08:19,535 --> 00:08:20,702
+at it-waves,
+
+215
+00:08:20,702 --> 00:08:22,281
+/devops-ai,
+
+216
+00:08:22,281 --> 00:08:23,792
+in the folder academy,
+
+217
+00:08:23,792 --> 00:08:24,479
+/lab.
+
+218
+00:08:25,029 --> 00:08:30,447
+Two files: lab115.sh, and shortcuts115.sh.
+
+219
+00:08:30,997 --> 00:08:31,913
+Install it,
+
+220
+00:08:31,913 --> 00:08:34,826
+on any Linux machine: sudo install,
+
+221
+00:08:34,826 --> 00:08:36,740
+-m 755,
+
+222
+00:08:36,740 --> 00:08:38,738
+lab115.sh,
+
+223
+00:08:38,738 --> 00:08:39,986
+into /usr,
+
+224
+00:08:39,986 --> 00:08:40,985
+/local,
+
+225
+00:08:40,985 --> 00:08:41,984
+/sbin.
+
+226
+00:08:42,534 --> 00:08:47,633
+Load the short name with: source shortcuts115.sh. You get: lab.
+
+227
+00:08:48,183 --> 00:08:49,312
+You need a JDK,
+
+228
+00:08:49,312 --> 00:08:49,644
+curl,
+
+229
+00:08:49,644 --> 00:08:50,773
+and the ss tool,
+
+230
+00:08:50,773 --> 00:08:52,698
+about one gigabyte of memory,
+
+231
+00:08:52,698 --> 00:08:57,546
+and ports eight thousand eighty-nine and eight thousand ninety-nine free.
+
+232
+00:08:57,546 --> 00:08:59,206
+The lab downloads Tomcat,
+
+233
+00:08:59,206 --> 00:09:00,003
+and the app,
+
+234
+00:09:00,003 --> 00:09:00,535
+for you.
+
+235
+00:09:01,085 --> 00:09:07,250
+The Manager login is deployer, and ship-it-115. It is a lab value only.
+
+236
+00:09:07,800 --> 00:09:09,567
+Lab check judges your work.
+
+237
+00:09:09,567 --> 00:09:12,511
+Lab down stops Tomcat and removes everything.
+
+238
+00:09:12,511 --> 00:09:14,605
+Only run it on your own machine.
+
+239
+00:09:16,655 --> 00:09:18,724
+Pass or fail. You need all five.
+
+240
+00:09:19,274 --> 00:09:21,856
+Tomcat runs, and the Manager answers.
+
+241
+00:09:22,406 --> 00:09:25,350
+CloudCart was deployed by hand, and answered up.
+
+242
+00:09:25,900 --> 00:09:28,524
+Slash shop runs, and the Manager lists it.
+
+243
+00:09:29,074 --> 00:09:32,551
+Slash cloudcart is undeployed: gone, while shop stays.
+
+244
+00:09:33,101 --> 00:09:35,768
+The three lines in answers.txt are right.
+
+245
+00:09:36,318 --> 00:09:37,619
+To pass, all five.
+
+246
+00:09:39,669 --> 00:09:41,440
+Your turn, on your own machine.
+
+247
+00:09:41,990 --> 00:09:45,019
+One: lab up, read the task list, and start Tomcat.
+
+248
+00:09:45,569 --> 00:09:48,449
+Two: copy the war in by hand, and open the app.
+
+249
+00:09:48,999 --> 00:09:51,751
+Three: deploy shop.war from the Manager.
+
+250
+00:09:52,301 --> 00:09:54,456
+Four: undeploy /cloudcart.
+
+251
+00:09:55,006 --> 00:09:59,656
+Five: write the three answers, and run lab check, until you see five out of five.
+
+252
+00:10:00,206 --> 00:10:02,788
+Six: lab down, and prove the port is free.
+
+253
+00:10:03,338 --> 00:10:05,172
+Pause the video, and begin now.
+
+254
+00:10:20,722 --> 00:10:21,597
+Quick check.
+
+255
+00:10:22,147 --> 00:10:24,557
+Which folder does Tomcat watch for new apps?
+
+256
+00:10:25,107 --> 00:10:28,094
+What decides the address of an app you drop in by hand?
+
+257
+00:10:28,644 --> 00:10:31,929
+Which button removes an app, and which one only switches it off?
+
+258
+00:10:32,479 --> 00:10:35,210
+What did the Manager do with shop.war on disk?
+
+259
+00:10:35,760 --> 00:10:38,665
+Objective covered: CloudCart version zero,
+
+260
+00:10:38,665 --> 00:10:40,048
+deploy it to Tomcat,
+
+261
+00:10:40,048 --> 00:10:42,053
+by hand and from the Manager.
+
+262
+00:10:42,603 --> 00:10:44,673
+Pause the video, and answer out loud.
+
+263
+00:10:55,223 --> 00:10:58,721
+Next: run it like a customer, and fix it like an engineer.
+
+264
+00:10:59,271 --> 00:11:02,599
+If this helped, like, share and subscribe, so you do not miss it.

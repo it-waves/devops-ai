@@ -1,0 +1,24 @@
+Lesson 115 of the DevOps Engineering Bootcamp, and lesson 3 of 5 of the CloudCart v0 project. You start from what to expect, then one picture of how Tomcat finds an app: the webapps folder, the war file name as the address, unpack, start. Then one continuous live recording: an empty Tomcat (a 404 for /cloudcart), a full screen tour of the Tomcat Web Application Manager (sign in, message line, Applications table and its columns, Start, Stop, Reload and Undeploy, the two deploy forms, Server information), deploying by hand with one cp command, deploying shop.war from the Manager as /shop, running two copies of CloudCart under two addresses, undeploying /cloudcart, and checking the disk. You finish with lab check for 5 of 5.
+
+Chapters
+0:00 Deploy CloudCart
+0:27 What to expect
+1:02 How Tomcat finds an app
+1:35 Live: deploy by hand, then from the Manager
+7:33 Your lab task
+8:12 Where to find the lab
+9:16 Pass or fail rubric
+9:39 Your turn
+10:20 Quick check
+Objectives covered: CloudCart v0, lesson 3 of 5 (deploy the WAR to Tomcat: by hand into webapps and from the Manager)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab115.sh and shortcuts115.sh). Install with: sudo install -m 755 lab115.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts115.sh. You need any Linux machine with root, a JDK, curl and ss (for example: sudo apt install -y openjdk-21-jdk-headless curl iproute2), internet access, about 1 GB of free memory and ports 8089 and 8099 free. No systemd is needed. The first lab up downloads Tomcat 10.1.34 (about 14 MB) and the app (about 0.3 MB). lab down stops Tomcat and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal and the browser parts are one real, continuous recording of the real CloudCart app on real Apache Tomcat 10.1.34 and its real Manager. The lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The Manager login (deployer / ship-it-115) is a lab value only: never use a guessable Manager password on a real server. The app in this lesson is the prebuilt 0.2.0 war from lesson 113; the war you built in lesson 114 deploys the same way. CloudCart is a practice store whose data is held in memory. The narration is synthetic speech. The hook, picture, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: CloudCart v0: The Project Layout and the Maven Build | Lesson 114 https://youtu.be/t2uorB6lHNo
+Next: CloudCart v0: run it like a customer, fix it like an engineer.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #cloudcart #tomcat #devopsbootcamp
