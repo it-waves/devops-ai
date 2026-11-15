@@ -1,0 +1,24 @@
+Lesson 104 of the DevOps Engineering Bootcamp: Apache Tomcat, the five pieces. Almost every Java web application needs a server to run it, and very often that server is Tomcat. You learn what a servlet container is, why Tomcat needs a JVM, what a connector, a context and a WAR file are, and how a web request travels through all of them. Then you start a real Tomcat 10.1.34, look inside its folders, find the connector in server.xml, deploy a real WAR and call it with curl. Your lab task repeats it on your own machine and a lab check judges the result.
+
+Chapters
+0:00 Why Tomcat matters
+0:32 The five pieces
+1:35 Live: a real Tomcat
+5:14 Your lab task
+5:44 Where to find the lab
+6:43 Pass or fail rubric
+7:12 Your turn
+7:52 Quick check
+
+Objectives covered: MC12-O01 (servlet container, JVM, WAR, connectors and contexts)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab104.sh and shortcuts104.sh). Install with: sudo install -m 755 lab104.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts104.sh. You need an Ubuntu virtual machine with root, a JDK, curl and unzip (for example: sudo apt install -y openjdk-21-jdk-headless curl unzip), internet access and about 1 GB of free memory. The first lab up downloads Tomcat 10.1.34 (about 14 MB). lab down stops Tomcat and removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal segment is one real recording with real Apache Tomcat 10.1.34. On the recording machine a stored copy of the Tomcat download was used, the same file the lab downloads from archive.apache.org. Tomcat's deploy scan runs every few seconds, so the wait after copying the WAR was real. The hello WAR is a tiny page made for this lab. The lab was run end to end before this lesson: it passes 0 of 5 at the start and 5 of 5 after the tasks, and lab down leaves nothing behind. The narration is synthetic speech. The hook, five pieces, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Gradle Mastery: Fix, Prove and Publish a Release Build https://youtu.be/ndBJ8sUd4Qg
+Next: install and run Tomcat on a disposable Linux host.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #tomcat #java #devopsbootcamp #linux

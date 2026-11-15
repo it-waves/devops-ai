@@ -1,0 +1,91 @@
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('h1', "Almost every Java web application needs something to run it. Very often, that something is Tomcat."),
+  c('h2', "Tomcat is a free, open source server from the Apache Software Foundation, and it has been around for over twenty years."),
+  c('h3', "If you work in DevOps, you will install it, deploy to it, secure it, and fix it."),
+  c('h4', "Today you learn the five pieces: the J V M, the servlet container, connectors, contexts, and the war file."),
+  c('h5', "Then you start a real Tomcat, and deploy a real application to it."),
+ ]),
+ ('parts', [
+  c('a1', "Here is the picture. A browser sends a request, and it travels through five pieces."),
+  c('a2', "The J V M comes first. Tomcat is a Java program, so it runs inside a Java Virtual Machine. No J V M, no Tomcat."),
+  c('a3', "Tomcat itself is a servlet container. A servlet is a small piece of Java code that answers a web request. The container loads servlets, calls them, and manages them."),
+  c('a4', "A connector is the door. It listens on a port, such as eight thousand eighty, and speaks a protocol, such as H T T P."),
+  c('a5', "A context is one web application, at one path. The path slash hello leads to the hello application."),
+  c('a6', "A war file is how you ship an application: one zip file, with your pages, your classes, and a web dot X M L. Drop it in web apps, and Tomcat makes a context from it."),
+  c('a7', "Remember the chain: connector, context, servlet. All inside Tomcat, and all inside a J V M."),
+ ]),
+ ('live', [
+  k('p0', "Go into the Tomcat folder. Type: C D, slash opt, slash lab one oh four, slash tomcat."),
+  k('l1', "Look at the main folders. Type: L S, dash D, and the six folder names."),
+  c('l1b', "Six folders. Bin holds the scripts. Conf holds the settings. Lib holds the jars. Logs holds the logs. Web apps holds your applications. Work is Tomcat's scratch space."),
+  k('l2', "Find the connector. Type the grep command, to show the first connector in server dot X M L."),
+  c('l2b', "There it is. A connector on port eight thousand eighty, speaking H T T P one point one. This is the door. A time out of twenty seconds, and a redirect port for secure traffic."),
+  k('l3', "Start Tomcat. Type: bin, slash startup dot S H, and show the last line."),
+  c('l3b', "Tomcat started. It took about a second."),
+  k('l4', "Is the J V M really running? Type P S, and ask for the java process."),
+  c('l4b', "Java. One process, using a few hundred megabytes of memory. Tomcat is this process."),
+  k('l5', "Ask the connector for the home page. Type the curl command, and show only the status code."),
+  c('l5b', "Two hundred. The door is open, and something answered."),
+  k('l6', "What is installed? Type: L S, web apps."),
+  c('l6b', "Five applications. Each folder is a context. Root answers on slash. Docs, examples, manager and host manager each answer on their own path."),
+  k('l7', "Call a real servlet. Type the curl command for the hello world example, and show the heading."),
+  c('l7b', "Hello World. This answer came from a Java servlet, running inside Tomcat."),
+  k('l8', "Now a war file. It is only a zip. Type: unzip, dash L, and the hello war."),
+  c('l8b', "An index dot H T M L page, and WEB dash I N F slash web dot X M L. That is the whole application."),
+  k('l9', "Deploy it. Copy the war into web apps."),
+  k('l10', "Tomcat looks for new war files every ten seconds. Wait fifteen seconds, then list web apps."),
+  c('l10b', "Tomcat unpacked it. There is a new folder called hello, next to the war file. A new context."),
+  k('l11', "Call it. Type the curl command for slash hello, and show the first line."),
+  c('l11b', "Hello from a war. The path comes from the name of the war file."),
+  k('l12', "Stop Tomcat. Type: bin, slash shutdown dot S H, and hide the output."),
+  k('l13', "Is the door closed? Type the same curl command again."),
+  c('l13b', "Zero zero zero. Nothing is listening any more. The connector is closed."),
+ ]),
+ ('task', [
+  c('k1', "Your task. Start a real Tomcat, deploy a war, and explain the five pieces in your own words."),
+  c('k2', "One: start Tomcat, and check that port eight thousand eighty answers two hundred."),
+  c('k3', "Two: copy hello dot war into web apps, and open slash hello."),
+  c('k4', "Three: look inside the war, and save the list."),
+  c('k5', "Four: find the connector port in server dot X M L."),
+  c('k6', "Five: write facts dot text, four lines: jvm, connector, context, war."),
+ ]),
+ ('labinfo', [
+  c('i1x', "Here is where to find everything. Pause on this screen if you need to write it down."),
+  c('i2', "The lab lives on GitHub, at it dash waves, slash dev ops dash A I, in the folder academy, slash lab."),
+  c('i3', "Two files: lab one oh four dot S H, and shortcuts one oh four dot S H."),
+  c('i4', "Install it, in your Ubuntu virtual machine: sudo install, dash m seven five five, lab one oh four dot S H, into slash usr, slash local, slash S bin."),
+  c('i5', "Load the short name with: source shortcuts one oh four dot S H. Then you can type: lab up, lab check, and lab down."),
+  c('i6', "You need a J D K, curl and unzip, about one gigabyte of memory, and an internet connection. The first lab up downloads Tomcat, about fourteen megabytes."),
+  c('i7', "Lab check tests your Tomcat on your machine. Lab down stops it and removes everything. Only run it in your own virtual machine."),
+ ]),
+ ('rubric', [
+  c('q1x', "Pass or fail. You need all six."),
+  c('q2x', "Five pass lines in lab check."), c('q3x', "Tomcat is running, and port eight thousand eighty answers two hundred."),
+  c('q4x', "Hello dot war is deployed, and slash hello answers."), c('q5x', "The war list is saved, and shows the web dot X M L."),
+  c('q6x', "Facts dot text has four lines, and the connector line names the real port."), c('q7x', "Lab down stops Tomcat and leaves nothing behind."), c('q8x', "To pass, all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine."),
+  c('z2', "One: lab up, and read the task list."),
+  c('z3', "Two: start Tomcat, and check the status code."),
+  c('z4', "Three: deploy hello dot war, and wait for it."),
+  c('z5', "Four: list the war, and find the connector port."),
+  c('z6', "Five: write facts dot text, and run lab check."),
+  c('z7', "Six: lab down, and prove nothing is left."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "What does a connector do?"), c('f13', "What is a context, and where does its path come from?"),
+  c('f14', "What is inside a war file?"), c('f15', "Why does Tomcat need a J V M?"),
+  c('f16', "Objective covered: M C twelve, objective one, servlet container, J V M, war, connectors and contexts."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next: install and run Tomcat on a disposable Linux host."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'a7': 0.5, 'k6': 0.5, 'i7': 0.5, 'q8x': 0.5, 'z8': 14.0, 'f17': 10.0, 'p0': 1.0, 'l1': 3.0, 'l2': 3.0, 'l3': 5.0, 'l4': 3.0, 'l5': 3.0, 'l6': 2.0, 'l7': 6.0, 'l8': 3.0, 'l9': 3.0, 'l10': 22.0, 'l11': 3.0, 'l12': 6.0, 'l13': 4.0}
+import os as _os, json as _json
+_xp = '/home/claude/academy/lesson104/extra.json'
+if _os.path.exists(_xp): EXTRA.update(_json.load(open(_xp)))
+CHAP = {'parts': 'The five pieces', 'live': 'Live: a real Tomcat', 'task': 'Your lab task', 'labinfo': 'Where to find the lab', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}
