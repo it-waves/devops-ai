@@ -16,7 +16,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab111.sh and shortc
 Honest notes: the terminal and the full screen Chrome segment are one real, continuous recording with real Apache Tomcat 10.1.34. The lab was run end to end: it passes 0 of 5 at the start and 5 of 5 after the tasks, and lab down leaves nothing behind. The failing release is a small demo app built by the lab to fail on purpose. The narration is synthetic speech. The hook, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: Secure the Tomcat Manager: Users, Permissions and Shutdown Port https://youtu.be/OcGy-UqlnVc
-Next: the Tomcat mastery scenario.
+Next lesson: Tomcat Mastery: Fix and Harden an Inherited Server | Lesson 112 https://youtu.be/xONw85H5URM
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
