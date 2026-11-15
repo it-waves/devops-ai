@@ -17,3 +17,6 @@ Rule: earlier versions are tagged and never edited except for logged fixes (clou
 | v5 | after MC41 OpenTelemetry | Metrics, tracing, dashboards, alerts | Trace of one checkout; error and latency panels |
 
 Open questions for the owner: none blocking. Gradle (MC11) continues first; the v0 build block starts when MC12 finishes.
+
+## Build tool rule (owner, 2026-11-14)
+Every build uses Maven except where a lesson specifically says to use Gradle. L102 (Maven vs Gradle) and the explicit "built with both Maven and Gradle" CloudCart v0 deploy are the named Gradle exceptions; all other CloudCart versions build with Maven.
