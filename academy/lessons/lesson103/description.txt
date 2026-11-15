@@ -1,0 +1,24 @@
+Lesson 103 of the DevOps Engineering Bootcamp: the Gradle mastery lesson, the evidence for the whole MC11 domain in one job. A teammate hands you cartcore 2.0 and it must be released today, but it does not build, and even when it builds it is not safe to release. You fix a dependency failure, fix a failing test, make the jar reproducible so two builds give the same hash, and publish to a release repository with the key read from the environment instead of a file. Every fix is proved with a real command, then a lab check confirms it. No new theory, just the real job from start to finish.
+
+Chapters
+0:00 One build, four problems
+0:28 The job: four problems
+1:02 Live: fix, prove and publish
+6:00 Your lab task
+6:30 Where to find the lab
+7:26 Pass or fail rubric
+7:51 Your turn
+8:33 Quick check
+
+Objectives covered: MC11 mastery evidence (a complete, independently verifiable scenario applying MC11-O01 to O08: diagnose a dependency and a task failure, build and test, reproducible archives, no secret in a file, publish, document results and clean up)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab103.sh and shortcuts103.sh). Install with: sudo install -m 755 lab103.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts103.sh. You need an Ubuntu virtual machine with root, a JDK, python3 and curl (for example: sudo apt install -y openjdk-21-jdk-headless python3 curl), internet access and about 1 GB of free memory. The first lab up downloads Gradle 8.14.3 (about 130 MB), and the build needs a few small libraries (JUnit, commons-lang3) from Maven Central. lab down removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal segment is one real recording with real Gradle 8.14.3. On the recording machine the Gradle download site is blocked, so a stored copy of Gradle was put in place first, and the libraries came from a stored copy of earlier Maven Central downloads. The Gradle daemon was started once before recording, so the runs you see are warm ones; on your machine the first run is slower. The release repository is a folder on disk standing in for a real repository server, and the release key is a demo value made for this lab, not a real secret. The lab was run end to end before this lesson: it passes 0 of 5 at the start and 5 of 5 after the fixes, and lab down leaves nothing behind. Only one style of fix was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. The hook, job, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Maven vs Gradle for DevOps: Build the Same Project Both Ways https://youtu.be/aW2XTTsg9QM
+Next: MC12, Tomcat.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #gradle #java #cicd #devopsbootcamp
