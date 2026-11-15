@@ -153,4 +153,4 @@ UI needed: Maven Central search site (central.sonatype.com) for coordinates and 
 | L104 | MC12-O01 | Tomcat Basics: The 5 Pieces and a Real Deploy | Published https://youtu.be/r8Rg2RXOWjQ, 8:34, captions and end screen done |
 | L105 | MC12-O02 | Install Tomcat Safely on Linux: Verify, User, Run | Published https://youtu.be/Vcptz-XPdNs, 10:02, captions and end screen done |
 | L106 | MC12-O03 | Deploy, Verify and Roll Back a Maven WAR on Tomcat | Published https://youtu.be/JfNAz7uPMHs, 11:36, captions and end screen done |
-| L107 | MC12-O04 | Run Tomcat as a systemd Service: Port, Environment, Restart | In upload |
+| L107 | MC12-O04 | Run Tomcat as a systemd Service: Port, Environment, Restart | Published https://youtu.be/u0GSyzxynlA, 12:30, captions and end screen done |
