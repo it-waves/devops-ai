@@ -85,7 +85,7 @@ check() {
   if [ -n "$w" ] && [ "$w" != 'shutdown="SHUTDOWN"' ] && [ "$w" != 'shutdown=""' ]; then pass "3 the stop word is no longer the default"; else fail "3 change the stop word SHUTDOWN in conf/server.xml, then restart"; fi
   b=$(curl -s -m 5 localhost:8088/cart/health.jsp 2>/dev/null)
   if grep -Eq '^shop.name=.' $D/data/app.properties && echo "$b" | grep -q '^UP'; then pass "4 the setting shop.name is set and health says UP"; else fail "4 add shop.name=CloudCart to data/app.properties (health says: $(echo "${b:-nothing}" | head -c 30))"; fi
-  if [ -x $D/health.sh ] && (cd $D && ./health.sh >/dev/null 2>&1) && [ "$(grep -c -E '^(FOUND|FIXED|PROOF|CLEANUP):' $D/report.txt 2>/dev/null)" -ge 4 ]; then pass "5 health.sh exits 0 and report.txt has FOUND, FIXED, PROOF, CLEANUP"; else fail "5 write health.sh (chmod +x, exit 0 while healthy) and report.txt with FOUND: FIXED: PROOF: CLEANUP: lines"; fi
+  if [ -x $D/health.sh ] && (cd $D && ./health.sh >/dev/null 2>&1) && [ "$(grep -c -E '^(FOUND|FIXED|PROOF|CLEANUP):' $D/report.txt 2>/dev/null)" -ge 4 ]; then pass "5 health.sh exits 0, report.txt has its 4 lines"; else fail "5 write health.sh (chmod +x, exit 0 while healthy) and report.txt with FOUND: FIXED: PROOF: CLEANUP: lines"; fi
   echo "$ok/5 checks passed"; [ $ok -eq 5 ]
 }
 status() { [ -d $D ] && echo "lab112 is set up in $D" || echo "lab112 is not set up"; }

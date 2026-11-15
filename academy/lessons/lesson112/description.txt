@@ -1,0 +1,23 @@
+Lesson 112 of the DevOps Engineering Bootcamp: the Tomcat mastery evidence. A colleague left a Tomcat server behind, and you take it over in one continuous job. You start it, see that /cart/ answers 404, and read the Catalina log to find the cause (a broken web.xml, the document structure never closed). You redeploy the last good release, read why health says DOWN (the setting shop.name is missing in data/app.properties) and add it. Then you harden the server: ss shows port 8088 open on 0.0.0.0, so you stop Tomcat, edit conf/server.xml in vim to bind the Connector to 127.0.0.1 and to replace the default SHUTDOWN stop word, and start it again. You write a health.sh script, a four line report (FOUND, FIXED, PROOF, CLEANUP), run lab check for 5 of 5, and clean up. It brings together lessons 104 to 111 (MC12-O01 to MC12-O08).
+
+Chapters
+0:00 An inherited Tomcat
+0:23 Five moves
+0:53 Live: take over, repair, harden
+5:33 Your lab task
+5:57 Where to find the lab
+6:52 Pass or fail rubric
+7:22 Your turn
+8:03 Quick check
+Objectives covered: MC12 mastery evidence (MC12-O01 to MC12-O08 applied in one verifiable scenario: documented results, troubleshooting and cleanup)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab112.sh and shortcuts112.sh). Install with: sudo install -m 755 lab112.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts112.sh. You need any Linux machine with root, a JDK (including the jar tool), curl and ss (for example: sudo apt install -y openjdk-21-jdk-headless curl iproute2), internet access, about 1 GB of free memory and ports 8088 and 8098 free. No systemd is needed. The first lab up downloads Tomcat 10.1.34 from archive.apache.org (about 14 MB). lab down stops Tomcat and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal is one real, continuous recording with real Apache Tomcat 10.1.34. The lab was run end to end: it passes 0 of 5 at the start and 5 of 5 after the tasks, and lab down leaves nothing behind. The broken release is a small demo app built by the lab to fail on purpose. The narration is synthetic speech. The hook, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Tomcat Health Checks: Recover From a Failed Deployment https://youtu.be/Mr9egqvwxY8
+Next: CloudCart v0, built with Maven and deployed to Tomcat.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #tomcat #devopsbootcamp #linux
