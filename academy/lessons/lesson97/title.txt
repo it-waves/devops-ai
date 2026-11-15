@@ -1,0 +1,1 @@
+Gradle Dependencies: Scopes, Version Catalog, Plugins and Publishing | Lesson 97

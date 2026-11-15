@@ -1,0 +1,831 @@
+1
+00:00:00,500 --> 00:00:05,599
+Last lesson Gradle tested your code. Today it manages everything your code needs.
+
+2
+00:00:06,149 --> 00:00:06,731
+Libraries,
+
+3
+00:00:06,731 --> 00:00:07,953
+where they come from,
+
+4
+00:00:07,953 --> 00:00:10,282
+and the plug ins that add new abilities.
+
+5
+00:00:10,282 --> 00:00:12,378
+All of it lives in one build script.
+
+6
+00:00:12,928 --> 00:00:17,591
+A wrong choice here has a price: a test library shipped inside your app,
+
+7
+00:00:17,591 --> 00:00:20,247
+version numbers scattered over ten files,
+
+8
+00:00:20,247 --> 00:00:21,931
+a jar nobody can download.
+
+9
+00:00:22,481 --> 00:00:26,584
+You will fix all three on a real project: the scope of a library,
+
+10
+00:00:26,584 --> 00:00:27,720
+a version catalog,
+
+11
+00:00:27,720 --> 00:00:28,667
+and publishing.
+
+12
+00:00:29,217 --> 00:00:32,332
+Then you do it alone, and a checker judges your result.
+
+13
+00:00:32,882 --> 00:00:36,957
+One idea first: a build script says what you need, and where to get it.
+
+14
+00:00:38,507 --> 00:00:41,707
+Four ideas run every Gradle dependency setup.
+
+15
+00:00:42,257 --> 00:00:42,537
+One,
+
+16
+00:00:42,537 --> 00:00:43,448
+repositories.
+
+17
+00:00:43,448 --> 00:00:45,409
+They say where Gradle looks.
+
+18
+00:00:45,409 --> 00:00:47,791
+Maven central is the public store,
+
+19
+00:00:47,791 --> 00:00:49,892
+and a company can add its own,
+
+20
+00:00:49,892 --> 00:00:50,662
+like Nexus.
+
+21
+00:00:51,212 --> 00:00:51,483
+Two,
+
+22
+00:00:51,483 --> 00:00:51,957
+scopes.
+
+23
+00:00:51,957 --> 00:00:54,597
+Implementation ships with your program.
+
+24
+00:00:54,597 --> 00:00:57,169
+Test implementation is only for tests,
+
+25
+00:00:57,169 --> 00:00:58,252
+and never ships.
+
+26
+00:00:58,802 --> 00:00:59,239
+Three,
+
+27
+00:00:59,239 --> 00:01:00,693
+the version catalog.
+
+28
+00:01:00,693 --> 00:01:01,347
+One file,
+
+29
+00:01:01,347 --> 00:01:03,383
+libs dot versions dot tom L,
+
+30
+00:01:03,383 --> 00:01:05,928
+holds every name and every version.
+
+31
+00:01:06,478 --> 00:01:06,843
+Four,
+
+32
+00:01:06,843 --> 00:01:07,499
+plug ins.
+
+33
+00:01:07,499 --> 00:01:10,345
+The java plug in adds compile and test.
+
+34
+00:01:10,345 --> 00:01:14,286
+The maven publish plug in adds one more task: publish.
+
+35
+00:01:14,836 --> 00:01:20,254
+Maven does the same jobs in a pom. Gradle does them in a script. Let us see it live.
+
+36
+00:01:22,304 --> 00:01:28,320
+Go into the project. Type: CD, slash opt, slash lab ninety-seven, slash cartcore.
+
+37
+00:01:28,870 --> 00:01:29,296
+First,
+
+38
+00:01:29,296 --> 00:01:31,354
+where do libraries come from?
+
+39
+00:01:31,354 --> 00:01:33,340
+Show the repositories block.
+
+40
+00:01:33,340 --> 00:01:34,121
+Type: grep,
+
+41
+00:01:34,121 --> 00:01:35,469
+dash capital A two,
+
+42
+00:01:35,469 --> 00:01:35,895
+quote,
+
+43
+00:01:35,895 --> 00:01:36,321
+caret,
+
+44
+00:01:36,321 --> 00:01:37,243
+repositories,
+
+45
+00:01:37,243 --> 00:01:37,669
+quote,
+
+46
+00:01:37,669 --> 00:01:38,875
+build dot gradle.
+
+47
+00:01:40,925 --> 00:01:41,897
+Maven central.
+
+48
+00:01:41,897 --> 00:01:43,633
+The public library store,
+
+49
+00:01:43,633 --> 00:01:45,299
+the same one Maven uses.
+
+50
+00:01:45,299 --> 00:01:46,618
+Gradle searches it,
+
+51
+00:01:46,618 --> 00:01:48,770
+and downloads what you ask for,
+
+52
+00:01:48,770 --> 00:01:49,117
+once.
+
+53
+00:01:49,667 --> 00:01:51,111
+Now what we ask for.
+
+54
+00:01:51,111 --> 00:01:51,905
+Type: grep,
+
+55
+00:01:51,905 --> 00:01:53,349
+dash capital A five,
+
+56
+00:01:53,349 --> 00:01:53,782
+quote,
+
+57
+00:01:53,782 --> 00:01:54,215
+caret,
+
+58
+00:01:54,215 --> 00:01:55,154
+dependencies,
+
+59
+00:01:55,154 --> 00:01:55,587
+quote,
+
+60
+00:01:55,587 --> 00:01:56,814
+build dot gradle.
+
+61
+00:01:58,864 --> 00:02:01,419
+Look at the third implementation line.
+
+62
+00:02:01,419 --> 00:02:01,890
+J unit,
+
+63
+00:02:01,890 --> 00:02:02,898
+a test library,
+
+64
+00:02:02,898 --> 00:02:04,915
+is declared as implementation.
+
+65
+00:02:04,915 --> 00:02:07,403
+That means it ships with the program.
+
+66
+00:02:07,403 --> 00:02:08,613
+That is a mistake.
+
+67
+00:02:09,163 --> 00:02:10,353
+Let us prove it.
+
+68
+00:02:10,353 --> 00:02:13,996
+Count the J unit lines on the runtime class path.
+
+69
+00:02:13,996 --> 00:02:15,855
+Type: dot slash gradle W,
+
+70
+00:02:15,855 --> 00:02:16,821
+dependencies,
+
+71
+00:02:16,821 --> 00:02:18,606
+dash dash configuration,
+
+72
+00:02:18,606 --> 00:02:20,019
+runtime class path,
+
+73
+00:02:20,019 --> 00:02:20,762
+then grep,
+
+74
+00:02:20,762 --> 00:02:21,283
+dash C,
+
+75
+00:02:21,283 --> 00:02:21,729
+junit.
+
+76
+00:02:24,279 --> 00:02:25,242
+More than zero.
+
+77
+00:02:25,242 --> 00:02:27,553
+J unit is on the runtime class path.
+
+78
+00:02:27,553 --> 00:02:30,892
+Your app would carry a test framework to production.
+
+79
+00:02:31,442 --> 00:02:33,032
+Fix the scope with sed.
+
+80
+00:02:33,032 --> 00:02:38,077
+Only the J unit line changes: implementation becomes test implementation.
+
+81
+00:02:40,127 --> 00:02:41,812
+Count again. Same command.
+
+82
+00:02:48,962 --> 00:02:49,279
+Zero.
+
+83
+00:02:49,279 --> 00:02:52,004
+J unit is gone from the runtime class path.
+
+84
+00:02:52,004 --> 00:02:54,032
+It is still there for the tests,
+
+85
+00:02:54,032 --> 00:02:55,490
+but it no longer ships.
+
+86
+00:02:56,040 --> 00:02:57,231
+Now the versions.
+
+87
+00:02:57,231 --> 00:03:01,014
+Numbers scattered through a script are hard to change.
+
+88
+00:03:01,014 --> 00:03:03,886
+A version catalog keeps them in one file.
+
+89
+00:03:03,886 --> 00:03:04,586
+Create it.
+
+90
+00:03:04,586 --> 00:03:05,567
+Type: print F,
+
+91
+00:03:05,567 --> 00:03:06,898
+the versions table,
+
+92
+00:03:06,898 --> 00:03:07,738
+into gradle,
+
+93
+00:03:07,738 --> 00:03:10,120
+slash libs dot versions dot tom L.
+
+94
+00:03:12,170 --> 00:03:13,924
+Add the library: its module,
+
+95
+00:03:13,924 --> 00:03:15,866
+and a reference to the version.
+
+96
+00:03:15,866 --> 00:03:16,492
+Same file,
+
+97
+00:03:16,492 --> 00:03:18,058
+with double greater than.
+
+98
+00:03:25,108 --> 00:03:30,143
+Read the file. Type: cat, gradle, slash libs dot versions dot tom L.
+
+99
+00:03:32,193 --> 00:03:32,931
+Two tables.
+
+100
+00:03:32,931 --> 00:03:34,744
+Versions holds the numbers.
+
+101
+00:03:34,744 --> 00:03:36,490
+Libraries holds the names,
+
+102
+00:03:36,490 --> 00:03:38,974
+and points to a version by reference.
+
+103
+00:03:38,974 --> 00:03:40,518
+Change one number here,
+
+104
+00:03:40,518 --> 00:03:43,137
+and every project that uses it follows.
+
+105
+00:03:43,687 --> 00:03:48,721
+Use it in the build script. Replace the long text with libs dot commons dot text.
+
+106
+00:03:52,071 --> 00:03:57,063
+Look at the commons lines. Type: grep dash N, commons, build dot gradle.
+
+107
+00:03:59,113 --> 00:04:00,798
+Libs dot commons dot text.
+
+108
+00:04:00,798 --> 00:04:02,030
+Short and readable,
+
+109
+00:04:02,030 --> 00:04:04,428
+and the version lives in the catalog.
+
+110
+00:04:04,428 --> 00:04:07,344
+Commons lang three still has its number here.
+
+111
+00:04:07,344 --> 00:04:09,353
+Moving it is part of your task.
+
+112
+00:04:09,903 --> 00:04:13,082
+Does it still build? Run the tests. Keep the build line.
+
+113
+00:04:15,632 --> 00:04:19,024
+Build successful. Same library, same version, new home.
+
+114
+00:04:19,574 --> 00:04:23,350
+Plug ins now. Add the maven publish plug in, next to java.
+
+115
+00:04:26,800 --> 00:04:28,565
+Check the plug ins block.
+
+116
+00:04:28,565 --> 00:04:30,825
+Type: grep dash capital A three,
+
+117
+00:04:30,825 --> 00:04:31,249
+quote,
+
+118
+00:04:31,249 --> 00:04:31,672
+caret,
+
+119
+00:04:31,672 --> 00:04:32,237
+plugins,
+
+120
+00:04:32,237 --> 00:04:32,661
+quote,
+
+121
+00:04:32,661 --> 00:04:33,861
+build dot gradle.
+
+122
+00:04:35,911 --> 00:04:42,205
+Two plug ins. Java builds and tests. Maven publish can send the result to a repository.
+
+123
+00:04:42,755 --> 00:04:44,317
+Describe what to publish.
+
+124
+00:04:44,317 --> 00:04:45,316
+One publication,
+
+125
+00:04:45,316 --> 00:04:47,190
+built from the java component.
+
+126
+00:04:47,190 --> 00:04:48,877
+Add it to the build script.
+
+127
+00:04:53,327 --> 00:04:54,847
+And where to publish it.
+
+128
+00:04:54,847 --> 00:04:55,671
+A repository,
+
+129
+00:04:55,671 --> 00:04:56,938
+in the build folder.
+
+130
+00:04:56,938 --> 00:04:59,471
+In real life this address is your Nexus.
+
+131
+00:05:02,921 --> 00:05:07,252
+Publish. Type: dot slash gradle W, publish, and grep, build.
+
+132
+00:05:10,302 --> 00:05:13,907
+Build successful. The new task, publish, came from the plug in.
+
+133
+00:05:14,457 --> 00:05:18,127
+What was published? Find the cart core files, and hide the checksums.
+
+134
+00:05:21,077 --> 00:05:21,508
+A jar,
+
+135
+00:05:21,508 --> 00:05:21,939
+a pom,
+
+136
+00:05:21,939 --> 00:05:23,736
+and a Gradle module file.
+
+137
+00:05:23,736 --> 00:05:27,690
+This is exactly what Nexus would store for other teams.
+
+138
+00:05:28,240 --> 00:05:34,832
+Read the pom. List its artifact I Ds. Type: grep, artifact I D, and the path to the pom.
+
+139
+00:05:36,882 --> 00:05:37,570
+Cart core,
+
+140
+00:05:37,570 --> 00:05:38,465
+commons text,
+
+141
+00:05:38,465 --> 00:05:40,048
+and commons lang three.
+
+142
+00:05:40,048 --> 00:05:42,663
+No J unit: a test library never ships.
+
+143
+00:05:42,663 --> 00:05:43,833
+Your two choices,
+
+144
+00:05:43,833 --> 00:05:45,623
+the scope and the catalog,
+
+145
+00:05:45,623 --> 00:05:48,445
+show up in the file other teams download.
+
+146
+00:05:49,995 --> 00:05:53,515
+Your task. The same journey, on your own project, in the lab.
+
+147
+00:05:54,065 --> 00:05:56,904
+One: J unit is declared as implementation.
+
+148
+00:05:56,904 --> 00:05:58,661
+Make it a test dependency,
+
+149
+00:05:58,661 --> 00:06:01,297
+and prove it on the runtime class path.
+
+150
+00:06:01,847 --> 00:06:06,143
+Two: create a version catalog for commons text and J unit jupiter,
+
+151
+00:06:06,143 --> 00:06:07,771
+and use it in the script.
+
+152
+00:06:07,771 --> 00:06:09,463
+The tests must still pass.
+
+153
+00:06:10,013 --> 00:06:14,685
+Three: add the maven publish plug in and the publishing block, and run publish.
+
+154
+00:06:15,235 --> 00:06:19,118
+Four: read the pom. It lists commons text, and no J unit.
+
+155
+00:06:19,668 --> 00:06:24,148
+Five: write notes dot text, three lines: catalog, published, and scope.
+
+156
+00:06:26,198 --> 00:06:30,401
+Here is where to find everything. Pause on this screen if you need to write it down.
+
+157
+00:06:30,951 --> 00:06:32,650
+The lab lives on git hub,
+
+158
+00:06:32,650 --> 00:06:33,805
+at it dash waves,
+
+159
+00:06:33,805 --> 00:06:35,368
+slash dev ops dash A I,
+
+160
+00:06:35,368 --> 00:06:36,863
+in the folder academy,
+
+161
+00:06:36,863 --> 00:06:37,543
+slash lab.
+
+162
+00:06:38,093 --> 00:06:43,426
+Two files: lab ninety-seven dot S H, and shortcuts ninety-seven dot S H.
+
+163
+00:06:43,976 --> 00:06:44,846
+Install it,
+
+164
+00:06:44,846 --> 00:06:48,404
+in your Ubuntu virtual machine: sudo install,
+
+165
+00:06:48,404 --> 00:06:50,222
+dash m seven five five,
+
+166
+00:06:50,222 --> 00:06:52,199
+lab ninety-seven dot S H,
+
+167
+00:06:52,199 --> 00:06:53,385
+into slash usr,
+
+168
+00:06:53,385 --> 00:06:54,334
+slash local,
+
+169
+00:06:54,334 --> 00:06:55,283
+slash S bin.
+
+170
+00:06:55,833 --> 00:07:00,122
+Load the short name with: source shortcuts ninety-seven dot S H.
+
+171
+00:07:00,122 --> 00:07:01,865
+Then you can type: lab up,
+
+172
+00:07:01,865 --> 00:07:02,535
+lab check,
+
+173
+00:07:02,535 --> 00:07:03,406
+and lab down.
+
+174
+00:07:03,956 --> 00:07:05,128
+You need a J D K,
+
+175
+00:07:05,128 --> 00:07:06,644
+curl and python three,
+
+176
+00:07:06,644 --> 00:07:08,644
+about one gigabyte of memory,
+
+177
+00:07:08,644 --> 00:07:10,505
+and an internet connection.
+
+178
+00:07:10,505 --> 00:07:12,849
+The first lab up downloads Gradle,
+
+179
+00:07:12,849 --> 00:07:14,089
+and the libraries.
+
+180
+00:07:14,639 --> 00:07:18,927
+Lab down removes everything. Only run it in your own virtual machine.
+
+181
+00:07:20,977 --> 00:07:23,046
+Pass or fail. You need all six.
+
+182
+00:07:23,596 --> 00:07:25,410
+Five pass lines in lab check.
+
+183
+00:07:25,960 --> 00:07:29,373
+J unit is test only: not on the runtime class path.
+
+184
+00:07:29,923 --> 00:07:33,059
+The versions live in the catalog, and the tests still pass.
+
+185
+00:07:33,609 --> 00:07:36,702
+Maven publish is applied, and publish really ran.
+
+186
+00:07:37,252 --> 00:07:40,516
+Notes dot text names the real files, in your own words.
+
+187
+00:07:41,066 --> 00:07:42,922
+Lab down leaves nothing behind.
+
+188
+00:07:43,472 --> 00:07:44,774
+To pass, all six.
+
+189
+00:07:46,824 --> 00:07:49,661
+Your turn, in your own Ubuntu virtual machine.
+
+190
+00:07:50,211 --> 00:07:52,302
+One: lab up, and read the task file.
+
+191
+00:07:52,852 --> 00:07:55,497
+Two: change the scope of J unit, and prove it.
+
+192
+00:07:56,047 --> 00:07:58,501
+Three: write the version catalog, and use it.
+
+193
+00:07:59,051 --> 00:08:02,613
+Four: add the plug in, the publishing block, and run publish.
+
+194
+00:08:03,163 --> 00:08:06,342
+Five: read the pom, write the notes, and run lab check.
+
+195
+00:08:06,892 --> 00:08:09,473
+Six: lab down, and prove nothing is left.
+
+196
+00:08:10,023 --> 00:08:11,858
+Pause the video, and begin now.
+
+197
+00:08:27,408 --> 00:08:28,283
+Quick check.
+
+198
+00:08:28,833 --> 00:08:32,737
+What is the difference between implementation and test implementation?
+
+199
+00:08:33,287 --> 00:08:35,143
+What does a version catalog give you?
+
+200
+00:08:35,693 --> 00:08:39,661
+Which plug in adds the publish task, and where did your jar and pom go?
+
+201
+00:08:40,211 --> 00:08:42,472
+Why is J unit missing from the pom?
+
+202
+00:08:43,022 --> 00:08:45,297
+Objective covered: M C eleven,
+
+203
+00:08:45,297 --> 00:08:46,510
+objective three,
+
+204
+00:08:46,510 --> 00:08:48,027
+Gradle dependencies,
+
+205
+00:08:48,027 --> 00:08:49,998
+repositories and plug ins.
+
+206
+00:08:50,548 --> 00:08:52,617
+Pause the video, and answer out loud.
+
+207
+00:09:03,167 --> 00:09:06,282
+Next: environment settings and secrets in Gradle.
+
+208
+00:09:06,832 --> 00:09:10,160
+If this helped, like, share and subscribe, so you do not miss it.

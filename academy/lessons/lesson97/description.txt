@@ -1,0 +1,24 @@
+Lesson 97 of the DevOps Engineering Bootcamp, the third lesson of Gradle. On a real Gradle 8.14.3 project you see where libraries come from (mavenCentral), find a test library that is declared in the wrong scope and prove it with the runtime classpath, fix it with testImplementation, move versions into a version catalog (gradle/libs.versions.toml), add the maven-publish plugin, publish the jar and pom, and read the pom. Then you do the same job yourself in the lab.
+
+Chapters
+0:00 Libraries, versions, plugins
+0:38 Four ideas of dependencies
+1:22 Live: scopes, a version catalog, publishing
+5:50 Your lab task
+6:26 Where to find the lab
+7:20 Pass or fail rubric
+7:46 Your turn
+8:27 Quick check
+
+Objectives covered: MC11-O03 (Gradle dependencies, repositories and plugins: implementation vs testImplementation, version catalog, maven-publish, published pom)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab97.sh and shortcuts97.sh). Install with: sudo install -m 755 lab97.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts97.sh. You need an Ubuntu virtual machine with root, a JDK, python3 and curl (for example: sudo apt install -y openjdk-21-jdk-headless python3 curl), internet access and about 1 GB of free memory. The first lab up downloads Gradle 8.14.3 (about 130 MB) and the project libraries (JUnit and Apache Commons) from Maven Central. lab down removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal segment is a real recording with real Gradle 8.14.3 and real libraries from Maven Central. On the recording machine the Gradle download site is blocked, so a stored copy of Gradle and of the libraries was put in place first; on your machine the first run downloads them once. The repository we publish to is a folder inside the project (build/repo), which plays the part of a Nexus repository: publishing to a real Nexus needs a url and credentials, which come in the next lessons. I planted the scope mistake myself so it is repeatable. The lab was run end to end before this lesson: it fails 0 of 5 at the start and passes 5 of 5 after the fixes; lab down leaves nothing behind. Only one style of fix was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. The parts, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Gradle Test and Dependencies: Fix a Failing Test, Read the Dependency Tree https://youtu.be/bt0hwLXN1Rc
+Next: Gradle environment settings and secrets (MC11-O04).
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #gradle #java #dependencies #versioncatalog #devopsbootcamp
