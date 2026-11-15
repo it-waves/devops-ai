@@ -15,3 +15,10 @@ Order (simple to advanced, one objective per lesson, UI where it teaches):
 - L102 MC11-O08 Maven vs Gradle for DevOps, then MC11 mastery evidence lesson with lab info on screen
 
 Thumbnails: state boldly what the lesson teaches (owner rule). Each lesson: demo, independent task with lab (up/check/down tested 0/N to N/N), rubric, honest notes, captions, end screen.
+
+## L102 MC11-O08 design (drafted 2026-11-15)
+Same cartcore project built both ways, side by side, real Maven and real Gradle 8.14.3.
+- Demo (simple to advanced): same source, pom.xml vs build.gradle line by line; `mvn -q package` vs `./gradlew build`; output folders target/ vs build/libs; second run (Maven rebuilds, Gradle UP-TO-DATE); add one dependency in each; when to pick which for DevOps (convention vs flexibility, CI caching, plugin ecosystem, team skills).
+- Lab102 (up/check/down): project with both build files; checks: 1 mvn jar exists, 2 gradle jar exists, 3 student adds commons-lang3 12.0 in both and both builds pass, 4 second Gradle run reports UP-TO-DATE (student saves output), 5 decision.txt with lines `maven:`, `gradle:`, `choice:` of 12+ chars. Test 0/5 to 5/5, down clean.
+- Honest notes: sandbox Gradle/Maven libs are pre-stored; opinion lines are judgement, not benchmarks; no timing claims beyond what the recording shows.
+- Next: MC11 mastery evidence lesson (lab info on screen), then MC12 Tomcat.
