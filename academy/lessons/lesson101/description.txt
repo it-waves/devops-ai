@@ -1,0 +1,24 @@
+Lesson 101 of the DevOps Engineering Bootcamp, the seventh lesson of Gradle. When a build fails, the message always says where it broke, if you know how to read it. You learn the three places a Gradle build can fail, and what each message looks like: the daemon that cannot start ("Unable to start the daemon process"), the dependency that cannot be found ("Could not find"), and the task that fails ("Execution failed for task"). On a real Gradle 8.14.3 project that fails all three ways, one behind the other, you read each message, fix the memory setting, the library version and the Java bug, and watch the build go green. Then you do the same job yourself in the lab.
+
+Chapters
+0:00 Read what went wrong
+0:30 Three phases, three kinds of failure
+1:18 Live: fix three failures, one by one
+4:17 Your lab task
+4:51 Where to find the lab
+5:50 Pass or fail rubric
+6:18 Your turn
+6:57 Quick check
+
+Objectives covered: MC11-O07 (diagnose Gradle task, dependency and daemon failures: reading "What went wrong", org.gradle.jvmargs, the dependencies report, a failing task)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab101.sh and shortcuts101.sh). Install with: sudo install -m 755 lab101.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts101.sh. You need an Ubuntu virtual machine with root, a JDK, python3 and curl (for example: sudo apt install -y openjdk-21-jdk-headless python3 curl), internet access and about 1 GB of free memory. The first lab up downloads Gradle 8.14.3 (about 130 MB), and the project needs one small library (commons-lang3) from Maven Central. lab down removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal segment is a real recording with real Gradle 8.14.3. On the recording machine the Gradle download site is blocked, so a stored copy of Gradle was put in place first; on your machine the first run downloads it once. The commons-lang3 library comes from a stored copy of Maven Central downloads for the one version that exists (3.12.0); the missing version (3.99.1) was really asked for from Maven Central and really was not found. The commands pipe the output through grep so the screen shows only the cause; your own screen will show more text, and that is normal. The lab was run end to end before this lesson: it fails 0 of 5 at the start and passes 5 of 5 after the fixes; lab down leaves nothing behind. Only one style of fix was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. The parts, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Gradle in CI with GitHub Actions: Cache, Secrets and Artifacts https://youtu.be/IfYZ0Y3RQSA
+Next: Maven or Gradle for DevOps (MC11-O08).
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #gradle #java #troubleshooting #devopsbootcamp
