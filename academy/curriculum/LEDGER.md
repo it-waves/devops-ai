@@ -156,4 +156,4 @@ UI needed: Maven Central search site (central.sonatype.com) for coordinates and 
 | L107 | MC12-O04 | Run Tomcat as a systemd Service: Port, Environment, Restart | Published https://youtu.be/u0GSyzxynlA, 12:30, captions and end screen done |
 | L108 | MC12-O05 | Read Tomcat Logs: Diagnose a Startup Failure and 500 Errors | Published https://youtu.be/2PVEzs0K2kA, 11:20, captions and end screen done |
 | L109 | MC12-O06 | Put nginx in Front of Tomcat: Reverse Proxy and HTTPS | Published https://youtu.be/uE9pDj2fr28, 13:16, captions and end screen done; L108 Next line updated |
-| L110 | MC12-O07 | Secure the Tomcat Manager: Users, Permissions and Shutdown Port | Published https://youtu.be/OcGy-UqlnVc, 12:30, captions done, end screen pending; L109 Next line updated |
+| L110 | MC12-O07 | Secure the Tomcat Manager: Users, Permissions and Shutdown Port | Published https://youtu.be/OcGy-UqlnVc, 12:30, captions and end screen done; L109 Next line updated |
