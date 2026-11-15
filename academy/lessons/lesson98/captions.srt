@@ -1,0 +1,647 @@
+1
+00:00:00,500 --> 00:00:04,980
+Last lesson you published a jar. A real repository wants a password.
+
+2
+00:00:05,530 --> 00:00:10,202
+Where does that password go? Not in your build script. Not in a file that goes to git.
+
+3
+00:00:10,752 --> 00:00:14,400
+Gradle has a clean path for settings, and another for secrets.
+
+4
+00:00:14,950 --> 00:00:17,113
+You will see a password leak from a file,
+
+5
+00:00:17,113 --> 00:00:17,641
+remove it,
+
+6
+00:00:17,641 --> 00:00:19,857
+and bring it back through the environment.
+
+7
+00:00:20,407 --> 00:00:23,521
+Then you do it alone, and a checker judges your result.
+
+8
+00:00:24,071 --> 00:00:28,658
+One idea first: settings go in files. Secrets go in the environment.
+
+9
+00:00:30,208 --> 00:00:33,792
+Four ideas keep a Gradle build configurable, and safe.
+
+10
+00:00:34,342 --> 00:00:39,739
+One, settings live in gradle dot properties. Not secret, and shared by the whole team.
+
+11
+00:00:40,289 --> 00:00:40,558
+Two,
+
+12
+00:00:40,558 --> 00:00:43,710
+a flag on the command line overrides a setting,
+
+13
+00:00:43,710 --> 00:00:44,515
+for one run.
+
+14
+00:00:44,515 --> 00:00:46,327
+The flag is dash capital P.
+
+15
+00:00:46,877 --> 00:00:47,251
+Three,
+
+16
+00:00:47,251 --> 00:00:50,242
+a secret never goes in a file that is committed.
+
+17
+00:00:50,242 --> 00:00:52,112
+It comes from the environment,
+
+18
+00:00:52,112 --> 00:00:53,234
+or a secret store.
+
+19
+00:00:53,784 --> 00:00:59,245
+Four, read it, but never print it. A build log is public, and a leaked line stays forever.
+
+20
+00:00:59,795 --> 00:01:02,255
+Real Nexus needs a user and a password.
+
+21
+00:01:02,255 --> 00:01:04,400
+This is how they reach your build.
+
+22
+00:01:04,400 --> 00:01:05,598
+Let us see it live.
+
+23
+00:01:07,648 --> 00:01:13,451
+Go into the project. Type: CD, slash opt, slash lab ninety-eight, slash cartcore.
+
+24
+00:01:14,001 --> 00:01:18,353
+First, look at the settings file. Type: cat, gradle dot properties.
+
+25
+00:01:20,403 --> 00:01:21,111
+One line.
+
+26
+00:01:21,111 --> 00:01:22,213
+Repo password,
+
+27
+00:01:22,213 --> 00:01:22,764
+equals,
+
+28
+00:01:22,764 --> 00:01:23,630
+Pa55-plain.
+
+29
+00:01:23,630 --> 00:01:24,890
+A real password,
+
+30
+00:01:24,890 --> 00:01:26,149
+in a plain file.
+
+31
+00:01:26,149 --> 00:01:27,724
+If this goes to git,
+
+32
+00:01:27,724 --> 00:01:31,581
+everyone who can read the repository can read it.
+
+33
+00:01:32,131 --> 00:01:33,897
+What does the build see?
+
+34
+00:01:33,897 --> 00:01:35,736
+Run the show config task,
+
+35
+00:01:35,736 --> 00:01:36,766
+in quiet mode.
+
+36
+00:01:36,766 --> 00:01:38,606
+Type: dot slash gradle W,
+
+37
+00:01:38,606 --> 00:01:39,120
+dash Q,
+
+38
+00:01:39,120 --> 00:01:40,003
+show config.
+
+39
+00:01:42,053 --> 00:01:42,673
+Greeting,
+
+40
+00:01:42,673 --> 00:01:43,087
+unset.
+
+41
+00:01:43,087 --> 00:01:43,707
+Password,
+
+42
+00:01:43,707 --> 00:01:43,983
+set.
+
+43
+00:01:43,983 --> 00:01:46,808
+The build found the password in the file.
+
+44
+00:01:46,808 --> 00:01:49,081
+Notice what the task prints: set,
+
+45
+00:01:49,081 --> 00:01:50,184
+never the value.
+
+46
+00:01:50,184 --> 00:01:51,700
+A build log is public.
+
+47
+00:01:51,700 --> 00:01:53,147
+Never print a secret.
+
+48
+00:01:53,697 --> 00:01:55,795
+Take the secret out of the file.
+
+49
+00:01:55,795 --> 00:01:58,221
+Delete every line with repo password.
+
+50
+00:01:58,221 --> 00:01:58,877
+Type: sed,
+
+51
+00:01:58,877 --> 00:01:59,336
+dash I,
+
+52
+00:01:59,336 --> 00:02:00,909
+then the delete command,
+
+53
+00:02:00,909 --> 00:02:02,614
+and gradle dot properties.
+
+54
+00:02:04,664 --> 00:02:06,392
+Ask again. Same command.
+
+55
+00:02:08,442 --> 00:02:08,970
+Password,
+
+56
+00:02:08,970 --> 00:02:09,439
+missing.
+
+57
+00:02:09,439 --> 00:02:11,023
+The build no longer has it,
+
+58
+00:02:11,023 --> 00:02:12,079
+and nothing leaks.
+
+59
+00:02:12,079 --> 00:02:13,546
+Now we must give it back,
+
+60
+00:02:13,546 --> 00:02:14,309
+the safe way.
+
+61
+00:02:14,859 --> 00:02:18,091
+A setting that is not secret belongs in the file.
+
+62
+00:02:18,091 --> 00:02:19,081
+Add a greeting.
+
+63
+00:02:19,081 --> 00:02:19,806
+Type: echo,
+
+64
+00:02:19,806 --> 00:02:20,664
+the greeting,
+
+65
+00:02:20,664 --> 00:02:21,983
+double greater than,
+
+66
+00:02:21,983 --> 00:02:23,435
+gradle dot properties.
+
+67
+00:02:25,485 --> 00:02:26,487
+Ask the build.
+
+68
+00:02:29,037 --> 00:02:30,976
+Greeting: Welcome to CloudCart.
+
+69
+00:02:30,976 --> 00:02:32,728
+The setting lives in a file,
+
+70
+00:02:32,728 --> 00:02:35,480
+so everyone on the team gets the same value.
+
+71
+00:02:36,030 --> 00:02:38,506
+Sometimes you need a different value,
+
+72
+00:02:38,506 --> 00:02:38,840
+once.
+
+73
+00:02:38,840 --> 00:02:40,981
+Override it on the command line,
+
+74
+00:02:40,981 --> 00:02:42,319
+with dash capital P.
+
+75
+00:02:42,319 --> 00:02:43,524
+Type: show config,
+
+76
+00:02:43,524 --> 00:02:44,862
+then dash capital P,
+
+77
+00:02:44,862 --> 00:02:46,334
+greeting equals Hello.
+
+78
+00:02:48,384 --> 00:02:53,099
+Greeting: Hello. The command line wins over the file, and the file did not change.
+
+79
+00:02:53,649 --> 00:02:54,726
+Now the secret,
+
+80
+00:02:54,726 --> 00:02:56,879
+the safe way: the environment.
+
+81
+00:02:56,879 --> 00:02:58,531
+A variable named O R G,
+
+82
+00:02:58,531 --> 00:02:59,320
+underscore,
+
+83
+00:02:59,320 --> 00:02:59,823
+gradle,
+
+84
+00:02:59,823 --> 00:03:00,613
+underscore,
+
+85
+00:03:00,613 --> 00:03:01,187
+project,
+
+86
+00:03:01,187 --> 00:03:01,977
+underscore,
+
+87
+00:03:01,977 --> 00:03:03,628
+then the property name.
+
+88
+00:03:03,628 --> 00:03:05,638
+Set it for this one command.
+
+89
+00:03:07,688 --> 00:03:08,598
+Password: set.
+
+90
+00:03:08,598 --> 00:03:11,525
+Gradle turned the variable into the property.
+
+91
+00:03:11,525 --> 00:03:13,866
+The value came from the environment,
+
+92
+00:03:13,866 --> 00:03:15,622
+so it never touched a file.
+
+93
+00:03:15,622 --> 00:03:16,533
+In a pipeline,
+
+94
+00:03:16,533 --> 00:03:18,419
+the secret store provides it.
+
+95
+00:03:18,969 --> 00:03:19,616
+Prove it.
+
+96
+00:03:19,616 --> 00:03:21,917
+Search every file for the value,
+
+97
+00:03:21,917 --> 00:03:23,499
+and count the matches.
+
+98
+00:03:23,499 --> 00:03:24,793
+Type: grep dash R,
+
+99
+00:03:24,793 --> 00:03:25,512
+the value,
+
+100
+00:03:25,512 --> 00:03:25,800
+dot,
+
+101
+00:03:25,800 --> 00:03:26,519
+then pipe,
+
+102
+00:03:26,519 --> 00:03:27,310
+W C dash L.
+
+103
+00:03:29,360 --> 00:03:34,245
+Zero. The secret was used, and left no trace in the project. That is the goal.
+
+104
+00:03:35,795 --> 00:03:39,315
+Your task. The same journey, on your own project, in the lab.
+
+105
+00:03:39,865 --> 00:03:45,412
+One: the password sits in gradle dot properties. Take it out. No file may contain it.
+
+106
+00:03:45,962 --> 00:03:50,207
+Two: add a greeting to gradle dot properties, and see it in show config.
+
+107
+00:03:50,757 --> 00:03:53,951
+Three: override the greeting with dash capital P,
+
+108
+00:03:53,951 --> 00:03:56,624
+and save the output in override dot text.
+
+109
+00:03:57,174 --> 00:04:00,163
+Four: give the password through the environment,
+
+110
+00:04:00,163 --> 00:04:02,593
+and save the output in secret dot text.
+
+111
+00:04:02,593 --> 00:04:03,901
+It must say password,
+
+112
+00:04:03,901 --> 00:04:04,150
+set.
+
+113
+00:04:04,700 --> 00:04:08,988
+Five: write notes dot text, three lines: where, why, and override.
+
+114
+00:04:11,038 --> 00:04:15,241
+Here is where to find everything. Pause on this screen if you need to write it down.
+
+115
+00:04:15,791 --> 00:04:17,490
+The lab lives on git hub,
+
+116
+00:04:17,490 --> 00:04:18,645
+at it dash waves,
+
+117
+00:04:18,645 --> 00:04:20,208
+slash dev ops dash A I,
+
+118
+00:04:20,208 --> 00:04:21,703
+in the folder academy,
+
+119
+00:04:21,703 --> 00:04:22,383
+slash lab.
+
+120
+00:04:22,933 --> 00:04:27,925
+Two files: lab ninety-eight dot S H, and shortcuts ninety-eight dot S H.
+
+121
+00:04:28,475 --> 00:04:29,346
+Install it,
+
+122
+00:04:29,346 --> 00:04:32,911
+in your Ubuntu virtual machine: sudo install,
+
+123
+00:04:32,911 --> 00:04:34,733
+dash m seven five five,
+
+124
+00:04:34,733 --> 00:04:36,713
+lab ninety-eight dot S H,
+
+125
+00:04:36,713 --> 00:04:37,901
+into slash usr,
+
+126
+00:04:37,901 --> 00:04:38,852
+slash local,
+
+127
+00:04:38,852 --> 00:04:39,803
+slash S bin.
+
+128
+00:04:40,353 --> 00:04:44,545
+Load the short name with: source shortcuts ninety-eight dot S H.
+
+129
+00:04:44,545 --> 00:04:46,249
+Then you can type: lab up,
+
+130
+00:04:46,249 --> 00:04:46,904
+lab check,
+
+131
+00:04:46,904 --> 00:04:47,755
+and lab down.
+
+132
+00:04:48,305 --> 00:04:49,472
+You need a J D K,
+
+133
+00:04:49,472 --> 00:04:50,982
+curl and python three,
+
+134
+00:04:50,982 --> 00:04:52,972
+about one gigabyte of memory,
+
+135
+00:04:52,972 --> 00:04:54,825
+and an internet connection.
+
+136
+00:04:54,825 --> 00:04:57,159
+The first lab up downloads Gradle.
+
+137
+00:04:57,709 --> 00:05:01,997
+Lab down removes everything. Only run it in your own virtual machine.
+
+138
+00:05:04,047 --> 00:05:06,116
+Pass or fail. You need all six.
+
+139
+00:05:06,666 --> 00:05:08,480
+Five pass lines in lab check.
+
+140
+00:05:09,030 --> 00:05:10,907
+The password text is in no file.
+
+141
+00:05:11,457 --> 00:05:15,190
+The greeting is in the file, and the override works from the command line.
+
+142
+00:05:15,740 --> 00:05:19,303
+The secret came from the environment, and show config says set.
+
+143
+00:05:19,853 --> 00:05:23,992
+Notes dot text answers where, why, and override, in your own words.
+
+144
+00:05:24,542 --> 00:05:26,398
+Lab down leaves nothing behind.
+
+145
+00:05:26,948 --> 00:05:28,249
+To pass, all six.
+
+146
+00:05:30,299 --> 00:05:33,136
+Your turn, in your own Ubuntu virtual machine.
+
+147
+00:05:33,686 --> 00:05:35,777
+One: lab up, and read the task file.
+
+148
+00:05:36,327 --> 00:05:38,396
+Two: take the password out of the file.
+
+149
+00:05:38,946 --> 00:05:41,400
+Three: add the greeting, and override it once.
+
+150
+00:05:41,950 --> 00:05:44,296
+Four: pass the secret through the environment.
+
+151
+00:05:44,846 --> 00:05:47,257
+Five: write the notes, and run lab check.
+
+152
+00:05:47,807 --> 00:05:50,388
+Six: lab down, and prove nothing is left.
+
+153
+00:05:50,938 --> 00:05:52,773
+Pause the video, and begin now.
+
+154
+00:06:08,323 --> 00:06:09,198
+Quick check.
+
+155
+00:06:09,748 --> 00:06:12,372
+Where do settings go, and where do secrets go?
+
+156
+00:06:12,922 --> 00:06:15,375
+Which flag overrides a property for one run?
+
+157
+00:06:15,925 --> 00:06:19,338
+How does an environment variable become a Gradle property?
+
+158
+00:06:19,888 --> 00:06:22,790
+Why does show config print set, and not the value?
+
+159
+00:06:23,340 --> 00:06:29,377
+Objective covered: M C eleven, objective four, Gradle environment settings and secrets.
+
+160
+00:06:29,927 --> 00:06:31,996
+Pause the video, and answer out loud.
+
+161
+00:06:42,546 --> 00:06:45,490
+Next: the build cache, and reproducible builds.
+
+162
+00:06:46,040 --> 00:06:49,368
+If this helped, like, share and subscribe, so you do not miss it.

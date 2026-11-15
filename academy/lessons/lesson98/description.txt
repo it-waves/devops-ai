@@ -1,0 +1,24 @@
+Lesson 98 of the DevOps Engineering Bootcamp, the fourth lesson of Gradle. A real repository needs a password, and that password must never sit in a file that goes to git. On a real Gradle 8.14.3 build you see a password leak from gradle.properties, remove it, keep a normal setting in the file, override it for one run with -P, and bring the secret back safely through an environment variable (ORG_GRADLE_PROJECT_name). You also see why the build reads a secret but never prints it. Then you do the same job yourself in the lab.
+
+Chapters
+0:00 Settings, flags, secrets
+0:30 Four ideas of config and secrets
+1:07 Live: remove a secret, override a setting
+3:35 Your lab task
+4:10 Where to find the lab
+5:03 Pass or fail rubric
+5:30 Your turn
+6:08 Quick check
+
+Objectives covered: MC11-O04 (Gradle environment settings and secrets: gradle.properties, -P overrides, ORG_GRADLE_PROJECT environment variables, no secret in a file, never print a secret)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab98.sh and shortcuts98.sh). Install with: sudo install -m 755 lab98.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts98.sh. You need an Ubuntu virtual machine with root, a JDK, python3 and curl (for example: sudo apt install -y openjdk-21-jdk-headless python3 curl), internet access and about 1 GB of free memory. The first lab up downloads Gradle 8.14.3 (about 130 MB). lab down removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal segment is a real recording with real Gradle 8.14.3. On the recording machine the Gradle download site is blocked, so a stored copy of Gradle was put in place first; on your machine the first run downloads it once. The password in the lab is a made-up test value, and the task that prints the settings is part of the lab project (it prints set or missing, never the value). The recording uses plain console output so the lines stay clean. The lab was run end to end before this lesson: it fails 0 of 5 at the start and passes 5 of 5 after the fixes; lab down leaves nothing behind. Only one style of fix was tested, so a different valid approach could be judged wrongly by the checker. A value passed on the command line (-P) can still show in your shell history and in the process list, so for real secrets prefer the environment or your CI secret store. The narration is synthetic speech. The parts, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Gradle Dependencies: Scopes, Version Catalog, Plugins and Publishing https://youtu.be/9ywhFLF8l8o
+Next: Gradle build cache and reproducible builds (MC11-O05).
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #gradle #java #secrets #devopsbootcamp
