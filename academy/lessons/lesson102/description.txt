@@ -1,0 +1,25 @@
+Lesson 102 of the DevOps Engineering Bootcamp, the last concept lesson of Gradle. Maven or Gradle: which one should your team use? Instead of an opinion, you build the same CloudCart project with both, side by side. You compare pom.xml with build.gradle, add the same library to each, build the jar with Maven and with Gradle, and run both again to see what each one skips. Then you learn how to choose, and do the same job yourself in the lab.
+
+Chapters
+0:00 Maven or Gradle?
+0:23 Same job, two tools
+1:09 Live: the same project, built both ways
+3:34 How to choose
+4:06 Your lab task
+4:41 Where to find the lab
+5:37 Pass or fail rubric
+6:05 Your turn
+6:47 Quick check
+
+Objectives covered: MC11-O08 (compare Maven and Gradle for DevOps workflows: build files, life cycle and task graph, dependencies, output folders, up-to-date builds, how to choose)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab102.sh and shortcuts102.sh). Install with: sudo install -m 755 lab102.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts102.sh. You need an Ubuntu virtual machine with root, a JDK, Maven, python3, curl and unzip (for example: sudo apt install -y openjdk-21-jdk-headless maven python3 curl unzip), internet access and about 1 GB of free memory. The first lab up downloads Gradle 8.14.3 (about 130 MB), and both builds need one small library (commons-lang3) from Maven Central. lab down removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal segment is a real recording with real Maven 3.9 and real Gradle 8.14.3. On the recording machine the Gradle download site is blocked, so a stored copy of Gradle was put in place first, and the Maven plugins and the library came from a stored copy of earlier Maven Central downloads. The Gradle daemon was started once before recording, so the Gradle run you see is a warm one; on your machine the very first Gradle run also starts the daemon and takes longer. The times on screen (about 2 seconds for Maven, about 1 second for Gradle) are from one tiny project on one machine: they are not a benchmark, and a big project can behave very differently. The advice on how to choose is judgement, not measurement. The lab was run end to end before this lesson: it fails 0 of 5 at the start and passes 5 of 5 after the fixes; lab down leaves nothing behind. Only one style of fix was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. The comparison, decision, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Fix Gradle Failures: Daemon, Dependency and Task Errors https://youtu.be/OtPMYKpRj2Q
+Next: the Gradle mastery lesson (MC11), the whole domain in one lab.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #maven #gradle #java #devopsbootcamp
