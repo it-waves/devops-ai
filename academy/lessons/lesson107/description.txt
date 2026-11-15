@@ -1,0 +1,24 @@
+Lesson 107 of the DevOps Engineering Bootcamp: stop starting Tomcat by hand and run it as a real systemd service. You read the port from a property (server.xml uses ${http.port:-8080}), write setenv.sh with the Java home, the PID file and the options that carry your port and environment name, write a systemd unit file (Type=forking, User=tomcat, Restart=on-failure), then daemon-reload, enable --now and check the status. You prove it with a status code on port 8081, the Java process owner and the startup arguments in catalina.out, crash it on purpose with kill -9, watch systemd restart it, and read the journal to see why. In the same continuous screen recording, Chrome shows Tomcat's welcome page on the new port and a refused connection on the old one.
+
+Chapters
+0:00 Why a service
+0:26 Four ideas
+1:05 Live: port, environment, service
+9:03 Your lab task
+9:35 Where to find the lab
+10:40 Pass or fail rubric
+11:11 Your turn
+11:49 Quick check
+
+Objectives covered: MC12-O04 (configure Tomcat ports and environment, and run it as a systemd service that restarts after a failure)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab107.sh and shortcuts107.sh). Install with: sudo install -m 755 lab107.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts107.sh. You need an Ubuntu virtual machine with a real systemd (not a plain container), root, a JDK and curl (for example: sudo apt install -y openjdk-21-jdk-headless curl), internet access, about 1 GB of free memory and port 8081 free. The first lab up downloads Tomcat 10.1.34 from archive.apache.org (about 14 MB) and creates a user called tomcat, so that name must be free. lab down stops and disables the service, removes the unit file and the user, and removes everything else. Only run it in your own virtual machine.
+
+Honest notes: the terminal and browser segment is one real, continuous recording with real Apache Tomcat 10.1.34 (from a copy stored on the recording machine) and a real systemd, booted as the first process of a private container on the recording machine, so it has no full boot or firewall; your virtual machine will show the same commands and the same results. Tomcat's folders are private to the tomcat user, so the lesson reads them with sudo. The lab was run end to end with a real systemd: it passes 0 of 5 at the start and 5 of 5 after the tasks, and lab down leaves nothing behind. The narration is synthetic speech. The hook, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Deploy, Verify and Roll Back a Maven WAR on Tomcat https://youtu.be/JfNAz7uPMHs
+Next: read Tomcat's logs and diagnose a Tomcat that will not start.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #tomcat #systemd #linux #devopsbootcamp
