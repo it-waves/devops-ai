@@ -1,6 +1,6 @@
 def s_hook(C, D, dur):
     E = [El(T('Skip. Restore. Reproduce.', 'x', 62), 100, 130, C['h1'])]
-    E.append(Pop(card(760, 140, ACC, 'runs in C I', [('hundreds of times a day', TXT)], 46, 30), 100, 300, C['h2']))
+    E.append(Pop(card(760, 140, ACC, 'runs in CI', [('hundreds of times a day', TXT)], 46, 30), 100, 300, C['h2']))
     E.append(Pop(card(760, 160, VIO, '3 ideas', [('up-to-date · cache · reproducible', TXT)], 52, 30), 100, 480, C['h3']))
     E.append(Pop(card(760, 160, WARN, 'live on Gradle 8.14.3', [('catch the timestamp', TXT)], 46, 30), 900, 440, C['h4']))
     E.append(Pop(card(1100, 140, GOOD, 'prove the jar is identical', [('then you do it alone', TXT)], 46, 30), 100, 700, C['h5']))
