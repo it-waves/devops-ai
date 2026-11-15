@@ -1,0 +1,24 @@
+Lesson 99 of the DevOps Engineering Bootcamp, the fifth lesson of Gradle. A build that runs hundreds of times a day in CI must skip work it has already done. On a real Gradle 8.14.3 build you see a second build skip tasks (UP-TO-DATE), catch the one line that makes the jar run every time (a Built-At time stamp in the manifest), switch on the build cache and watch compileJava come back FROM-CACHE even after clean, and prove with sha256sum that a jar is not reproducible until you stop it storing file times and file order. Then you do the same job yourself in the lab.
+
+Chapters
+0:00 Skip work, restore work, prove it
+0:35 Three ideas of a fast build
+1:20 Live: skip work, restore from cache, same jar twice
+5:04 Your lab task
+5:37 Where to find the lab
+6:30 Pass or fail rubric
+6:58 Your turn
+7:41 Quick check
+
+Objectives covered: MC11-O05 (Gradle up-to-date checks, the build cache, FROM-CACHE after clean, reproducible archives: preserveFileTimestamps = false and reproducibleFileOrder = true)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab99.sh and shortcuts99.sh). Install with: sudo install -m 755 lab99.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts99.sh. You need an Ubuntu virtual machine with root, a JDK, python3 and curl (for example: sudo apt install -y openjdk-21-jdk-headless python3 curl), internet access and about 1 GB of free memory. The first lab up downloads Gradle 8.14.3 (about 130 MB). lab down removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal segment is a real recording with real Gradle 8.14.3. On the recording machine the Gradle download site is blocked, so a stored copy of Gradle was put in place first; on your machine the first run downloads it once. The project is a small CloudCart sample with no outside libraries, so no Maven Central download is needed. The cache here is the local cache on one machine; a team shares one cache through a cache server, which this lesson does not set up. The two different fingerprints in the demo depend on a few seconds passing between builds, because a jar stores file times to two-second precision. The lab was run end to end before this lesson: it fails 0 of 5 at the start and passes 5 of 5 after the fixes; lab down leaves nothing behind. Only one style of fix was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. The parts, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Gradle Secrets and Settings: gradle.properties, -P and Environment Variables https://youtu.be/yJLWykvQfsI
+Next: Gradle in CI with GitHub Actions (MC11-O06).
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #gradle #java #buildcache #devopsbootcamp
