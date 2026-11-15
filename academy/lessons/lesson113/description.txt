@@ -1,0 +1,24 @@
+Lesson 113 of the DevOps Engineering Bootcamp, and lesson 1 of 5 of the CloudCart v0 project. You start from what to expect: you will start a real app on a real Tomcat server, tour every part of every screen, shop in it, place an order and answer five questions. A short picture shows how the app works (browser, Tomcat, servlet, data). Then one continuous live recording: start Tomcat, read /cloudcart/health, and tour the store full screen in Chrome: header, search, menu and cart counter, the banner, the hero, category filters, the sort menu, product cards (picture, category, name, rating, stock tags, price, add to cart), the product page, the cart and its order summary with the free shipping bar, sign in with the demo account, checkout with form validation, the order confirmation, the order history, the footer version and the admin and health page. You finish with lab check for 5 of 5.
+
+Chapters
+0:00 Meet CloudCart
+0:27 What to expect
+1:04 How the app works
+1:34 Live: start it, tour every screen, shop
+7:58 Your lab task
+8:31 Where to find the lab
+9:28 Pass or fail rubric
+9:54 Your turn
+10:33 Quick check
+Objectives covered: CloudCart v0, lesson 1 of 5 (meet the app: start it on Tomcat, tour every screen, shop and check out)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab113.sh and shortcuts113.sh). Install with: sudo install -m 755 lab113.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts113.sh. You need any Linux machine with root, a JDK, curl and ss (for example: sudo apt install -y openjdk-21-jdk-headless curl iproute2), internet access, about 1 GB of free memory and ports 8089 and 8099 free. No systemd is needed. The first lab up downloads Tomcat 10.1.34 (about 14 MB) and the app (about 0.3 MB). lab down stops Tomcat and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal and the browser tour are one real, continuous recording of the real CloudCart app on real Apache Tomcat 10.1.34. The lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. CloudCart is a practice store: the data is held in memory and resets when Tomcat restarts, nothing is charged or shipped, the product pictures are drawn illustrations, and the demo account (student@cloudcart.test) is a lab value only. The app in this lesson is prebuilt; you build it yourself in the next lesson. The narration is synthetic speech. The picture of how the app works and the hook, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Tomcat Mastery: Fix and Harden an Inherited Server | Lesson 112 https://youtu.be/xONw85H5URM
+Next: CloudCart v0: the project layout and the Maven build.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #cloudcart #tomcat #devopsbootcamp
