@@ -4,13 +4,13 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>academy.cloudcart</groupId>
   <artifactId>cloudcart</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
   <packaging>war</packaging>
   <name>CloudCart</name>
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <failOnMissingWebXml>false</failOnMissingWebXml>
+    <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm'Z'</maven.build.timestamp.format>
   </properties>
   <dependencies>
     <dependency>
@@ -27,6 +27,12 @@
   </dependencies>
   <build>
     <finalName>cloudcart</finalName>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
     <plugins>
       <plugin><artifactId>maven-compiler-plugin</artifactId><version>3.12.1</version></plugin>
       <plugin><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version></plugin>

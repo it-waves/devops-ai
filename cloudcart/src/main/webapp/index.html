@@ -1,2 +1,39 @@
-<!doctype html><title>CloudCart</title><h1>CloudCart v0.1.0</h1>
-<p>Try <a href="health">/health</a> and <a href="api/products">/api/products</a>.</p>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CloudCart: gear for people who build things</title>
+<meta name="description" content="CloudCart is a demo store used to learn DevOps. Browse, search, add to cart and check out.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2319c3b1'/%3E%3Cpath d='M7 9h3l2 11h11l2-8H12' fill='none' stroke='%230b1f24' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='14' cy='24' r='1.8' fill='%230b1f24'/%3E%3Ccircle cx='21' cy='24' r='1.8' fill='%230b1f24'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top" id="top">
+  <a class="brand" href="#/" aria-label="CloudCart home">
+    <svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#19c3b1"/><path d="M7 9h3l2 11h11l2-8H12" fill="none" stroke="#0b1f24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="24" r="1.8" fill="#0b1f24"/><circle cx="21" cy="24" r="1.8" fill="#0b1f24"/></svg>
+    <span>CloudCart</span>
+  </a>
+  <form class="search" id="search" role="search">
+    <label class="sr" for="q">Search products</label>
+    <input id="q" type="search" placeholder="Search keyboards, headphones, lamps..." autocomplete="off">
+    <button type="submit" aria-label="Search"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  </form>
+  <nav class="nav" aria-label="Main">
+    <a href="#/" data-nav="shop">Shop</a>
+    <a href="#/orders" data-nav="orders">Orders</a>
+    <a href="#/signin" id="account" data-nav="signin">Sign in</a>
+    <a href="#/cart" class="cartlink" data-nav="cart" aria-label="Cart"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M3 4h2.5l2 11h11l2-8H7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="19.5" r="1.5" fill="currentColor"/><circle cx="17" cy="19.5" r="1.5" fill="currentColor"/></svg><span class="badge" id="badge" hidden>0</span></a>
+  </nav>
+</header>
+<div class="promo" id="promo">Free shipping on orders over $75 &middot; Demo store: nothing is charged or shipped</div>
+<main id="main" tabindex="-1"></main>
+<footer class="foot">
+  <span>CloudCart <b id="ver">v0</b> &middot; a practice app for the DevOps Engineering Bootcamp</span>
+  <span><a href="admin.html">Admin &amp; health</a> &middot; <a href="health">/health</a></span>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="js/app.js"></script>
+</body>
+</html>

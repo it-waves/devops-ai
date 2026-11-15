@@ -4,41 +4,47 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
-/** Maps HTTP requests to Api methods and writes one log line per request. */
-@WebServlet(urlPatterns = {"/health", "/api/products", "/api/products/*", "/api/orders"})
+/** The one servlet: maps HTTP to Api, keeps the Session in the HTTP session, logs one line per request. */
+@WebServlet(urlPatterns = {"/health", "/api/*"})
 public class ApiServlet extends HttpServlet {
     private static final Logger LOG = Logger.getLogger(ApiServlet.class.getName());
     private final Api api = new Api();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String path = req.getServletPath();
-        Api.Response r;
-        if (path.equals("/health")) r = api.health();
-        else if (path.equals("/api/products") && req.getPathInfo() == null) r = api.listProducts();
-        else if (path.equals("/api/products")) r = api.getProduct(req.getPathInfo().substring(1));
-        else r = new Api.Response(405, "{\"error\":\"method not allowed\"}");
-        write(req, resp, r);
+    public void init() {
+        System.setProperty("server.info", getServletContext().getServerInfo());
+        LOG.info("CloudCart started on " + getServletContext().getServerInfo());
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        Api.Response r = req.getServletPath().equals("/api/orders")
-            ? api.placeOrder(new String(req.getInputStream().readAllBytes(), StandardCharsets.UTF_8))
-            : new Api.Response(405, "{\"error\":\"method not allowed\"}");
-        write(req, resp, r);
-    }
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        long t0 = System.nanoTime();
+        String path = req.getServletPath() + (req.getPathInfo() == null ? "" : req.getPathInfo());
+        // Read the body first: asking for parameters on a form-encoded request would consume it.
+        String body = new String(req.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+        Map<String, String> query = new HashMap<>();
+        req.getParameterMap().forEach((k, v) -> query.put(k, v[0]));
 
-    private void write(HttpServletRequest req, HttpServletResponse resp, Api.Response r) throws IOException {
+        HttpSession http = req.getSession(true);
+        Session s = (Session) http.getAttribute("cc");
+        if (s == null) { s = new Session(); http.setAttribute("cc", s); }
+
+        Api.Response r;
+        synchronized (s) { r = api.handle(req.getMethod(), path, query, body, s); }
+
         resp.setStatus(r.status());
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
+        resp.setHeader("Cache-Control", "no-store");
         resp.getWriter().write(r.body());
-        LOG.info("{\"method\":\"" + req.getMethod() + "\",\"path\":\"" + req.getRequestURI()
-            + "\",\"status\":" + r.status() + "}");
+        LOG.info(req.getMethod() + " " + req.getRequestURI() + " -> " + r.status()
+            + " (" + (System.nanoTime() - t0) / 1_000_000 + " ms)");
     }
 }

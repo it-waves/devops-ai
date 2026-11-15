@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CloudCart · Admin and health</title><link rel="stylesheet" href="css/app.css"></head>
+<body>
+<header class="top"><a class="brand" href="./"><svg viewBox="0 0 32 32" width="32" height="32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#19c3b1"/><path d="M7 9h3l2 11h11l2-8H12" fill="none" stroke="#0b1f24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="14" cy="24" r="1.8" fill="#0b1f24"/><circle cx="21" cy="24" r="1.8" fill="#0b1f24"/></svg><span>CloudCart Admin</span></a><nav class="nav" style="margin-left:auto"><a href="./">Back to the shop</a></nav></header>
+<main id="main" tabindex="-1">
+  <h1 class="page">Application health</h1>
+  <div class="panel" style="margin-bottom:22px"><div class="status" id="st"><span class="dot down" id="dot"></span><span id="stt">Checking...</span></div>
+  <p class="hint" id="when" style="margin:8px 0 0">The page asks <code>/health</code> and <code>/api/admin/stats</code> every 5 seconds.</p></div>
+  <div class="kpis" id="kpis"></div>
+  <div class="panel"><h2>What this page is for</h2><p class="hint" style="margin:0">Operators read this page to confirm a deployment worked: the status is UP, the version matches the build you shipped, and the uptime restarts at zero after a redeploy. In a later version, monitoring tools read the same <code>/health</code> endpoint.</p></div>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const up=s=>{const h=Math.floor(s/3600),m=Math.floor(s%3600/60);return h?h+'h '+m+'m':m?m+'m '+(s%60)+'s':s+'s'};
+async function tick(){
+  try{
+    const h=await (await fetch('health',{cache:'no-store'})).json();
+    const s=await (await fetch('api/admin/stats',{cache:'no-store'})).json();
+    $('#dot').className='dot';$('#stt').textContent=h.status+' · CloudCart '+h.version;
+    const k=[['Version',s.version],['Built at',s.builtAt.replace('T',' ').replace('Z',' UTC')],['Uptime',up(s.uptimeSeconds)],['Java',s.java],['Server',s.server],['Memory',s.memoryUsedMb+' / '+s.memoryMaxMb+' MB'],['Products',s.products],['Out of stock',s.outOfStock],['Users',s.users],['Orders',s.orders]];
+    $('#kpis').innerHTML=k.map(([a,b])=>`<div class="kpi"><small>${a}</small><b style="font-size:${String(b).length>14?'18px':'26px'}">${b}</b></div>`).join('');
+    $('#when').textContent='Last checked '+new Date().toLocaleTimeString()+' · refreshes every 5 seconds';
+  }catch(e){$('#dot').className='dot down';$('#stt').textContent='DOWN · cannot reach the application';}
+}
+tick();setInterval(tick,5000);
+</script></body></html>

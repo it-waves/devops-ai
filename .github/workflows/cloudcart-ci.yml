@@ -52,13 +52,18 @@ jobs:
         run: |
           set -x
           B=localhost:8080/cloudcart
+          J='Content-Type: application/json'
           curl -fs $B/health | grep -q '"status":"UP"'
-          curl -fs $B/api/products | grep -q 'Mechanical keyboard'
-          curl -fs $B/api/products/2 | grep -q 'USB-C hub'
+          curl -fs $B/ | grep -q 'CloudCart'
+          curl -fs $B/api/products | grep -q 'Tactile Mechanical Keyboard'
+          curl -fs $B/api/products/2 | grep -q 'USB-C Hub'
           test "$(curl -s -o /dev/null -w '%{http_code}' $B/api/products/42)" = 404
-          curl -fs -X POST -d '{"items":[{"productId":2,"quantity":2}]}' $B/api/orders | tee order.json
-          grep -q '"totalCents":7000' order.json
-          test "$(curl -s -o /dev/null -w '%{http_code}' -X POST -d '{bad' $B/api/orders)" = 400
+          test "$(curl -s -o /dev/null -w '%{http_code}' -X POST -H "$J" -d '{}' $B/api/orders)" = 401
+          curl -fs -c jar -b jar -X POST -H "$J" -d '{"email":"student@cloudcart.test","password":"learn-cloudcart"}' $B/api/auth/login | grep -q '"signedIn":true'
+          curl -fs -c jar -b jar -X POST -H "$J" -d '{"productId":2,"quantity":2}' $B/api/cart/items | grep -q '"subtotalCents":7000'
+          curl -fs -c jar -b jar -X POST -H "$J" -d '{"name":"Sam","address":"1 Main St","city":"Austin","zip":"78701"}' $B/api/orders | tee order.json
+          grep -q '"id":"CC-1001"' order.json
+          test "$(curl -s -o /dev/null -w '%{http_code}' -b jar -X POST -H "$J" -d '{bad' $B/api/orders)" = 400
           echo "RUNTIME CHECKS PASSED" | tee runtime.txt
       - name: Collect logs
         if: always()

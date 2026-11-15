@@ -1,30 +1,26 @@
-# CloudCart v0.1.0 (DevOps Simplified HQ reference application)
+# CloudCart v0
 
-Small Java e-commerce API packaged as a WAR for Apache Tomcat 10.1.
+A small, fully working online store used as the practice project in the DevOps Engineering Bootcamp.
+You build it with **Maven**, deploy it to **Tomcat**, and use it like a customer.
 
-## Prerequisites
-JDK 17, Maven 3.9.x, Apache Tomcat 10.1.x (Jakarta Servlet 6). Check: `java -version`, `mvn -v`.
+## What you get
+- Storefront with search, category filter and sorting (12 products, drawn illustrations)
+- Product pages, cart with live totals and a free-shipping meter, checkout with validation
+- Sign in / create account, order history, out-of-stock handling
+- Admin & health page (`admin.html`) and a `/health` endpoint for operators
 
-## Build and test
+Demo account: `student@cloudcart.test` / `learn-cloudcart` (lab value only). Nothing is charged or shipped.
+
+## Stack
+Java 17, Jakarta Servlet 6 (no framework), Gson, vanilla HTML/CSS/JavaScript, WAR on Tomcat 10.1, in-memory data seeded at startup.
+
+## Build, test, run
 ```
-cd cloudcart
-mvn verify
-```
-Produces `target/cloudcart.war` and test reports in `target/surefire-reports/`.
-
-## Deploy and run
-```
+mvn package                      # compiles, runs 32 JUnit tests, builds target/cloudcart.war
 cp target/cloudcart.war $CATALINA_HOME/webapps/
-$CATALINA_HOME/bin/startup.sh
-curl localhost:8080/cloudcart/health
-curl localhost:8080/cloudcart/api/products
-curl -X POST -d '{"items":[{"productId":2,"quantity":2}]}' localhost:8080/cloudcart/api/orders
+$CATALINA_HOME/bin/startup.sh    # then open http://localhost:8080/cloudcart/
 ```
+End-to-end browser test (needs Node and Playwright): `BASE=http://localhost:8080/cloudcart/ node e2e/e2e.js`
 
-## API
-`GET /health` · `GET /api/products` · `GET /api/products/{id}` · `POST /api/orders` (JSON `{"items":[{"productId":1,"quantity":2}]}` returns `totalCents`).
-
-## Known v0 limits (honest scope)
-- Data is in memory. PostgreSQL, authentication, metrics and tracing are NOT in v0 (planned v0.2+); the blueprint's v0 list is reduced accordingly.
-- No security hardening beyond input validation.
-- Verification: unit tests and a CI runtime smoke test against Tomcat. See CI results; nothing else is claimed.
+## Honest scope
+Data lives in memory and resets when Tomcat restarts. There is no real payment and no email. Those arrive in later versions (see `academy/curriculum/CLOUDCART_ROADMAP.md`).
