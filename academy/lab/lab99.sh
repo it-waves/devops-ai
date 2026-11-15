@@ -37,9 +37,8 @@ version = '1.4'
 // the jar manifest records who built it, and when
 jar {
     manifest {
-        attributes 'Implementation-Title': 'cartcore',
-                   'Implementation-Version': project.version,
-                   'Built-At': new Date().toString()
+        attributes 'Implementation-Title': 'cartcore'
+        attributes 'Built-At': new Date().toString()
     }
 }
 EOF_B
