@@ -1,0 +1,25 @@
+Lesson 100 of the DevOps Engineering Bootcamp, the sixth lesson of Gradle. A build is only trusted when it runs on a clean machine, on every push. You read a broken GitHub Actions workflow and find what is wrong: it only runs on pushes to main, it keeps a password in plain text, it uses Java 8, it has no Gradle cache and it never saves the jar. You run the build the way the runner would, with real Gradle 8.14.3, read the repaired workflow (a real file from this repository), and then see that workflow run for real on GitHub Actions, step by step in the real user interface. Then you repair a workflow yourself in the lab.
+
+Chapters
+0:00 Your build on a clean machine
+0:35 What a workflow is
+1:16 Live: read, find the mistakes, run the build
+3:43 Real GitHub Actions run
+5:00 Your lab task
+5:29 Where to find the lab
+6:27 Pass or fail rubric
+6:55 Your turn
+7:35 Quick check
+
+Objectives covered: MC11-O06 (Gradle in CI with GitHub Actions: triggers, checkout and setup-java, the setup-gradle cache, secrets instead of plain text passwords, upload-artifact)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab100.sh and shortcuts100.sh). Install with: sudo install -m 755 lab100.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts100.sh. You need an Ubuntu virtual machine with root, a JDK, python3 and curl (for example: sudo apt install -y openjdk-21-jdk-headless python3 curl), internet access and about 1 GB of free memory. The first lab up downloads Gradle 8.14.3 (about 130 MB). lab down removes everything. Only run it in your own virtual machine.
+
+Honest notes: the terminal segment is a real recording with real Gradle 8.14.3. On the recording machine the Gradle download site is blocked, so a stored copy of Gradle was put in place first; on your machine the first run downloads it once. The repaired workflow shown is the real file .github/workflows/gradle-ci.yml in the repository github.com/it-waves/devops-ai, and it really ran on GitHub twice (a push, then a manual run): the first took 55 seconds and the second 30 seconds because the Gradle cache was restored. The GitHub screens are real captures from a browser, shown as step-by-step screenshots with highlights, not a continuous recording. The password in the workflow is read from a repository secret called REPO_PASSWORD that is not defined in this repository, so no real secret is used or shown. The lab cannot run a GitHub workflow: lab check reads your workflow file and runs ./gradlew build on your own machine. The lab was run end to end before this lesson: it fails 0 of 5 at the start and passes 5 of 5 after the fixes; lab down leaves nothing behind. Only one style of fix was tested, so a different valid approach could be judged wrongly by the checker. The narration is synthetic speech. The parts, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Gradle Build Cache: UP-TO-DATE, FROM-CACHE and Reproducible Jars https://youtu.be/2E8Uo6Lvfr8
+Next: Diagnose Gradle Task, Dependency and Daemon Failures (MC11-O07).
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #gradle #githubactions #cicd #devopsbootcamp

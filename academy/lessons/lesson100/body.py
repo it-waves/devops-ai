@@ -1,0 +1,97 @@
+def k(cid, s): return c(cid, s, s)
+SCENES = [
+ ('hook', [
+  c('h1', "A teammate pushes code at four in the afternoon. Who builds it, and who tells the team it is broken?"),
+  c('h2', "A CI workflow does. Every push, on a clean machine, with nothing from your laptop to hide behind."),
+  c('h3', "Today you read a broken workflow, spot what is wrong, and run its build the way the runner would."),
+  c('h4', "Then you see a real run on git hub actions, step by step, in the real user interface."),
+  c('h5', "And you repair a workflow alone, in the lab, with a checker."),
+  c('h6', "One idea first: C I is just your build, on someone else's clean computer."),
+ ]),
+ ('parts', [
+  c('a1', "A git hub actions workflow is one yamel file, in dot git hub, slash workflows."),
+  c('a2', "One, the trigger. The word on says when it runs. A push, a pull request, or a button you press yourself."),
+  c('a3', "Two, the runner and the steps. A fresh virtual machine starts. It checks out your code, sets up Java, then runs your Gradle build."),
+  c('a4', "Three, the extras that make it safe and fast. A Gradle cache. A secret kept out of the file. And an artifact, the jar, saved after the run."),
+  c('a5', "The runner starts empty every time. Whatever the build needs, the workflow must say."),
+  c('a6', "Let us read a broken one, and run its build."),
+ ]),
+ ('live', [
+  k('p0', "Go into the project. Type: C D, slash opt, slash lab one hundred, slash cartcore."),
+  k('t1', "Read the workflow. Type: cat, and the path: dot git hub, slash workflows, slash C I dot yamel."),
+  c('t1b', "Sixteen lines. The name. The trigger, on push. One job, called build. The steps: check out the code, set up Java, run Gradle. Five things need fixing. Let us find them."),
+  k('t2', "Pull out three suspicious lines. Type: grep, dash N, dash capital E, then three words in quotes, and the file."),
+  c('t2b', "First, the trigger. Only pushes to main. A pull request never gets checked."),
+  c('t2c', "Second, a password written in plain text, in a file that everyone can read."),
+  c('t2d', "Third, Java version eight. This project needs twenty-one."),
+  c('t2e', "Two more are missing. There is no Gradle cache step, so every run downloads everything again. And the jar is never saved."),
+  k('t3', "Now the build. The runner will run exactly one command. Run it here. Type: dot slash gradle W, build, pipe, grep, dash V, then in quotes: caret, dollar. That hides the empty lines."),
+  c('t3b', "Compile java. Jar. And the smoke task, which runs the jar and checks what it says."),
+  c('t3c', "Then check, and build. Build successful. On a clean machine, with Java twenty-one, this passes."),
+  k('t4', "The artifact step would save one file. List it. Type: L S, build slash libs."),
+  c('t4b', "Cart core, one point five, dot jar. This is the file a workflow can keep, after the runner is gone."),
+  c('t4c', "Now the repaired workflow. This is a real file, from this repository. First half."),
+  k('t5', "Type: cat dash N, dot dot slash demo slash gradle C I dot yamel, pipe, head dash N fourteen."),
+  c('t5b', "Three triggers: push, pull request, and workflow dispatch. Dispatch gives you a Run button, in the browser."),
+  c('t5c', "And the password is now a secret, read from git hub, never written in the file."),
+  k('t6', "Second half. Type the same, with tail dash N fourteen."),
+  c('t6b', "Java twenty-one."),
+  c('t6c', "Then the setup gradle action, which restores the Gradle cache."),
+  c('t6d', "Then your build, and then upload artifact, which saves the jar."),
+ ]),
+ ('ui', [
+  c('u1', "Now the same workflow, running for real, on git hub. This is a real capture of my own repository, in Chrome. Still screenshots, step by step."),
+  c('u2', "Open the repository, and click the Actions tab. This list shows every run. Here is the first one: a green tick, from one push, in fifty-five seconds."),
+  c('u3', "Click the workflow name, in the left menu. Because the file has workflow dispatch, a Run workflow button appears. Pick the branch, and press it."),
+  c('u4', "A new run appears. Yellow means in progress. The top bar shows who started it, the commit, the status, the total time, and the artifacts."),
+  c('u5', "Click the job, build. On the left, the list of jobs. In the middle, every step, with its own time."),
+  c('u6', "Open the step that runs Gradle. This is the same log you saw in the terminal. Compile java, jar, smoke, check, build. Then: build successful."),
+  c('u7', "Back on the summary, the Gradle action added its own report. The project, the task, the Gradle version, and the outcome. And below, the artifact: the jar the run saved."),
+  c('u8', "The second run took thirty seconds, not fifty-five. The cache from the first run was restored. That is what setup gradle is for."),
+ ]),
+ ('task', [
+  c('k1', "Your task. Repair a broken workflow, in the lab."),
+  c('k2', "One: the trigger. Run on push, and on pull request."),
+  c('k3', "Two: Java. Check out the code, and set up Java twenty-one."),
+  c('k4', "Three: add the setup gradle action, so the cache is restored."),
+  c('k5', "Four: remove the plain text password. Read it from secrets dot repo password."),
+  c('k6', "Five: save the jar with upload artifact, from build slash libs. And a local Gradle build must pass."),
+ ]),
+ ('labinfo', [
+  c('i1x', "Here is where to find everything. Pause on this screen if you need to write it down."),
+  c('i2', "The lab lives on git hub, at it dash waves, slash dev ops dash A I, in the folder academy, slash lab."),
+  c('i3', "Two files: lab one hundred dot S H, and shortcuts one hundred dot S H."),
+  c('i4', "Install it, in your Ubuntu virtual machine: sudo install, dash m seven five five, lab one hundred dot S H, into slash usr, slash local, slash S bin."),
+  c('i5', "Load the short name with: source shortcuts one hundred dot S H. Then you can type: lab up, lab check, and lab down."),
+  c('i6', "You need a J D K, curl and python three, about one gigabyte of memory, and an internet connection. The first lab up downloads Gradle."),
+  c('i7', "The lab cannot run a git hub workflow. The checker reads your yamel, and runs the Gradle build on your own machine. Lab down removes everything."),
+ ]),
+ ('rubric', [
+  c('q1x', "Pass or fail. You need all six."),
+  c('q2x', "Five pass lines in lab check."), c('q3x', "The workflow runs on push and on pull request."),
+  c('q4x', "Java twenty-one, and the setup gradle action, are both in the file."), c('q5x', "No plain text password anywhere. The secret is read from secrets."),
+  c('q6x', "The jar is saved with upload artifact, and a local build passes."), c('q7x', "Lab down leaves nothing behind."), c('q8x', "To pass, all six."),
+ ]),
+ ('yourturn', [
+  c('z1', "Your turn, in your own Ubuntu virtual machine."),
+  c('z2', "One: lab up, and read the workflow. Find the five problems."),
+  c('z3', "Two: fix the trigger, and the Java version."),
+  c('z4', "Three: add the setup gradle action."),
+  c('z5', "Four: replace the password with a secret."),
+  c('z6', "Five: add upload artifact, then run lab check."),
+  c('z7', "Six: lab down, and prove nothing is left."),
+  c('z8', "Pause the video, and begin now."),
+ ]),
+ ('recap', [
+  c('f11', "Quick check."), c('f12', "What starts a workflow? Name three triggers."), c('f13', "Why must a workflow set up Java and Gradle itself?"),
+  c('f14', "Why is a password never written in the workflow file?"), c('f15', "What does the artifact step keep, after the runner is gone?"),
+  c('f16', "Objective covered: M C eleven, objective six, Gradle in C I with git hub actions."),
+  c('f17', "Pause the video, and answer out loud."), c('f18', "Next: diagnosing task, dependency and daemon failures."), c('f19', "If this helped, like, share and subscribe, so you do not miss it."),
+ ]),
+]
+CLEAR = True
+EXTRA = {'a6': 0.5, 'k6': 0.5, 'i7': 0.5, 'q8x': 0.5, 'z8': 14.0, 'f17': 10.0, 'p0': 1.0, 't1': 2.0, 't2': 2.0, 't3': 2.5, 't4': 1.5, 't5': 2.0, 't6': 2.0, 'u8': 0.5}
+import os as _os, json as _json
+_xp = '/home/claude/academy/lesson100/extra.json'
+if _os.path.exists(_xp): EXTRA.update(_json.load(open(_xp)))
+CHAP = {'parts': 'What a workflow is', 'live': 'Live: read, find the mistakes, run the build', 'ui': 'Real GitHub Actions run', 'task': 'Your lab task', 'labinfo': 'Where to find the lab', 'rubric': 'Pass or fail rubric', 'yourturn': 'Your turn', 'recap': 'Quick check'}
