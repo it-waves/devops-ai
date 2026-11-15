@@ -1,0 +1,24 @@
+Lesson 114 of the DevOps Engineering Bootcamp, and lesson 2 of 5 of the CloudCart v0 project. You start from what to expect: you will read a real Java web project, run a real Maven build, open the finished WAR file and answer four questions about what is inside it. A short picture explains Maven in three words: pom, Central, lifecycle. Then one continuous live recording in the terminal: the folders under src and what lives in each, the pom.xml (project name, version, packaging and the three dependency scopes: provided, compile and test), mvn test and mvn package with every lifecycle step in order and 32 passing tests, a look inside cloudcart.war with unzip (web pages, WEB-INF/web.xml, the Gson library, 15 classes, the filtered version.properties, and why the Servlet API is not inside), then a version bump to 0.2.1 and a clean rebuild. Your lab: build it, bump the version with vim, open the WAR, answer four questions and check 5 of 5.
+
+Chapters
+0:00 Build CloudCart
+0:24 What to expect
+1:02 What is Maven
+1:39 Live: layout, pom, build, open the WAR
+7:09 Your lab task
+7:41 Where to find the lab
+8:34 Pass or fail rubric
+8:57 Your turn
+9:36 Quick check
+Objectives covered: CloudCart v0, lesson 2 of 5 (the project layout and the Maven build: pom.xml, dependencies and scopes, the lifecycle, the WAR)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab114.sh and shortcuts114.sh). Install with: sudo install -m 755 lab114.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts114.sh. You need any Linux machine with root, a JDK, Maven, curl and unzip (for example: sudo apt install -y openjdk-21-jdk-headless maven curl unzip), internet access for Maven Central (about 25 MB the first time) and about 1 GB of free memory. lab down removes everything. Only run it on your own machine.
+
+Honest notes: the terminal demo is one real, continuous recording of a real Maven build on real Maven Central. The few picture scenes are marked ILLUSTRATION, not a capture. The lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. Build times and file sizes on your machine will differ a little.
+
+Previous lesson: CloudCart v0: Meet the App and Use It Like a Customer | Lesson 113 https://youtu.be/jecx02ezHyw
+Next: CloudCart v0: deploy it to Tomcat, by hand and from the Manager.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #maven #cloudcart #devopsbootcamp

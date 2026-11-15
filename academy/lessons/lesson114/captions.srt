@@ -1,0 +1,907 @@
+1
+00:00:00,500 --> 00:00:01,496
+In this lesson,
+
+2
+00:00:01,496 --> 00:00:03,421
+you build CloudCart yourself.
+
+3
+00:00:03,421 --> 00:00:04,218
+One command,
+
+4
+00:00:04,218 --> 00:00:07,073
+and Maven turns source code into a web app,
+
+5
+00:00:07,073 --> 00:00:08,201
+ready for Tomcat.
+
+6
+00:00:08,751 --> 00:00:12,485
+Today is lesson two: the project layout, and the Maven build.
+
+7
+00:00:13,035 --> 00:00:14,512
+You will read the project,
+
+8
+00:00:14,512 --> 00:00:15,308
+run the build,
+
+9
+00:00:15,308 --> 00:00:16,615
+open the finished file,
+
+10
+00:00:16,615 --> 00:00:19,456
+and answer four questions about what is inside it.
+
+11
+00:00:20,006 --> 00:00:22,886
+Last lesson, you used the app. Today, you make it.
+
+12
+00:00:24,436 --> 00:00:27,508
+Here is what to expect, from the first minute to the last.
+
+13
+00:00:28,058 --> 00:00:32,837
+One: look. The folders of a real Java web project, and what lives in each.
+
+14
+00:00:33,387 --> 00:00:38,635
+Two: read. The pom.xml, the one file that tells Maven everything.
+
+15
+00:00:39,185 --> 00:00:43,878
+Three: build. Test first, then package, and watch every step Maven takes.
+
+16
+00:00:44,428 --> 00:00:48,396
+Four: open. Look inside the finished war file, without Tomcat.
+
+17
+00:00:48,946 --> 00:00:53,383
+Five: your turn. Change the version, build again, and a lab checks your work.
+
+18
+00:00:53,933 --> 00:00:58,776
+And the lessons ahead: deploy it, run it and fix it, then prove it from a clean copy.
+
+19
+00:00:59,326 --> 00:01:00,841
+Look, read, build, open.
+
+20
+00:01:02,891 --> 00:01:05,771
+Before the terminal, one idea. What is Maven?
+
+21
+00:01:06,321 --> 00:01:12,252
+Maven is a build tool. You describe the project in one file, the pom. Maven does the rest.
+
+22
+00:01:12,802 --> 00:01:15,818
+It downloads the libraries your project needs,
+
+23
+00:01:15,818 --> 00:01:17,064
+from Maven Central.
+
+24
+00:01:17,064 --> 00:01:18,901
+That is a huge public store,
+
+25
+00:01:18,901 --> 00:01:19,884
+and it is free.
+
+26
+00:01:20,434 --> 00:01:23,593
+Then it follows a fixed lifecycle: compile your code,
+
+27
+00:01:23,593 --> 00:01:24,470
+run your tests,
+
+28
+00:01:24,470 --> 00:01:25,640
+and pack the result.
+
+29
+00:01:26,190 --> 00:01:27,383
+If one step fails,
+
+30
+00:01:27,383 --> 00:01:28,178
+Maven stops.
+
+31
+00:01:28,178 --> 00:01:31,028
+A broken build never reaches the next step,
+
+32
+00:01:31,028 --> 00:01:33,016
+and it never reaches a server.
+
+33
+00:01:33,566 --> 00:01:38,260
+Pom, Central, lifecycle. Keep these three words. We use them in every lesson.
+
+34
+00:01:39,810 --> 00:01:45,954
+Go to the project. Type: cd /opt/lab114/cloudcart
+
+35
+00:01:47,084 --> 00:01:49,431
+Look at the top level. Type: ls
+
+36
+00:01:49,561 --> 00:01:51,422
+Only three things: a README,
+
+37
+00:01:51,422 --> 00:01:52,578
+the pom.xml,
+
+38
+00:01:52,578 --> 00:01:53,990
+and the source folder.
+
+39
+00:01:53,990 --> 00:01:55,017
+Everything else,
+
+40
+00:01:55,017 --> 00:01:56,494
+the build makes for us.
+
+41
+00:01:57,044 --> 00:02:05,193
+Now the main code. Type: find src/main -type f | sort | cut -c10-
+
+42
+00:02:05,323 --> 00:02:06,381
+Three folders.
+
+43
+00:02:06,381 --> 00:02:07,891
+Java holds the code.
+
+44
+00:02:07,891 --> 00:02:10,157
+It sits in a package: academy,
+
+45
+00:02:10,157 --> 00:02:11,366
+then CloudCart.
+
+46
+00:02:11,366 --> 00:02:12,272
+Eight files,
+
+47
+00:02:12,272 --> 00:02:14,311
+one for each job: products,
+
+48
+00:02:14,311 --> 00:02:14,991
+the cart,
+
+49
+00:02:14,991 --> 00:02:15,595
+pricing,
+
+50
+00:02:15,595 --> 00:02:16,124
+orders,
+
+51
+00:02:16,124 --> 00:02:16,577
+users,
+
+52
+00:02:16,577 --> 00:02:17,483
+and the API.
+
+53
+00:02:18,033 --> 00:02:22,407
+Resources holds a file the app reads while it runs. Here, its version.
+
+54
+00:02:22,957 --> 00:02:27,206
+And web app holds everything the browser gets: the pages,
+
+55
+00:02:27,206 --> 00:02:27,951
+the style,
+
+56
+00:02:27,951 --> 00:02:28,846
+the scripts.
+
+57
+00:02:28,846 --> 00:02:29,591
+Inside it,
+
+58
+00:02:29,591 --> 00:02:31,679
+the WEB-INF folder,
+
+59
+00:02:31,679 --> 00:02:33,095
+with web.xml.
+
+60
+00:02:33,095 --> 00:02:36,226
+That file tells Tomcat how to run the app.
+
+61
+00:02:36,776 --> 00:02:41,427
+And the tests. Type: find src/test -type f
+
+62
+00:02:41,557 --> 00:02:42,663
+Four test files,
+
+63
+00:02:42,663 --> 00:02:44,736
+with thirty-two tests in them.
+
+64
+00:02:44,736 --> 00:02:45,980
+They check prices,
+
+65
+00:02:45,980 --> 00:02:46,395
+stock,
+
+66
+00:02:46,395 --> 00:02:46,879
+orders,
+
+67
+00:02:46,879 --> 00:02:47,708
+and the API.
+
+68
+00:02:47,708 --> 00:02:50,197
+Maven runs them every time we build.
+
+69
+00:02:50,747 --> 00:02:58,427
+Now the heart of it: the pom. First, its name. Type: sed -n 5,9p pom.xml
+
+70
+00:02:58,557 --> 00:03:01,929
+Three words give a project its address: group,
+
+71
+00:03:01,929 --> 00:03:02,589
+artifact,
+
+72
+00:03:02,589 --> 00:03:03,469
+and version.
+
+73
+00:03:03,469 --> 00:03:05,669
+Group: academy.cloudcart.
+
+74
+00:03:05,669 --> 00:03:07,208
+Artifact: CloudCart.
+
+75
+00:03:07,208 --> 00:03:09,628
+Version: 0.2.0.
+
+76
+00:03:09,628 --> 00:03:11,314
+And the packaging: war.
+
+77
+00:03:11,864 --> 00:03:18,285
+Then the libraries. Type: sed -n 15,27p pom.xml
+
+78
+00:03:18,415 --> 00:03:19,803
+Three dependencies.
+
+79
+00:03:19,803 --> 00:03:21,336
+Jakarta servlet API,
+
+80
+00:03:21,336 --> 00:03:22,431
+scope provided.
+
+81
+00:03:22,431 --> 00:03:24,694
+That means: Tomcat supplies it,
+
+82
+00:03:24,694 --> 00:03:26,885
+so we only need it to compile.
+
+83
+00:03:27,435 --> 00:03:27,873
+Gson,
+
+84
+00:03:27,873 --> 00:03:29,335
+the J S O N library,
+
+85
+00:03:29,335 --> 00:03:30,358
+with no scope.
+
+86
+00:03:30,358 --> 00:03:32,257
+It is packed into the app.
+
+87
+00:03:32,257 --> 00:03:33,061
+And JUnit,
+
+88
+00:03:33,061 --> 00:03:35,692
+scope test: only used while testing,
+
+89
+00:03:35,692 --> 00:03:36,715
+never shipped.
+
+90
+00:03:37,265 --> 00:03:38,385
+Now we build.
+
+91
+00:03:38,385 --> 00:03:38,902
+First,
+
+92
+00:03:38,902 --> 00:03:40,711
+only up to the tests.
+
+93
+00:03:40,711 --> 00:03:42,263
+Type: mvn -B test,
+
+94
+00:03:42,263 --> 00:03:46,054
+then a filter to keep the lines that matter.
+
+95
+00:03:58,604 --> 00:03:59,764
+Watch the steps,
+
+96
+00:03:59,764 --> 00:04:00,417
+in order.
+
+97
+00:04:00,417 --> 00:04:01,142
+Resources.
+
+98
+00:04:01,142 --> 00:04:01,722
+Compile.
+
+99
+00:04:01,722 --> 00:04:02,809
+Test resources.
+
+100
+00:04:02,809 --> 00:04:03,752
+Test compile.
+
+101
+00:04:03,752 --> 00:04:06,724
+Then surefire runs the tests: thirty-two,
+
+102
+00:04:06,724 --> 00:04:07,594
+no failures.
+
+103
+00:04:07,594 --> 00:04:08,609
+Build success.
+
+104
+00:04:09,159 --> 00:04:13,142
+Maven downloaded every library it needed from Maven Central,
+
+105
+00:04:13,142 --> 00:04:14,336
+on this first run.
+
+106
+00:04:14,336 --> 00:04:14,999
+Next time,
+
+107
+00:04:14,999 --> 00:04:16,925
+they come from a local cache.
+
+108
+00:04:17,475 --> 00:04:20,568
+Did it make the web app yet? Type: ls target
+
+109
+00:04:20,698 --> 00:04:21,219
+Classes,
+
+110
+00:04:21,219 --> 00:04:22,066
+test classes,
+
+111
+00:04:22,066 --> 00:04:23,433
+and the test reports.
+
+112
+00:04:23,433 --> 00:04:24,475
+But no war file.
+
+113
+00:04:24,475 --> 00:04:26,885
+The test step stops before packaging.
+
+114
+00:04:27,435 --> 00:04:32,811
+Now the whole lifecycle. Type: mvn -B package, with the same filter.
+
+115
+00:04:45,761 --> 00:04:46,717
+The same steps,
+
+116
+00:04:46,717 --> 00:04:49,332
+and one more at the end: the war plugin.
+
+117
+00:04:49,332 --> 00:04:50,161
+Building war,
+
+118
+00:04:50,161 --> 00:04:50,799
+in target.
+
+119
+00:04:50,799 --> 00:04:51,691
+Build success.
+
+120
+00:04:52,241 --> 00:04:57,212
+How big is it? Type: ls -lh target/cloudcart.war
+
+121
+00:04:57,342 --> 00:05:01,865
+About three hundred kilobytes. One small file, with the whole app inside it.
+
+122
+00:05:02,415 --> 00:05:03,377
+Open it,
+
+123
+00:05:03,377 --> 00:05:05,181
+without Tomcat.
+
+124
+00:05:05,181 --> 00:05:08,187
+A war file is a zip file.
+
+125
+00:05:08,187 --> 00:05:12,637
+Type: unzip -Z1 target/cloudcart.war,
+
+126
+00:05:12,637 --> 00:05:14,681
+then two filters.
+
+127
+00:05:15,231 --> 00:05:16,901
+The inside of the war.
+
+128
+00:05:16,901 --> 00:05:17,660
+The pages,
+
+129
+00:05:17,660 --> 00:05:18,419
+the style,
+
+130
+00:05:18,419 --> 00:05:19,330
+the scripts.
+
+131
+00:05:19,330 --> 00:05:22,139
+Then WEB-INF: web.xml,
+
+132
+00:05:22,139 --> 00:05:23,429
+the version file,
+
+133
+00:05:23,429 --> 00:05:25,175
+and one library: Gson.
+
+134
+00:05:25,175 --> 00:05:26,845
+That is the whole app,
+
+135
+00:05:26,845 --> 00:05:28,970
+except the compiled classes.
+
+136
+00:05:29,520 --> 00:05:37,669
+And the compiled classes. Type: unzip -Z1 target/cloudcart.war | grep -c '.class$'
+
+137
+00:05:37,799 --> 00:05:39,342
+Fifteen compiled classes,
+
+138
+00:05:39,342 --> 00:05:41,069
+from the eight source files.
+
+139
+00:05:41,069 --> 00:05:42,920
+Some files hold inner classes,
+
+140
+00:05:42,920 --> 00:05:45,202
+so there are more classes than files.
+
+141
+00:05:45,752 --> 00:05:48,306
+Remember the version file?
+
+142
+00:05:48,306 --> 00:05:55,181
+Type: unzip -p target/cloudcart.war WEB-INF/classes/version.properties
+
+143
+00:05:55,311 --> 00:05:56,228
+In the source,
+
+144
+00:05:56,228 --> 00:05:57,603
+it said: dollar sign,
+
+145
+00:05:57,603 --> 00:05:58,651
+project version.
+
+146
+00:05:58,651 --> 00:06:01,270
+Maven replaced it with the real version,
+
+147
+00:06:01,270 --> 00:06:02,514
+and the build time.
+
+148
+00:06:02,514 --> 00:06:04,151
+This is called filtering.
+
+149
+00:06:04,151 --> 00:06:06,639
+Remember this time: it is in your lab.
+
+150
+00:06:07,189 --> 00:06:14,229
+And the servlet API library? Type: unzip -Z1 target/cloudcart.war | grep -c servlet
+
+151
+00:06:14,359 --> 00:06:18,413
+Zero. Provided means: not in the war. Tomcat already has it.
+
+152
+00:06:18,963 --> 00:06:28,115
+Now change the version. Type: sed -i to replace 0.2.0 with 0.2.1 in pom.xml
+
+153
+00:06:28,245 --> 00:06:35,669
+Build again, from a clean start. Type: mvn -B -q clean package. The -q means quiet.
+
+154
+00:06:45,219 --> 00:06:47,786
+Clean deleted the target folder first.
+
+155
+00:06:47,786 --> 00:06:50,218
+Then the whole lifecycle ran again.
+
+156
+00:06:50,218 --> 00:06:52,515
+Quiet means: no news is good news.
+
+157
+00:06:53,065 --> 00:06:57,715
+Check the war. Type: unzip -p target/cloudcart.war WEB-INF/classes/version.properties
+
+158
+00:07:00,445 --> 00:07:01,998
+Zero point two point one,
+
+159
+00:07:01,998 --> 00:07:03,302
+and a new build time.
+
+160
+00:07:03,302 --> 00:07:04,543
+One line in the pom,
+
+161
+00:07:04,543 --> 00:07:06,158
+and the whole app changed.
+
+162
+00:07:06,158 --> 00:07:07,275
+That is your task,
+
+163
+00:07:07,275 --> 00:07:08,083
+in miniature.
+
+164
+00:07:09,633 --> 00:07:13,409
+Your task. Build CloudCart, and prove what is inside the war.
+
+165
+00:07:13,959 --> 00:07:16,391
+One: lab up. It gives you the real source.
+
+166
+00:07:16,941 --> 00:07:20,973
+Two: build it as it is, with mvn package, and read the summary.
+
+167
+00:07:21,523 --> 00:07:26,515
+Three: edit the pom with vim. Version 0.2.1. Build again.
+
+168
+00:07:27,065 --> 00:07:29,161
+Four: open the war with unzip.
+
+169
+00:07:29,161 --> 00:07:31,054
+Then write answers.txt,
+
+170
+00:07:31,054 --> 00:07:32,541
+four lines: the tests,
+
+171
+00:07:32,541 --> 00:07:33,353
+the library,
+
+172
+00:07:33,353 --> 00:07:34,975
+the provided dependency,
+
+173
+00:07:34,975 --> 00:07:36,260
+and the build time.
+
+174
+00:07:36,810 --> 00:07:39,860
+Five: lab check. Five checks. Then lab down.
+
+175
+00:07:41,910 --> 00:07:46,113
+Here is where to find everything. Pause on this screen if you need to write it down.
+
+176
+00:07:46,663 --> 00:07:48,311
+The lab lives on GitHub,
+
+177
+00:07:48,311 --> 00:07:49,478
+at it-waves,
+
+178
+00:07:49,478 --> 00:07:51,057
+/devops-ai,
+
+179
+00:07:51,057 --> 00:07:52,568
+in the folder academy,
+
+180
+00:07:52,568 --> 00:07:53,255
+/lab.
+
+181
+00:07:53,805 --> 00:07:59,309
+Two files: lab114.sh, and shortcuts114.sh.
+
+182
+00:07:59,859 --> 00:08:00,771
+Install it,
+
+183
+00:08:00,771 --> 00:08:03,673
+on any Linux machine: sudo install,
+
+184
+00:08:03,673 --> 00:08:05,581
+-m 755,
+
+185
+00:08:05,581 --> 00:08:07,654
+lab114.sh,
+
+186
+00:08:07,654 --> 00:08:08,898
+into /usr
+
+187
+00:08:08,898 --> 00:08:09,893
+/local
+
+188
+00:08:09,893 --> 00:08:10,888
+/sbin.
+
+189
+00:08:11,438 --> 00:08:16,558
+Load the short name with: source shortcuts114.sh. You get: lab.
+
+190
+00:08:17,108 --> 00:08:18,314
+You need a JDK,
+
+191
+00:08:18,314 --> 00:08:18,740
+Maven,
+
+192
+00:08:18,740 --> 00:08:19,095
+curl,
+
+193
+00:08:19,095 --> 00:08:19,804
+and unzip,
+
+194
+00:08:19,804 --> 00:08:21,862
+about one gigabyte of memory,
+
+195
+00:08:21,862 --> 00:08:22,784
+and internet,
+
+196
+00:08:22,784 --> 00:08:24,061
+for Maven Central.
+
+197
+00:08:24,061 --> 00:08:26,687
+The lab downloads the source for you.
+
+198
+00:08:27,237 --> 00:08:32,698
+Lab check judges your work. Lab down removes everything. Only run it on your own machine.
+
+199
+00:08:34,748 --> 00:08:36,817
+Pass or fail. You need all five.
+
+200
+00:08:37,367 --> 00:08:39,565
+The war exists, and it is a valid zip.
+
+201
+00:08:40,115 --> 00:08:43,720
+The pom, and the war, both say 0.2.1.
+
+202
+00:08:44,270 --> 00:08:46,553
+Your test count is the one Maven ran.
+
+203
+00:08:47,103 --> 00:08:50,345
+Your library, and your provided dependency, are right.
+
+204
+00:08:50,895 --> 00:08:54,245
+Your build time comes from inside the war, not from the clock.
+
+205
+00:08:54,795 --> 00:08:56,096
+To pass, all five.
+
+206
+00:08:58,146 --> 00:08:59,917
+Your turn, on your own machine.
+
+207
+00:09:00,467 --> 00:09:02,536
+One: lab up, and read the task list.
+
+208
+00:09:03,086 --> 00:09:05,326
+Two: look at the layout, and build once.
+
+209
+00:09:05,876 --> 00:09:10,377
+Three: set version 0.2.1 with vim, and build again.
+
+210
+00:09:10,927 --> 00:09:13,615
+Four: open the war, and write the four answers.
+
+211
+00:09:14,165 --> 00:09:17,152
+Five: lab check, until you see five out of five.
+
+212
+00:09:17,702 --> 00:09:19,046
+Six: lab down.
+
+213
+00:09:19,596 --> 00:09:21,431
+Pause the video, and begin now.
+
+214
+00:09:36,981 --> 00:09:37,856
+Quick check.
+
+215
+00:09:38,406 --> 00:09:41,392
+Which file tells Maven everything about the project?
+
+216
+00:09:41,942 --> 00:09:44,737
+Why is the servlet API not inside the war?
+
+217
+00:09:45,287 --> 00:09:47,122
+What did the test step stop before?
+
+218
+00:09:47,672 --> 00:09:50,274
+Where did the build time inside the war come from?
+
+219
+00:09:50,824 --> 00:09:53,820
+Objective covered: CloudCart version zero,
+
+220
+00:09:53,820 --> 00:09:56,601
+the project layout and the Maven build.
+
+221
+00:09:56,601 --> 00:09:56,958
+Look,
+
+222
+00:09:56,958 --> 00:09:57,314
+read,
+
+223
+00:09:57,314 --> 00:09:57,742
+build,
+
+224
+00:09:57,742 --> 00:09:58,099
+open.
+
+225
+00:09:58,649 --> 00:10:00,718
+Pause the video, and answer out loud.
+
+226
+00:10:11,268 --> 00:10:14,895
+Next: deploy it to Tomcat, by hand, and from the Manager.
+
+227
+00:10:15,445 --> 00:10:18,773
+If this helped, like, share and subscribe, so you do not miss it.
