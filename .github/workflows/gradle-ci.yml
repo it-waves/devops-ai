@@ -1,0 +1,27 @@
+name: gradle-ci
+on:
+  push:
+    paths: ['academy/ci-demo/**', '.github/workflows/gradle-ci.yml']
+  pull_request:
+    paths: ['academy/ci-demo/**']
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    env:
+      REPO_PASSWORD: ${{ secrets.REPO_PASSWORD }}
+    defaults:
+      run:
+        working-directory: academy/ci-demo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: gradle/actions/setup-gradle@v4
+      - run: ./gradlew build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cartcore-jar
+          path: academy/ci-demo/build/libs/*.jar

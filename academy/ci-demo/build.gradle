@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.cloudcart'
+version = '1.5'
+
+jar {
+    manifest { attributes 'Main-Class': 'com.cloudcart.Main' }
+}
+
+// a smoke test: run the jar and check what it says. check (and so build) depends on it
+tasks.register('smoke', Exec) {
+    dependsOn jar
+    commandLine 'java', '-jar', jar.archiveFile.get().asFile.path
+    standardOutput = new ByteArrayOutputStream()
+    doLast { if (!standardOutput.toString().contains('smoke ok')) throw new GradleException('smoke test failed') }
+}
+check.dependsOn smoke
