@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab122.sh and shortc
 Honest notes: the terminal part is one real, continuous recording on real nginx 1.24, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The number of 404 requests is random for each lab up, so you must count it yourself. The log format in the lab is shortened so lines fit on screen; nginx's built-in combined format also records the time and the referrer. The narration is synthetic speech. The hook, the two-logs picture, the task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: nginx Load Balancing: Upstream Pool, Round Robin, Health Checks, Backup | Lesson 121 https://youtu.be/cpWxLDtSpog
-Next: Timeouts, request size limits and secure defaults with nginx.
+Next: nginx Limits: Timeouts, Request Size, Secure Defaults | Lesson 123 https://youtu.be/anFDW3E2UYQ
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
