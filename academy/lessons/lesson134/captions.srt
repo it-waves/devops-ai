@@ -1,0 +1,895 @@
+1
+00:00:00,500 --> 00:00:02,297
+A release goes out on Friday.
+
+2
+00:00:02,297 --> 00:00:02,917
+By Monday,
+
+3
+00:00:02,917 --> 00:00:04,156
+the orders are gone,
+
+4
+00:00:04,156 --> 00:00:05,334
+the cart is frozen,
+
+5
+00:00:05,334 --> 00:00:07,007
+and the app cannot connect.
+
+6
+00:00:07,557 --> 00:00:12,698
+Can you ship the database, survive all of that, and prove it? Not by luck. With evidence.
+
+7
+00:00:13,248 --> 00:00:15,707
+This is the databases mastery lesson.
+
+8
+00:00:15,707 --> 00:00:16,903
+One real scenario,
+
+9
+00:00:16,903 --> 00:00:19,562
+every skill from the last eight lessons,
+
+10
+00:00:19,562 --> 00:00:21,888
+and a judge that checks six things.
+
+11
+00:00:22,438 --> 00:00:24,806
+Ship it. Break it. Recover it. Prove it.
+
+12
+00:00:26,356 --> 00:00:29,428
+Here is what to expect, from the first minute to the last.
+
+13
+00:00:29,978 --> 00:00:34,074
+One: a look back at the whole domain, eight objectives, in one picture.
+
+14
+00:00:34,624 --> 00:00:38,272
+Two: the mastery scenario. Six missions, in a fixed order.
+
+15
+00:00:38,822 --> 00:00:43,771
+Three: a live worked example of the whole scenario on a real post gress server.
+
+16
+00:00:44,321 --> 00:00:45,533
+Four: your own run,
+
+17
+00:00:45,533 --> 00:00:46,873
+judged by six checks,
+
+18
+00:00:46,873 --> 00:00:49,679
+with a report that documents what you found.
+
+19
+00:00:49,679 --> 00:00:50,572
+Then clean up.
+
+20
+00:00:51,122 --> 00:00:54,749
+This is lesson nine, the last lesson of the databases domain.
+
+21
+00:00:55,299 --> 00:00:57,667
+Ship it. Break it. Recover it. Prove it.
+
+22
+00:00:59,717 --> 00:01:04,005
+First, the map of the domain. Eight objectives, and you have done every one.
+
+23
+00:01:04,555 --> 00:01:08,950
+Concepts: tables, schemas, connections, transactions, and migrations.
+
+24
+00:01:09,500 --> 00:01:13,980
+Connect and inspect: P S Q L, and simple diagnostic S Q L.
+
+25
+00:01:14,530 --> 00:01:18,284
+Credentials and least privilege: the app gets only what it needs.
+
+26
+00:01:18,834 --> 00:01:23,528
+Configuration and storage: a server with its own folder and its own settings.
+
+27
+00:01:24,078 --> 00:01:28,451
+Migrations: change the structure safely, in order, in one transaction.
+
+28
+00:01:29,001 --> 00:01:32,542
+Backup and restore: and prove the restored data with numbers.
+
+29
+00:01:33,092 --> 00:01:38,127
+Sessions, locks, and slow queries: look first, then end only the one that blocks.
+
+30
+00:01:38,677 --> 00:01:43,029
+And troubleshooting: four layers of connection errors, and failed migrations.
+
+31
+00:01:43,579 --> 00:01:46,331
+Today, all eight work together in one scenario.
+
+32
+00:01:47,881 --> 00:01:50,036
+Six missions. Do them in this order.
+
+33
+00:01:50,586 --> 00:01:51,947
+Mission one: deploy.
+
+34
+00:01:51,947 --> 00:01:53,239
+Run the migrations.
+
+35
+00:01:53,239 --> 00:01:54,464
+One of them fails,
+
+36
+00:01:54,464 --> 00:01:55,621
+so find the typo,
+
+37
+00:01:55,621 --> 00:01:56,097
+fix it,
+
+38
+00:01:56,097 --> 00:01:57,050
+and run again.
+
+39
+00:01:57,600 --> 00:01:58,907
+Mission two: access.
+
+40
+00:01:58,907 --> 00:02:00,409
+Create the app's login,
+
+41
+00:02:00,409 --> 00:02:01,782
+with least privilege.
+
+42
+00:02:01,782 --> 00:02:03,677
+It may read and write orders,
+
+43
+00:02:03,677 --> 00:02:05,179
+and only read products.
+
+44
+00:02:05,179 --> 00:02:06,944
+It may not delete anything.
+
+45
+00:02:07,494 --> 00:02:09,377
+Mission three: connect the app.
+
+46
+00:02:09,377 --> 00:02:10,471
+It fails to start.
+
+47
+00:02:10,471 --> 00:02:11,444
+Study the error,
+
+48
+00:02:11,444 --> 00:02:12,598
+change one setting,
+
+49
+00:02:12,598 --> 00:02:13,510
+and test again.
+
+50
+00:02:14,060 --> 00:02:15,391
+Mission four: back up.
+
+51
+00:02:15,391 --> 00:02:16,601
+Before the incident,
+
+52
+00:02:16,601 --> 00:02:17,449
+take a backup,
+
+53
+00:02:17,449 --> 00:02:19,264
+and check that it is readable.
+
+54
+00:02:19,264 --> 00:02:19,990
+Never after.
+
+55
+00:02:20,540 --> 00:02:22,314
+Mission five: the incident.
+
+56
+00:02:22,314 --> 00:02:23,826
+Every order is deleted,
+
+57
+00:02:23,826 --> 00:02:26,191
+and a stuck session blocks the cart.
+
+58
+00:02:26,191 --> 00:02:27,308
+Find the blocker,
+
+59
+00:02:27,308 --> 00:02:28,688
+write its P I D down,
+
+60
+00:02:28,688 --> 00:02:30,396
+and end only that session.
+
+61
+00:02:30,946 --> 00:02:32,988
+Mission six: recover and report.
+
+62
+00:02:32,988 --> 00:02:34,774
+Restore into a new database,
+
+63
+00:02:34,774 --> 00:02:35,922
+prove the numbers,
+
+64
+00:02:35,922 --> 00:02:37,517
+and write a short report.
+
+65
+00:02:38,067 --> 00:02:42,483
+That report is your evidence: what you found, what failed, and what you fixed.
+
+66
+00:02:44,033 --> 00:02:49,132
+Go to the lab folder.
+
+67
+00:02:50,682 --> 00:02:52,580
+Look around.
+
+68
+00:02:53,130 --> 00:02:57,418
+The app folder, an empty backups folder, the server data, and the task file.
+
+69
+00:02:57,968 --> 00:03:01,382
+Set up the admin shortcuts.
+
+70
+00:03:01,932 --> 00:03:05,132
+Host, port, and user are now set for every command.
+
+71
+00:03:05,682 --> 00:03:13,746
+Mission one: deploy.
+
+72
+00:03:14,296 --> 00:03:17,307
+Zero zero one and zero zero two apply.
+
+73
+00:03:17,307 --> 00:03:23,170
+Zero zero three fails and rolls back: column status status does not exist.
+
+74
+00:03:23,170 --> 00:03:23,725
+A typo.
+
+75
+00:03:24,275 --> 00:03:32,360
+Fix the typo.
+
+76
+00:03:32,910 --> 00:03:37,305
+Run it again.
+
+77
+00:03:37,855 --> 00:03:40,479
+All three applied. Migrations up to date.
+
+78
+00:03:41,029 --> 00:03:44,208
+Go back.
+
+79
+00:03:44,758 --> 00:03:54,592
+Mission two: the login.
+
+80
+00:03:55,142 --> 00:03:55,866
+Create role.
+
+81
+00:03:55,866 --> 00:03:58,157
+The password comes from the task file.
+
+82
+00:03:58,157 --> 00:03:59,845
+It is never typed into code,
+
+83
+00:03:59,845 --> 00:04:02,076
+and never put in a video description.
+
+84
+00:04:02,626 --> 00:04:09,047
+Grant the connection.
+
+85
+00:04:10,897 --> 00:04:17,126
+Grant on tables.
+
+86
+00:04:28,976 --> 00:04:32,710
+Three grants. Not one of them is delete, drop, or superuser.
+
+87
+00:04:33,260 --> 00:04:39,852
+Prove it.
+
+88
+00:04:43,902 --> 00:04:46,100
+Permission denied for table orders.
+
+89
+00:04:46,100 --> 00:04:47,921
+That is exactly what we want.
+
+90
+00:04:47,921 --> 00:04:50,622
+A mistake in the app cannot wipe the table.
+
+91
+00:04:51,172 --> 00:04:55,246
+Mission three: start the app.
+
+92
+00:04:55,796 --> 00:04:56,964
+Connection refused,
+
+93
+00:04:56,964 --> 00:04:58,563
+port fifty-four forty-one.
+
+94
+00:04:58,563 --> 00:04:59,608
+The second layer,
+
+95
+00:04:59,608 --> 00:05:00,161
+the port.
+
+96
+00:05:00,161 --> 00:05:01,514
+Nothing listens there.
+
+97
+00:05:02,064 --> 00:05:10,213
+Fix the port.
+
+98
+00:05:10,763 --> 00:05:15,584
+Start the app again.
+
+99
+00:05:16,134 --> 00:05:19,654
+App OK, eight orders. Four missions of the first half done.
+
+100
+00:05:20,204 --> 00:05:31,212
+Mission four: back up.
+
+101
+00:05:31,762 --> 00:05:38,546
+Is it readable?
+
+102
+00:05:39,096 --> 00:05:42,958
+Both tables are inside, with their rows. The backup is readable.
+
+103
+00:05:43,508 --> 00:05:46,878
+Mission five: the incident.
+
+104
+00:05:47,428 --> 00:05:51,503
+Every order is deleted, and a session is now stuck, holding a lock.
+
+105
+00:05:52,053 --> 00:05:55,168
+What does the app say?
+
+106
+00:05:55,718 --> 00:05:56,205
+App OK,
+
+107
+00:05:56,205 --> 00:05:57,039
+zero orders.
+
+108
+00:05:57,039 --> 00:05:58,500
+The app is connected,
+
+109
+00:05:58,500 --> 00:05:59,961
+and the data is gone.
+
+110
+00:05:59,961 --> 00:06:02,395
+Connectivity was never the problem.
+
+111
+00:06:02,945 --> 00:06:09,046
+Who is blocking?
+
+112
+00:06:20,896 --> 00:06:23,300
+The cart API session is active,
+
+113
+00:06:23,300 --> 00:06:24,076
+and waits.
+
+114
+00:06:24,076 --> 00:06:26,867
+Its blocked by column holds a P I D,
+
+115
+00:06:26,867 --> 00:06:29,116
+and that P I D is report job,
+
+116
+00:06:29,116 --> 00:06:30,667
+idle in transaction.
+
+117
+00:06:31,217 --> 00:06:41,777
+Write the P I D down.
+
+118
+00:06:42,527 --> 00:06:49,482
+End only that session.
+
+119
+00:06:54,432 --> 00:06:57,504
+True. The session is gone, and its lock is released.
+
+120
+00:06:58,054 --> 00:07:03,131
+Did the cart finish?
+
+121
+00:07:05,081 --> 00:07:07,897
+Nine. The waiting cart update finished by itself.
+
+122
+00:07:08,447 --> 00:07:14,527
+Mission six: recover.
+
+123
+00:07:15,077 --> 00:07:23,760
+Restore into it.
+
+124
+00:07:24,310 --> 00:07:27,296
+Validate.
+
+125
+00:07:31,046 --> 00:07:36,038
+Eight orders. Every order is back. Only now would we copy the data into production.
+
+126
+00:07:36,588 --> 00:07:46,231
+Write the report.
+
+127
+00:07:46,781 --> 00:07:50,066
+Look at it.
+
+128
+00:07:50,616 --> 00:07:51,332
+Four lines.
+
+129
+00:07:51,332 --> 00:07:52,372
+Orders restored,
+
+130
+00:07:52,372 --> 00:07:53,152
+the blocker,
+
+131
+00:07:53,152 --> 00:07:54,517
+the failed migration,
+
+132
+00:07:54,517 --> 00:07:55,362
+and the port.
+
+133
+00:07:55,362 --> 00:07:57,963
+A teammate can read this in ten seconds,
+
+134
+00:07:57,963 --> 00:07:58,808
+and trust it.
+
+135
+00:07:59,358 --> 00:08:01,726
+Run the judge.
+
+136
+00:08:02,276 --> 00:08:04,127
+Six checks: least privilege,
+
+137
+00:08:04,127 --> 00:08:04,855
+migrations,
+
+138
+00:08:04,855 --> 00:08:05,384
+the app,
+
+139
+00:08:05,384 --> 00:08:06,177
+the restore,
+
+140
+00:08:06,177 --> 00:08:06,970
+the blocker,
+
+141
+00:08:06,970 --> 00:08:07,962
+and the report.
+
+142
+00:08:07,962 --> 00:08:08,954
+Six out of six.
+
+143
+00:08:09,504 --> 00:08:11,466
+Clean up.
+
+144
+00:08:12,016 --> 00:08:15,728
+The server and every session are stopped, and everything is removed.
+
+145
+00:08:16,278 --> 00:08:25,281
+Is it gone?
+
+146
+00:08:25,831 --> 00:08:28,348
+No response. Nothing is left behind.
+
+147
+00:08:29,898 --> 00:08:33,909
+Your mastery task. The same scenario, on your own machine, without me.
+
+148
+00:08:34,459 --> 00:08:37,523
+Deploy the migrations and fix the one that fails.
+
+149
+00:08:37,523 --> 00:08:40,149
+Create the app login with least privilege.
+
+150
+00:08:40,149 --> 00:08:41,712
+Fix the app's connection.
+
+151
+00:08:42,262 --> 00:08:45,867
+Back up before anything breaks, and check that the backup is readable.
+
+152
+00:08:46,417 --> 00:08:47,573
+Run the incident.
+
+153
+00:08:47,573 --> 00:08:49,680
+Write down the blocker's P I D,
+
+154
+00:08:49,680 --> 00:08:51,176
+end only that session,
+
+155
+00:08:51,176 --> 00:08:53,351
+and restore into a new database.
+
+156
+00:08:53,901 --> 00:08:57,229
+Write the four line report. Then lab check, and lab down.
+
+157
+00:08:59,279 --> 00:09:02,178
+Here is where to find everything for the whole domain.
+
+158
+00:09:02,178 --> 00:09:03,305
+Pause on this screen,
+
+159
+00:09:03,305 --> 00:09:04,271
+and write it down.
+
+160
+00:09:04,821 --> 00:09:06,480
+The labs live on GitHub,
+
+161
+00:09:06,480 --> 00:09:07,655
+at it dash waves,
+
+162
+00:09:07,655 --> 00:09:09,244
+slash dev ops dash A I,
+
+163
+00:09:09,244 --> 00:09:10,765
+in the folder academy,
+
+164
+00:09:10,765 --> 00:09:11,456
+slash lab.
+
+165
+00:09:12,006 --> 00:09:15,866
+This lesson has two files: lab one thirty-four dot S H,
+
+166
+00:09:15,866 --> 00:09:18,534
+and shortcuts one thirty-four dot S H.
+
+167
+00:09:19,084 --> 00:09:19,986
+Install it,
+
+168
+00:09:19,986 --> 00:09:22,857
+on any Linux machine: sudo install,
+
+169
+00:09:22,857 --> 00:09:24,744
+dash m seven five five,
+
+170
+00:09:24,744 --> 00:09:27,041
+lab one thirty-four dot S H,
+
+171
+00:09:27,041 --> 00:09:28,272
+into slash usr,
+
+172
+00:09:28,272 --> 00:09:29,257
+slash local,
+
+173
+00:09:29,257 --> 00:09:30,241
+slash S bin.
+
+174
+00:09:30,791 --> 00:09:35,875
+Load the short names with: source shortcuts one thirty-four dot S H.
+
+175
+00:09:35,875 --> 00:09:37,296
+You get three: lab,
+
+176
+00:09:37,296 --> 00:09:37,595
+P G,
+
+177
+00:09:37,595 --> 00:09:38,492
+and use D B.
+
+178
+00:09:39,042 --> 00:09:40,678
+You need post gress Q L,
+
+179
+00:09:40,678 --> 00:09:41,904
+server and client,
+
+180
+00:09:41,904 --> 00:09:44,221
+and port fifty-five fourteen free.
+
+181
+00:09:44,221 --> 00:09:46,946
+The lab runs its own private post gress,
+
+182
+00:09:46,946 --> 00:09:48,173
+in its own folder.
+
+183
+00:09:48,723 --> 00:09:50,688
+Lab up prepares the project.
+
+184
+00:09:50,688 --> 00:09:53,074
+Lab incident starts the emergency.
+
+185
+00:09:53,074 --> 00:09:54,969
+Lab check judges your work.
+
+186
+00:09:54,969 --> 00:09:56,653
+Lab down removes it all.
+
+187
+00:09:56,653 --> 00:09:58,899
+Only run it on your own machine.
+
+188
+00:09:59,449 --> 00:10:01,966
+The earlier lessons each have their own lab,
+
+189
+00:10:01,966 --> 00:10:03,225
+with the same pattern.
+
+190
+00:10:03,225 --> 00:10:05,742
+Redo any of them whenever you need practice.
+
+191
+00:10:07,792 --> 00:10:09,861
+Pass or fail. You need all six.
+
+192
+00:10:10,411 --> 00:10:13,825
+One: the app login has least privilege, and cannot delete.
+
+193
+00:10:14,375 --> 00:10:16,572
+Two: all three migrations are applied.
+
+194
+00:10:17,122 --> 00:10:19,554
+Three: the app connects and reads its data.
+
+195
+00:10:20,104 --> 00:10:24,413
+Four: a readable backup, restored into a new database, with eight orders.
+
+196
+00:10:24,963 --> 00:10:28,185
+Five: the blocker is gone, and the waiting update finished.
+
+197
+00:10:28,735 --> 00:10:31,487
+Six: the report has the four correct values.
+
+198
+00:10:32,037 --> 00:10:33,338
+To pass, all six.
+
+199
+00:10:35,388 --> 00:10:37,159
+Your turn, on your own machine.
+
+200
+00:10:37,709 --> 00:10:41,719
+One: lab up, and use D B. Deploy, and fix migration three.
+
+201
+00:10:42,269 --> 00:10:46,301
+Two: create the login with least privilege, and prove it cannot delete.
+
+202
+00:10:46,851 --> 00:10:49,027
+Three: fix the app's port, and back up.
+
+203
+00:10:49,577 --> 00:10:50,887
+Four: lab incident.
+
+204
+00:10:50,887 --> 00:10:52,059
+Find the blocker,
+
+205
+00:10:52,059 --> 00:10:53,506
+write the P I D down,
+
+206
+00:10:53,506 --> 00:10:55,022
+end only that session,
+
+207
+00:10:55,022 --> 00:10:55,849
+and restore.
+
+208
+00:10:56,399 --> 00:11:01,050
+Five: write the report, then lab check until six out of six. Then lab down.
+
+209
+00:11:01,600 --> 00:11:03,435
+Pause the video, and begin now.
+
+210
+00:11:18,985 --> 00:11:19,860
+Quick check.
+
+211
+00:11:20,410 --> 00:11:22,692
+Why do you take the backup before the incident?
+
+212
+00:11:23,242 --> 00:11:25,994
+Which rights did the app get, and which did it not get?
+
+213
+00:11:26,544 --> 00:11:28,336
+How did you know which session to end?
+
+214
+00:11:28,886 --> 00:11:30,252
+What does your report prove?
+
+215
+00:11:30,802 --> 00:11:34,141
+Objectives covered: all eight of M C fourteen,
+
+216
+00:11:34,141 --> 00:11:35,738
+databases for dev ops.
+
+217
+00:11:35,738 --> 00:11:38,641
+Mastery evidence: a verifiable scenario,
+
+218
+00:11:38,641 --> 00:11:39,585
+with results,
+
+219
+00:11:39,585 --> 00:11:40,747
+troubleshooting,
+
+220
+00:11:40,747 --> 00:11:41,618
+and cleanup.
+
+221
+00:11:42,168 --> 00:11:44,237
+Pause the video, and answer out loud.
+
+222
+00:11:54,787 --> 00:11:58,223
+Congratulations: the databases domain is complete.
+
+223
+00:11:58,223 --> 00:12:01,315
+Next: software testing and quality assurance.
+
+224
+00:12:01,865 --> 00:12:05,193
+If this helped, like, share and subscribe, so you do not miss it.

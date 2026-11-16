@@ -1,0 +1,26 @@
+Lesson 134 of the DevOps Engineering Bootcamp, and the mastery lesson of the Databases for DevOps domain. You prove everything together on one real PostgreSQL 16 server: fix and run a failing migration, create a least privilege role, fix the app's wrong port, take a backup with pg_dump, then survive an incident where a long idle transaction blocks the cart. You find the blocker with pg_stat_activity, end it with pg_terminate_backend, restore the backup into a new database and prove the data is back. A lab judges you from 0 of 6 to 6 of 6.
+
+Chapters
+0:00 Prove it all, in one scenario
+0:26 What to expect
+0:59 The whole domain in one map
+1:47 The six missions
+2:43 Live: the whole scenario, start to finish
+8:29 Your lab task
+8:59 Where to find the lab
+10:07 Pass or fail rubric
+10:35 Your turn
+11:18 Quick check
+
+Objectives covered: MC14-O01 to MC14-O08, the Databases for DevOps mastery evidence: complete an independently verifiable scenario, document results, troubleshooting and cleanup.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab134.sh and shortcuts134.sh). Install with: sudo install -m 755 lab134.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts134.sh. You need any Linux machine with root, PostgreSQL server and client (for example: sudo apt install -y postgresql postgresql-client), and port 5514 free. The lab runs its own private PostgreSQL cluster in /opt/lab134 and does not touch the system PostgreSQL. lab down stops everything and removes it. Only run it on your own machine.
+
+Honest notes: the terminal demo is one real, continuous recording of real PostgreSQL 16 and a small shell app and migration runner written for this lab, and the lab was run end to end: it passes 0 of 6 before you start and 6 of 6 after you finish, and lab down leaves nothing behind. The lab password sits in a plain text file only to keep the lesson simple: real teams use a secret manager. The narration is synthetic speech. The hook, map, missions, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Fix App-to-Database Connection Errors and Failed Migrations in PostgreSQL | Lesson 133 https://youtu.be/jQj3519YS3s
+Next: Software Testing and QA, the next domain of the bootcamp.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #postgresql #database #backup #devopsbootcamp
