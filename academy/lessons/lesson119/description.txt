@@ -1,0 +1,24 @@
+Lesson 119 of the DevOps Engineering Bootcamp, and lesson 2 of the Web Servers and Reverse Proxies domain. Your app runs on a private port and your customers visit a public one, so something has to carry each request across and bring the answer back. That is a reverse proxy. You follow one request through its two hops, then use real nginx 1.24 and a real backend: see the /api/ path fail with a 404, route it with proxy_pass (and learn what the trailing slash does), read exactly what the backend receives, and discover it sees the wrong host and no client details. You fix that with proxy_set_header for Host, X-Real-IP, X-Forwarded-For and X-Forwarded-Proto, applying each change with a test and a reload. Then you get a lab that judges your work, from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Route it.
+0:24 What to expect
+1:09 One request, two hops
+1:51 Live: route, inspect, pass headers
+6:36 Your lab task
+7:10 Where to find the lab
+8:07 Pass or fail rubric
+8:31 Your turn
+9:16 Quick check
+Objectives covered: MC13-O03 (configure nginx to route traffic to a backend and pass the proxy headers)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab119.sh and shortcuts119.sh). Install with: sudo install -m 755 lab119.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts119.sh. You need any Linux machine with root, nginx, python3, curl and ss (for example: sudo apt install -y nginx python3 curl iproute2) and ports 8191 and 8192 free. The lab runs its own private nginx and its own tiny backend from /opt/lab119 and does not touch the system nginx. lab down stops both and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording on real nginx 1.24 with a real (small) backend, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The backend is a tiny stand-in written for the lab so you can see exactly what it receives; it is not CloudCart itself. The narration is synthetic speech. The hook, the two-hops picture, the task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: nginx Basics: Serve a Static Site, Test and Reload the Config | Lesson 118 https://youtu.be/QbRw15_S0y4
+Next: HTTPS with TLS certificates on nginx.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #nginx #reverseproxy #linux #devopsbootcamp

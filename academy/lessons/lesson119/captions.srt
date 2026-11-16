@@ -1,0 +1,971 @@
+1
+00:00:00,500 --> 00:00:02,412
+Your app runs on a private port.
+
+2
+00:00:02,412 --> 00:00:04,385
+The customer visits a public one.
+
+3
+00:00:04,385 --> 00:00:07,672
+Something in the middle must carry each request across,
+
+4
+00:00:07,672 --> 00:00:09,225
+and bring the answer back.
+
+5
+00:00:09,775 --> 00:00:14,063
+That something is a reverse proxy, and today you build one with engine X.
+
+6
+00:00:14,613 --> 00:00:16,766
+You will route one path to a backend,
+
+7
+00:00:16,766 --> 00:00:18,977
+see exactly what the backend receives,
+
+8
+00:00:18,977 --> 00:00:21,013
+and fix three things it gets wrong.
+
+9
+00:00:21,563 --> 00:00:23,483
+Route it, pass the headers, prove it.
+
+10
+00:00:25,033 --> 00:00:28,105
+Here is what to expect, from the first minute to the last.
+
+11
+00:00:28,655 --> 00:00:34,266
+One: how a proxy works. One request in, one request out, and what gets lost on the way.
+
+12
+00:00:34,816 --> 00:00:36,051
+Two: a live demo.
+
+13
+00:00:36,051 --> 00:00:37,722
+Engine X serves a page,
+
+14
+00:00:37,722 --> 00:00:39,975
+but the API path leads nowhere.
+
+15
+00:00:39,975 --> 00:00:41,792
+We see the failure first.
+
+16
+00:00:42,342 --> 00:00:43,918
+Three: we add proxy pass,
+
+17
+00:00:43,918 --> 00:00:45,431
+and the backend answers.
+
+18
+00:00:45,431 --> 00:00:48,394
+Then we look at what the backend actually sees,
+
+19
+00:00:48,394 --> 00:00:49,403
+and it is wrong.
+
+20
+00:00:49,953 --> 00:00:51,677
+Four: we add proxy headers,
+
+21
+00:00:51,677 --> 00:00:53,976
+so the backend learns the real host,
+
+22
+00:00:53,976 --> 00:00:54,997
+the real client,
+
+23
+00:00:54,997 --> 00:00:56,402
+and the real protocol.
+
+24
+00:00:56,402 --> 00:00:57,360
+Then your turn,
+
+25
+00:00:57,360 --> 00:00:59,084
+with a lab that judges you.
+
+26
+00:00:59,634 --> 00:01:02,407
+This is lesson two of the web servers domain.
+
+27
+00:01:02,407 --> 00:01:04,071
+Last time you served files.
+
+28
+00:01:04,071 --> 00:01:05,735
+Today you forward requests.
+
+29
+00:01:06,285 --> 00:01:07,544
+Route, pass, prove.
+
+30
+00:01:09,594 --> 00:01:12,175
+One request, two hops. Let us follow it.
+
+31
+00:01:12,725 --> 00:01:16,356
+The customer asks engine X for slash API slash hello.
+
+32
+00:01:16,356 --> 00:01:18,205
+Engine X is the front door.
+
+33
+00:01:18,205 --> 00:01:21,493
+It is the only thing the customer ever talks to.
+
+34
+00:01:22,043 --> 00:01:23,564
+Engine X opens a second,
+
+35
+00:01:23,564 --> 00:01:25,655
+brand new request to the backend,
+
+36
+00:01:25,655 --> 00:01:26,795
+on a private port,
+
+37
+00:01:26,795 --> 00:01:28,379
+and waits for the answer.
+
+38
+00:01:28,929 --> 00:01:30,134
+Here is the catch.
+
+39
+00:01:30,134 --> 00:01:31,138
+To the backend,
+
+40
+00:01:31,138 --> 00:01:33,681
+every request now comes from engine X.
+
+41
+00:01:33,681 --> 00:01:35,153
+Not from the customer.
+
+42
+00:01:35,153 --> 00:01:38,231
+So by default the backend sees the wrong host,
+
+43
+00:01:38,231 --> 00:01:40,172
+and the wrong client address.
+
+44
+00:01:40,722 --> 00:01:42,110
+The fix is headers.
+
+45
+00:01:42,110 --> 00:01:42,475
+Host,
+
+46
+00:01:42,475 --> 00:01:43,279
+X real I P,
+
+47
+00:01:43,279 --> 00:01:44,448
+X forwarded for,
+
+48
+00:01:44,448 --> 00:01:46,055
+and X forwarded proto.
+
+49
+00:01:46,055 --> 00:01:50,877
+Four small lines that carry the customer's details across the hop.
+
+50
+00:01:52,427 --> 00:01:57,440
+Go to the lab folder.
+
+51
+00:01:58,990 --> 00:02:00,889
+Look around. Type: L S.
+
+52
+00:02:01,439 --> 00:02:02,402
+A site folder,
+
+53
+00:02:02,402 --> 00:02:03,158
+the config,
+
+54
+00:02:03,158 --> 00:02:04,120
+a logs folder,
+
+55
+00:02:04,120 --> 00:02:05,495
+and backend dot P Y.
+
+56
+00:02:05,495 --> 00:02:07,214
+That is our tiny backend.
+
+57
+00:02:07,214 --> 00:02:08,727
+It is already running,
+
+58
+00:02:08,727 --> 00:02:10,789
+on port eighty-one ninety-two,
+
+59
+00:02:10,789 --> 00:02:12,990
+and engine X is already running,
+
+60
+00:02:12,990 --> 00:02:14,708
+on eighty-one ninety-one.
+
+61
+00:02:15,258 --> 00:02:18,906
+Read the config.
+
+62
+00:02:19,456 --> 00:02:21,102
+Look at the server block.
+
+63
+00:02:21,102 --> 00:02:23,209
+Listen on eighty-one ninety-one,
+
+64
+00:02:23,209 --> 00:02:24,395
+and a root folder.
+
+65
+00:02:24,395 --> 00:02:26,765
+Then a location block for slash API,
+
+66
+00:02:26,765 --> 00:02:27,160
+slash.
+
+67
+00:02:27,160 --> 00:02:28,214
+And it is empty.
+
+68
+00:02:28,214 --> 00:02:30,123
+That is the gap we will fill.
+
+69
+00:02:30,673 --> 00:02:36,412
+Ask for the home page.
+
+70
+00:02:36,962 --> 00:02:39,735
+Welcome to CloudCart. Static files work.
+
+71
+00:02:40,285 --> 00:02:49,416
+Ask for the API.
+
+72
+00:02:49,966 --> 00:02:50,888
+Four oh four.
+
+73
+00:02:50,888 --> 00:02:53,582
+Engine X has a location for slash API,
+
+74
+00:02:53,582 --> 00:02:54,930
+but no instruction,
+
+75
+00:02:54,930 --> 00:02:56,561
+so it looks for a file,
+
+76
+00:02:56,561 --> 00:02:57,624
+and finds none.
+
+77
+00:02:58,174 --> 00:03:07,134
+Ask the backend directly.
+
+78
+00:03:07,684 --> 00:03:07,954
+Yes.
+
+79
+00:03:07,954 --> 00:03:09,235
+Backend says hello.
+
+80
+00:03:09,235 --> 00:03:11,460
+Notice the host line: local host,
+
+81
+00:03:11,460 --> 00:03:13,348
+colon eighty-one ninety-two.
+
+82
+00:03:13,348 --> 00:03:16,113
+That is what a direct visitor looks like.
+
+83
+00:03:16,113 --> 00:03:16,922
+Remember it.
+
+84
+00:03:17,472 --> 00:03:21,226
+Open the config in vim.
+
+85
+00:03:21,776 --> 00:03:22,996
+Go to line sixteen,
+
+86
+00:03:22,996 --> 00:03:24,215
+the location block,
+
+87
+00:03:24,215 --> 00:03:26,718
+and add one line inside it: proxy pass,
+
+88
+00:03:26,718 --> 00:03:28,195
+to the backend address.
+
+89
+00:03:28,195 --> 00:03:30,698
+Proxy pass is the whole trick: it says,
+
+90
+00:03:30,698 --> 00:03:33,650
+send this location's requests to that address.
+
+91
+00:03:33,650 --> 00:03:35,511
+End the address with a slash.
+
+92
+00:03:35,511 --> 00:03:36,474
+That is a rule,
+
+93
+00:03:36,474 --> 00:03:38,464
+not decoration: with the slash,
+
+94
+00:03:38,464 --> 00:03:40,774
+engine X removes the matched prefix,
+
+95
+00:03:40,774 --> 00:03:41,416
+slash API,
+
+96
+00:03:41,416 --> 00:03:42,571
+before forwarding.
+
+97
+00:03:42,571 --> 00:03:44,304
+We will see it in a moment.
+
+98
+00:03:46,354 --> 00:03:53,842
+Test, then reload.
+
+99
+00:03:54,392 --> 00:03:57,379
+Syntax ok, and reloaded, with no downtime.
+
+100
+00:03:57,929 --> 00:04:05,588
+Ask the API again.
+
+101
+00:04:06,138 --> 00:04:07,386
+Backend says hello.
+
+102
+00:04:07,386 --> 00:04:08,437
+The route works.
+
+103
+00:04:08,437 --> 00:04:10,736
+Now read what the backend received.
+
+104
+00:04:10,736 --> 00:04:12,313
+The path is slash hello,
+
+105
+00:04:12,313 --> 00:04:13,232
+not slash API,
+
+106
+00:04:13,232 --> 00:04:14,021
+slash hello.
+
+107
+00:04:14,021 --> 00:04:17,502
+That trailing slash on proxy pass removed the prefix.
+
+108
+00:04:17,502 --> 00:04:18,225
+Without it,
+
+109
+00:04:18,225 --> 00:04:21,050
+the backend would have seen the whole path.
+
+110
+00:04:21,600 --> 00:04:24,313
+But look at the host line: one two seven,
+
+111
+00:04:24,313 --> 00:04:24,908
+dot zero,
+
+112
+00:04:24,908 --> 00:04:25,504
+dot zero,
+
+113
+00:04:25,504 --> 00:04:26,033
+dot one,
+
+114
+00:04:26,033 --> 00:04:27,886
+colon eighty-one ninety-two.
+
+115
+00:04:27,886 --> 00:04:29,739
+That is the proxy's address,
+
+116
+00:04:29,739 --> 00:04:30,996
+not the customer's.
+
+117
+00:04:30,996 --> 00:04:35,232
+And the three other lines show a dash: nothing was passed along.
+
+118
+00:04:35,782 --> 00:04:39,856
+Open the config again.
+
+119
+00:04:40,406 --> 00:04:42,510
+Seventeen is our proxy pass line.
+
+120
+00:04:42,510 --> 00:04:43,083
+Below it,
+
+121
+00:04:43,083 --> 00:04:45,123
+add four proxy set header lines.
+
+122
+00:04:45,123 --> 00:04:45,505
+First,
+
+123
+00:04:45,505 --> 00:04:45,824
+Host,
+
+124
+00:04:45,824 --> 00:04:48,756
+with the original host name the customer used,
+
+125
+00:04:48,756 --> 00:04:51,242
+so the backend can build correct links.
+
+126
+00:04:51,242 --> 00:04:51,688
+Second,
+
+127
+00:04:51,688 --> 00:04:52,389
+X real I P,
+
+128
+00:04:52,389 --> 00:04:54,429
+with the customer's own address.
+
+129
+00:04:54,429 --> 00:04:54,811
+Third,
+
+130
+00:04:54,811 --> 00:04:55,831
+X forwarded for,
+
+131
+00:04:55,831 --> 00:04:59,591
+a growing list of every address the request passed through.
+
+132
+00:04:59,591 --> 00:05:00,293
+And fourth,
+
+133
+00:05:00,293 --> 00:05:01,440
+X forwarded proto,
+
+134
+00:05:01,440 --> 00:05:02,141
+the scheme,
+
+135
+00:05:02,141 --> 00:05:03,479
+H T T P or H T T P S.
+
+136
+00:05:03,479 --> 00:05:04,945
+We type them carefully,
+
+137
+00:05:04,945 --> 00:05:05,774
+one per line,
+
+138
+00:05:05,774 --> 00:05:06,348
+and save.
+
+139
+00:05:18,398 --> 00:05:24,499
+Test, then reload.
+
+140
+00:05:25,049 --> 00:05:26,286
+Safe, and instant.
+
+141
+00:05:26,836 --> 00:05:33,940
+Ask the API one more time.
+
+142
+00:05:34,490 --> 00:05:36,725
+Now the backend sees everything.
+
+143
+00:05:36,725 --> 00:05:38,051
+Host is local host,
+
+144
+00:05:38,051 --> 00:05:39,937
+the name the customer used.
+
+145
+00:05:39,937 --> 00:05:41,263
+The client address,
+
+146
+00:05:41,263 --> 00:05:42,730
+the forwarding chain,
+
+147
+00:05:42,730 --> 00:05:43,917
+and the protocol,
+
+148
+00:05:43,917 --> 00:05:44,475
+H T T P.
+
+149
+00:05:44,475 --> 00:05:46,640
+If the customer used H T T P S,
+
+150
+00:05:46,640 --> 00:05:48,246
+the backend would know,
+
+151
+00:05:48,246 --> 00:05:51,947
+even though the hop behind engine X is plain H T T P.
+
+152
+00:05:51,947 --> 00:05:54,181
+That is why this header matters.
+
+153
+00:05:54,731 --> 00:06:01,558
+Every request is written down.
+
+154
+00:06:02,108 --> 00:06:02,708
+Who asked,
+
+155
+00:06:02,708 --> 00:06:03,368
+which path,
+
+156
+00:06:03,368 --> 00:06:04,569
+and the answer code.
+
+157
+00:06:04,569 --> 00:06:05,289
+Two hundred.
+
+158
+00:06:05,289 --> 00:06:06,550
+The backend's answer,
+
+159
+00:06:06,550 --> 00:06:08,230
+passed back to the customer.
+
+160
+00:06:08,780 --> 00:06:11,148
+Run the judge.
+
+161
+00:06:11,698 --> 00:06:12,506
+Five checks,
+
+162
+00:06:12,506 --> 00:06:13,313
+five passes.
+
+163
+00:06:13,313 --> 00:06:14,659
+The config is valid,
+
+164
+00:06:14,659 --> 00:06:15,736
+the API answers,
+
+165
+00:06:15,736 --> 00:06:16,947
+the path is clean,
+
+166
+00:06:16,947 --> 00:06:18,966
+and the backend sees the host,
+
+167
+00:06:18,966 --> 00:06:19,706
+the client,
+
+168
+00:06:19,706 --> 00:06:20,850
+and the protocol.
+
+169
+00:06:21,400 --> 00:06:23,363
+Clean up.
+
+170
+00:06:23,913 --> 00:06:27,518
+Engine X stopped, the backend stopped, and everything removed.
+
+171
+00:06:28,068 --> 00:06:32,143
+Are both ports free? Count the lines.
+
+172
+00:06:32,693 --> 00:06:35,701
+Zero. Nothing listens, nothing is left behind.
+
+173
+00:06:37,251 --> 00:06:40,536
+Your task. Route traffic to a backend with engine X.
+
+174
+00:06:41,086 --> 00:06:41,897
+One: lab up.
+
+175
+00:06:41,897 --> 00:06:44,939
+Engine X and the backend are already running.
+
+176
+00:06:44,939 --> 00:06:45,818
+Curl the API,
+
+177
+00:06:45,818 --> 00:06:47,508
+and see the four oh four.
+
+178
+00:06:48,058 --> 00:06:49,797
+Two: in the location block,
+
+179
+00:06:49,797 --> 00:06:50,763
+add proxy pass,
+
+180
+00:06:50,763 --> 00:06:52,179
+with a trailing slash.
+
+181
+00:06:52,179 --> 00:06:52,501
+Test,
+
+182
+00:06:52,501 --> 00:06:53,210
+and reload.
+
+183
+00:06:53,210 --> 00:06:54,884
+The backend should answer.
+
+184
+00:06:55,434 --> 00:07:00,426
+Three: add proxy set header Host, so the backend sees the name the customer used.
+
+185
+00:07:00,976 --> 00:07:05,243
+Four: add X real I P, X forwarded for, and X forwarded proto.
+
+186
+00:07:05,793 --> 00:07:09,078
+Five: test, reload, and lab check. Then lab down.
+
+187
+00:07:11,128 --> 00:07:14,904
+Here is where to find everything. Pause on this screen, and write it down.
+
+188
+00:07:15,454 --> 00:07:17,102
+The lab lives on GitHub,
+
+189
+00:07:17,102 --> 00:07:18,269
+at it dash waves,
+
+190
+00:07:18,269 --> 00:07:19,849
+slash dev ops dash A I,
+
+191
+00:07:19,849 --> 00:07:21,359
+in the folder academy,
+
+192
+00:07:21,359 --> 00:07:22,046
+slash lab.
+
+193
+00:07:22,596 --> 00:07:27,972
+Two files: lab one nineteen dot S H, and shortcuts one nineteen dot S H.
+
+194
+00:07:28,522 --> 00:07:29,431
+Install it,
+
+195
+00:07:29,431 --> 00:07:32,322
+on any Linux machine: sudo install,
+
+196
+00:07:32,322 --> 00:07:34,222
+dash m seven five five,
+
+197
+00:07:34,222 --> 00:07:36,287
+lab one nineteen dot S H,
+
+198
+00:07:36,287 --> 00:07:37,526
+into slash usr,
+
+199
+00:07:37,526 --> 00:07:38,517
+slash local,
+
+200
+00:07:38,517 --> 00:07:39,509
+slash S bin.
+
+201
+00:07:40,059 --> 00:07:44,650
+Load the short names with: source shortcuts one nineteen dot S H.
+
+202
+00:07:44,650 --> 00:07:45,851
+You get two: lab,
+
+203
+00:07:45,851 --> 00:07:46,416
+and N G.
+
+204
+00:07:46,966 --> 00:07:48,183
+You need engine X,
+
+205
+00:07:48,183 --> 00:07:49,063
+python three,
+
+206
+00:07:49,063 --> 00:07:50,348
+and curl installed,
+
+207
+00:07:50,348 --> 00:07:54,609
+and ports eighty-one ninety-one and eighty-one ninety-two free.
+
+208
+00:07:54,609 --> 00:07:58,870
+The lab runs its own private engine X and its own tiny backend.
+
+209
+00:07:59,420 --> 00:08:01,127
+Lab up prepares everything.
+
+210
+00:08:01,127 --> 00:08:02,834
+Lab check judges your work.
+
+211
+00:08:02,834 --> 00:08:04,351
+Lab down removes it all.
+
+212
+00:08:04,351 --> 00:08:06,375
+Only run it on your own machine.
+
+213
+00:08:08,425 --> 00:08:10,494
+Pass or fail. You need all five.
+
+214
+00:08:11,044 --> 00:08:15,162
+The config passes the test, the page is served, and the API answers.
+
+215
+00:08:15,712 --> 00:08:17,909
+The API is answered by the backend.
+
+216
+00:08:18,459 --> 00:08:21,232
+The backend sees the clean path, slash hello.
+
+217
+00:08:21,782 --> 00:08:24,342
+The backend sees the customer's Host header.
+
+218
+00:08:24,892 --> 00:08:27,900
+The backend sees the client address and the protocol.
+
+219
+00:08:28,450 --> 00:08:29,752
+To pass, all five.
+
+220
+00:08:31,802 --> 00:08:33,573
+Your turn, on your own machine.
+
+221
+00:08:34,123 --> 00:08:38,581
+One: lab up, read the task list, and curl the API. See the four oh four.
+
+222
+00:08:39,131 --> 00:08:40,950
+Two: add proxy pass in vim,
+
+223
+00:08:40,950 --> 00:08:41,287
+test,
+
+224
+00:08:41,287 --> 00:08:42,028
+and reload.
+
+225
+00:08:42,028 --> 00:08:42,769
+Curl again,
+
+226
+00:08:42,769 --> 00:08:45,126
+and read what the backend received.
+
+227
+00:08:45,676 --> 00:08:48,215
+Three: add the Host header, test, and reload.
+
+228
+00:08:48,765 --> 00:08:51,986
+Four: add the three forwarding headers, test, and reload.
+
+229
+00:08:52,536 --> 00:08:55,693
+Five: run lab check until you see five out of five.
+
+230
+00:08:56,243 --> 00:08:59,081
+Six: lab down, and prove both ports are free.
+
+231
+00:08:59,631 --> 00:09:01,465
+Pause the video, and begin now.
+
+232
+00:09:17,015 --> 00:09:17,890
+Quick check.
+
+233
+00:09:18,440 --> 00:09:22,109
+What does a reverse proxy do between the customer and the backend?
+
+234
+00:09:22,659 --> 00:09:25,198
+What does the trailing slash on proxy pass change?
+
+235
+00:09:25,748 --> 00:09:28,713
+Why does the backend need the X forwarded for header?
+
+236
+00:09:29,263 --> 00:09:34,788
+Why does X forwarded proto matter when the hop behind the proxy is plain H T T P?
+
+237
+00:09:35,338 --> 00:09:37,647
+Objectives covered: M C thirteen,
+
+238
+00:09:37,647 --> 00:09:38,767
+objective three.
+
+239
+00:09:38,767 --> 00:09:40,236
+Routing to a backend,
+
+240
+00:09:40,236 --> 00:09:42,336
+and passing the proxy headers.
+
+241
+00:09:42,886 --> 00:09:44,955
+Pause the video, and answer out loud.
+
+242
+00:09:55,505 --> 00:09:59,964
+Next: H T T P S, with T L S certificates on engine X.
+
+243
+00:10:00,514 --> 00:10:03,842
+If this helped, like, share and subscribe, so you do not miss it.
