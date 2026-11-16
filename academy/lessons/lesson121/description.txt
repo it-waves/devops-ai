@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab121.sh and shortc
 Honest notes: the terminal part is one real, continuous recording on real nginx 1.24, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The backends are tiny stand-in programs that only print their own name. Open source nginx has passive health checks only (it learns from failed real requests); timed active health checks need nginx Plus or another tool, and are not shown here. The narration is synthetic speech. The hook, the pool picture, the task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: nginx HTTPS: Make a Certificate, Enable TLS, Redirect HTTP | Lesson 120 https://youtu.be/TGo1r5Ie8So
-Next: nginx Logs: Read Access and Error Logs, Understand Status Codes | Lesson 122 (link coming)
+Next: nginx Logs: Read Access and Error Logs, Understand Status Codes | Lesson 122 https://youtu.be/uO94JSZww7c
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
