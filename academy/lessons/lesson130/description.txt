@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab130.sh and shortc
 Honest notes: the terminal part is one real, continuous recording on real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. pg_dump makes a logical backup; very large databases often add physical backups and point-in-time recovery, which are beyond this lesson. The narration is synthetic speech. The hook, vocabulary, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: PostgreSQL Schema Migrations: Run, Fail, Fix and Repeat Safely | Lesson 129 https://youtu.be/XPgLfdGEqIY
-Next: A tour of the database user interface.
+Next: Database UI Tour: Browse, Edit, Query and Export PostgreSQL with Adminer | Lesson 131 https://youtu.be/-icPwM6Gt4I
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
