@@ -19,7 +19,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab131.sh and shortc
 Honest notes: the terminal and the browser parts are one real, continuous recording of real Adminer 5.4.1 on real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. Other tools such as pgAdmin and DBeaver look different but use the same ideas. The narration is synthetic speech. The hook, anatomy, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: PostgreSQL Backup and Restore: pg_dump, pg_restore and Proving the Data | Lesson 130 https://youtu.be/87otBi-hkME
-Next: Connections, locks and slow queries.
+Next lesson: PostgreSQL Connections, Locks and Slow Queries | Lesson 132 https://youtu.be/pKODIHeTMbc
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
