@@ -1,0 +1,24 @@
+Lesson 124 of the DevOps Engineering Bootcamp, and lesson 7 of the Web Servers and Reverse Proxies domain. A customer sends you a screenshot: bad gateway, service unavailable, gateway timeout, or "not secure". Each error leaves different evidence. This lesson shows where to look, then you use real nginx 1.24 with four faults at once: a 502 caused by connection refused (a wrong upstream port, found with the error log and ss), a 504 caused by a proxy_read_timeout that is shorter than the work, a 503 that nginx answers on purpose because a maintenance flag file exists, and a TLS failure because the certificate holds the wrong name (read with openssl x509). You write down the evidence first, fix all four, and prove it with a probe script and a lab that judges your work, from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Read the evidence.
+0:25 What to expect
+0:59 Four symptoms, four places
+1:40 Live: four faults, four fixes
+6:29 Your lab task
+7:06 Where to find the lab
+8:03 Pass or fail rubric
+8:25 Your turn
+9:10 Quick check
+Objectives covered: MC13-O08 (troubleshoot 502, 503, 504, TLS and upstream connectivity)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab124.sh and shortcuts124.sh). Install with: sudo install -m 755 lab124.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts124.sh. You need any Linux machine with root, nginx, curl, openssl, python3 and ss (for example: sudo apt install -y nginx curl openssl iproute2 python3) and ports 8241, 8243 and 8248 free. The lab runs its own private nginx from /opt/lab124 and does not touch the system nginx. lab down stops it and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording on real nginx 1.24, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the fixes, and lab down leaves nothing behind. The four faults are planted on purpose in a small lab, so real incidents will be messier: real causes are often a mix, and you may also need the app's own logs. The certificate is self-signed for the demo. The narration is synthetic speech. The hook, the symptoms picture, the task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: nginx Limits: Timeouts, Request Size, Secure Defaults | Lesson 123 https://youtu.be/anFDW3E2UYQ
+Next: The mastery lesson for web servers and reverse proxies: prove the whole domain.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #nginx #troubleshooting #502 #devopsbootcamp

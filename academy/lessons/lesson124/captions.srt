@@ -1,0 +1,747 @@
+1
+00:00:00,500 --> 00:00:02,465
+Four customers write to you.
+
+2
+00:00:02,465 --> 00:00:03,939
+One sees bad gateway.
+
+3
+00:00:03,939 --> 00:00:05,974
+One sees service unavailable.
+
+4
+00:00:05,974 --> 00:00:07,728
+One sees gateway timeout.
+
+5
+00:00:07,728 --> 00:00:10,676
+And one says the connection is not secure.
+
+6
+00:00:11,226 --> 00:00:12,624
+Four different messages,
+
+7
+00:00:12,624 --> 00:00:13,905
+four different causes.
+
+8
+00:00:13,905 --> 00:00:14,662
+If you guess,
+
+9
+00:00:14,662 --> 00:00:15,651
+you lose an hour.
+
+10
+00:00:15,651 --> 00:00:17,107
+If you read the evidence,
+
+11
+00:00:17,107 --> 00:00:18,330
+you lose two minutes.
+
+12
+00:00:18,880 --> 00:00:22,528
+Today you learn where each error leaves its evidence, and how to read it.
+
+13
+00:00:23,078 --> 00:00:24,230
+Read the evidence.
+
+14
+00:00:25,780 --> 00:00:28,852
+Here is what to expect, from the first minute to the last.
+
+15
+00:00:29,402 --> 00:00:32,474
+One: what each symptom means, and the place to look for it.
+
+16
+00:00:33,024 --> 00:00:37,845
+Two: a live demo. One real engine X, with four faults at the same time.
+
+17
+00:00:38,395 --> 00:00:43,046
+Three: we find each cause, in the error log, in the config, and in the certificate.
+
+18
+00:00:43,596 --> 00:00:44,919
+Four: we fix all four,
+
+19
+00:00:44,919 --> 00:00:45,701
+and prove it.
+
+20
+00:00:45,701 --> 00:00:46,603
+Then your turn,
+
+21
+00:00:46,603 --> 00:00:49,249
+with a lab that judges you with five checks.
+
+22
+00:00:49,799 --> 00:00:52,685
+This is lesson seven of the web servers domain.
+
+23
+00:00:52,685 --> 00:00:53,360
+After this,
+
+24
+00:00:53,360 --> 00:00:55,815
+one mastery lesson ties it all together.
+
+25
+00:00:56,365 --> 00:00:57,517
+Read the evidence.
+
+26
+00:00:59,567 --> 00:01:01,743
+Four symptoms, four places to look.
+
+27
+00:01:02,293 --> 00:01:03,066
+Five oh two,
+
+28
+00:01:03,066 --> 00:01:03,839
+bad gateway.
+
+29
+00:01:03,839 --> 00:01:07,189
+Engine X reached for the app and got nothing useful.
+
+30
+00:01:07,189 --> 00:01:12,085
+The error log usually says connection refused: nothing listens on that port.
+
+31
+00:01:12,635 --> 00:01:13,471
+Five oh four,
+
+32
+00:01:13,471 --> 00:01:14,500
+gateway timeout.
+
+33
+00:01:14,500 --> 00:01:16,171
+The app is alive but slow.
+
+34
+00:01:16,171 --> 00:01:18,679
+The error log says up stream timed out,
+
+35
+00:01:18,679 --> 00:01:21,958
+and the config has a timeout shorter than the work.
+
+36
+00:01:22,508 --> 00:01:23,424
+Five oh three,
+
+37
+00:01:23,424 --> 00:01:24,733
+service unavailable.
+
+38
+00:01:24,733 --> 00:01:27,285
+Often on purpose: a maintenance switch,
+
+39
+00:01:27,285 --> 00:01:28,005
+or a limit.
+
+40
+00:01:28,005 --> 00:01:29,249
+Look in the config,
+
+41
+00:01:29,249 --> 00:01:30,230
+not in the app.
+
+42
+00:01:30,780 --> 00:01:35,691
+And a T L S error is not a status code at all: the handshake fails first.
+
+43
+00:01:35,691 --> 00:01:37,171
+Check the certificate.
+
+44
+00:01:37,171 --> 00:01:37,776
+Its name,
+
+45
+00:01:37,776 --> 00:01:38,449
+its dates,
+
+46
+00:01:38,449 --> 00:01:39,122
+its chain.
+
+47
+00:01:40,672 --> 00:01:45,856
+Go to the lab folder.
+
+48
+00:01:47,406 --> 00:01:49,305
+Look around. Type: L S.
+
+49
+00:01:49,855 --> 00:01:50,590
+The config,
+
+50
+00:01:50,590 --> 00:01:51,594
+a probe script,
+
+51
+00:01:51,594 --> 00:01:52,865
+a maintenance flag,
+
+52
+00:01:52,865 --> 00:01:54,604
+a certificate and its key.
+
+53
+00:01:54,604 --> 00:01:55,674
+Behind engine X,
+
+54
+00:01:55,674 --> 00:01:57,748
+a small app is already running.
+
+55
+00:01:58,298 --> 00:02:02,351
+Probe all four.
+
+56
+00:02:02,901 --> 00:02:03,836
+Four requests,
+
+57
+00:02:03,836 --> 00:02:04,770
+four failures.
+
+58
+00:02:04,770 --> 00:02:05,705
+A five oh two,
+
+59
+00:02:05,705 --> 00:02:06,706
+a five oh four,
+
+60
+00:02:06,706 --> 00:02:07,774
+a five oh three,
+
+61
+00:02:07,774 --> 00:02:09,843
+and a failed secure connection.
+
+62
+00:02:09,843 --> 00:02:11,712
+Let us take them one by one.
+
+63
+00:02:12,262 --> 00:02:27,025
+502: ask the error log.
+
+64
+00:02:27,575 --> 00:02:28,805
+Connection refused,
+
+65
+00:02:28,805 --> 00:02:29,907
+error one eleven.
+
+66
+00:02:29,907 --> 00:02:31,656
+Engine X called an address,
+
+67
+00:02:31,656 --> 00:02:32,951
+and nobody answered.
+
+68
+00:02:32,951 --> 00:02:34,700
+So who is really listening?
+
+69
+00:02:35,250 --> 00:02:44,125
+See what listens.
+
+70
+00:02:44,675 --> 00:02:45,989
+Eighty-two forty-one,
+
+71
+00:02:45,989 --> 00:02:46,740
+forty-three,
+
+72
+00:02:46,740 --> 00:02:47,741
+and forty-eight.
+
+73
+00:02:47,741 --> 00:02:49,368
+The app is on forty-eight.
+
+74
+00:02:49,368 --> 00:02:51,245
+Nothing listens on forty-nine.
+
+75
+00:02:51,795 --> 00:02:57,918
+Find the port in the config.
+
+76
+00:02:58,468 --> 00:03:02,295
+There it is: the proxy pass points at eighty-two forty-nine.
+
+77
+00:03:02,295 --> 00:03:03,316
+One wrong digit.
+
+78
+00:03:03,316 --> 00:03:04,847
+That is the five oh two.
+
+79
+00:03:05,397 --> 00:03:16,597
+504: ask the error log.
+
+80
+00:03:17,147 --> 00:03:21,733
+Up stream timed out. The app is alive, but engine X stopped waiting for it.
+
+81
+00:03:22,283 --> 00:03:27,937
+Find the timeout.
+
+82
+00:03:28,487 --> 00:03:33,457
+Proxy read timeout, one second. The report takes three. That is the five oh four.
+
+83
+00:03:34,007 --> 00:03:42,007
+503: look in the config.
+
+84
+00:03:42,557 --> 00:03:44,099
+This one is on purpose.
+
+85
+00:03:44,099 --> 00:03:47,117
+If a file called maintenance dot flag exists,
+
+86
+00:03:47,117 --> 00:03:50,067
+engine X answers five oh three for the shop.
+
+87
+00:03:50,617 --> 00:03:54,222
+Is the flag there?
+
+88
+00:03:54,772 --> 00:03:57,865
+Yes. Someone forgot to remove it after the last release.
+
+89
+00:03:58,415 --> 00:04:09,765
+TLS: read the certificate name.
+
+90
+00:04:10,315 --> 00:04:15,883
+Wrong dot example. The site is local host, so every client refuses this certificate.
+
+91
+00:04:16,433 --> 00:04:29,489
+Write the three answers.
+
+92
+00:04:30,039 --> 00:04:33,132
+Read them back. Type: cat, answers dot text.
+
+93
+00:04:33,682 --> 00:04:35,623
+Three words, three diagnoses.
+
+94
+00:04:36,173 --> 00:04:41,528
+Open the config in vim.
+
+95
+00:04:42,078 --> 00:04:43,247
+Go to line fifteen,
+
+96
+00:04:43,247 --> 00:04:46,079
+and change the port to eighty-two forty-eight.
+
+97
+00:04:46,079 --> 00:04:47,248
+Then line eighteen,
+
+98
+00:04:47,248 --> 00:04:49,587
+and change the timeout to ten seconds.
+
+99
+00:05:04,737 --> 00:05:09,047
+Remove the flag.
+
+100
+00:05:09,597 --> 00:05:40,695
+Make a new certificate.
+
+101
+00:05:41,245 --> 00:05:47,346
+Test, then reload.
+
+102
+00:05:47,896 --> 00:05:49,624
+Applied without stopping anything.
+
+103
+00:05:50,174 --> 00:05:53,481
+Probe again.
+
+104
+00:05:54,031 --> 00:05:59,556
+Two hundred, four times. Each fix matched its evidence, so each one worked the first time.
+
+105
+00:06:00,106 --> 00:06:02,474
+Run the judge.
+
+106
+00:06:03,024 --> 00:06:03,808
+Five checks.
+
+107
+00:06:03,808 --> 00:06:05,311
+The four services work,
+
+108
+00:06:05,311 --> 00:06:08,185
+and your three diagnoses match the evidence.
+
+109
+00:06:08,185 --> 00:06:09,296
+Five out of five.
+
+110
+00:06:09,846 --> 00:06:11,809
+Clean up.
+
+111
+00:06:12,359 --> 00:06:15,879
+Engine X and the app are stopped, and everything is removed.
+
+112
+00:06:16,429 --> 00:06:24,855
+Are the ports free? Count the lines.
+
+113
+00:06:25,405 --> 00:06:28,413
+Zero. Nothing listens, nothing is left behind.
+
+114
+00:06:29,963 --> 00:06:34,912
+Your task. Four things are broken. Find each cause from the evidence, then fix them.
+
+115
+00:06:35,462 --> 00:06:38,065
+One: lab up, and probe. See four failures.
+
+116
+00:06:38,615 --> 00:06:42,284
+Two: for the five oh two, read the error log, and see what listens.
+
+117
+00:06:42,834 --> 00:06:44,578
+Three: for the five oh four,
+
+118
+00:06:44,578 --> 00:06:45,760
+read the error log,
+
+119
+00:06:45,760 --> 00:06:46,757
+and the timeout.
+
+120
+00:06:46,757 --> 00:06:48,126
+For the five oh three,
+
+121
+00:06:48,126 --> 00:06:49,745
+find the maintenance flag.
+
+122
+00:06:49,745 --> 00:06:50,368
+For T L S,
+
+123
+00:06:50,368 --> 00:06:51,986
+read the certificate name.
+
+124
+00:06:52,536 --> 00:06:57,400
+Four: write your three diagnoses into answers dot text, before you fix anything.
+
+125
+00:06:57,950 --> 00:06:59,219
+Five: fix the port,
+
+126
+00:06:59,219 --> 00:07:00,019
+the timeout,
+
+127
+00:07:00,019 --> 00:07:01,955
+the flag and the certificate.
+
+128
+00:07:01,955 --> 00:07:02,422
+Reload,
+
+129
+00:07:02,422 --> 00:07:02,823
+probe,
+
+130
+00:07:02,823 --> 00:07:03,757
+run lab check,
+
+131
+00:07:03,757 --> 00:07:04,692
+then lab down.
+
+132
+00:07:06,742 --> 00:07:10,518
+Here is where to find everything. Pause on this screen, and write it down.
+
+133
+00:07:11,068 --> 00:07:12,716
+The lab lives on GitHub,
+
+134
+00:07:12,716 --> 00:07:13,883
+at it dash waves,
+
+135
+00:07:13,883 --> 00:07:15,463
+slash dev ops dash A I,
+
+136
+00:07:15,463 --> 00:07:16,973
+in the folder academy,
+
+137
+00:07:16,973 --> 00:07:17,660
+slash lab.
+
+138
+00:07:18,210 --> 00:07:23,821
+Two files: lab one twenty-four dot S H, and shortcuts one twenty-four dot S H.
+
+139
+00:07:24,371 --> 00:07:25,268
+Install it,
+
+140
+00:07:25,268 --> 00:07:28,123
+on any Linux machine: sudo install,
+
+141
+00:07:28,123 --> 00:07:29,999
+dash m seven five five,
+
+142
+00:07:29,999 --> 00:07:32,283
+lab one twenty-four dot S H,
+
+143
+00:07:32,283 --> 00:07:33,506
+into slash usr,
+
+144
+00:07:33,506 --> 00:07:34,485
+slash local,
+
+145
+00:07:34,485 --> 00:07:35,464
+slash S bin.
+
+146
+00:07:36,014 --> 00:07:40,834
+Load the short names with: source shortcuts one twenty-four dot S H.
+
+147
+00:07:40,834 --> 00:07:42,039
+You get two: lab,
+
+148
+00:07:42,039 --> 00:07:42,606
+and N G.
+
+149
+00:07:43,156 --> 00:07:44,428
+You need engine X,
+
+150
+00:07:44,428 --> 00:07:44,782
+curl,
+
+151
+00:07:44,782 --> 00:07:47,467
+open S S L and python three installed,
+
+152
+00:07:47,467 --> 00:07:49,658
+and ports eighty-two forty-one,
+
+153
+00:07:49,658 --> 00:07:51,990
+forty-three and forty-eight free.
+
+154
+00:07:51,990 --> 00:07:54,676
+The lab runs its own private engine X.
+
+155
+00:07:55,226 --> 00:07:56,933
+Lab up prepares everything.
+
+156
+00:07:56,933 --> 00:07:58,640
+Lab check judges your work.
+
+157
+00:07:58,640 --> 00:08:00,157
+Lab down removes it all.
+
+158
+00:08:00,157 --> 00:08:02,181
+Only run it on your own machine.
+
+159
+00:08:04,231 --> 00:08:06,300
+Pass or fail. You need all five.
+
+160
+00:08:06,850 --> 00:08:09,368
+The five oh two is fixed: the app answers.
+
+161
+00:08:09,918 --> 00:08:12,691
+The five oh four is fixed: the report answers.
+
+162
+00:08:13,241 --> 00:08:15,908
+The five oh three is fixed: the shop answers.
+
+163
+00:08:16,458 --> 00:08:18,911
+The secure connection verifies and works.
+
+164
+00:08:19,461 --> 00:08:21,893
+Your three diagnoses match the evidence.
+
+165
+00:08:22,443 --> 00:08:23,744
+To pass, all five.
+
+166
+00:08:25,794 --> 00:08:27,565
+Your turn, on your own machine.
+
+167
+00:08:28,115 --> 00:08:30,909
+One: lab up, and probe. Read the four failures.
+
+168
+00:08:31,459 --> 00:08:35,577
+Two: find each cause in the error log, the config, and the certificate.
+
+169
+00:08:36,127 --> 00:08:40,713
+Three: write your three diagnoses into answers dot text, before any fix.
+
+170
+00:08:41,263 --> 00:08:44,783
+Four: fix the port, the timeout, the flag, and the certificate.
+
+171
+00:08:45,333 --> 00:08:49,707
+Five: reload, probe, and run lab check until you see five out of five.
+
+172
+00:08:50,257 --> 00:08:53,030
+Six: lab down, and prove the ports are free.
+
+173
+00:08:53,580 --> 00:08:55,415
+Pause the video, and begin now.
+
+174
+00:09:10,965 --> 00:09:11,840
+Quick check.
+
+175
+00:09:12,390 --> 00:09:15,419
+What does a five oh two usually mean, and where do you look?
+
+176
+00:09:15,969 --> 00:09:18,550
+How do you tell a five oh four from a five oh three?
+
+177
+00:09:19,100 --> 00:09:21,703
+Why is a T L S error not a status code?
+
+178
+00:09:22,253 --> 00:09:25,581
+What is the order: symptom, evidence, cause, fix, proof?
+
+179
+00:09:26,131 --> 00:09:28,548
+Objectives covered: M C thirteen,
+
+180
+00:09:28,548 --> 00:09:29,720
+objective eight.
+
+181
+00:09:29,720 --> 00:09:31,772
+Troubleshooting five oh two,
+
+182
+00:09:31,772 --> 00:09:32,797
+five oh three,
+
+183
+00:09:32,797 --> 00:09:33,750
+five oh four,
+
+184
+00:09:33,750 --> 00:09:36,094
+T L S and upstream connectivity.
+
+185
+00:09:36,644 --> 00:09:38,713
+Pause the video, and answer out loud.
+
+186
+00:09:49,263 --> 00:09:52,506
+Next: the mastery lesson, where you prove the whole domain.
+
+187
+00:09:53,056 --> 00:09:56,384
+If this helped, like, share and subscribe, so you do not miss it.
