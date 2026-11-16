@@ -54,7 +54,7 @@ EOF_S
 # what the shop app does at start-up: connect with app.env and count the orders
 cd "$(dirname "$0")"; . ./app.env
 export PGPASSWORD="$DB_PASS"
-out=$(psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -X -At -c "SELECT count(*) FROM orders" 2>&1) && echo "app OK: $out orders" || { echo "app FAILED:"; echo "$out" | sed 's/^psql: error: //' | tr '\n\t' '  ' | fold -s -w 66 | sed 's/^/  /'; exit 1; }
+out=$(psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -X -At -c "SELECT count(*) FROM orders" 2>&1) && echo "app OK: $out orders" || { echo "app FAILED:"; echo "$out" | sed 's/^psql: error: //' | tr '\n\t' '  ' | fold -s -w 66 | sed 's/^/  /'; echo; exit 1; }
 EOF_S
   cat > $D/app/app.env <<'EOF_E'
 # connection settings of the shop app
