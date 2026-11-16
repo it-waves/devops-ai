@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab124.sh and shortc
 Honest notes: the terminal part is one real, continuous recording on real nginx 1.24, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the fixes, and lab down leaves nothing behind. The four faults are planted on purpose in a small lab, so real incidents will be messier: real causes are often a mix, and you may also need the app's own logs. The certificate is self-signed for the demo. The narration is synthetic speech. The hook, the symptoms picture, the task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: nginx Limits: Timeouts, Request Size, Secure Defaults | Lesson 123 https://youtu.be/anFDW3E2UYQ
-Next: The mastery lesson for web servers and reverse proxies: prove the whole domain.
+Next: Web Servers and Reverse Proxies Mastery: Build, Secure, Fix and Prove It | Lesson 125 https://youtu.be/QuaItZqwQDU
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
