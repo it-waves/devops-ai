@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab118.sh and shortc
 Honest notes: the terminal part is one real, continuous recording on real nginx 1.24, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The narration is synthetic speech. The hook, the three roles picture, the task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: CloudCart v0 Mastery: Prove It From a Clean Clone | Lesson 117 https://youtu.be/4GqAJaS6RBs
-Next: nginx Reverse Proxy: Route to a Backend, Pass Host and Client Headers | Lesson 119 (link coming)
+Next: nginx Reverse Proxy: Route to a Backend, Pass Host and Client Headers | Lesson 119 https://youtu.be/ENcmpwWj9Gc
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
