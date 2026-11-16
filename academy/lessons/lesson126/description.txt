@@ -1,0 +1,24 @@
+Lesson 126 of the DevOps Engineering Bootcamp, and lesson 1 of the Databases for DevOps domain. Your app is slow, shows an error, or lost an order, and nine times out of ten the answer is in the database. This lesson gives you the eight words you need (server, database, schema, table, row and column, connection, transaction, migration), then you use a real PostgreSQL 16 server: connect with psql, read the version, list and describe tables, count rows, read a migrations table, join three tables, check who is connected with pg_stat_activity, and run one transaction that rolls back and one that commits. A rolled-back row still uses up an id, and you see it happen. A lab then judges you from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Meet the database.
+0:25 What to expect
+1:02 Eight words to know
+1:49 Live: connect, look, ask, change
+7:06 Your lab task
+7:34 Where to find the lab
+8:30 Pass or fail rubric
+8:50 Your turn
+9:29 Quick check
+Objectives covered: MC14-O01 (relational database, schema, connection, transaction, migration) and MC14-O02 (connect to PostgreSQL and run basic diagnostic SQL)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab126.sh and shortcuts126.sh). Install with: sudo install -m 755 lab126.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts126.sh. You need any Linux machine with root, PostgreSQL server and client (for example: sudo apt install -y postgresql postgresql-client) and port 5461 free. The lab runs its own private PostgreSQL cluster in /opt/lab126 and does not touch the system PostgreSQL. lab down stops it and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording on real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. The shop database is a tiny teaching example, so real databases are much bigger. The server is configured for local sockets with trust authentication in this lab only: never do that on a real server (we fix that in the next lesson). The narration is synthetic speech. The hook, vocabulary, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: nginx Mastery: Web Servers and Reverse Proxies, Build, Secure, Fix and Prove It | Lesson 125 https://youtu.be/QuaItZqwQDU
+Next: Users, passwords and least privilege for the database.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #postgresql #sql #database #devopsbootcamp
