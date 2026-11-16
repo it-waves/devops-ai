@@ -12,7 +12,7 @@ Chapters
 12:38 Pass or fail rubric
 13:05 Your turn
 13:46 Quick check
-Objectives covered: MC14-O07 (use a database user interface to browse, query and manage data)
+Objectives covered: bonus lesson for the Databases domain (a user interface for MC14-O02, connect to PostgreSQL and inspect it). The objective MC14-O07, connections, locks and slow queries, comes next.
 
 Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab131.sh and shortcuts131.sh). Install with: sudo install -m 755 lab131.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts131.sh. You need any Linux machine with root, PostgreSQL server and client (for example: sudo apt install -y postgresql postgresql-client), PHP with the pgsql driver (sudo apt install -y php-cli php-pgsql), curl, and ports 5511 and 8085 free. The lab runs its own private PostgreSQL cluster in /opt/lab131 and a local web page for Adminer, and does not touch the system PostgreSQL. lab down stops everything and removes it. Only run it on your own machine.
 
