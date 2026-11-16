@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab115.sh and shortc
 Honest notes: the terminal and the browser parts are one real, continuous recording of the real CloudCart app on real Apache Tomcat 10.1.34 and its real Manager. The lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The Manager login (deployer / ship-it-115) is a lab value only: never use a guessable Manager password on a real server. The app in this lesson is the prebuilt 0.2.0 war from lesson 113; the war you built in lesson 114 deploys the same way. CloudCart is a practice store whose data is held in memory. The narration is synthetic speech. The hook, picture, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: CloudCart v0: The Project Layout and the Maven Build | Lesson 114 https://youtu.be/t2uorB6lHNo
-Next: CloudCart v0: Run It Like a Customer, Fix It Like an Engineer | Lesson 116 https://youtu.be/yookiVsHfl0
+Next: CloudCart v0: Run It Like a Customer, Fix It Like an Engineer | Lesson 116 https://youtu.be/0kDCCCDR-Wk
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 

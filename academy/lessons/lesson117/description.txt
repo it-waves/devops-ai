@@ -16,7 +16,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab117.sh and shortc
 
 Honest notes: the terminal part is one real, continuous recording. The lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. In the lab the "team repository" is a local copy (origin.git) made by lab up, so you can practise cloning and pushing a tag safely. The narration is synthetic speech. The hook, picture, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
-Previous lesson: CloudCart v0: Run It Like a Customer, Fix It Like an Engineer | Lesson 116 https://youtu.be/yookiVsHfl0
+Previous lesson: CloudCart v0: Run It Like a Customer, Fix It Like an Engineer | Lesson 116 https://youtu.be/0kDCCCDR-Wk
 Next: Web servers and reverse proxies, with nginx in front of CloudCart.
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
