@@ -1,0 +1,695 @@
+1
+00:00:00,500 --> 00:00:01,426
+Friday deploy.
+
+2
+00:00:01,426 --> 00:00:03,675
+The new code expects a new column.
+
+3
+00:00:03,675 --> 00:00:05,925
+The database does not have it yet.
+
+4
+00:00:05,925 --> 00:00:07,049
+The site is down.
+
+5
+00:00:07,599 --> 00:00:11,139
+Today you learn migrations: small numbered S Q L files,
+
+6
+00:00:11,139 --> 00:00:12,234
+applied in order,
+
+7
+00:00:12,234 --> 00:00:13,135
+recorded once,
+
+8
+00:00:13,135 --> 00:00:15,130
+and rolled back when they fail.
+
+9
+00:00:15,680 --> 00:00:18,404
+You run a real runner on a real post gress.
+
+10
+00:00:18,404 --> 00:00:20,621
+One migration will fail on purpose,
+
+11
+00:00:20,621 --> 00:00:21,888
+and you will fix it.
+
+12
+00:00:22,438 --> 00:00:25,254
+Change the database in small, recorded steps.
+
+13
+00:00:26,804 --> 00:00:29,876
+Here is what to expect, from the first minute to the last.
+
+14
+00:00:30,426 --> 00:00:36,399
+One: the words. Migration, version, the migrations table, transaction, and idempotent.
+
+15
+00:00:36,949 --> 00:00:42,389
+Two: a live demo on real post gress. We run the runner, and one migration fails.
+
+16
+00:00:42,939 --> 00:00:47,846
+Three: we see that the failed migration left nothing behind, fix it, and run again.
+
+17
+00:00:48,396 --> 00:00:50,194
+Four: we add a new migration,
+
+18
+00:00:50,194 --> 00:00:52,674
+and prove running twice changes nothing.
+
+19
+00:00:52,674 --> 00:00:53,604
+Then your turn,
+
+20
+00:00:53,604 --> 00:00:56,332
+with a lab that judges you with five checks.
+
+21
+00:00:56,882 --> 00:00:59,527
+This is lesson four of the databases domain.
+
+22
+00:01:00,077 --> 00:01:02,893
+Change the database in small, recorded steps.
+
+23
+00:01:04,943 --> 00:01:07,055
+Six ideas for safe migrations.
+
+24
+00:01:07,605 --> 00:01:11,520
+A migration is one S Q L file that changes the schema.
+
+25
+00:01:11,520 --> 00:01:13,550
+Name it with a number first,
+
+26
+00:01:13,550 --> 00:01:16,233
+so the order is clear: zero zero one,
+
+27
+00:01:16,233 --> 00:01:17,248
+zero zero two.
+
+28
+00:01:17,798 --> 00:01:20,215
+The database remembers which ones ran,
+
+29
+00:01:20,215 --> 00:01:22,506
+in a table called schema migrations.
+
+30
+00:01:22,506 --> 00:01:25,051
+The runner only applies what is missing.
+
+31
+00:01:25,601 --> 00:01:28,289
+Each migration runs in one transaction.
+
+32
+00:01:28,289 --> 00:01:29,874
+If any statement fails,
+
+33
+00:01:29,874 --> 00:01:32,562
+everything in that file is rolled back.
+
+34
+00:01:32,562 --> 00:01:33,665
+No half changes.
+
+35
+00:01:34,215 --> 00:01:37,690
+Idempotent means running the runner twice is safe.
+
+36
+00:01:37,690 --> 00:01:40,122
+The second run finds nothing to do,
+
+37
+00:01:40,122 --> 00:01:40,956
+and says so.
+
+38
+00:01:41,506 --> 00:01:44,871
+Never edit a migration that has already been applied.
+
+39
+00:01:44,871 --> 00:01:47,665
+Other databases already ran the old version.
+
+40
+00:01:47,665 --> 00:01:49,442
+Add a new migration instead.
+
+41
+00:01:49,992 --> 00:01:51,002
+In a deployment,
+
+42
+00:01:51,002 --> 00:01:53,715
+the runner goes before the new code starts.
+
+43
+00:01:53,715 --> 00:01:54,473
+If it fails,
+
+44
+00:01:54,473 --> 00:01:55,545
+the deploy stops,
+
+45
+00:01:55,545 --> 00:01:57,502
+and the old code keeps running.
+
+46
+00:01:59,052 --> 00:02:04,236
+Go to the lab folder.
+
+47
+00:02:05,786 --> 00:02:07,685
+Look around. Type: L S.
+
+48
+00:02:08,235 --> 00:02:13,931
+A migrations folder, the runner called migrate dot S H, a data folder, and a task file.
+
+49
+00:02:14,481 --> 00:02:17,787
+List the migrations.
+
+50
+00:02:18,337 --> 00:02:19,254
+Three files.
+
+51
+00:02:19,254 --> 00:02:21,088
+Zero zero one customers,
+
+52
+00:02:21,088 --> 00:02:22,615
+zero zero two email,
+
+53
+00:02:22,615 --> 00:02:24,372
+zero zero three orders.
+
+54
+00:02:24,372 --> 00:02:26,359
+The numbers set the order.
+
+55
+00:02:26,909 --> 00:02:33,607
+Read one.
+
+56
+00:02:34,157 --> 00:02:35,140
+Two statements.
+
+57
+00:02:35,140 --> 00:02:36,450
+Add an email column,
+
+58
+00:02:36,450 --> 00:02:39,200
+and fill it in for the existing customers.
+
+59
+00:02:39,200 --> 00:02:39,855
+One small,
+
+60
+00:02:39,855 --> 00:02:40,707
+clear change.
+
+61
+00:02:41,257 --> 00:02:46,163
+What is pending?
+
+62
+00:02:46,713 --> 00:02:49,231
+All three are pending. Nothing has run yet.
+
+63
+00:02:49,781 --> 00:02:53,343
+Run the runner.
+
+64
+00:02:53,893 --> 00:02:55,532
+Zero zero one applied.
+
+65
+00:02:55,532 --> 00:02:57,171
+Zero zero two applied.
+
+66
+00:02:57,171 --> 00:03:02,013
+Then zero zero three fails: the relation customer does not exist.
+
+67
+00:03:02,013 --> 00:03:03,726
+The runner says FAILED,
+
+68
+00:03:03,726 --> 00:03:04,620
+rolled back,
+
+69
+00:03:04,620 --> 00:03:05,365
+and stops.
+
+70
+00:03:05,365 --> 00:03:07,376
+The deploy would stop here.
+
+71
+00:03:07,926 --> 00:03:14,582
+What did the failure leave?
+
+72
+00:03:15,132 --> 00:03:15,808
+Customers,
+
+73
+00:03:15,808 --> 00:03:17,972
+and the schema migrations table.
+
+74
+00:03:17,972 --> 00:03:19,054
+No orders table.
+
+75
+00:03:19,054 --> 00:03:21,691
+The transaction rolled everything back.
+
+76
+00:03:21,691 --> 00:03:22,705
+No half change.
+
+77
+00:03:23,255 --> 00:03:27,522
+Check the status.
+
+78
+00:03:28,072 --> 00:03:31,720
+Two applied, one pending. That is your first lab answer: two.
+
+79
+00:03:32,270 --> 00:03:38,947
+Write the answer.
+
+80
+00:03:39,497 --> 00:03:53,151
+Fix the migration.
+
+81
+00:03:53,701 --> 00:03:58,565
+Line three. The reference says customer. Change it to customers, with an S. Save.
+
+82
+00:04:09,615 --> 00:04:13,817
+Run it again.
+
+83
+00:04:14,367 --> 00:04:16,223
+Only zero zero three applies.
+
+84
+00:04:16,223 --> 00:04:17,887
+The first two are skipped,
+
+85
+00:04:17,887 --> 00:04:20,063
+because they are already recorded.
+
+86
+00:04:20,063 --> 00:04:20,383
+Done,
+
+87
+00:04:20,383 --> 00:04:21,151
+one applied.
+
+88
+00:04:21,701 --> 00:04:30,363
+Write a new migration.
+
+89
+00:04:30,913 --> 00:04:32,906
+Add a status column to orders,
+
+90
+00:04:32,906 --> 00:04:34,368
+with a default of new.
+
+91
+00:04:34,368 --> 00:04:35,232
+A new number,
+
+92
+00:04:35,232 --> 00:04:36,229
+zero zero four.
+
+93
+00:04:36,229 --> 00:04:38,090
+We never touch the old ones.
+
+94
+00:04:38,090 --> 00:04:38,422
+Save.
+
+95
+00:04:45,072 --> 00:04:48,699
+Apply it.
+
+96
+00:04:49,249 --> 00:04:51,873
+Zero zero four applied. One applied.
+
+97
+00:04:52,423 --> 00:04:58,204
+Run it again.
+
+98
+00:04:58,754 --> 00:05:03,447
+Done, zero applied. Nothing to do, nothing changed. Running twice is safe.
+
+99
+00:05:03,997 --> 00:05:14,109
+The history.
+
+100
+00:05:14,659 --> 00:05:17,347
+Four versions, each with the time it was applied.
+
+101
+00:05:17,897 --> 00:05:27,903
+The new column.
+
+102
+00:05:28,453 --> 00:05:31,123
+The orders from zero zero three are there,
+
+103
+00:05:31,123 --> 00:05:33,221
+and every one has the new status,
+
+104
+00:05:33,221 --> 00:05:33,476
+new.
+
+105
+00:05:33,476 --> 00:05:34,938
+The old data is intact.
+
+106
+00:05:35,488 --> 00:05:37,856
+Run the judge.
+
+107
+00:05:38,406 --> 00:05:44,315
+Five checks. Counted, fixed, new column, four versions, and data intact. Five out of five.
+
+108
+00:05:44,865 --> 00:05:46,828
+Clean up.
+
+109
+00:05:47,378 --> 00:05:50,045
+The server is stopped and everything is removed.
+
+110
+00:05:50,595 --> 00:05:59,341
+Is it gone?
+
+111
+00:05:59,891 --> 00:06:02,409
+No response. Nothing is left behind.
+
+112
+00:06:03,959 --> 00:06:07,906
+Your task. Run the migrations, survive a failure, and add your own.
+
+113
+00:06:08,456 --> 00:06:09,811
+One: run the runner.
+
+114
+00:06:09,811 --> 00:06:12,182
+Two migrations apply and one fails.
+
+115
+00:06:12,182 --> 00:06:15,773
+Write how many are applied now into answers dot text.
+
+116
+00:06:16,323 --> 00:06:21,528
+Two: read the error, and fix migration zero zero three, which has never been applied.
+
+117
+00:06:22,078 --> 00:06:25,620
+Three: run the runner again, so zero zero three applies.
+
+118
+00:06:26,170 --> 00:06:28,690
+Four: add migration zero zero four,
+
+119
+00:06:28,690 --> 00:06:31,354
+which adds a status column to orders.
+
+120
+00:06:31,354 --> 00:06:32,722
+Five: run it twice,
+
+121
+00:06:32,722 --> 00:06:33,802
+then lab check,
+
+122
+00:06:33,802 --> 00:06:34,810
+then lab down.
+
+123
+00:06:36,860 --> 00:06:40,636
+Here is where to find everything. Pause on this screen, and write it down.
+
+124
+00:06:41,186 --> 00:06:42,834
+The lab lives on GitHub,
+
+125
+00:06:42,834 --> 00:06:44,001
+at it dash waves,
+
+126
+00:06:44,001 --> 00:06:45,581
+slash dev ops dash A I,
+
+127
+00:06:45,581 --> 00:06:47,091
+in the folder academy,
+
+128
+00:06:47,091 --> 00:06:47,778
+slash lab.
+
+129
+00:06:48,328 --> 00:06:54,003
+Two files: lab one twenty-nine dot S H, and shortcuts one twenty-nine dot S H.
+
+130
+00:06:54,553 --> 00:06:55,453
+Install it,
+
+131
+00:06:55,453 --> 00:06:58,319
+on any Linux machine: sudo install,
+
+132
+00:06:58,319 --> 00:07:00,203
+dash m seven five five,
+
+133
+00:07:00,203 --> 00:07:02,495
+lab one twenty-nine dot S H,
+
+134
+00:07:02,495 --> 00:07:03,723
+into slash usr,
+
+135
+00:07:03,723 --> 00:07:04,706
+slash local,
+
+136
+00:07:04,706 --> 00:07:05,689
+slash S bin.
+
+137
+00:07:06,239 --> 00:07:11,012
+Load the short names with: source shortcuts one twenty-nine dot S H.
+
+138
+00:07:11,012 --> 00:07:12,205
+You get two: lab,
+
+139
+00:07:12,205 --> 00:07:12,767
+and P G.
+
+140
+00:07:13,317 --> 00:07:14,947
+You need post gress Q L,
+
+141
+00:07:14,947 --> 00:07:16,170
+server and client,
+
+142
+00:07:16,170 --> 00:07:16,850
+installed,
+
+143
+00:07:16,850 --> 00:07:19,296
+and port fifty-four ninety-one free.
+
+144
+00:07:19,296 --> 00:07:22,014
+The lab runs its own private post gress,
+
+145
+00:07:22,014 --> 00:07:23,237
+in its own folder.
+
+146
+00:07:23,787 --> 00:07:25,494
+Lab up prepares everything.
+
+147
+00:07:25,494 --> 00:07:27,201
+Lab check judges your work.
+
+148
+00:07:27,201 --> 00:07:28,718
+Lab down removes it all.
+
+149
+00:07:28,718 --> 00:07:30,741
+Only run it on your own machine.
+
+150
+00:07:32,791 --> 00:07:34,860
+Pass or fail. You need all five.
+
+151
+00:07:35,410 --> 00:07:38,440
+One: you counted the two migrations that applied first.
+
+152
+00:07:38,990 --> 00:07:42,510
+Two: migration zero zero three is fixed and applied.
+
+153
+00:07:43,060 --> 00:07:47,156
+Three: your migration zero zero four added the status column.
+
+154
+00:07:47,706 --> 00:07:51,204
+Four: the migrations table lists exactly four versions.
+
+155
+00:07:51,754 --> 00:07:53,930
+Five: the customers kept their data.
+
+156
+00:07:54,480 --> 00:07:55,782
+To pass, all five.
+
+157
+00:07:57,832 --> 00:07:59,603
+Your turn, on your own machine.
+
+158
+00:08:00,153 --> 00:08:02,691
+One: lab up, run the runner, and write the answer.
+
+159
+00:08:03,241 --> 00:08:06,164
+Two: read the error, and fix zero zero three.
+
+160
+00:08:06,714 --> 00:08:08,314
+Three: run the runner again.
+
+161
+00:08:08,864 --> 00:08:11,851
+Four: write zero zero four, and run it twice.
+
+162
+00:08:12,401 --> 00:08:16,219
+Five: lab check until you see five out of five. Then lab down.
+
+163
+00:08:16,769 --> 00:08:18,604
+Pause the video, and begin now.
+
+164
+00:08:34,154 --> 00:08:35,029
+Quick check.
+
+165
+00:08:35,579 --> 00:08:37,477
+Why are migration files numbered?
+
+166
+00:08:38,027 --> 00:08:41,163
+What happened to the failed migration's changes, and why?
+
+167
+00:08:41,713 --> 00:08:44,209
+Why never edit a migration that already ran?
+
+168
+00:08:44,759 --> 00:08:47,021
+What does idempotent mean for the runner?
+
+169
+00:08:47,571 --> 00:08:50,008
+Objectives covered: M C fourteen,
+
+170
+00:08:50,008 --> 00:08:51,115
+objective five.
+
+171
+00:08:51,115 --> 00:08:54,291
+Schema migrations in a deployment workflow.
+
+172
+00:08:54,841 --> 00:08:56,910
+Pause the video, and answer out loud.
+
+173
+00:09:07,460 --> 00:09:11,748
+Next: backing up a database, restoring it, and proving the data is back.
+
+174
+00:09:12,298 --> 00:09:15,626
+If this helped, like, share and subscribe, so you do not miss it.

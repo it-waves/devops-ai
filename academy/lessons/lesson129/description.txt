@@ -1,0 +1,24 @@
+Lesson 129 of the DevOps Engineering Bootcamp, and lesson 4 of the Databases for DevOps domain. A Friday deploy expects a new column and the database does not have it: the site is down. Migrations fix this: small numbered SQL files, applied in order, recorded once in a schema_migrations table, each inside one transaction. In this lesson you run a real migration runner on a real PostgreSQL 16 server, watch migration 003 fail and roll back without leaving anything behind, fix it, run again so only the missing one applies, add your own migration 004, and prove that running the runner twice changes nothing. A lab then judges you from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Change the database safely
+0:26 What to expect
+1:04 Six ideas for safe migrations
+1:58 Live: migrate, fail, fix, repeat
+6:03 Your lab task
+6:36 Where to find the lab
+7:32 Pass or fail rubric
+7:57 Your turn
+8:33 Quick check
+Objectives covered: MC14-O05 (run schema migrations in a deployment workflow)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab129.sh and shortcuts129.sh). Install with: sudo install -m 755 lab129.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts129.sh. You need any Linux machine with root, PostgreSQL server and client (for example: sudo apt install -y postgresql postgresql-client) and port 5491 free. The lab runs its own private PostgreSQL cluster in /opt/lab129 and does not touch the system PostgreSQL. lab down stops it and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording on real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. The runner is a tiny teaching script; real teams use tools such as Flyway, Liquibase or their framework's migrations, built on the same ideas. The narration is synthetic speech. The hook, vocabulary, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: PostgreSQL Configuration and Persistent Storage: conf.d, Reload vs Restart | Lesson 128 https://youtu.be/UrmCJFYtduo
+Next: Backing up and restoring a database.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #postgresql #database #migrations #devopsbootcamp
