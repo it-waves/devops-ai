@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab129.sh and shortc
 Honest notes: the terminal part is one real, continuous recording on real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. The runner is a tiny teaching script; real teams use tools such as Flyway, Liquibase or their framework's migrations, built on the same ideas. The narration is synthetic speech. The hook, vocabulary, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: PostgreSQL Configuration and Persistent Storage: conf.d, Reload vs Restart | Lesson 128 https://youtu.be/UrmCJFYtduo
-Next: Backing up and restoring a database.
+Next lesson: PostgreSQL Backup and Restore: pg_dump, pg_restore and Proving the Data | Lesson 130 https://youtu.be/87otBi-hkME
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
