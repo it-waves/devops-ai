@@ -1,0 +1,26 @@
+Lesson 131 of the DevOps Engineering Bootcamp, and lesson 6 of the Databases for DevOps domain. A teammate wants to see the orders, a manager wants to see the customers table, a new engineer wants to understand the schema. Not every database job happens in a terminal. In this lesson you tour a real database user interface, Adminer, on a real PostgreSQL 16 server: why teams use one, an anatomy of the six zones of the screen, then a live click-by-click walk through login, the table list, table structure, select data, following a foreign key, editing a row, the SQL command page, export and the schema diagram. You finish with five habits for using a database interface safely. A lab then judges you from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Look at your database in a browser
+0:32 What to expect
+1:06 Why use a database interface
+2:04 Anatomy of the screen
+2:59 Live tour of the interface
+10:23 Five safe habits
+10:57 Your lab task
+11:41 Where to find the lab
+12:38 Pass or fail rubric
+13:05 Your turn
+13:46 Quick check
+Objectives covered: MC14-O07 (use a database user interface to browse, query and manage data)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab131.sh and shortcuts131.sh). Install with: sudo install -m 755 lab131.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts131.sh. You need any Linux machine with root, PostgreSQL server and client (for example: sudo apt install -y postgresql postgresql-client), PHP with the pgsql driver (sudo apt install -y php-cli php-pgsql), curl, and ports 5511 and 8085 free. The lab runs its own private PostgreSQL cluster in /opt/lab131 and a local web page for Adminer, and does not touch the system PostgreSQL. lab down stops everything and removes it. Only run it on your own machine.
+
+Honest notes: the terminal and the browser parts are one real, continuous recording of real Adminer 5.4.1 on real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. Other tools such as pgAdmin and DBeaver look different but use the same ideas. The narration is synthetic speech. The hook, anatomy, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: PostgreSQL Backup and Restore: pg_dump, pg_restore and Proving the Data | Lesson 130 https://youtu.be/87otBi-hkME
+Next: Connections, locks and slow queries.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #postgresql #database #adminer #devopsbootcamp

@@ -1,0 +1,1435 @@
+1
+00:00:00,500 --> 00:00:03,252
+Not every database job happens in a terminal.
+
+2
+00:00:03,802 --> 00:00:06,911
+A teammate asks: how many orders came in last week?
+
+3
+00:00:06,911 --> 00:00:09,532
+A manager wants to see the customers table.
+
+4
+00:00:09,532 --> 00:00:12,335
+A new engineer wants to understand the schema.
+
+5
+00:00:12,885 --> 00:00:16,981
+You could write queries for each of them. Or you can open a web page, and look.
+
+6
+00:00:17,531 --> 00:00:20,483
+Today you tour a real database user interface,
+
+7
+00:00:20,483 --> 00:00:21,510
+called admin er,
+
+8
+00:00:21,510 --> 00:00:23,307
+on a real post gress server,
+
+9
+00:00:23,307 --> 00:00:25,553
+and learn every part of the screen.
+
+10
+00:00:26,103 --> 00:00:31,180
+A user interface is fast and friendly. It is also powerful, so you learn it with care.
+
+11
+00:00:32,730 --> 00:00:34,159
+Here is what to expect.
+
+12
+00:00:34,709 --> 00:00:39,104
+One: why teams use a database user interface, and which tools exist.
+
+13
+00:00:39,654 --> 00:00:41,069
+Two: an anatomy lesson.
+
+14
+00:00:41,069 --> 00:00:42,545
+A picture of the screen,
+
+15
+00:00:42,545 --> 00:00:43,898
+with every zone named,
+
+16
+00:00:43,898 --> 00:00:45,435
+before we touch anything.
+
+17
+00:00:45,985 --> 00:00:47,461
+Three: a live tour,
+
+18
+00:00:47,461 --> 00:00:48,626
+click by click.
+
+19
+00:00:48,626 --> 00:00:49,092
+Login,
+
+20
+00:00:49,092 --> 00:00:49,636
+tables,
+
+21
+00:00:49,636 --> 00:00:50,413
+structure,
+
+22
+00:00:50,413 --> 00:00:50,801
+data,
+
+23
+00:00:50,801 --> 00:00:51,189
+edit,
+
+24
+00:00:51,189 --> 00:00:51,655
+S Q L,
+
+25
+00:00:51,655 --> 00:00:52,199
+export,
+
+26
+00:00:52,199 --> 00:00:53,985
+and the schema diagram.
+
+27
+00:00:54,535 --> 00:00:57,970
+Four: five habits for using a database interface safely.
+
+28
+00:00:58,520 --> 00:00:59,471
+Then your turn,
+
+29
+00:00:59,471 --> 00:01:02,259
+with a lab that judges you with five checks.
+
+30
+00:01:02,259 --> 00:01:04,984
+This is lesson six of the databases domain.
+
+31
+00:01:06,834 --> 00:01:08,925
+Why use a database user interface?
+
+32
+00:01:09,475 --> 00:01:10,016
+To look.
+
+33
+00:01:10,016 --> 00:01:10,963
+Browse tables,
+
+34
+00:01:10,963 --> 00:01:11,911
+see real rows,
+
+35
+00:01:11,911 --> 00:01:14,550
+understand a schema you did not design.
+
+36
+00:01:14,550 --> 00:01:17,731
+Much faster than typing select a hundred times.
+
+37
+00:01:18,281 --> 00:01:23,763
+To make small, careful changes. Fix one typo in one row. Add one test customer.
+
+38
+00:01:24,313 --> 00:01:25,757
+To explore and export.
+
+39
+00:01:25,757 --> 00:01:26,938
+Run a quick query,
+
+40
+00:01:26,938 --> 00:01:30,415
+and download the answer as a C S V for a spreadsheet.
+
+41
+00:01:30,965 --> 00:01:32,909
+Three tools you will meet.
+
+42
+00:01:32,909 --> 00:01:34,778
+Admin er: one P H P file,
+
+43
+00:01:34,778 --> 00:01:35,152
+tiny,
+
+44
+00:01:35,152 --> 00:01:36,947
+supports many databases.
+
+45
+00:01:36,947 --> 00:01:40,611
+P G admin: the full official tool for post gress.
+
+46
+00:01:40,611 --> 00:01:45,621
+And dee beaver: a desktop program that connects to almost anything.
+
+47
+00:01:46,171 --> 00:01:47,183
+We use admin er,
+
+48
+00:01:47,183 --> 00:01:50,854
+because it installs in seconds and every screen is simple.
+
+49
+00:01:50,854 --> 00:01:53,701
+Every idea you learn transfers to the others.
+
+50
+00:01:54,251 --> 00:01:57,466
+A user interface does not replace the command line.
+
+51
+00:01:57,466 --> 00:01:57,970
+Scripts,
+
+52
+00:01:57,970 --> 00:02:00,743
+backups and automation stay in the terminal.
+
+53
+00:02:00,743 --> 00:02:02,507
+The interface is for people,
+
+54
+00:02:02,507 --> 00:02:03,894
+looking and exploring.
+
+55
+00:02:05,444 --> 00:02:10,671
+Anatomy of the screen. Learn these six zones, and you can use any database interface.
+
+56
+00:02:11,221 --> 00:02:11,804
+Zone one,
+
+57
+00:02:11,804 --> 00:02:12,841
+the bread crumb,
+
+58
+00:02:12,841 --> 00:02:13,553
+at the top.
+
+59
+00:02:13,553 --> 00:02:15,821
+It shows where you are: the server,
+
+60
+00:02:15,821 --> 00:02:16,664
+the database,
+
+61
+00:02:16,664 --> 00:02:17,376
+the schema,
+
+62
+00:02:17,376 --> 00:02:18,024
+the table.
+
+63
+00:02:18,024 --> 00:02:19,903
+Every part is a link back up.
+
+64
+00:02:20,453 --> 00:02:23,803
+Zone two, the user name and the logout button, top right.
+
+65
+00:02:24,353 --> 00:02:25,035
+Zone three,
+
+66
+00:02:25,035 --> 00:02:27,145
+the database and schema selectors,
+
+67
+00:02:27,145 --> 00:02:28,325
+top of the sidebar.
+
+68
+00:02:28,325 --> 00:02:31,179
+They decide which database you are looking at.
+
+69
+00:02:31,729 --> 00:02:32,454
+Zone four,
+
+70
+00:02:32,454 --> 00:02:34,843
+the main menu and the table list,
+
+71
+00:02:34,843 --> 00:02:36,292
+also in the sidebar.
+
+72
+00:02:36,292 --> 00:02:37,306
+S Q L command,
+
+73
+00:02:37,306 --> 00:02:37,813
+import,
+
+74
+00:02:37,813 --> 00:02:38,320
+export,
+
+75
+00:02:38,320 --> 00:02:39,985
+and one link per table.
+
+76
+00:02:40,535 --> 00:02:41,255
+Zone five,
+
+77
+00:02:41,255 --> 00:02:41,903
+the tabs,
+
+78
+00:02:41,903 --> 00:02:43,415
+under the page title.
+
+79
+00:02:43,415 --> 00:02:44,279
+Select data,
+
+80
+00:02:44,279 --> 00:02:45,359
+show structure,
+
+81
+00:02:45,359 --> 00:02:46,223
+alter table,
+
+82
+00:02:46,223 --> 00:02:46,871
+new item.
+
+83
+00:02:47,421 --> 00:02:47,997
+Zone six,
+
+84
+00:02:47,997 --> 00:02:48,957
+the main panel.
+
+85
+00:02:48,957 --> 00:02:50,493
+This is where the table,
+
+86
+00:02:50,493 --> 00:02:51,069
+the rows,
+
+87
+00:02:51,069 --> 00:02:52,349
+or the form appears.
+
+88
+00:02:52,349 --> 00:02:54,333
+Everything you do ends up here.
+
+89
+00:02:54,883 --> 00:02:58,041
+Remember this picture. We now visit every zone, live.
+
+90
+00:02:59,591 --> 00:03:03,026
+Start in the terminal. Start the lab. Type: lab, up.
+
+91
+00:03:03,576 --> 00:03:06,121
+This starts a private post gress server,
+
+92
+00:03:06,121 --> 00:03:07,394
+loads the shop data,
+
+93
+00:03:07,394 --> 00:03:09,558
+and serves admin er on a web port.
+
+94
+00:03:09,558 --> 00:03:11,085
+Wait for the ready line.
+
+95
+00:03:16,635 --> 00:03:19,259
+Now the shortcut U I. Type: U I.
+
+96
+00:03:19,809 --> 00:03:20,575
+Where to go,
+
+97
+00:03:20,575 --> 00:03:22,554
+and how to log in: the address,
+
+98
+00:03:22,554 --> 00:03:23,256
+the system,
+
+99
+00:03:23,256 --> 00:03:24,533
+the server and port,
+
+100
+00:03:24,533 --> 00:03:25,108
+the user,
+
+101
+00:03:25,108 --> 00:03:25,937
+the password,
+
+102
+00:03:25,937 --> 00:03:27,023
+and the database.
+
+103
+00:03:27,023 --> 00:03:28,236
+Keep these in mind.
+
+104
+00:03:28,786 --> 00:03:32,498
+Now the browser. Open local host, port eighty-eighty-five.
+
+105
+00:03:37,948 --> 00:03:39,038
+The login page.
+
+106
+00:03:39,038 --> 00:03:41,800
+Admin er works with several databases,
+
+107
+00:03:41,800 --> 00:03:44,199
+so the first field is the system.
+
+108
+00:03:44,199 --> 00:03:45,798
+Choose post gress Q L.
+
+109
+00:03:46,348 --> 00:03:49,488
+Server: the address and port of the database.
+
+110
+00:03:49,488 --> 00:03:52,488
+One twenty-seven dot zero dot zero dot one,
+
+111
+00:03:52,488 --> 00:03:54,092
+port fifty-five eleven.
+
+112
+00:03:58,542 --> 00:03:59,429
+The user name,
+
+113
+00:03:59,429 --> 00:04:00,126
+shop admin.
+
+114
+00:04:00,126 --> 00:04:00,949
+The password,
+
+115
+00:04:00,949 --> 00:04:02,912
+which stays hidden as you type.
+
+116
+00:04:02,912 --> 00:04:04,306
+And the database name,
+
+117
+00:04:04,306 --> 00:04:04,622
+shop.
+
+118
+00:04:22,272 --> 00:04:23,296
+Click login.
+
+119
+00:04:25,146 --> 00:04:27,421
+The home screen of the shop schema.
+
+120
+00:04:27,421 --> 00:04:30,605
+First the bread crumb at the top: post gress Q L,
+
+121
+00:04:30,605 --> 00:04:31,320
+the server,
+
+122
+00:04:31,320 --> 00:04:32,490
+the database shop,
+
+123
+00:04:32,490 --> 00:04:33,660
+the schema public.
+
+124
+00:04:33,660 --> 00:04:34,960
+Each part is a link.
+
+125
+00:04:35,510 --> 00:04:37,711
+At the top right: the logged in user,
+
+126
+00:04:37,711 --> 00:04:39,021
+and the logout button.
+
+127
+00:04:39,021 --> 00:04:40,270
+On a shared computer,
+
+128
+00:04:40,270 --> 00:04:41,163
+always log out.
+
+129
+00:04:41,713 --> 00:04:42,614
+In the sidebar,
+
+130
+00:04:42,614 --> 00:04:45,377
+the selectors for the database and the schema.
+
+131
+00:04:45,377 --> 00:04:46,998
+Before you change anything,
+
+132
+00:04:46,998 --> 00:04:47,959
+check these two.
+
+133
+00:04:47,959 --> 00:04:48,860
+Wrong database,
+
+134
+00:04:48,860 --> 00:04:49,521
+wrong data.
+
+135
+00:04:50,071 --> 00:04:52,565
+Then the main menu: S Q L command,
+
+136
+00:04:52,565 --> 00:04:53,079
+import,
+
+137
+00:04:53,079 --> 00:04:53,592
+export,
+
+138
+00:04:53,592 --> 00:04:54,546
+create table.
+
+139
+00:04:54,546 --> 00:04:55,206
+Below it,
+
+140
+00:04:55,206 --> 00:04:57,187
+one line per table or view.
+
+141
+00:04:57,187 --> 00:04:59,167
+Order totals is in italics,
+
+142
+00:04:59,167 --> 00:05:00,708
+because it is a view,
+
+143
+00:05:00,708 --> 00:05:01,735
+a saved query,
+
+144
+00:05:01,735 --> 00:05:02,615
+not a table.
+
+145
+00:05:03,165 --> 00:05:06,211
+The main panel lists the tables and the views.
+
+146
+00:05:06,211 --> 00:05:07,932
+Engine says table or view.
+
+147
+00:05:07,932 --> 00:05:11,309
+Data length and index length are the bytes on disk.
+
+148
+00:05:11,309 --> 00:05:14,090
+Rows is an estimate: about four customers,
+
+149
+00:05:14,090 --> 00:05:15,017
+twelve orders,
+
+150
+00:05:15,017 --> 00:05:15,944
+five products.
+
+151
+00:05:16,494 --> 00:05:20,009
+Search data in tables looks for a word in every table at once.
+
+152
+00:05:20,009 --> 00:05:22,787
+Handy when you do not know where something lives.
+
+153
+00:05:23,337 --> 00:05:24,384
+Below the list,
+
+154
+00:05:24,384 --> 00:05:25,849
+four buttons: vacuum,
+
+155
+00:05:25,849 --> 00:05:26,477
+optimize,
+
+156
+00:05:26,477 --> 00:05:27,733
+truncate and drop.
+
+157
+00:05:27,733 --> 00:05:30,385
+They stay grey until you tick a table.
+
+158
+00:05:30,385 --> 00:05:32,129
+Truncate empties a table.
+
+159
+00:05:32,129 --> 00:05:33,246
+Drop deletes it.
+
+160
+00:05:33,246 --> 00:05:34,153
+Respect them.
+
+161
+00:05:34,703 --> 00:05:37,391
+Now open the orders table. Click its name.
+
+162
+00:05:38,241 --> 00:05:39,297
+The table page.
+
+163
+00:05:39,297 --> 00:05:40,917
+Four tabs: select data,
+
+164
+00:05:40,917 --> 00:05:41,973
+show structure,
+
+165
+00:05:41,973 --> 00:05:42,818
+alter table,
+
+166
+00:05:42,818 --> 00:05:43,734
+and new item.
+
+167
+00:05:43,734 --> 00:05:45,494
+We are on show structure.
+
+168
+00:05:46,044 --> 00:05:46,867
+The columns,
+
+169
+00:05:46,867 --> 00:05:47,964
+and their types.
+
+170
+00:05:47,964 --> 00:05:53,380
+Id is an integer with auto increment: the database fills it in from a sequence.
+
+171
+00:05:53,380 --> 00:05:54,614
+Qty has a default,
+
+172
+00:05:54,614 --> 00:05:55,986
+the one in brackets.
+
+173
+00:05:56,536 --> 00:05:57,103
+Indexes.
+
+174
+00:05:57,103 --> 00:05:58,664
+Primary on id: unique,
+
+175
+00:05:58,664 --> 00:05:59,870
+and fast to find.
+
+176
+00:05:59,870 --> 00:06:02,423
+Alter indexes is where you add more.
+
+177
+00:06:02,423 --> 00:06:05,048
+Remember it: it is part of your task.
+
+178
+00:06:05,598 --> 00:06:06,539
+Foreign keys.
+
+179
+00:06:06,539 --> 00:06:08,929
+Customer I D points to customers.
+
+180
+00:06:08,929 --> 00:06:11,173
+Product I D points to products.
+
+181
+00:06:11,173 --> 00:06:15,880
+The database refuses an order for a customer that does not exist.
+
+182
+00:06:16,430 --> 00:06:18,777
+Now click select data, to see the rows.
+
+183
+00:06:20,227 --> 00:06:20,728
+On top,
+
+184
+00:06:20,728 --> 00:06:25,521
+admin er shows the S Q L it wrote for you: select star from orders,
+
+185
+00:06:25,521 --> 00:06:26,380
+limit fifty,
+
+186
+00:06:26,380 --> 00:06:27,882
+and how long it took.
+
+187
+00:06:27,882 --> 00:06:30,744
+You can learn S Q L just by watching it.
+
+188
+00:06:31,294 --> 00:06:32,552
+The row of boxes.
+
+189
+00:06:32,552 --> 00:06:34,550
+Select chooses the columns.
+
+190
+00:06:34,550 --> 00:06:36,326
+Search filters the rows.
+
+191
+00:06:36,326 --> 00:06:37,584
+Sort orders them.
+
+192
+00:06:37,584 --> 00:06:39,285
+Limit is how many rows.
+
+193
+00:06:39,285 --> 00:06:41,579
+Text length shortens long text.
+
+194
+00:06:41,579 --> 00:06:42,985
+And Action runs it.
+
+195
+00:06:43,535 --> 00:06:46,179
+Each blue number in customer I D is a link.
+
+196
+00:06:46,179 --> 00:06:48,085
+Click the one in the first row,
+
+197
+00:06:48,085 --> 00:06:51,343
+and admin er follows the foreign key to the customer.
+
+198
+00:06:51,893 --> 00:06:54,309
+Order one belongs to customer one,
+
+199
+00:06:54,309 --> 00:06:54,593
+Ana,
+
+200
+00:06:54,593 --> 00:06:55,233
+in Lagos.
+
+201
+00:06:55,233 --> 00:06:57,862
+This page filtered by a where clause,
+
+202
+00:06:57,862 --> 00:06:59,212
+shown in the S Q L.
+
+203
+00:06:59,212 --> 00:07:01,344
+Click edit to change this row.
+
+204
+00:07:05,494 --> 00:07:06,496
+The edit form.
+
+205
+00:07:06,496 --> 00:07:08,215
+One box for each column.
+
+206
+00:07:08,215 --> 00:07:09,719
+We move Ana to Abuja.
+
+207
+00:07:09,719 --> 00:07:11,080
+Click the city box,
+
+208
+00:07:11,080 --> 00:07:11,868
+select all,
+
+209
+00:07:11,868 --> 00:07:13,515
+and type the new value.
+
+210
+00:07:14,065 --> 00:07:19,569
+Scroll down. Three buttons. Save. Save and continue edit. And Delete. Click save.
+
+211
+00:07:22,519 --> 00:07:25,051
+A green message: item has been updated.
+
+212
+00:07:25,051 --> 00:07:26,609
+The row now shows Abuja.
+
+213
+00:07:26,609 --> 00:07:28,427
+That is an update statement,
+
+214
+00:07:28,427 --> 00:07:29,986
+written and run for you.
+
+215
+00:07:30,536 --> 00:07:32,495
+Now the S Q L command page.
+
+216
+00:07:32,495 --> 00:07:34,236
+Click it in the sidebar.
+
+217
+00:07:34,236 --> 00:07:38,953
+It is a plain editor: anything you can type in P S Q L runs here.
+
+218
+00:07:38,953 --> 00:07:41,202
+We query the order totals view.
+
+219
+00:07:43,952 --> 00:07:48,752
+Press control enter, or the execute button. The answer appears above the editor.
+
+220
+00:07:54,202 --> 00:07:56,134
+Under the table: how many rows,
+
+221
+00:07:56,134 --> 00:07:57,193
+how long it took,
+
+222
+00:07:57,193 --> 00:07:58,938
+and links to edit the query,
+
+223
+00:07:58,938 --> 00:07:59,624
+explain it,
+
+224
+00:07:59,624 --> 00:08:00,434
+or export it.
+
+225
+00:08:00,434 --> 00:08:01,493
+Below the editor,
+
+226
+00:08:01,493 --> 00:08:03,425
+history remembers your queries,
+
+227
+00:08:03,425 --> 00:08:06,042
+and stop on error protects longer scripts.
+
+228
+00:08:06,592 --> 00:08:07,367
+Now export.
+
+229
+00:08:07,367 --> 00:08:09,337
+Click export in the sidebar.
+
+230
+00:08:09,337 --> 00:08:11,941
+Output: open shows it in the browser,
+
+231
+00:08:11,941 --> 00:08:13,490
+save downloads a file,
+
+232
+00:08:13,490 --> 00:08:14,827
+gzip compresses it.
+
+233
+00:08:29,477 --> 00:08:30,495
+Format: S Q L,
+
+234
+00:08:30,495 --> 00:08:32,530
+for a backup you can replay,
+
+235
+00:08:32,530 --> 00:08:33,910
+or C S V and T S V,
+
+236
+00:08:33,910 --> 00:08:35,219
+for a spreadsheet.
+
+237
+00:08:35,219 --> 00:08:39,434
+Tables: drop plus create makes the file rebuild the table.
+
+238
+00:08:39,434 --> 00:08:41,542
+Data: insert writes the rows.
+
+239
+00:08:41,542 --> 00:08:44,304
+You can untick tables you do not need.
+
+240
+00:08:44,854 --> 00:08:45,824
+Click export.
+
+241
+00:08:45,824 --> 00:08:49,330
+An S Q L dump appears: create table statements,
+
+242
+00:08:49,330 --> 00:08:51,046
+then insert statements.
+
+243
+00:08:51,046 --> 00:08:54,552
+The same idea as P G dump from the last lesson,
+
+244
+00:08:54,552 --> 00:08:55,671
+in the browser.
+
+245
+00:08:55,671 --> 00:08:56,940
+For real backups,
+
+246
+00:08:56,940 --> 00:08:57,910
+use P G dump.
+
+247
+00:08:58,460 --> 00:09:00,127
+One more screen: indexes,
+
+248
+00:09:00,127 --> 00:09:01,928
+because your task needs it.
+
+249
+00:09:01,928 --> 00:09:03,261
+Click select orders,
+
+250
+00:09:03,261 --> 00:09:04,595
+then show structure,
+
+251
+00:09:04,595 --> 00:09:05,862
+then alter indexes.
+
+252
+00:09:09,512 --> 00:09:10,396
+A small form.
+
+253
+00:09:10,396 --> 00:09:11,144
+Index type,
+
+254
+00:09:11,144 --> 00:09:11,960
+the columns,
+
+255
+00:09:11,960 --> 00:09:12,844
+and the name.
+
+256
+00:09:12,844 --> 00:09:15,088
+The first row is the primary key.
+
+257
+00:09:15,088 --> 00:09:17,807
+A new index goes in the empty row below.
+
+258
+00:09:17,807 --> 00:09:20,595
+We will not save here: that is your task.
+
+259
+00:09:20,595 --> 00:09:21,139
+Go back.
+
+260
+00:09:21,689 --> 00:09:25,550
+And new item. Open select orders again, and click new item.
+
+261
+00:09:27,600 --> 00:09:29,716
+A blank form to insert one row.
+
+262
+00:09:29,716 --> 00:09:31,148
+Id is auto increment,
+
+263
+00:09:31,148 --> 00:09:32,377
+so leave it empty.
+
+264
+00:09:32,377 --> 00:09:34,355
+The other boxes are required.
+
+265
+00:09:34,355 --> 00:09:36,198
+We close it without saving.
+
+266
+00:09:36,748 --> 00:09:38,104
+Now the schema picture.
+
+267
+00:09:38,104 --> 00:09:40,404
+Go up to the schema in the bread crumb,
+
+268
+00:09:40,404 --> 00:09:41,996
+then click database schema.
+
+269
+00:09:47,746 --> 00:09:50,102
+Admin er draws the tables as boxes,
+
+270
+00:09:50,102 --> 00:09:52,323
+with arrows for the foreign keys.
+
+271
+00:09:52,323 --> 00:09:55,218
+Orders points to customers and to products.
+
+272
+00:09:55,218 --> 00:09:57,708
+A free diagram of the whole database.
+
+273
+00:09:58,258 --> 00:09:58,786
+Finally,
+
+274
+00:09:58,786 --> 00:09:59,313
+log out.
+
+275
+00:09:59,313 --> 00:10:00,170
+Click logout.
+
+276
+00:10:00,170 --> 00:10:01,620
+The session is closed.
+
+277
+00:10:01,620 --> 00:10:03,268
+The lab is still running,
+
+278
+00:10:03,268 --> 00:10:05,576
+so you can try everything yourself.
+
+279
+00:10:23,726 --> 00:10:26,819
+Five habits for using a database interface safely.
+
+280
+00:10:27,369 --> 00:10:30,329
+One: look at the bread crumb before every change.
+
+281
+00:10:30,329 --> 00:10:31,114
+Right server,
+
+282
+00:10:31,114 --> 00:10:32,020
+right database,
+
+283
+00:10:32,020 --> 00:10:32,745
+right table.
+
+284
+00:10:33,295 --> 00:10:38,543
+Two: look first, then change. Select data, read the S Q L, and only then edit.
+
+285
+00:10:39,093 --> 00:10:44,299
+Three: truncate, drop and delete are final. If you have no backup, you have no undo.
+
+286
+00:10:44,849 --> 00:10:46,961
+Four: use a least privilege account.
+
+287
+00:10:46,961 --> 00:10:48,603
+Not the owner of everything,
+
+288
+00:10:48,603 --> 00:10:50,246
+and never a shared password.
+
+289
+00:10:50,796 --> 00:10:52,099
+Five: on production,
+
+290
+00:10:52,099 --> 00:10:53,728
+ask for read only access,
+
+291
+00:10:53,728 --> 00:10:56,855
+and do your changes through reviewed migrations.
+
+292
+00:10:58,405 --> 00:11:02,949
+Your task. Tour the shop database in the browser, and prove it with five checks.
+
+293
+00:11:03,499 --> 00:11:05,656
+One: in select data on orders,
+
+294
+00:11:05,656 --> 00:11:06,734
+count the rows.
+
+295
+00:11:06,734 --> 00:11:08,676
+Then run the S Q L command,
+
+296
+00:11:08,676 --> 00:11:11,623
+select sum total cents from order totals.
+
+297
+00:11:11,623 --> 00:11:14,571
+Write both numbers into answers dot text.
+
+298
+00:11:15,121 --> 00:11:18,982
+Two: edit the row of customer Cy, and change the city to Paris.
+
+299
+00:11:19,532 --> 00:11:22,555
+Three: use new item on customers to add Eli,
+
+300
+00:11:22,555 --> 00:11:25,165
+with the email eli at example dot com,
+
+301
+00:11:25,165 --> 00:11:25,783
+in Cairo.
+
+302
+00:11:26,333 --> 00:11:27,521
+Four: in orders,
+
+303
+00:11:27,521 --> 00:11:28,561
+alter indexes,
+
+304
+00:11:28,561 --> 00:11:30,938
+create an index on customer I D,
+
+305
+00:11:30,938 --> 00:11:33,017
+named orders customer I D X.
+
+306
+00:11:33,017 --> 00:11:35,246
+Open show structure on orders,
+
+307
+00:11:35,246 --> 00:11:38,291
+and write its column count on line three.
+
+308
+00:11:38,291 --> 00:11:39,405
+Then lab check,
+
+309
+00:11:39,405 --> 00:11:40,370
+and lab down.
+
+310
+00:11:42,420 --> 00:11:46,196
+Here is where to find everything. Pause on this screen, and write it down.
+
+311
+00:11:46,746 --> 00:11:48,394
+The lab lives on GitHub,
+
+312
+00:11:48,394 --> 00:11:49,561
+at it dash waves,
+
+313
+00:11:49,561 --> 00:11:51,141
+slash dev ops dash A I,
+
+314
+00:11:51,141 --> 00:11:52,651
+in the folder academy,
+
+315
+00:11:52,651 --> 00:11:53,338
+slash lab.
+
+316
+00:11:53,888 --> 00:11:59,605
+Two files: lab one thirty-one dot S H, and shortcuts one thirty-one dot S H.
+
+317
+00:12:00,155 --> 00:12:01,063
+Install it,
+
+318
+00:12:01,063 --> 00:12:03,950
+on any Linux machine: sudo install,
+
+319
+00:12:03,950 --> 00:12:05,847
+dash m seven five five,
+
+320
+00:12:05,847 --> 00:12:08,074
+lab one thirty-one dot S H,
+
+321
+00:12:08,074 --> 00:12:09,312
+into slash usr,
+
+322
+00:12:09,312 --> 00:12:10,301
+slash local,
+
+323
+00:12:10,301 --> 00:12:11,291
+slash S bin.
+
+324
+00:12:11,841 --> 00:12:16,564
+Load the short names with: source shortcuts one thirty-one dot S H.
+
+325
+00:12:16,564 --> 00:12:17,763
+You get two: lab,
+
+326
+00:12:17,763 --> 00:12:18,327
+and U I.
+
+327
+00:12:18,877 --> 00:12:20,515
+You need post gress Q L,
+
+328
+00:12:20,515 --> 00:12:21,744
+server and client,
+
+329
+00:12:21,744 --> 00:12:24,338
+plus P H P with the post gress driver,
+
+330
+00:12:24,338 --> 00:12:24,952
+and curl.
+
+331
+00:12:24,952 --> 00:12:29,048
+Ports fifty-five eleven and eighty-eighty-five must be free.
+
+332
+00:12:29,048 --> 00:12:31,847
+Everything runs on your own machine only.
+
+333
+00:12:32,397 --> 00:12:37,368
+Lab up prepares everything. Lab check judges your work. Lab down removes it all.
+
+334
+00:12:39,418 --> 00:12:41,487
+Pass or fail. You need all five.
+
+335
+00:12:42,037 --> 00:12:45,941
+One: answers dot text has twelve orders, and the correct total.
+
+336
+00:12:46,491 --> 00:12:48,155
+Two: Cy lives in Paris.
+
+337
+00:12:48,705 --> 00:12:51,585
+Three: Eli exists, with the right email and city.
+
+338
+00:12:52,135 --> 00:12:56,807
+Four: the index orders customer I D X exists on customer I D.
+
+339
+00:12:57,357 --> 00:13:01,709
+Five: line three says orders has five columns, and nothing was damaged.
+
+340
+00:13:02,259 --> 00:13:03,561
+To pass, all five.
+
+341
+00:13:05,611 --> 00:13:07,382
+Your turn, on your own machine.
+
+342
+00:13:07,932 --> 00:13:11,900
+One: lab up, then U I, and log in to admin er in your browser.
+
+343
+00:13:12,450 --> 00:13:16,034
+Two: count the orders, run the sum query, and write the answers.
+
+344
+00:13:16,584 --> 00:13:19,314
+Three: edit Cy, and add Eli with new item.
+
+345
+00:13:19,864 --> 00:13:24,408
+Four: create the index in alter indexes, and count the columns of orders.
+
+346
+00:13:24,958 --> 00:13:28,777
+Five: lab check until you see five out of five. Then lab down.
+
+347
+00:13:29,327 --> 00:13:31,162
+Pause the video, and begin now.
+
+348
+00:13:46,712 --> 00:13:47,587
+Quick check.
+
+349
+00:13:48,137 --> 00:13:49,929
+Name the six zones of the screen.
+
+350
+00:13:50,479 --> 00:13:52,057
+What does the bread crumb tell you?
+
+351
+00:13:52,607 --> 00:13:54,058
+Why is a view in italics?
+
+352
+00:13:54,608 --> 00:13:57,040
+Which buttons are final, and what protects you?
+
+353
+00:13:57,590 --> 00:14:00,127
+Objectives covered: M C fourteen,
+
+354
+00:14:00,127 --> 00:14:01,357
+objective seven.
+
+355
+00:14:01,357 --> 00:14:04,432
+Use a database user interface to browse,
+
+356
+00:14:04,432 --> 00:14:06,123
+query and manage data.
+
+357
+00:14:06,673 --> 00:14:08,743
+Pause the video, and answer out loud.
+
+358
+00:14:19,293 --> 00:14:22,151
+Next: connections, locks and slow queries.
+
+359
+00:14:22,701 --> 00:14:26,029
+If this helped, like, share and subscribe, so you do not miss it.

@@ -9,7 +9,7 @@ if [ "$OWNER" = root ]; then OWNER=postgres; id postgres >/dev/null 2>&1 || { ec
 BIN=$(ls -d /usr/lib/postgresql/*/bin 2>/dev/null | sort -V | tail -n 1)
 RU="runuser -u $OWNER --"
 PORT=5511; WEB=8085; DBPASS='Shop-UI-131'
-ADM_URL=https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1-en.php
+ADM_URL=https://github.com/vrana/adminer/releases/download/v5.4.1/adminer-5.4.1-en.php
 down() {
   [ -f $D/web.pid ] && kill "$(cat $D/web.pid)" 2>/dev/null
   [ -f $D/data/postmaster.pid ] && $RU $BIN/pg_ctl -D $D/data -m fast stop >/dev/null 2>&1
@@ -33,7 +33,7 @@ up() {
 CREATE ROLE shopadmin LOGIN PASSWORD '$DBPASS';
 CREATE DATABASE shop OWNER shopadmin;
 EOF_SQL
-  $P -d shop >/dev/null <<'EOF_SQL'
+  $P -U shopadmin -d shop >/dev/null <<'EOF_SQL'
 CREATE TABLE customers (id serial PRIMARY KEY, name text NOT NULL, email text UNIQUE, city text);
 CREATE TABLE products (id serial PRIMARY KEY, name text NOT NULL, price_cents int NOT NULL);
 CREATE TABLE orders (id serial PRIMARY KEY, customer_id int NOT NULL REFERENCES customers(id), product_id int NOT NULL REFERENCES products(id), qty int NOT NULL DEFAULT 1, ordered_on date NOT NULL);
@@ -42,6 +42,7 @@ INSERT INTO products (name, price_cents) VALUES ('Keyboard',4500),('Mouse',1900)
 INSERT INTO orders (customer_id, product_id, qty, ordered_on) VALUES (1,1,1,'2026-10-01'),(1,2,2,'2026-10-03'),(2,3,1,'2026-10-04'),(3,4,1,'2026-10-06'),(2,5,1,'2026-10-09'),(4,1,2,'2026-10-10'),(3,2,1,'2026-10-12'),(1,3,1,'2026-10-15'),(4,5,1,'2026-10-18'),(2,2,3,'2026-10-20'),(3,1,1,'2026-10-22'),(4,4,2,'2026-10-25');
 CREATE VIEW order_totals AS SELECT o.id AS order_id, c.name AS customer, p.name AS product, o.qty * p.price_cents AS total_cents FROM orders o JOIN customers c ON c.id = o.customer_id JOIN products p ON p.id = o.product_id;
 EOF_SQL
+  $P -U shopadmin -d shop -c "ANALYZE customers, products, orders"
   $RU sh -c "cd $D/web && nohup php -S 127.0.0.1:$WEB -t $D/web >$D/web.log 2>&1 & echo \$! > $D/web.pid"
   sleep 2
   cat > $D/TASKS.txt <<EOF_T
@@ -59,7 +60,7 @@ Write your findings in  $D/answers.txt  (use any editor), one per line:
 Rule: look first, change second, and always know which database and table you are in.
 EOF_T
   chown -R $OWNER $D 2>/dev/null
-  echo "lab 131 ready. Open http://localhost:$WEB and read $D/TASKS.txt"
+  echo "lab 131 ready: http://localhost:$WEB  tasks: $D/TASKS.txt"
 }
 pass=0; total=5
 ok() { pass=$((pass+1)); echo "  PASS  $1"; }
