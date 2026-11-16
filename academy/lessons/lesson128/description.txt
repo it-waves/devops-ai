@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab128.sh and shortc
 Honest notes: the terminal part is one real, continuous recording on real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. The settings are small lab values for teaching, not tuning advice for a real server. Persistent storage is not a backup: if the disk is lost, so is the data (backups come in a later lesson). The narration is synthetic speech. The hook, vocabulary, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: PostgreSQL Users and Least Privilege: Roles, Grants and scram Passwords | Lesson 127 https://youtu.be/4HeTouBiIsI
-Next: Schema migrations in a deployment workflow.
+Next lesson: PostgreSQL Schema Migrations: Run, Fail, Fix and Repeat Safely | Lesson 129 https://youtu.be/XPgLfdGEqIY
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
