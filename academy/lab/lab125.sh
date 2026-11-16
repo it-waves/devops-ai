@@ -41,7 +41,7 @@ class H(BaseHTTPRequestHandler):
         if self.path.startswith('/report'): time.sleep(3); self.send('report from %s\n' % I)
         elif self.path.startswith('/whoami'):
             h = self.headers
-            self.send('id=%s host=%s xff=%s proto=%s\n' % (I, h.get('Host', '-'), h.get('X-Forwarded-For', '-'), h.get('X-Forwarded-Proto', '-')))
+            self.send('id=%s host=%s ip=%s proto=%s\n' % (I, h.get('Host', '-'), h.get('X-Real-IP', '-'), h.get('X-Forwarded-Proto', '-')))
         else: self.send('id=%s\n' % I)
     def do_POST(self):
         n = int(self.headers.get('Content-Length', 0)); self.rfile.read(n); self.send('got %d bytes\n' % n)
@@ -68,7 +68,10 @@ http {
         listen 8251;
         root $D/sitee;
         location /api/ { proxy_pass http://pool/; }
-        location /report { proxy_pass http://pool; proxy_read_timeout 1s; }
+        location /report {
+            proxy_pass http://pool;
+            proxy_read_timeout 1s;
+        }
     }
     server {
         listen 8253 ssl;
@@ -87,8 +90,8 @@ CloudCart's web tier is half built. nginx listens on http 8251 and https 8253. T
   files:  nginx.conf (the config)   site/index.html   logs/seed.log (a day of old traffic)   cert.pem + key.pem
 
 1  Static serving (O01, O02):   / must serve the CloudCart page, and  ng -t  must pass.      The root path in nginx.conf is wrong: ls  shows the real folder.
-2  Proxy headers (O03):         the app must see the real Host, X-Forwarded-For and X-Forwarded-Proto.   curl localhost:8251/api/whoami   shows what the app sees.
-                                 In the /api/ location add:  proxy_set_header Host $host;   X-Forwarded-For $proxy_add_x_forwarded_for;   X-Forwarded-Proto $scheme;
+2  Proxy headers (O03):         the app must see the real Host, X-Real-IP and X-Forwarded-Proto.   curl localhost:8251/api/whoami   shows what the app sees.
+                                 In the /api/ location add:  proxy_set_header Host $host;   X-Real-IP $remote_addr;   X-Forwarded-Proto $scheme;
 3  HTTPS (O04):                 https must verify for the name localhost.   openssl x509 -in cert.pem -noout -subject   then make a new certificate (-subj /CN=localhost -addext subjectAltName=DNS:localhost).
 4  Health + balancing (O05):    both apps must answer:   for i in 1 2 3 4 5 6; do curl -s localhost:8251/api/; done      (a wrong port is in the upstream block)
                                  and add a health endpoint:   location = /health { return 200 "ok\n"; }
@@ -114,7 +117,7 @@ check() {
   c=$(code localhost:8251/); b=$(curl -s -m 8 localhost:8251/ 2>/dev/null)
   if [ "$c" = 200 ] && echo "$b" | grep -q CloudCart && $NG -t >/dev/null 2>&1; then ok "1 static site served and the config tests OK (O01, O02)"; else no "1 / gives '$c': the root path must be the folder that holds index.html, and ng -t must pass"; fi
   w=$(curl -s -m 8 localhost:8251/api/whoami 2>/dev/null)
-  if echo "$w" | grep -q 'host=localhost' && ! echo "$w" | grep -q 'xff=-' && echo "$w" | grep -q 'proto=http'; then ok "2 the app sees the real Host and forwarded headers (O03)"; else no "2 the app sees: '$w' : set Host, X-Forwarded-For and X-Forwarded-Proto in the /api/ location"; fi
+  if echo "$w" | grep -q 'host=localhost' && ! echo "$w" | grep -q 'ip=-' && echo "$w" | grep -q 'proto=http'; then ok "2 the app sees the real Host and forwarded headers (O03)"; else no "2 the app sees: '$w' : set Host, X-Real-IP and X-Forwarded-Proto in the /api/ location"; fi
   c=$(code --cacert $D/cert.pem https://localhost:8253/)
   if [ "$c" = 200 ]; then ok "3 https verifies and works (O04)"; else no "3 https failed ('$c'): the certificate must be valid for the name localhost"; fi
   s=$(for i in 1 2 3 4 5 6; do curl -s -m 8 localhost:8251/api/ 2>/dev/null; done | sort -u | tr '\n' ' '); h=$(curl -s -m 8 localhost:8251/health 2>/dev/null)
