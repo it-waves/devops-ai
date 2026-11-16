@@ -1,0 +1,631 @@
+1
+00:00:00,500 --> 00:00:02,397
+Someone runs delete from orders,
+
+2
+00:00:02,397 --> 00:00:03,642
+with no where clause.
+
+3
+00:00:03,642 --> 00:00:04,828
+Every order is gone.
+
+4
+00:00:04,828 --> 00:00:06,665
+How fast can you get them back?
+
+5
+00:00:07,215 --> 00:00:08,181
+If the answer is,
+
+6
+00:00:08,181 --> 00:00:09,090
+we have backups,
+
+7
+00:00:09,090 --> 00:00:12,442
+the next question matters more: have you ever restored one?
+
+8
+00:00:12,992 --> 00:00:15,828
+Today you back up a real post gress database,
+
+9
+00:00:15,828 --> 00:00:17,088
+break it on purpose,
+
+10
+00:00:17,088 --> 00:00:17,782
+restore it,
+
+11
+00:00:17,782 --> 00:00:19,861
+and prove every number came back.
+
+12
+00:00:20,411 --> 00:00:22,929
+A backup you never restored is only a hope.
+
+13
+00:00:24,479 --> 00:00:27,551
+Here is what to expect, from the first minute to the last.
+
+14
+00:00:28,101 --> 00:00:32,517
+One: the words. Backup, dump, restore, validate, and recovery point.
+
+15
+00:00:33,067 --> 00:00:38,443
+Two: a live demo on real post gress. We measure the data first, then take a backup.
+
+16
+00:00:38,993 --> 00:00:42,662
+Three: we break the database with a delete that has no where clause.
+
+17
+00:00:43,212 --> 00:00:45,524
+Four: we restore into a new database,
+
+18
+00:00:45,524 --> 00:00:46,524
+and validate it.
+
+19
+00:00:46,524 --> 00:00:47,461
+Then your turn,
+
+20
+00:00:47,461 --> 00:00:50,210
+with a lab that judges you with five checks.
+
+21
+00:00:50,760 --> 00:00:53,512
+This is lesson five of the databases domain.
+
+22
+00:00:54,062 --> 00:00:56,579
+A backup you never restored is only a hope.
+
+23
+00:00:58,629 --> 00:01:00,677
+Six ideas for backups that work.
+
+24
+00:01:01,227 --> 00:01:03,216
+A backup is a copy of the data,
+
+25
+00:01:03,216 --> 00:01:04,500
+kept somewhere else.
+
+26
+00:01:04,500 --> 00:01:06,618
+On the same disk is not a backup.
+
+27
+00:01:06,618 --> 00:01:08,992
+It is a second copy of the same risk.
+
+28
+00:01:09,542 --> 00:01:13,702
+P G dump makes a logical backup: the S Q L and the rows,
+
+29
+00:01:13,702 --> 00:01:14,593
+in one file.
+
+30
+00:01:14,593 --> 00:01:16,970
+The custom format is compressed,
+
+31
+00:01:16,970 --> 00:01:19,718
+and P G restore can pick parts of it.
+
+32
+00:01:20,268 --> 00:01:21,855
+A restore is the reverse.
+
+33
+00:01:21,855 --> 00:01:24,014
+Restore into a new database first,
+
+34
+00:01:24,014 --> 00:01:25,982
+never straight over production.
+
+35
+00:01:25,982 --> 00:01:28,140
+You get to look before you commit.
+
+36
+00:01:28,690 --> 00:01:29,266
+Validate.
+
+37
+00:01:29,266 --> 00:01:33,170
+Compare numbers you measured before the disaster: row counts,
+
+38
+00:01:33,170 --> 00:01:33,810
+and a sum.
+
+39
+00:01:33,810 --> 00:01:34,706
+If they match,
+
+40
+00:01:34,706 --> 00:01:35,922
+the backup is real.
+
+41
+00:01:36,472 --> 00:01:39,616
+The recovery point is how much data you can lose,
+
+42
+00:01:39,616 --> 00:01:41,605
+the time since the last backup.
+
+43
+00:01:41,605 --> 00:01:44,684
+The recovery time is how long the restore takes.
+
+44
+00:01:44,684 --> 00:01:45,326
+Know both.
+
+45
+00:01:45,876 --> 00:01:46,620
+Practice it.
+
+46
+00:01:46,620 --> 00:01:50,467
+Teams that restore every month are calm on the day it matters.
+
+47
+00:01:50,467 --> 00:01:53,321
+Teams that never tested find out the hard way.
+
+48
+00:01:54,871 --> 00:01:59,628
+Go to the lab folder.
+
+49
+00:02:01,178 --> 00:02:03,077
+Look around. Type: L S.
+
+50
+00:02:03,627 --> 00:02:07,510
+A backups folder, still empty, the server data, and the task file.
+
+51
+00:02:08,060 --> 00:02:18,022
+Tell the tools where the server is.
+
+52
+00:02:18,572 --> 00:02:25,335
+Now P G dump, P G restore, create D B, and P S Q L all find this server by themselves.
+
+53
+00:02:25,885 --> 00:02:39,517
+Measure the data.
+
+54
+00:02:40,067 --> 00:02:40,679
+Six orders,
+
+55
+00:02:40,679 --> 00:02:43,458
+and fourteen thousand four hundred cents in total.
+
+56
+00:02:43,458 --> 00:02:45,571
+These two numbers are our proof later.
+
+57
+00:02:46,121 --> 00:02:54,804
+Write the answers.
+
+58
+00:02:55,354 --> 00:03:02,308
+Take the backup.
+
+59
+00:03:02,858 --> 00:03:08,021
+Dash capital F C is the custom format, compressed. No output means success.
+
+60
+00:03:08,571 --> 00:03:12,219
+Is the file there?
+
+61
+00:03:12,769 --> 00:03:18,060
+A few kilobytes. Small, because our database is small. A real one can be gigabytes.
+
+62
+00:03:18,610 --> 00:03:29,298
+Is it readable?
+
+63
+00:03:29,848 --> 00:03:31,308
+The table of contents,
+
+64
+00:03:31,308 --> 00:03:32,901
+filtered for table data.
+
+65
+00:03:32,901 --> 00:03:35,025
+Customers and orders are inside,
+
+66
+00:03:35,025 --> 00:03:36,086
+with their rows.
+
+67
+00:03:36,086 --> 00:03:37,613
+The backup is readable.
+
+68
+00:03:38,163 --> 00:03:46,355
+The accident.
+
+69
+00:03:46,905 --> 00:03:47,677
+Delete six.
+
+70
+00:03:47,677 --> 00:03:48,661
+Six rows gone.
+
+71
+00:03:48,661 --> 00:03:49,784
+No where clause,
+
+72
+00:03:49,784 --> 00:03:50,557
+no warning.
+
+73
+00:03:50,557 --> 00:03:53,646
+This is the mistake we are insuring against.
+
+74
+00:03:54,196 --> 00:04:02,708
+Count again.
+
+75
+00:04:03,258 --> 00:04:05,882
+Zero. Production just lost every order.
+
+76
+00:04:06,432 --> 00:04:14,283
+Create a new database.
+
+77
+00:04:14,833 --> 00:04:23,025
+Restore into it.
+
+78
+00:04:23,575 --> 00:04:26,071
+No output again. Quiet means it worked.
+
+79
+00:04:26,621 --> 00:04:42,152
+Validate.
+
+80
+00:04:42,702 --> 00:04:43,397
+Six orders,
+
+81
+00:04:43,397 --> 00:04:45,737
+fourteen thousand four hundred cents.
+
+82
+00:04:45,737 --> 00:04:48,582
+Exactly the numbers from before the disaster.
+
+83
+00:04:48,582 --> 00:04:49,910
+The backup is proven.
+
+84
+00:04:49,910 --> 00:04:53,262
+Only now would we copy the data back into production.
+
+85
+00:04:53,812 --> 00:04:56,180
+Run the judge.
+
+86
+00:04:56,730 --> 00:05:02,255
+Five checks. Measured, backed up, disaster, restored, and validated. Five out of five.
+
+87
+00:05:02,805 --> 00:05:04,768
+Clean up.
+
+88
+00:05:05,318 --> 00:05:07,984
+The server is stopped and everything is removed.
+
+89
+00:05:08,534 --> 00:05:16,748
+Is it gone?
+
+90
+00:05:17,298 --> 00:05:19,815
+No response. Nothing is left behind.
+
+91
+00:05:21,365 --> 00:05:26,336
+Your task. Back up the shop database, survive a disaster, and prove the restore.
+
+92
+00:05:26,886 --> 00:05:28,364
+One: measure the orders.
+
+93
+00:05:28,364 --> 00:05:31,568
+Write the count and the total into answers dot text,
+
+94
+00:05:31,568 --> 00:05:32,369
+one per line,
+
+95
+00:05:32,369 --> 00:05:34,032
+before you change anything.
+
+96
+00:05:34,582 --> 00:05:36,760
+Two: take a backup with P G dump,
+
+97
+00:05:36,760 --> 00:05:38,344
+into the backups folder,
+
+98
+00:05:38,344 --> 00:05:40,918
+and check that P G restore can read it.
+
+99
+00:05:41,468 --> 00:05:44,348
+Three: run the accidental delete, and count again.
+
+100
+00:05:44,898 --> 00:05:46,754
+Four: create a new database,
+
+101
+00:05:46,754 --> 00:05:48,079
+and restore into it.
+
+102
+00:05:48,079 --> 00:05:49,868
+Five: validate the numbers,
+
+103
+00:05:49,868 --> 00:05:50,861
+then lab check,
+
+104
+00:05:50,861 --> 00:05:51,789
+then lab down.
+
+105
+00:05:53,839 --> 00:05:57,615
+Here is where to find everything. Pause on this screen, and write it down.
+
+106
+00:05:58,165 --> 00:05:59,813
+The lab lives on GitHub,
+
+107
+00:05:59,813 --> 00:06:00,980
+at it dash waves,
+
+108
+00:06:00,980 --> 00:06:02,560
+slash dev ops dash A I,
+
+109
+00:06:02,560 --> 00:06:04,070
+in the folder academy,
+
+110
+00:06:04,070 --> 00:06:04,757
+slash lab.
+
+111
+00:06:05,307 --> 00:06:10,342
+Two files: lab one thirty dot S H, and shortcuts one thirty dot S H.
+
+112
+00:06:10,892 --> 00:06:11,798
+Install it,
+
+113
+00:06:11,798 --> 00:06:14,682
+on any Linux machine: sudo install,
+
+114
+00:06:14,682 --> 00:06:16,577
+dash m seven five five,
+
+115
+00:06:16,577 --> 00:06:18,473
+lab one thirty dot S H,
+
+116
+00:06:18,473 --> 00:06:19,709
+into slash usr,
+
+117
+00:06:19,709 --> 00:06:20,698
+slash local,
+
+118
+00:06:20,698 --> 00:06:21,686
+slash S bin.
+
+119
+00:06:22,236 --> 00:06:26,885
+Load the short names with: source shortcuts one thirty dot S H.
+
+120
+00:06:26,885 --> 00:06:28,288
+You get three: lab,
+
+121
+00:06:28,288 --> 00:06:28,583
+P G,
+
+122
+00:06:28,583 --> 00:06:29,468
+and use D B.
+
+123
+00:06:30,018 --> 00:06:31,691
+You need post gress Q L,
+
+124
+00:06:31,691 --> 00:06:32,946
+server and client,
+
+125
+00:06:32,946 --> 00:06:33,643
+installed,
+
+126
+00:06:33,643 --> 00:06:35,874
+and port fifty-five oh one free.
+
+127
+00:06:35,874 --> 00:06:38,662
+The lab runs its own private post gress,
+
+128
+00:06:38,662 --> 00:06:39,917
+in its own folder.
+
+129
+00:06:40,467 --> 00:06:42,174
+Lab up prepares everything.
+
+130
+00:06:42,174 --> 00:06:43,881
+Lab check judges your work.
+
+131
+00:06:43,881 --> 00:06:45,398
+Lab down removes it all.
+
+132
+00:06:45,398 --> 00:06:47,422
+Only run it on your own machine.
+
+133
+00:06:49,472 --> 00:06:51,541
+Pass or fail. You need all five.
+
+134
+00:06:52,091 --> 00:06:56,017
+One: you measured six orders and fourteen thousand four hundred cents first.
+
+135
+00:06:56,567 --> 00:07:00,321
+Two: the backup file exists, and P G restore can read it.
+
+136
+00:07:00,871 --> 00:07:04,306
+Three: the disaster happened, and shop has zero orders.
+
+137
+00:07:04,856 --> 00:07:07,629
+Four: the new database has all six orders back.
+
+138
+00:07:08,179 --> 00:07:11,699
+Five: the restored total matches the number you wrote down.
+
+139
+00:07:12,249 --> 00:07:13,551
+To pass, all five.
+
+140
+00:07:15,601 --> 00:07:17,372
+Your turn, on your own machine.
+
+141
+00:07:17,922 --> 00:07:20,994
+One: lab up, use D B, measure, and write the answers.
+
+142
+00:07:21,544 --> 00:07:24,082
+Two: take the backup, and check it is readable.
+
+143
+00:07:24,632 --> 00:07:26,616
+Three: run the accidental delete.
+
+144
+00:07:27,166 --> 00:07:31,262
+Four: create the new database, restore, and validate the numbers.
+
+145
+00:07:31,812 --> 00:07:35,631
+Five: lab check until you see five out of five. Then lab down.
+
+146
+00:07:36,181 --> 00:07:38,016
+Pause the video, and begin now.
+
+147
+00:07:53,566 --> 00:07:54,441
+Quick check.
+
+148
+00:07:54,991 --> 00:07:57,337
+Why is a backup on the same disk not enough?
+
+149
+00:07:57,887 --> 00:08:00,063
+Why restore into a new database first?
+
+150
+00:08:00,613 --> 00:08:02,576
+Which numbers prove a restore worked?
+
+151
+00:08:03,126 --> 00:08:05,473
+What are recovery point and recovery time?
+
+152
+00:08:06,023 --> 00:08:08,427
+Objectives covered: M C fourteen,
+
+153
+00:08:08,427 --> 00:08:09,447
+objective six.
+
+154
+00:08:09,447 --> 00:08:11,705
+Back up and restore a database,
+
+155
+00:08:11,705 --> 00:08:13,745
+and validate recovered data.
+
+156
+00:08:14,295 --> 00:08:16,365
+Pause the video, and answer out loud.
+
+157
+00:08:26,915 --> 00:08:31,139
+Next: a tour of the database user interface, every part explained.
+
+158
+00:08:31,689 --> 00:08:35,017
+If this helped, like, share and subscribe, so you do not miss it.

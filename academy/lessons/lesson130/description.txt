@@ -1,0 +1,24 @@
+Lesson 130 of the DevOps Engineering Bootcamp, and lesson 5 of the Databases for DevOps domain. Someone runs DELETE FROM orders with no WHERE clause and every order is gone. A backup you never restored is only a hope. In this lesson you measure a real PostgreSQL 16 database, take a backup with pg_dump, check it is readable with pg_restore, cause the accident on purpose, restore into a new database instead of over production, and validate that the row count and the total match the numbers from before the disaster. You also learn recovery point and recovery time. A lab then judges you from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Back up. Break it. Restore it.
+0:23 What to expect
+0:58 Six ideas for backups that work
+1:54 Live: back up, break it, restore, prove it
+5:20 Your lab task
+5:53 Where to find the lab
+6:48 Pass or fail rubric
+7:15 Your turn
+7:53 Quick check
+Objectives covered: MC14-O06 (back up and restore a database and validate recovered data)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab130.sh and shortcuts130.sh). Install with: sudo install -m 755 lab130.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts130.sh. You need any Linux machine with root, PostgreSQL server and client (for example: sudo apt install -y postgresql postgresql-client) and port 5501 free. The lab runs its own private PostgreSQL cluster in /opt/lab130 and does not touch the system PostgreSQL. lab down stops it and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording on real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. pg_dump makes a logical backup; very large databases often add physical backups and point-in-time recovery, which are beyond this lesson. The narration is synthetic speech. The hook, vocabulary, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: PostgreSQL Schema Migrations: Run, Fail, Fix and Repeat Safely | Lesson 129 https://youtu.be/XPgLfdGEqIY
+Next: A tour of the database user interface.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #postgresql #database #backup #devopsbootcamp
