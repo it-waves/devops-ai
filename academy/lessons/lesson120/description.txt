@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab120.sh and shortc
 Honest notes: the terminal part is one real, continuous recording on real nginx 1.24 and OpenSSL 3.0, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The certificate is self-signed for the name localhost and is for learning only: in production a public certificate authority signs it, and you would never use curl -k. The narration is synthetic speech. The hook, the key and certificate picture, the task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: nginx Reverse Proxy: Route to a Backend, Pass Host and Client Headers | Lesson 119 https://youtu.be/ENcmpwWj9Gc
-Next: Health checks and basic load balancing with nginx.
+Next: nginx Load Balancing: Upstream Pool, Round Robin, Health Checks, Backup | Lesson 121 (link coming)
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 

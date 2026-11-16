@@ -1,0 +1,1 @@
+nginx Load Balancing: Upstream Pool, Round Robin, Health Checks, Backup | Lesson 121

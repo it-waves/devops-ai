@@ -1,0 +1,24 @@
+Lesson 121 of the DevOps Engineering Bootcamp, and lesson 4 of the Web Servers and Reverse Proxies domain. One backend is a single point of failure. This lesson explains upstream pools, round robin and passive health checks, then you use real nginx 1.24 and three real backends: ask a single backend six times, build an upstream pool with three servers and watch round robin (A, B, C), stop one backend and see that nobody gets an error, tune max_fails and fail_timeout, mark one server as backup, and prove the backup answers when both others are down. Then you get a lab that judges your work, from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Share it.
+0:29 What to expect
+1:08 Pool, round robin, health
+2:14 Live: pool, failure, backup
+7:00 Your lab task
+7:33 Where to find the lab
+8:32 Pass or fail rubric
+8:53 Your turn
+9:41 Quick check
+Objectives covered: MC13-O05 (health checks and basic load balancing)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab121.sh and shortcuts121.sh). Install with: sudo install -m 755 lab121.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts121.sh. You need any Linux machine with root, nginx, python3, curl and ss (for example: sudo apt install -y nginx python3 curl iproute2) and ports 8211 to 8214 free. The lab runs its own private nginx and three tiny backends from /opt/lab121 and does not touch the system nginx. lab down stops everything and removes it all. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording on real nginx 1.24, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The backends are tiny stand-in programs that only print their own name. Open source nginx has passive health checks only (it learns from failed real requests); timed active health checks need nginx Plus or another tool, and are not shown here. The narration is synthetic speech. The hook, the pool picture, the task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: nginx HTTPS: Make a Certificate, Enable TLS, Redirect HTTP | Lesson 120 https://youtu.be/TGo1r5Ie8So
+Next: Access logs, error logs and status codes with nginx.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #nginx #loadbalancing #healthchecks #devopsbootcamp
