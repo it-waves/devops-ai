@@ -1,0 +1,24 @@
+Lesson 128 of the DevOps Engineering Bootcamp, and lesson 3 of the Databases for DevOps domain. Change a database setting the wrong way and either nothing happens, or you lose data. In this lesson you configure a real PostgreSQL 16 server the safe way: find the data directory with SHOW data_directory, read the defaults and their context in pg_settings, put your own settings in a drop-in file (conf.d/app.conf) instead of editing postgresql.conf, reload with pg_reload_conf(), see which settings still wait for a restart (pending_restart), restart with pg_ctl, and prove the data survived: the note you inserted before the restart is still there, and pg_postmaster_start_time() shows the server really restarted. A lab then judges you from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Configure it. Keep the data.
+0:26 What to expect
+1:03 Six ideas for configuring a server
+2:07 Live: configure, restart, prove persistence
+7:03 Your lab task
+7:38 Where to find the lab
+8:35 Pass or fail rubric
+9:05 Your turn
+9:43 Quick check
+Objectives covered: MC14-O04 (database configuration and persistent storage for a lab)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab128.sh and shortcuts128.sh). Install with: sudo install -m 755 lab128.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts128.sh. You need any Linux machine with root, PostgreSQL server and client (for example: sudo apt install -y postgresql postgresql-client) and port 5481 free. The lab runs its own private PostgreSQL cluster in /opt/lab128 and does not touch the system PostgreSQL. lab down stops it and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording on real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. The settings are small lab values for teaching, not tuning advice for a real server. Persistent storage is not a backup: if the disk is lost, so is the data (backups come in a later lesson). The narration is synthetic speech. The hook, vocabulary, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: PostgreSQL Users and Least Privilege: Roles, Grants and scram Passwords | Lesson 127 https://youtu.be/4HeTouBiIsI
+Next: Schema migrations in a deployment workflow.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #postgresql #database #configuration #devopsbootcamp

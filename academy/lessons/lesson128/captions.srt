@@ -1,0 +1,815 @@
+1
+00:00:00,500 --> 00:00:02,415
+You change a database setting,
+
+2
+00:00:02,415 --> 00:00:03,628
+restart the server,
+
+3
+00:00:03,628 --> 00:00:04,969
+and the data is gone.
+
+4
+00:00:04,969 --> 00:00:07,076
+Or the setting never took effect.
+
+5
+00:00:07,076 --> 00:00:09,119
+Both happen to teams every week.
+
+6
+00:00:09,669 --> 00:00:13,096
+Today you configure a real post gress server the safe way,
+
+7
+00:00:13,096 --> 00:00:15,578
+and you prove its data survives a restart.
+
+8
+00:00:16,128 --> 00:00:18,848
+Three ideas: settings in a drop-in file,
+
+9
+00:00:18,848 --> 00:00:20,344
+reload versus restart,
+
+10
+00:00:20,344 --> 00:00:22,656
+and one data folder that persists.
+
+11
+00:00:23,206 --> 00:00:25,809
+Configure it. Restart it. Prove it persists.
+
+12
+00:00:27,359 --> 00:00:30,431
+Here is what to expect, from the first minute to the last.
+
+13
+00:00:30,981 --> 00:00:32,068
+One: the words.
+
+14
+00:00:32,068 --> 00:00:32,938
+Config file,
+
+15
+00:00:32,938 --> 00:00:33,518
+drop-in,
+
+16
+00:00:33,518 --> 00:00:34,025
+reload,
+
+17
+00:00:34,025 --> 00:00:34,605
+restart,
+
+18
+00:00:34,605 --> 00:00:35,693
+data directory,
+
+19
+00:00:35,693 --> 00:00:37,360
+and persistent storage.
+
+20
+00:00:37,910 --> 00:00:43,307
+Two: a live demo on real post gress. We look at the defaults and where the data lives.
+
+21
+00:00:43,857 --> 00:00:45,683
+Three: we write a drop-in file,
+
+22
+00:00:45,683 --> 00:00:46,096
+reload,
+
+23
+00:00:46,096 --> 00:00:48,334
+see which settings wait for a restart,
+
+24
+00:00:48,334 --> 00:00:49,041
+and restart.
+
+25
+00:00:49,591 --> 00:00:51,588
+Four: we prove the data survived.
+
+26
+00:00:51,588 --> 00:00:52,496
+Then your turn,
+
+27
+00:00:52,496 --> 00:00:55,159
+with a lab that judges you with five checks.
+
+28
+00:00:55,709 --> 00:00:58,354
+This is lesson three of the databases domain.
+
+29
+00:00:58,904 --> 00:01:01,507
+Configure it. Restart it. Prove it persists.
+
+30
+00:01:03,557 --> 00:01:06,352
+Six ideas for configuring a database server.
+
+31
+00:01:06,902 --> 00:01:10,361
+The main config file is post gress Q L dot conf.
+
+32
+00:01:10,361 --> 00:01:11,442
+Do not edit it.
+
+33
+00:01:11,442 --> 00:01:14,756
+Add your own settings in a small drop-in file,
+
+34
+00:01:14,756 --> 00:01:16,558
+in the conf dot D folder.
+
+35
+00:01:16,558 --> 00:01:18,071
+It is easy to review,
+
+36
+00:01:18,071 --> 00:01:19,296
+and easy to undo.
+
+37
+00:01:19,846 --> 00:01:21,692
+Every setting has a context.
+
+38
+00:01:21,692 --> 00:01:23,340
+Some apply with a reload.
+
+39
+00:01:23,340 --> 00:01:23,669
+Some,
+
+40
+00:01:23,669 --> 00:01:26,306
+like max connections and shared buffers,
+
+41
+00:01:26,306 --> 00:01:27,624
+need a full restart.
+
+42
+00:01:27,624 --> 00:01:30,129
+The P G settings view tells you which.
+
+43
+00:01:30,679 --> 00:01:34,235
+A reload re-reads the files and keeps every connection.
+
+44
+00:01:34,235 --> 00:01:35,980
+A restart stops the server,
+
+45
+00:01:35,980 --> 00:01:37,273
+and starts it again.
+
+46
+00:01:37,273 --> 00:01:39,212
+Use a reload whenever you can.
+
+47
+00:01:39,762 --> 00:01:41,028
+The data directory,
+
+48
+00:01:41,028 --> 00:01:42,094
+called P G data,
+
+49
+00:01:42,094 --> 00:01:43,293
+holds every table,
+
+50
+00:01:43,293 --> 00:01:43,960
+every row,
+
+51
+00:01:43,960 --> 00:01:45,559
+and the write ahead log.
+
+52
+00:01:45,559 --> 00:01:47,890
+It is the only thing you must keep.
+
+53
+00:01:48,440 --> 00:01:53,420
+Persistent storage means that folder lives on a disk that outlives the server.
+
+54
+00:01:53,420 --> 00:01:54,378
+In a container,
+
+55
+00:01:54,378 --> 00:01:55,336
+it is a volume.
+
+56
+00:01:55,336 --> 00:01:57,251
+A restart must never touch it.
+
+57
+00:01:57,801 --> 00:02:00,226
+The data folder belongs to one user,
+
+58
+00:02:00,226 --> 00:02:02,315
+and is closed to everyone else.
+
+59
+00:02:02,315 --> 00:02:06,761
+Persistence is not a backup: a deleted disk still means lost data.
+
+60
+00:02:08,311 --> 00:02:13,367
+Go to the lab folder.
+
+61
+00:02:14,917 --> 00:02:16,816
+Look around. Type: L S.
+
+62
+00:02:17,366 --> 00:02:18,280
+A data folder,
+
+63
+00:02:18,280 --> 00:02:19,129
+a server log,
+
+64
+00:02:19,129 --> 00:02:20,174
+and a task file.
+
+65
+00:02:20,174 --> 00:02:22,329
+The post gress server is running,
+
+66
+00:02:22,329 --> 00:02:23,766
+from that data folder.
+
+67
+00:02:24,316 --> 00:02:32,550
+Where is the data?
+
+68
+00:02:33,100 --> 00:02:33,774
+Slash opt,
+
+69
+00:02:33,774 --> 00:02:35,594
+slash lab one twenty-eight,
+
+70
+00:02:35,594 --> 00:02:36,336
+slash data.
+
+71
+00:02:36,336 --> 00:02:38,897
+This is the persistent data directory.
+
+72
+00:02:38,897 --> 00:02:42,402
+Everything the database knows is in this one folder.
+
+73
+00:02:42,952 --> 00:02:47,005
+What is inside?
+
+74
+00:02:47,555 --> 00:02:49,189
+Base holds the databases.
+
+75
+00:02:49,189 --> 00:02:51,934
+There are folders for the write ahead log,
+
+76
+00:02:51,934 --> 00:02:53,307
+and the config files.
+
+77
+00:02:53,307 --> 00:02:56,771
+And a folder I made for drop-in settings: conf dot D.
+
+78
+00:02:57,321 --> 00:03:15,369
+Read the three settings.
+
+79
+00:03:15,919 --> 00:03:18,029
+Max connections is one hundred.
+
+80
+00:03:18,029 --> 00:03:21,229
+Look at the context column: it says postmaster,
+
+81
+00:03:21,229 --> 00:03:23,203
+meaning this needs a restart.
+
+82
+00:03:23,203 --> 00:03:25,246
+Shared buffers also needs one.
+
+83
+00:03:25,246 --> 00:03:27,560
+Log min duration statement is off,
+
+84
+00:03:27,560 --> 00:03:28,241
+minus one,
+
+85
+00:03:28,241 --> 00:03:31,236
+and a superuser can change it with a reload.
+
+86
+00:03:31,786 --> 00:03:40,661
+Write the answer.
+
+87
+00:03:41,211 --> 00:03:47,014
+Create the drop-in file.
+
+88
+00:03:47,564 --> 00:03:48,383
+Three lines.
+
+89
+00:03:48,383 --> 00:03:49,476
+Max connections,
+
+90
+00:03:49,476 --> 00:03:49,886
+fifty.
+
+91
+00:03:49,886 --> 00:03:50,910
+Shared buffers,
+
+92
+00:03:50,910 --> 00:03:52,344
+sixty-four megabytes.
+
+93
+00:03:52,344 --> 00:03:54,461
+And log min duration statement,
+
+94
+00:03:54,461 --> 00:03:55,690
+two hundred fifty.
+
+95
+00:03:55,690 --> 00:03:59,173
+That logs every query slower than a quarter second.
+
+96
+00:03:59,173 --> 00:04:00,129
+Save the file.
+
+97
+00:04:04,479 --> 00:04:09,386
+Read it back. Type: cat, data, slash, conf dot D, slash, app dot conf.
+
+98
+00:04:09,936 --> 00:04:21,370
+Reload the server.
+
+99
+00:04:21,920 --> 00:04:24,288
+True. No restart, no dropped connection.
+
+100
+00:04:24,838 --> 00:04:41,094
+What applied?
+
+101
+00:04:41,644 --> 00:04:45,110
+Log min duration statement is now two hundred fifty.
+
+102
+00:04:45,110 --> 00:04:49,442
+But max connections and shared buffers still show the old values,
+
+103
+00:04:49,442 --> 00:04:51,309
+and pending restart is true.
+
+104
+00:04:51,309 --> 00:04:52,908
+They wait for a restart.
+
+105
+00:04:53,458 --> 00:05:08,050
+Add a row first.
+
+106
+00:05:08,600 --> 00:05:10,968
+Insert, zero, one. One row added.
+
+107
+00:05:11,518 --> 00:05:20,926
+Restart the server.
+
+108
+00:05:21,476 --> 00:05:23,450
+Waiting for server to shut down,
+
+109
+00:05:23,450 --> 00:05:24,622
+and server started.
+
+110
+00:05:24,622 --> 00:05:26,966
+The process stopped and started again.
+
+111
+00:05:26,966 --> 00:05:28,755
+Everything in memory is gone.
+
+112
+00:05:28,755 --> 00:05:29,988
+What about the data?
+
+113
+00:05:30,538 --> 00:05:47,136
+Did settings apply?
+
+114
+00:05:47,686 --> 00:05:49,363
+Max connections is fifty.
+
+115
+00:05:49,363 --> 00:05:54,528
+Shared buffers is eight thousand one hundred ninety-two eight-kilobyte pages,
+
+116
+00:05:54,528 --> 00:05:56,541
+which is sixty-four megabytes.
+
+117
+00:05:56,541 --> 00:05:58,218
+Pending restart is false.
+
+118
+00:05:58,218 --> 00:05:59,291
+All three apply.
+
+119
+00:05:59,841 --> 00:06:06,518
+Is the data there?
+
+120
+00:06:07,068 --> 00:06:07,705
+Both rows.
+
+121
+00:06:07,705 --> 00:06:08,660
+The first note,
+
+122
+00:06:08,660 --> 00:06:09,487
+and survives.
+
+123
+00:06:09,487 --> 00:06:11,652
+The data lives in the data folder,
+
+124
+00:06:11,652 --> 00:06:13,752
+and the restart did not touch it.
+
+125
+00:06:13,752 --> 00:06:15,026
+That is persistence.
+
+126
+00:06:15,576 --> 00:06:28,504
+Prove the restart happened.
+
+127
+00:06:29,054 --> 00:06:31,528
+A start time after the note was saved.
+
+128
+00:06:31,528 --> 00:06:32,701
+The server is new.
+
+129
+00:06:32,701 --> 00:06:33,743
+The data is old.
+
+130
+00:06:33,743 --> 00:06:35,240
+Exactly what we wanted.
+
+131
+00:06:35,790 --> 00:06:38,158
+Run the judge.
+
+132
+00:06:38,708 --> 00:06:44,191
+Five checks. Counted, restarted, reloaded, drop-in, and persisted. Five out of five.
+
+133
+00:06:44,741 --> 00:06:46,704
+Clean up.
+
+134
+00:06:47,254 --> 00:06:49,920
+The server is stopped and everything is removed.
+
+135
+00:06:50,470 --> 00:06:58,982
+Is it gone?
+
+136
+00:06:59,532 --> 00:07:02,050
+No response. Nothing is left behind.
+
+137
+00:07:03,600 --> 00:07:07,205
+Your task. Configure the server, and prove its data persists.
+
+138
+00:07:07,755 --> 00:07:10,155
+One: read the default max connections,
+
+139
+00:07:10,155 --> 00:07:12,365
+and write it into answers dot text,
+
+140
+00:07:12,365 --> 00:07:14,070
+before you change anything.
+
+141
+00:07:14,620 --> 00:07:16,537
+Two: create the drop-in file,
+
+142
+00:07:16,537 --> 00:07:18,323
+with max connections fifty,
+
+143
+00:07:18,323 --> 00:07:20,703
+shared buffers sixty-four megabytes,
+
+144
+00:07:20,703 --> 00:07:23,943
+and log min duration statement two hundred fifty.
+
+145
+00:07:24,493 --> 00:07:29,549
+Three: reload, and see which setting applied, and which waits. Add a note called survives.
+
+146
+00:07:30,099 --> 00:07:31,637
+Four: restart the server.
+
+147
+00:07:31,637 --> 00:07:33,175
+Five: check the settings,
+
+148
+00:07:33,175 --> 00:07:35,205
+check both notes are still there,
+
+149
+00:07:35,205 --> 00:07:36,128
+then lab check,
+
+150
+00:07:36,128 --> 00:07:36,989
+then lab down.
+
+151
+00:07:39,039 --> 00:07:42,815
+Here is where to find everything. Pause on this screen, and write it down.
+
+152
+00:07:43,365 --> 00:07:45,013
+The lab lives on GitHub,
+
+153
+00:07:45,013 --> 00:07:46,180
+at it dash waves,
+
+154
+00:07:46,180 --> 00:07:47,760
+slash dev ops dash A I,
+
+155
+00:07:47,760 --> 00:07:49,270
+in the folder academy,
+
+156
+00:07:49,270 --> 00:07:49,957
+slash lab.
+
+157
+00:07:50,507 --> 00:07:56,054
+Two files: lab one twenty-eight dot S H, and shortcuts one twenty-eight dot S H.
+
+158
+00:07:56,604 --> 00:07:57,491
+Install it,
+
+159
+00:07:57,491 --> 00:08:00,314
+on any Linux machine: sudo install,
+
+160
+00:08:00,314 --> 00:08:02,169
+dash m seven five five,
+
+161
+00:08:02,169 --> 00:08:04,509
+lab one twenty-eight dot S H,
+
+162
+00:08:04,509 --> 00:08:05,718
+into slash usr,
+
+163
+00:08:05,718 --> 00:08:06,686
+slash local,
+
+164
+00:08:06,686 --> 00:08:07,654
+slash S bin.
+
+165
+00:08:08,204 --> 00:08:13,275
+Load the short names with: source shortcuts one twenty-eight dot S H.
+
+166
+00:08:13,275 --> 00:08:14,671
+You get three: lab,
+
+167
+00:08:14,671 --> 00:08:14,965
+P G,
+
+168
+00:08:14,965 --> 00:08:16,140
+and P G control.
+
+169
+00:08:16,690 --> 00:08:18,307
+You need post gress Q L,
+
+170
+00:08:18,307 --> 00:08:19,519
+server and client,
+
+171
+00:08:19,519 --> 00:08:20,193
+installed,
+
+172
+00:08:20,193 --> 00:08:22,618
+and port fifty-four eighty-one free.
+
+173
+00:08:22,618 --> 00:08:25,313
+The lab runs its own private post gress,
+
+174
+00:08:25,313 --> 00:08:26,525
+in its own folder.
+
+175
+00:08:27,075 --> 00:08:28,782
+Lab up prepares everything.
+
+176
+00:08:28,782 --> 00:08:30,489
+Lab check judges your work.
+
+177
+00:08:30,489 --> 00:08:32,006
+Lab down removes it all.
+
+178
+00:08:32,006 --> 00:08:34,030
+Only run it on your own machine.
+
+179
+00:08:36,080 --> 00:08:38,149
+Pass or fail. You need all five.
+
+180
+00:08:38,699 --> 00:08:41,473
+One: you read the default max connections first.
+
+181
+00:08:42,023 --> 00:08:46,746
+Two: max connections is fifty and shared buffers is sixty-four megabytes,
+
+182
+00:08:46,746 --> 00:08:47,911
+after the restart.
+
+183
+00:08:48,461 --> 00:08:53,111
+Three: log min duration statement is two hundred fifty, after the reload.
+
+184
+00:08:53,661 --> 00:08:58,291
+Four: the settings are in the drop-in file, and the main config file is untouched.
+
+185
+00:08:58,841 --> 00:09:02,062
+Five: the note you saved before the restart is still there.
+
+186
+00:09:02,612 --> 00:09:03,913
+To pass, all five.
+
+187
+00:09:05,963 --> 00:09:07,734
+Your turn, on your own machine.
+
+188
+00:09:08,284 --> 00:09:10,993
+One: lab up, read the defaults, and write the answer.
+
+189
+00:09:11,543 --> 00:09:14,316
+Two: create the drop-in file with the three settings.
+
+190
+00:09:14,866 --> 00:09:18,258
+Three: reload, look at pending restart, and insert the note.
+
+191
+00:09:18,808 --> 00:09:21,987
+Four: restart, and check the settings and both notes.
+
+192
+00:09:22,537 --> 00:09:26,356
+Five: lab check until you see five out of five. Then lab down.
+
+193
+00:09:26,906 --> 00:09:28,740
+Pause the video, and begin now.
+
+194
+00:09:44,290 --> 00:09:45,165
+Quick check.
+
+195
+00:09:45,715 --> 00:09:49,149
+Why use a drop-in file instead of editing the main config?
+
+196
+00:09:49,699 --> 00:09:52,366
+What is the difference between a reload and a restart?
+
+197
+00:09:52,916 --> 00:09:55,135
+Which two settings needed a restart today?
+
+198
+00:09:55,685 --> 00:09:59,055
+What makes storage persistent, and what does it not protect you from?
+
+199
+00:09:59,605 --> 00:10:02,056
+Objectives covered: M C fourteen,
+
+200
+00:10:02,056 --> 00:10:03,170
+objective four.
+
+201
+00:10:03,170 --> 00:10:07,328
+Database configuration and persistent storage for a lab.
+
+202
+00:10:07,878 --> 00:10:09,947
+Pause the video, and answer out loud.
+
+203
+00:10:20,497 --> 00:10:24,252
+Next: changing the database safely, with schema migrations.
+
+204
+00:10:24,802 --> 00:10:28,130
+If this helped, like, share and subscribe, so you do not miss it.

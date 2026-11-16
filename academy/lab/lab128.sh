@@ -51,21 +51,21 @@ EOF_T
   echo "lab 128 ready in $D. Read TASKS.txt, then run: pg"
 }
 pass=0; total=5
-ok() { pass=$((pass+1)); echo "PASS  $1"; }
-no() { echo "FAIL  $1"; }
+ok() { pass=$((pass+1)); echo "  PASS  $1"; }
+no() { echo "  FAIL  $1"; }
 check() {
   [ -f $D/data/postmaster.pid ] || { echo "the lab is not running: run  lab up"; exit 1; }
   PS="$RU psql -h $D -p $PORT -X -q -At -d shop"
   a=$(sed -n 1p $D/answers.txt 2>/dev/null | tr -d ' \r')
-  if [ "$a" = 100 ]; then ok "1 answers.txt has the default max_connections you saw (100)"; else no "1 answers.txt line 1 must be the default max_connections you saw with SHOW max_connections before changing anything"; fi
+  if [ "$a" = 100 ]; then ok "1 answers.txt has the default max_connections"; else no "1 answers.txt line 1 must be the default max_connections you saw with SHOW max_connections before changing anything"; fi
   mc=$($PS -c "SHOW max_connections" 2>/dev/null); sb=$($PS -c "SHOW shared_buffers" 2>/dev/null)
-  if [ "$mc" = 50 ] && [ "$sb" = 64MB ]; then ok "2 max_connections is 50 and shared_buffers is 64MB (the restart applied them)"; else no "2 max_connections=$mc shared_buffers=$sb : they need to be 50 and 64MB, and need a restart to apply"; fi
+  if [ "$mc" = 50 ] && [ "$sb" = 64MB ]; then ok "2 max_connections 50 and shared_buffers 64MB applied"; else no "2 max_connections=$mc shared_buffers=$sb : they need to be 50 and 64MB, and need a restart to apply"; fi
   ms=$($PS -c "SHOW log_min_duration_statement" 2>/dev/null)
-  if [ "$ms" = 250ms ]; then ok "3 log_min_duration_statement is 250ms"; else no "3 log_min_duration_statement is $ms : put log_min_duration_statement = 250 in data/conf.d/app.conf and reload"; fi
-  if [ -f $D/data/conf.d/app.conf ] && grep -q "max_connections" $D/data/conf.d/app.conf && grep -q "^max_connections = 100" $D/data/postgresql.conf && grep -q "^shared_buffers = 128MB" $D/data/postgresql.conf; then ok "4 the settings live in the drop-in data/conf.d/app.conf, not in postgresql.conf"; else no "4 the settings must be in data/conf.d/app.conf and postgresql.conf must stay untouched"; fi
+  if [ "$ms" = 250ms ]; then ok "3 slow-query log threshold is 250ms"; else no "3 log_min_duration_statement is $ms : put log_min_duration_statement = 250 in data/conf.d/app.conf and reload"; fi
+  if [ -f $D/data/conf.d/app.conf ] && grep -q "max_connections" $D/data/conf.d/app.conf && grep -q "^max_connections = 100" $D/data/postgresql.conf && grep -q "^shared_buffers = 128MB" $D/data/postgresql.conf; then ok "4 settings are in the drop-in conf.d/app.conf"; else no "4 the settings must be in data/conf.d/app.conf and postgresql.conf must stay untouched"; fi
   n=$($PS -c "SELECT count(*) FROM notes WHERE body='survives' AND saved_at < pg_postmaster_start_time()" 2>/dev/null); k=$($PS -c "SELECT count(*) FROM notes" 2>/dev/null)
-  if [ "$n" = 1 ] && [ "$k" = 2 ]; then ok "5 the row 'survives' was saved before the restart and is still here: the data is persistent"; else no "5 insert the note 'survives' BEFORE the restart, then restart: both notes must still be there (count now: $k)"; fi
-  echo "$pass / $total passed"
+  if [ "$n" = 1 ] && [ "$k" = 2 ]; then ok "5 the note saved before the restart survived"; else no "5 insert the note 'survives' BEFORE the restart, then restart: both notes must still be there (count now: $k)"; fi
+  echo; echo "$pass / $total passed"; [ $pass -eq $total ]
 }
 case "$1" in
   up) up ;;
