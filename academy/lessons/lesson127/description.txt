@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab127.sh and shortc
 Honest notes: the terminal part is one real, continuous recording on real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. The demo password is for teaching only: use a long random one in real life and keep it in a secrets manager, never in a repository. The shop database is a tiny teaching example. The narration is synthetic speech. The hook, vocabulary, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: PostgreSQL Basics: Connect with psql, Read the Schema, Run a Transaction | Lesson 126 https://youtu.be/EoOpNbZ-4vw
-Next: Database configuration and persistent storage.
+Next lesson: PostgreSQL Configuration and Persistent Storage: conf.d, Reload vs Restart | Lesson 128 https://youtu.be/UrmCJFYtduo
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
