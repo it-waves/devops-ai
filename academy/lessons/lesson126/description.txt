@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab126.sh and shortc
 Honest notes: the terminal part is one real, continuous recording on real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. The shop database is a tiny teaching example, so real databases are much bigger. The server is configured for local sockets with trust authentication in this lab only: never do that on a real server (we fix that in the next lesson). The narration is synthetic speech. The hook, vocabulary, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: nginx Mastery: Web Servers and Reverse Proxies, Build, Secure, Fix and Prove It | Lesson 125 https://youtu.be/QuaItZqwQDU
-Next: Users, passwords and least privilege for the database.
+Next lesson: PostgreSQL Users and Least Privilege: Roles, Grants and scram Passwords | Lesson 127 https://youtu.be/4HeTouBiIsI
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
