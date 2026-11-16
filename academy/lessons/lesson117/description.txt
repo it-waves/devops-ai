@@ -1,0 +1,24 @@
+Lesson 117 of the DevOps Engineering Bootcamp, and lesson 5 of 5 of the CloudCart v0 project: the mastery evidence. One scenario that anyone can verify, on real git, Maven and Apache Tomcat 10.1.34: a clean clone of the team repository (git status is clean), a Maven build (32 tests, one WAR), deploying the WAR you just built, a customer check (health UP, 12 products, plus the real "Tomcat is not up yet" symptom and the fix: wait and ask again), tagging the exact commit as cloudcart-v0 and pushing the tag, then four lines of evidence: the commit, the test count, the sha256 fingerprint of the WAR and the version. lab check judges all five points, and lab down proves nothing is left behind.
+
+Chapters
+0:00 Prove it.
+0:32 What to expect
+1:05 One scenario, six steps
+1:38 Live: clone, build, deploy, tag, prove
+6:22 Your lab task
+6:52 Where to find the lab
+7:53 Pass or fail rubric
+8:15 Your turn
+9:00 Quick check
+Objectives covered: CloudCart v0, lesson 5 of 5 (mastery evidence: an independently verifiable scenario, results documented, troubleshooting and cleanup)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab117.sh and shortcuts117.sh). Install with: sudo install -m 755 lab117.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short name with: source shortcuts117.sh. You need any Linux machine with root, a JDK, Maven, git, curl, unzip and ss (for example: sudo apt install -y openjdk-21-jdk-headless maven git curl unzip iproute2), internet access, about 1 GB of free memory and ports 8089 and 8099 free. No systemd is needed. The first lab up downloads Tomcat 10.1.34 (about 14 MB) and the project source (about 25 KB); the first Maven build downloads about 25 MB from Maven Central. lab down stops Tomcat and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording. The lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. In the lab the "team repository" is a local copy (origin.git) made by lab up, so you can practise cloning and pushing a tag safely. The narration is synthetic speech. The hook, picture, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: CloudCart v0: Run It Like a Customer, Fix It Like an Engineer | Lesson 116 https://youtu.be/yookiVsHfl0
+Next: Web servers and reverse proxies, with nginx in front of CloudCart.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #cloudcart #maven #git #devopsbootcamp

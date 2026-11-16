@@ -1,0 +1,731 @@
+1
+00:00:00,500 --> 00:00:02,702
+Version zero of CloudCart is built,
+
+2
+00:00:02,702 --> 00:00:03,268
+deployed,
+
+3
+00:00:03,268 --> 00:00:03,897
+and fixed.
+
+4
+00:00:03,897 --> 00:00:05,218
+But can you prove it?
+
+5
+00:00:05,218 --> 00:00:06,728
+Not on your own machine,
+
+6
+00:00:06,728 --> 00:00:08,993
+with files left over from last week.
+
+7
+00:00:08,993 --> 00:00:09,559
+Prove it,
+
+8
+00:00:09,559 --> 00:00:10,377
+from nothing.
+
+9
+00:00:10,927 --> 00:00:12,865
+Today is the mastery lesson.
+
+10
+00:00:12,865 --> 00:00:16,326
+One scenario that anyone can check: a clean clone,
+
+11
+00:00:16,326 --> 00:00:16,880
+a build,
+
+12
+00:00:16,880 --> 00:00:17,503
+a deploy,
+
+13
+00:00:17,503 --> 00:00:18,680
+a customer check,
+
+14
+00:00:18,680 --> 00:00:19,095
+a tag,
+
+15
+00:00:19,095 --> 00:00:20,549
+and written evidence.
+
+16
+00:00:21,099 --> 00:00:23,595
+If every step passes from a fresh copy,
+
+17
+00:00:23,595 --> 00:00:24,939
+version zero is real.
+
+18
+00:00:24,939 --> 00:00:25,771
+If one fails,
+
+19
+00:00:25,771 --> 00:00:28,075
+you found a problem that was hiding.
+
+20
+00:00:28,625 --> 00:00:31,099
+Clone it, build it, deploy it, check it, tag it.
+
+21
+00:00:32,649 --> 00:00:35,721
+Here is what to expect, from the first minute to the last.
+
+22
+00:00:36,271 --> 00:00:40,218
+One: you clone the project fresh. Nothing is left over from before.
+
+23
+00:00:40,768 --> 00:00:44,330
+Two: you build it with Maven, and deploy the war you just built.
+
+24
+00:00:44,880 --> 00:00:48,848
+Three: you check it like a customer, then tag the exact commit you built.
+
+25
+00:00:49,398 --> 00:00:54,625
+Four: you write four lines of evidence. Then your turn, with a lab that judges all of it.
+
+26
+00:00:55,175 --> 00:01:00,999
+This lesson closes the CloudCart version zero project. Five lessons, one app, proven.
+
+27
+00:01:01,549 --> 00:01:03,810
+Clone, build, deploy, check, tag, prove.
+
+28
+00:01:05,860 --> 00:01:09,295
+One scenario, six steps, and every step has a witness.
+
+29
+00:01:09,845 --> 00:01:13,770
+A clean clone. The witness: git status says nothing is changed.
+
+30
+00:01:14,320 --> 00:01:18,928
+A build. The witness: Maven's own count of passing tests, and a war file.
+
+31
+00:01:19,478 --> 00:01:24,150
+A deploy and a customer check. The witness: the health page, and the product list.
+
+32
+00:01:24,700 --> 00:01:26,740
+A tag and four lines of evidence.
+
+33
+00:01:26,740 --> 00:01:28,347
+The witnesses: the commit,
+
+34
+00:01:28,347 --> 00:01:29,274
+the test count,
+
+35
+00:01:29,274 --> 00:01:30,572
+the file fingerprint,
+
+36
+00:01:30,572 --> 00:01:31,313
+the version.
+
+37
+00:01:31,863 --> 00:01:32,895
+If a step fails,
+
+38
+00:01:32,895 --> 00:01:36,054
+you use the method from the last lesson: symptom,
+
+39
+00:01:36,054 --> 00:01:36,634
+evidence,
+
+40
+00:01:36,634 --> 00:01:37,021
+cause,
+
+41
+00:01:37,021 --> 00:01:37,279
+fix,
+
+42
+00:01:37,279 --> 00:01:37,666
+proof.
+
+43
+00:01:39,216 --> 00:01:44,357
+Go to the lab folder.
+
+44
+00:01:45,907 --> 00:01:47,806
+Look around. Type: L S.
+
+45
+00:01:48,356 --> 00:01:49,407
+Tomcat is here,
+
+46
+00:01:49,407 --> 00:01:49,827
+empty.
+
+47
+00:01:49,827 --> 00:01:51,158
+And origin.git,
+
+48
+00:01:51,158 --> 00:01:52,558
+the team repository.
+
+49
+00:01:52,558 --> 00:01:55,780
+We do not have the project on our machine yet.
+
+50
+00:01:56,330 --> 00:02:01,599
+Clone the project.
+
+51
+00:02:02,149 --> 00:02:02,902
+One command,
+
+52
+00:02:02,902 --> 00:02:04,785
+and the whole project is here,
+
+53
+00:02:04,785 --> 00:02:05,852
+with its history.
+
+54
+00:02:05,852 --> 00:02:08,613
+This is how every engineer starts on a team.
+
+55
+00:02:09,163 --> 00:02:11,339
+Go inside. Type: CD, work.
+
+56
+00:02:11,889 --> 00:02:13,959
+Is the copy clean?
+
+57
+00:02:14,709 --> 00:02:19,402
+Main, matching origin main, and no changed files. A clean starting point.
+
+58
+00:02:19,952 --> 00:02:22,235
+What are we about to build?
+
+59
+00:02:22,985 --> 00:02:25,311
+One commit: CloudCart version zero.
+
+60
+00:02:25,311 --> 00:02:27,171
+A short code in front of it.
+
+61
+00:02:27,171 --> 00:02:28,434
+Remember that code.
+
+62
+00:02:28,434 --> 00:02:30,959
+It is the exact version we will build,
+
+63
+00:02:30,959 --> 00:02:31,225
+tag,
+
+64
+00:02:31,225 --> 00:02:32,222
+and write down.
+
+65
+00:02:32,772 --> 00:02:39,471
+Build it, and keep the test summary.
+
+66
+00:02:48,021 --> 00:02:49,578
+Maven compiled the code,
+
+67
+00:02:49,578 --> 00:02:50,486
+ran the tests,
+
+68
+00:02:50,486 --> 00:02:51,719
+and packed the war.
+
+69
+00:02:51,719 --> 00:02:53,081
+Thirty-two tests run,
+
+70
+00:02:53,081 --> 00:02:53,860
+no failures,
+
+71
+00:02:53,860 --> 00:02:54,508
+no errors.
+
+72
+00:02:54,508 --> 00:02:56,001
+That count is evidence,
+
+73
+00:02:56,001 --> 00:02:57,493
+so remember thirty-two.
+
+74
+00:02:58,043 --> 00:03:01,819
+Is the war there?
+
+75
+00:03:02,369 --> 00:03:06,529
+About three hundred thousand bytes. The war you built, from a clean clone.
+
+76
+00:03:07,079 --> 00:03:15,185
+Deploy it into Tomcat.
+
+77
+00:03:15,735 --> 00:03:32,717
+Start Tomcat, then ask right away.
+
+78
+00:03:36,267 --> 00:03:38,438
+Symptom: curl could not connect.
+
+79
+00:03:38,438 --> 00:03:41,898
+The evidence: nothing is listening on the port yet.
+
+80
+00:03:41,898 --> 00:03:45,087
+The cause: Tomcat needs a few seconds to start,
+
+81
+00:03:45,087 --> 00:03:46,376
+and unpack the war.
+
+82
+00:03:46,376 --> 00:03:47,665
+The fix is to wait,
+
+83
+00:03:47,665 --> 00:03:48,683
+then ask again.
+
+84
+00:03:49,233 --> 00:04:00,305
+Wait, then ask again.
+
+85
+00:04:06,855 --> 00:04:12,231
+Status up, version zero point two point oh. The proof: asked again, as a customer.
+
+86
+00:04:12,781 --> 00:04:24,706
+Count the products.
+
+87
+00:04:25,256 --> 00:04:29,587
+Twelve products. The catalog is complete, so the customer check passes.
+
+88
+00:04:30,137 --> 00:04:35,043
+Tag the commit.
+
+89
+00:04:35,593 --> 00:04:40,372
+A tag is a permanent name for one exact commit. No output means it worked.
+
+90
+00:04:40,922 --> 00:04:44,421
+Publish the tag.
+
+91
+00:04:44,971 --> 00:04:50,496
+New tag, pushed to the team repository. Now everyone can find exactly this version.
+
+92
+00:04:51,046 --> 00:05:06,214
+Write the evidence. First, the commit.
+
+93
+00:05:06,764 --> 00:05:15,425
+The test count.
+
+94
+00:05:15,975 --> 00:05:31,655
+The file fingerprint.
+
+95
+00:05:32,205 --> 00:05:41,741
+The version.
+
+96
+00:05:42,291 --> 00:05:46,494
+Read it back.
+
+97
+00:05:47,044 --> 00:05:47,733
+Four lines.
+
+98
+00:05:47,733 --> 00:05:48,421
+The commit,
+
+99
+00:05:48,421 --> 00:05:49,486
+thirty-two tests,
+
+100
+00:05:49,486 --> 00:05:51,051
+a fingerprint of the war,
+
+101
+00:05:51,051 --> 00:05:52,053
+and the version.
+
+102
+00:05:52,053 --> 00:05:53,681
+Anyone can check each one,
+
+103
+00:05:53,681 --> 00:05:54,745
+and the lab will.
+
+104
+00:05:55,295 --> 00:05:57,663
+Run the judge.
+
+105
+00:05:58,213 --> 00:05:59,030
+Five checks,
+
+106
+00:05:59,030 --> 00:05:59,848
+five passes.
+
+107
+00:05:59,848 --> 00:06:00,801
+A clean clone,
+
+108
+00:06:00,801 --> 00:06:01,686
+a real build,
+
+109
+00:06:01,686 --> 00:06:03,184
+the right war running,
+
+110
+00:06:03,184 --> 00:06:03,593
+a tag,
+
+111
+00:06:03,593 --> 00:06:04,955
+and honest evidence.
+
+112
+00:06:05,505 --> 00:06:07,467
+Clean up.
+
+113
+00:06:08,017 --> 00:06:10,385
+Tomcat stopped, and everything removed.
+
+114
+00:06:10,935 --> 00:06:15,607
+Is the port free? Count the lines.
+
+115
+00:06:16,157 --> 00:06:20,957
+Zero. Nothing listens, nothing is left behind. Version zero is proven.
+
+116
+00:06:22,507 --> 00:06:25,366
+Your task. Prove version zero, from a clean clone.
+
+117
+00:06:25,916 --> 00:06:30,353
+One: lab up. Clone the team repository into a folder called work.
+
+118
+00:06:30,903 --> 00:06:35,020
+Two: build it with Maven, and deploy the war you built into Tomcat.
+
+119
+00:06:35,570 --> 00:06:37,227
+Three: ask the health page,
+
+120
+00:06:37,227 --> 00:06:38,209
+like a customer.
+
+121
+00:06:38,209 --> 00:06:39,559
+If it does not answer,
+
+122
+00:06:39,559 --> 00:06:41,032
+use the incident method.
+
+123
+00:06:41,582 --> 00:06:45,806
+Four: tag the commit, cloudcart-v0, and push the tag.
+
+124
+00:06:46,356 --> 00:06:51,113
+Five: write evidence.txt, four lines. Then lab check, and lab down.
+
+125
+00:06:53,163 --> 00:06:55,040
+Here is where to find everything.
+
+126
+00:06:55,040 --> 00:06:56,576
+This is the mastery lesson,
+
+127
+00:06:56,576 --> 00:06:58,966
+so pause on this screen and write it down.
+
+128
+00:06:59,516 --> 00:07:01,164
+The lab lives on GitHub,
+
+129
+00:07:01,164 --> 00:07:02,331
+at it-waves,
+
+130
+00:07:02,331 --> 00:07:03,910
+/devops-ai,
+
+131
+00:07:03,910 --> 00:07:05,421
+in the folder academy,
+
+132
+00:07:05,421 --> 00:07:06,108
+/lab.
+
+133
+00:07:06,658 --> 00:07:12,375
+Two files: lab117.sh, and shortcuts117.sh.
+
+134
+00:07:12,925 --> 00:07:13,834
+Install it,
+
+135
+00:07:13,834 --> 00:07:16,726
+on any Linux machine: sudo install,
+
+136
+00:07:16,726 --> 00:07:18,626
+- m seven five five,
+
+137
+00:07:18,626 --> 00:07:20,775
+lab117.sh,
+
+138
+00:07:20,775 --> 00:07:22,014
+into /usr
+
+139
+00:07:22,014 --> 00:07:23,005
+/local
+
+140
+00:07:23,005 --> 00:07:23,997
+/sbin.
+
+141
+00:07:24,547 --> 00:07:29,774
+Load the short name with: source shortcuts117.sh. You get: lab.
+
+142
+00:07:30,324 --> 00:07:31,507
+You need a JDK,
+
+143
+00:07:31,507 --> 00:07:31,924
+Maven,
+
+144
+00:07:31,924 --> 00:07:32,203
+git,
+
+145
+00:07:32,203 --> 00:07:32,551
+curl,
+
+146
+00:07:32,551 --> 00:07:34,151
+unzip and the ss tool.
+
+147
+00:07:34,151 --> 00:07:36,169
+About one gigabyte of memory,
+
+148
+00:07:36,169 --> 00:07:41,250
+and ports 8089 and 8099 free.
+
+149
+00:07:41,250 --> 00:07:42,989
+The lab downloads Tomcat,
+
+150
+00:07:42,989 --> 00:07:44,103
+and the project,
+
+151
+00:07:44,103 --> 00:07:44,660
+for you.
+
+152
+00:07:45,210 --> 00:07:46,917
+Lab up prepares everything.
+
+153
+00:07:46,917 --> 00:07:48,624
+Lab check judges your work.
+
+154
+00:07:48,624 --> 00:07:50,141
+Lab down removes it all.
+
+155
+00:07:50,141 --> 00:07:52,164
+Only run it on your own machine.
+
+156
+00:07:54,214 --> 00:07:56,283
+Pass or fail. You need all five.
+
+157
+00:07:56,833 --> 00:07:59,969
+Your work folder is a clean clone, at the latest commit.
+
+158
+00:08:00,519 --> 00:08:03,143
+It was built: a valid war, and the tests ran.
+
+159
+00:08:03,693 --> 00:08:06,381
+Tomcat runs the war you built, and health is up.
+
+160
+00:08:06,931 --> 00:08:09,534
+Origin has the tag, on the commit you built.
+
+161
+00:08:10,084 --> 00:08:11,940
+Your four lines of evidence match.
+
+162
+00:08:12,490 --> 00:08:13,791
+To pass, all five.
+
+163
+00:08:15,841 --> 00:08:17,612
+Your turn, on your own machine.
+
+164
+00:08:18,162 --> 00:08:22,066
+One: lab up, read the task list, and clone the project into work.
+
+165
+00:08:22,616 --> 00:08:25,432
+Two: build with Maven, and read the test summary.
+
+166
+00:08:25,982 --> 00:08:29,672
+Three: deploy the war, start Tomcat, and wait before you ask.
+
+167
+00:08:30,222 --> 00:08:33,785
+Four: check the health page and the products, then tag and push.
+
+168
+00:08:34,335 --> 00:08:39,476
+Five: write the four evidence lines, and run lab check until you see five out of five.
+
+169
+00:08:40,026 --> 00:08:42,608
+Six: lab down, and prove the port is free.
+
+170
+00:08:43,158 --> 00:08:44,992
+Pause the video, and begin now.
+
+171
+00:09:00,542 --> 00:09:01,417
+Quick check.
+
+172
+00:09:01,967 --> 00:09:04,036
+Why do we prove a build from a clean clone?
+
+173
+00:09:04,586 --> 00:09:07,103
+What does a git tag give you that a branch does not?
+
+174
+00:09:07,653 --> 00:09:09,637
+Which four facts make up the evidence?
+
+175
+00:09:10,187 --> 00:09:12,747
+What do you do when the health page does not answer?
+
+176
+00:09:13,297 --> 00:09:16,256
+Objective covered: CloudCart version zero,
+
+177
+00:09:16,256 --> 00:09:17,453
+mastery evidence.
+
+178
+00:09:17,453 --> 00:09:18,862
+A verified scenario,
+
+179
+00:09:18,862 --> 00:09:20,623
+its results written down,
+
+180
+00:09:20,623 --> 00:09:21,468
+and cleanup.
+
+181
+00:09:22,018 --> 00:09:24,087
+Pause the video, and answer out loud.
+
+182
+00:09:34,637 --> 00:09:38,328
+Next: web servers, with nginx in front of CloudCart.
+
+183
+00:09:38,878 --> 00:09:42,206
+If this helped, like, share and subscribe, so you do not miss it.
