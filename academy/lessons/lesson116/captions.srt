@@ -1,0 +1,811 @@
+1
+00:00:00,500 --> 00:00:05,513
+Your app is deployed. Then, one morning, it is not answering. Customers get nothing.
+
+2
+00:00:06,063 --> 00:00:08,459
+Today you work like an engineer on call.
+
+3
+00:00:08,459 --> 00:00:09,477
+You do not guess.
+
+4
+00:00:09,477 --> 00:00:10,794
+You read the evidence,
+
+5
+00:00:10,794 --> 00:00:11,692
+find the cause,
+
+6
+00:00:11,692 --> 00:00:12,112
+fix it,
+
+7
+00:00:12,112 --> 00:00:12,890
+and prove it.
+
+8
+00:00:13,440 --> 00:00:15,572
+Tomcat is broken in three ways.
+
+9
+00:00:15,572 --> 00:00:16,809
+A wrong Java path.
+
+10
+00:00:16,809 --> 00:00:18,941
+A port that someone else holds.
+
+11
+00:00:18,941 --> 00:00:20,523
+And a damaged war file.
+
+12
+00:00:21,073 --> 00:00:25,574
+You will find each one in the output and the logs, and you will fix them one at a time.
+
+13
+00:00:27,124 --> 00:00:30,196
+Here is what to expect, from the first minute to the last.
+
+14
+00:00:30,746 --> 00:00:33,647
+One: Tomcat will not start. You read what it says.
+
+15
+00:00:34,197 --> 00:00:38,720
+Two: Tomcat starts, but a stranger answers. You find who holds the port.
+
+16
+00:00:39,270 --> 00:00:44,518
+Three: Tomcat answers, but the app is missing. You read the log, and compare two files.
+
+17
+00:00:45,068 --> 00:00:46,902
+Four: you act like a customer,
+
+18
+00:00:46,902 --> 00:00:48,736
+and check that the shop works.
+
+19
+00:00:48,736 --> 00:00:50,082
+Then your turn: a lab,
+
+20
+00:00:50,082 --> 00:00:50,999
+with one check.
+
+21
+00:00:51,549 --> 00:00:54,855
+And one lesson ahead: prove all of it, from a clean copy.
+
+22
+00:00:55,405 --> 00:00:57,432
+Read it, find it, fix it, prove it.
+
+23
+00:00:59,482 --> 00:01:03,663
+Before the live part, one method. Every incident, the same five steps.
+
+24
+00:01:04,213 --> 00:01:08,715
+One: the symptom. What does the customer see? Nothing, an error, the wrong page.
+
+25
+00:01:09,265 --> 00:01:14,214
+Two: the evidence. The screen output, the log, the port list. Read before you touch.
+
+26
+00:01:14,764 --> 00:01:17,580
+Three: the cause. One sentence. Write it down.
+
+27
+00:01:18,130 --> 00:01:21,629
+Four: the fix. The smallest change that removes that cause.
+
+28
+00:01:22,179 --> 00:01:27,469
+Five: the proof. Ask again, as a customer. Symptom, evidence, cause, fix, proof.
+
+29
+00:01:29,019 --> 00:01:34,032
+Go to the lab folder.
+
+30
+00:01:35,582 --> 00:01:37,481
+Look around. Type: L S.
+
+31
+00:01:38,031 --> 00:01:40,025
+Tomcat is in the tomcat folder.
+
+32
+00:01:40,025 --> 00:01:42,920
+A good copy of the app is in the good folder.
+
+33
+00:01:42,920 --> 00:01:44,657
+Something is wrong in here.
+
+34
+00:01:44,657 --> 00:01:45,943
+We do not know what.
+
+35
+00:01:45,943 --> 00:01:46,458
+We read.
+
+36
+00:01:47,008 --> 00:01:52,320
+Start Tomcat, and keep the first two lines.
+
+37
+00:01:53,870 --> 00:01:54,722
+Symptom one.
+
+38
+00:01:54,722 --> 00:01:56,285
+Tomcat does not start.
+
+39
+00:01:56,285 --> 00:02:00,334
+It says: the JAVA_HOME variable is not defined correctly.
+
+40
+00:02:00,334 --> 00:02:03,388
+And it prints the path it tried: /opt
+
+41
+00:02:03,388 --> 00:02:04,880
+/java-gone.
+
+42
+00:02:04,880 --> 00:02:06,798
+That folder does not exist.
+
+43
+00:02:07,848 --> 00:02:13,650
+Where does that path come from?
+
+44
+00:02:14,200 --> 00:02:17,068
+Tomcat reads this file before it starts.
+
+45
+00:02:17,068 --> 00:02:20,940
+Line one sets JAVA_HOME to a folder that is not there.
+
+46
+00:02:20,940 --> 00:02:22,732
+Write it down: /opt
+
+47
+00:02:22,732 --> 00:02:24,238
+/java-gone.
+
+48
+00:02:24,238 --> 00:02:25,528
+That is cause one.
+
+49
+00:02:26,078 --> 00:02:31,412
+Fix it, with vim.
+
+50
+00:02:31,962 --> 00:02:33,951
+The wrong line is line one.
+
+51
+00:02:33,951 --> 00:02:34,614
+Type dd,
+
+52
+00:02:34,614 --> 00:02:36,014
+to delete the line.
+
+53
+00:02:36,014 --> 00:02:36,824
+Then colon,
+
+54
+00:02:36,824 --> 00:02:37,119
+W Q,
+
+55
+00:02:37,119 --> 00:02:37,856
+and enter,
+
+56
+00:02:37,856 --> 00:02:39,108
+to save and quit.
+
+57
+00:02:39,658 --> 00:02:45,013
+Start Tomcat again, and keep the last line.
+
+58
+00:02:45,563 --> 00:02:51,558
+Tomcat started. Without that line, it finds Java by itself. Fixed? Ask as a customer.
+
+59
+00:02:52,108 --> 00:03:02,369
+Ask for the health page, and keep two lines.
+
+60
+00:03:05,919 --> 00:03:06,763
+Symptom two.
+
+61
+00:03:06,763 --> 00:03:07,677
+Four oh four.
+
+62
+00:03:07,677 --> 00:03:11,545
+But read the second line: the server is SimpleHTTP,
+
+63
+00:03:11,545 --> 00:03:12,037
+Python.
+
+64
+00:03:12,037 --> 00:03:14,077
+This is not Tomcat answering.
+
+65
+00:03:14,077 --> 00:03:16,116
+Something else owns the port.
+
+66
+00:03:16,666 --> 00:03:21,509
+Who owns port 8089?
+
+67
+00:03:22,059 --> 00:03:25,574
+The listener on the port is a program called python3,
+
+68
+00:03:25,574 --> 00:03:27,028
+with its process number.
+
+69
+00:03:27,028 --> 00:03:27,695
+A stranger,
+
+70
+00:03:27,695 --> 00:03:28,907
+sitting on our port.
+
+71
+00:03:29,457 --> 00:03:37,436
+What does Tomcat say?
+
+72
+00:03:37,986 --> 00:03:40,572
+Bind exception: address already in use.
+
+73
+00:03:40,572 --> 00:03:42,827
+Tomcat lost the race for the port.
+
+74
+00:03:42,827 --> 00:03:44,949
+The log and the port list agree.
+
+75
+00:03:44,949 --> 00:03:47,138
+Cause two: a python3 server.
+
+76
+00:03:47,688 --> 00:03:53,746
+Stop the stranger, by its command line.
+
+77
+00:03:54,296 --> 00:03:54,617
+Quiet.
+
+78
+00:03:54,617 --> 00:03:56,649
+Dash F matches the whole command line,
+
+79
+00:03:56,649 --> 00:03:58,894
+and -u keeps it to your own processes.
+
+80
+00:03:58,894 --> 00:04:00,177
+Tomcat is still running,
+
+81
+00:04:00,177 --> 00:04:01,567
+but it never got the port.
+
+82
+00:04:01,567 --> 00:04:02,316
+So restart it.
+
+83
+00:04:02,316 --> 00:04:02,583
+Stop,
+
+84
+00:04:02,583 --> 00:04:03,171
+then start.
+
+85
+00:04:03,721 --> 00:04:09,076
+Stop Tomcat.
+
+86
+00:04:09,626 --> 00:04:14,980
+Start Tomcat.
+
+87
+00:04:15,530 --> 00:04:25,792
+Ask again, and keep two lines.
+
+88
+00:04:29,342 --> 00:04:29,818
+Better.
+
+89
+00:04:29,818 --> 00:04:32,741
+This four oh four comes from Tomcat itself.
+
+90
+00:04:32,741 --> 00:04:33,897
+The port is ours.
+
+91
+00:04:33,897 --> 00:04:35,665
+Now the app: Tomcat is up,
+
+92
+00:04:35,665 --> 00:04:37,704
+but CloudCart is not running.
+
+93
+00:04:38,254 --> 00:04:43,886
+Search the log for the cause.
+
+94
+00:04:44,436 --> 00:04:47,266
+Zip exception: zip end header not found.
+
+95
+00:04:47,266 --> 00:04:49,034
+A war file is a zip file.
+
+96
+00:04:49,034 --> 00:04:50,449
+This one has no end.
+
+97
+00:04:50,449 --> 00:04:51,651
+It was cut short.
+
+98
+00:04:51,651 --> 00:04:52,500
+Cause three.
+
+99
+00:04:53,050 --> 00:05:04,080
+Compare the two war files by size.
+
+100
+00:05:04,630 --> 00:05:07,628
+One hundred thousand bytes in the deployed file.
+
+101
+00:05:07,628 --> 00:05:10,564
+Almost three hundred thousand in the good copy.
+
+102
+00:05:10,564 --> 00:05:13,312
+The deployed war is a third of the real one.
+
+103
+00:05:13,862 --> 00:05:22,374
+Put the good file in place.
+
+104
+00:05:22,924 --> 00:05:31,180
+Wait, then ask for the health page.
+
+105
+00:05:36,730 --> 00:05:37,444
+Status up,
+
+106
+00:05:37,444 --> 00:05:39,727
+version zero point two point oh.
+
+107
+00:05:39,727 --> 00:05:41,724
+Tomcat noticed the new file,
+
+108
+00:05:41,724 --> 00:05:43,722
+and redeployed it by itself.
+
+109
+00:05:43,722 --> 00:05:44,436
+Now check,
+
+110
+00:05:44,436 --> 00:05:45,434
+as a customer.
+
+111
+00:05:45,984 --> 00:05:58,592
+Count the products a customer can see.
+
+112
+00:05:59,142 --> 00:06:00,134
+Twelve products.
+
+113
+00:06:00,134 --> 00:06:01,187
+The shop is open,
+
+114
+00:06:01,187 --> 00:06:02,922
+and the catalog is complete.
+
+115
+00:06:02,922 --> 00:06:04,966
+That is the proof for a customer.
+
+116
+00:06:05,516 --> 00:06:09,250
+Write the answers, with vim.
+
+117
+00:06:09,800 --> 00:06:10,357
+Press I,
+
+118
+00:06:10,357 --> 00:06:11,821
+and type three lines.
+
+119
+00:06:11,821 --> 00:06:12,518
+Java home,
+
+120
+00:06:12,518 --> 00:06:13,145
+the path.
+
+121
+00:06:13,145 --> 00:06:13,981
+Port holder,
+
+122
+00:06:13,981 --> 00:06:14,887
+python3.
+
+123
+00:06:14,887 --> 00:06:16,141
+And the exception,
+
+124
+00:06:16,141 --> 00:06:17,117
+ZipException.
+
+125
+00:06:19,167 --> 00:06:21,791
+Escape, then colon, wq, and enter.
+
+126
+00:06:23,341 --> 00:06:25,709
+Run the judge.
+
+127
+00:06:26,259 --> 00:06:30,611
+Five checks, five passes. Every cause found, and every fix proven.
+
+128
+00:06:31,161 --> 00:06:33,124
+Clean up.
+
+129
+00:06:33,674 --> 00:06:38,751
+Is the port free? Count the lines.
+
+130
+00:06:39,301 --> 00:06:44,357
+Zero. Nothing listens. Three causes, found by reading, and fixed one at a time.
+
+131
+00:06:45,907 --> 00:06:48,296
+Your task. Fix three faults, and prove it.
+
+132
+00:06:48,846 --> 00:06:49,784
+One: lab up.
+
+133
+00:06:49,784 --> 00:06:50,800
+Start Tomcat,
+
+134
+00:06:50,800 --> 00:06:52,519
+and read what it says.
+
+135
+00:06:52,519 --> 00:06:55,098
+Fix the cause in setenv.sh,
+
+136
+00:06:55,098 --> 00:06:55,801
+with vim.
+
+137
+00:06:56,351 --> 00:06:57,471
+Two: start again.
+
+138
+00:06:57,471 --> 00:06:58,393
+Ask with curl,
+
+139
+00:06:58,393 --> 00:06:59,711
+and see who answers.
+
+140
+00:06:59,711 --> 00:07:01,292
+Find who holds the port,
+
+141
+00:07:01,292 --> 00:07:01,819
+stop it,
+
+142
+00:07:01,819 --> 00:07:03,071
+and restart Tomcat.
+
+143
+00:07:03,621 --> 00:07:09,189
+Three: Tomcat answers, but CloudCart does not. Read the log. Put the good war in place.
+
+144
+00:07:09,739 --> 00:07:11,547
+Four: write answers.txt,
+
+145
+00:07:11,547 --> 00:07:12,295
+three lines.
+
+146
+00:07:12,295 --> 00:07:13,230
+The wrong path,
+
+147
+00:07:13,230 --> 00:07:14,228
+the port holder,
+
+148
+00:07:14,228 --> 00:07:15,350
+and the exception.
+
+149
+00:07:15,900 --> 00:07:18,886
+Five: lab check, five checks. Then lab down.
+
+150
+00:07:20,936 --> 00:07:25,139
+Here is where to find everything. Pause on this screen if you need to write it down.
+
+151
+00:07:25,689 --> 00:07:27,337
+The lab lives on GitHub,
+
+152
+00:07:27,337 --> 00:07:28,504
+at it-waves,
+
+153
+00:07:28,504 --> 00:07:30,083
+/devops-ai,
+
+154
+00:07:30,083 --> 00:07:31,594
+in the folder academy,
+
+155
+00:07:31,594 --> 00:07:32,281
+/lab.
+
+156
+00:07:32,831 --> 00:07:38,228
+Two files: lab116.sh, and shortcuts116.sh.
+
+157
+00:07:38,778 --> 00:07:39,697
+Install it,
+
+158
+00:07:39,697 --> 00:07:42,622
+on any Linux machine: sudo install,
+
+159
+00:07:42,622 --> 00:07:44,543
+dash m seven five five,
+
+160
+00:07:44,543 --> 00:07:46,549
+lab116.sh,
+
+161
+00:07:46,549 --> 00:07:47,802
+into /usr
+
+162
+00:07:47,802 --> 00:07:48,805
+/local
+
+163
+00:07:48,805 --> 00:07:49,807
+/sbin.
+
+164
+00:07:50,357 --> 00:07:55,499
+Load the short name with: source shortcuts116.sh. You get: lab.
+
+165
+00:07:56,049 --> 00:07:57,186
+You need a JDK,
+
+166
+00:07:57,186 --> 00:07:57,520
+curl,
+
+167
+00:07:57,520 --> 00:07:58,390
+the ss tool,
+
+168
+00:07:58,390 --> 00:07:59,527
+and python3.
+
+169
+00:07:59,527 --> 00:08:01,467
+About one gigabyte of memory,
+
+170
+00:08:01,467 --> 00:08:06,350
+and ports 8089 and 8099 free.
+
+171
+00:08:06,350 --> 00:08:08,023
+The lab downloads Tomcat,
+
+172
+00:08:08,023 --> 00:08:08,826
+and the app,
+
+173
+00:08:08,826 --> 00:08:09,361
+for you.
+
+174
+00:08:09,911 --> 00:08:11,982
+Lab up starts the faults for you.
+
+175
+00:08:11,982 --> 00:08:13,676
+Lab check judges your work.
+
+176
+00:08:13,676 --> 00:08:15,433
+Lab down removes everything.
+
+177
+00:08:15,433 --> 00:08:17,441
+Only run it on your own machine.
+
+178
+00:08:19,491 --> 00:08:21,560
+Pass or fail. You need all five.
+
+179
+00:08:22,110 --> 00:08:24,841
+The JAVA_HOME is fixed, and Tomcat runs.
+
+180
+00:08:25,391 --> 00:08:28,399
+Port 8089 belongs to Tomcat.
+
+181
+00:08:28,949 --> 00:08:31,381
+CloudCart answers, and its health says up.
+
+182
+00:08:31,931 --> 00:08:34,470
+The war on disk is the good, complete file.
+
+183
+00:08:35,020 --> 00:08:37,729
+The three causes in answers.txt are right.
+
+184
+00:08:38,279 --> 00:08:39,580
+To pass, all five.
+
+185
+00:08:41,630 --> 00:08:43,401
+Your turn, on your own machine.
+
+186
+00:08:43,951 --> 00:08:48,367
+One: lab up, read the task list, and start Tomcat. Read the first symptom.
+
+187
+00:08:48,917 --> 00:08:52,778
+Two: fix the JAVA_HOME, with vim. Write down the wrong path first.
+
+188
+00:08:53,328 --> 00:08:57,552
+Three: find the stranger on the port, stop it, and restart Tomcat.
+
+189
+00:08:58,102 --> 00:09:01,046
+Four: read the log, and replace the damaged war.
+
+190
+00:09:01,596 --> 00:09:06,268
+Five: write the three causes, and run lab check, until you see five out of five.
+
+191
+00:09:06,818 --> 00:09:09,399
+Six: lab down, and prove the port is free.
+
+192
+00:09:09,949 --> 00:09:11,784
+Pause the video, and begin now.
+
+193
+00:09:27,334 --> 00:09:28,209
+Quick check.
+
+194
+00:09:28,759 --> 00:09:31,063
+What are the five steps of the incident method?
+
+195
+00:09:31,613 --> 00:09:34,706
+How could you tell that Tomcat was not the one answering?
+
+196
+00:09:35,256 --> 00:09:37,176
+Which command shows who holds a port?
+
+197
+00:09:37,726 --> 00:09:40,393
+Why did the war file fail: what did the log say?
+
+198
+00:09:40,943 --> 00:09:43,691
+Objective covered: CloudCart version zero,
+
+199
+00:09:43,691 --> 00:09:45,196
+run it like a customer,
+
+200
+00:09:45,196 --> 00:09:46,767
+fix it like an engineer.
+
+201
+00:09:47,317 --> 00:09:49,386
+Pause the video, and answer out loud.
+
+202
+00:09:59,936 --> 00:10:02,197
+Next: prove it all, from a clean copy.
+
+203
+00:10:02,747 --> 00:10:06,075
+If this helped, like, share and subscribe, so you do not miss it.
