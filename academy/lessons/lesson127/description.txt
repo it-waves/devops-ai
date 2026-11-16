@@ -1,0 +1,24 @@
+Lesson 127 of the DevOps Engineering Bootcamp, and lesson 2 of the Databases for DevOps domain. Your app logs in to the database with one account. If that account is a superuser with a weak password, one bug or one stolen password can erase everything. In this lesson you start from exactly that mistake on a real PostgreSQL 16 server: the app account logs in with no password, as a superuser. Then you fix it live: demote the role with ALTER ROLE, set a strong password kept in app.env, grant only SELECT on customers and products and SELECT plus INSERT on orders (with USAGE on the sequence), change pg_hba.conf from trust to scram-sha-256, reload, and prove it: no password fails, the right password reads, DELETE and CREATE TABLE are denied. A lab then judges you from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Lock down the database
+0:27 What to expect
+1:03 Six ideas for safe access
+2:02 Live: from superuser to least privilege
+7:39 Your lab task
+8:10 Where to find the lab
+9:06 Pass or fail rubric
+9:29 Your turn
+10:11 Quick check
+Objectives covered: MC14-O03 (database roles, passwords and least-privilege access for applications)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab127.sh and shortcuts127.sh). Install with: sudo install -m 755 lab127.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts127.sh. You need any Linux machine with root, PostgreSQL server and client (for example: sudo apt install -y postgresql postgresql-client) and port 5471 free. The lab runs its own private PostgreSQL cluster in /opt/lab127 and does not touch the system PostgreSQL. lab down stops it and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording on real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. The demo password is for teaching only: use a long random one in real life and keep it in a secrets manager, never in a repository. The shop database is a tiny teaching example. The narration is synthetic speech. The hook, vocabulary, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: PostgreSQL Basics: Connect with psql, Read the Schema, Run a Transaction | Lesson 126 https://youtu.be/EoOpNbZ-4vw
+Next: Database configuration and persistent storage.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #postgresql #database #security #devopsbootcamp

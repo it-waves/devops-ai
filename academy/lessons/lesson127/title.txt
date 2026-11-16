@@ -1,0 +1,1 @@
+PostgreSQL Users and Least Privilege: Roles, Grants and scram Passwords | Lesson 127

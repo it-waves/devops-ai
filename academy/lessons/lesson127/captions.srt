@@ -1,0 +1,687 @@
+1
+00:00:00,500 --> 00:00:03,899
+Your app logs in to the database with one account.
+
+2
+00:00:03,899 --> 00:00:06,074
+If that account is too powerful,
+
+3
+00:00:06,074 --> 00:00:06,618
+one bug,
+
+4
+00:00:06,618 --> 00:00:08,182
+or one stolen password,
+
+5
+00:00:08,182 --> 00:00:09,609
+can erase everything.
+
+6
+00:00:10,159 --> 00:00:16,095
+Today you take a database account that is a superuser with a weak password and no password check,
+
+7
+00:00:16,095 --> 00:00:17,135
+and make it safe.
+
+8
+00:00:17,685 --> 00:00:19,616
+Three fixes: a strong password,
+
+9
+00:00:19,616 --> 00:00:21,796
+only the permissions the app needs,
+
+10
+00:00:21,796 --> 00:00:23,851
+and a door that asks for the key.
+
+11
+00:00:24,401 --> 00:00:25,958
+Give the app the least it needs.
+
+12
+00:00:27,508 --> 00:00:30,580
+Here is what to expect, from the first minute to the last.
+
+13
+00:00:31,130 --> 00:00:34,735
+One: the words. Role, privilege, grant, and least privilege.
+
+14
+00:00:35,285 --> 00:00:37,652
+Two: a live demo on real post gress.
+
+15
+00:00:37,652 --> 00:00:39,296
+We see the problem first,
+
+16
+00:00:39,296 --> 00:00:42,517
+with the app account logging in with no password.
+
+17
+00:00:43,067 --> 00:00:48,102
+Three: we demote the account, set a strong password, and grant only what the app needs.
+
+18
+00:00:48,652 --> 00:00:52,472
+Four: we close the door in the host based authentication file,
+
+19
+00:00:52,472 --> 00:00:53,273
+and prove it.
+
+20
+00:00:53,273 --> 00:00:54,197
+Then your turn,
+
+21
+00:00:54,197 --> 00:00:56,908
+with a lab that judges you with five checks.
+
+22
+00:00:57,458 --> 00:00:59,975
+This is lesson two of the databases domain.
+
+23
+00:01:00,525 --> 00:01:02,083
+Give the app the least it needs.
+
+24
+00:01:04,133 --> 00:01:06,650
+Six ideas for safe database access.
+
+25
+00:01:07,200 --> 00:01:08,551
+A role is an account.
+
+26
+00:01:08,551 --> 00:01:09,451
+It can log in,
+
+27
+00:01:09,451 --> 00:01:10,159
+own things,
+
+28
+00:01:10,159 --> 00:01:11,509
+and hold permissions.
+
+29
+00:01:11,509 --> 00:01:14,468
+A superuser role skips every permission check.
+
+30
+00:01:14,468 --> 00:01:16,011
+Never give it to an app.
+
+31
+00:01:16,561 --> 00:01:19,338
+A privilege is one permission on one object,
+
+32
+00:01:19,338 --> 00:01:20,916
+like select on one table.
+
+33
+00:01:20,916 --> 00:01:22,368
+You give it with grant,
+
+34
+00:01:22,368 --> 00:01:24,198
+and take it back with revoke.
+
+35
+00:01:24,748 --> 00:01:28,972
+Least privilege means the app gets only what it needs to do its job,
+
+36
+00:01:28,972 --> 00:01:29,780
+nothing more.
+
+37
+00:01:29,780 --> 00:01:31,830
+If it only reads and adds orders,
+
+38
+00:01:31,830 --> 00:01:33,196
+it cannot delete them.
+
+39
+00:01:33,746 --> 00:01:35,842
+A serial column uses a sequence.
+
+40
+00:01:35,842 --> 00:01:40,034
+An insert needs permission on the sequence as well as the table.
+
+41
+00:01:40,034 --> 00:01:41,213
+A common surprise.
+
+42
+00:01:41,763 --> 00:01:44,766
+The P G H B A file decides who may connect,
+
+43
+00:01:44,766 --> 00:01:45,534
+from where,
+
+44
+00:01:45,534 --> 00:01:47,070
+and how they prove it.
+
+45
+00:01:47,070 --> 00:01:48,537
+Trust means no proof.
+
+46
+00:01:48,537 --> 00:01:50,143
+Scram means a password.
+
+47
+00:01:50,143 --> 00:01:53,006
+Always use scram for network connections.
+
+48
+00:01:53,556 --> 00:01:56,753
+Secrets such as passwords live outside the code,
+
+49
+00:01:56,753 --> 00:01:59,685
+in an environment file or a secrets manager,
+
+50
+00:01:59,685 --> 00:02:01,150
+never in a repository.
+
+51
+00:02:02,700 --> 00:02:08,012
+Go to the lab folder.
+
+52
+00:02:09,562 --> 00:02:11,461
+Look around. Type: L S.
+
+53
+00:02:12,011 --> 00:02:14,001
+A data folder and a server log.
+
+54
+00:02:14,001 --> 00:02:15,991
+A post gress server is running,
+
+55
+00:02:15,991 --> 00:02:18,688
+and an app account called shop app exists.
+
+56
+00:02:19,238 --> 00:02:39,526
+Log in as the app, no password.
+
+57
+00:02:40,076 --> 00:02:44,577
+It worked. Nobody asked for a password. Anyone on this machine can be the app.
+
+58
+00:02:45,127 --> 00:03:03,197
+Who are the roles?
+
+59
+00:03:03,747 --> 00:03:04,398
+Two roles,
+
+60
+00:03:04,398 --> 00:03:05,961
+and both are superusers.
+
+61
+00:03:05,961 --> 00:03:07,980
+The app account is a superuser.
+
+62
+00:03:07,980 --> 00:03:10,650
+A superuser skips every permission check.
+
+63
+00:03:10,650 --> 00:03:12,408
+That is far too much power.
+
+64
+00:03:12,958 --> 00:03:24,990
+Count the superusers.
+
+65
+00:03:25,540 --> 00:03:29,807
+Two. Write this down before you change anything. It is your first lab answer.
+
+66
+00:03:30,357 --> 00:03:35,839
+Write the answer.
+
+67
+00:03:36,389 --> 00:03:41,744
+Open psql as admin.
+
+68
+00:03:42,294 --> 00:03:58,081
+Demote the app.
+
+69
+00:03:58,631 --> 00:04:01,489
+Alter role. The app is now an ordinary role.
+
+70
+00:04:02,039 --> 00:04:17,869
+Set a strong password.
+
+71
+00:04:18,419 --> 00:04:21,235
+Done. The old password, change me, no longer works.
+
+72
+00:04:21,785 --> 00:04:45,038
+Grant only what the app needs.
+
+73
+00:04:45,588 --> 00:04:47,443
+Read customers and products.
+
+74
+00:04:47,443 --> 00:04:48,768
+Read and add orders.
+
+75
+00:04:48,768 --> 00:04:49,895
+And the sequence,
+
+76
+00:04:49,895 --> 00:04:51,617
+because an insert uses it.
+
+77
+00:04:51,617 --> 00:04:52,479
+Nothing else.
+
+78
+00:04:53,029 --> 00:04:55,866
+Leave psql. Type: backslash, Q.
+
+79
+00:04:56,416 --> 00:05:12,907
+Save the password for the app.
+
+80
+00:05:13,457 --> 00:05:16,102
+Read it back. Type: cat, app dot env.
+
+81
+00:05:16,652 --> 00:05:22,028
+In real life, this file is never committed to a repository, and only the app may read it.
+
+82
+00:05:22,578 --> 00:05:31,005
+Open the access file.
+
+83
+00:05:31,555 --> 00:05:32,247
+Two lines.
+
+84
+00:05:32,247 --> 00:05:35,641
+Local connections through the socket are trusted.
+
+85
+00:05:35,641 --> 00:05:37,580
+The network line says trust.
+
+86
+00:05:37,580 --> 00:05:39,104
+Change trust to scram,
+
+87
+00:05:39,104 --> 00:05:39,451
+shaw,
+
+88
+00:05:39,451 --> 00:05:41,251
+two fifty-six on line two.
+
+89
+00:05:41,251 --> 00:05:41,944
+Then save.
+
+90
+00:05:42,494 --> 00:05:53,289
+Reload the config.
+
+91
+00:05:53,839 --> 00:05:56,463
+True. The change is live, without a restart.
+
+92
+00:05:57,013 --> 00:06:19,711
+Try with no password.
+
+93
+00:06:20,261 --> 00:06:23,376
+No password supplied. The door asks for the key now.
+
+94
+00:06:23,926 --> 00:06:46,134
+Log in with the password.
+
+95
+00:06:46,684 --> 00:06:48,668
+Three orders. The app can read.
+
+96
+00:06:49,218 --> 00:06:54,103
+Try to delete.
+
+97
+00:06:54,653 --> 00:06:56,968
+Permission denied for table orders.
+
+98
+00:06:56,968 --> 00:06:59,547
+The app can no longer erase the orders,
+
+99
+00:06:59,547 --> 00:07:00,605
+even by mistake.
+
+100
+00:07:01,155 --> 00:07:06,531
+Try to create a table.
+
+101
+00:07:07,081 --> 00:07:10,708
+Permission denied for schema public. Least privilege, working.
+
+102
+00:07:11,258 --> 00:07:13,626
+Run the judge.
+
+103
+00:07:14,176 --> 00:07:18,869
+Five checks. Counted, demoted, password, door, and grants. Five out of five.
+
+104
+00:07:19,419 --> 00:07:21,382
+Clean up.
+
+105
+00:07:21,932 --> 00:07:24,599
+The server is stopped and everything is removed.
+
+106
+00:07:25,149 --> 00:07:34,877
+Is it gone?
+
+107
+00:07:35,427 --> 00:07:37,944
+No response. Nothing is left behind.
+
+108
+00:07:39,494 --> 00:07:41,862
+Your task. Make the shop app account safe.
+
+109
+00:07:42,412 --> 00:07:43,949
+One: count the superusers,
+
+110
+00:07:43,949 --> 00:07:46,491
+and write the number into answers dot text,
+
+111
+00:07:46,491 --> 00:07:48,087
+before you change anything.
+
+112
+00:07:48,637 --> 00:07:54,141
+Two: demote the app account, and give it a new strong password, saved in app dot env.
+
+113
+00:07:54,691 --> 00:07:57,912
+Three: grant only select on customers and products,
+
+114
+00:07:57,912 --> 00:07:59,933
+and select and insert on orders,
+
+115
+00:07:59,933 --> 00:08:01,069
+with the sequence.
+
+116
+00:08:01,619 --> 00:08:04,710
+Four: change trust to scram in the access file,
+
+117
+00:08:04,710 --> 00:08:05,433
+and reload.
+
+118
+00:08:05,433 --> 00:08:06,880
+Five: test as the app,
+
+119
+00:08:06,880 --> 00:08:07,867
+then lab check,
+
+120
+00:08:07,867 --> 00:08:08,787
+then lab down.
+
+121
+00:08:10,837 --> 00:08:14,613
+Here is where to find everything. Pause on this screen, and write it down.
+
+122
+00:08:15,163 --> 00:08:16,811
+The lab lives on GitHub,
+
+123
+00:08:16,811 --> 00:08:17,978
+at it dash waves,
+
+124
+00:08:17,978 --> 00:08:19,558
+slash dev ops dash A I,
+
+125
+00:08:19,558 --> 00:08:21,068
+in the folder academy,
+
+126
+00:08:21,068 --> 00:08:21,755
+slash lab.
+
+127
+00:08:22,305 --> 00:08:28,108
+Two files: lab one twenty-seven dot S H, and shortcuts one twenty-seven dot S H.
+
+128
+00:08:28,658 --> 00:08:29,564
+Install it,
+
+129
+00:08:29,564 --> 00:08:32,447
+on any Linux machine: sudo install,
+
+130
+00:08:32,447 --> 00:08:34,342
+dash m seven five five,
+
+131
+00:08:34,342 --> 00:08:36,730
+lab one twenty-seven dot S H,
+
+132
+00:08:36,730 --> 00:08:37,966
+into slash usr,
+
+133
+00:08:37,966 --> 00:08:38,955
+slash local,
+
+134
+00:08:38,955 --> 00:08:39,943
+slash S bin.
+
+135
+00:08:40,493 --> 00:08:45,363
+Load the short names with: source shortcuts one twenty-seven dot S H.
+
+136
+00:08:45,363 --> 00:08:46,563
+You get two: lab,
+
+137
+00:08:46,563 --> 00:08:47,128
+and P G.
+
+138
+00:08:47,678 --> 00:08:49,329
+You need post gress Q L,
+
+139
+00:08:49,329 --> 00:08:50,567
+server and client,
+
+140
+00:08:50,567 --> 00:08:51,255
+installed,
+
+141
+00:08:51,255 --> 00:08:53,800
+and port fifty-four seventy-one free.
+
+142
+00:08:53,800 --> 00:08:56,551
+The lab runs its own private post gress,
+
+143
+00:08:56,551 --> 00:08:57,790
+in its own folder.
+
+144
+00:08:58,340 --> 00:09:00,047
+Lab up prepares everything.
+
+145
+00:09:00,047 --> 00:09:01,754
+Lab check judges your work.
+
+146
+00:09:01,754 --> 00:09:03,271
+Lab down removes it all.
+
+147
+00:09:03,271 --> 00:09:05,294
+Only run it on your own machine.
+
+148
+00:09:07,344 --> 00:09:09,413
+Pass or fail. You need all five.
+
+149
+00:09:09,963 --> 00:09:12,075
+One: you counted the superusers first.
+
+150
+00:09:12,625 --> 00:09:14,908
+Two: the app is no longer a superuser.
+
+151
+00:09:15,458 --> 00:09:18,999
+Three: a strong new password, saved in app dot env.
+
+152
+00:09:19,549 --> 00:09:22,109
+Four: the network login demands a password.
+
+153
+00:09:22,659 --> 00:09:26,286
+Five: the app can read and insert orders, and nothing more.
+
+154
+00:09:26,836 --> 00:09:28,137
+To pass, all five.
+
+155
+00:09:30,187 --> 00:09:31,958
+Your turn, on your own machine.
+
+156
+00:09:32,508 --> 00:09:35,580
+One: lab up, count the superusers, and write the answer.
+
+157
+00:09:36,130 --> 00:09:40,503
+Two: demote the app, and set a new password, saved in app dot env.
+
+158
+00:09:41,053 --> 00:09:44,488
+Three: grant only what the app needs, including the sequence.
+
+159
+00:09:45,038 --> 00:09:49,411
+Four: change trust to scram, reload, and test with and without a password.
+
+160
+00:09:49,961 --> 00:09:53,780
+Five: lab check until you see five out of five. Then lab down.
+
+161
+00:09:54,330 --> 00:09:56,164
+Pause the video, and begin now.
+
+162
+00:10:11,714 --> 00:10:12,589
+Quick check.
+
+163
+00:10:13,139 --> 00:10:15,827
+Why must an app account never be a superuser?
+
+164
+00:10:16,377 --> 00:10:20,025
+What does least privilege mean for an app that reads and adds orders?
+
+165
+00:10:20,575 --> 00:10:23,028
+Why did the insert need a grant on the sequence?
+
+166
+00:10:23,578 --> 00:10:27,247
+What is the difference between trust and scram in the access file?
+
+167
+00:10:27,797 --> 00:10:30,149
+Objectives covered: M C fourteen,
+
+168
+00:10:30,149 --> 00:10:31,289
+objective three.
+
+169
+00:10:31,289 --> 00:10:34,923
+Credentials and least privilege application access.
+
+170
+00:10:35,473 --> 00:10:37,542
+Pause the video, and answer out loud.
+
+171
+00:10:48,092 --> 00:10:52,316
+Next: where the database keeps its data, and how to set it up on purpose.
+
+172
+00:10:52,866 --> 00:10:56,194
+If this helped, like, share and subscribe, so you do not miss it.
