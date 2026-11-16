@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab125.sh and shortc
 Honest notes: the terminal part is one real, continuous recording on real nginx 1.24, and the lab was run end to end: it passes 0 of 8 before you start and 8 of 8 after the fixes, and lab down leaves nothing behind. The faults are planted on purpose in a small lab, so real incidents will be messier. The certificate is self-signed for the demo. The narration is synthetic speech. The hook, domain map, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: nginx Troubleshooting: Fix 502, 503, 504 and TLS Errors | Lesson 124 https://youtu.be/EK0_6r_Grm0
-Next: A new domain begins. Subscribe so you do not miss it.
+Next: PostgreSQL Basics: Connect with psql, Read the Schema, Run a Transaction | Lesson 126 https://youtu.be/EoOpNbZ-4vw
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
