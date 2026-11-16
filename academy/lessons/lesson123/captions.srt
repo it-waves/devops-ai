@@ -1,0 +1,707 @@
+1
+00:00:00,500 --> 00:00:01,567
+One slow request.
+
+2
+00:00:01,567 --> 00:00:04,077
+A backend takes a full minute to answer,
+
+3
+00:00:04,077 --> 00:00:05,458
+and the visitor waits,
+
+4
+00:00:05,458 --> 00:00:08,031
+holding a connection open the whole time.
+
+5
+00:00:08,581 --> 00:00:11,667
+Now add a three megabyte upload nobody expected,
+
+6
+00:00:11,667 --> 00:00:14,110
+a secret file nobody meant to publish,
+
+7
+00:00:14,110 --> 00:00:17,903
+and a server that announces its exact version to the world.
+
+8
+00:00:18,453 --> 00:00:20,016
+Today you set the limits.
+
+9
+00:00:20,016 --> 00:00:21,516
+How long engine X waits,
+
+10
+00:00:21,516 --> 00:00:22,766
+how much it accepts,
+
+11
+00:00:22,766 --> 00:00:24,704
+and what it is willing to show.
+
+12
+00:00:25,254 --> 00:00:26,257
+Set the limits.
+
+13
+00:00:27,807 --> 00:00:30,879
+Here is what to expect, from the first minute to the last.
+
+14
+00:00:31,429 --> 00:00:34,970
+One: the three kinds of limit, time, size, and exposure.
+
+15
+00:00:35,520 --> 00:00:40,598
+Two: a live demo. We find four risks in a real engine X, with real requests.
+
+16
+00:00:41,148 --> 00:00:43,307
+Three: we fix them in the config.
+
+17
+00:00:43,307 --> 00:00:43,896
+Timeouts,
+
+18
+00:00:43,896 --> 00:00:44,747
+a size limit,
+
+19
+00:00:44,747 --> 00:00:45,859
+a hidden version,
+
+20
+00:00:45,859 --> 00:00:46,972
+and no dot files.
+
+21
+00:00:47,522 --> 00:00:50,991
+Four: we repeat each request and watch the answer change.
+
+22
+00:00:50,991 --> 00:00:51,905
+Then your turn,
+
+23
+00:00:51,905 --> 00:00:54,583
+with a lab that judges you with five checks.
+
+24
+00:00:55,133 --> 00:00:57,834
+This is lesson six of the web servers domain.
+
+25
+00:00:57,834 --> 00:00:59,515
+Last time you read the logs.
+
+26
+00:00:59,515 --> 00:01:01,256
+Today you protect the server.
+
+27
+00:01:01,806 --> 00:01:02,808
+Set the limits.
+
+28
+00:01:04,858 --> 00:01:08,250
+Three kinds of limit protect a web server. Let us meet them.
+
+29
+00:01:08,800 --> 00:01:09,130
+Time.
+
+30
+00:01:09,130 --> 00:01:12,234
+How long engine X waits: for the app behind it,
+
+31
+00:01:12,234 --> 00:01:14,678
+for a slow visitor to send a request,
+
+32
+00:01:14,678 --> 00:01:17,056
+and for an idle connection to close.
+
+33
+00:01:17,606 --> 00:01:17,941
+Size.
+
+34
+00:01:17,941 --> 00:01:19,614
+How big a request may be.
+
+35
+00:01:19,614 --> 00:01:21,488
+The default is one megabyte,
+
+36
+00:01:21,488 --> 00:01:23,897
+and a value of zero means unlimited,
+
+37
+00:01:23,897 --> 00:01:25,905
+which is rarely what you want.
+
+38
+00:01:26,455 --> 00:01:27,010
+Exposure.
+
+39
+00:01:27,010 --> 00:01:29,912
+What the server gives away: its version number,
+
+40
+00:01:29,912 --> 00:01:31,703
+and any file in the web root,
+
+41
+00:01:31,703 --> 00:01:34,049
+including dot files that hold secrets.
+
+42
+00:01:34,599 --> 00:01:37,012
+Each limit has its own status code.
+
+43
+00:01:37,012 --> 00:01:38,597
+Too big: four thirteen.
+
+44
+00:01:38,597 --> 00:01:40,871
+A backend too slow: five oh four.
+
+45
+00:01:40,871 --> 00:01:43,559
+A file you may not have: four oh three.
+
+46
+00:01:45,109 --> 00:01:50,229
+Go to the lab folder.
+
+47
+00:01:51,779 --> 00:01:53,678
+Look around. Type: L S.
+
+48
+00:01:54,228 --> 00:01:54,944
+The config,
+
+49
+00:01:54,944 --> 00:01:55,920
+two test files,
+
+50
+00:01:55,920 --> 00:01:57,613
+a small one and a big one,
+
+51
+00:01:57,613 --> 00:01:58,785
+and a site folder.
+
+52
+00:01:58,785 --> 00:01:59,827
+Behind engine X,
+
+53
+00:01:59,827 --> 00:02:01,780
+a slow app is already running.
+
+54
+00:02:02,330 --> 00:02:12,335
+First risk: the version.
+
+55
+00:02:12,885 --> 00:02:13,972
+The exact version.
+
+56
+00:02:13,972 --> 00:02:16,751
+An attacker now knows which known bugs to try.
+
+57
+00:02:16,751 --> 00:02:18,624
+There is no reason to share it.
+
+58
+00:02:19,174 --> 00:02:27,344
+Second risk: a secret file.
+
+59
+00:02:27,894 --> 00:02:29,139
+A database password,
+
+60
+00:02:29,139 --> 00:02:30,197
+served to anyone.
+
+61
+00:02:30,197 --> 00:02:33,558
+The web root is public: anything in it can be fetched,
+
+62
+00:02:33,558 --> 00:02:34,678
+unless you say no.
+
+63
+00:02:35,228 --> 00:02:43,186
+Third risk: size.
+
+64
+00:02:43,736 --> 00:02:45,213
+Two hundred: accepted.
+
+65
+00:02:45,213 --> 00:02:47,696
+In the config the size limit is zero,
+
+66
+00:02:47,696 --> 00:02:48,368
+unlimited.
+
+67
+00:02:48,368 --> 00:02:51,053
+One careless client could fill the disk.
+
+68
+00:02:51,603 --> 00:02:58,046
+Fourth risk: time.
+
+69
+00:02:58,596 --> 00:02:59,341
+Two hundred,
+
+70
+00:02:59,341 --> 00:03:00,522
+after four seconds.
+
+71
+00:03:00,522 --> 00:03:01,516
+Engine X waited,
+
+72
+00:03:01,516 --> 00:03:02,946
+holding the connection.
+
+73
+00:03:02,946 --> 00:03:04,002
+With the default,
+
+74
+00:03:04,002 --> 00:03:05,742
+it would wait a full minute.
+
+75
+00:03:06,292 --> 00:03:11,348
+Open the config in vim.
+
+76
+00:03:11,898 --> 00:03:13,195
+Go to line fifteen,
+
+77
+00:03:13,195 --> 00:03:14,219
+the size limit,
+
+78
+00:03:14,219 --> 00:03:15,790
+and change it to one M.
+
+79
+00:03:15,790 --> 00:03:16,404
+Under it,
+
+80
+00:03:16,404 --> 00:03:17,496
+add the version,
+
+81
+00:03:17,496 --> 00:03:19,135
+the two client timeouts,
+
+82
+00:03:19,135 --> 00:03:19,886
+keep alive,
+
+83
+00:03:19,886 --> 00:03:22,411
+and a location that denies dot files.
+
+84
+00:03:22,411 --> 00:03:22,753
+Then,
+
+85
+00:03:22,753 --> 00:03:24,186
+in the slow location,
+
+86
+00:03:24,186 --> 00:03:25,756
+add proxy read timeout,
+
+87
+00:03:25,756 --> 00:03:26,576
+two seconds.
+
+88
+00:03:55,926 --> 00:04:02,027
+Test, then reload.
+
+89
+00:04:02,577 --> 00:04:04,305
+Applied without stopping anything.
+
+90
+00:04:04,855 --> 00:04:12,130
+Check the version again.
+
+91
+00:04:12,680 --> 00:04:15,090
+Just the word engine X. No version.
+
+92
+00:04:15,640 --> 00:04:23,192
+Ask for the secret again.
+
+93
+00:04:23,742 --> 00:04:27,156
+Four oh three, forbidden. The password stays on the server.
+
+94
+00:04:27,706 --> 00:04:34,255
+Send the big upload again.
+
+95
+00:04:34,805 --> 00:04:39,626
+Four thirteen: request entity too large. Refused before the app ever saw it.
+
+96
+00:04:40,176 --> 00:04:48,027
+Send the small upload.
+
+97
+00:04:48,577 --> 00:04:53,036
+Still two hundred. A good limit stops the abuse and lets normal work through.
+
+98
+00:04:53,586 --> 00:04:58,962
+Ask for the slow path again.
+
+99
+00:04:59,512 --> 00:05:01,524
+Five oh four after two seconds.
+
+100
+00:05:01,524 --> 00:05:03,667
+Engine X gave up on the slow app,
+
+101
+00:05:03,667 --> 00:05:05,290
+and freed the connection.
+
+102
+00:05:05,290 --> 00:05:06,978
+That is a gateway timeout.
+
+103
+00:05:07,528 --> 00:05:09,896
+Run the judge.
+
+104
+00:05:10,446 --> 00:05:11,275
+Five checks.
+
+105
+00:05:11,275 --> 00:05:12,933
+The slow path times out.
+
+106
+00:05:12,933 --> 00:05:16,386
+The big upload is refused and the small one works.
+
+107
+00:05:16,386 --> 00:05:17,906
+The version is hidden.
+
+108
+00:05:17,906 --> 00:05:19,425
+Dot files are refused.
+
+109
+00:05:19,425 --> 00:05:21,774
+And the client timeouts are short.
+
+110
+00:05:21,774 --> 00:05:22,948
+Five out of five.
+
+111
+00:05:23,498 --> 00:05:25,460
+Clean up.
+
+112
+00:05:26,010 --> 00:05:29,829
+Engine X and the slow app are stopped, and everything is removed.
+
+113
+00:05:30,379 --> 00:05:37,227
+Are the ports free? Count the lines.
+
+114
+00:05:37,777 --> 00:05:40,785
+Zero. Nothing listens, nothing is left behind.
+
+115
+00:05:42,335 --> 00:05:47,604
+Your task. Find four risks, fix them in the config, and prove each fix with a request.
+
+116
+00:05:48,154 --> 00:05:51,546
+One: lab up, then send the four requests, and read each answer.
+
+117
+00:05:52,096 --> 00:05:55,851
+Two: in vim, set the body size to one M, and hide the version.
+
+118
+00:05:56,401 --> 00:05:57,809
+Three: deny dot files,
+
+119
+00:05:57,809 --> 00:06:02,289
+and set the client timeouts and keep alive to fifteen seconds or less.
+
+120
+00:06:02,839 --> 00:06:08,172
+Four: add proxy read timeout, two seconds, to the slow location. Test, and reload.
+
+121
+00:06:08,722 --> 00:06:10,350
+Five: repeat the requests,
+
+122
+00:06:10,350 --> 00:06:12,729
+check that a small upload still works,
+
+123
+00:06:12,729 --> 00:06:13,606
+run lab check,
+
+124
+00:06:13,606 --> 00:06:14,482
+then lab down.
+
+125
+00:06:16,532 --> 00:06:20,308
+Here is where to find everything. Pause on this screen, and write it down.
+
+126
+00:06:20,858 --> 00:06:22,506
+The lab lives on GitHub,
+
+127
+00:06:22,506 --> 00:06:23,673
+at it dash waves,
+
+128
+00:06:23,673 --> 00:06:25,253
+slash dev ops dash A I,
+
+129
+00:06:25,253 --> 00:06:26,763
+in the folder academy,
+
+130
+00:06:26,763 --> 00:06:27,450
+slash lab.
+
+131
+00:06:28,000 --> 00:06:33,568
+Two files: lab one twenty-three dot S H, and shortcuts one twenty-three dot S H.
+
+132
+00:06:34,118 --> 00:06:35,002
+Install it,
+
+133
+00:06:35,002 --> 00:06:37,814
+on any Linux machine: sudo install,
+
+134
+00:06:37,814 --> 00:06:39,662
+dash m seven five five,
+
+135
+00:06:39,662 --> 00:06:41,992
+lab one twenty-three dot S H,
+
+136
+00:06:41,992 --> 00:06:43,198
+into slash usr,
+
+137
+00:06:43,198 --> 00:06:44,162
+slash local,
+
+138
+00:06:44,162 --> 00:06:45,126
+slash S bin.
+
+139
+00:06:45,676 --> 00:06:50,483
+Load the short names with: source shortcuts one twenty-three dot S H.
+
+140
+00:06:50,483 --> 00:06:51,668
+You get two: lab,
+
+141
+00:06:51,668 --> 00:06:52,225
+and N G.
+
+142
+00:06:52,775 --> 00:06:53,948
+You need engine X,
+
+143
+00:06:53,948 --> 00:06:56,031
+curl and python three installed,
+
+144
+00:06:56,031 --> 00:07:00,199
+and ports eighty-two thirty-one and eighty-two thirty-nine free.
+
+145
+00:07:00,199 --> 00:07:02,674
+The lab runs its own private engine X.
+
+146
+00:07:03,224 --> 00:07:04,931
+Lab up prepares everything.
+
+147
+00:07:04,931 --> 00:07:06,638
+Lab check judges your work.
+
+148
+00:07:06,638 --> 00:07:08,155
+Lab down removes it all.
+
+149
+00:07:08,155 --> 00:07:10,179
+Only run it on your own machine.
+
+150
+00:07:12,229 --> 00:07:14,298
+Pass or fail. You need all five.
+
+151
+00:07:14,848 --> 00:07:17,195
+The slow path gives up with a five oh four.
+
+152
+00:07:17,745 --> 00:07:20,710
+A big upload is refused, a small one still works.
+
+153
+00:07:21,260 --> 00:07:22,860
+The server version is hidden.
+
+154
+00:07:23,410 --> 00:07:26,290
+Dot files are refused, normal pages work.
+
+155
+00:07:26,840 --> 00:07:30,275
+Client timeouts and keep alive are fifteen seconds or less.
+
+156
+00:07:30,825 --> 00:07:32,126
+To pass, all five.
+
+157
+00:07:34,176 --> 00:07:35,947
+Your turn, on your own machine.
+
+158
+00:07:36,497 --> 00:07:39,867
+One: lab up, and send the four requests. Read the answers.
+
+159
+00:07:40,417 --> 00:07:44,983
+Two: in vim, fix the size limit, hide the version, and deny dot files.
+
+160
+00:07:45,533 --> 00:07:48,509
+Three: set the client timeouts and keep alive.
+
+161
+00:07:48,509 --> 00:07:51,357
+Add proxy read timeout to the slow location.
+
+162
+00:07:51,907 --> 00:07:54,787
+Four: test, reload, and repeat every request.
+
+163
+00:07:55,337 --> 00:07:59,987
+Five: send the small upload, and run lab check until you see five out of five.
+
+164
+00:08:00,537 --> 00:08:03,375
+Six: lab down, and prove both ports are free.
+
+165
+00:08:03,925 --> 00:08:05,759
+Pause the video, and begin now.
+
+166
+00:08:21,309 --> 00:08:22,184
+Quick check.
+
+167
+00:08:22,734 --> 00:08:24,334
+What are the three kinds of limit?
+
+168
+00:08:24,884 --> 00:08:29,918
+Which status code means a request was too big, and which means the backend was too slow?
+
+169
+00:08:30,468 --> 00:08:32,666
+Why is a size limit of zero risky?
+
+170
+00:08:33,216 --> 00:08:36,074
+Why hide the version, and why deny dot files?
+
+171
+00:08:36,624 --> 00:08:39,088
+Objectives covered: M C thirteen,
+
+172
+00:08:39,088 --> 00:08:40,283
+objective seven.
+
+173
+00:08:40,283 --> 00:08:40,955
+Timeouts,
+
+174
+00:08:40,955 --> 00:08:43,942
+request size limits and secure defaults.
+
+175
+00:08:44,492 --> 00:08:46,561
+Pause the video, and answer out loud.
+
+176
+00:08:57,111 --> 00:09:01,186
+Next: troubleshooting five oh two, five oh three and five oh four.
+
+177
+00:09:01,736 --> 00:09:05,064
+If this helped, like, share and subscribe, so you do not miss it.

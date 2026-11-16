@@ -1,0 +1,24 @@
+Lesson 123 of the DevOps Engineering Bootcamp, and lesson 6 of the Web Servers and Reverse Proxies domain. A web server must decide how long to wait, how much to accept, and what to show. This lesson explains the three kinds of limit, then you use real nginx 1.24 to find four risks with real requests (the version in the Server header, a secret .env file served to anyone, an unlimited upload, a slow backend that nginx waits for), fix them in the config with client_max_body_size, server_tokens, a location that denies dot files, client timeouts and proxy_read_timeout, and prove each fix: 413, 403, a hidden version and a 504 Gateway Timeout after two seconds. Then you get a lab that judges your work, from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Set the limits.
+0:27 What to expect
+1:04 Time, size, exposure
+1:44 Live: four risks, four fixes
+5:41 Your lab task
+6:16 Where to find the lab
+7:11 Pass or fail rubric
+7:33 Your turn
+8:20 Quick check
+Objectives covered: MC13-O07 (timeouts, request-size limits, secure defaults)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab123.sh and shortcuts123.sh). Install with: sudo install -m 755 lab123.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts123.sh. You need any Linux machine with root, nginx, curl, python3 and ss (for example: sudo apt install -y nginx curl iproute2 python3) and ports 8231 and 8239 free. The lab runs its own private nginx from /opt/lab123 and does not touch the system nginx. lab down stops it and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording on real nginx 1.24, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The slow backend is a tiny Python program that waits four seconds on purpose, and the .env file holds a fake password made for the demo. Real timeouts depend on your application: two seconds suits this demo, not every service. The narration is synthetic speech. The hook, the three-limits picture, the task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: nginx Logs: Read Access and Error Logs, Understand Status Codes | Lesson 122 https://youtu.be/uO94JSZww7c
+Next: Troubleshooting 502, 503 and 504 errors, TLS and upstream problems with nginx.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #nginx #timeouts #security #devopsbootcamp

@@ -1,0 +1,1 @@
+nginx Limits: Timeouts, Request Size, Secure Defaults | Lesson 123
