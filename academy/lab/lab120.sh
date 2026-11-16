@@ -53,8 +53,9 @@ Open a terminal in /opt/lab120. The short name  ng  runs nginx with this lab's o
 1  Test the config:   ng -t       It fails: the HTTPS server has no certificate yet. Read the message.
 2  Make a private key and a self-signed certificate (valid 30 days, for the name localhost):
      cd certs
-     openssl req -x509 -nodes -newkey rsa:2048 -days 30 -keyout site.key -out site.crt -subj /CN=localhost
+     openssl req -x509 -nodes -newkey rsa:2048 -days 30 -keyout site.key -out site.crt -subj /CN=localhost 2>/dev/null
      cd ..
+   (2>/dev/null hides the progress dots that key generation prints)
 3  Look at your certificate:   openssl x509 -in certs/site.crt -noout -subject -enddate
 4  In nginx.conf, inside the  listen 8443 ssl;  server block, add three lines:
      ssl_certificate     certs/site.crt;
@@ -81,7 +82,7 @@ check() {
   if $RU $NG -t >/dev/null 2>&1 && [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then ok "2 the config passes  ng -t  and nginx is running"; else no "2 the config fails the test or nginx is not running: run  ng -t  and fix the line it names, then  ng"; fi
   if curl -sk -m 3 https://localhost:8443/ 2>/dev/null | grep -q 'Welcome to CloudCart'; then ok "3 HTTPS answers on port 8443 with the CloudCart page"; else no "3 https://localhost:8443 does not answer: add the three ssl lines to the 8443 server block"; fi
   pr=$($RU $NG -T 2>/dev/null | sed -n 's/^ *ssl_protocols *\(.*\);/\1/p')
-  if echo "$pr" | grep -q 'TLSv1.2' && ! echo "$pr" | grep -Eq 'TLSv1( |;|$)|TLSv1\.1|SSLv'; then ok "4 only modern TLS versions are enabled (ssl_protocols $pr)"; else no "4 set  ssl_protocols TLSv1.2 TLSv1.3;  and nothing older"; fi
+  if echo "$pr" | grep -q 'TLSv1.2' && ! echo "$pr" | grep -Eq 'TLSv1( |;|$)|TLSv1\.1|SSLv'; then ok "4 only TLS 1.2 and 1.3 are enabled"; else no "4 set  ssl_protocols TLSv1.2 TLSv1.3;  and nothing older"; fi
   h=$(curl -sI -m 3 localhost:8201/x 2>/dev/null | tr -d '\r')
   if echo "$h" | head -n 1 | grep -q ' 301' && echo "$h" | grep -iq '^location: https://localhost:8443/x'; then ok "5 plain HTTP on 8201 redirects (301) to HTTPS on 8443"; else no "5 http://localhost:8201 must answer 301 with a Location on https: add  return 301 https://localhost:8443\$request_uri;"; fi
   echo; echo "$pass / $total passed"; [ $pass -eq $total ]

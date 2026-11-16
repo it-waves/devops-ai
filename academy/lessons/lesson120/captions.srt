@@ -1,0 +1,855 @@
+1
+00:00:00,500 --> 00:00:02,019
+Look at the address bar.
+
+2
+00:00:02,019 --> 00:00:02,652
+A padlock,
+
+3
+00:00:02,652 --> 00:00:03,475
+or a warning.
+
+4
+00:00:03,475 --> 00:00:05,058
+Behind that small symbol,
+
+5
+00:00:05,058 --> 00:00:06,894
+a conversation just happened,
+
+6
+00:00:06,894 --> 00:00:09,552
+and everything you type travels inside it,
+
+7
+00:00:09,552 --> 00:00:10,185
+scrambled.
+
+8
+00:00:10,735 --> 00:00:15,813
+That conversation is T L S, and today you switch it on, for engine X, from nothing.
+
+9
+00:00:16,363 --> 00:00:18,239
+You will make a certificate,
+
+10
+00:00:18,239 --> 00:00:21,054
+read the error engine X gives without one,
+
+11
+00:00:21,054 --> 00:00:22,261
+turn on H T T P S,
+
+12
+00:00:22,261 --> 00:00:25,344
+and send every plain request to the safe door.
+
+13
+00:00:25,894 --> 00:00:27,771
+Encrypt it, serve it, redirect it.
+
+14
+00:00:29,321 --> 00:00:32,393
+Here is what to expect, from the first minute to the last.
+
+15
+00:00:32,943 --> 00:00:37,423
+One: what a certificate and a key actually are, and what T L S protects.
+
+16
+00:00:37,973 --> 00:00:42,709
+Two: a live demo. We start with a config that cannot start, and read why.
+
+17
+00:00:43,259 --> 00:00:46,289
+Three: we make a private key and a certificate,
+
+18
+00:00:46,289 --> 00:00:47,256
+look inside it,
+
+19
+00:00:47,256 --> 00:00:49,062
+and wire both into engine X.
+
+20
+00:00:49,612 --> 00:00:52,237
+Four: we meet the self-signed warning,
+
+21
+00:00:52,237 --> 00:00:54,103
+check the version of T L S,
+
+22
+00:00:54,103 --> 00:00:55,968
+and redirect plain H T T P.
+
+23
+00:00:55,968 --> 00:00:57,005
+Then your turn,
+
+24
+00:00:57,005 --> 00:00:58,870
+with a lab that judges you.
+
+25
+00:00:59,420 --> 00:01:02,303
+This is lesson three of the web servers domain.
+
+26
+00:01:02,303 --> 00:01:04,082
+Last time you routed traffic.
+
+27
+00:01:04,082 --> 00:01:05,308
+Today you secure it.
+
+28
+00:01:05,858 --> 00:01:07,458
+Encrypt, serve, redirect.
+
+29
+00:01:09,508 --> 00:01:13,007
+Two files, one handshake. Let us see how they work together.
+
+30
+00:01:13,557 --> 00:01:18,719
+The private key stays on the server. It is a secret, and nobody else must ever see it.
+
+31
+00:01:19,269 --> 00:01:20,875
+The certificate is public.
+
+32
+00:01:20,875 --> 00:01:22,049
+It says: this name,
+
+33
+00:01:22,049 --> 00:01:23,285
+belongs to this key,
+
+34
+00:01:23,285 --> 00:01:26,373
+and it carries a signature from someone you trust.
+
+35
+00:01:26,923 --> 00:01:28,415
+When a browser connects,
+
+36
+00:01:28,415 --> 00:01:30,466
+the server shows its certificate.
+
+37
+00:01:30,466 --> 00:01:32,206
+The browser checks the name,
+
+38
+00:01:32,206 --> 00:01:32,828
+the dates,
+
+39
+00:01:32,828 --> 00:01:33,946
+and who signed it.
+
+40
+00:01:33,946 --> 00:01:36,681
+Then both sides agree on a temporary secret,
+
+41
+00:01:36,681 --> 00:01:39,105
+and everything after that is encrypted.
+
+42
+00:01:39,655 --> 00:01:40,523
+In production,
+
+43
+00:01:40,523 --> 00:01:43,128
+a public authority signs your certificate,
+
+44
+00:01:43,128 --> 00:01:44,865
+and every browser trusts it.
+
+45
+00:01:44,865 --> 00:01:46,230
+Today we sign our own,
+
+46
+00:01:46,230 --> 00:01:48,091
+which is perfect for learning,
+
+47
+00:01:48,091 --> 00:01:50,076
+and browsers will warn about it.
+
+48
+00:01:50,076 --> 00:01:51,751
+That warning is the lesson.
+
+49
+00:01:53,301 --> 00:01:58,186
+Go to the lab folder.
+
+50
+00:01:59,736 --> 00:02:01,635
+Look around. Type: L S.
+
+51
+00:02:02,185 --> 00:02:03,044
+A site folder,
+
+52
+00:02:03,044 --> 00:02:03,718
+the config,
+
+53
+00:02:03,718 --> 00:02:04,025
+logs,
+
+54
+00:02:04,025 --> 00:02:05,620
+and an empty certs folder.
+
+55
+00:02:05,620 --> 00:02:08,564
+That is where our key and certificate will live.
+
+56
+00:02:09,114 --> 00:02:12,762
+Read the config.
+
+57
+00:02:13,312 --> 00:02:14,645
+Two server blocks.
+
+58
+00:02:14,645 --> 00:02:17,535
+The first listens on eighty-two oh one,
+
+59
+00:02:17,535 --> 00:02:18,573
+plain H T T P.
+
+60
+00:02:18,573 --> 00:02:21,981
+The second listens on eighty-four forty-three,
+
+61
+00:02:21,981 --> 00:02:23,463
+with the word S S L.
+
+62
+00:02:23,463 --> 00:02:25,983
+That word means: speak T L S here.
+
+63
+00:02:25,983 --> 00:02:28,650
+But look: it has no certificate yet.
+
+64
+00:02:29,200 --> 00:02:31,568
+Test the config.
+
+65
+00:02:32,118 --> 00:02:33,414
+Engine X refuses.
+
+66
+00:02:33,414 --> 00:02:38,214
+No S S L certificate is defined for the listen S S L directive,
+
+67
+00:02:38,214 --> 00:02:39,509
+in the conf file,
+
+68
+00:02:39,509 --> 00:02:40,652
+line seventeen.
+
+69
+00:02:40,652 --> 00:02:41,718
+It is a clear,
+
+70
+00:02:41,718 --> 00:02:42,861
+honest message.
+
+71
+00:02:42,861 --> 00:02:45,452
+A secure door needs a certificate.
+
+72
+00:02:46,002 --> 00:02:49,052
+Go into the certs folder.
+
+73
+00:02:49,602 --> 00:03:09,954
+Make a key and a certificate.
+
+74
+00:03:10,504 --> 00:03:14,862
+The backslash at the end of a line just means: the command continues.
+
+75
+00:03:14,862 --> 00:03:15,809
+Read it slowly.
+
+76
+00:03:15,809 --> 00:03:18,777
+X five oh nine means a self-signed certificate.
+
+77
+00:03:18,777 --> 00:03:20,988
+Nodes means no password on the key,
+
+78
+00:03:20,988 --> 00:03:23,324
+so engine X can start without asking.
+
+79
+00:03:23,324 --> 00:03:26,924
+New key R S A two thousand forty-eight makes a fresh key.
+
+80
+00:03:26,924 --> 00:03:28,692
+Days thirty is the lifetime.
+
+81
+00:03:28,692 --> 00:03:30,903
+Key out and out name the two files.
+
+82
+00:03:30,903 --> 00:03:33,808
+And subj sets the name: C N equals local host.
+
+83
+00:03:33,808 --> 00:03:35,955
+The last part hides progress dots.
+
+84
+00:03:36,505 --> 00:03:38,553
+List the files.
+
+85
+00:03:39,103 --> 00:03:44,628
+Two files. Site dot key, the secret. Site dot C R T, the public certificate.
+
+86
+00:03:45,178 --> 00:03:54,949
+Look inside the certificate.
+
+87
+00:03:55,499 --> 00:03:57,975
+The subject: C N equals local host.
+
+88
+00:03:57,975 --> 00:04:00,451
+And not after: the date it expires.
+
+89
+00:04:00,451 --> 00:04:02,361
+Certificates always expire.
+
+90
+00:04:02,361 --> 00:04:03,634
+That is a feature,
+
+91
+00:04:03,634 --> 00:04:04,342
+not a bug,
+
+92
+00:04:04,342 --> 00:04:09,152
+and it is a classic cause of outages when somebody forgets to renew.
+
+93
+00:04:09,702 --> 00:04:12,220
+Go back up.
+
+94
+00:04:12,770 --> 00:04:16,524
+Open the config in vim.
+
+95
+00:04:17,074 --> 00:04:18,543
+Go to line eighteen,
+
+96
+00:04:18,543 --> 00:04:20,159
+the listen S S L line,
+
+97
+00:04:20,159 --> 00:04:22,290
+and add three lines under it.
+
+98
+00:04:22,290 --> 00:04:23,612
+S S L certificate,
+
+99
+00:04:23,612 --> 00:04:25,669
+pointing to the certificate.
+
+100
+00:04:25,669 --> 00:04:27,285
+S S L certificate key,
+
+101
+00:04:27,285 --> 00:04:28,754
+pointing to the key.
+
+102
+00:04:28,754 --> 00:04:30,223
+And S S L protocols,
+
+103
+00:04:30,223 --> 00:04:31,692
+T L S one point two,
+
+104
+00:04:31,692 --> 00:04:33,161
+and one point three.
+
+105
+00:04:33,161 --> 00:04:35,438
+That last line refuses the old,
+
+106
+00:04:35,438 --> 00:04:36,466
+weak versions.
+
+107
+00:04:42,616 --> 00:04:48,654
+Test, then start.
+
+108
+00:04:49,204 --> 00:04:51,870
+Syntax ok, and engine X is running.
+
+109
+00:04:52,420 --> 00:05:02,468
+Ask for the page, strictly.
+
+110
+00:05:03,018 --> 00:05:03,984
+Nothing printed,
+
+111
+00:05:03,984 --> 00:05:05,915
+because the strict check failed.
+
+112
+00:05:05,915 --> 00:05:09,838
+Curl does not trust a certificate that nobody trustworthy signed.
+
+113
+00:05:09,838 --> 00:05:12,554
+That is exactly what a browser warning means.
+
+114
+00:05:13,104 --> 00:05:23,472
+Accept it, knowingly.
+
+115
+00:05:24,022 --> 00:05:25,425
+Welcome to CloudCart.
+
+116
+00:05:25,425 --> 00:05:26,962
+It travelled encrypted.
+
+117
+00:05:26,962 --> 00:05:29,300
+Dash K means: skip the trust check.
+
+118
+00:05:29,300 --> 00:05:30,302
+Fine for a lab.
+
+119
+00:05:30,302 --> 00:05:31,638
+Never in production.
+
+120
+00:05:32,188 --> 00:05:47,527
+Which T L S version was used?
+
+121
+00:05:48,077 --> 00:05:49,996
+Using T L S one point three,
+
+122
+00:05:49,996 --> 00:05:51,710
+the newest and strongest.
+
+123
+00:05:51,710 --> 00:05:54,863
+And the subject is our local host certificate.
+
+124
+00:05:54,863 --> 00:05:55,343
+Modern,
+
+125
+00:05:55,343 --> 00:05:57,400
+and exactly what we asked for.
+
+126
+00:05:57,950 --> 00:06:03,262
+Open the config again.
+
+127
+00:06:03,812 --> 00:06:05,178
+Go to line fourteen,
+
+128
+00:06:05,178 --> 00:06:06,887
+the plain H T T P server,
+
+129
+00:06:06,887 --> 00:06:08,596
+and add one line: return,
+
+130
+00:06:08,596 --> 00:06:09,484
+three oh one,
+
+131
+00:06:09,484 --> 00:06:10,987
+to the secure address,
+
+132
+00:06:10,987 --> 00:06:12,833
+with the same request path.
+
+133
+00:06:12,833 --> 00:06:15,361
+Three oh one means moved permanently.
+
+134
+00:06:15,361 --> 00:06:19,598
+Anyone who arrives on the unsafe door is sent to the safe one.
+
+135
+00:06:22,548 --> 00:06:28,650
+Test, then reload.
+
+136
+00:06:29,200 --> 00:06:30,437
+Safe, and instant.
+
+137
+00:06:30,987 --> 00:06:38,432
+Ask the plain door.
+
+138
+00:06:38,982 --> 00:06:39,901
+Three oh one,
+
+139
+00:06:39,901 --> 00:06:41,172
+moved permanently,
+
+140
+00:06:41,172 --> 00:06:46,046
+and the location line points to H T T P S on eighty-four forty-three.
+
+141
+00:06:46,046 --> 00:06:48,518
+A browser follows it automatically.
+
+142
+00:06:49,068 --> 00:06:51,436
+Run the judge.
+
+143
+00:06:51,986 --> 00:06:52,942
+Five checks,
+
+144
+00:06:52,942 --> 00:06:53,898
+five passes.
+
+145
+00:06:53,898 --> 00:06:55,490
+A valid certificate,
+
+146
+00:06:55,490 --> 00:06:56,844
+a working config,
+
+147
+00:06:56,844 --> 00:06:58,437
+H T T P S answering,
+
+148
+00:06:58,437 --> 00:06:59,870
+only modern T L S,
+
+149
+00:06:59,870 --> 00:07:01,224
+and the redirect.
+
+150
+00:07:01,774 --> 00:07:03,736
+Clean up.
+
+151
+00:07:04,286 --> 00:07:08,532
+Engine X stopped, and the key and certificate removed with everything else.
+
+152
+00:07:09,082 --> 00:07:16,762
+Are both ports free? Count the lines.
+
+153
+00:07:17,312 --> 00:07:20,320
+Zero. Nothing listens, nothing is left behind.
+
+154
+00:07:21,870 --> 00:07:25,241
+Your task. Turn on H T T P S for engine X.
+
+155
+00:07:25,791 --> 00:07:31,828
+One: lab up, then N G dash T. It fails, because there is no certificate. Read the message.
+
+156
+00:07:32,378 --> 00:07:37,455
+Two: make a key and a self-signed certificate with open S S L, and look inside it.
+
+157
+00:07:38,005 --> 00:07:40,231
+Three: add S S L certificate,
+
+158
+00:07:40,231 --> 00:07:41,920
+S S L certificate key,
+
+159
+00:07:41,920 --> 00:07:45,067
+and S S L protocols to the secure server.
+
+160
+00:07:45,067 --> 00:07:45,451
+Test,
+
+161
+00:07:45,451 --> 00:07:46,219
+and start.
+
+162
+00:07:46,769 --> 00:07:51,035
+Four: add a three oh one redirect to the plain server. Test, and reload.
+
+163
+00:07:51,585 --> 00:07:54,977
+Five: prove it with curl, run lab check, then lab down.
+
+164
+00:07:57,027 --> 00:08:00,803
+Here is where to find everything. Pause on this screen, and write it down.
+
+165
+00:08:01,353 --> 00:08:03,001
+The lab lives on GitHub,
+
+166
+00:08:03,001 --> 00:08:04,168
+at it dash waves,
+
+167
+00:08:04,168 --> 00:08:05,748
+slash dev ops dash A I,
+
+168
+00:08:05,748 --> 00:08:07,258
+in the folder academy,
+
+169
+00:08:07,258 --> 00:08:07,945
+slash lab.
+
+170
+00:08:08,495 --> 00:08:13,551
+Two files: lab one twenty dot S H, and shortcuts one twenty dot S H.
+
+171
+00:08:14,101 --> 00:08:15,009
+Install it,
+
+172
+00:08:15,009 --> 00:08:17,899
+on any Linux machine: sudo install,
+
+173
+00:08:17,899 --> 00:08:19,798
+dash m seven five five,
+
+174
+00:08:19,798 --> 00:08:21,697
+lab one twenty dot S H,
+
+175
+00:08:21,697 --> 00:08:22,935
+into slash usr,
+
+176
+00:08:22,935 --> 00:08:23,926
+slash local,
+
+177
+00:08:23,926 --> 00:08:24,917
+slash S bin.
+
+178
+00:08:25,467 --> 00:08:31,675
+Load the short names with: source shortcuts one twenty dot S H. You get two: lab, and N G.
+
+179
+00:08:32,225 --> 00:08:33,492
+You need engine X,
+
+180
+00:08:33,492 --> 00:08:34,266
+open S S L,
+
+181
+00:08:34,266 --> 00:08:35,604
+and curl installed,
+
+182
+00:08:35,604 --> 00:08:39,897
+and ports eighty-two oh one and eighty-four forty-three free.
+
+183
+00:08:39,897 --> 00:08:42,572
+The lab runs its own private engine X.
+
+184
+00:08:43,122 --> 00:08:44,814
+Lab up prepares everything.
+
+185
+00:08:44,814 --> 00:08:46,506
+Lab check judges your work.
+
+186
+00:08:46,506 --> 00:08:48,010
+Lab down removes it all,
+
+187
+00:08:48,010 --> 00:08:49,201
+including your key.
+
+188
+00:08:49,201 --> 00:08:51,207
+Only run it on your own machine.
+
+189
+00:08:53,257 --> 00:08:55,326
+Pass or fail. You need all five.
+
+190
+00:08:55,876 --> 00:08:58,991
+A valid key and certificate for local host exist.
+
+191
+00:08:59,541 --> 00:09:02,506
+The config passes the test, and engine X runs.
+
+192
+00:09:03,056 --> 00:09:06,192
+H T T P S answers with the CloudCart page.
+
+193
+00:09:06,742 --> 00:09:09,494
+Only modern T L S versions are enabled.
+
+194
+00:09:10,044 --> 00:09:13,031
+Plain H T T P redirects with a three oh one.
+
+195
+00:09:13,581 --> 00:09:14,882
+To pass, all five.
+
+196
+00:09:16,932 --> 00:09:18,703
+Your turn, on your own machine.
+
+197
+00:09:19,253 --> 00:09:23,583
+One: lab up, read the task list, and run N G dash T. Read the error.
+
+198
+00:09:24,133 --> 00:09:29,723
+Two: make the key and certificate, and look inside with open S S L, X five oh nine.
+
+199
+00:09:30,273 --> 00:09:35,009
+Three: add the three S S L lines in vim, test, and start engine X.
+
+200
+00:09:35,559 --> 00:09:39,847
+Four: add the redirect, test, and reload. Prove both doors with curl.
+
+201
+00:09:40,397 --> 00:09:43,554
+Five: run lab check until you see five out of five.
+
+202
+00:09:44,104 --> 00:09:46,941
+Six: lab down, and prove both ports are free.
+
+203
+00:09:47,491 --> 00:09:49,326
+Pause the video, and begin now.
+
+204
+00:10:04,876 --> 00:10:05,751
+Quick check.
+
+205
+00:10:06,301 --> 00:10:09,586
+Which file is secret, the key or the certificate, and why?
+
+206
+00:10:10,136 --> 00:10:14,595
+Why does curl refuse a self-signed certificate, and what does dash K change?
+
+207
+00:10:15,145 --> 00:10:16,873
+Why do certificates expire?
+
+208
+00:10:17,423 --> 00:10:21,284
+What does a three oh one redirect do for plain H T T P visitors?
+
+209
+00:10:21,834 --> 00:10:24,575
+Objectives covered: M C thirteen,
+
+210
+00:10:24,575 --> 00:10:25,821
+objective four.
+
+211
+00:10:25,821 --> 00:10:29,642
+Configuring H T T P S with T L S certificates.
+
+212
+00:10:30,192 --> 00:10:32,261
+Pause the video, and answer out loud.
+
+213
+00:10:42,811 --> 00:10:45,542
+Next: health checks and basic load balancing.
+
+214
+00:10:46,092 --> 00:10:49,420
+If this helped, like, share and subscribe, so you do not miss it.

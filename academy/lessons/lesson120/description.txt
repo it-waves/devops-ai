@@ -1,0 +1,24 @@
+Lesson 120 of the DevOps Engineering Bootcamp, and lesson 3 of the Web Servers and Reverse Proxies domain. Behind every padlock there is a private key, a certificate and a handshake. This lesson explains what each one is, then you use real nginx 1.24 and real OpenSSL: see nginx refuse to start an ssl server without a certificate, make a private key and a self-signed certificate with openssl req, look inside it with openssl x509, add ssl_certificate, ssl_certificate_key and ssl_protocols to nginx, see why curl rejects a self-signed certificate and what -k changes, confirm the connection uses TLS 1.3, and redirect plain HTTP to HTTPS with a 301. Then you get a lab that judges your work, from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Encrypt it.
+0:28 What to expect
+1:09 Key, certificate, handshake
+1:52 Live: certificate, HTTPS, redirect
+7:21 Your lab task
+7:56 Where to find the lab
+8:52 Pass or fail rubric
+9:16 Your turn
+10:04 Quick check
+Objectives covered: MC13-O04 (configure HTTPS with TLS certificates)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab120.sh and shortcuts120.sh). Install with: sudo install -m 755 lab120.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts120.sh. You need any Linux machine with root, nginx, openssl, curl and ss (for example: sudo apt install -y nginx openssl curl iproute2) and ports 8201 and 8443 free. The lab runs its own private nginx from /opt/lab120 and does not touch the system nginx. lab down stops it and removes everything, including the key and certificate you made. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording on real nginx 1.24 and OpenSSL 3.0, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The certificate is self-signed for the name localhost and is for learning only: in production a public certificate authority signs it, and you would never use curl -k. The narration is synthetic speech. The hook, the key and certificate picture, the task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: nginx Reverse Proxy: Route to a Backend, Pass Host and Client Headers | Lesson 119 https://youtu.be/ENcmpwWj9Gc
+Next: Health checks and basic load balancing with nginx.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #nginx #https #tls #devopsbootcamp
