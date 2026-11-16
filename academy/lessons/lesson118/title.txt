@@ -1,0 +1,1 @@
+nginx Basics: Serve a Static Site, Test and Reload the Config | Lesson 118

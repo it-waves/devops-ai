@@ -1,0 +1,859 @@
+1
+00:00:00,500 --> 00:00:02,454
+A customer types your address,
+
+2
+00:00:02,454 --> 00:00:03,692
+and a page appears.
+
+3
+00:00:03,692 --> 00:00:04,539
+Who answered?
+
+4
+00:00:04,539 --> 00:00:05,385
+Not your app.
+
+5
+00:00:05,385 --> 00:00:05,776
+Often,
+
+6
+00:00:05,776 --> 00:00:07,014
+it is a web server,
+
+7
+00:00:07,014 --> 00:00:09,945
+a small program whose whole job is to answer,
+
+8
+00:00:09,945 --> 00:00:10,271
+fast.
+
+9
+00:00:10,821 --> 00:00:14,370
+Today you meet the most popular one in the world: engine X.
+
+10
+00:00:14,370 --> 00:00:15,272
+You install it,
+
+11
+00:00:15,272 --> 00:00:16,475
+you read its config,
+
+12
+00:00:16,475 --> 00:00:17,257
+you break it,
+
+13
+00:00:17,257 --> 00:00:18,159
+and you fix it.
+
+14
+00:00:18,709 --> 00:00:19,351
+By the end,
+
+15
+00:00:19,351 --> 00:00:20,925
+you will serve a real page,
+
+16
+00:00:20,925 --> 00:00:22,616
+show a friendly four oh four,
+
+17
+00:00:22,616 --> 00:00:24,832
+and hide a detail that attackers love.
+
+18
+00:00:25,382 --> 00:00:27,025
+Serve it, test it, reload it.
+
+19
+00:00:28,575 --> 00:00:31,647
+Here is what to expect, from the first minute to the last.
+
+20
+00:00:32,197 --> 00:00:34,535
+One: three roles that people mix up.
+
+21
+00:00:34,535 --> 00:00:35,379
+A web server,
+
+22
+00:00:35,379 --> 00:00:36,418
+a reverse proxy,
+
+23
+00:00:36,418 --> 00:00:38,106
+and an application server.
+
+24
+00:00:38,656 --> 00:00:44,075
+Two: a live demo. We read a real config, and the test tells us exactly what is wrong.
+
+25
+00:00:44,625 --> 00:00:45,787
+Three: we fix it,
+
+26
+00:00:45,787 --> 00:00:46,812
+start engine X,
+
+27
+00:00:46,812 --> 00:00:49,136
+and ask for pages like a customer,
+
+28
+00:00:49,136 --> 00:00:51,665
+including a page that does not exist.
+
+29
+00:00:52,215 --> 00:00:53,991
+Four: we improve the config,
+
+30
+00:00:53,991 --> 00:00:55,704
+and apply it with a reload,
+
+31
+00:00:55,704 --> 00:00:56,783
+with no downtime.
+
+32
+00:00:56,783 --> 00:00:57,734
+Then your turn,
+
+33
+00:00:57,734 --> 00:00:59,447
+with a lab that judges you.
+
+34
+00:00:59,997 --> 00:01:05,608
+This is lesson one of the web servers domain. Next, we point engine X at a real backend.
+
+35
+00:01:06,158 --> 00:01:07,566
+Serve, test, reload.
+
+36
+00:01:09,616 --> 00:01:13,691
+Three roles, three jobs. People mix them up, so let us separate them.
+
+37
+00:01:14,241 --> 00:01:17,020
+A web server answers requests with files.
+
+38
+00:01:17,020 --> 00:01:17,495
+A page,
+
+39
+00:01:17,495 --> 00:01:18,173
+a picture,
+
+40
+00:01:18,173 --> 00:01:19,122
+a style sheet.
+
+41
+00:01:19,122 --> 00:01:20,884
+It does not run your code.
+
+42
+00:01:20,884 --> 00:01:23,528
+It reads a file from disk and sends it.
+
+43
+00:01:23,528 --> 00:01:25,087
+That is static serving,
+
+44
+00:01:25,087 --> 00:01:26,443
+and it is very fast.
+
+45
+00:01:26,993 --> 00:01:30,283
+A reverse proxy answers on behalf of another server.
+
+46
+00:01:30,283 --> 00:01:32,307
+The customer talks to the proxy.
+
+47
+00:01:32,307 --> 00:01:34,078
+The proxy talks to your app,
+
+48
+00:01:34,078 --> 00:01:35,786
+and passes the answer back.
+
+49
+00:01:35,786 --> 00:01:37,873
+The customer never sees your app.
+
+50
+00:01:38,423 --> 00:01:40,938
+An application server runs your code.
+
+51
+00:01:40,938 --> 00:01:41,889
+Tomcat is one.
+
+52
+00:01:41,889 --> 00:01:43,384
+It builds each answer,
+
+53
+00:01:43,384 --> 00:01:45,762
+from a database and business rules.
+
+54
+00:01:45,762 --> 00:01:46,781
+It is powerful,
+
+55
+00:01:46,781 --> 00:01:47,597
+and heavier.
+
+56
+00:01:48,147 --> 00:01:49,876
+Engine X is a web server,
+
+57
+00:01:49,876 --> 00:01:51,952
+and a very good reverse proxy.
+
+58
+00:01:51,952 --> 00:01:53,266
+In front of Tomcat,
+
+59
+00:01:53,266 --> 00:01:55,480
+it serves the easy files itself,
+
+60
+00:01:55,480 --> 00:01:57,971
+and forwards only the hard requests.
+
+61
+00:01:57,971 --> 00:02:00,669
+Today we do the first job: serve files.
+
+62
+00:02:02,219 --> 00:02:07,147
+Go to the lab folder.
+
+63
+00:02:08,697 --> 00:02:10,596
+Look around. Type: L S.
+
+64
+00:02:11,146 --> 00:02:13,329
+Our site is in the site folder.
+
+65
+00:02:13,329 --> 00:02:15,582
+The config is engine X dot conf.
+
+66
+00:02:15,582 --> 00:02:17,061
+Logs will go in logs.
+
+67
+00:02:17,061 --> 00:02:21,215
+And mime dot types tells engine X which file kind is which.
+
+68
+00:02:21,765 --> 00:02:25,648
+Read the config.
+
+69
+00:02:26,198 --> 00:02:27,666
+Read it from the top.
+
+70
+00:02:27,666 --> 00:02:28,855
+Worker processes,
+
+71
+00:02:28,855 --> 00:02:29,765
+a P I D file,
+
+72
+00:02:29,765 --> 00:02:30,534
+and events.
+
+73
+00:02:30,534 --> 00:02:31,933
+Then the http block,
+
+74
+00:02:31,933 --> 00:02:32,562
+our logs,
+
+75
+00:02:32,562 --> 00:02:33,821
+some temp folders,
+
+76
+00:02:33,821 --> 00:02:35,290
+and one server block.
+
+77
+00:02:35,290 --> 00:02:39,277
+That server block is the heart of it: listen is the port,
+
+78
+00:02:39,277 --> 00:02:41,515
+and root is the folder of files.
+
+79
+00:02:42,065 --> 00:02:50,342
+Test the config before you start.
+
+80
+00:02:50,892 --> 00:02:51,503
+It fails,
+
+81
+00:02:51,503 --> 00:02:53,536
+and it tells us exactly where.
+
+82
+00:02:53,536 --> 00:02:55,231
+Emerg means an emergency.
+
+83
+00:02:55,231 --> 00:02:56,791
+Invalid parameter root,
+
+84
+00:02:56,791 --> 00:02:57,943
+in the conf file,
+
+85
+00:02:57,943 --> 00:02:58,893
+line fourteen.
+
+86
+00:02:58,893 --> 00:03:00,791
+Always read the line number.
+
+87
+00:03:01,341 --> 00:03:05,544
+Open the file in vim.
+
+88
+00:03:06,094 --> 00:03:07,770
+Line fourteen says root,
+
+89
+00:03:07,770 --> 00:03:10,774
+but the real mistake is the line before it.
+
+90
+00:03:10,774 --> 00:03:13,218
+Listen has no semicolon at the end.
+
+91
+00:03:13,218 --> 00:03:16,571
+Every setting in engine X ends with a semicolon.
+
+92
+00:03:16,571 --> 00:03:17,968
+Go to line thirteen,
+
+93
+00:03:17,968 --> 00:03:18,457
+add it,
+
+94
+00:03:18,457 --> 00:03:19,086
+and save.
+
+95
+00:03:21,136 --> 00:03:23,760
+Test again.
+
+96
+00:03:24,310 --> 00:03:28,854
+Syntax is ok, and the test is successful. Now it is safe to start.
+
+97
+00:03:29,404 --> 00:03:31,772
+Start nginx.
+
+98
+00:03:32,322 --> 00:03:34,050
+No output means it started.
+
+99
+00:03:34,600 --> 00:03:40,829
+Is it listening?
+
+100
+00:03:41,379 --> 00:03:44,024
+Yes: listening, on port eighty-one eighty-one.
+
+101
+00:03:44,574 --> 00:03:52,318
+Ask for the headers.
+
+102
+00:03:52,868 --> 00:03:53,673
+Two hundred,
+
+103
+00:03:53,673 --> 00:03:53,874
+OK.
+
+104
+00:03:53,874 --> 00:03:55,147
+The page was found.
+
+105
+00:03:55,147 --> 00:03:58,767
+Look at the server line: it says the engine X version,
+
+106
+00:03:58,767 --> 00:04:00,777
+and even the operating system.
+
+107
+00:04:00,777 --> 00:04:02,319
+We will hide that soon.
+
+108
+00:04:02,869 --> 00:04:08,586
+Ask for the page.
+
+109
+00:04:09,136 --> 00:04:13,424
+Welcome to CloudCart. Served by engine X, straight from a folder.
+
+110
+00:04:13,974 --> 00:04:23,340
+Ask for a page that does not exist.
+
+111
+00:04:23,890 --> 00:04:24,734
+Four oh four,
+
+112
+00:04:24,734 --> 00:04:25,383
+not found.
+
+113
+00:04:25,383 --> 00:04:26,422
+That is correct.
+
+114
+00:04:26,422 --> 00:04:30,188
+But the page a customer would see is a plain gray default.
+
+115
+00:04:30,188 --> 00:04:31,292
+We can do better.
+
+116
+00:04:31,842 --> 00:04:35,917
+Improve the config.
+
+117
+00:04:36,467 --> 00:04:37,172
+Two lines.
+
+118
+00:04:37,172 --> 00:04:38,863
+Inside the server block,
+
+119
+00:04:38,863 --> 00:04:40,554
+error page four oh four,
+
+120
+00:04:40,554 --> 00:04:42,316
+pointing to our own page.
+
+121
+00:04:42,316 --> 00:04:43,866
+And in the http block,
+
+122
+00:04:43,866 --> 00:04:45,134
+server tokens off,
+
+123
+00:04:45,134 --> 00:04:46,825
+which hides the version.
+
+124
+00:04:46,825 --> 00:04:47,459
+Add them,
+
+125
+00:04:47,459 --> 00:04:48,094
+and save.
+
+126
+00:04:58,144 --> 00:05:05,632
+Test, then reload.
+
+127
+00:05:06,182 --> 00:05:08,162
+Reload applies the new config,
+
+128
+00:05:08,162 --> 00:05:09,283
+without stopping.
+
+129
+00:05:09,283 --> 00:05:10,801
+Customers never notice.
+
+130
+00:05:10,801 --> 00:05:14,563
+That is the safe way to change a live server: test first,
+
+131
+00:05:14,563 --> 00:05:15,355
+then reload.
+
+132
+00:05:15,905 --> 00:05:23,073
+Ask for the missing page again.
+
+133
+00:05:23,623 --> 00:05:24,537
+Page not found,
+
+134
+00:05:24,537 --> 00:05:25,573
+in our own style,
+
+135
+00:05:25,573 --> 00:05:26,914
+with a link back home.
+
+136
+00:05:26,914 --> 00:05:28,194
+Still a four oh four,
+
+137
+00:05:28,194 --> 00:05:29,170
+only friendlier.
+
+138
+00:05:29,720 --> 00:05:36,653
+Is the version hidden?
+
+139
+00:05:37,203 --> 00:05:42,344
+Just engine X. No version number. A small secure default, and an easy win.
+
+140
+00:05:42,894 --> 00:05:49,721
+Every request is written down.
+
+141
+00:05:50,271 --> 00:05:50,888
+Who asked,
+
+142
+00:05:50,888 --> 00:05:51,197
+when,
+
+143
+00:05:51,197 --> 00:05:51,506
+what,
+
+144
+00:05:51,506 --> 00:05:52,740
+and the answer code.
+
+145
+00:05:52,740 --> 00:05:56,074
+We will read these like a detective in a later lesson.
+
+146
+00:05:56,624 --> 00:05:58,992
+Run the judge.
+
+147
+00:05:59,542 --> 00:06:00,345
+Five checks,
+
+148
+00:06:00,345 --> 00:06:01,148
+five passes.
+
+149
+00:06:01,148 --> 00:06:02,018
+Config valid,
+
+150
+00:06:02,018 --> 00:06:03,155
+engine X running,
+
+151
+00:06:03,155 --> 00:06:04,226
+the page served,
+
+152
+00:06:04,226 --> 00:06:05,832
+a friendly four oh four,
+
+153
+00:06:05,832 --> 00:06:07,371
+and the version hidden.
+
+154
+00:06:07,921 --> 00:06:09,884
+Clean up.
+
+155
+00:06:10,434 --> 00:06:12,823
+Engine X stopped, and everything removed.
+
+156
+00:06:13,373 --> 00:06:17,896
+Is the port free? Count the lines.
+
+157
+00:06:18,446 --> 00:06:21,454
+Zero. Nothing listens, nothing is left behind.
+
+158
+00:06:23,004 --> 00:06:25,863
+Your task. Serve a static site with engine X.
+
+159
+00:06:26,413 --> 00:06:32,343
+One: lab up, then N G dash T. It fails. Read the line number, and fix the config in vim.
+
+160
+00:06:32,893 --> 00:06:37,608
+Two: test again until it succeeds. Then start engine X, and curl the page.
+
+161
+00:06:38,158 --> 00:06:42,766
+Three: add error page four oh four, so a missing page shows your friendly page.
+
+162
+00:06:43,316 --> 00:06:46,196
+Four: add server tokens off, to hide the version.
+
+163
+00:06:46,746 --> 00:06:50,245
+Five: test, then reload. Then lab check, and lab down.
+
+164
+00:06:52,295 --> 00:06:56,071
+Here is where to find everything. Pause on this screen, and write it down.
+
+165
+00:06:56,621 --> 00:06:58,269
+The lab lives on GitHub,
+
+166
+00:06:58,269 --> 00:06:59,436
+at it dash waves,
+
+167
+00:06:59,436 --> 00:07:01,016
+slash dev ops dash A I,
+
+168
+00:07:01,016 --> 00:07:02,526
+in the folder academy,
+
+169
+00:07:02,526 --> 00:07:03,213
+slash lab.
+
+170
+00:07:03,763 --> 00:07:09,075
+Two files: lab one eighteen dot S H, and shortcuts one eighteen dot S H.
+
+171
+00:07:09,625 --> 00:07:10,530
+Install it,
+
+172
+00:07:10,530 --> 00:07:13,410
+on any Linux machine: sudo install,
+
+173
+00:07:13,410 --> 00:07:15,303
+dash m seven five five,
+
+174
+00:07:15,303 --> 00:07:17,360
+lab one eighteen dot S H,
+
+175
+00:07:17,360 --> 00:07:18,594
+into slash usr,
+
+176
+00:07:18,594 --> 00:07:19,582
+slash local,
+
+177
+00:07:19,582 --> 00:07:20,569
+slash S bin.
+
+178
+00:07:21,119 --> 00:07:25,649
+Load the short names with: source shortcuts one eighteen dot S H.
+
+179
+00:07:25,649 --> 00:07:26,833
+You get two: lab,
+
+180
+00:07:26,833 --> 00:07:27,391
+and N G.
+
+181
+00:07:27,941 --> 00:07:30,294
+You need engine X and curl installed,
+
+182
+00:07:30,294 --> 00:07:32,583
+and port eighty-one eighty-one free.
+
+183
+00:07:32,583 --> 00:07:34,999
+The lab runs its own private engine X,
+
+184
+00:07:34,999 --> 00:07:37,797
+so it does not touch the one on your system.
+
+185
+00:07:38,347 --> 00:07:40,054
+Lab up prepares everything.
+
+186
+00:07:40,054 --> 00:07:41,761
+Lab check judges your work.
+
+187
+00:07:41,761 --> 00:07:43,278
+Lab down removes it all.
+
+188
+00:07:43,278 --> 00:07:45,302
+Only run it on your own machine.
+
+189
+00:07:47,352 --> 00:07:49,421
+Pass or fail. You need all five.
+
+190
+00:07:49,971 --> 00:07:51,571
+The config passes the test.
+
+191
+00:07:52,121 --> 00:07:54,703
+Engine X is running and answers on its port.
+
+192
+00:07:55,253 --> 00:07:56,981
+The CloudCart page is served.
+
+193
+00:07:57,531 --> 00:08:00,816
+A missing page gives a four oh four, with your friendly page.
+
+194
+00:08:01,366 --> 00:08:03,222
+The server header hides the version.
+
+195
+00:08:03,772 --> 00:08:05,073
+To pass, all five.
+
+196
+00:08:07,123 --> 00:08:08,894
+Your turn, on your own machine.
+
+197
+00:08:09,444 --> 00:08:13,774
+One: lab up, read the task list, and run N G dash T. Read the error.
+
+198
+00:08:14,324 --> 00:08:17,247
+Two: fix the semicolon in vim, and test again.
+
+199
+00:08:17,797 --> 00:08:22,170
+Three: start engine X, and ask for the page, and for a page that is missing.
+
+200
+00:08:22,720 --> 00:08:26,560
+Four: add error page and server tokens off, test, and reload.
+
+201
+00:08:27,110 --> 00:08:30,268
+Five: run lab check until you see five out of five.
+
+202
+00:08:30,818 --> 00:08:33,399
+Six: lab down, and prove the port is free.
+
+203
+00:08:33,949 --> 00:08:35,784
+Pause the video, and begin now.
+
+204
+00:08:51,334 --> 00:08:52,209
+Quick check.
+
+205
+00:08:52,759 --> 00:08:56,279
+What is the difference between a web server and an application server?
+
+206
+00:08:56,829 --> 00:08:59,175
+Why do you test the config before you reload?
+
+207
+00:08:59,725 --> 00:09:03,352
+What does a four oh four mean, and who decides what the customer sees?
+
+208
+00:09:03,902 --> 00:09:05,481
+Why hide the server version?
+
+209
+00:09:06,031 --> 00:09:08,382
+Objectives covered: M C thirteen,
+
+210
+00:09:08,382 --> 00:09:10,020
+objectives one and two.
+
+211
+00:09:10,020 --> 00:09:11,160
+The three roles,
+
+212
+00:09:11,160 --> 00:09:14,009
+and installing and configuring engine X.
+
+213
+00:09:14,559 --> 00:09:16,629
+Pause the video, and answer out loud.
+
+214
+00:09:27,179 --> 00:09:31,765
+Next: routing traffic to a backend, with engine X as a reverse proxy.
+
+215
+00:09:32,315 --> 00:09:35,643
+If this helped, like, share and subscribe, so you do not miss it.

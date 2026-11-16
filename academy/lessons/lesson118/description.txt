@@ -1,0 +1,24 @@
+Lesson 118 of the DevOps Engineering Bootcamp, and lesson 1 of the Web Servers and Reverse Proxies domain. A web server, a reverse proxy and an application server do three different jobs, and people mix them up. This lesson separates them, then you use real nginx 1.24: read a real config, let the config test find the mistake (a missing semicolon, with its line number), fix it in vim, start nginx, ask for the page and for a page that does not exist, add a friendly 404 and hide the server version, and apply the change with a reload and no downtime. Then you get a lab that judges your work, from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Serve it.
+0:28 What to expect
+1:09 Three roles
+2:01 Live: install, test, serve, reload
+6:22 Your lab task
+6:51 Where to find the lab
+7:46 Pass or fail rubric
+8:06 Your turn
+8:50 Quick check
+Objectives covered: MC13-O01 (explain static web serving versus reverse proxy and application server) and MC13-O02 (install and configure Nginx)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab118.sh and shortcuts118.sh). Install with: sudo install -m 755 lab118.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts118.sh. You need any Linux machine with root, nginx, curl and ss (for example: sudo apt install -y nginx curl iproute2) and port 8181 free. The lab runs its own private nginx from /opt/lab118 and does not touch the system nginx. lab down stops it and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording on real nginx 1.24, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The narration is synthetic speech. The hook, the three roles picture, the task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: CloudCart v0 Mastery: Prove It From a Clean Clone | Lesson 117 https://youtu.be/4GqAJaS6RBs
+Next: Routing traffic to a backend with nginx as a reverse proxy.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #nginx #webserver #linux #devopsbootcamp

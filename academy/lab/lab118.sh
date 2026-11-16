@@ -10,7 +10,7 @@ B=localhost:8181
 NG="nginx -p $D -e $D/logs/error.log -c $D/nginx.conf"
 down() {
   [ -f $D/nginx.pid ] && kill "$(cat $D/nginx.pid)" 2>/dev/null; sleep 1
-  rm -rf "${D:?}"; true
+  rm -rf "${D:?}"/* "${D:?}"/.[!.]* 2>/dev/null; rmdir "$D" 2>/dev/null; true
 }
 up() {
   for t in nginx curl; do command -v $t >/dev/null 2>&1 || { echo "$t not found: run  sudo apt install -y nginx curl iproute2"; exit 1; }; done
