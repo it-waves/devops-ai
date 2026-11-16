@@ -24,7 +24,7 @@ up() {
   P="$RU psql -h $D -p $PORT -X -q -v ON_ERROR_STOP=1"
   $P -d postgres -c "CREATE DATABASE shop" >/dev/null
   $P -d shop >/dev/null <<'EOF_SQL'
-CREATE TABLE schema_migrations (version int PRIMARY KEY, applied_at timestamptz NOT NULL DEFAULT now());
+CREATE TABLE schema_migrations (version int PRIMARY KEY, applied_on date NOT NULL DEFAULT current_date);
 CREATE TABLE customers (id serial PRIMARY KEY, name text NOT NULL);
 CREATE TABLE products (id serial PRIMARY KEY, name text NOT NULL, price_cents int NOT NULL);
 CREATE TABLE orders (id serial PRIMARY KEY, customer_id int NOT NULL REFERENCES customers(id), product_id int NOT NULL REFERENCES products(id), qty int NOT NULL);
