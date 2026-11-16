@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab123.sh and shortc
 Honest notes: the terminal part is one real, continuous recording on real nginx 1.24, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The slow backend is a tiny Python program that waits four seconds on purpose, and the .env file holds a fake password made for the demo. Real timeouts depend on your application: two seconds suits this demo, not every service. The narration is synthetic speech. The hook, the three-limits picture, the task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: nginx Logs: Read Access and Error Logs, Understand Status Codes | Lesson 122 https://youtu.be/uO94JSZww7c
-Next: Troubleshooting 502, 503 and 504 errors, TLS and upstream problems with nginx.
+Next: nginx Troubleshooting: Fix 502, 503, 504 and TLS Errors | Lesson 124 https://youtu.be/EK0_6r_Grm0
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
