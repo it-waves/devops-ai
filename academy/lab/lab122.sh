@@ -42,7 +42,8 @@ events { worker_connections 64; }
 http {
     include mime.types;
     server_tokens off;
-    log_format main '\$remote_addr "\$request" \$status \$body_bytes_sent "\$http_user_agent"';
+    log_format main '\$remote_addr "\$request" \$status'
+                    ' \$body_bytes_sent "\$http_user_agent"';
     access_log $D/logs/access.log main;
     client_body_temp_path $D/tmp/body;
     proxy_temp_path $D/tmp/proxy;
@@ -93,13 +94,13 @@ check() {
   A=$D/logs/access.log
   conf=$($RU $NG -T 2>/dev/null); pid=$(cat $D/nginx.pid 2>/dev/null)
   fmt=$(echo "$conf" | sed -n 's/^ *log_format  *\([a-z_]*\) .*\$request_time.*/\1/p' | head -n 1)
-  if $RU $NG -t >/dev/null 2>&1 && [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null && [ -n "$fmt" ] && echo "$conf" | grep -Eq "^ *access_log +[^ ]+ +$fmt;"; then ok "1 nginx runs and access_log uses a format that records \$request_time"; else no "1 add a log_format with rt=\$request_time and end the access_log line with its name (TASKS.txt step 4)"; fi
+  if $RU $NG -t >/dev/null 2>&1 && [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null && [ -n "$fmt" ] && echo "$conf" | grep -Eq "^ *access_log +[^ ]+ +$fmt;"; then ok "1 access_log uses a format with request_time"; else no "1 add a log_format with rt=\$request_time and end the access_log line with its name (TASKS.txt step 4)"; fi
   n404=$(grep -c ' 404 ' $A 2>/dev/null); n502=$(grep -c ' 502 ' $A 2>/dev/null)
-  if [ "$n404" -ge 3 ] && [ "$n502" -ge 2 ] && grep -q ' 301 ' $A && grep -q ' 403 ' $A && grep -Eq 'rt=[0-9]+\.[0-9]+$' $A && ! grep -Evq 'rt=[0-9]+\.[0-9]+$' $A; then ok "2 the access log holds the traffic, every line in the new format"; else no "2 empty the log, run ./traffic.sh again after the format change (steps 4 and 5)"; fi
+  if [ "$n404" -ge 3 ] && [ "$n502" -ge 2 ] && grep -q ' 301 ' $A && grep -q ' 403 ' $A && grep -Eq 'rt=[0-9]+\.[0-9]+$' $A && ! grep -Evq 'rt=[0-9]+\.[0-9]+$' $A; then ok "2 the log holds the traffic in the new format"; else no "2 empty the log, run ./traffic.sh again after the format change (steps 4 and 5)"; fi
   a1=$(sed -n 1p $D/answers.txt 2>/dev/null | tr -d ' \r'); a2=$(sed -n 2p $D/answers.txt 2>/dev/null | tr -d ' \r'); a3=$(sed -n 3p $D/answers.txt 2>/dev/null | tr -d ' \r' | tr A-Z a-z)
-  if [ -n "$a1" ] && [ "$a1" = "$n404" ]; then ok "3 line 1 of answers.txt: the number of 404 responses is right"; else no "3 line 1 of answers.txt must be the number of 404 responses (count them in the log), got '$a1'"; fi
-  if [ "$a2" = "/broken" ]; then ok "4 line 2 of answers.txt: the path behind the 502 is right"; else no "4 line 2 of answers.txt must be the path that gave 502 Bad Gateway, got '$a2'"; fi
-  if [ "$a3" = "refused" ] && grep -q 'Connection refused' $D/logs/error.log 2>/dev/null; then ok "5 line 3 of answers.txt: the reason in error.log is right"; else no "5 line 3 of answers.txt must be the one-word reason in error.log after (111: , got '$a3'"; fi
+  if [ -n "$a1" ] && [ "$a1" = "$n404" ]; then ok "3 your count of 404 responses is right"; else no "3 line 1 of answers.txt must be the number of 404 responses (count them in the log), got '$a1'"; fi
+  if [ "$a2" = "/broken" ]; then ok "4 your path behind the 502 is right"; else no "4 line 2 of answers.txt must be the path that gave 502 Bad Gateway, got '$a2'"; fi
+  if [ "$a3" = "refused" ] && grep -q 'Connection refused' $D/logs/error.log 2>/dev/null; then ok "5 your reason from error.log is right"; else no "5 line 3 of answers.txt must be the one-word reason in error.log after (111: , got '$a3'"; fi
   echo; echo "$pass / $total passed"; [ $pass -eq $total ]
 }
 status() { [ -d $D ] && echo "lab 122 is up in $D" || echo "lab 122 is not up"; }
