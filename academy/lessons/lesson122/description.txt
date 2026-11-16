@@ -1,0 +1,24 @@
+Lesson 122 of the DevOps Engineering Bootcamp, and lesson 5 of the Web Servers and Reverse Proxies domain. When someone says "your site is broken", you start in the logs. This lesson explains the access log and the error log and the five families of HTTP status codes, then you use real nginx 1.24: send a mix of requests, read the access log, count requests per status code with awk, find the 502 Bad Gateway responses, read the error log to learn why (connection refused), add the request time to every log line with log_format, and answer three questions from the evidence. Then you get a lab that checks your answers against the real logs, from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Read it.
+0:26 What to expect
+1:04 Two logs, five families
+1:48 Live: read the logs
+6:26 Your lab task
+6:58 Where to find the lab
+7:53 Pass or fail rubric
+8:13 Your turn
+8:57 Quick check
+Objectives covered: MC13-O06 (access and error logs, status codes)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab122.sh and shortcuts122.sh). Install with: sudo install -m 755 lab122.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts122.sh. You need any Linux machine with root, nginx, curl and ss (for example: sudo apt install -y nginx curl iproute2) and port 8221 free. The lab runs its own private nginx from /opt/lab122 and does not touch the system nginx. lab down stops it and removes everything, logs included. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording on real nginx 1.24, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The number of 404 requests is random for each lab up, so you must count it yourself. The log format in the lab is shortened so lines fit on screen; nginx's built-in combined format also records the time and the referrer. The narration is synthetic speech. The hook, the two-logs picture, the task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: nginx Load Balancing: Upstream Pool, Round Robin, Health Checks, Backup | Lesson 121 https://youtu.be/cpWxLDtSpog
+Next: Timeouts, request size limits and secure defaults with nginx.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #nginx #logs #statuscodes #devopsbootcamp

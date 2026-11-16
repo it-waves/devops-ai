@@ -1,0 +1,727 @@
+1
+00:00:00,500 --> 00:00:02,738
+A customer says: your site is broken.
+
+2
+00:00:02,738 --> 00:00:04,129
+You open the dashboard,
+
+3
+00:00:04,129 --> 00:00:05,701
+and everything looks fine.
+
+4
+00:00:05,701 --> 00:00:07,092
+Where do you look next?
+
+5
+00:00:07,642 --> 00:00:09,853
+Always in the same place: the logs.
+
+6
+00:00:09,853 --> 00:00:13,074
+Every request engine X ever served is written down,
+
+7
+00:00:13,074 --> 00:00:15,663
+with a number that tells you how it went.
+
+8
+00:00:16,213 --> 00:00:18,327
+Today you learn to read that number,
+
+9
+00:00:18,327 --> 00:00:20,324
+find a failing request in seconds,
+
+10
+00:00:20,324 --> 00:00:22,379
+and ask the log the right question.
+
+11
+00:00:22,929 --> 00:00:24,635
+Read the log, trust the number.
+
+12
+00:00:26,185 --> 00:00:29,257
+Here is what to expect, from the first minute to the last.
+
+13
+00:00:29,807 --> 00:00:32,964
+One: the two logs, and the families of status codes.
+
+14
+00:00:33,514 --> 00:00:37,781
+Two: a live demo. We send a mix of requests to a real engine X.
+
+15
+00:00:38,331 --> 00:00:40,172
+Three: we read the access log,
+
+16
+00:00:40,172 --> 00:00:41,154
+count the codes,
+
+17
+00:00:41,154 --> 00:00:43,792
+and chase a five oh two into the error log.
+
+18
+00:00:44,342 --> 00:00:46,972
+Four: we add the request time to every line.
+
+19
+00:00:46,972 --> 00:00:47,868
+Then your turn,
+
+20
+00:00:47,868 --> 00:00:50,319
+with a lab that asks you three questions,
+
+21
+00:00:50,319 --> 00:00:52,769
+and checks your answers against the logs.
+
+22
+00:00:53,319 --> 00:00:56,072
+This is lesson five of the web servers domain.
+
+23
+00:00:56,072 --> 00:00:57,688
+Last time you built a pool.
+
+24
+00:00:57,688 --> 00:01:00,082
+Today you learn to see what is going on.
+
+25
+00:01:00,632 --> 00:01:02,338
+Read the log, trust the number.
+
+26
+00:01:04,388 --> 00:01:07,737
+Two logs, two different questions. Let us see which is which.
+
+27
+00:01:08,287 --> 00:01:11,408
+The access log has one line per request: who asked,
+
+28
+00:01:11,408 --> 00:01:12,631
+what they asked for,
+
+29
+00:01:12,631 --> 00:01:14,773
+and the status code that came back.
+
+30
+00:01:15,323 --> 00:01:20,009
+The error log is engine X talking about itself: a file that was not found,
+
+31
+00:01:20,009 --> 00:01:21,909
+a backend that did not answer,
+
+32
+00:01:21,909 --> 00:01:23,429
+a setting that is wrong.
+
+33
+00:01:23,979 --> 00:01:26,194
+Status codes come in five families.
+
+34
+00:01:26,194 --> 00:01:27,649
+Two hundred: it worked.
+
+35
+00:01:27,649 --> 00:01:29,737
+Three hundred: go somewhere else.
+
+36
+00:01:29,737 --> 00:01:33,027
+Four hundred: the visitor asked for something wrong.
+
+37
+00:01:33,027 --> 00:01:35,051
+Five hundred: the server failed.
+
+38
+00:01:35,601 --> 00:01:36,803
+Remember the split.
+
+39
+00:01:36,803 --> 00:01:39,144
+Four hundred is the client's problem.
+
+40
+00:01:39,144 --> 00:01:40,536
+Five hundred is yours.
+
+41
+00:01:40,536 --> 00:01:41,674
+And a five oh two,
+
+42
+00:01:41,674 --> 00:01:42,433
+bad gateway,
+
+43
+00:01:42,433 --> 00:01:46,545
+means engine X could not get an answer from the server behind it.
+
+44
+00:01:48,095 --> 00:01:53,215
+Go to the lab folder.
+
+45
+00:01:54,765 --> 00:01:56,664
+Look around. Type: L S.
+
+46
+00:01:57,214 --> 00:02:01,566
+A site, a config, an empty logs folder, and a script that sends traffic.
+
+47
+00:02:02,116 --> 00:02:08,132
+Which special locations exist?
+
+48
+00:02:08,682 --> 00:02:09,071
+Three.
+
+49
+00:02:09,071 --> 00:02:11,797
+Anything under admin gets a four oh three,
+
+50
+00:02:11,797 --> 00:02:12,446
+forbidden.
+
+51
+00:02:12,446 --> 00:02:15,172
+The path old is moved with a three oh one.
+
+52
+00:02:15,172 --> 00:02:18,612
+And broken is proxied to port eighty-two twenty-nine,
+
+53
+00:02:18,612 --> 00:02:20,364
+where nothing is listening.
+
+54
+00:02:20,364 --> 00:02:22,506
+Everything else is a normal page.
+
+55
+00:02:23,056 --> 00:02:26,832
+Send the traffic.
+
+56
+00:02:27,382 --> 00:02:29,255
+A fixed mix of good requests,
+
+57
+00:02:29,255 --> 00:02:30,160
+missing pages,
+
+58
+00:02:30,160 --> 00:02:31,064
+one forbidden,
+
+59
+00:02:31,064 --> 00:02:31,904
+one redirect,
+
+60
+00:02:31,904 --> 00:02:34,230
+and two requests to the broken path.
+
+61
+00:02:34,780 --> 00:02:40,113
+Read the first lines of the access log.
+
+62
+00:02:40,663 --> 00:02:42,211
+Each line is one request.
+
+63
+00:02:42,211 --> 00:02:43,388
+The client address,
+
+64
+00:02:43,388 --> 00:02:44,750
+the request in quotes,
+
+65
+00:02:44,750 --> 00:02:45,741
+the status code,
+
+66
+00:02:45,741 --> 00:02:46,855
+the size in bytes,
+
+67
+00:02:46,855 --> 00:02:48,527
+and the program that asked.
+
+68
+00:02:48,527 --> 00:02:49,518
+Here it is curl.
+
+69
+00:02:49,518 --> 00:02:52,738
+The number after the quotes is the one that matters.
+
+70
+00:02:53,288 --> 00:03:06,280
+Count requests per status code.
+
+71
+00:03:06,830 --> 00:03:07,889
+Six two hundreds,
+
+72
+00:03:07,889 --> 00:03:08,948
+one three oh one,
+
+73
+00:03:08,948 --> 00:03:10,070
+one four oh three,
+
+74
+00:03:10,070 --> 00:03:11,254
+some four oh fours,
+
+75
+00:03:11,254 --> 00:03:12,563
+and two five oh twos.
+
+76
+00:03:12,563 --> 00:03:14,993
+Awk picked the fifth word of each line,
+
+77
+00:03:14,993 --> 00:03:16,115
+sort grouped them,
+
+78
+00:03:16,115 --> 00:03:17,299
+and unique counted.
+
+79
+00:03:17,299 --> 00:03:21,038
+The log has told you the shape of the traffic in one second.
+
+80
+00:03:21,588 --> 00:03:29,502
+Count the 404s.
+
+81
+00:03:30,052 --> 00:03:34,212
+That number is the four oh fours. Remember it, it is your first answer.
+
+82
+00:03:34,762 --> 00:03:42,058
+Show the 502s.
+
+83
+00:03:42,608 --> 00:03:44,524
+Both on the same path: broken.
+
+84
+00:03:44,524 --> 00:03:47,206
+Four hundreds are mistakes of the visitor.
+
+85
+00:03:47,206 --> 00:03:49,823
+Five hundreds are failures of the system.
+
+86
+00:03:49,823 --> 00:03:51,675
+This one needs the error log.
+
+87
+00:03:52,225 --> 00:04:06,454
+Ask the error log why.
+
+88
+00:04:07,004 --> 00:04:08,264
+Connection refused,
+
+89
+00:04:08,264 --> 00:04:09,458
+error one one one.
+
+90
+00:04:09,458 --> 00:04:11,845
+Engine X tried to reach the backend,
+
+91
+00:04:11,845 --> 00:04:13,503
+and nobody was listening.
+
+92
+00:04:13,503 --> 00:04:16,023
+That is exactly what a five oh two is.
+
+93
+00:04:16,023 --> 00:04:17,482
+Without the error log,
+
+94
+00:04:17,482 --> 00:04:21,063
+the access log only says what; the error log says why.
+
+95
+00:04:21,613 --> 00:04:26,882
+Open the config in vim.
+
+96
+00:04:27,432 --> 00:04:28,483
+Go to line nine,
+
+97
+00:04:28,483 --> 00:04:29,795
+the access log line,
+
+98
+00:04:29,795 --> 00:04:33,209
+and make it end with the word timed instead of main.
+
+99
+00:04:33,209 --> 00:04:34,915
+Then open a line above it,
+
+100
+00:04:34,915 --> 00:04:36,425
+and define that format,
+
+101
+00:04:36,425 --> 00:04:38,132
+called timed: the request,
+
+102
+00:04:38,132 --> 00:04:38,854
+the status,
+
+103
+00:04:38,854 --> 00:04:41,480
+and then R T equals dollar request time,
+
+104
+00:04:41,480 --> 00:04:43,646
+the seconds engine X spent on it.
+
+105
+00:04:47,096 --> 00:04:53,197
+Test, then reload.
+
+106
+00:04:53,747 --> 00:04:55,475
+Applied without stopping anything.
+
+107
+00:04:56,025 --> 00:05:03,598
+Empty the old log.
+
+108
+00:05:04,148 --> 00:05:08,223
+Send the traffic again.
+
+109
+00:05:08,773 --> 00:05:14,042
+Read the new format.
+
+110
+00:05:14,592 --> 00:05:19,008
+Now every line ends with R T and a number: how long the request took.
+
+111
+00:05:19,008 --> 00:05:21,440
+This is how you find the slow request,
+
+112
+00:05:21,440 --> 00:05:22,912
+before a customer does.
+
+113
+00:05:23,462 --> 00:05:33,638
+Write answer one.
+
+114
+00:05:34,188 --> 00:05:41,058
+Write answer two.
+
+115
+00:05:41,608 --> 00:05:48,477
+Write answer three.
+
+116
+00:05:49,027 --> 00:05:52,120
+Read the answers.
+
+117
+00:05:52,670 --> 00:05:56,660
+A number, a path, and a word. Three facts, all found in the logs.
+
+118
+00:05:57,210 --> 00:05:59,578
+Run the judge.
+
+119
+00:06:00,128 --> 00:06:00,889
+Five checks.
+
+120
+00:06:00,889 --> 00:06:02,476
+The new format is in use.
+
+121
+00:06:02,476 --> 00:06:05,078
+The log holds the traffic in that format.
+
+122
+00:06:05,078 --> 00:06:09,139
+And each of your three answers is checked against the real logs.
+
+123
+00:06:09,139 --> 00:06:10,218
+Five out of five.
+
+124
+00:06:10,768 --> 00:06:12,731
+Clean up.
+
+125
+00:06:13,281 --> 00:06:16,652
+Engine X stopped, and everything removed, logs included.
+
+126
+00:06:17,202 --> 00:06:21,682
+Is the port free? Count the lines.
+
+127
+00:06:22,232 --> 00:06:25,240
+Zero. Nothing listens, nothing is left behind.
+
+128
+00:06:26,790 --> 00:06:30,907
+Your task. Read the logs, and answer three questions from the evidence.
+
+129
+00:06:31,457 --> 00:06:35,831
+One: lab up, run the traffic script, and count the requests per status code.
+
+130
+00:06:36,381 --> 00:06:40,242
+Two: find the five oh twos, and read the error log to learn why.
+
+131
+00:06:40,792 --> 00:06:46,659
+Three: define a log format with request time, and use it in access log. Test, and reload.
+
+132
+00:06:47,209 --> 00:06:51,091
+Four: empty the log, send the traffic again, and read the new lines.
+
+133
+00:06:51,641 --> 00:06:56,761
+Five: write three answers into answers dot text, run lab check, then lab down.
+
+134
+00:06:58,811 --> 00:07:02,587
+Here is where to find everything. Pause on this screen, and write it down.
+
+135
+00:07:03,137 --> 00:07:04,785
+The lab lives on GitHub,
+
+136
+00:07:04,785 --> 00:07:05,952
+at it dash waves,
+
+137
+00:07:05,952 --> 00:07:07,532
+slash dev ops dash A I,
+
+138
+00:07:07,532 --> 00:07:09,042
+in the folder academy,
+
+139
+00:07:09,042 --> 00:07:09,729
+slash lab.
+
+140
+00:07:10,279 --> 00:07:15,868
+Two files: lab one twenty-two dot S H, and shortcuts one twenty-two dot S H.
+
+141
+00:07:16,418 --> 00:07:17,319
+Install it,
+
+142
+00:07:17,319 --> 00:07:20,184
+on any Linux machine: sudo install,
+
+143
+00:07:20,184 --> 00:07:22,066
+dash m seven five five,
+
+144
+00:07:22,066 --> 00:07:24,277
+lab one twenty-two dot S H,
+
+145
+00:07:24,277 --> 00:07:25,504
+into slash usr,
+
+146
+00:07:25,504 --> 00:07:26,487
+slash local,
+
+147
+00:07:26,487 --> 00:07:27,469
+slash S bin.
+
+148
+00:07:28,019 --> 00:07:32,758
+Load the short names with: source shortcuts one twenty-two dot S H.
+
+149
+00:07:32,758 --> 00:07:33,960
+You get two: lab,
+
+150
+00:07:33,960 --> 00:07:34,526
+and N G.
+
+151
+00:07:35,076 --> 00:07:37,522
+You need engine X and curl installed,
+
+152
+00:07:37,522 --> 00:07:39,902
+and port eighty-two twenty-one free.
+
+153
+00:07:39,902 --> 00:07:42,414
+The lab runs its own private engine X.
+
+154
+00:07:42,964 --> 00:07:44,679
+Lab up prepares everything.
+
+155
+00:07:44,679 --> 00:07:46,394
+Lab check judges your work.
+
+156
+00:07:46,394 --> 00:07:47,918
+Lab down removes it all,
+
+157
+00:07:47,918 --> 00:07:49,124
+including the logs.
+
+158
+00:07:49,124 --> 00:07:51,156
+Only run it on your own machine.
+
+159
+00:07:53,206 --> 00:07:55,275
+Pass or fail. You need all five.
+
+160
+00:07:55,825 --> 00:07:58,748
+Access log uses a format with request time.
+
+161
+00:07:59,298 --> 00:08:01,730
+The log holds the full traffic in that format.
+
+162
+00:08:02,280 --> 00:08:04,243
+Your count of four oh fours is right.
+
+163
+00:08:04,793 --> 00:08:06,947
+You named the path behind the five oh two.
+
+164
+00:08:07,497 --> 00:08:09,417
+You named the reason in the error log.
+
+165
+00:08:09,967 --> 00:08:11,269
+To pass, all five.
+
+166
+00:08:13,319 --> 00:08:15,090
+Your turn, on your own machine.
+
+167
+00:08:15,640 --> 00:08:19,330
+One: lab up, run the traffic script, and count the codes with awk.
+
+168
+00:08:19,880 --> 00:08:23,486
+Two: find the five oh twos, and the reason in the error log.
+
+169
+00:08:24,036 --> 00:08:27,534
+Three: add the new log format in vim. Test, and reload.
+
+170
+00:08:28,084 --> 00:08:31,306
+Four: empty the log, send the traffic again, and read it.
+
+171
+00:08:31,856 --> 00:08:36,784
+Five: write answers dot text, and run lab check until you see five out of five.
+
+172
+00:08:37,334 --> 00:08:39,915
+Six: lab down, and prove the port is free.
+
+173
+00:08:40,465 --> 00:08:42,300
+Pause the video, and begin now.
+
+174
+00:08:57,850 --> 00:08:58,725
+Quick check.
+
+175
+00:08:59,275 --> 00:09:03,413
+What question does the access log answer, and what does the error log answer?
+
+176
+00:09:03,963 --> 00:09:06,630
+What do the four hundreds and the five hundreds mean?
+
+177
+00:09:07,180 --> 00:09:08,737
+What does a five oh two tell you?
+
+178
+00:09:09,287 --> 00:09:11,271
+Why add the request time to the log?
+
+179
+00:09:11,821 --> 00:09:18,712
+Objectives covered: M C thirteen, objective six. Access logs, error logs and status codes.
+
+180
+00:09:19,262 --> 00:09:21,331
+Pause the video, and answer out loud.
+
+181
+00:09:31,881 --> 00:09:35,465
+Next: timeouts, request size limits and secure defaults.
+
+182
+00:09:36,015 --> 00:09:39,343
+If this helped, like, share and subscribe, so you do not miss it.
