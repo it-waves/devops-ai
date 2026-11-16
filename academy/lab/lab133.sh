@@ -54,7 +54,7 @@ EOF_S
 # what the shop app does at start-up: connect with app.env and count the orders
 cd "$(dirname "$0")"; . ./app.env
 export PGPASSWORD="$DB_PASS"
-out=$(psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -X -At -c "SELECT count(*) FROM orders" 2>&1) && echo "app OK: $out orders" || { echo "app FAILED: $out"; exit 1; }
+out=$(psql -h $DB_HOST -p $DB_PORT -U $DB_USER -d $DB_NAME -X -At -c "SELECT count(*) FROM orders" 2>&1) && echo "app OK: $out orders" || { echo "app FAILED:"; echo "$out" | sed 's/^psql: error: //' | tr '\n\t' '  ' | fold -s -w 66 | sed 's/^/  /'; exit 1; }
 EOF_S
   cat > $D/app/app.env <<'EOF_E'
 # connection settings of the shop app
@@ -64,7 +64,7 @@ DB_NAME=shopp
 DB_USER=shopapp
 DB_PASS=shop-app-133
 EOF_E
-  printf '%s\n' 'secret store (do not commit): user shopapp, password Shop-app-133, database shop, server 127.0.0.1 port 5513' > $D/vault.txt
+  printf '%s\n' 'secret store (do not commit)' 'user      shopapp' 'password  Shop-app-133' 'database  shop' 'server    127.0.0.1 port 5513' > $D/vault.txt
   chmod +x $D/app/migrate.sh $D/app/check_app.sh
   # 001 and 002 were applied earlier; 003 is pending
   $P -d shop -c "CREATE TABLE schema_migrations (version text PRIMARY KEY)" -f $D/app/migrations/001_orders.sql -f $D/app/migrations/002_customers.sql -c "INSERT INTO schema_migrations VALUES ('001'),('002')" -c "ALTER TABLE orders OWNER TO shopapp" -c "ALTER TABLE customers OWNER TO shopapp" -c "ALTER TABLE schema_migrations OWNER TO shopapp" >/dev/null
