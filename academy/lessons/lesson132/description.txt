@@ -18,7 +18,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab132.sh and shortc
 Honest notes: the terminal demo is one real, continuous recording of real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. The cache hit figure is 100 percent on screen because the demo database is tiny; the narration says "near ninety nine", so read the screen as the truth. Timings such as 20 ms versus 1 ms depend on your hardware. The narration is synthetic speech. The hook, ideas, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: Database UI Tour: Browse, Edit, Query and Export PostgreSQL with Adminer | Lesson 131 https://youtu.be/-icPwM6Gt4I
-Next: Troubleshooting app-to-database connectivity and migration failures.
+Next lesson: Fix App-to-Database Connection Errors and Failed Migrations in PostgreSQL | Lesson 133 https://youtu.be/jQj3519YS3s
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
