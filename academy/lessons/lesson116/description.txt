@@ -17,7 +17,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab116.sh and shortc
 Honest notes: the terminal part is one real, continuous recording on real Apache Tomcat 10.1.34 with the real faults the lab plants. The lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after the tasks, and lab down leaves nothing behind. The app is the prebuilt CloudCart 0.2.0 war from lesson 113. The narration is synthetic speech. The hook, picture, steps, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: CloudCart v0: Deploy to Tomcat by Hand and from the Manager | Lesson 115 https://youtu.be/8X5s3aE3vGo
-Next: CloudCart v0: Prove It From a Clean Copy | Lesson 117.
+Next: CloudCart v0 Mastery: Prove It From a Clean Clone | Lesson 117 https://youtu.be/4GqAJaS6RBs
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
