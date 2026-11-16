@@ -98,7 +98,7 @@ check() {
   nf=$(echo "$conf" | grep -cE '^ *server 127\.0\.0\.1:821[23] .*max_fails=[0-9]+ .*fail_timeout=([0-9]|10)s')
   if [ "$nf" -ge 2 ] && echo "$conf" | grep -Eq 'server 127\.0\.0\.1:8214 .*backup'; then ok "3 max_fails, fail_timeout and a backup are set"; else no "3 put max_fails= and fail_timeout=10s-or-less on A and B, and backup on C"; fi
   bstop b >/dev/null; r=$(hit 4 | sort | uniq -c | tr -s ' ' | tr '\n' ','); bstart b >/dev/null
-  if [ "$r" = " 4 backend A," ]; then ok "4 with B down, every request still succeeds"; else no "4 with B stopped, 4 requests must all be answered by A, got:$r"; fi
+  if [ "$r" = " 4 backend A," ] && [ "$ns" -eq 3 ]; then ok "4 with B down, every request still succeeds"; else no "4 with B stopped, 4 requests must all be answered by A, got:$r"; fi
   bstop a >/dev/null; bstop b >/dev/null; r=$(hit 3 | sort | uniq -c | tr -s ' ' | tr '\n' ','); bstart a >/dev/null; bstart b >/dev/null
   if [ "$r" = " 3 backend C," ]; then ok "5 with A and B down, the backup C answers"; else no "5 with A and B stopped, the backup C must answer, got:$r"; fi
   sleep 11
