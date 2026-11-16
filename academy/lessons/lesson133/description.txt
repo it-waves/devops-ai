@@ -18,7 +18,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab133.sh and shortc
 Honest notes: the terminal demo is one real, continuous recording of real PostgreSQL 16 and a small shell app and migration runner written for this lab, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. The word-for-word error messages come from PostgreSQL 16 and may differ slightly in other versions. The lab password sits in a plain text file only to keep the lesson simple: real teams use a secret manager. The narration is synthetic speech. The hook, ideas, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: PostgreSQL Connections, Locks and Slow Queries: pg_stat_activity, Terminate and Index | Lesson 132 https://youtu.be/pKODIHeTMbc
-Next: The databases mastery lesson, where you prove everything together.
+Next lesson: PostgreSQL Databases Mastery: Deploy, Secure, Back Up and Recover a Real Database | Lesson 134 https://youtu.be/YdKIVeZ54uo
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
