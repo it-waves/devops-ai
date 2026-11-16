@@ -22,7 +22,7 @@ up() {
   [ "$(id -u)" = 0 ] || { echo "run with sudo"; exit 1; }
   down; mkdir -p $D; chown $OWNER $D
   $RU $BIN/initdb -D $D/data -A trust -E UTF8 --locale=C.UTF-8 >/dev/null 2>&1 || { echo "initdb failed"; exit 1; }
-  $RU $BIN/pg_ctl -D $D/data -o "-p $PORT -k $D -c listen_addresses= -c max_connections=40 -c shared_preload_libraries=pg_stat_statements -c log_lock_waits=on -c deadlock_timeout=1s" -l $D/server.log -w start >/dev/null 2>&1 || { echo "PostgreSQL did not start: see $D/server.log"; exit 1; }
+  $RU $BIN/pg_ctl -D $D/data -o "-p $PORT -k $D -c listen_addresses= -c max_connections=40 -c max_parallel_workers_per_gather=0 -c shared_preload_libraries=pg_stat_statements -c log_lock_waits=on -c deadlock_timeout=1s" -l $D/server.log -w start >/dev/null 2>&1 || { echo "PostgreSQL did not start: see $D/server.log"; exit 1; }
   P="$RU psql -h $D -p $PORT -X -q -v ON_ERROR_STOP=1"
   $P -d postgres -c "CREATE DATABASE shop" >/dev/null
   $P -d shop >/dev/null <<'EOF_SQL'

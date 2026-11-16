@@ -1,0 +1,1 @@
+PostgreSQL Connections, Locks and Slow Queries: pg_stat_activity, Terminate and Index | Lesson 132

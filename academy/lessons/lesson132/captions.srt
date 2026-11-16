@@ -1,0 +1,851 @@
+1
+00:00:00,500 --> 00:00:02,120
+The checkout page is slow.
+
+2
+00:00:02,120 --> 00:00:03,552
+Customers are clicking,
+
+3
+00:00:03,552 --> 00:00:04,798
+and nothing happens.
+
+4
+00:00:04,798 --> 00:00:06,169
+The servers look fine.
+
+5
+00:00:06,169 --> 00:00:06,729
+What now?
+
+6
+00:00:07,279 --> 00:00:10,239
+Very often the answer is inside the database.
+
+7
+00:00:10,239 --> 00:00:12,213
+A session that never finished.
+
+8
+00:00:12,213 --> 00:00:14,054
+A lock that nobody released.
+
+9
+00:00:14,054 --> 00:00:15,962
+A query that reads every row.
+
+10
+00:00:16,512 --> 00:00:19,520
+Today you look inside a real post gress server,
+
+11
+00:00:19,520 --> 00:00:20,992
+find the stuck session,
+
+12
+00:00:20,992 --> 00:00:21,888
+end it safely,
+
+13
+00:00:21,888 --> 00:00:23,552
+and speed up a slow query.
+
+14
+00:00:24,102 --> 00:00:26,641
+Look first. Then act on exactly one thing.
+
+15
+00:00:28,191 --> 00:00:31,263
+Here is what to expect, from the first minute to the last.
+
+16
+00:00:31,813 --> 00:00:36,400
+One: the words. Connection, session state, lock, blocking, and slow query.
+
+17
+00:00:36,950 --> 00:00:41,643
+Two: a live demo. We count the connections, and find who is waiting for whom.
+
+18
+00:00:42,193 --> 00:00:46,716
+Three: we end the one session that blocks everyone, first gently, then firmly.
+
+19
+00:00:47,266 --> 00:00:49,298
+Four: we find the slowest query,
+
+20
+00:00:49,298 --> 00:00:50,187
+read its plan,
+
+21
+00:00:50,187 --> 00:00:51,775
+and fix it with an index.
+
+22
+00:00:51,775 --> 00:00:52,727
+Then your turn,
+
+23
+00:00:52,727 --> 00:00:55,522
+with a lab that judges you with five checks.
+
+24
+00:00:56,072 --> 00:00:58,845
+This is lesson seven of the databases domain.
+
+25
+00:00:59,395 --> 00:01:01,934
+Look first. Then act on exactly one thing.
+
+26
+00:01:03,984 --> 00:01:06,288
+Eight ideas for a database in trouble.
+
+27
+00:01:06,838 --> 00:01:09,767
+A connection is one client talking to the server.
+
+28
+00:01:09,767 --> 00:01:11,082
+Each one is a session,
+
+29
+00:01:11,082 --> 00:01:12,337
+with its own process,
+
+30
+00:01:12,337 --> 00:01:13,473
+and its own memory.
+
+31
+00:01:14,023 --> 00:01:15,662
+Every session has a state.
+
+32
+00:01:15,662 --> 00:01:17,868
+Active means it is running a query.
+
+33
+00:01:17,868 --> 00:01:20,326
+Idle means it is connected and waiting.
+
+34
+00:01:20,326 --> 00:01:25,180
+And idle in transaction means it started a transaction and never finished it.
+
+35
+00:01:25,730 --> 00:01:28,226
+A lock protects a row while it changes.
+
+36
+00:01:28,226 --> 00:01:31,298
+Other sessions that want the same row must wait.
+
+37
+00:01:31,298 --> 00:01:32,258
+That is normal,
+
+38
+00:01:32,258 --> 00:01:33,346
+for milliseconds.
+
+39
+00:01:33,896 --> 00:01:36,681
+Trouble starts when the holder never lets go.
+
+40
+00:01:36,681 --> 00:01:40,210
+An idle in transaction session can hold a lock for hours,
+
+41
+00:01:40,210 --> 00:01:42,067
+and everyone behind it queues.
+
+42
+00:01:42,617 --> 00:01:43,959
+Two ways to end it.
+
+43
+00:01:43,959 --> 00:01:46,996
+P G cancel backend stops the running query.
+
+44
+00:01:46,996 --> 00:01:50,174
+P G terminate backend ends the whole session,
+
+45
+00:01:50,174 --> 00:01:51,869
+and rolls back its work.
+
+46
+00:01:51,869 --> 00:01:53,070
+Try cancel first.
+
+47
+00:01:53,620 --> 00:01:54,736
+Resource pressure.
+
+48
+00:01:54,736 --> 00:01:56,037
+Too many connections,
+
+49
+00:01:56,037 --> 00:01:57,153
+too little memory,
+
+50
+00:01:57,153 --> 00:01:57,897
+a full disk,
+
+51
+00:01:57,897 --> 00:01:59,260
+a low cache hit ratio.
+
+52
+00:01:59,260 --> 00:02:00,686
+The server has a limit,
+
+53
+00:02:00,686 --> 00:02:02,793
+and you can see how close you are.
+
+54
+00:02:03,343 --> 00:02:06,690
+A slow query is usually a query reading too much.
+
+55
+00:02:06,690 --> 00:02:09,422
+P G stat statements tells you which one.
+
+56
+00:02:09,422 --> 00:02:11,471
+Explain analyze tells you why.
+
+57
+00:02:12,021 --> 00:02:14,845
+An index lets the database jump to the rows.
+
+58
+00:02:14,845 --> 00:02:20,171
+But always look first: sometimes a query is slow only because it waited for a lock.
+
+59
+00:02:21,721 --> 00:02:26,820
+Go to the lab folder.
+
+60
+00:02:28,370 --> 00:02:38,674
+Tell the tools where the server is.
+
+61
+00:02:39,224 --> 00:02:41,997
+Now P S Q L finds this server by itself.
+
+62
+00:02:42,547 --> 00:02:53,598
+How many connections are allowed?
+
+63
+00:02:54,148 --> 00:02:58,329
+Forty. The forty first client is refused. Keep this number in mind.
+
+64
+00:02:58,879 --> 00:03:09,460
+Who is connected?
+
+65
+00:03:12,610 --> 00:03:13,778
+Read it by rows.
+
+66
+00:03:13,778 --> 00:03:15,966
+Cart API: three sessions idle,
+
+67
+00:03:15,966 --> 00:03:18,958
+that is a web app with a connection pool,
+
+68
+00:03:18,958 --> 00:03:20,198
+waiting for work.
+
+69
+00:03:20,198 --> 00:03:24,211
+Cart API active: one session that is running right now.
+
+70
+00:03:24,211 --> 00:03:25,232
+P S Q L is us.
+
+71
+00:03:25,232 --> 00:03:26,326
+And report job,
+
+72
+00:03:26,326 --> 00:03:27,786
+idle in transaction.
+
+73
+00:03:27,786 --> 00:03:29,464
+That one is suspicious.
+
+74
+00:03:30,014 --> 00:03:41,982
+Who is waiting for whom?
+
+75
+00:03:46,832 --> 00:03:48,976
+The last column is the answer.
+
+76
+00:03:48,976 --> 00:03:53,695
+One session shows a number in braces: it is blocked by that P I D.
+
+77
+00:03:53,695 --> 00:03:56,340
+And that P I D belongs to report job.
+
+78
+00:03:56,340 --> 00:04:00,272
+The session that is waiting is the active cart API one.
+
+79
+00:04:00,822 --> 00:04:12,278
+How long has it waited?
+
+80
+00:04:15,928 --> 00:04:16,932
+Wait type: lock.
+
+81
+00:04:16,932 --> 00:04:19,569
+It is waiting for a transaction to finish,
+
+82
+00:04:19,569 --> 00:04:21,892
+and has been waiting for a long time.
+
+83
+00:04:21,892 --> 00:04:24,717
+Real customers would be staring at a spinner.
+
+84
+00:04:25,267 --> 00:04:33,715
+Write down what you found.
+
+85
+00:04:37,665 --> 00:04:39,237
+Four cart API sessions,
+
+86
+00:04:39,237 --> 00:04:40,467
+forty connections,
+
+87
+00:04:40,467 --> 00:04:41,560
+and the blocker.
+
+88
+00:04:41,560 --> 00:04:44,840
+A command inside dollar and brackets runs first,
+
+89
+00:04:44,840 --> 00:04:46,753
+and its answer is pasted in.
+
+90
+00:04:47,303 --> 00:04:57,095
+Try the gentle way.
+
+91
+00:04:58,245 --> 00:04:59,973
+True. But did anything change?
+
+92
+00:05:00,523 --> 00:05:07,734
+Is it still there?
+
+93
+00:05:10,484 --> 00:05:11,231
+Still there,
+
+94
+00:05:11,231 --> 00:05:12,850
+still idle in transaction.
+
+95
+00:05:12,850 --> 00:05:14,967
+Cancel only stops a running query,
+
+96
+00:05:14,967 --> 00:05:17,208
+and this session is running nothing.
+
+97
+00:05:17,208 --> 00:05:18,952
+It is just holding the lock.
+
+98
+00:05:18,952 --> 00:05:20,446
+So we need the firm way.
+
+99
+00:05:20,996 --> 00:05:31,364
+End that one session.
+
+100
+00:05:32,214 --> 00:05:36,758
+True. The session is gone, its transaction rolled back, and its lock released.
+
+101
+00:05:37,308 --> 00:05:40,295
+Who is waiting now?
+
+102
+00:05:54,145 --> 00:05:55,345
+Nobody is blocked.
+
+103
+00:05:55,345 --> 00:05:57,480
+The waiting update got its lock,
+
+104
+00:05:57,480 --> 00:05:57,746
+ran,
+
+105
+00:05:57,746 --> 00:05:58,613
+and finished,
+
+106
+00:05:58,613 --> 00:06:01,548
+and that cart API session went back to idle.
+
+107
+00:06:02,098 --> 00:06:10,076
+Did the waiting work finish?
+
+108
+00:06:10,626 --> 00:06:15,746
+One hundred and one. The waiting update added one. The blocked work was not lost.
+
+109
+00:06:16,296 --> 00:06:26,942
+Check resource pressure.
+
+110
+00:06:33,992 --> 00:06:38,996
+A cache hit percentage near ninety nine means reads mostly come from memory.
+
+111
+00:06:38,996 --> 00:06:42,091
+The database is small: a few tens of megabytes.
+
+112
+00:06:42,091 --> 00:06:44,659
+On a real server you also watch memory,
+
+113
+00:06:44,659 --> 00:06:47,688
+disk space and load from the operating system.
+
+114
+00:06:48,238 --> 00:06:59,822
+Which queries are slow?
+
+115
+00:07:03,972 --> 00:07:06,311
+The top line is the blocked update.
+
+116
+00:07:06,311 --> 00:07:07,581
+It looks very slow,
+
+117
+00:07:07,581 --> 00:07:10,255
+but only because it waited for the lock.
+
+118
+00:07:10,255 --> 00:07:11,191
+Not its fault.
+
+119
+00:07:11,191 --> 00:07:14,667
+The second line is the real suspect: a report query,
+
+120
+00:07:14,667 --> 00:07:16,137
+run twenty five times,
+
+121
+00:07:16,137 --> 00:07:18,009
+about ten milliseconds each.
+
+122
+00:07:18,559 --> 00:07:28,479
+Why is it slow?
+
+123
+00:07:29,029 --> 00:07:29,631
+Seq scan.
+
+124
+00:07:29,631 --> 00:07:33,044
+The database reads all three hundred thousand rows,
+
+125
+00:07:33,044 --> 00:07:35,387
+and throws almost all of them away.
+
+126
+00:07:35,387 --> 00:07:37,461
+Rows removed by filter says it.
+
+127
+00:07:37,461 --> 00:07:38,800
+That is the problem.
+
+128
+00:07:39,350 --> 00:07:50,571
+Create an index.
+
+129
+00:07:51,121 --> 00:07:54,897
+Create index. It took a moment, because it read the table once.
+
+130
+00:07:55,447 --> 00:07:58,818
+Run the explain again.
+
+131
+00:08:04,268 --> 00:08:05,438
+Now an index scan.
+
+132
+00:08:05,438 --> 00:08:07,975
+It jumps straight to the matching rows.
+
+133
+00:08:07,975 --> 00:08:11,943
+The time dropped from about twenty milliseconds to about one.
+
+134
+00:08:11,943 --> 00:08:13,569
+Ten times or more faster.
+
+135
+00:08:14,119 --> 00:08:16,487
+Run the judge.
+
+136
+00:08:17,037 --> 00:08:22,669
+Five checks. Connections, the blocker, the fix, the index, and the plan. Five out of five.
+
+137
+00:08:23,219 --> 00:08:25,182
+Clean up.
+
+138
+00:08:25,732 --> 00:08:29,444
+The server and every session are stopped, and everything is removed.
+
+139
+00:08:29,994 --> 00:08:38,506
+Is it gone?
+
+140
+00:08:39,056 --> 00:08:41,573
+No response. Nothing is left behind.
+
+141
+00:08:43,123 --> 00:08:43,786
+Your task.
+
+142
+00:08:43,786 --> 00:08:47,635
+A busy shop database has a stuck session and a slow query.
+
+143
+00:08:47,635 --> 00:08:48,298
+Find them,
+
+144
+00:08:48,298 --> 00:08:48,895
+fix them,
+
+145
+00:08:48,895 --> 00:08:49,758
+and prove it.
+
+146
+00:08:50,308 --> 00:08:53,048
+One: count the sessions named cart API,
+
+147
+00:08:53,048 --> 00:08:54,805
+and read max connections.
+
+148
+00:08:54,805 --> 00:08:57,124
+Write both into answers dot text,
+
+149
+00:08:57,124 --> 00:08:58,670
+line one and line two.
+
+150
+00:08:59,220 --> 00:09:03,828
+Two: find the session that blocks the others. Write its P I D on line three.
+
+151
+00:09:04,378 --> 00:09:08,036
+Three: end only that session with P G terminate backend.
+
+152
+00:09:08,036 --> 00:09:10,714
+The waiting update must finish by itself.
+
+153
+00:09:11,264 --> 00:09:14,042
+Four: read the plan of the report query,
+
+154
+00:09:14,042 --> 00:09:16,541
+and create an index on customer I D.
+
+155
+00:09:16,541 --> 00:09:17,652
+Five: lab check,
+
+156
+00:09:17,652 --> 00:09:18,624
+then lab down.
+
+157
+00:09:20,674 --> 00:09:24,450
+Here is where to find everything. Pause on this screen, and write it down.
+
+158
+00:09:25,000 --> 00:09:26,648
+The lab lives on GitHub,
+
+159
+00:09:26,648 --> 00:09:27,815
+at it dash waves,
+
+160
+00:09:27,815 --> 00:09:29,395
+slash dev ops dash A I,
+
+161
+00:09:29,395 --> 00:09:30,905
+in the folder academy,
+
+162
+00:09:30,905 --> 00:09:31,592
+slash lab.
+
+163
+00:09:32,142 --> 00:09:37,625
+Two files: lab one thirty-two dot S H, and shortcuts one thirty-two dot S H.
+
+164
+00:09:38,175 --> 00:09:39,077
+Install it,
+
+165
+00:09:39,077 --> 00:09:41,947
+on any Linux machine: sudo install,
+
+166
+00:09:41,947 --> 00:09:43,834
+dash m seven five five,
+
+167
+00:09:43,834 --> 00:09:46,048
+lab one thirty-two dot S H,
+
+168
+00:09:46,048 --> 00:09:47,278
+into slash usr,
+
+169
+00:09:47,278 --> 00:09:48,262
+slash local,
+
+170
+00:09:48,262 --> 00:09:49,247
+slash S bin.
+
+171
+00:09:49,797 --> 00:09:54,771
+Load the short names with: source shortcuts one thirty-two dot S H.
+
+172
+00:09:54,771 --> 00:09:56,182
+You get three: lab,
+
+173
+00:09:56,182 --> 00:09:56,479
+P G,
+
+174
+00:09:56,479 --> 00:09:57,370
+and use D B.
+
+175
+00:09:57,920 --> 00:09:59,530
+You need post gress Q L,
+
+176
+00:09:59,530 --> 00:09:59,999
+server,
+
+177
+00:09:59,999 --> 00:10:02,079
+client and the contrib package,
+
+178
+00:10:02,079 --> 00:10:04,226
+and port fifty-five twelve free.
+
+179
+00:10:04,226 --> 00:10:06,910
+The lab runs its own private post gress,
+
+180
+00:10:06,910 --> 00:10:08,117
+in its own folder.
+
+181
+00:10:08,667 --> 00:10:10,354
+Lab up prepares everything,
+
+182
+00:10:10,354 --> 00:10:12,102
+including the stuck session.
+
+183
+00:10:12,102 --> 00:10:13,789
+Lab check judges your work.
+
+184
+00:10:13,789 --> 00:10:15,287
+Lab down removes it all.
+
+185
+00:10:15,287 --> 00:10:17,286
+Only run it on your own machine.
+
+186
+00:10:19,336 --> 00:10:21,405
+Pass or fail. You need all five.
+
+187
+00:10:21,955 --> 00:10:26,926
+One: answers dot text has four cart API sessions, and forty connections.
+
+188
+00:10:27,476 --> 00:10:29,823
+Two: line three names the blocking session.
+
+189
+00:10:30,373 --> 00:10:33,594
+Three: the blocker is gone, and the waiting update finished.
+
+190
+00:10:34,144 --> 00:10:36,789
+Four: an index exists on customer I D.
+
+191
+00:10:37,339 --> 00:10:40,155
+Five: the report query now uses the index.
+
+192
+00:10:40,705 --> 00:10:42,007
+To pass, all five.
+
+193
+00:10:44,057 --> 00:10:45,828
+Your turn, on your own machine.
+
+194
+00:10:46,378 --> 00:10:50,943
+One: lab up, use D B, and read the connections. Write the first two answers.
+
+195
+00:10:51,493 --> 00:10:54,160
+Two: find the blocker, and write its P I D.
+
+196
+00:10:54,710 --> 00:10:57,675
+Three: end only that session, and check the balance.
+
+197
+00:10:58,225 --> 00:11:03,068
+Four: explain analyze the report query, create the index, and explain again.
+
+198
+00:11:03,618 --> 00:11:07,436
+Five: lab check until you see five out of five. Then lab down.
+
+199
+00:11:07,986 --> 00:11:09,821
+Pause the video, and begin now.
+
+200
+00:11:25,371 --> 00:11:26,246
+Quick check.
+
+201
+00:11:26,796 --> 00:11:30,380
+What does idle in transaction mean, and why is it dangerous?
+
+202
+00:11:30,930 --> 00:11:32,850
+Which column tells you who is blocking?
+
+203
+00:11:33,400 --> 00:11:35,960
+Cancel or terminate: which first, and why?
+
+204
+00:11:36,510 --> 00:11:40,328
+A statement is slow. How do you tell a lock wait from a bad plan?
+
+205
+00:11:40,878 --> 00:11:43,310
+Objectives covered: M C fourteen,
+
+206
+00:11:43,310 --> 00:11:44,489
+objective seven.
+
+207
+00:11:44,489 --> 00:11:45,963
+Inspect connections,
+
+208
+00:11:45,963 --> 00:11:46,406
+locks,
+
+209
+00:11:46,406 --> 00:11:47,732
+resource pressure,
+
+210
+00:11:47,732 --> 00:11:48,985
+and slow queries.
+
+211
+00:11:49,535 --> 00:11:51,604
+Pause the video, and answer out loud.
+
+212
+00:12:02,154 --> 00:12:06,634
+Next: troubleshooting app to database connectivity and migration failures.
+
+213
+00:12:07,184 --> 00:12:10,512
+If this helped, like, share and subscribe, so you do not miss it.

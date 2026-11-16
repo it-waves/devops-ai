@@ -1,0 +1,25 @@
+Lesson 132 of the DevOps Engineering Bootcamp, and lesson 7 of the Databases for DevOps domain. The checkout page is slow and the servers look fine. The cause is often inside the database: a session that never finished, a lock nobody released, a query that reads every row. In this lesson you look inside a real PostgreSQL 16 server with pg_stat_activity, find the session that blocks everyone with pg_blocking_pids, end it safely (pg_cancel_backend first, then pg_terminate_backend), check resource pressure, find the slowest query with pg_stat_statements, read its plan with EXPLAIN ANALYZE and fix it with an index. A lab then judges you from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Find it, end it, speed it up
+0:28 What to expect
+1:04 Eight ideas for a database in trouble
+2:21 Live: find the stuck session, fix the slow query
+8:43 Your lab task
+9:20 Where to find the lab
+10:19 Pass or fail rubric
+10:44 Your turn
+11:25 Quick check
+
+Objectives covered: MC14-O07, inspect connections, locks, resource pressure, and slow queries.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab132.sh and shortcuts132.sh). Install with: sudo install -m 755 lab132.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts132.sh. You need any Linux machine with root, PostgreSQL server, client and the contrib package (for example: sudo apt install -y postgresql postgresql-client postgresql-contrib), and port 5512 free. The lab runs its own private PostgreSQL cluster in /opt/lab132, including a stuck session and a slow query for you to find, and does not touch the system PostgreSQL. lab down stops everything and removes it. Only run it on your own machine.
+
+Honest notes: the terminal demo is one real, continuous recording of real PostgreSQL 16, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. The cache hit figure is 100 percent on screen because the demo database is tiny; the narration says "near ninety nine", so read the screen as the truth. Timings such as 20 ms versus 1 ms depend on your hardware. The narration is synthetic speech. The hook, ideas, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Database UI Tour: Browse, Edit, Query and Export PostgreSQL with Adminer | Lesson 131 https://youtu.be/-icPwM6Gt4I
+Next: Troubleshooting app-to-database connectivity and migration failures.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #postgresql #database #sre #devopsbootcamp
