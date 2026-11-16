@@ -1,0 +1,763 @@
+1
+00:00:00,500 --> 00:00:05,471
+Monday morning. The app is down, and the error says: cannot connect to the database.
+
+2
+00:00:06,021 --> 00:00:07,466
+Is the database broken?
+
+3
+00:00:07,466 --> 00:00:08,283
+Almost never.
+
+4
+00:00:08,283 --> 00:00:09,352
+Most of the time,
+
+5
+00:00:09,352 --> 00:00:11,049
+one small setting is wrong,
+
+6
+00:00:11,049 --> 00:00:14,191
+and the error message tells you exactly which one.
+
+7
+00:00:14,741 --> 00:00:18,558
+Today a real shop app cannot reach its post gress database.
+
+8
+00:00:18,558 --> 00:00:20,175
+We fix it layer by layer,
+
+9
+00:00:20,175 --> 00:00:22,763
+then fix a migration that fails halfway.
+
+10
+00:00:23,313 --> 00:00:26,513
+Study the exact error. Change one thing. Test again.
+
+11
+00:00:28,063 --> 00:00:31,135
+Here is what to expect, from the first minute to the last.
+
+12
+00:00:31,685 --> 00:00:36,549
+One: the layers between an app and its database, and the error each layer produces.
+
+13
+00:00:37,099 --> 00:00:38,218
+Two: a live demo.
+
+14
+00:00:38,218 --> 00:00:40,457
+The app fails four times in a row,
+
+15
+00:00:40,457 --> 00:00:43,222
+and we fix one setting after each failure.
+
+16
+00:00:43,772 --> 00:00:48,913
+Three: a migration that fails, why it rolled back safely, and how to fix and rerun it.
+
+17
+00:00:49,463 --> 00:00:53,026
+Four: your turn, with a lab that judges you with five checks.
+
+18
+00:00:53,576 --> 00:00:58,930
+This is lesson eight of the databases domain, the last lesson before the mastery lesson.
+
+19
+00:00:59,480 --> 00:01:02,680
+Study the exact error. Change one thing. Test again.
+
+20
+00:01:04,730 --> 00:01:06,842
+Eight ideas for a connection that fails.
+
+21
+00:01:07,392 --> 00:01:08,851
+A connection has layers,
+
+22
+00:01:08,851 --> 00:01:10,857
+and each one can fail on its own.
+
+23
+00:01:10,857 --> 00:01:11,222
+First,
+
+24
+00:01:11,222 --> 00:01:14,261
+the name: does the host name turn into an address?
+
+25
+00:01:14,811 --> 00:01:19,846
+Second, the port: is anything listening there? A wrong port gives connection refused.
+
+26
+00:01:20,396 --> 00:01:20,770
+Third,
+
+27
+00:01:20,770 --> 00:01:22,391
+the login: the right user,
+
+28
+00:01:22,391 --> 00:01:23,826
+and the right password.
+
+29
+00:01:23,826 --> 00:01:26,881
+A wrong one gives password authentication failed.
+
+30
+00:01:27,431 --> 00:01:31,975
+Fourth, the database name. A typo gives, database does not exist.
+
+31
+00:01:32,525 --> 00:01:37,816
+A fifth layer is permission: the user may exist, but may not be allowed to use that table.
+
+32
+00:01:38,366 --> 00:01:41,727
+A migration is a change to the database structure,
+
+33
+00:01:41,727 --> 00:01:42,870
+written as S Q L.
+
+34
+00:01:42,870 --> 00:01:44,416
+If one statement fails,
+
+35
+00:01:44,416 --> 00:01:47,441
+a good runner rolls the whole migration back,
+
+36
+00:01:47,441 --> 00:01:49,054
+so nothing is half done.
+
+37
+00:01:49,604 --> 00:01:54,959
+Fix the pending migration, and rerun. Never edit a migration that is already applied.
+
+38
+00:01:55,509 --> 00:02:00,266
+The method never changes: look at the exact error, change one thing, test again.
+
+39
+00:02:01,816 --> 00:02:07,512
+Go to the app folder.
+
+40
+00:02:09,062 --> 00:02:10,961
+Look around.
+
+41
+00:02:11,511 --> 00:02:15,415
+The app's settings file, two small scripts, and a folder of migrations.
+
+42
+00:02:15,965 --> 00:02:19,527
+What does the app use?
+
+43
+00:02:20,077 --> 00:02:20,554
+A host,
+
+44
+00:02:20,554 --> 00:02:21,031
+a port,
+
+45
+00:02:21,031 --> 00:02:22,121
+a database name,
+
+46
+00:02:22,121 --> 00:02:22,598
+a user,
+
+47
+00:02:22,598 --> 00:02:23,620
+and a password.
+
+48
+00:02:23,620 --> 00:02:24,438
+Five values,
+
+49
+00:02:24,438 --> 00:02:26,413
+and any of them can be wrong.
+
+50
+00:02:26,963 --> 00:02:33,321
+Start the app.
+
+51
+00:02:33,871 --> 00:02:34,311
+Failed.
+
+52
+00:02:34,311 --> 00:02:38,276
+Look at the error: could not translate host name D B dash shop.
+
+53
+00:02:38,276 --> 00:02:39,786
+This is the first layer,
+
+54
+00:02:39,786 --> 00:02:40,353
+the name.
+
+55
+00:02:40,353 --> 00:02:42,681
+The computer does not know this host.
+
+56
+00:02:43,231 --> 00:02:50,037
+Ask the system.
+
+57
+00:02:50,587 --> 00:02:51,550
+Nothing found.
+
+58
+00:02:51,550 --> 00:02:52,995
+So the name is wrong.
+
+59
+00:02:52,995 --> 00:02:56,297
+The post gress server runs on this same machine,
+
+60
+00:02:56,297 --> 00:02:59,461
+at one twenty-seven dot zero dot zero dot one.
+
+61
+00:03:00,011 --> 00:03:07,350
+Fix the host.
+
+62
+00:03:07,900 --> 00:03:12,529
+Start the app again.
+
+63
+00:03:13,079 --> 00:03:13,862
+A new error.
+
+64
+00:03:13,862 --> 00:03:14,449
+Progress.
+
+65
+00:03:14,449 --> 00:03:15,688
+Connection refused,
+
+66
+00:03:15,688 --> 00:03:17,449
+port fifty-four thirty-one.
+
+67
+00:03:17,449 --> 00:03:18,493
+The name worked,
+
+68
+00:03:18,493 --> 00:03:20,058
+so now the second layer,
+
+69
+00:03:20,058 --> 00:03:20,645
+the port,
+
+70
+00:03:20,645 --> 00:03:21,037
+fails.
+
+71
+00:03:21,587 --> 00:03:31,101
+Is anything listening?
+
+72
+00:03:31,651 --> 00:03:34,318
+No response. Nothing listens on that port.
+
+73
+00:03:34,868 --> 00:03:42,164
+Try the real port.
+
+74
+00:03:42,714 --> 00:03:45,167
+Accepting connections. That is our server.
+
+75
+00:03:45,717 --> 00:03:52,523
+Fix the port.
+
+76
+00:03:53,073 --> 00:03:57,702
+Start the app again.
+
+77
+00:03:58,252 --> 00:03:59,246
+Progress again.
+
+78
+00:03:59,246 --> 00:04:00,769
+Now the server answers,
+
+79
+00:04:00,769 --> 00:04:03,485
+and says: password authentication failed.
+
+80
+00:04:03,485 --> 00:04:04,544
+The third layer,
+
+81
+00:04:04,544 --> 00:04:05,207
+the login.
+
+82
+00:04:05,757 --> 00:04:17,063
+Where is the secret?
+
+83
+00:04:17,613 --> 00:04:22,392
+The password starts with a capital S. Ours started with a small s. One letter.
+
+84
+00:04:22,942 --> 00:04:30,195
+Fix the password.
+
+85
+00:04:30,745 --> 00:04:35,375
+Start the app again.
+
+86
+00:04:35,925 --> 00:04:37,319
+The login works now.
+
+87
+00:04:37,319 --> 00:04:40,596
+The next error: database shop P does not exist.
+
+88
+00:04:40,596 --> 00:04:41,781
+The fourth layer.
+
+89
+00:04:41,781 --> 00:04:43,733
+A typo in the database name.
+
+90
+00:04:44,283 --> 00:04:53,819
+List the databases.
+
+91
+00:04:54,369 --> 00:04:59,126
+Post gress, the template databases, and shop. Our name had one extra letter.
+
+92
+00:04:59,676 --> 00:05:05,223
+Fix the database name.
+
+93
+00:05:05,773 --> 00:05:10,402
+Start the app again.
+
+94
+00:05:10,952 --> 00:05:11,467
+App OK,
+
+95
+00:05:11,467 --> 00:05:12,275
+six orders.
+
+96
+00:05:12,275 --> 00:05:13,157
+Four errors,
+
+97
+00:05:13,157 --> 00:05:14,039
+four layers,
+
+98
+00:05:14,039 --> 00:05:15,289
+four small fixes.
+
+99
+00:05:15,289 --> 00:05:16,024
+Each time,
+
+100
+00:05:16,024 --> 00:05:16,833
+one change,
+
+101
+00:05:16,833 --> 00:05:17,715
+then a test.
+
+102
+00:05:18,265 --> 00:05:22,489
+Run the migrations.
+
+103
+00:05:23,039 --> 00:05:26,286
+Zero zero one and zero zero two are skipped,
+
+104
+00:05:26,286 --> 00:05:28,131
+they were applied before.
+
+105
+00:05:28,131 --> 00:05:29,828
+Zero zero three failed,
+
+106
+00:05:29,828 --> 00:05:31,452
+and says: rolled back,
+
+107
+00:05:31,452 --> 00:05:32,707
+nothing recorded.
+
+108
+00:05:32,707 --> 00:05:36,175
+The error: column status status does not exist.
+
+109
+00:05:36,175 --> 00:05:36,692
+A typo.
+
+110
+00:05:37,242 --> 00:05:46,117
+Look at the file.
+
+111
+00:05:46,667 --> 00:05:48,417
+The second line says status,
+
+112
+00:05:48,417 --> 00:05:50,293
+with two S letters at the end,
+
+113
+00:05:50,293 --> 00:05:51,106
+in the index.
+
+114
+00:05:51,106 --> 00:05:53,420
+The first line just added the column.
+
+115
+00:05:53,420 --> 00:05:55,546
+Because it ran in one transaction,
+
+116
+00:05:55,546 --> 00:05:57,547
+that column was rolled back too.
+
+117
+00:05:58,097 --> 00:06:06,182
+Fix the typo.
+
+118
+00:06:06,732 --> 00:06:11,127
+Run it again.
+
+119
+00:06:11,677 --> 00:06:15,261
+Zero zero three is applied. Migrations up to date.
+
+120
+00:06:15,811 --> 00:06:21,741
+Run it once more.
+
+121
+00:06:22,291 --> 00:06:25,619
+Everything is skipped. A good runner is safe to run again.
+
+122
+00:06:26,169 --> 00:06:28,537
+Run the judge.
+
+123
+00:06:29,087 --> 00:06:35,082
+Five checks. Host and port, login, database, the app, and the migration. Five out of five.
+
+124
+00:06:35,632 --> 00:06:37,595
+Clean up.
+
+125
+00:06:38,145 --> 00:06:40,811
+The server is stopped and everything is removed.
+
+126
+00:06:41,361 --> 00:06:50,236
+Is it gone?
+
+127
+00:06:50,786 --> 00:06:53,303
+No response. Nothing is left behind.
+
+128
+00:06:54,853 --> 00:06:59,632
+Your task. The shop app cannot start. Fix it, one layer at a time, and prove it.
+
+129
+00:07:00,182 --> 00:07:01,533
+One: run check app,
+
+130
+00:07:01,533 --> 00:07:03,097
+and fix the host name,
+
+131
+00:07:03,097 --> 00:07:04,093
+then the port,
+
+132
+00:07:04,093 --> 00:07:05,159
+in app dot env.
+
+133
+00:07:05,159 --> 00:07:06,795
+Test after each change.
+
+134
+00:07:07,345 --> 00:07:12,358
+Two: find the right password in the vault file, and fix it. Then fix the database name.
+
+135
+00:07:12,908 --> 00:07:14,833
+Three: run migrate dot S H.
+
+136
+00:07:14,833 --> 00:07:15,474
+It fails.
+
+137
+00:07:15,474 --> 00:07:18,182
+Fix the typo in the pending migration,
+
+138
+00:07:18,182 --> 00:07:19,394
+and run it again.
+
+139
+00:07:19,944 --> 00:07:22,013
+Four: lab check, then lab down.
+
+140
+00:07:24,063 --> 00:07:27,839
+Here is where to find everything. Pause on this screen, and write it down.
+
+141
+00:07:28,389 --> 00:07:30,037
+The lab lives on GitHub,
+
+142
+00:07:30,037 --> 00:07:31,204
+at it dash waves,
+
+143
+00:07:31,204 --> 00:07:32,784
+slash dev ops dash A I,
+
+144
+00:07:32,784 --> 00:07:34,294
+in the folder academy,
+
+145
+00:07:34,294 --> 00:07:34,981
+slash lab.
+
+146
+00:07:35,531 --> 00:07:41,163
+Two files: lab one thirty-three dot S H, and shortcuts one thirty-three dot S H.
+
+147
+00:07:41,713 --> 00:07:42,609
+Install it,
+
+148
+00:07:42,609 --> 00:07:45,459
+on any Linux machine: sudo install,
+
+149
+00:07:45,459 --> 00:07:47,332
+dash m seven five five,
+
+150
+00:07:47,332 --> 00:07:49,694
+lab one thirty-three dot S H,
+
+151
+00:07:49,694 --> 00:07:50,916
+into slash usr,
+
+152
+00:07:50,916 --> 00:07:51,893
+slash local,
+
+153
+00:07:51,893 --> 00:07:52,870
+slash S bin.
+
+154
+00:07:53,420 --> 00:07:58,473
+Load the short names with: source shortcuts one thirty-three dot S H.
+
+155
+00:07:58,473 --> 00:07:59,865
+You get three: lab,
+
+156
+00:07:59,865 --> 00:08:00,158
+P G,
+
+157
+00:08:00,158 --> 00:08:01,036
+and use D B.
+
+158
+00:08:01,586 --> 00:08:03,218
+You need post gress Q L,
+
+159
+00:08:03,218 --> 00:08:04,441
+server and client,
+
+160
+00:08:04,441 --> 00:08:06,753
+and port fifty-five thirteen free.
+
+161
+00:08:06,753 --> 00:08:09,472
+The lab runs its own private post gress,
+
+162
+00:08:09,472 --> 00:08:10,696
+in its own folder.
+
+163
+00:08:11,246 --> 00:08:13,218
+Lab up prepares the broken app.
+
+164
+00:08:13,218 --> 00:08:14,936
+Lab check judges your work.
+
+165
+00:08:14,936 --> 00:08:16,463
+Lab down removes it all.
+
+166
+00:08:16,463 --> 00:08:18,499
+Only run it on your own machine.
+
+167
+00:08:20,549 --> 00:08:22,618
+Pass or fail. You need all five.
+
+168
+00:08:23,168 --> 00:08:25,408
+One: the host and port reach the server.
+
+169
+00:08:25,958 --> 00:08:28,326
+Two: the user and password are accepted.
+
+170
+00:08:28,876 --> 00:08:31,052
+Three: the database name exists.
+
+171
+00:08:31,602 --> 00:08:34,418
+Four: the app starts, and finds its six orders.
+
+172
+00:08:34,968 --> 00:08:38,040
+Five: migration zero zero three is applied.
+
+173
+00:08:38,590 --> 00:08:39,892
+To pass, all five.
+
+174
+00:08:41,942 --> 00:08:43,713
+Your turn, on your own machine.
+
+175
+00:08:44,263 --> 00:08:47,356
+One: lab up, go to the app folder, and run check app.
+
+176
+00:08:47,906 --> 00:08:50,914
+Two: fix the host, then the port. Test after each.
+
+177
+00:08:51,464 --> 00:08:55,261
+Three: fix the password from the vault file, then the database name.
+
+178
+00:08:55,811 --> 00:08:59,054
+Four: run migrate, fix the typo, and run it again.
+
+179
+00:08:59,604 --> 00:09:03,423
+Five: lab check until you see five out of five. Then lab down.
+
+180
+00:09:03,973 --> 00:09:05,807
+Pause the video, and begin now.
+
+181
+00:09:21,357 --> 00:09:22,232
+Quick check.
+
+182
+00:09:22,782 --> 00:09:25,832
+Name the four layers where a connection can fail, in order.
+
+183
+00:09:26,382 --> 00:09:28,942
+Which error means nothing is listening on the port?
+
+184
+00:09:29,492 --> 00:09:32,266
+Why did the failed migration leave nothing behind?
+
+185
+00:09:32,816 --> 00:09:35,930
+Why fix the pending migration, and never an applied one?
+
+186
+00:09:36,480 --> 00:09:38,778
+Objectives covered: M C fourteen,
+
+187
+00:09:38,778 --> 00:09:39,891
+objective eight.
+
+188
+00:09:39,891 --> 00:09:44,416
+Troubleshoot app to database connectivity and migration failures.
+
+189
+00:09:44,966 --> 00:09:47,036
+Pause the video, and answer out loud.
+
+190
+00:09:57,586 --> 00:10:01,831
+Next: the databases mastery lesson, where you prove everything together.
+
+191
+00:10:02,381 --> 00:10:05,709
+If this helped, like, share and subscribe, so you do not miss it.

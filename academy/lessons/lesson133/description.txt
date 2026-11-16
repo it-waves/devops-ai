@@ -1,0 +1,25 @@
+Lesson 133 of the DevOps Engineering Bootcamp, and lesson 8 of the Databases for DevOps domain. Monday morning, the app is down: cannot connect to the database. In this lesson a real app fails four times in a row against a real PostgreSQL 16 server, and you fix one setting after each failure: the host name that does not resolve, the port with nothing listening (connection refused), the password that is rejected (password authentication failed), and the database name that does not exist. Then a schema migration fails halfway, and you see why it rolled back safely, fix the typo in the pending migration and rerun it. A lab then judges you from 0 of 5 to 5 of 5.
+
+Chapters
+0:00 Fix it, one layer at a time
+0:28 What to expect
+1:04 Eight ideas for a connection that fails
+2:01 Live: fix the app, one layer at a time
+6:54 Your lab task
+7:24 Where to find the lab
+8:20 Pass or fail rubric
+8:41 Your turn
+9:21 Quick check
+
+Objectives covered: MC14-O08, troubleshoot app-to-database connectivity and migration failures.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab133.sh and shortcuts133.sh). Install with: sudo install -m 755 lab133.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts133.sh. You need any Linux machine with root, PostgreSQL server and client (for example: sudo apt install -y postgresql postgresql-client), and port 5513 free. The lab runs its own private PostgreSQL cluster in /opt/lab133, with a deliberately broken app configuration and a failing migration, and does not touch the system PostgreSQL. lab down stops everything and removes it. Only run it on your own machine.
+
+Honest notes: the terminal demo is one real, continuous recording of real PostgreSQL 16 and a small shell app and migration runner written for this lab, and the lab was run end to end: it passes 0 of 5 before you start and 5 of 5 after you finish, and lab down leaves nothing behind. The word-for-word error messages come from PostgreSQL 16 and may differ slightly in other versions. The lab password sits in a plain text file only to keep the lesson simple: real teams use a secret manager. The narration is synthetic speech. The hook, ideas, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: PostgreSQL Connections, Locks and Slow Queries: pg_stat_activity, Terminate and Index | Lesson 132 https://youtu.be/pKODIHeTMbc
+Next: The databases mastery lesson, where you prove everything together.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #postgresql #database #troubleshooting #devopsbootcamp
