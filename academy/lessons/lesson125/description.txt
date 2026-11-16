@@ -1,0 +1,24 @@
+Lesson 125 of the DevOps Engineering Bootcamp, and the mastery lesson of the Web Servers and Reverse Proxies domain. A half-built CloudCart web tier is waiting, and nobody tells you what is wrong. On one real nginx 1.24 you prove all eight objectives in one scenario: serve a static site and test and reload the config, pass the real Host and client address to the app, make a certificate that matches the name and verify HTTPS, fix a pool of two apps and add a health endpoint, read a day of logs to count and rank the 5xx errors, set a request-size limit and hide the server version, and fix a 504 on a slow report. You write notes on your results, troubleshooting and cleanup, then a lab judges you from 0 of 8 to 8 of 8.
+
+Chapters
+0:00 Prove the whole domain.
+0:24 What to expect
+1:01 The whole domain
+1:37 Live: all eight objectives
+11:19 Your lab task
+11:48 Where to find the lab
+12:46 Pass or fail rubric
+13:18 Your turn
+13:59 Quick check
+Objectives covered: MC13-O01 to MC13-O08 (the whole domain: static serving, install and configure, proxy headers, HTTPS and TLS, pool and health checks, logs and status codes, timeouts, limits and secure defaults, troubleshooting)
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab125.sh and shortcuts125.sh). Install with: sudo install -m 755 lab125.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts125.sh. You need any Linux machine with root, nginx, curl, openssl, python3 and ss (for example: sudo apt install -y nginx curl openssl iproute2 python3) and ports 8251, 8253, 8254 and 8255 free. The lab runs its own private nginx from /opt/lab125 and does not touch the system nginx. lab down stops it and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal part is one real, continuous recording on real nginx 1.24, and the lab was run end to end: it passes 0 of 8 before you start and 8 of 8 after the fixes, and lab down leaves nothing behind. The faults are planted on purpose in a small lab, so real incidents will be messier. The certificate is self-signed for the demo. The narration is synthetic speech. The hook, domain map, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: nginx Troubleshooting: Fix 502, 503, 504 and TLS Errors | Lesson 124 https://youtu.be/EK0_6r_Grm0
+Next: A new domain begins. Subscribe so you do not miss it.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #nginx #reverseproxy #devopsbootcamp #webserver

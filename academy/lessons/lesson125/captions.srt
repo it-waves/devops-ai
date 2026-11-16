@@ -1,0 +1,775 @@
+1
+00:00:00,500 --> 00:00:05,791
+Seven lessons. Eight objectives. One web server. Today you prove you can do all of it.
+
+2
+00:00:06,341 --> 00:00:08,525
+A half-built web tier is waiting.
+
+3
+00:00:08,525 --> 00:00:09,452
+A static site,
+
+4
+00:00:09,452 --> 00:00:10,511
+a reverse proxy,
+
+5
+00:00:10,511 --> 00:00:11,769
+secure web traffic,
+
+6
+00:00:11,769 --> 00:00:13,027
+two apps behind it,
+
+7
+00:00:13,027 --> 00:00:13,490
+limits,
+
+8
+00:00:13,490 --> 00:00:14,682
+and a slow report.
+
+9
+00:00:15,232 --> 00:00:17,223
+Nobody tells you what is wrong.
+
+10
+00:00:17,223 --> 00:00:17,993
+You find it,
+
+11
+00:00:17,993 --> 00:00:18,443
+fix it,
+
+12
+00:00:18,443 --> 00:00:19,214
+document it,
+
+13
+00:00:19,214 --> 00:00:21,461
+and a judge checks every objective.
+
+14
+00:00:22,011 --> 00:00:23,291
+Prove the whole domain.
+
+15
+00:00:24,841 --> 00:00:27,913
+Here is what to expect, from the first minute to the last.
+
+16
+00:00:28,463 --> 00:00:32,772
+One: the whole domain on one page, so you see how the seven lessons connect.
+
+17
+00:00:33,322 --> 00:00:34,584
+Two: a live demo.
+
+18
+00:00:34,584 --> 00:00:35,921
+One real engine X,
+
+19
+00:00:35,921 --> 00:00:37,183
+eight objectives,
+
+20
+00:00:37,183 --> 00:00:40,746
+from a static page all the way to a slow report.
+
+21
+00:00:41,296 --> 00:00:45,456
+Three: for each one, we find the evidence first, then fix it, then prove it.
+
+22
+00:00:46,006 --> 00:00:47,389
+Four: we write our notes,
+
+23
+00:00:47,389 --> 00:00:48,107
+and clean up.
+
+24
+00:00:48,107 --> 00:00:48,937
+Then your turn,
+
+25
+00:00:48,937 --> 00:00:51,425
+with a lab that judges you with eight checks.
+
+26
+00:00:51,975 --> 00:00:55,076
+This is the mastery lesson of the web servers domain.
+
+27
+00:00:55,076 --> 00:00:56,538
+If you can do this alone,
+
+28
+00:00:56,538 --> 00:00:57,650
+you own the domain.
+
+29
+00:00:58,200 --> 00:00:59,480
+Prove the whole domain.
+
+30
+00:01:01,530 --> 00:01:03,215
+The whole domain on one page.
+
+31
+00:01:03,765 --> 00:01:07,195
+Objective one and two: engine X serves static files,
+
+32
+00:01:07,195 --> 00:01:08,317
+tests its config,
+
+33
+00:01:08,317 --> 00:01:10,229
+and reloads without stopping.
+
+34
+00:01:10,779 --> 00:01:14,470
+Objective three: the reverse proxy sends traffic to an app,
+
+35
+00:01:14,470 --> 00:01:17,222
+and passes the real host and client address.
+
+36
+00:01:17,772 --> 00:01:22,423
+Objective four: H T T P S with a certificate that matches the name.
+
+37
+00:01:22,973 --> 00:01:25,959
+Objective five: a pool of apps, with a health check.
+
+38
+00:01:26,509 --> 00:01:30,456
+Objective six: the logs and the status codes tell you what happened.
+
+39
+00:01:31,006 --> 00:01:36,745
+Objective seven: limits and secure defaults. Objective eight: troubleshoot when it breaks.
+
+40
+00:01:38,295 --> 00:01:43,500
+Go to the lab folder.
+
+41
+00:01:45,050 --> 00:01:46,949
+Look around. Type: L S.
+
+42
+00:01:47,499 --> 00:01:48,255
+The config,
+
+43
+00:01:48,255 --> 00:01:49,218
+a certificate,
+
+44
+00:01:49,218 --> 00:01:50,181
+a site folder,
+
+45
+00:01:50,181 --> 00:01:51,625
+a log of old traffic.
+
+46
+00:01:51,625 --> 00:01:52,725
+Behind engine X,
+
+47
+00:01:52,725 --> 00:01:54,582
+two small apps are running.
+
+48
+00:01:55,132 --> 00:01:59,996
+Run the judge, show the last line.
+
+49
+00:02:00,546 --> 00:02:03,042
+Zero out of eight. That is our starting line.
+
+50
+00:02:03,592 --> 00:02:08,328
+First, a tiny helper that prints only the status code. We will use it all the way.
+
+51
+00:02:08,878 --> 00:02:26,072
+Type the helper.
+
+52
+00:02:26,622 --> 00:02:34,153
+Objective one: ask for the site.
+
+53
+00:02:34,703 --> 00:02:38,372
+Four oh four. The site is there, but engine X cannot find it.
+
+54
+00:02:38,922 --> 00:02:43,999
+Find the root.
+
+55
+00:02:44,550 --> 00:02:49,947
+Line nineteen says site, with two E's. A typo. The real folder is site, with one.
+
+56
+00:02:50,497 --> 00:02:54,252
+Open the config in vim.
+
+57
+00:02:54,802 --> 00:02:58,023
+Go to line nineteen, and fix the root path. Then save.
+
+58
+00:03:06,573 --> 00:03:13,933
+Test, then reload.
+
+59
+00:03:14,483 --> 00:03:17,320
+Test first, then reload, without stopping anything.
+
+60
+00:03:17,870 --> 00:03:22,500
+Ask again.
+
+61
+00:03:23,050 --> 00:03:25,140
+Two hundred. The static site works.
+
+62
+00:03:25,690 --> 00:03:35,930
+Objective three: what does the app see?
+
+63
+00:03:36,480 --> 00:03:37,449
+The app answers,
+
+64
+00:03:37,449 --> 00:03:39,326
+but it thinks the host is pool,
+
+65
+00:03:39,326 --> 00:03:42,110
+and it sees no client address and no protocol.
+
+66
+00:03:42,110 --> 00:03:43,563
+We have to pass them on.
+
+67
+00:03:44,113 --> 00:03:47,868
+Open the config again.
+
+68
+00:03:48,418 --> 00:03:49,333
+On line twenty,
+
+69
+00:03:49,333 --> 00:03:53,240
+replace the location with one that sets three headers: the host,
+
+70
+00:03:53,240 --> 00:03:54,705
+the real client address,
+
+71
+00:03:54,705 --> 00:03:56,354
+and the forwarded protocol.
+
+72
+00:04:21,204 --> 00:04:27,305
+Test, then reload.
+
+73
+00:04:27,855 --> 00:04:35,471
+Ask the app again.
+
+74
+00:04:36,021 --> 00:04:39,882
+Now the app sees the real host, the client address, and the protocol.
+
+75
+00:04:40,432 --> 00:04:52,187
+Objective four: whose name is on the certificate?
+
+76
+00:04:52,737 --> 00:04:57,238
+Wrong dot example. The site is local host, so clients would refuse it.
+
+77
+00:04:57,788 --> 00:05:28,673
+Make a new certificate.
+
+78
+00:05:29,223 --> 00:05:31,911
+Reload.
+
+79
+00:05:32,461 --> 00:05:43,384
+Check the secure site.
+
+80
+00:05:43,934 --> 00:05:46,835
+Two hundred, and this time the certificate verifies.
+
+81
+00:05:47,385 --> 00:06:02,660
+Objective five: ask the pool four times.
+
+82
+00:06:03,210 --> 00:06:08,692
+Four times app A. App B never answers. A wrong port is hiding in the upstream block.
+
+83
+00:06:09,242 --> 00:06:12,997
+Open the config.
+
+84
+00:06:13,547 --> 00:06:14,642
+On line fifteen,
+
+85
+00:06:14,642 --> 00:06:17,241
+fix the port to eighty-two fifty-five.
+
+86
+00:06:17,241 --> 00:06:18,883
+Then after the location,
+
+87
+00:06:18,883 --> 00:06:21,483
+add a health endpoint that answers ok.
+
+88
+00:06:34,533 --> 00:06:40,634
+Test, then reload.
+
+89
+00:06:41,184 --> 00:06:54,432
+Ask the pool four times.
+
+90
+00:06:54,982 --> 00:06:58,246
+A, B, A, B. Round robin, with both apps in the pool.
+
+91
+00:06:58,796 --> 00:07:04,706
+Check the health endpoint.
+
+92
+00:07:05,256 --> 00:07:09,522
+Two hundred. A load balancer can now ask engine X if it is alive.
+
+93
+00:07:10,072 --> 00:07:25,112
+Objective six: count the failures.
+
+94
+00:07:25,662 --> 00:07:28,030
+Seven failures in a day of old traffic.
+
+95
+00:07:28,580 --> 00:07:46,628
+Which failure was the most common?
+
+96
+00:07:47,178 --> 00:07:51,850
+Three times five oh two. The app was refusing connections more than anything else.
+
+97
+00:07:52,400 --> 00:08:00,912
+Write the two answers.
+
+98
+00:08:01,462 --> 00:08:04,342
+Read it back. Type: cat, answers dot text.
+
+99
+00:08:04,892 --> 00:08:13,191
+Objective seven: send a big upload.
+
+100
+00:08:13,741 --> 00:08:23,128
+Upload it.
+
+101
+00:08:23,678 --> 00:08:28,776
+Two hundred. The server accepts two megabytes, when the limit is a hundred. Too generous.
+
+102
+00:08:29,326 --> 00:08:38,649
+What does the server header say?
+
+103
+00:08:39,199 --> 00:08:42,591
+It tells everyone the exact version. Attackers love that.
+
+104
+00:08:43,141 --> 00:08:46,896
+Open the config.
+
+105
+00:08:47,446 --> 00:08:48,387
+On line twelve,
+
+106
+00:08:48,387 --> 00:08:50,271
+set the limit to one megabyte,
+
+107
+00:08:50,271 --> 00:08:51,904
+and add server tokens off,
+
+108
+00:08:51,904 --> 00:08:52,971
+on the next line.
+
+109
+00:09:01,621 --> 00:09:07,722
+Test, then reload.
+
+110
+00:09:08,272 --> 00:09:18,107
+Upload again.
+
+111
+00:09:18,657 --> 00:09:22,881
+Four thirteen. Request too large. Refused before it reaches the app.
+
+112
+00:09:23,431 --> 00:09:31,943
+Server header again.
+
+113
+00:09:32,493 --> 00:09:34,562
+Just engine X. No version.
+
+114
+00:09:35,112 --> 00:09:42,280
+Objective eight: the slow report.
+
+115
+00:09:42,830 --> 00:09:47,268
+Five oh four. Gateway timeout. Evidence first: ask the error log.
+
+116
+00:09:47,818 --> 00:09:57,311
+Ask the error log.
+
+117
+00:09:57,861 --> 00:10:02,021
+Up stream timed out. The app is alive, but engine X stopped waiting.
+
+118
+00:10:02,571 --> 00:10:06,326
+Open the config.
+
+119
+00:10:06,876 --> 00:10:11,740
+The report takes three seconds, and the timeout is one. On line thirty, make it ten.
+
+120
+00:10:16,990 --> 00:10:23,091
+Test, then reload.
+
+121
+00:10:23,641 --> 00:10:29,508
+Ask for the report.
+
+122
+00:10:30,058 --> 00:10:33,983
+Two hundred, after three seconds. The slow report finally comes.
+
+123
+00:10:34,533 --> 00:10:44,218
+Document your results.
+
+124
+00:10:44,768 --> 00:10:47,542
+Read it back. Type: cat, notes dot text.
+
+125
+00:10:48,092 --> 00:10:51,825
+Results, troubleshooting, cleanup. Three lines your team can read.
+
+126
+00:10:52,375 --> 00:10:54,828
+Run the judge.
+
+127
+00:10:55,378 --> 00:10:58,749
+Eight checks, one for each part of the domain. Eight out of eight.
+
+128
+00:10:59,299 --> 00:11:01,262
+Clean up.
+
+129
+00:11:01,812 --> 00:11:04,286
+Engine X, both apps, everything removed.
+
+130
+00:11:04,836 --> 00:11:14,415
+Are the ports free? Count the lines.
+
+131
+00:11:14,965 --> 00:11:17,973
+Zero. Nothing listens, nothing is left behind.
+
+132
+00:11:19,523 --> 00:11:24,664
+Your task. A half-built web tier, and eight things to prove. Find the evidence, then fix.
+
+133
+00:11:25,214 --> 00:11:28,272
+One: the static site and the config test.
+
+134
+00:11:28,272 --> 00:11:29,986
+Two: the proxy headers.
+
+135
+00:11:29,986 --> 00:11:33,044
+Three: H T T P S for the name local host.
+
+136
+00:11:33,594 --> 00:11:38,458
+Four: the pool and a health endpoint. Five: read the log, and write two answers.
+
+137
+00:11:39,008 --> 00:11:44,042
+Six: limits and no version. Seven: the slow report. Eight: write your notes.
+
+138
+00:11:44,592 --> 00:11:46,619
+Then run lab check, and lab down.
+
+139
+00:11:48,669 --> 00:11:52,445
+Here is where to find everything. Pause on this screen, and write it down.
+
+140
+00:11:52,995 --> 00:11:54,643
+The lab lives on GitHub,
+
+141
+00:11:54,643 --> 00:11:55,810
+at it dash waves,
+
+142
+00:11:55,810 --> 00:11:57,390
+slash dev ops dash A I,
+
+143
+00:11:57,390 --> 00:11:58,900
+in the folder academy,
+
+144
+00:11:58,900 --> 00:11:59,587
+slash lab.
+
+145
+00:12:00,137 --> 00:12:05,897
+Two files: lab one twenty-five dot S H, and shortcuts one twenty-five dot S H.
+
+146
+00:12:06,447 --> 00:12:07,351
+Install it,
+
+147
+00:12:07,351 --> 00:12:10,228
+on any Linux machine: sudo install,
+
+148
+00:12:10,228 --> 00:12:12,119
+dash m seven five five,
+
+149
+00:12:12,119 --> 00:12:14,420
+lab one twenty-five dot S H,
+
+150
+00:12:14,420 --> 00:12:15,653
+into slash usr,
+
+151
+00:12:15,653 --> 00:12:16,639
+slash local,
+
+152
+00:12:16,639 --> 00:12:17,626
+slash S bin.
+
+153
+00:12:18,176 --> 00:12:23,042
+Load the short names with: source shortcuts one twenty-five dot S H.
+
+154
+00:12:23,042 --> 00:12:24,259
+You get two: lab,
+
+155
+00:12:24,259 --> 00:12:24,832
+and N G.
+
+156
+00:12:25,382 --> 00:12:26,665
+You need engine X,
+
+157
+00:12:26,665 --> 00:12:27,021
+curl,
+
+158
+00:12:27,021 --> 00:12:29,729
+open S S L and python three installed,
+
+159
+00:12:29,729 --> 00:12:31,939
+and ports eighty-two fifty-one,
+
+160
+00:12:31,939 --> 00:12:32,794
+fifty-three,
+
+161
+00:12:32,794 --> 00:12:35,004
+fifty-four and fifty-five free.
+
+162
+00:12:35,004 --> 00:12:37,712
+The lab runs its own private engine X.
+
+163
+00:12:38,262 --> 00:12:39,969
+Lab up prepares everything.
+
+164
+00:12:39,969 --> 00:12:41,676
+Lab check judges your work.
+
+165
+00:12:41,676 --> 00:12:43,194
+Lab down removes it all.
+
+166
+00:12:43,194 --> 00:12:45,217
+Only run it on your own machine.
+
+167
+00:12:47,267 --> 00:12:49,251
+Pass or fail. You need all eight.
+
+168
+00:12:49,801 --> 00:12:52,852
+One: the static site, and the config tests OK.
+
+169
+00:12:53,402 --> 00:12:56,388
+Two: the app sees the real host and client headers.
+
+170
+00:12:56,938 --> 00:13:00,138
+Three: H T T P S verifies for local host.
+
+171
+00:13:00,688 --> 00:13:04,102
+Four: both apps answer, and the health endpoint says ok.
+
+172
+00:13:04,652 --> 00:13:06,806
+Five: your two log answers are right.
+
+173
+00:13:07,356 --> 00:13:10,812
+Six: big uploads are refused, and no version is shown.
+
+174
+00:13:11,362 --> 00:13:14,861
+Seven: the report works. Eight: your notes document it.
+
+175
+00:13:15,411 --> 00:13:16,670
+To pass, all eight.
+
+176
+00:13:18,720 --> 00:13:21,963
+Your turn, on your own machine. This is the mastery proof.
+
+177
+00:13:22,513 --> 00:13:25,862
+One: lab up, and run lab check. See zero out of eight.
+
+178
+00:13:26,412 --> 00:13:30,593
+Two: for each objective, find the evidence before you change anything.
+
+179
+00:13:31,143 --> 00:13:35,559
+Three: fix them one by one, test and reload after each, and keep your notes.
+
+180
+00:13:36,109 --> 00:13:38,968
+Four: run lab check until you see eight out of eight.
+
+181
+00:13:39,518 --> 00:13:42,313
+Five: lab down, and prove the ports are free.
+
+182
+00:13:42,863 --> 00:13:44,697
+Pause the video, and begin now.
+
+183
+00:14:00,247 --> 00:14:01,122
+Quick check.
+
+184
+00:14:01,672 --> 00:14:05,661
+What is the difference between serving static files and proxying to an app?
+
+185
+00:14:06,211 --> 00:14:08,622
+Which headers does the app need from the proxy?
+
+186
+00:14:09,172 --> 00:14:12,862
+Which status code, and which log, point at each kind of failure?
+
+187
+00:14:13,412 --> 00:14:17,252
+What is the order: symptom, evidence, cause, fix, proof, notes?
+
+188
+00:14:17,802 --> 00:14:20,133
+Objectives covered: M C thirteen,
+
+189
+00:14:20,133 --> 00:14:21,827
+objectives one to eight.
+
+190
+00:14:21,827 --> 00:14:25,288
+The whole web servers and reverse proxies domain,
+
+191
+00:14:25,288 --> 00:14:26,912
+proven in one scenario.
+
+192
+00:14:27,462 --> 00:14:29,531
+Pause the video, and answer out loud.
+
+193
+00:14:40,081 --> 00:14:42,769
+Domain complete. Next, we start a new domain.
+
+194
+00:14:43,319 --> 00:14:46,647
+If this helped, like, share and subscribe, so you do not miss it.
