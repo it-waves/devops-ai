@@ -21,7 +21,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab137.sh and shortc
 Honest notes: the terminal demo is one real, continuous recording of pytest running on a small Python shop written for this lab, and the HTML report is the real report opened in a real Chrome window. The lab was run end to end: it passes 0 of 6 before you start and 6 of 6 after you finish, with a reference solution, and lab down leaves nothing behind. Failure summaries are shortened in places to keep the screen clean. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: Pytest Assertions, Fixtures, Mocks, Test Data and Isolation: Tests That Catch Bugs | Lesson 136 https://youtu.be/bTby4HN_3Q4
-Next: Browser tests with Playwright, the HTML report and the trace viewer.
+Next: Browser Tests with Playwright: Traces, Screenshots and the Trace Viewer | Lesson 138 https://youtu.be/wg4FW70eUcQ
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
