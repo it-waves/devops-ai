@@ -1,0 +1,971 @@
+1
+00:00:00,500 --> 00:00:04,127
+Here is a test. It runs. It passes. Green, every time.
+
+2
+00:00:04,677 --> 00:00:09,199
+And it tests nothing. It never checks the answer, so the bug sails straight through.
+
+3
+00:00:09,749 --> 00:00:12,527
+A test is only worth something if it can fail,
+
+4
+00:00:12,527 --> 00:00:13,916
+when the code is wrong.
+
+5
+00:00:13,916 --> 00:00:17,237
+Today you learn the five tools that make a test honest.
+
+6
+00:00:17,787 --> 00:00:18,553
+Assertions,
+
+7
+00:00:18,553 --> 00:00:19,179
+fixtures,
+
+8
+00:00:19,179 --> 00:00:19,596
+mocks,
+
+9
+00:00:19,596 --> 00:00:20,292
+test data,
+
+10
+00:00:20,292 --> 00:00:21,266
+and isolation.
+
+11
+00:00:21,266 --> 00:00:24,187
+Then you prove your tests catch real bugs.
+
+12
+00:00:25,737 --> 00:00:27,166
+Here is what to expect.
+
+13
+00:00:27,716 --> 00:00:32,474
+One: assertions. The claim a test makes, and why a good failure message matters.
+
+14
+00:00:33,024 --> 00:00:37,994
+Two: fixtures. Setup that every test gets fresh, so you do not repeat yourself.
+
+15
+00:00:38,544 --> 00:00:43,984
+Three: mocks. A safe stand in, for the parts a test must not touch, like real e-mail.
+
+16
+00:00:44,534 --> 00:00:46,563
+Four: test data and isolation.
+
+17
+00:00:46,563 --> 00:00:48,254
+Many cases from one test,
+
+18
+00:00:48,254 --> 00:00:50,892
+and tests that never affect each other.
+
+19
+00:00:51,442 --> 00:00:53,356
+Then a live demo with pie test,
+
+20
+00:00:53,356 --> 00:00:54,529
+building six tests,
+
+21
+00:00:54,529 --> 00:00:57,986
+and breaking the code on purpose to watch them catch it.
+
+22
+00:00:57,986 --> 00:00:59,591
+And a lab with six checks.
+
+23
+00:01:01,641 --> 00:01:03,838
+Assertions. The heart of every test.
+
+24
+00:01:04,388 --> 00:01:07,038
+An assertion is a claim that must be true.
+
+25
+00:01:07,038 --> 00:01:07,480
+Assert,
+
+26
+00:01:07,480 --> 00:01:08,679
+then an expression.
+
+27
+00:01:08,679 --> 00:01:09,562
+If it is true,
+
+28
+00:01:09,562 --> 00:01:10,634
+the test goes on.
+
+29
+00:01:10,634 --> 00:01:11,581
+If it is false,
+
+30
+00:01:11,581 --> 00:01:12,527
+the test fails,
+
+31
+00:01:12,527 --> 00:01:13,284
+right there.
+
+32
+00:01:13,834 --> 00:01:16,619
+Pie test shows you both sides when it fails.
+
+33
+00:01:16,619 --> 00:01:17,632
+Not just failed,
+
+34
+00:01:17,632 --> 00:01:20,543
+but: the shop gave one thousand seventy-eight,
+
+35
+00:01:20,543 --> 00:01:23,201
+and we expected one thousand seventy-nine.
+
+36
+00:01:23,201 --> 00:01:25,226
+That message is your first clue.
+
+37
+00:01:25,776 --> 00:01:27,908
+Floating point numbers need care.
+
+38
+00:01:27,908 --> 00:01:31,267
+Point one plus point two is not exactly point three.
+
+39
+00:01:31,267 --> 00:01:32,817
+Use pie test dot approx,
+
+40
+00:01:32,817 --> 00:01:35,014
+to compare with a small tolerance.
+
+41
+00:01:35,564 --> 00:01:38,444
+And sometimes the right behavior is an error.
+
+42
+00:01:38,444 --> 00:01:42,156
+Pie test dot raises says: this code must raise this error.
+
+43
+00:01:42,156 --> 00:01:43,500
+If it does not raise,
+
+44
+00:01:43,500 --> 00:01:44,460
+the test fails.
+
+45
+00:01:45,010 --> 00:01:49,618
+One test, one idea. A test with ten assertions hides which one broke.
+
+46
+00:01:51,168 --> 00:01:53,835
+Fixtures. Setup, done once, shared by name.
+
+47
+00:01:54,385 --> 00:01:58,018
+Many tests need the same starting point: a fresh cart,
+
+48
+00:01:58,018 --> 00:01:58,758
+a database,
+
+49
+00:01:58,758 --> 00:01:59,902
+a logged in user.
+
+50
+00:01:59,902 --> 00:02:03,400
+Copying that setup into every test is slow to write,
+
+51
+00:02:03,400 --> 00:02:04,881
+and easy to get wrong.
+
+52
+00:02:05,431 --> 00:02:07,026
+A fixture is a function,
+
+53
+00:02:07,026 --> 00:02:09,220
+marked with pie test dot fixture.
+
+54
+00:02:09,220 --> 00:02:10,483
+A test asks for it,
+
+55
+00:02:10,483 --> 00:02:12,677
+just by naming it as a parameter.
+
+56
+00:02:12,677 --> 00:02:13,941
+Pie test builds it,
+
+57
+00:02:13,941 --> 00:02:15,137
+and hands it over.
+
+58
+00:02:15,687 --> 00:02:16,361
+By default,
+
+59
+00:02:16,361 --> 00:02:18,322
+every test gets a brand new one.
+
+60
+00:02:18,322 --> 00:02:21,938
+That is the point: no test leaves a mess for the next test.
+
+61
+00:02:22,488 --> 00:02:24,575
+Scope can widen that: function,
+
+62
+00:02:24,575 --> 00:02:25,046
+module,
+
+63
+00:02:25,046 --> 00:02:25,786
+or session.
+
+64
+00:02:25,786 --> 00:02:29,623
+A database that costs a second to create might be shared.
+
+65
+00:02:29,623 --> 00:02:31,171
+A cart should never be.
+
+66
+00:02:31,721 --> 00:02:35,527
+Shared fixtures live in a file called con F test dot pie.
+
+67
+00:02:35,527 --> 00:02:38,399
+Every test file in the folder can use them,
+
+68
+00:02:38,399 --> 00:02:39,401
+with no import.
+
+69
+00:02:40,951 --> 00:02:44,087
+Mocks. A stand in, for what a test must not touch.
+
+70
+00:02:44,637 --> 00:02:46,927
+Our shop sends a receipt by e-mail.
+
+71
+00:02:46,927 --> 00:02:47,581
+In a test,
+
+72
+00:02:47,581 --> 00:02:50,263
+that must never reach a real mail server.
+
+73
+00:02:50,263 --> 00:02:50,983
+It is slow,
+
+74
+00:02:50,983 --> 00:02:53,992
+it can fail for reasons that are not your bug,
+
+75
+00:02:53,992 --> 00:02:56,413
+and you might e-mail a real customer.
+
+76
+00:02:56,963 --> 00:03:00,161
+A mock is a fake object that records how it was used.
+
+77
+00:03:00,161 --> 00:03:01,609
+You give it to the code,
+
+78
+00:03:01,609 --> 00:03:03,299
+in place of the real mailer.
+
+79
+00:03:03,849 --> 00:03:05,832
+Then you check the conversation.
+
+80
+00:03:05,832 --> 00:03:06,823
+Was send called?
+
+81
+00:03:06,823 --> 00:03:07,753
+How many times?
+
+82
+00:03:07,753 --> 00:03:08,930
+With which address?
+
+83
+00:03:08,930 --> 00:03:13,577
+That is how you test a promise like: the customer is e-mailed exactly once.
+
+84
+00:03:14,127 --> 00:03:16,303
+Mock the edges of your system: mail,
+
+85
+00:03:16,303 --> 00:03:16,847
+payments,
+
+86
+00:03:16,847 --> 00:03:17,451
+the clock,
+
+87
+00:03:17,451 --> 00:03:18,177
+the network.
+
+88
+00:03:18,177 --> 00:03:20,836
+Do not mock the code you are trying to test,
+
+89
+00:03:20,836 --> 00:03:22,106
+or you test the mock.
+
+90
+00:03:22,656 --> 00:03:26,474
+In a later lesson, we mock a real service for the CloudCart tests.
+
+91
+00:03:28,024 --> 00:03:29,773
+Test data, and isolation.
+
+92
+00:03:30,323 --> 00:03:31,536
+Test data: small,
+
+93
+00:03:31,536 --> 00:03:31,963
+clear,
+
+94
+00:03:31,963 --> 00:03:33,532
+and chosen on purpose.
+
+95
+00:03:33,532 --> 00:03:35,529
+One test can run many cases,
+
+96
+00:03:35,529 --> 00:03:37,668
+with pie test dot parametrize.
+
+97
+00:03:37,668 --> 00:03:38,881
+A list of inputs,
+
+98
+00:03:38,881 --> 00:03:40,663
+and the expected answers.
+
+99
+00:03:40,663 --> 00:03:43,017
+Each case is reported separately.
+
+100
+00:03:43,567 --> 00:03:45,738
+Good data includes the edges: zero,
+
+101
+00:03:45,738 --> 00:03:46,855
+the biggest value,
+
+102
+00:03:46,855 --> 00:03:47,661
+the smallest,
+
+103
+00:03:47,661 --> 00:03:50,329
+and the odd one that once broke production.
+
+104
+00:03:50,879 --> 00:03:53,166
+Isolation: a test must pass alone,
+
+105
+00:03:53,166 --> 00:03:54,040
+in any order,
+
+106
+00:03:54,040 --> 00:03:54,779
+on any day.
+
+107
+00:03:54,779 --> 00:03:57,335
+If test two only works after test one,
+
+108
+00:03:57,335 --> 00:03:59,285
+you have a hidden dependency.
+
+109
+00:03:59,835 --> 00:04:03,234
+How to stay isolated: build fresh state in a fixture.
+
+110
+00:04:03,234 --> 00:04:04,709
+Use a temporary folder,
+
+111
+00:04:04,709 --> 00:04:05,799
+called temp path,
+
+112
+00:04:05,799 --> 00:04:06,440
+for files.
+
+113
+00:04:06,440 --> 00:04:08,813
+Use monkey patch to change a setting,
+
+114
+00:04:08,813 --> 00:04:10,224
+and put it back after.
+
+115
+00:04:10,774 --> 00:04:13,566
+And a simple shape for every test: arrange,
+
+116
+00:04:13,566 --> 00:04:13,826
+act,
+
+117
+00:04:13,826 --> 00:04:14,280
+assert.
+
+118
+00:04:14,280 --> 00:04:14,800
+Prepare,
+
+119
+00:04:14,800 --> 00:04:15,644
+do one thing,
+
+120
+00:04:15,644 --> 00:04:16,747
+check the result.
+
+121
+00:04:18,297 --> 00:04:23,417
+Go to the lab folder.
+
+122
+00:04:24,967 --> 00:04:26,866
+Look around.
+
+123
+00:04:27,416 --> 00:04:27,987
+The shop,
+
+124
+00:04:27,987 --> 00:04:29,258
+a shared setup file,
+
+125
+00:04:29,258 --> 00:04:30,465
+and a tests folder.
+
+126
+00:04:30,465 --> 00:04:33,069
+The tests file is empty: we write it now.
+
+127
+00:04:33,619 --> 00:04:38,931
+The code.
+
+128
+00:04:39,481 --> 00:04:41,795
+The tax function: the total with tax,
+
+129
+00:04:41,795 --> 00:04:43,546
+rounded to the nearest cent.
+
+130
+00:04:43,546 --> 00:04:44,984
+And the discount tiers.
+
+131
+00:04:44,984 --> 00:04:49,486
+The bug switch near the top is how the judge breaks the code on purpose.
+
+132
+00:04:50,036 --> 00:04:54,495
+First assertion.
+
+133
+00:05:03,145 --> 00:05:04,186
+Nine ninety-nine,
+
+134
+00:05:04,186 --> 00:05:05,595
+with eight percent tax,
+
+135
+00:05:05,595 --> 00:05:08,351
+is one thousand seventy-eight point nine two.
+
+136
+00:05:08,351 --> 00:05:11,230
+To the nearest cent: one thousand seventy-nine.
+
+137
+00:05:11,780 --> 00:05:14,170
+Run it.
+
+138
+00:05:14,720 --> 00:05:15,356
+One passed.
+
+139
+00:05:15,356 --> 00:05:17,729
+But does this test really check anything?
+
+140
+00:05:17,729 --> 00:05:19,002
+Let us break the code,
+
+141
+00:05:19,002 --> 00:05:20,160
+with the bug switch.
+
+142
+00:05:20,710 --> 00:05:23,760
+Break it.
+
+143
+00:05:24,710 --> 00:05:25,136
+Failed.
+
+144
+00:05:25,136 --> 00:05:28,419
+The test noticed that the code now cuts the cents off.
+
+145
+00:05:28,419 --> 00:05:31,580
+A test that can fail is a test that means something.
+
+146
+00:05:32,130 --> 00:05:37,506
+Add the mock import.
+
+147
+00:05:38,956 --> 00:05:46,700
+The mock test.
+
+148
+00:05:58,750 --> 00:06:01,736
+No real mail is ever sent. The mock just counts.
+
+149
+00:06:02,286 --> 00:06:05,209
+Run both.
+
+150
+00:06:05,759 --> 00:06:06,655
+Two passed.
+
+151
+00:06:07,205 --> 00:06:11,941
+Break the mailer.
+
+152
+00:06:12,491 --> 00:06:18,464
+An F, and one failed. The customer would have got two e-mails, and the mock caught it.
+
+153
+00:06:19,014 --> 00:06:24,476
+Test data.
+
+154
+00:06:39,826 --> 00:06:43,900
+See each case.
+
+155
+00:06:44,450 --> 00:06:49,357
+Four cases, four lines, each with its own name. If one case breaks, you see which.
+
+156
+00:06:49,907 --> 00:06:53,107
+Break a tier.
+
+157
+00:06:56,557 --> 00:07:04,237
+Only the gold case failed. The other three still pass. Parametrize pinpoints the bad case.
+
+158
+00:07:04,787 --> 00:07:09,224
+A fixture.
+
+159
+00:07:14,474 --> 00:07:19,125
+Use it.
+
+160
+00:07:32,475 --> 00:07:35,248
+Run everything.
+
+161
+00:07:35,798 --> 00:07:36,758
+Eight passed.
+
+162
+00:07:37,308 --> 00:07:42,002
+Shared state.
+
+163
+00:07:42,552 --> 00:07:47,001
+One test failed: it found items left behind by another test.
+
+164
+00:07:47,001 --> 00:07:50,930
+Tests that share state fail depending on their order.
+
+165
+00:07:50,930 --> 00:07:51,820
+The fixture,
+
+166
+00:07:51,820 --> 00:07:53,896
+with a fresh cart each time,
+
+167
+00:07:53,896 --> 00:07:56,269
+is how a good suite avoids that.
+
+168
+00:07:56,819 --> 00:08:02,771
+An expected error.
+
+169
+00:08:09,521 --> 00:08:12,017
+Run.
+
+170
+00:08:12,567 --> 00:08:13,527
+Nine passed.
+
+171
+00:08:14,077 --> 00:08:18,728
+Break it.
+
+172
+00:08:19,278 --> 00:08:20,918
+Failed: the cart accepted zero,
+
+173
+00:08:20,918 --> 00:08:21,871
+and did not raise.
+
+174
+00:08:21,871 --> 00:08:23,035
+Five bugs switched on,
+
+175
+00:08:23,035 --> 00:08:24,782
+and five times the tests noticed.
+
+176
+00:08:25,332 --> 00:08:27,700
+Run the judge.
+
+177
+00:08:28,250 --> 00:08:31,883
+The judge does the same as we did: it switches each bug on,
+
+178
+00:08:31,883 --> 00:08:33,854
+and checks that your tests fail.
+
+179
+00:08:33,854 --> 00:08:34,778
+Six out of six.
+
+180
+00:08:35,328 --> 00:08:37,290
+Clean up.
+
+181
+00:08:37,840 --> 00:08:39,696
+Removed. Nothing left behind.
+
+182
+00:08:41,246 --> 00:08:44,894
+Your lab task: write tests that catch bugs. Six checks.
+
+183
+00:08:45,444 --> 00:08:46,022
+One: tax,
+
+184
+00:08:46,022 --> 00:08:48,205
+with a test that catches rounding.
+
+185
+00:08:48,205 --> 00:08:49,425
+Two: a mock mailer,
+
+186
+00:08:49,425 --> 00:08:51,801
+that proves the receipt is sent once.
+
+187
+00:08:52,351 --> 00:08:54,643
+Three: parametrized discount cases,
+
+188
+00:08:54,643 --> 00:08:56,018
+at least three tiers.
+
+189
+00:08:56,018 --> 00:08:58,179
+Four: a fixture for a fresh cart,
+
+190
+00:08:58,179 --> 00:08:59,882
+and two tests that use it.
+
+191
+00:09:00,432 --> 00:09:03,653
+Five: pie test dot raises, for a bad quantity.
+
+192
+00:09:04,203 --> 00:09:05,190
+Then lab check,
+
+193
+00:09:05,190 --> 00:09:06,571
+until six out of six.
+
+194
+00:09:06,571 --> 00:09:08,872
+A good test passes on correct code,
+
+195
+00:09:08,872 --> 00:09:11,371
+and fails when its bug is switched on.
+
+196
+00:09:13,421 --> 00:09:16,216
+Where to find the lab. Pause here, and write it down.
+
+197
+00:09:16,766 --> 00:09:18,230
+One: the repository,
+
+198
+00:09:18,230 --> 00:09:22,550
+git hub dot com slash it dash waves slash dev ops dash A I,
+
+199
+00:09:22,550 --> 00:09:24,894
+in the folder academy slash lab.
+
+200
+00:09:25,444 --> 00:09:31,524
+Two: the files, lab one thirty-six dot S H, and shortcuts one thirty-six dot S H.
+
+201
+00:09:32,074 --> 00:09:37,535
+Three: install it, with sudo install, into slash user slash local slash S bin.
+
+202
+00:09:38,085 --> 00:09:39,921
+Four: load the short names,
+
+203
+00:09:39,921 --> 00:09:42,980
+with source shortcuts one thirty-six dot S H.
+
+204
+00:09:42,980 --> 00:09:43,796
+Then lab up,
+
+205
+00:09:43,796 --> 00:09:44,476
+lab check,
+
+206
+00:09:44,476 --> 00:09:45,360
+and lab down.
+
+207
+00:09:45,910 --> 00:09:48,913
+Five: you need python three and pie test.
+
+208
+00:09:48,913 --> 00:09:49,645
+On Ubuntu,
+
+209
+00:09:49,645 --> 00:09:50,890
+sudo apt install,
+
+210
+00:09:50,890 --> 00:09:51,842
+python three,
+
+211
+00:09:51,842 --> 00:09:52,502
+pie test.
+
+212
+00:09:53,052 --> 00:09:56,892
+Six: only on your own machine. Lab down removes everything.
+
+213
+00:09:57,442 --> 00:09:59,084
+The link is in the description.
+
+214
+00:10:01,134 --> 00:10:04,782
+Pass or fail rubric. Six points. All six to pass.
+
+215
+00:10:05,332 --> 00:10:08,532
+One: six tests or more, all passing on correct code.
+
+216
+00:10:09,082 --> 00:10:11,599
+Two: the tests catch the tax rounding bug.
+
+217
+00:10:12,149 --> 00:10:14,560
+Three: the mock catches the double e-mail.
+
+218
+00:10:15,110 --> 00:10:18,715
+Four: three or more parametrized cases catch the bad tier.
+
+219
+00:10:19,265 --> 00:10:22,295
+Five: a fixture, and the tests catch shared state.
+
+220
+00:10:22,845 --> 00:10:26,023
+Six: pie test dot raises catches the missing error.
+
+221
+00:10:26,573 --> 00:10:27,875
+Pass means all six.
+
+222
+00:10:29,925 --> 00:10:31,696
+Your turn, on your own machine.
+
+223
+00:10:32,246 --> 00:10:35,872
+One: lab up, and open the instructions file, to learn the rules.
+
+224
+00:10:36,422 --> 00:10:40,945
+Two: write the tax test, and the mock test. Break the code, and watch them fail.
+
+225
+00:10:41,495 --> 00:10:44,076
+Three: add parametrize for the discount tiers.
+
+226
+00:10:44,626 --> 00:10:48,466
+Four: write the fixture, and the cart tests. Then the raises test.
+
+227
+00:10:49,016 --> 00:10:52,494
+Five: lab check, until six out of six. Then lab down.
+
+228
+00:10:53,044 --> 00:10:54,878
+Pause the video, and begin now.
+
+229
+00:11:10,428 --> 00:11:11,303
+Quick check.
+
+230
+00:11:11,853 --> 00:11:13,687
+Why must a test be able to fail?
+
+231
+00:11:14,237 --> 00:11:16,093
+What does a fixture give every test?
+
+232
+00:11:16,643 --> 00:11:18,030
+What do you check on a mock?
+
+233
+00:11:18,580 --> 00:11:20,052
+What does isolation mean?
+
+234
+00:11:20,602 --> 00:11:23,016
+Objective covered: M C fifteen,
+
+235
+00:11:23,016 --> 00:11:24,106
+objective two.
+
+236
+00:11:24,106 --> 00:11:25,586
+Explain assertions,
+
+237
+00:11:25,586 --> 00:11:26,287
+fixtures,
+
+238
+00:11:26,287 --> 00:11:26,754
+mocks,
+
+239
+00:11:26,754 --> 00:11:27,533
+test data,
+
+240
+00:11:27,533 --> 00:11:28,623
+and isolation.
+
+241
+00:11:29,173 --> 00:11:31,243
+Pause the video, and answer out loud.
+
+242
+00:11:41,793 --> 00:11:45,163
+Next: run tests, and read reports and exit codes.
+
+243
+00:11:45,713 --> 00:11:49,041
+If this helped, like, share and subscribe, so you do not miss it.

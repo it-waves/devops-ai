@@ -1,0 +1,28 @@
+Lesson 136 of the DevOps Engineering Bootcamp, and lesson 2 of the Software Testing and QA domain. A green test can lie: it runs, it passes, and it checks nothing. In this lesson you learn the five tools that make a test honest: assertions (including pytest.approx and pytest.raises), fixtures and conftest.py, mocks, test data with parametrize, and isolation. Then you build six real tests with pytest on a mini shop, switch five bugs on one at a time (tax rounding, a double receipt e-mail, a wrong discount tier, shared state, a missing error), and watch your tests catch every one. A lab then judges you from 0 of 6 to 6 of 6.
+
+Chapters
+0:00 A green test can lie
+0:25 What to expect
+1:01 Assertions
+1:50 Fixtures
+2:40 Mocks
+3:27 Test data and isolation
+4:17 Live: tests that catch bugs
+8:40 Your lab task
+9:12 Where to find the lab
+10:00 Pass or fail rubric
+10:29 Your turn
+11:09 Quick check
+
+Objectives covered: MC15-O02, explain assertions, fixtures, mocks, test data, and isolation.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab136.sh and shortcuts136.sh). Install with: sudo install -m 755 lab136.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts136.sh. You need any Linux machine with root, python3 and pytest (for example: sudo apt install -y python3-pytest). The lab creates a small shop project in /opt/lab136 and does not touch anything else. lab down removes it. Only run it on your own machine.
+
+Honest notes: the terminal demo is one real, continuous recording of pytest running on a small Python shop written for this lab, and the lab was run end to end: it passes 0 of 6 before you start and 6 of 6 after you finish, with a reference solution, and lab down leaves nothing behind. Failure summaries are switched off in the recording to keep the screen clean. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Types of Software Tests: Unit, Integration, API, End-to-End, Smoke and Regression | Lesson 135 https://youtu.be/LHK5CDeXW_0
+Next: Running tests, reports and exit codes.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #softwaretesting #pytest #qa #devopsbootcamp
