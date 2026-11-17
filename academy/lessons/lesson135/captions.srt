@@ -1,0 +1,1271 @@
+1
+00:00:00,500 --> 00:00:02,253
+A developer changes one line,
+
+2
+00:00:02,253 --> 00:00:03,583
+on a Friday afternoon.
+
+3
+00:00:03,583 --> 00:00:05,033
+Nothing looks different.
+
+4
+00:00:05,033 --> 00:00:05,940
+Do you ship it?
+
+5
+00:00:06,490 --> 00:00:09,729
+A team that does not test finds out from its customers.
+
+6
+00:00:09,729 --> 00:00:12,262
+A team that tests finds out in two minutes,
+
+7
+00:00:12,262 --> 00:00:13,381
+before anyone else.
+
+8
+00:00:13,931 --> 00:00:15,999
+But not every test is the same.
+
+9
+00:00:15,999 --> 00:00:17,601
+Some take a millisecond.
+
+10
+00:00:17,601 --> 00:00:20,136
+Some open a browser and take a minute.
+
+11
+00:00:20,136 --> 00:00:22,805
+Some only ask one question: is it alive?
+
+12
+00:00:23,355 --> 00:00:25,633
+Today you learn the six kinds of test,
+
+13
+00:00:25,633 --> 00:00:26,892
+what each one is for,
+
+14
+00:00:26,892 --> 00:00:28,031
+and when to run it.
+
+15
+00:00:28,031 --> 00:00:30,609
+Then you sort a real set of tests yourself.
+
+16
+00:00:32,159 --> 00:00:33,588
+Here is what to expect.
+
+17
+00:00:34,138 --> 00:00:35,632
+One: the test pyramid.
+
+18
+00:00:35,632 --> 00:00:39,910
+A picture of how many tests of each kind a healthy project has,
+
+19
+00:00:39,910 --> 00:00:40,453
+and why.
+
+20
+00:00:41,003 --> 00:00:42,935
+Two: the six kinds of test.
+
+21
+00:00:42,935 --> 00:00:43,293
+Unit,
+
+22
+00:00:43,293 --> 00:00:44,152
+integration,
+
+23
+00:00:44,152 --> 00:00:44,438
+API,
+
+24
+00:00:44,438 --> 00:00:45,226
+end to end,
+
+25
+00:00:45,226 --> 00:00:45,655
+smoke,
+
+26
+00:00:45,655 --> 00:00:46,729
+and regression.
+
+27
+00:00:46,729 --> 00:00:48,232
+What each one checks,
+
+28
+00:00:48,232 --> 00:00:49,878
+and what it cannot see.
+
+29
+00:00:50,428 --> 00:00:52,348
+Three: when to run which test.
+
+30
+00:00:52,348 --> 00:00:53,372
+On every commit,
+
+31
+00:00:53,372 --> 00:00:54,780
+on every pull request,
+
+32
+00:00:54,780 --> 00:00:56,124
+before every release,
+
+33
+00:00:56,124 --> 00:00:57,404
+and after every bug.
+
+34
+00:00:57,954 --> 00:00:59,124
+Four: a live demo,
+
+35
+00:00:59,124 --> 00:01:00,034
+with pie test,
+
+36
+00:01:00,034 --> 00:01:01,334
+on a real mini shop.
+
+37
+00:01:01,334 --> 00:01:02,569
+You run every kind,
+
+38
+00:01:02,569 --> 00:01:06,274
+and watch the difference in speed and in what they touch.
+
+39
+00:01:06,824 --> 00:01:12,178
+Then your turn: a lab with six checks. This is lesson one of the software testing domain.
+
+40
+00:01:14,228 --> 00:01:18,793
+The test pyramid. One picture, and it explains a whole testing strategy.
+
+41
+00:01:19,343 --> 00:01:20,990
+At the bottom: unit tests.
+
+42
+00:01:20,990 --> 00:01:23,142
+They test one small piece of code,
+
+43
+00:01:23,142 --> 00:01:23,522
+alone.
+
+44
+00:01:23,522 --> 00:01:24,409
+They are fast,
+
+45
+00:01:24,409 --> 00:01:25,802
+a millisecond or less,
+
+46
+00:01:25,802 --> 00:01:27,005
+and cheap to write.
+
+47
+00:01:27,005 --> 00:01:29,221
+A healthy project has many of them.
+
+48
+00:01:29,771 --> 00:01:32,499
+In the middle: integration and API tests.
+
+49
+00:01:32,499 --> 00:01:36,226
+They test pieces working together: code with a database,
+
+50
+00:01:36,226 --> 00:01:38,090
+or a request to an endpoint.
+
+51
+00:01:38,090 --> 00:01:38,556
+Slower,
+
+52
+00:01:38,556 --> 00:01:39,221
+and fewer.
+
+53
+00:01:39,771 --> 00:01:41,560
+At the top: end to end tests.
+
+54
+00:01:41,560 --> 00:01:44,459
+They walk through the whole system like a user.
+
+55
+00:01:44,459 --> 00:01:45,754
+They are the slowest,
+
+56
+00:01:45,754 --> 00:01:47,049
+and the most fragile,
+
+57
+00:01:47,049 --> 00:01:48,838
+so a healthy project has few.
+
+58
+00:01:49,388 --> 00:01:50,727
+Going up the pyramid,
+
+59
+00:01:50,727 --> 00:01:53,149
+a test covers more of the real system,
+
+60
+00:01:53,149 --> 00:01:54,935
+so it gives more confidence.
+
+61
+00:01:54,935 --> 00:01:56,018
+But it is slower,
+
+62
+00:01:56,018 --> 00:01:57,421
+it breaks more easily,
+
+63
+00:01:57,421 --> 00:01:58,568
+and when it fails,
+
+64
+00:01:58,568 --> 00:02:00,417
+it is harder to find out why.
+
+65
+00:02:00,967 --> 00:02:01,605
+Going down,
+
+66
+00:02:01,605 --> 00:02:04,504
+a test is fast and points straight at the problem,
+
+67
+00:02:04,504 --> 00:02:06,301
+but it sees only a small piece.
+
+68
+00:02:06,851 --> 00:02:12,184
+So you want both: many small fast tests for speed, and a few big tests for confidence.
+
+69
+00:02:13,734 --> 00:02:16,209
+The six kinds of test. One at a time.
+
+70
+00:02:16,759 --> 00:02:17,416
+Unit test.
+
+71
+00:02:17,416 --> 00:02:19,716
+It tests one function or one class,
+
+72
+00:02:19,716 --> 00:02:20,110
+alone,
+
+73
+00:02:20,110 --> 00:02:21,227
+with no database,
+
+74
+00:02:21,227 --> 00:02:21,950
+no network,
+
+75
+00:02:21,950 --> 00:02:22,805
+and no files.
+
+76
+00:02:22,805 --> 00:02:27,865
+In our shop: does line total give two thousand nine hundred and ninety-seven,
+
+77
+00:02:27,865 --> 00:02:28,850
+for three mugs?
+
+78
+00:02:28,850 --> 00:02:30,493
+It runs in a millisecond.
+
+79
+00:02:30,493 --> 00:02:31,413
+When it fails,
+
+80
+00:02:31,413 --> 00:02:33,911
+you know exactly which function broke.
+
+81
+00:02:34,461 --> 00:02:35,537
+Integration test.
+
+82
+00:02:35,537 --> 00:02:39,272
+It tests your code together with a real part it depends on,
+
+83
+00:02:39,272 --> 00:02:40,664
+most often a database.
+
+84
+00:02:40,664 --> 00:02:42,880
+Does the cart total come out right,
+
+85
+00:02:42,880 --> 00:02:46,045
+when the items are really stored and loaded again?
+
+86
+00:02:46,045 --> 00:02:46,868
+It is slower,
+
+87
+00:02:46,868 --> 00:02:50,223
+but it catches what unit tests cannot: wrong queries,
+
+88
+00:02:50,223 --> 00:02:51,109
+wrong columns,
+
+89
+00:02:51,109 --> 00:02:51,869
+wrong types.
+
+90
+00:02:52,419 --> 00:02:53,019
+API test.
+
+91
+00:02:53,019 --> 00:02:56,022
+It sends a real request to a running service,
+
+92
+00:02:56,022 --> 00:02:58,624
+and checks the answer: the status code,
+
+93
+00:02:58,624 --> 00:02:59,492
+and the body.
+
+94
+00:02:59,492 --> 00:03:02,761
+Does slash API slash products return two hundred,
+
+95
+00:03:02,761 --> 00:03:04,096
+with three products?
+
+96
+00:03:04,096 --> 00:03:06,698
+Does a bad product return four hundred?
+
+97
+00:03:06,698 --> 00:03:10,168
+It tests the contract that other programs depend on.
+
+98
+00:03:10,718 --> 00:03:11,777
+End to end test.
+
+99
+00:03:11,777 --> 00:03:13,167
+A whole user journey,
+
+100
+00:03:13,167 --> 00:03:14,822
+through the whole system.
+
+101
+00:03:14,822 --> 00:03:16,213
+Look at the products,
+
+102
+00:03:16,213 --> 00:03:16,875
+add a mug,
+
+103
+00:03:16,875 --> 00:03:17,603
+add a lamp,
+
+104
+00:03:17,603 --> 00:03:18,265
+check out,
+
+105
+00:03:18,265 --> 00:03:20,251
+and confirm the cart is empty.
+
+106
+00:03:20,251 --> 00:03:21,509
+The most realistic,
+
+107
+00:03:21,509 --> 00:03:22,568
+and the slowest.
+
+108
+00:03:22,568 --> 00:03:25,613
+Real projects often drive a real browser here.
+
+109
+00:03:25,613 --> 00:03:26,209
+You will,
+
+110
+00:03:26,209 --> 00:03:27,401
+in a later lesson.
+
+111
+00:03:27,951 --> 00:03:28,703
+Smoke test.
+
+112
+00:03:28,703 --> 00:03:29,181
+A tiny,
+
+113
+00:03:29,181 --> 00:03:31,643
+fast check that the system is alive,
+
+114
+00:03:31,643 --> 00:03:33,968
+and its most important parts work.
+
+115
+00:03:33,968 --> 00:03:35,609
+Is the health page okay?
+
+116
+00:03:35,609 --> 00:03:37,318
+Is the catalog not empty?
+
+117
+00:03:37,318 --> 00:03:41,489
+Named after switching on new electronics: if smoke comes out,
+
+118
+00:03:41,489 --> 00:03:41,831
+stop.
+
+119
+00:03:41,831 --> 00:03:44,292
+You run it right after every deploy.
+
+120
+00:03:44,842 --> 00:03:45,861
+Regression test.
+
+121
+00:03:45,861 --> 00:03:47,580
+Not a level of the pyramid,
+
+122
+00:03:47,580 --> 00:03:48,472
+but a purpose.
+
+123
+00:03:48,472 --> 00:03:50,382
+When a bug is found and fixed,
+
+124
+00:03:50,382 --> 00:03:52,993
+you write a test that fails with the bug,
+
+125
+00:03:52,993 --> 00:03:54,521
+and passes with the fix.
+
+126
+00:03:54,521 --> 00:03:55,604
+It stays forever,
+
+127
+00:03:55,604 --> 00:03:58,278
+so that bug can never come back unnoticed.
+
+128
+00:03:58,278 --> 00:04:00,634
+A regression test can be a unit test,
+
+129
+00:04:00,634 --> 00:04:01,781
+or any other kind.
+
+130
+00:04:02,331 --> 00:04:03,227
+Notice: unit,
+
+131
+00:04:03,227 --> 00:04:04,054
+integration,
+
+132
+00:04:04,054 --> 00:04:08,743
+API and end to end tell you how much of the system the test touches.
+
+133
+00:04:08,743 --> 00:04:11,845
+Smoke and regression tell you why you run it.
+
+134
+00:04:13,395 --> 00:04:17,512
+When do you run which test? Fast tests often. Slow tests wisely.
+
+135
+00:04:18,062 --> 00:04:19,894
+On every commit: unit tests,
+
+136
+00:04:19,894 --> 00:04:21,399
+and a quick smoke test.
+
+137
+00:04:21,399 --> 00:04:22,316
+A few seconds.
+
+138
+00:04:22,316 --> 00:04:24,737
+A developer runs them before pushing,
+
+139
+00:04:24,737 --> 00:04:25,849
+many times a day.
+
+140
+00:04:26,399 --> 00:04:31,055
+On every pull request: add the integration tests and the API tests.
+
+141
+00:04:31,055 --> 00:04:32,029
+A few minutes,
+
+142
+00:04:32,029 --> 00:04:33,488
+run by the CI server,
+
+143
+00:04:33,488 --> 00:04:35,295
+so nobody has to remember.
+
+144
+00:04:35,845 --> 00:04:38,673
+Before a release: add the end to end tests,
+
+145
+00:04:38,673 --> 00:04:39,594
+the slow ones.
+
+146
+00:04:39,594 --> 00:04:42,620
+And right after every deploy: the smoke tests,
+
+147
+00:04:42,620 --> 00:04:44,528
+against the real environment.
+
+148
+00:04:45,078 --> 00:04:47,611
+After every bug: a new regression test,
+
+149
+00:04:47,611 --> 00:04:48,521
+written first.
+
+150
+00:04:48,521 --> 00:04:49,496
+The test fails,
+
+151
+00:04:49,496 --> 00:04:50,600
+you fix the code,
+
+152
+00:04:50,600 --> 00:04:51,640
+the test passes,
+
+153
+00:04:51,640 --> 00:04:53,654
+and it joins the suite forever.
+
+154
+00:04:54,204 --> 00:04:57,216
+This is how a pipeline gets both speed and safety.
+
+155
+00:04:57,216 --> 00:04:59,686
+We build that pipeline in a later lesson.
+
+156
+00:05:01,236 --> 00:05:06,420
+Go to the lab folder.
+
+157
+00:05:07,970 --> 00:05:09,869
+Look around.
+
+158
+00:05:10,419 --> 00:05:15,965
+A small shop module, a shared setup file, and a folder of tests. Let us look at the tests.
+
+159
+00:05:16,515 --> 00:05:17,945
+The tests folder.
+
+160
+00:05:18,795 --> 00:05:19,585
+Five files.
+
+161
+00:05:19,585 --> 00:05:20,087
+Prices,
+
+162
+00:05:20,087 --> 00:05:21,093
+cart database,
+
+163
+00:05:21,093 --> 00:05:21,380
+API,
+
+164
+00:05:21,380 --> 00:05:21,955
+journey,
+
+165
+00:05:21,955 --> 00:05:22,745
+and health.
+
+166
+00:05:22,745 --> 00:05:25,474
+Every one is a different kind of test.
+
+167
+00:05:25,474 --> 00:05:27,413
+Your task is to tell which.
+
+168
+00:05:27,963 --> 00:05:34,982
+A unit test file.
+
+169
+00:05:35,532 --> 00:05:36,588
+Plain functions.
+
+170
+00:05:36,588 --> 00:05:38,965
+Each calls one function of the shop,
+
+171
+00:05:38,965 --> 00:05:40,285
+with simple numbers,
+
+172
+00:05:40,285 --> 00:05:41,803
+and asserts the answer.
+
+173
+00:05:41,803 --> 00:05:42,595
+No database,
+
+174
+00:05:42,595 --> 00:05:43,321
+no network.
+
+175
+00:05:43,321 --> 00:05:44,641
+That is a unit test.
+
+176
+00:05:45,191 --> 00:05:47,943
+Run it.
+
+177
+00:05:48,993 --> 00:05:49,767
+Five passed,
+
+178
+00:05:49,767 --> 00:05:51,829
+in a few hundredths of a second.
+
+179
+00:05:51,829 --> 00:05:53,182
+Each dot is one test.
+
+180
+00:05:53,182 --> 00:05:55,244
+That is the speed of unit tests.
+
+181
+00:05:55,794 --> 00:06:01,767
+An integration test.
+
+182
+00:06:02,317 --> 00:06:03,235
+Three passed.
+
+183
+00:06:03,235 --> 00:06:05,774
+Each test gets a real database file,
+
+184
+00:06:05,774 --> 00:06:07,327
+in a temporary folder,
+
+185
+00:06:07,327 --> 00:06:09,302
+created for it by a fixture.
+
+186
+00:06:09,302 --> 00:06:10,219
+Real queries,
+
+187
+00:06:10,219 --> 00:06:11,137
+real storage.
+
+188
+00:06:11,137 --> 00:06:13,112
+That is an integration test.
+
+189
+00:06:13,662 --> 00:06:17,587
+An API test.
+
+190
+00:06:18,437 --> 00:06:19,325
+Three passed.
+
+191
+00:06:19,325 --> 00:06:22,398
+Each one starts a real server on a free port,
+
+192
+00:06:22,398 --> 00:06:23,969
+sends H T T P requests,
+
+193
+00:06:23,969 --> 00:06:25,813
+and checks the status code.
+
+194
+00:06:25,813 --> 00:06:26,633
+Two hundred,
+
+195
+00:06:26,633 --> 00:06:27,520
+four hundred,
+
+196
+00:06:27,520 --> 00:06:29,296
+and four hundred and nine.
+
+197
+00:06:29,846 --> 00:06:35,457
+End to end.
+
+198
+00:06:36,007 --> 00:06:36,613
+One test,
+
+199
+00:06:36,613 --> 00:06:37,892
+many steps: browse,
+
+200
+00:06:37,892 --> 00:06:38,835
+add two items,
+
+201
+00:06:38,835 --> 00:06:39,912
+check the total,
+
+202
+00:06:39,912 --> 00:06:40,181
+pay,
+
+203
+00:06:40,181 --> 00:06:42,403
+and check that the cart is empty.
+
+204
+00:06:42,403 --> 00:06:43,480
+One failed step,
+
+205
+00:06:43,480 --> 00:06:45,163
+and the whole test fails.
+
+206
+00:06:45,163 --> 00:06:47,655
+That is why end to end tests are few.
+
+207
+00:06:48,205 --> 00:06:53,559
+Smoke.
+
+208
+00:06:54,109 --> 00:06:56,120
+Two quick checks: the health page,
+
+209
+00:06:56,120 --> 00:06:58,013
+and a catalog that is not empty.
+
+210
+00:06:58,013 --> 00:06:58,841
+If these fail,
+
+211
+00:06:58,841 --> 00:07:00,083
+nothing else matters.
+
+212
+00:07:00,633 --> 00:07:10,403
+A bug report.
+
+213
+00:07:10,953 --> 00:07:12,016
+Eight ninety-nine.
+
+214
+00:07:12,016 --> 00:07:13,551
+The fixed code is correct.
+
+215
+00:07:13,551 --> 00:07:15,558
+Now bring the bug back on purpose,
+
+216
+00:07:15,558 --> 00:07:17,033
+with the shop bug switch.
+
+217
+00:07:17,583 --> 00:07:21,765
+With the bug.
+
+218
+00:07:25,315 --> 00:07:26,132
+Nine hundred,
+
+219
+00:07:26,132 --> 00:07:27,578
+in cents: nine dollars.
+
+220
+00:07:27,578 --> 00:07:28,772
+That is bug twelve.
+
+221
+00:07:28,772 --> 00:07:31,224
+The discount was rounded the wrong way.
+
+222
+00:07:31,774 --> 00:07:37,833
+Register markers.
+
+223
+00:07:44,583 --> 00:07:45,382
+Six markers,
+
+224
+00:07:45,382 --> 00:07:46,581
+one for each kind,
+
+225
+00:07:46,581 --> 00:07:47,846
+and strict markers.
+
+226
+00:07:47,846 --> 00:07:50,843
+Strict means a misspelled marker is an error,
+
+227
+00:07:50,843 --> 00:07:52,241
+not a silent mistake.
+
+228
+00:07:52,791 --> 00:07:58,338
+Write the test.
+
+229
+00:08:06,688 --> 00:08:09,150
+The marker says what kind of test this is.
+
+230
+00:08:09,150 --> 00:08:14,368
+The assert says what must be true: ten percent off nine ninety-nine is eight ninety-nine.
+
+231
+00:08:14,918 --> 00:08:18,651
+Fails with the bug.
+
+232
+00:08:21,001 --> 00:08:26,228
+Red. One failed: nine hundred is not eight ninety-nine. The test catches the bug.
+
+233
+00:08:26,778 --> 00:08:30,362
+Passes without.
+
+234
+00:08:30,912 --> 00:08:34,539
+Green. One passed. This test now guards that bug forever.
+
+235
+00:08:35,089 --> 00:08:38,737
+Everything.
+
+236
+00:08:39,287 --> 00:08:40,167
+Fifteen passed.
+
+237
+00:08:40,167 --> 00:08:42,337
+But all the kinds are mixed together.
+
+238
+00:08:42,337 --> 00:08:44,508
+How would you run only the fast ones?
+
+239
+00:08:44,508 --> 00:08:45,857
+You need to label them.
+
+240
+00:08:46,407 --> 00:08:51,698
+Label the unit tests.
+
+241
+00:08:53,348 --> 00:08:57,167
+Run only unit tests.
+
+242
+00:08:57,717 --> 00:08:58,542
+Five passed,
+
+243
+00:08:58,542 --> 00:08:59,573
+ten deselected.
+
+244
+00:08:59,573 --> 00:09:01,222
+Only the unit tests ran.
+
+245
+00:09:01,222 --> 00:09:05,141
+That is the power of a label: you choose which tests run.
+
+246
+00:09:05,691 --> 00:09:10,768
+Everything else.
+
+247
+00:09:11,318 --> 00:09:14,091
+Ten passed. Same suite, a different slice.
+
+248
+00:09:14,641 --> 00:09:17,009
+Run the judge.
+
+249
+00:09:17,559 --> 00:09:19,435
+Three checks pass: the markers,
+
+250
+00:09:19,435 --> 00:09:20,343
+the unit tests,
+
+251
+00:09:20,343 --> 00:09:21,795
+and the regression test.
+
+252
+00:09:21,795 --> 00:09:23,006
+Three are still red,
+
+253
+00:09:23,006 --> 00:09:25,729
+because the other files are not labelled yet.
+
+254
+00:09:25,729 --> 00:09:26,818
+That is your task.
+
+255
+00:09:27,368 --> 00:09:29,331
+Clean up.
+
+256
+00:09:29,881 --> 00:09:31,737
+Removed. Nothing left behind.
+
+257
+00:09:33,287 --> 00:09:37,362
+Your lab task: classify the tests of the mini shop. Six checks.
+
+258
+00:09:37,912 --> 00:09:42,861
+One: register the six markers in pie test dot I N I, with strict markers.
+
+259
+00:09:43,411 --> 00:09:45,998
+Two: label every test with its kind.
+
+260
+00:09:45,998 --> 00:09:46,717
+Five unit,
+
+261
+00:09:46,717 --> 00:09:48,011
+three integration,
+
+262
+00:09:48,011 --> 00:09:48,729
+three API,
+
+263
+00:09:48,729 --> 00:09:49,807
+one end to end,
+
+264
+00:09:49,807 --> 00:09:50,814
+and two smoke.
+
+265
+00:09:51,364 --> 00:09:53,195
+Three: bug twelve is in the lab.
+
+266
+00:09:53,195 --> 00:09:54,683
+Write the regression test.
+
+267
+00:09:54,683 --> 00:09:56,171
+It must fail with the bug,
+
+268
+00:09:56,171 --> 00:09:57,316
+and pass without it.
+
+269
+00:09:57,866 --> 00:10:00,191
+Then lab check, until six out of six.
+
+270
+00:10:02,241 --> 00:10:05,036
+Where to find the lab. Pause here, and write it down.
+
+271
+00:10:05,586 --> 00:10:07,050
+One: the repository,
+
+272
+00:10:07,050 --> 00:10:11,370
+git hub dot com slash it dash waves slash dev ops dash A I,
+
+273
+00:10:11,370 --> 00:10:13,714
+in the folder academy slash lab.
+
+274
+00:10:14,264 --> 00:10:20,386
+Two: the files, lab one thirty-five dot S H, and shortcuts one thirty-five dot S H.
+
+275
+00:10:20,936 --> 00:10:26,398
+Three: install it, with sudo install, into slash user slash local slash S bin.
+
+276
+00:10:26,948 --> 00:10:28,772
+Four: load the short names,
+
+277
+00:10:28,772 --> 00:10:31,879
+with source shortcuts one thirty-five dot S H.
+
+278
+00:10:31,879 --> 00:10:32,690
+Then lab up,
+
+279
+00:10:32,690 --> 00:10:33,365
+lab check,
+
+280
+00:10:33,365 --> 00:10:34,244
+and lab down.
+
+281
+00:10:34,794 --> 00:10:37,797
+Five: you need python three and pie test.
+
+282
+00:10:37,797 --> 00:10:38,529
+On Ubuntu,
+
+283
+00:10:38,529 --> 00:10:39,774
+sudo apt install,
+
+284
+00:10:39,774 --> 00:10:40,726
+python three,
+
+285
+00:10:40,726 --> 00:10:41,386
+pie test.
+
+286
+00:10:41,936 --> 00:10:45,776
+Six: only on your own machine. Lab down removes everything.
+
+287
+00:10:46,326 --> 00:10:47,968
+The link is in the description.
+
+288
+00:10:50,018 --> 00:10:53,666
+Pass or fail rubric. Six points. All six to pass.
+
+289
+00:10:54,216 --> 00:10:56,456
+One: six markers registered, strict.
+
+290
+00:10:57,006 --> 00:10:59,054
+Two: exactly five unit tests.
+
+291
+00:10:59,604 --> 00:11:02,015
+Three: exactly three integration tests.
+
+292
+00:11:02,565 --> 00:11:05,722
+Four: three API tests, and one end to end test.
+
+293
+00:11:06,272 --> 00:11:08,491
+Five: two smoke tests, and they pass.
+
+294
+00:11:09,041 --> 00:11:12,966
+Six: the regression test fails with the bug, and passes without it.
+
+295
+00:11:13,516 --> 00:11:14,817
+Pass means all six.
+
+296
+00:11:16,867 --> 00:11:18,638
+Your turn, on your own machine.
+
+297
+00:11:19,188 --> 00:11:22,644
+One: lab up, and read every test file. Decide its kind.
+
+298
+00:11:23,194 --> 00:11:26,500
+Two: write the pie test dot I N I with six markers.
+
+299
+00:11:27,050 --> 00:11:30,037
+Three: label each file, with one line at the top.
+
+300
+00:11:30,587 --> 00:11:35,067
+Four: write the regression test for bug twelve. Run it with the bug, and without.
+
+301
+00:11:35,617 --> 00:11:39,094
+Five: lab check, until six out of six. Then lab down.
+
+302
+00:11:39,644 --> 00:11:41,479
+Pause the video, and begin now.
+
+303
+00:11:57,029 --> 00:11:57,904
+Quick check.
+
+304
+00:11:58,454 --> 00:12:02,336
+Which kind of test is the fastest, and which is the most realistic?
+
+305
+00:12:02,886 --> 00:12:05,084
+Why must a regression test fail first?
+
+306
+00:12:05,634 --> 00:12:07,660
+Which tests do you run on every commit?
+
+307
+00:12:08,210 --> 00:12:09,682
+What does a marker let you do?
+
+308
+00:12:10,232 --> 00:12:12,701
+Objective covered: M C fifteen,
+
+309
+00:12:12,701 --> 00:12:13,816
+objective one.
+
+310
+00:12:13,816 --> 00:12:15,170
+Distinguish unit,
+
+311
+00:12:15,170 --> 00:12:16,125
+integration,
+
+312
+00:12:16,125 --> 00:12:16,444
+API,
+
+313
+00:12:16,444 --> 00:12:17,320
+end to end,
+
+314
+00:12:17,320 --> 00:12:17,797
+smoke,
+
+315
+00:12:17,797 --> 00:12:19,470
+and regression tests.
+
+316
+00:12:20,020 --> 00:12:22,089
+Pause the video, and answer out loud.
+
+317
+00:12:32,639 --> 00:12:36,650
+Next: assertions, fixtures, mocks, test data, and isolation.
+
+318
+00:12:37,200 --> 00:12:40,528
+If this helped, like, share and subscribe, so you do not miss it.

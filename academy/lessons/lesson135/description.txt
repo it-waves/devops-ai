@@ -1,0 +1,27 @@
+Lesson 135 of the DevOps Engineering Bootcamp, and lesson 1 of the Software Testing and QA domain. A developer changes one line on a Friday afternoon: do you ship it? In this lesson you learn the six kinds of test and what each one is for: unit, integration, API, end-to-end, smoke and regression. You see the test pyramid (many small fast tests, a few big slow ones), when to run which test (every commit, every pull request, before a release, after every bug), and then you run every kind live with pytest on a real mini shop, write a regression test for a real bug, and select tests by label with pytest markers. A lab then judges you from 0 of 6 to 6 of 6.
+
+Chapters
+0:00 Which test do you run?
+0:31 What to expect
+1:13 The test pyramid
+2:13 The six kinds of test
+4:12 When to run which test
+5:00 Live: run every kind of test
+9:32 Your lab task
+10:01 Where to find the lab
+10:49 Pass or fail rubric
+11:16 Your turn
+11:56 Quick check
+
+Objectives covered: MC15-O01, distinguish unit, integration, API, end-to-end, smoke, and regression tests.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab135.sh and shortcuts135.sh). Install with: sudo install -m 755 lab135.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts135.sh. You need any Linux machine with root, python3 and pytest (for example: sudo apt install -y python3-pytest). The lab creates a small shop project in /opt/lab135 and does not touch anything else. lab down removes it. Only run it on your own machine.
+
+Honest notes: the terminal demo is one real, continuous recording of pytest running on a small Python shop written for this lab, and the lab was run end to end: it passes 0 of 6 before you start and 6 of 6 after you finish, and lab down leaves nothing behind. The pytest header on screen shows no plugins because they are switched off in the recording to keep the screen clean. The narration is synthetic speech. The hook, pyramid, kinds, when, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: PostgreSQL Databases Mastery: Deploy, Secure, Back Up and Recover a Real Database | Lesson 134 https://youtu.be/YdKIVeZ54uo
+Next: Assertions, fixtures, mocks, test data and isolation.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #softwaretesting #pytest #qa #devopsbootcamp
