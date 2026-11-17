@@ -14,7 +14,7 @@ def add_item(stock, name, qty):
     stock[name] = qty
 
 def restock(stock, name, qty):
-    stock[name] = qty                       # BUG: this replaces the count, it should add to it
+    stock[name] = qty  # BUG: replaces, should add
 
 def remove(stock, name, qty):
     if stock.get(name, 0) < qty:
@@ -35,7 +35,7 @@ def test_stock_add_new_item():
     stock.add_item(s, "mug", 5)
     assert s["mug"] == 5
 
-def test_stock_restock_adds_to_existing():
+def test_stock_restock_adds():
     s = {"mug": 5}
     stock.restock(s, "mug", 3)
     assert s["mug"] == 8
@@ -102,18 +102,18 @@ r = ET.parse(sys.argv[1]).getroot()
 t = r if r.tag == "testsuite" else r.find("testsuite")
 sys.exit(0 if (t.get("tests"), t.get("failures"), t.get("skipped")) == ("10", "1", "2") else 1)
 EOF_P
-  chk $s "out/junit.xml is a JUnit report of the failing run (10 tests, 1 failure)"
-  s=bad; [ -f $O/report.html ] && grep -q "<style" $O/report.html && ! grep -q 'rel="stylesheet"' $O/report.html && grep -q "test_stock_restock_adds_to_existing" $O/report.html && s=ok
-  chk $s "out/report.html is a self-contained HTML report that shows the failure"
+  chk $s "junit.xml: JUnit report of the failing run"
+  s=bad; [ -f $O/report.html ] && grep -q "<style" $O/report.html && ! grep -q 'rel="stylesheet"' $O/report.html && grep -q "test_stock_restock_adds" $O/report.html && s=ok
+  chk $s "report.html: self-contained, shows the failure"
   s=bad; [ "$(cat $O/exit_failing.txt 2>/dev/null | tr -d ' \n')" = 1 ] && s=ok
-  chk $s "out/exit_failing.txt holds the exit code of the failing run (1)"
+  chk $s "exit_failing.txt holds 1 (the failing run)"
   s=bad; grep -q "slowest" $O/slow.txt 2>/dev/null && grep -q "test_report_builds_slowly" $O/slow.txt && s=ok
-  chk $s "out/slow.txt lists the slowest tests (--durations)"
+  chk $s "slow.txt lists the slowest tests"
   n=$(grep -c "::" $O/selected.txt 2>/dev/null); a=$(grep "::" $O/selected.txt 2>/dev/null | grep -vc stock)
   s=bad; [ "${n:-0}" -ge 4 ] && [ "${a:-1}" = 0 ] && grep -q "PASSED\|FAILED" $O/selected.txt && s=ok
-  chk $s "out/selected.txt shows only the stock tests, run verbosely (-k stock -v)"
+  chk $s "selected.txt: only the stock tests, verbose"
   s=bad; ( cd $D && sha256sum -c .tests.sha >/dev/null 2>&1 && python3 -m pytest -q -p no:cacheprovider tests >/dev/null 2>&1 ) && [ "$(cat $O/exit_passing.txt 2>/dev/null | tr -d ' \n')" = 0 ] && s=ok
-  chk $s "stock.py is fixed (tests untouched, all pass) and out/exit_passing.txt holds 0"
+  chk $s "stock.py fixed, tests untouched, exit_passing.txt 0"
   echo; echo "$P / $N passed"; [ $P = $N ]
 }
 status() { [ -d $D ] && echo "lab 137 running in $D" || echo "lab 137 not running"; }

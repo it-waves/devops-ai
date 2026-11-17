@@ -1,0 +1,1307 @@
+1
+00:00:00,500 --> 00:00:04,639
+The test run finished. Did it pass? You looked at the screen, and you could tell.
+
+2
+00:00:05,189 --> 00:00:08,142
+But your build server cannot look at a screen.
+
+3
+00:00:08,142 --> 00:00:11,031
+It asks one question: what was the exit code?
+
+4
+00:00:11,031 --> 00:00:11,352
+Zero,
+
+5
+00:00:11,352 --> 00:00:12,122
+or not zero.
+
+6
+00:00:12,672 --> 00:00:15,900
+And your manager does not want to scroll through a terminal.
+
+7
+00:00:15,900 --> 00:00:17,621
+She wants a report she can open.
+
+8
+00:00:18,171 --> 00:00:21,308
+Today you learn to run tests the way you need them,
+
+9
+00:00:21,308 --> 00:00:22,600
+to read every result,
+
+10
+00:00:22,600 --> 00:00:24,015
+to trust the exit code,
+
+11
+00:00:24,015 --> 00:00:26,598
+and to make a report that anyone can open.
+
+12
+00:00:28,148 --> 00:00:29,577
+Here is what to expect.
+
+13
+00:00:30,127 --> 00:00:35,546
+One: the ways to run tests. All of them, one file, one test, or only the ones you name.
+
+14
+00:00:36,096 --> 00:00:40,213
+Two: how to read the output. The dots and letters, and the summary line.
+
+15
+00:00:40,763 --> 00:00:41,933
+Three: exit codes.
+
+16
+00:00:41,933 --> 00:00:42,972
+What zero means,
+
+17
+00:00:42,972 --> 00:00:43,947
+what one means,
+
+18
+00:00:43,947 --> 00:00:46,481
+and why every pipeline depends on them.
+
+19
+00:00:47,031 --> 00:00:52,705
+Four: reports. A J unit file for machines, and an H T M L page for people.
+
+20
+00:00:53,255 --> 00:00:55,415
+Then a live demo with pie test,
+
+21
+00:00:55,415 --> 00:00:59,456
+and a real walkthrough of the H T M L report in a browser,
+
+22
+00:00:59,456 --> 00:01:00,361
+part by part.
+
+23
+00:01:00,361 --> 00:01:02,173
+And a lab with six checks.
+
+24
+00:01:04,223 --> 00:01:05,652
+The ways to run tests.
+
+25
+00:01:06,202 --> 00:01:07,474
+Just type pie test,
+
+26
+00:01:07,474 --> 00:01:10,019
+and it finds every test in the folder.
+
+27
+00:01:10,019 --> 00:01:11,358
+Give it a file name,
+
+28
+00:01:11,358 --> 00:01:12,831
+and it runs that file.
+
+29
+00:01:12,831 --> 00:01:14,906
+Add two colons and a test name,
+
+30
+00:01:14,906 --> 00:01:16,848
+and it runs exactly one test.
+
+31
+00:01:17,398 --> 00:01:18,728
+Dash K takes a word,
+
+32
+00:01:18,728 --> 00:01:21,588
+and runs every test whose name contains it.
+
+33
+00:01:21,588 --> 00:01:23,052
+Dash M takes a marker,
+
+34
+00:01:23,052 --> 00:01:25,846
+like the ones you used in the last lesson.
+
+35
+00:01:26,396 --> 00:01:28,315
+Dash X stops at the first failure.
+
+36
+00:01:28,315 --> 00:01:31,589
+When you have a hundred tests and the first one is broken,
+
+37
+00:01:31,589 --> 00:01:33,734
+there is no need to wait for the rest.
+
+38
+00:01:34,284 --> 00:01:36,979
+Dash Q makes the output quiet and short.
+
+39
+00:01:36,979 --> 00:01:40,279
+Dash V makes it verbose: one line for every test,
+
+40
+00:01:40,279 --> 00:01:41,559
+with its full name.
+
+41
+00:01:42,109 --> 00:01:46,973
+Choose the smallest run that answers your question. Fast feedback is the whole point.
+
+42
+00:01:48,523 --> 00:01:49,846
+How to read the output.
+
+43
+00:01:50,396 --> 00:01:52,610
+Every test shows one character.
+
+44
+00:01:52,610 --> 00:01:53,967
+A dot means passed.
+
+45
+00:01:53,967 --> 00:01:55,753
+A capital F means failed.
+
+46
+00:01:55,753 --> 00:01:57,467
+A small s means skipped,
+
+47
+00:01:57,467 --> 00:01:58,252
+on purpose.
+
+48
+00:01:58,252 --> 00:02:00,824
+A small x means an expected failure.
+
+49
+00:02:00,824 --> 00:02:04,966
+A capital E means an error: the test could not even start.
+
+50
+00:02:05,516 --> 00:02:08,410
+After the characters comes the failure section.
+
+51
+00:02:08,410 --> 00:02:10,811
+For each failure you see the test name,
+
+52
+00:02:10,811 --> 00:02:11,365
+the code,
+
+53
+00:02:11,365 --> 00:02:13,028
+and a line starting with E.
+
+54
+00:02:13,028 --> 00:02:15,737
+That E line is the clue: what the code gave,
+
+55
+00:02:15,737 --> 00:02:17,399
+and what the test expected.
+
+56
+00:02:17,949 --> 00:02:19,649
+The last line is the summary.
+
+57
+00:02:19,649 --> 00:02:20,587
+How many failed,
+
+58
+00:02:20,587 --> 00:02:21,525
+how many passed,
+
+59
+00:02:21,525 --> 00:02:22,522
+how many skipped,
+
+60
+00:02:22,522 --> 00:02:23,753
+and how long it took.
+
+61
+00:02:23,753 --> 00:02:25,160
+Look at that line first.
+
+62
+00:02:25,710 --> 00:02:31,427
+Colors help. Red is a problem. Green is fine. Yellow is something you chose to set aside.
+
+63
+00:02:31,977 --> 00:02:33,499
+A skip is not a failure,
+
+64
+00:02:33,499 --> 00:02:36,098
+and an expected failure is not a failure.
+
+65
+00:02:36,098 --> 00:02:37,493
+But neither is a pass.
+
+66
+00:02:37,493 --> 00:02:38,761
+Keep an eye on them.
+
+67
+00:02:40,311 --> 00:02:43,170
+Exit codes. The answer a machine understands.
+
+68
+00:02:43,720 --> 00:02:45,832
+Every program ends with a number.
+
+69
+00:02:45,832 --> 00:02:47,048
+Zero means success.
+
+70
+00:02:47,048 --> 00:02:49,672
+Anything else means something went wrong.
+
+71
+00:02:49,672 --> 00:02:50,504
+In the shell,
+
+72
+00:02:50,504 --> 00:02:55,752
+the special variable dollar question mark holds the exit code of the last command.
+
+73
+00:02:56,302 --> 00:02:58,106
+Pie test uses six codes.
+
+74
+00:02:58,106 --> 00:02:59,835
+Zero: all tests passed.
+
+75
+00:02:59,835 --> 00:03:01,564
+One: some tests failed.
+
+76
+00:03:01,564 --> 00:03:03,744
+Two: the run was interrupted,
+
+77
+00:03:03,744 --> 00:03:05,774
+for example with control C.
+
+78
+00:03:06,324 --> 00:03:07,935
+Three: an internal error.
+
+79
+00:03:07,935 --> 00:03:10,191
+Four: you used the command wrongly.
+
+80
+00:03:10,191 --> 00:03:12,318
+Five: no tests were found at all.
+
+81
+00:03:12,868 --> 00:03:15,339
+A pipeline does not read your output.
+
+82
+00:03:15,339 --> 00:03:16,942
+It looks at this number.
+
+83
+00:03:16,942 --> 00:03:17,276
+Zero,
+
+84
+00:03:17,276 --> 00:03:18,945
+and the pipeline goes on.
+
+85
+00:03:18,945 --> 00:03:19,546
+Not zero,
+
+86
+00:03:19,546 --> 00:03:20,414
+and it stops,
+
+87
+00:03:20,414 --> 00:03:22,618
+and nobody ships the broken code.
+
+88
+00:03:23,168 --> 00:03:25,593
+That also means: never hide a failure.
+
+89
+00:03:25,593 --> 00:03:28,848
+A run that prints failures but exits zero is a lie,
+
+90
+00:03:28,848 --> 00:03:30,954
+and the pipeline will believe it.
+
+91
+00:03:32,504 --> 00:03:35,171
+Reports. Three outputs, for three audiences.
+
+92
+00:03:35,721 --> 00:03:37,143
+The terminal is for you,
+
+93
+00:03:37,143 --> 00:03:37,735
+right now.
+
+94
+00:03:37,735 --> 00:03:38,447
+It is quick,
+
+95
+00:03:38,447 --> 00:03:41,054
+and it disappears when you close the window.
+
+96
+00:03:41,604 --> 00:03:44,100
+A J unit X M L file is for machines.
+
+97
+00:03:44,100 --> 00:03:44,655
+Jenkins,
+
+98
+00:03:44,655 --> 00:03:45,764
+Git hub Actions,
+
+99
+00:03:45,764 --> 00:03:48,676
+and almost every build tool understand it.
+
+100
+00:03:48,676 --> 00:03:52,143
+They read it to show trends and to mark the build.
+
+101
+00:03:52,693 --> 00:03:55,002
+An H T M L report is for people.
+
+102
+00:03:55,002 --> 00:03:55,652
+One file,
+
+103
+00:03:55,652 --> 00:03:57,384
+with colors and filters.
+
+104
+00:03:57,384 --> 00:03:59,550
+You can attach it to a ticket,
+
+105
+00:03:59,550 --> 00:04:01,354
+or e-mail it to the team.
+
+106
+00:04:01,904 --> 00:04:06,640
+And the durations option lists the slowest tests, so you can see where the time goes.
+
+107
+00:04:07,190 --> 00:04:10,667
+All of them come from the same run, with a few extra options.
+
+108
+00:04:12,217 --> 00:04:17,444
+Go to the lab folder.
+
+109
+00:04:18,994 --> 00:04:20,892
+Look around.
+
+110
+00:04:21,442 --> 00:04:24,878
+A small warehouse project: the code in stock dot pie,
+
+111
+00:04:24,878 --> 00:04:26,045
+a folder of tests,
+
+112
+00:04:26,045 --> 00:04:28,055
+and an empty folder called out,
+
+113
+00:04:28,055 --> 00:04:29,741
+where the reports will go.
+
+114
+00:04:30,291 --> 00:04:34,088
+Run the tests.
+
+115
+00:04:34,638 --> 00:04:36,172
+Look at the characters.
+
+116
+00:04:36,172 --> 00:04:36,572
+A dot,
+
+117
+00:04:36,572 --> 00:04:38,639
+then an s for the skipped test,
+
+118
+00:04:38,639 --> 00:04:40,973
+then an x for the expected failure.
+
+119
+00:04:40,973 --> 00:04:41,840
+Further down,
+
+120
+00:04:41,840 --> 00:04:42,173
+an F.
+
+121
+00:04:42,173 --> 00:04:43,774
+The summary: one failed,
+
+122
+00:04:43,774 --> 00:04:44,641
+seven passed,
+
+123
+00:04:44,641 --> 00:04:45,441
+one skipped,
+
+124
+00:04:45,441 --> 00:04:46,841
+one expected failure.
+
+125
+00:04:47,391 --> 00:04:55,007
+The exit code.
+
+126
+00:04:55,557 --> 00:04:55,807
+One.
+
+127
+00:04:55,807 --> 00:04:57,368
+At least one test failed.
+
+128
+00:04:57,368 --> 00:04:59,554
+This is the number a pipeline sees.
+
+129
+00:04:59,554 --> 00:05:01,677
+And it is saved in the out folder,
+
+130
+00:05:01,677 --> 00:05:02,426
+for the lab.
+
+131
+00:05:02,976 --> 00:05:07,798
+See the failure.
+
+132
+00:05:08,348 --> 00:05:08,907
+The file,
+
+133
+00:05:08,907 --> 00:05:09,901
+the line number,
+
+134
+00:05:09,901 --> 00:05:12,387
+and the clue: assert three equals eight.
+
+135
+00:05:12,387 --> 00:05:13,629
+The code gave three.
+
+136
+00:05:13,629 --> 00:05:14,748
+We expected eight.
+
+137
+00:05:15,298 --> 00:05:19,628
+Stop early.
+
+138
+00:05:20,178 --> 00:05:22,207
+It stopped right after the failure,
+
+139
+00:05:22,207 --> 00:05:23,599
+and says so: one failed,
+
+140
+00:05:23,599 --> 00:05:25,512
+and only the tests before it ran.
+
+141
+00:05:26,062 --> 00:05:31,800
+Run only some.
+
+142
+00:05:32,950 --> 00:05:33,597
+Four tests,
+
+143
+00:05:33,597 --> 00:05:36,127
+and only the ones with stock in their name.
+
+144
+00:05:36,127 --> 00:05:38,774
+Verbose mode shows each name with its result.
+
+145
+00:05:39,324 --> 00:05:44,316
+The slowest tests.
+
+146
+00:05:45,266 --> 00:05:47,505
+The slowest test is the report test,
+
+147
+00:05:47,505 --> 00:05:48,997
+four tenths of a second.
+
+148
+00:05:48,997 --> 00:05:51,112
+Everything else is nearly instant.
+
+149
+00:05:51,662 --> 00:05:59,128
+A J unit file.
+
+150
+00:05:59,678 --> 00:06:02,985
+The screen looks the same. The difference is the file it wrote.
+
+151
+00:06:03,535 --> 00:06:07,012
+Peek inside.
+
+152
+00:06:08,462 --> 00:06:13,134
+Failures equals one. Any build tool can read this, count it, and mark the build.
+
+153
+00:06:13,684 --> 00:06:22,730
+An H T M L report.
+
+154
+00:06:23,280 --> 00:06:28,784
+Self contained means one single file, with its styles inside, so you can send it anywhere.
+
+155
+00:06:29,334 --> 00:06:31,062
+Terminal output is for you,
+
+156
+00:06:31,062 --> 00:06:31,702
+right now.
+
+157
+00:06:31,702 --> 00:06:34,326
+A report is for everyone else: your team,
+
+158
+00:06:34,326 --> 00:06:35,158
+your manager,
+
+159
+00:06:35,158 --> 00:06:36,246
+the build server.
+
+160
+00:06:36,246 --> 00:06:38,550
+So let us open the one we just made,
+
+161
+00:06:38,550 --> 00:06:39,382
+in a browser.
+
+162
+00:06:39,932 --> 00:06:40,908
+I open Chrome,
+
+163
+00:06:40,908 --> 00:06:42,999
+and type the path to the file.
+
+164
+00:06:42,999 --> 00:06:43,347
+File,
+
+165
+00:06:43,347 --> 00:06:43,766
+colon,
+
+166
+00:06:43,766 --> 00:06:44,184
+slash,
+
+167
+00:06:44,184 --> 00:06:44,602
+slash,
+
+168
+00:06:44,602 --> 00:06:45,648
+and the folder.
+
+169
+00:06:45,648 --> 00:06:49,830
+A report like this is just a file on disk: no server needed.
+
+170
+00:06:50,380 --> 00:06:51,770
+At the top: the title,
+
+171
+00:06:51,770 --> 00:06:54,801
+and a line telling you when the report was made,
+
+172
+00:06:54,801 --> 00:06:55,937
+and by which tool.
+
+173
+00:06:55,937 --> 00:06:57,011
+Pie test H T M L,
+
+174
+00:06:57,011 --> 00:06:58,463
+version four point two.
+
+175
+00:06:58,463 --> 00:06:58,842
+Below,
+
+176
+00:06:58,842 --> 00:07:00,232
+the Environment table.
+
+177
+00:07:00,232 --> 00:07:01,431
+The Python version,
+
+178
+00:07:01,431 --> 00:07:02,252
+the platform,
+
+179
+00:07:02,252 --> 00:07:03,326
+and the packages,
+
+180
+00:07:03,326 --> 00:07:05,157
+with the version of pie test.
+
+181
+00:07:05,157 --> 00:07:08,441
+When a test fails on one machine but not on another,
+
+182
+00:07:08,441 --> 00:07:10,967
+this table is where you start comparing.
+
+183
+00:07:11,517 --> 00:07:11,852
+Next,
+
+184
+00:07:11,852 --> 00:07:12,656
+the Summary.
+
+185
+00:07:12,656 --> 00:07:15,469
+The first line says how long the run took.
+
+186
+00:07:15,469 --> 00:07:17,211
+Then a row of check boxes,
+
+187
+00:07:17,211 --> 00:07:19,623
+one for each kind of result: failed,
+
+188
+00:07:19,623 --> 00:07:20,092
+passed,
+
+189
+00:07:20,092 --> 00:07:20,627
+skipped,
+
+190
+00:07:20,627 --> 00:07:21,833
+expected failures,
+
+191
+00:07:21,833 --> 00:07:23,039
+unexpected passes,
+
+192
+00:07:23,039 --> 00:07:23,508
+errors,
+
+193
+00:07:23,508 --> 00:07:24,245
+and reruns.
+
+194
+00:07:24,245 --> 00:07:26,991
+The number in front of each is its count.
+
+195
+00:07:26,991 --> 00:07:28,733
+Red means look here first.
+
+196
+00:07:29,283 --> 00:07:29,693
+Below,
+
+197
+00:07:29,693 --> 00:07:32,221
+the table has one row for every test.
+
+198
+00:07:32,221 --> 00:07:32,836
+Failures,
+
+199
+00:07:32,836 --> 00:07:36,798
+expected failures and skips open their details by default,
+
+200
+00:07:36,798 --> 00:07:39,872
+because those are the rows that need a human.
+
+201
+00:07:39,872 --> 00:07:41,717
+The two links on the right,
+
+202
+00:07:41,717 --> 00:07:44,313
+show all details and hide all details,
+
+203
+00:07:44,313 --> 00:07:46,499
+open or close every row at once.
+
+204
+00:07:47,049 --> 00:07:47,960
+Four columns.
+
+205
+00:07:47,960 --> 00:07:48,450
+Result.
+
+206
+00:07:48,450 --> 00:07:49,921
+The name of the test.
+
+207
+00:07:49,921 --> 00:07:50,832
+Its duration.
+
+208
+00:07:50,832 --> 00:07:51,532
+And links,
+
+209
+00:07:51,532 --> 00:07:55,385
+which stay empty unless you attach logs or screenshots.
+
+210
+00:07:55,385 --> 00:07:57,417
+The first row is our failure.
+
+211
+00:07:59,667 --> 00:08:01,845
+The grey box holds the detail: E,
+
+212
+00:08:01,845 --> 00:08:03,561
+assert three equals eight.
+
+213
+00:08:03,561 --> 00:08:06,002
+The same clue we saw in the terminal.
+
+214
+00:08:06,002 --> 00:08:07,322
+The code gave three,
+
+215
+00:08:07,322 --> 00:08:09,170
+and the test expected eight.
+
+216
+00:08:09,170 --> 00:08:10,556
+For a long traceback,
+
+217
+00:08:10,556 --> 00:08:11,678
+you click expand,
+
+218
+00:08:11,678 --> 00:08:13,328
+and the whole text opens.
+
+219
+00:08:13,328 --> 00:08:14,318
+I click expand,
+
+220
+00:08:14,318 --> 00:08:15,902
+and then collapse again.
+
+221
+00:08:25,652 --> 00:08:26,888
+Below it: X failed,
+
+222
+00:08:26,888 --> 00:08:28,190
+an expected failure,
+
+223
+00:08:28,190 --> 00:08:28,841
+in orange.
+
+224
+00:08:28,841 --> 00:08:31,249
+We marked that test as known to fail,
+
+225
+00:08:31,249 --> 00:08:33,136
+so it does not break the run.
+
+226
+00:08:33,136 --> 00:08:35,804
+Then skipped: a test we chose not to run,
+
+227
+00:08:35,804 --> 00:08:39,774
+and the reason is stored with it: gift wrap is not built yet.
+
+228
+00:08:40,324 --> 00:08:42,361
+The check boxes filter the list.
+
+229
+00:08:42,361 --> 00:08:43,507
+I un-tick skipped,
+
+230
+00:08:43,507 --> 00:08:44,907
+and those rows vanish.
+
+231
+00:08:44,907 --> 00:08:45,798
+Tick it again,
+
+232
+00:08:45,798 --> 00:08:46,816
+and they return.
+
+233
+00:08:46,816 --> 00:08:49,044
+In a suite with thousands of tests,
+
+234
+00:08:49,044 --> 00:08:51,844
+this is how you find the problem in seconds.
+
+235
+00:08:52,394 --> 00:08:54,502
+Now I click the duration header,
+
+236
+00:08:54,502 --> 00:08:56,346
+and the table sorts by time.
+
+237
+00:08:56,346 --> 00:08:58,716
+The green rows are the passed tests.
+
+238
+00:08:58,716 --> 00:09:04,182
+One more click puts the slowest first: the four hundred millisecond test is on top.
+
+239
+00:09:04,182 --> 00:09:06,817
+The same answer as the durations option,
+
+240
+00:09:06,817 --> 00:09:07,541
+but visual.
+
+241
+00:09:08,091 --> 00:09:09,281
+That is the report.
+
+242
+00:09:09,281 --> 00:09:09,845
+One file,
+
+243
+00:09:09,845 --> 00:09:12,226
+and anyone can open it with a browser.
+
+244
+00:09:12,226 --> 00:09:14,106
+You can attach it to a ticket,
+
+245
+00:09:14,106 --> 00:09:15,735
+or keep it with the build.
+
+246
+00:09:15,735 --> 00:09:17,051
+Back to the terminal.
+
+247
+00:09:32,501 --> 00:09:38,709
+Find the bug.
+
+248
+00:09:39,259 --> 00:09:41,803
+The restock function replaces the number,
+
+249
+00:09:41,803 --> 00:09:43,292
+instead of adding to it.
+
+250
+00:09:43,292 --> 00:09:44,161
+Five in stock,
+
+251
+00:09:44,161 --> 00:09:45,277
+three more arrive,
+
+252
+00:09:45,277 --> 00:09:46,767
+and the code says three,
+
+253
+00:09:46,767 --> 00:09:47,387
+not eight.
+
+254
+00:09:47,937 --> 00:09:53,612
+Fix it.
+
+255
+00:09:54,862 --> 00:09:57,102
+Now restock adds to what is already there.
+
+256
+00:09:57,652 --> 00:10:00,873
+Run again.
+
+257
+00:10:01,423 --> 00:10:05,562
+All passed. The skipped and expected failure are still there, as planned.
+
+258
+00:10:06,112 --> 00:10:10,741
+Exit code.
+
+259
+00:10:11,291 --> 00:10:13,318
+Zero. The pipeline would go on.
+
+260
+00:10:13,868 --> 00:10:16,236
+Run the judge.
+
+261
+00:10:16,786 --> 00:10:21,820
+It checks every file in the out folder, and runs the tests itself. Six out of six.
+
+262
+00:10:22,370 --> 00:10:24,333
+Clean up.
+
+263
+00:10:24,883 --> 00:10:26,739
+Removed. Nothing left behind.
+
+264
+00:10:28,289 --> 00:10:32,449
+Your lab task: run the tests, and save the evidence. Six checks.
+
+265
+00:10:32,999 --> 00:10:38,802
+One: a J unit file of the failing run. Two: a self contained H T M L report.
+
+266
+00:10:39,352 --> 00:10:42,000
+Three: the exit code of the failing run,
+
+267
+00:10:42,000 --> 00:10:43,060
+saved to a file.
+
+268
+00:10:43,060 --> 00:10:44,649
+Four: the slowest tests,
+
+269
+00:10:44,649 --> 00:10:46,370
+with the durations option.
+
+270
+00:10:46,920 --> 00:10:49,018
+Five: run only the stock tests,
+
+271
+00:10:49,018 --> 00:10:49,694
+verbosely,
+
+272
+00:10:49,694 --> 00:10:51,048
+and save the output.
+
+273
+00:10:51,048 --> 00:10:53,010
+Six: fix the bug in the code,
+
+274
+00:10:53,010 --> 00:10:54,160
+not in the tests,
+
+275
+00:10:54,160 --> 00:10:55,987
+and save the new exit code.
+
+276
+00:10:56,537 --> 00:10:58,862
+Then lab check, until six out of six.
+
+277
+00:11:00,912 --> 00:11:03,707
+Where to find the lab. Pause here, and write it down.
+
+278
+00:11:04,257 --> 00:11:05,721
+One: the repository,
+
+279
+00:11:05,721 --> 00:11:10,041
+git hub dot com slash it dash waves slash dev ops dash A I,
+
+280
+00:11:10,041 --> 00:11:12,385
+in the folder academy slash lab.
+
+281
+00:11:12,935 --> 00:11:19,164
+Two: the files, lab one thirty-seven dot S H, and shortcuts one thirty-seven dot S H.
+
+282
+00:11:19,714 --> 00:11:25,175
+Three: install it, with sudo install, into slash user slash local slash S bin.
+
+283
+00:11:25,725 --> 00:11:27,543
+Four: load the short names,
+
+284
+00:11:27,543 --> 00:11:30,708
+with source shortcuts one thirty-seven dot S H.
+
+285
+00:11:30,708 --> 00:11:31,515
+Then lab up,
+
+286
+00:11:31,515 --> 00:11:32,189
+lab check,
+
+287
+00:11:32,189 --> 00:11:33,064
+and lab down.
+
+288
+00:11:33,614 --> 00:11:35,833
+Five: you need python three,
+
+289
+00:11:35,833 --> 00:11:36,547
+pie test,
+
+290
+00:11:36,547 --> 00:11:38,211
+and pie test H T M L.
+
+291
+00:11:38,211 --> 00:11:39,004
+On Ubuntu,
+
+292
+00:11:39,004 --> 00:11:40,351
+sudo apt install,
+
+293
+00:11:40,351 --> 00:11:41,382
+python three,
+
+294
+00:11:41,382 --> 00:11:42,095
+pie test,
+
+295
+00:11:42,095 --> 00:11:43,125
+python three,
+
+296
+00:11:43,125 --> 00:11:43,839
+pie test,
+
+297
+00:11:43,839 --> 00:11:44,473
+H T M L.
+
+298
+00:11:45,023 --> 00:11:48,863
+Six: only on your own machine. Lab down removes everything.
+
+299
+00:11:49,413 --> 00:11:51,055
+The link is in the description.
+
+300
+00:11:53,105 --> 00:11:56,753
+Pass or fail rubric. Six points. All six to pass.
+
+301
+00:11:57,303 --> 00:12:00,674
+One: the J unit file shows ten tests and one failure.
+
+302
+00:12:01,224 --> 00:12:05,704
+Two: the H T M L report is one file, and shows the failing test.
+
+303
+00:12:06,254 --> 00:12:08,963
+Three: the exit code of the failing run is one.
+
+304
+00:12:09,513 --> 00:12:12,585
+Four: the durations output lists the slowest tests.
+
+305
+00:12:13,135 --> 00:12:16,122
+Five: the dash K run shows only the stock tests.
+
+306
+00:12:16,672 --> 00:12:21,536
+Six: the code is fixed, the tests are untouched, and the new exit code is zero.
+
+307
+00:12:22,086 --> 00:12:23,387
+Pass means all six.
+
+308
+00:12:25,437 --> 00:12:27,208
+Your turn, on your own machine.
+
+309
+00:12:27,758 --> 00:12:31,384
+One: lab up, and open the instructions file, to learn the rules.
+
+310
+00:12:31,934 --> 00:12:37,609
+Two: run the tests with the J unit and H T M L options, and save the exit code.
+
+311
+00:12:38,159 --> 00:12:41,722
+Three: find the slow tests, and run only the stock tests.
+
+312
+00:12:42,272 --> 00:12:45,429
+Four: open your report in a browser, and click through it.
+
+313
+00:12:45,979 --> 00:12:49,179
+Five: fix the bug. Then lab check, and lab down.
+
+314
+00:12:49,729 --> 00:12:51,564
+Pause the video, and begin now.
+
+315
+00:13:07,114 --> 00:13:07,989
+Quick check.
+
+316
+00:13:08,539 --> 00:13:11,227
+What do a dot, an F, an s and an x mean?
+
+317
+00:13:11,777 --> 00:13:14,422
+What does exit code one mean, and who uses it?
+
+318
+00:13:14,972 --> 00:13:18,001
+Which report is for machines, and which is for people?
+
+319
+00:13:18,551 --> 00:13:21,282
+How do you run only the tests with stock in their name?
+
+320
+00:13:21,832 --> 00:13:24,136
+Objective covered: M C fifteen,
+
+321
+00:13:24,136 --> 00:13:25,325
+objective three.
+
+322
+00:13:25,325 --> 00:13:26,068
+Run tests,
+
+323
+00:13:26,068 --> 00:13:27,332
+read the reports,
+
+324
+00:13:27,332 --> 00:13:28,744
+and use exit codes.
+
+325
+00:13:29,294 --> 00:13:31,363
+Pause the video, and answer out loud.
+
+326
+00:13:41,913 --> 00:13:46,799
+Next: a bonus, with browser tests: Play wright, with its report and trace viewer.
+
+327
+00:13:47,349 --> 00:13:50,677
+If this helped, like, share and subscribe, so you do not miss it.

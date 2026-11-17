@@ -1,0 +1,28 @@
+Lesson 137 of the DevOps Engineering Bootcamp, and lesson 3 of the Software Testing and QA domain. A test run that looks green on your screen means nothing to a build server: it reads one number, the exit code. In this lesson you learn the ways to run pytest (all tests, one file, one test, a keyword with -k), how to read the dots and letters and the E line of a failure, what exit code 0 and 1 mean, how to find the slowest tests, and how to produce a JUnit XML file for machines and a self-contained HTML report for people. You then open the real HTML report in a browser and click through it. A lab judges you from 0 of 6 to 6 of 6.
+
+Chapters
+0:00 Green on screen, zero in the pipeline
+0:28 What to expect
+1:04 Ways to run tests
+1:48 Reading the output
+2:40 Exit codes
+3:32 Reports
+4:12 Live: run, read, report
+10:28 Your lab task
+11:00 Where to find the lab
+11:53 Pass or fail rubric
+12:25 Your turn
+13:07 Quick check
+
+Objectives covered: MC15-O03, run tests, read reports, and use exit codes.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab137.sh and shortcuts137.sh). Install with: sudo install -m 755 lab137.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts137.sh. You need any Linux machine with root, python3 and pytest (for example: sudo apt install -y python3-pytest python3-pytest-html), plus a web browser to open the report. The lab creates a small shop project in /opt/lab137 and does not touch anything else. lab down removes it. Only run it on your own machine.
+
+Honest notes: the terminal demo is one real, continuous recording of pytest running on a small Python shop written for this lab, and the HTML report is the real report opened in a real Chrome window. The lab was run end to end: it passes 0 of 6 before you start and 6 of 6 after you finish, with a reference solution, and lab down leaves nothing behind. Failure summaries are shortened in places to keep the screen clean. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Pytest Assertions, Fixtures, Mocks, Test Data and Isolation: Tests That Catch Bugs | Lesson 136 https://youtu.be/bTby4HN_3Q4
+Next: Browser tests with Playwright, the HTML report and the trace viewer.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #softwaretesting #pytest #qa #devopsbootcamp
