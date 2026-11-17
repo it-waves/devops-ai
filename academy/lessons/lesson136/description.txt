@@ -21,7 +21,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab136.sh and shortc
 Honest notes: the terminal demo is one real, continuous recording of pytest running on a small Python shop written for this lab, and the lab was run end to end: it passes 0 of 6 before you start and 6 of 6 after you finish, with a reference solution, and lab down leaves nothing behind. Failure summaries are switched off in the recording to keep the screen clean. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: Types of Software Tests: Unit, Integration, API, End-to-End, Smoke and Regression | Lesson 135 https://youtu.be/LHK5CDeXW_0
-Next: Running tests, reports and exit codes.
+Next: Run Pytest Tests, Read Reports and Exit Codes: JUnit XML and HTML Report | Lesson 137 https://youtu.be/5YvSb6E-yJ8
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
