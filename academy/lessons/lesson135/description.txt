@@ -20,7 +20,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab135.sh and shortc
 Honest notes: the terminal demo is one real, continuous recording of pytest running on a small Python shop written for this lab, and the lab was run end to end: it passes 0 of 6 before you start and 6 of 6 after you finish, and lab down leaves nothing behind. The pytest header on screen shows no plugins because they are switched off in the recording to keep the screen clean. The narration is synthetic speech. The hook, pyramid, kinds, when, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: PostgreSQL Databases Mastery: Deploy, Secure, Back Up and Recover a Real Database | Lesson 134 https://youtu.be/YdKIVeZ54uo
-Next: Assertions, fixtures, mocks, test data and isolation.
+Next: Pytest Assertions, Fixtures, Mocks, Test Data and Isolation: Tests That Catch Bugs | Lesson 136 https://youtu.be/bTby4HN_3Q4
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
