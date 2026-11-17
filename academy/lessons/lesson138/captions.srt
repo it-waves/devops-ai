@@ -1,0 +1,1055 @@
+1
+00:00:00,500 --> 00:00:04,489
+Your unit tests are green. You deploy. And the buy button does nothing.
+
+2
+00:00:05,039 --> 00:00:09,925
+The unit tests never opened the page. They tested the code, not what a user sees.
+
+3
+00:00:10,475 --> 00:00:13,461
+A browser test does what a user does: open the page,
+
+4
+00:00:13,461 --> 00:00:14,323
+click a button,
+
+5
+00:00:14,323 --> 00:00:16,448
+and check what appears on the screen.
+
+6
+00:00:16,998 --> 00:00:19,695
+Today you run browser tests with Play wright.
+
+7
+00:00:19,695 --> 00:00:20,834
+And when one fails,
+
+8
+00:00:20,834 --> 00:00:22,752
+you learn to open its recording,
+
+9
+00:00:22,752 --> 00:00:24,550
+and see exactly what happened.
+
+10
+00:00:26,100 --> 00:00:27,529
+Here is what to expect.
+
+11
+00:00:28,079 --> 00:00:30,981
+One: what a browser test is, and when to use one.
+
+12
+00:00:31,531 --> 00:00:36,779
+Two: finding things on a page, the Play wright way. Locators, and automatic waiting.
+
+13
+00:00:37,329 --> 00:00:40,742
+Three: evidence. Traces, screenshots, and a report.
+
+14
+00:00:41,292 --> 00:00:45,815
+Four: the trace viewer, panel by panel. A time machine for a failed test.
+
+15
+00:00:46,365 --> 00:00:50,162
+Then a live demo, in a real browser, and a lab with six checks.
+
+16
+00:00:52,212 --> 00:00:53,577
+What a browser test is.
+
+17
+00:00:54,127 --> 00:00:56,240
+Play wright starts a real browser,
+
+18
+00:00:56,240 --> 00:00:57,421
+Chrome in our case,
+
+19
+00:00:57,421 --> 00:00:59,037
+and controls it with code.
+
+20
+00:00:59,037 --> 00:01:00,031
+It opens a page,
+
+21
+00:01:00,031 --> 00:01:00,466
+clicks,
+
+22
+00:01:00,466 --> 00:01:00,839
+types,
+
+23
+00:01:00,839 --> 00:01:02,703
+and reads what the page shows.
+
+24
+00:01:03,253 --> 00:01:05,383
+By default the browser is headless.
+
+25
+00:01:05,383 --> 00:01:06,783
+It runs with no window,
+
+26
+00:01:06,783 --> 00:01:07,635
+so it is fast,
+
+27
+00:01:07,635 --> 00:01:10,677
+and it works on a build server that has no screen.
+
+28
+00:01:11,227 --> 00:01:13,717
+Browser tests are slower than unit tests,
+
+29
+00:01:13,717 --> 00:01:15,356
+and they break more easily,
+
+30
+00:01:15,356 --> 00:01:17,785
+because there is more that can go wrong.
+
+31
+00:01:17,785 --> 00:01:18,696
+So write a few,
+
+32
+00:01:18,696 --> 00:01:20,942
+for the journeys that matter: search,
+
+33
+00:01:20,942 --> 00:01:21,671
+add to cart,
+
+34
+00:01:21,671 --> 00:01:22,278
+check out.
+
+35
+00:01:22,828 --> 00:01:26,245
+Remember the test pyramid from lesson one thirty-five.
+
+36
+00:01:26,245 --> 00:01:28,144
+Many unit tests at the bottom,
+
+37
+00:01:28,144 --> 00:01:30,359
+and a few browser tests at the top.
+
+38
+00:01:31,909 --> 00:01:33,381
+Finding things on a page.
+
+39
+00:01:33,931 --> 00:01:36,490
+A locator says which element you mean.
+
+40
+00:01:36,490 --> 00:01:40,329
+The best locators describe what a user sees: get by role,
+
+41
+00:01:40,329 --> 00:01:42,147
+with a button and its name,
+
+42
+00:01:42,147 --> 00:01:43,157
+or get by text,
+
+43
+00:01:43,157 --> 00:01:44,235
+or get by label.
+
+44
+00:01:44,785 --> 00:01:46,349
+Avoid long C S S paths.
+
+45
+00:01:46,349 --> 00:01:49,612
+They break the moment a designer moves a button.
+
+46
+00:01:49,612 --> 00:01:52,060
+A role and a name survive redesigns.
+
+47
+00:01:52,610 --> 00:01:55,063
+Then the best feature: automatic waiting.
+
+48
+00:01:55,063 --> 00:01:56,201
+Before every click,
+
+49
+00:01:56,201 --> 00:01:58,774
+Play wright waits until the element exists,
+
+50
+00:01:58,774 --> 00:01:59,432
+is visible,
+
+51
+00:01:59,432 --> 00:02:00,210
+and is ready.
+
+52
+00:02:00,210 --> 00:02:01,527
+You never write sleep.
+
+53
+00:02:02,077 --> 00:02:03,430
+Assertions wait too.
+
+54
+00:02:03,430 --> 00:02:03,903
+Expect,
+
+55
+00:02:03,903 --> 00:02:04,444
+locator,
+
+56
+00:02:04,444 --> 00:02:05,323
+to have text,
+
+57
+00:02:05,323 --> 00:02:06,338
+keeps retrying,
+
+58
+00:02:06,338 --> 00:02:07,893
+for up to five seconds,
+
+59
+00:02:07,893 --> 00:02:09,448
+until the text matches.
+
+60
+00:02:09,448 --> 00:02:12,018
+These are called web first assertions.
+
+61
+00:02:12,568 --> 00:02:16,942
+So use the expect from Play wright, not a plain assert, so that the waiting works.
+
+62
+00:02:18,492 --> 00:02:22,631
+Evidence. When a browser test fails, a one line error is not enough.
+
+63
+00:02:23,181 --> 00:02:26,899
+A trace is a recording of the whole test: every action,
+
+64
+00:02:26,899 --> 00:02:29,535
+a picture of the page before and after,
+
+65
+00:02:29,535 --> 00:02:30,752
+the network calls,
+
+66
+00:02:30,752 --> 00:02:31,833
+and the console.
+
+67
+00:02:31,833 --> 00:02:34,402
+It is saved as one trace dot zip file.
+
+68
+00:02:34,952 --> 00:02:36,893
+Tracing on records every test.
+
+69
+00:02:36,893 --> 00:02:40,580
+Retain on failure keeps traces only for the failed tests,
+
+70
+00:02:40,580 --> 00:02:42,909
+which saves space on a build server.
+
+71
+00:02:43,459 --> 00:02:48,174
+A screenshot, only on failure, gives you a picture of the page at the moment it broke.
+
+72
+00:02:48,724 --> 00:02:52,953
+And the pie test H T M L report from the last lesson still works.
+
+73
+00:02:52,953 --> 00:02:55,295
+One command can produce all of them.
+
+74
+00:02:55,845 --> 00:02:59,578
+Attach the trace to the failed build, and anyone can replay it later.
+
+75
+00:03:01,128 --> 00:03:06,120
+Go to the lab folder.
+
+76
+00:03:07,670 --> 00:03:09,569
+Look around.
+
+77
+00:03:10,119 --> 00:03:10,884
+A shop page,
+
+78
+00:03:10,884 --> 00:03:12,032
+a folder of tests,
+
+79
+00:03:12,032 --> 00:03:14,839
+an empty folder called out for the evidence,
+
+80
+00:03:14,839 --> 00:03:16,689
+and a pie test settings file.
+
+81
+00:03:17,239 --> 00:03:21,207
+The page and the tests.
+
+82
+00:03:21,757 --> 00:03:24,871
+The page is just two files: an H T M L page,
+
+83
+00:03:24,871 --> 00:03:26,640
+and a little java script.
+
+84
+00:03:26,640 --> 00:03:29,117
+The tests are in test shop dot pie.
+
+85
+00:03:29,667 --> 00:03:34,169
+Five tests.
+
+86
+00:03:34,719 --> 00:03:36,022
+Five browser tests.
+
+87
+00:03:36,022 --> 00:03:36,708
+The title,
+
+88
+00:03:36,708 --> 00:03:37,736
+adding an item,
+
+89
+00:03:37,736 --> 00:03:39,519
+the total after two items,
+
+90
+00:03:39,519 --> 00:03:40,891
+removing everything,
+
+91
+00:03:40,891 --> 00:03:43,977
+and checkout disabled when the cart is empty.
+
+92
+00:03:44,527 --> 00:03:49,157
+Run them.
+
+93
+00:03:49,707 --> 00:03:52,170
+A real Chrome browser ran every test,
+
+94
+00:03:52,170 --> 00:03:53,169
+with no window.
+
+95
+00:03:53,169 --> 00:03:53,968
+Four passed.
+
+96
+00:03:53,968 --> 00:03:54,701
+One failed.
+
+97
+00:03:54,701 --> 00:03:56,299
+That took a few seconds.
+
+98
+00:03:56,849 --> 00:04:01,393
+The exit code.
+
+99
+00:04:01,943 --> 00:04:05,271
+One. At least one test failed, so a pipeline would stop.
+
+100
+00:04:05,821 --> 00:04:13,650
+Collect evidence.
+
+101
+00:04:16,600 --> 00:04:17,551
+The same result.
+
+102
+00:04:17,551 --> 00:04:20,999
+But this time Play wright recorded a trace for every test,
+
+103
+00:04:20,999 --> 00:04:22,723
+and a picture of the failure.
+
+104
+00:04:23,273 --> 00:04:27,219
+See the evidence.
+
+105
+00:04:27,769 --> 00:04:29,369
+One folder for each test.
+
+106
+00:04:29,919 --> 00:04:35,445
+The failed test.
+
+107
+00:04:35,995 --> 00:04:41,093
+Two files: the screenshot, and trace dot zip. That zip file is the whole recording.
+
+108
+00:04:41,643 --> 00:04:50,667
+A report.
+
+109
+00:04:51,217 --> 00:04:56,999
+This is the same pie test H T M L report from the last lesson, now for browser tests.
+
+110
+00:04:57,549 --> 00:05:07,511
+Open the trace.
+
+111
+00:05:08,061 --> 00:05:12,721
+It says it is listening on one twenty-seven dot zero dot zero dot one,
+
+112
+00:05:12,721 --> 00:05:14,452
+port nine three two three.
+
+113
+00:05:14,452 --> 00:05:16,915
+The viewer is a small local web page.
+
+114
+00:05:17,465 --> 00:05:21,836
+The trace viewer opens a failed test as a recording you can walk through,
+
+115
+00:05:21,836 --> 00:05:22,615
+step by step.
+
+116
+00:05:22,615 --> 00:05:24,291
+So let us open it in Chrome.
+
+117
+00:05:24,841 --> 00:05:25,793
+I open Chrome,
+
+118
+00:05:25,793 --> 00:05:31,573
+and type the address the command printed: one twenty-seven dot zero dot zero dot one,
+
+119
+00:05:31,573 --> 00:05:33,409
+colon nine three two three.
+
+120
+00:05:33,409 --> 00:05:35,721
+The viewer loads our failed trace.
+
+121
+00:05:36,271 --> 00:05:36,981
+Four areas.
+
+122
+00:05:36,981 --> 00:05:37,691
+At the top,
+
+123
+00:05:37,691 --> 00:05:38,530
+the timeline,
+
+124
+00:05:38,530 --> 00:05:41,628
+with small pictures of the page as the test ran.
+
+125
+00:05:41,628 --> 00:05:42,402
+On the left,
+
+126
+00:05:42,402 --> 00:05:45,178
+the Actions list: every step the test took.
+
+127
+00:05:45,178 --> 00:05:46,081
+In the middle,
+
+128
+00:05:46,081 --> 00:05:47,114
+the page itself,
+
+129
+00:05:47,114 --> 00:05:48,792
+as it looked at that step.
+
+130
+00:05:48,792 --> 00:05:49,953
+And at the bottom,
+
+131
+00:05:49,953 --> 00:05:51,631
+a details panel with tabs.
+
+132
+00:05:52,181 --> 00:05:54,678
+The Actions list reads like the test,
+
+133
+00:05:54,678 --> 00:05:55,555
+line by line.
+
+134
+00:05:55,555 --> 00:05:56,364
+Create page.
+
+135
+00:05:56,364 --> 00:05:57,781
+Navigate to the shop.
+
+136
+00:05:57,781 --> 00:05:59,940
+Click on a button named Add mug.
+
+137
+00:05:59,940 --> 00:06:02,099
+Click on a button named Add cap.
+
+138
+00:06:02,099 --> 00:06:02,841
+And in red,
+
+139
+00:06:02,841 --> 00:06:05,675
+the step that failed: expect to have text,
+
+140
+00:06:05,675 --> 00:06:06,552
+on the total.
+
+141
+00:06:06,552 --> 00:06:08,779
+Each step shows how long it took.
+
+142
+00:06:09,329 --> 00:06:10,229
+Click an action,
+
+143
+00:06:10,229 --> 00:06:12,762
+and the middle shows the page at that moment.
+
+144
+00:06:12,762 --> 00:06:14,000
+This is the mug click.
+
+145
+00:06:14,000 --> 00:06:15,464
+And this is the cap click,
+
+146
+00:06:15,464 --> 00:06:17,265
+with the cap button highlighted.
+
+147
+00:06:17,815 --> 00:06:18,851
+Above the page,
+
+148
+00:06:18,851 --> 00:06:19,610
+three tabs.
+
+149
+00:06:19,610 --> 00:06:22,511
+Before is the page just before the action.
+
+150
+00:06:22,511 --> 00:06:24,721
+After is the page just after it.
+
+151
+00:06:24,721 --> 00:06:26,240
+Look at the cap click.
+
+152
+00:06:26,240 --> 00:06:27,415
+Before: one item,
+
+153
+00:06:27,415 --> 00:06:28,658
+total ten dollars.
+
+154
+00:06:28,658 --> 00:06:29,832
+After: two items,
+
+155
+00:06:29,832 --> 00:06:31,351
+and a total of thirty.
+
+156
+00:06:31,351 --> 00:06:32,801
+Thirty is suspicious.
+
+157
+00:06:32,801 --> 00:06:35,564
+A mug and a cap should cost twenty-five.
+
+158
+00:06:36,114 --> 00:06:37,435
+Now the failed step.
+
+159
+00:06:37,435 --> 00:06:39,086
+The page shows the total,
+
+160
+00:06:39,086 --> 00:06:39,548
+thirty,
+
+161
+00:06:39,548 --> 00:06:40,341
+highlighted.
+
+162
+00:06:40,341 --> 00:06:42,322
+The test expected twenty-five.
+
+163
+00:06:42,872 --> 00:06:43,979
+The bottom panel.
+
+164
+00:06:43,979 --> 00:06:47,106
+Call shows the details of the step: the locator,
+
+165
+00:06:47,106 --> 00:06:48,539
+and the expected text,
+
+166
+00:06:48,539 --> 00:06:49,321
+twenty-five.
+
+167
+00:06:49,321 --> 00:06:51,079
+Log is the most useful one.
+
+168
+00:06:51,079 --> 00:06:52,969
+It shows Play wright waiting,
+
+169
+00:06:52,969 --> 00:06:54,271
+finding the element,
+
+170
+00:06:54,271 --> 00:06:55,183
+seeing thirty,
+
+171
+00:06:55,183 --> 00:06:56,291
+and trying again,
+
+172
+00:06:56,291 --> 00:06:56,942
+and again,
+
+173
+00:06:56,942 --> 00:06:58,701
+until five seconds ran out.
+
+174
+00:06:58,701 --> 00:07:01,176
+That is the automatic waiting at work.
+
+175
+00:07:01,726 --> 00:07:03,762
+Errors shows the failure message.
+
+176
+00:07:03,762 --> 00:07:05,737
+Source shows your own test code,
+
+177
+00:07:05,737 --> 00:07:08,760
+with the failing line highlighted: line nineteen,
+
+178
+00:07:08,760 --> 00:07:11,167
+the total should have text twenty-five.
+
+179
+00:07:11,167 --> 00:07:13,759
+Network lists every request the page made,
+
+180
+00:07:13,759 --> 00:07:15,857
+here only the page and its script.
+
+181
+00:07:15,857 --> 00:07:18,942
+And Console would show any error from the browser.
+
+182
+00:07:19,492 --> 00:07:19,993
+Finally,
+
+183
+00:07:19,993 --> 00:07:21,685
+Metadata shows the browser,
+
+184
+00:07:21,685 --> 00:07:22,500
+the platform,
+
+185
+00:07:22,500 --> 00:07:23,502
+the screen size,
+
+186
+00:07:23,502 --> 00:07:25,257
+and the Play wright version,
+
+187
+00:07:25,257 --> 00:07:27,701
+so you know exactly where the test ran.
+
+188
+00:07:27,701 --> 00:07:32,651
+The cause is in the shop's java script: the total is the price times the count,
+
+189
+00:07:32,651 --> 00:07:34,406
+instead of adding the price.
+
+190
+00:07:34,406 --> 00:07:35,909
+A browser test found it,
+
+191
+00:07:35,909 --> 00:07:37,476
+and the trace showed why.
+
+192
+00:07:38,026 --> 00:07:39,564
+That is the trace viewer.
+
+193
+00:07:39,564 --> 00:07:41,593
+A time machine for a failed test.
+
+194
+00:07:41,593 --> 00:07:42,885
+Back to the terminal,
+
+195
+00:07:42,885 --> 00:07:43,807
+to fix the bug.
+
+196
+00:07:44,357 --> 00:07:48,795
+Find the bug.
+
+197
+00:07:49,345 --> 00:07:53,526
+The total is the price times the count. It should add the price to the total.
+
+198
+00:07:54,076 --> 00:08:00,348
+Fix it.
+
+199
+00:08:00,898 --> 00:08:02,775
+Now every click adds the price.
+
+200
+00:08:03,325 --> 00:08:08,232
+Run again.
+
+201
+00:08:08,782 --> 00:08:09,827
+Five passed.
+
+202
+00:08:10,377 --> 00:08:15,007
+Exit code.
+
+203
+00:08:15,557 --> 00:08:17,583
+Zero. The pipeline would go on.
+
+204
+00:08:18,133 --> 00:08:20,501
+Run the judge.
+
+205
+00:08:21,051 --> 00:08:25,041
+It checks the evidence, and runs the tests itself. Six out of six.
+
+206
+00:08:25,591 --> 00:08:27,553
+Clean up.
+
+207
+00:08:28,103 --> 00:08:29,959
+Removed. Nothing left behind.
+
+208
+00:08:31,509 --> 00:08:36,906
+Your lab task: run browser tests, collect the evidence, and fix the bug. Six checks.
+
+209
+00:08:37,456 --> 00:08:42,832
+One: run the tests and save the output. Two: save the exit code of the failing run.
+
+210
+00:08:43,382 --> 00:08:48,374
+Three: record a trace of every test. Four: take a screenshot when a test fails.
+
+211
+00:08:48,924 --> 00:08:52,036
+Five: save a self contained H T M L report.
+
+212
+00:08:52,036 --> 00:08:55,148
+Six: fix the bug in the shop's java script,
+
+213
+00:08:55,148 --> 00:08:56,378
+not in the tests,
+
+214
+00:08:56,378 --> 00:08:58,332
+and save the new exit code.
+
+215
+00:08:58,882 --> 00:09:01,208
+Then lab check, until six out of six.
+
+216
+00:09:03,258 --> 00:09:06,053
+Where to find the lab. Pause here, and write it down.
+
+217
+00:09:06,603 --> 00:09:08,067
+One: the repository,
+
+218
+00:09:08,067 --> 00:09:12,387
+git hub dot com slash it dash waves slash dev ops dash A I,
+
+219
+00:09:12,387 --> 00:09:14,731
+in the folder academy slash lab.
+
+220
+00:09:15,281 --> 00:09:21,105
+Two: the files, lab one thirty-eight dot S H, and shortcuts one thirty-eight dot S H.
+
+221
+00:09:21,655 --> 00:09:27,116
+Three: install it, with sudo install, into slash user slash local slash S bin.
+
+222
+00:09:27,666 --> 00:09:29,442
+Four: load the short names,
+
+223
+00:09:29,442 --> 00:09:32,532
+with source shortcuts one thirty-eight dot S H.
+
+224
+00:09:32,532 --> 00:09:33,321
+Then lab up,
+
+225
+00:09:33,321 --> 00:09:33,979
+lab check,
+
+226
+00:09:33,979 --> 00:09:34,834
+and lab down.
+
+227
+00:09:35,384 --> 00:09:37,330
+Five: you need python three,
+
+228
+00:09:37,330 --> 00:09:38,580
+and Google Chrome.
+
+229
+00:09:38,580 --> 00:09:39,762
+Install pie test,
+
+230
+00:09:39,762 --> 00:09:42,680
+Play wright and pie test H T M L with pip.
+
+231
+00:09:43,230 --> 00:09:47,070
+Six: only on your own machine. Lab down removes everything.
+
+232
+00:09:47,620 --> 00:09:49,263
+The link is in the description.
+
+233
+00:09:51,313 --> 00:09:54,961
+Pass or fail rubric. Six points. All six to pass.
+
+234
+00:09:55,511 --> 00:09:58,370
+One: the run output says one failed, four passed.
+
+235
+00:09:58,920 --> 00:10:01,544
+Two: the exit code of the failing run is one.
+
+236
+00:10:02,094 --> 00:10:04,248
+Three: every test has a trace file.
+
+237
+00:10:04,798 --> 00:10:07,124
+Four: a screenshot of the failure exists.
+
+238
+00:10:07,674 --> 00:10:12,388
+Five: the H T M L report is one file, and shows the failing test.
+
+239
+00:10:12,938 --> 00:10:17,760
+Six: the shop is fixed, the tests are untouched, and the new exit code is zero.
+
+240
+00:10:18,310 --> 00:10:19,611
+Pass means all six.
+
+241
+00:10:21,661 --> 00:10:23,432
+Your turn, on your own machine.
+
+242
+00:10:23,982 --> 00:10:26,499
+One: lab up, and read the instructions file.
+
+243
+00:10:27,049 --> 00:10:30,548
+Two: run the tests, and save the output and the exit code.
+
+244
+00:10:31,098 --> 00:10:34,532
+Three: run again with tracing, screenshots, and the report.
+
+245
+00:10:35,082 --> 00:10:37,793
+Four: open the failing trace with show trace.
+
+246
+00:10:37,793 --> 00:10:39,058
+Find the failed step,
+
+247
+00:10:39,058 --> 00:10:39,540
+the log,
+
+248
+00:10:39,540 --> 00:10:41,226
+and the failing source line.
+
+249
+00:10:41,776 --> 00:10:44,976
+Five: fix the bug. Then lab check, and lab down.
+
+250
+00:10:45,526 --> 00:10:47,361
+Pause the video, and begin now.
+
+251
+00:11:02,911 --> 00:11:03,786
+Quick check.
+
+252
+00:11:04,336 --> 00:11:06,746
+What is a locator, and which kind is best?
+
+253
+00:11:07,296 --> 00:11:08,747
+Why do you never write sleep?
+
+254
+00:11:09,297 --> 00:11:10,705
+What is inside a trace?
+
+255
+00:11:11,255 --> 00:11:12,855
+Which tab shows the retries?
+
+256
+00:11:13,405 --> 00:11:15,674
+Objective covered: M C fifteen,
+
+257
+00:11:15,674 --> 00:11:16,846
+objective three,
+
+258
+00:11:16,846 --> 00:11:17,285
+bonus.
+
+259
+00:11:17,285 --> 00:11:18,310
+Browser tests,
+
+260
+00:11:18,310 --> 00:11:18,822
+traces,
+
+261
+00:11:18,822 --> 00:11:20,360
+and the trace viewer.
+
+262
+00:11:20,910 --> 00:11:22,979
+Pause the video, and answer out loud.
+
+263
+00:11:33,529 --> 00:11:36,814
+Next: testing the Cloud Cart API and its health checks.
+
+264
+00:11:37,364 --> 00:11:40,692
+If this helped, like, share and subscribe, so you do not miss it.

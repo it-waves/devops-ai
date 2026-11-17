@@ -1,0 +1,27 @@
+Lesson 138 of the DevOps Engineering Bootcamp, a bonus lesson in the Software Testing and QA domain. Your unit tests are green, you deploy, and the buy button does nothing, because unit tests never open the page. A browser test does what a user does. In this lesson you learn what a browser test is and when to write one, how to find elements with Playwright locators (by role and name), why you never write sleep (auto-waiting and web-first assertions), and how to collect evidence from a failed test: a trace, a screenshot and an HTML report. Then you open the real Playwright trace viewer in Chrome and walk through every panel: timeline, actions, Before and After, Call, Log, Errors, Source, Network, Console and Metadata. A lab judges you from 0 of 6 to 6 of 6.
+
+Chapters
+0:00 Green tests, broken button
+0:26 What to expect
+0:52 What is a browser test
+1:31 Locators and auto-wait
+2:18 Traces and screenshots
+3:01 Live: run, trace, fix
+8:31 Your lab task
+9:03 Where to find the lab
+9:51 Pass or fail rubric
+10:21 Your turn
+11:02 Quick check
+
+Objectives covered: MC15-O03 (bonus), browser tests with Playwright, traces and the trace viewer.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab138.sh and shortcuts138.sh). Install with: sudo install -m 755 lab138.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts138.sh. You need python3, Google Chrome, and pip install pytest-playwright pytest-html. The lab creates a small shop page and five browser tests in /opt/lab138 and does not touch anything else. lab down removes it. Only run it on your own machine.
+
+Honest notes: the terminal demo and the trace viewer are one real, continuous recording of Playwright with pytest in real Chrome, on a small shop page written for this lab, and the lab was run end to end: it passes 0 of 6 before you start and 6 of 6 after you finish, with a reference solution, and lab down leaves nothing behind. The browser runs headless. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Run Pytest Tests, Read Reports and Exit Codes: JUnit XML and HTML Report | Lesson 137 https://youtu.be/5YvSb6E-yJ8
+Next: Testing the CloudCart API and its health checks.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #softwaretesting #playwright #pytest #devopsbootcamp
