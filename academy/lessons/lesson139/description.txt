@@ -1,0 +1,27 @@
+Lesson 139 of the DevOps Engineering Bootcamp, in the Software Testing and QA domain. Tomcat is running, but a customer adds a mug to the cart and gets an error: running is not the same as working. In this lesson you learn what an API test and a health check are, how to check the status code and the JSON data of a reply (200, 401, 404, 409, 400), and five habits of a good API test: independent tests, real values, clear names, waiting for the server to be ready, and tests that can fail. Then you test the real CloudCart shop running on Tomcat with pytest, step by step from a health test to a cart test and parametrized status codes, you stop the server to see a clear outage failure, and start it again. A lab judges you from 0 of 6 to 6 of 6, including a fake shop that tries to fool your tests.
+
+Chapters
+0:00 Running is not working
+0:29 What to expect
+1:00 What is an API test
+1:59 Status codes and data
+2:54 Writing good API tests
+3:44 Live: health, cart, errors
+8:46 Your lab task
+9:25 Where to find the lab
+10:18 Pass or fail rubric
+10:47 Your turn
+11:29 Quick check
+
+Objectives covered: MC15-O04, add API and application health tests to CloudCart.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab139.sh and shortcuts139.sh). Install with: sudo install -m 755 lab139.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts139.sh. You need java, curl, python3 and pytest. lab up downloads Tomcat 10.1 and the CloudCart WAR into /opt/lab139 and uses ports 8139 and 8149; it does not touch anything else. lab down stops Tomcat and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal demo is one real, continuous recording of pytest against the real CloudCart v0.2.0 running on a real Tomcat. The lab was run end to end: it passes 0 of 6 before you start and 6 of 6 with a reference solution, and lab down leaves nothing behind. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Browser Tests with Playwright: Traces, Screenshots and the Trace Viewer | Lesson 138 https://youtu.be/wg4FW70eUcQ
+Next: Test coverage with pytest-cov, and what it does not tell you.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #softwaretesting #apitesting #pytest #devopsbootcamp

@@ -1,0 +1,1039 @@
+1
+00:00:00,500 --> 00:00:05,471
+Is the shop up? Your server says yes. Tom cat is running, the process is alive.
+
+2
+00:00:06,021 --> 00:00:08,283
+But a customer adds a mug to the cart,
+
+3
+00:00:08,283 --> 00:00:09,355
+and gets an error.
+
+4
+00:00:09,355 --> 00:00:11,439
+Running is not the same as working.
+
+5
+00:00:11,989 --> 00:00:14,299
+An API test asks the real questions,
+
+6
+00:00:14,299 --> 00:00:15,838
+the way a program would.
+
+7
+00:00:15,838 --> 00:00:16,608
+Is it alive?
+
+8
+00:00:16,608 --> 00:00:17,891
+Is the answer right?
+
+9
+00:00:17,891 --> 00:00:19,110
+And does it say no,
+
+10
+00:00:19,110 --> 00:00:20,200
+in the right way,
+
+11
+00:00:20,200 --> 00:00:21,163
+when it should?
+
+12
+00:00:21,713 --> 00:00:24,357
+Today you test the real Cloud Cart shop,
+
+13
+00:00:24,357 --> 00:00:25,613
+running on Tom cat,
+
+14
+00:00:25,613 --> 00:00:26,539
+with pie test.
+
+15
+00:00:26,539 --> 00:00:27,002
+Health,
+
+16
+00:00:27,002 --> 00:00:27,332
+cart,
+
+17
+00:00:27,332 --> 00:00:28,390
+and error codes.
+
+18
+00:00:29,940 --> 00:00:31,369
+Here is what to expect.
+
+19
+00:00:31,919 --> 00:00:35,055
+One: what an API test is, and what a health check is.
+
+20
+00:00:35,605 --> 00:00:39,808
+Two: the answers you check. Status codes, and the data in the reply.
+
+21
+00:00:40,358 --> 00:00:45,158
+Three: how to write a good API test. Independent, readable, and able to fail.
+
+22
+00:00:45,708 --> 00:00:48,169
+Then a live demo against the real shop.
+
+23
+00:00:48,169 --> 00:00:49,242
+We start Tom cat,
+
+24
+00:00:49,242 --> 00:00:51,072
+write the tests step by step,
+
+25
+00:00:51,072 --> 00:00:52,650
+and even stop the server,
+
+26
+00:00:52,650 --> 00:00:54,732
+to see what an outage looks like.
+
+27
+00:00:55,282 --> 00:00:59,271
+And a lab with six checks, including one that tries to fool your tests.
+
+28
+00:01:01,321 --> 00:01:02,686
+What is an API test?
+
+29
+00:01:03,236 --> 00:01:07,034
+An API is the door a program uses to talk to the shop.
+
+30
+00:01:07,034 --> 00:01:08,933
+Instead of clicking a page,
+
+31
+00:01:08,933 --> 00:01:10,269
+you send a request,
+
+32
+00:01:10,269 --> 00:01:11,605
+and read the reply.
+
+33
+00:01:11,605 --> 00:01:12,379
+No browser,
+
+34
+00:01:12,379 --> 00:01:13,082
+no screen.
+
+35
+00:01:13,082 --> 00:01:14,066
+So it is fast,
+
+36
+00:01:14,066 --> 00:01:15,332
+and very reliable.
+
+37
+00:01:15,882 --> 00:01:18,435
+It sits in the middle of the test pyramid.
+
+38
+00:01:18,435 --> 00:01:19,894
+Higher than a unit test,
+
+39
+00:01:19,894 --> 00:01:22,265
+because the whole running shop answers.
+
+40
+00:01:22,265 --> 00:01:23,845
+Lower than a browser test,
+
+41
+00:01:23,845 --> 00:01:25,973
+because there is no page to render.
+
+42
+00:01:26,523 --> 00:01:29,060
+A health check is the smallest API test.
+
+43
+00:01:29,060 --> 00:01:31,089
+One request to a health address.
+
+44
+00:01:31,089 --> 00:01:33,943
+The reply says whether the application is up,
+
+45
+00:01:33,943 --> 00:01:35,782
+and which version is running.
+
+46
+00:01:36,332 --> 00:01:38,310
+Operators use it all the time.
+
+47
+00:01:38,310 --> 00:01:41,079
+A load balancer asks it every few seconds,
+
+48
+00:01:41,079 --> 00:01:45,100
+and stops sending customers to a server that does not answer.
+
+49
+00:01:45,100 --> 00:01:47,342
+A pipeline asks it after a deploy,
+
+50
+00:01:47,342 --> 00:01:49,452
+to decide if the release worked.
+
+51
+00:01:50,002 --> 00:01:51,892
+Three questions to remember.
+
+52
+00:01:51,892 --> 00:01:52,703
+Is it alive?
+
+53
+00:01:52,703 --> 00:01:53,513
+Is it ready?
+
+54
+00:01:53,513 --> 00:01:54,458
+Is it correct?
+
+55
+00:01:54,458 --> 00:01:56,417
+Health answers the first two.
+
+56
+00:01:56,417 --> 00:01:58,578
+Your API tests answer the third.
+
+57
+00:02:00,128 --> 00:02:04,203
+What do you check in a reply? Two things. The status code, and the data.
+
+58
+00:02:04,753 --> 00:02:07,513
+The status code is a number from the server.
+
+59
+00:02:07,513 --> 00:02:08,956
+Two hundred means okay.
+
+60
+00:02:08,956 --> 00:02:11,528
+Four hundred means the request was wrong.
+
+61
+00:02:11,528 --> 00:02:14,289
+Five hundred means the server itself failed.
+
+62
+00:02:14,839 --> 00:02:16,025
+Learn four of them.
+
+63
+00:02:16,025 --> 00:02:17,899
+Four oh one: you must sign in.
+
+64
+00:02:17,899 --> 00:02:20,834
+Four oh four: there is nothing at that address.
+
+65
+00:02:20,834 --> 00:02:22,396
+Four oh nine: a conflict,
+
+66
+00:02:22,396 --> 00:02:23,145
+for example,
+
+67
+00:02:23,145 --> 00:02:24,706
+the item is out of stock.
+
+68
+00:02:24,706 --> 00:02:27,767
+And four hundred: the data you sent is not valid.
+
+69
+00:02:28,317 --> 00:02:29,242
+Then the data.
+
+70
+00:02:29,242 --> 00:02:30,630
+The reply is jay son,
+
+71
+00:02:30,630 --> 00:02:32,348
+a set of names and values.
+
+72
+00:02:32,348 --> 00:02:34,859
+Check the fields that matter: a price,
+
+73
+00:02:34,859 --> 00:02:35,387
+a total,
+
+74
+00:02:35,387 --> 00:02:35,916
+a count.
+
+75
+00:02:35,916 --> 00:02:36,907
+Not everything,
+
+76
+00:02:36,907 --> 00:02:39,154
+just what a customer would notice.
+
+77
+00:02:39,704 --> 00:02:43,451
+Testing the error paths matters as much as the happy path.
+
+78
+00:02:43,451 --> 00:02:46,229
+A shop that sells to a signed out customer,
+
+79
+00:02:46,229 --> 00:02:48,232
+or sells an item with no stock,
+
+80
+00:02:48,232 --> 00:02:48,813
+is a bug.
+
+81
+00:02:49,363 --> 00:02:53,011
+A good API test checks the status code first, then the data.
+
+82
+00:02:54,561 --> 00:02:56,118
+Now, how to write a good one.
+
+83
+00:02:56,668 --> 00:02:58,771
+One: keep every test independent.
+
+84
+00:02:58,771 --> 00:03:00,746
+Each test makes its own client,
+
+85
+00:03:00,746 --> 00:03:03,167
+with its own session and its own cart.
+
+86
+00:03:03,167 --> 00:03:06,034
+No test depends on another one running first.
+
+87
+00:03:06,584 --> 00:03:08,178
+Two: assert real values.
+
+88
+00:03:08,178 --> 00:03:11,833
+If the test only checks that the status is two hundred,
+
+89
+00:03:11,833 --> 00:03:14,889
+a broken shop that always says okay will pass.
+
+90
+00:03:14,889 --> 00:03:15,953
+Check the total.
+
+91
+00:03:15,953 --> 00:03:17,016
+Check the count.
+
+92
+00:03:17,566 --> 00:03:19,934
+Three: name the test after the behavior.
+
+93
+00:03:19,934 --> 00:03:21,356
+Two keyboards ship free.
+
+94
+00:03:21,356 --> 00:03:22,955
+That reads like a sentence,
+
+95
+00:03:22,955 --> 00:03:24,435
+and tells you what broke.
+
+96
+00:03:24,985 --> 00:03:27,388
+Four: wait for the server to be ready.
+
+97
+00:03:27,388 --> 00:03:28,905
+After you start Tom cat,
+
+98
+00:03:28,905 --> 00:03:30,738
+the shop needs a few seconds.
+
+99
+00:03:30,738 --> 00:03:32,193
+Ask the health address,
+
+100
+00:03:32,193 --> 00:03:32,825
+in a loop,
+
+101
+00:03:32,825 --> 00:03:33,900
+until it answers.
+
+102
+00:03:33,900 --> 00:03:35,417
+Never use a fixed sleep.
+
+103
+00:03:35,967 --> 00:03:38,933
+Five: a test that can never fail is worth nothing.
+
+104
+00:03:38,933 --> 00:03:41,068
+Your lab check will try to fool you,
+
+105
+00:03:41,068 --> 00:03:42,076
+with a fake shop.
+
+106
+00:03:42,076 --> 00:03:43,796
+We will see that in the task.
+
+107
+00:03:45,346 --> 00:03:50,509
+Go to the lab folder.
+
+108
+00:03:52,059 --> 00:03:53,957
+Look around.
+
+109
+00:03:54,507 --> 00:03:55,606
+A client dot pie,
+
+110
+00:03:55,606 --> 00:03:56,575
+a tests folder,
+
+111
+00:03:56,575 --> 00:03:57,479
+the task file,
+
+112
+00:03:57,479 --> 00:03:58,836
+and a Tom cat folder,
+
+113
+00:03:58,836 --> 00:04:01,355
+with the shop already placed inside it.
+
+114
+00:04:01,905 --> 00:04:08,476
+Start the shop.
+
+115
+00:04:09,026 --> 00:04:13,271
+Tom cat is starting. It needs a few seconds. So never test right away.
+
+116
+00:04:13,821 --> 00:04:20,904
+The address.
+
+117
+00:04:21,454 --> 00:04:28,451
+Wait until ready.
+
+118
+00:04:30,201 --> 00:04:31,028
+There it is.
+
+119
+00:04:31,028 --> 00:04:31,785
+Status: UP.
+
+120
+00:04:31,785 --> 00:04:34,126
+Version zero point two point zero.
+
+121
+00:04:34,126 --> 00:04:36,260
+That reply is the health check.
+
+122
+00:04:36,810 --> 00:04:42,890
+Ask the API.
+
+123
+00:04:44,240 --> 00:04:46,224
+Four categories, as jay son.
+
+124
+00:04:46,774 --> 00:04:57,142
+A status code.
+
+125
+00:04:57,692 --> 00:05:00,465
+Four oh four. The shop says no, in the right way.
+
+126
+00:05:01,015 --> 00:05:04,258
+The client.
+
+127
+00:05:04,808 --> 00:05:05,660
+Twenty lines,
+
+128
+00:05:05,660 --> 00:05:07,365
+from the standard library.
+
+129
+00:05:07,365 --> 00:05:08,349
+A client class.
+
+130
+00:05:08,349 --> 00:05:09,989
+It keeps its own cookies,
+
+131
+00:05:09,989 --> 00:05:12,546
+so every client is a separate customer.
+
+132
+00:05:12,546 --> 00:05:13,792
+It sends a request,
+
+133
+00:05:13,792 --> 00:05:15,300
+and returns the status,
+
+134
+00:05:15,300 --> 00:05:16,350
+and the jay son.
+
+135
+00:05:16,350 --> 00:05:18,186
+If the shop does not answer,
+
+136
+00:05:18,186 --> 00:05:19,891
+it says so in plain words.
+
+137
+00:05:20,441 --> 00:05:24,387
+A new folder.
+
+138
+00:05:24,937 --> 00:05:31,657
+Test one.
+
+139
+00:05:41,607 --> 00:05:42,165
+A client,
+
+140
+00:05:42,165 --> 00:05:43,405
+a request to health,
+
+141
+00:05:43,405 --> 00:05:44,582
+and two assertions.
+
+142
+00:05:44,582 --> 00:05:46,194
+The status is two hundred,
+
+143
+00:05:46,194 --> 00:05:47,495
+and the body says UP.
+
+144
+00:05:48,045 --> 00:05:50,776
+Run it.
+
+145
+00:05:51,326 --> 00:05:56,937
+One passed. Simple, and real. Every test from now on talks to the real running shop.
+
+146
+00:05:57,487 --> 00:06:02,479
+Test two.
+
+147
+00:06:10,429 --> 00:06:12,711
+One request, and one check on the count.
+
+148
+00:06:13,261 --> 00:06:16,333
+Run again.
+
+149
+00:06:16,883 --> 00:06:17,779
+Two passed.
+
+150
+00:06:18,329 --> 00:06:23,407
+Test three: the cart.
+
+151
+00:06:36,557 --> 00:06:37,343
+A new client,
+
+152
+00:06:37,343 --> 00:06:39,583
+so a new customer with an empty cart.
+
+153
+00:06:39,583 --> 00:06:40,793
+We post to the cart,
+
+154
+00:06:40,793 --> 00:06:41,822
+with the product,
+
+155
+00:06:41,822 --> 00:06:43,154
+and a quantity of two.
+
+156
+00:06:43,154 --> 00:06:47,270
+Then we assert the subtotal: two times two hundred nineteen dollars,
+
+157
+00:06:47,270 --> 00:06:47,814
+in cents,
+
+158
+00:06:47,814 --> 00:06:49,933
+forty-three thousand eight hundred.
+
+159
+00:06:50,483 --> 00:06:53,555
+Run again.
+
+160
+00:06:54,105 --> 00:06:56,217
+Three passed. The cart does the math.
+
+161
+00:06:56,767 --> 00:07:05,300
+Test four: many cases.
+
+162
+00:07:15,250 --> 00:07:16,330
+One test function,
+
+163
+00:07:16,330 --> 00:07:19,029
+two cases: a missing path gives four oh four,
+
+164
+00:07:19,029 --> 00:07:21,309
+and the health path gives two hundred.
+
+165
+00:07:21,859 --> 00:07:24,931
+Run again.
+
+166
+00:07:25,481 --> 00:07:29,107
+Four tests became five. Parametrize counted each case.
+
+167
+00:07:29,657 --> 00:07:36,953
+Now an outage.
+
+168
+00:07:37,503 --> 00:07:41,770
+Tom cat is stopping. The shop is gone, and our tests do not know that yet.
+
+169
+00:07:42,320 --> 00:07:47,248
+Run the tests.
+
+170
+00:07:48,598 --> 00:07:49,739
+Every test fails.
+
+171
+00:07:49,739 --> 00:07:52,894
+And look at the message: shop is not answering.
+
+172
+00:07:52,894 --> 00:07:54,371
+Not a confusing crash.
+
+173
+00:07:54,371 --> 00:07:55,378
+A clear reason.
+
+174
+00:07:55,378 --> 00:07:58,667
+That is why the client reports it in plain words.
+
+175
+00:07:59,217 --> 00:08:04,807
+Start it again.
+
+176
+00:08:05,357 --> 00:08:07,405
+Wait, then test.
+
+177
+00:08:10,955 --> 00:08:11,829
+Up again.
+
+178
+00:08:12,379 --> 00:08:16,411
+All green.
+
+179
+00:08:16,961 --> 00:08:20,631
+Five passed. Same tests, same shop, the outage is over.
+
+180
+00:08:21,181 --> 00:08:27,986
+Where am I?
+
+181
+00:08:28,536 --> 00:08:29,518
+One out of six.
+
+182
+00:08:29,518 --> 00:08:30,828
+The shop is running,
+
+183
+00:08:30,828 --> 00:08:32,268
+and that check passes.
+
+184
+00:08:32,268 --> 00:08:35,215
+The test files for the task do not exist yet,
+
+185
+00:08:35,215 --> 00:08:36,066
+so five fail.
+
+186
+00:08:36,066 --> 00:08:36,525
+Honest,
+
+187
+00:08:36,525 --> 00:08:37,245
+and useful.
+
+188
+00:08:37,245 --> 00:08:39,864
+That is the starting line for your task.
+
+189
+00:08:40,414 --> 00:08:42,377
+Clean up.
+
+190
+00:08:42,927 --> 00:08:45,295
+Tom cat stopped, and everything removed.
+
+191
+00:08:46,845 --> 00:08:51,005
+Your lab task: test the Cloud Cart API yourself. Six checks.
+
+192
+00:08:51,555 --> 00:08:54,584
+One: start Tom cat, and wait for health to say UP.
+
+193
+00:08:55,134 --> 00:08:56,312
+Two: health tests,
+
+194
+00:08:56,312 --> 00:08:57,228
+three of them.
+
+195
+00:08:57,228 --> 00:08:58,603
+Three: product tests,
+
+196
+00:08:58,603 --> 00:08:58,995
+three.
+
+197
+00:08:58,995 --> 00:09:00,108
+Four: cart tests,
+
+198
+00:09:00,108 --> 00:09:00,500
+three.
+
+199
+00:09:00,500 --> 00:09:03,249
+The cart must ship free for two keyboards,
+
+200
+00:09:03,249 --> 00:09:05,801
+and charge shipping for one cheap item.
+
+201
+00:09:06,351 --> 00:09:07,499
+Five: error tests,
+
+202
+00:09:07,499 --> 00:09:08,327
+four of them.
+
+203
+00:09:08,327 --> 00:09:09,156
+Four oh four,
+
+204
+00:09:09,156 --> 00:09:09,985
+four oh nine,
+
+205
+00:09:09,985 --> 00:09:10,750
+four oh one,
+
+206
+00:09:10,750 --> 00:09:11,834
+and four hundred.
+
+207
+00:09:12,384 --> 00:09:13,953
+Six: the fake shop check.
+
+208
+00:09:13,953 --> 00:09:19,289
+Lab check runs your tests against a fake shop that answers two hundred to everything.
+
+209
+00:09:19,289 --> 00:09:22,113
+At least eight of your tests must fail there.
+
+210
+00:09:22,113 --> 00:09:23,055
+Then lab check,
+
+211
+00:09:23,055 --> 00:09:24,373
+until six out of six.
+
+212
+00:09:26,423 --> 00:09:29,218
+Where to find the lab. Pause here, and write it down.
+
+213
+00:09:29,768 --> 00:09:31,232
+One: the repository,
+
+214
+00:09:31,232 --> 00:09:35,552
+git hub dot com slash it dash waves slash dev ops dash A I,
+
+215
+00:09:35,552 --> 00:09:37,896
+in the folder academy slash lab.
+
+216
+00:09:38,446 --> 00:09:44,632
+Two: the files, lab one thirty-nine dot S H, and shortcuts one thirty-nine dot S H.
+
+217
+00:09:45,182 --> 00:09:50,644
+Three: install it, with sudo install, into slash user slash local slash S bin.
+
+218
+00:09:51,194 --> 00:09:53,044
+Four: load the short names,
+
+219
+00:09:53,044 --> 00:09:56,197
+with source shortcuts one thirty-nine dot S H.
+
+220
+00:09:56,197 --> 00:09:57,020
+Then lab up,
+
+221
+00:09:57,020 --> 00:09:57,705
+lab check,
+
+222
+00:09:57,705 --> 00:09:58,596
+and lab down.
+
+223
+00:09:59,146 --> 00:10:00,586
+Five: you need java,
+
+224
+00:10:00,586 --> 00:10:00,946
+curl,
+
+225
+00:10:00,946 --> 00:10:01,881
+python three,
+
+226
+00:10:01,881 --> 00:10:02,817
+and pie test.
+
+227
+00:10:02,817 --> 00:10:06,272
+Lab up downloads Tom cat and Cloud Cart for you.
+
+228
+00:10:06,822 --> 00:10:08,795
+Six: only on your own machine,
+
+229
+00:10:08,795 --> 00:10:10,901
+with ports eight one three nine,
+
+230
+00:10:10,901 --> 00:10:12,809
+and eight one four nine free.
+
+231
+00:10:12,809 --> 00:10:14,651
+Lab down removes everything.
+
+232
+00:10:15,201 --> 00:10:16,844
+The link is in the description.
+
+233
+00:10:18,894 --> 00:10:22,542
+Pass or fail rubric. Six points. All six to pass.
+
+234
+00:10:23,092 --> 00:10:25,588
+One: Tom cat is running, and health says UP.
+
+235
+00:10:26,138 --> 00:10:27,759
+Two: three health tests pass.
+
+236
+00:10:28,309 --> 00:10:30,251
+Three: three product tests pass.
+
+237
+00:10:30,801 --> 00:10:33,766
+Four: three cart tests pass, with real values.
+
+238
+00:10:34,316 --> 00:10:36,030
+Five: four error tests pass,
+
+239
+00:10:36,030 --> 00:10:37,377
+covering four oh four,
+
+240
+00:10:37,377 --> 00:10:38,173
+four oh nine,
+
+241
+00:10:38,173 --> 00:10:38,907
+four oh one,
+
+242
+00:10:38,907 --> 00:10:39,948
+and four hundred.
+
+243
+00:10:40,498 --> 00:10:43,634
+Six: at least eight of your tests fail against the fake shop.
+
+244
+00:10:44,184 --> 00:10:45,485
+Pass means all six.
+
+245
+00:10:47,535 --> 00:10:49,306
+Your turn, on your own machine.
+
+246
+00:10:49,856 --> 00:10:54,250
+One: lab up, and read the task file. Start Tom cat, and wait for health.
+
+247
+00:10:54,800 --> 00:10:58,406
+Two: write the health and product tests. Run them after each one.
+
+248
+00:10:58,956 --> 00:11:02,582
+Three: write the cart tests. Use a new client in every test.
+
+249
+00:11:03,132 --> 00:11:08,231
+Four: write the error tests. Sign in with the demo account, and send a bad zip code.
+
+250
+00:11:08,781 --> 00:11:12,258
+Five: lab check, until six out of six. Then lab down.
+
+251
+00:11:12,808 --> 00:11:14,643
+Pause the video, and begin now.
+
+252
+00:11:30,193 --> 00:11:31,068
+Quick check.
+
+253
+00:11:31,618 --> 00:11:33,559
+What does a health check tell an operator?
+
+254
+00:11:34,109 --> 00:11:37,672
+Which status code means out of stock, and which means sign in first?
+
+255
+00:11:38,222 --> 00:11:40,440
+Why must every test make its own client?
+
+256
+00:11:40,990 --> 00:11:43,038
+How do you wait for a server to be ready?
+
+257
+00:11:43,588 --> 00:11:49,839
+Objective covered: M C fifteen, objective four. API and health tests for Cloud Cart.
+
+258
+00:11:50,389 --> 00:11:52,458
+Pause the video, and answer out loud.
+
+259
+00:12:03,008 --> 00:12:08,043
+Next: how much of your code do the tests actually run? Test coverage, and its limits.
+
+260
+00:12:08,593 --> 00:12:11,921
+If this helped, like, share and subscribe, so you do not miss it.
