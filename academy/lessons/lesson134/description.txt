@@ -19,7 +19,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab134.sh and shortc
 Honest notes: the terminal demo is one real, continuous recording of real PostgreSQL 16 and a small shell app and migration runner written for this lab, and the lab was run end to end: it passes 0 of 6 before you start and 6 of 6 after you finish, and lab down leaves nothing behind. The lab password sits in a plain text file only to keep the lesson simple: real teams use a secret manager. The narration is synthetic speech. The hook, map, missions, task, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: Fix App-to-Database Connection Errors and Failed Migrations in PostgreSQL | Lesson 133 https://youtu.be/jQj3519YS3s
-Next: Software Testing and QA, the next domain of the bootcamp.
+Next lesson: Types of Software Tests: Unit, Integration, API, End-to-End, Smoke and Regression | Lesson 135 https://youtu.be/LHK5CDeXW_0
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
