@@ -20,7 +20,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab143.sh and shortc
 Honest notes: the terminal demo is a real recording of real pytest. The flaky failure is a small test written for the lab: it uses random numbers, and the demo fixes the random seed for each run so that the same failure can be replayed exactly (that is the point of the lesson). Which seeds fail is fixed, but the timings that pytest prints vary from run to run. The lab was run end to end: 0 of 6 before you start, 6 of 6 with a reference solution, and lab down leaves nothing behind. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: Performance, Load and Security Testing: p95, Budgets and Secret Scans | Lesson 142 https://youtu.be/eyI6JEF5oAQ
-Next: the testing mastery scenario, the whole domain in one lab.
+Next: https://youtu.be/YEqxngkZqFU (Software Testing Mastery: Find the Bug, Fix Flaky Tests, Gate with CI and Prove It)
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
