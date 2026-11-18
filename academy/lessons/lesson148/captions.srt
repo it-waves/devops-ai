@@ -1,0 +1,827 @@
+1
+00:00:00,500 --> 00:00:03,955
+A new version passes every test in the test environment.
+
+2
+00:00:03,955 --> 00:00:05,930
+The team ships it to production.
+
+3
+00:00:05,930 --> 00:00:06,793
+And it breaks.
+
+4
+00:00:07,343 --> 00:00:07,960
+Same code,
+
+5
+00:00:07,960 --> 00:00:09,193
+same version number.
+
+6
+00:00:09,193 --> 00:00:10,242
+So what happened?
+
+7
+00:00:10,242 --> 00:00:12,400
+Somebody rebuilt it for production.
+
+8
+00:00:12,400 --> 00:00:15,791
+And the rebuild was not the same thing that was tested.
+
+9
+00:00:16,341 --> 00:00:17,963
+A second team builds once,
+
+10
+00:00:17,963 --> 00:00:21,207
+and moves that exact file through every environment.
+
+11
+00:00:21,207 --> 00:00:22,891
+Nothing changes on the way.
+
+12
+00:00:23,441 --> 00:00:24,901
+Today: build artifacts,
+
+13
+00:00:24,901 --> 00:00:25,727
+environments,
+
+14
+00:00:25,727 --> 00:00:27,123
+and release promotion.
+
+15
+00:00:27,123 --> 00:00:30,425
+How a build travels from a laptop to your customers,
+
+16
+00:00:30,425 --> 00:00:31,505
+without changing.
+
+17
+00:00:33,055 --> 00:00:34,484
+Here is what to expect.
+
+18
+00:00:35,034 --> 00:00:38,298
+One: what a build artifact is, and the rule: build once.
+
+19
+00:00:38,848 --> 00:00:42,795
+Two: environments, and why the settings live outside the artifact.
+
+20
+00:00:43,345 --> 00:00:44,373
+Three: promotion,
+
+21
+00:00:44,373 --> 00:00:46,851
+the moves from dev to test to production,
+
+22
+00:00:46,851 --> 00:00:48,785
+and rollback when it goes wrong.
+
+23
+00:00:49,335 --> 00:00:50,498
+Four: a live demo.
+
+24
+00:00:50,498 --> 00:00:51,919
+We rebuild by mistake,
+
+25
+00:00:51,919 --> 00:00:52,953
+then build once,
+
+26
+00:00:52,953 --> 00:00:54,439
+promote it three times,
+
+27
+00:00:54,439 --> 00:00:56,119
+and catch a tampered file.
+
+28
+00:00:56,669 --> 00:00:59,805
+This is lesson four of the DevOps fundamentals domain.
+
+29
+00:01:01,855 --> 00:01:03,519
+Start with the build artifact.
+
+30
+00:01:04,069 --> 00:01:05,820
+Your source code is text.
+
+31
+00:01:05,820 --> 00:01:06,520
+To run it,
+
+32
+00:01:06,520 --> 00:01:07,430
+you build it.
+
+33
+00:01:07,430 --> 00:01:10,231
+The result is the artifact: one package,
+
+34
+00:01:10,231 --> 00:01:10,651
+a jar,
+
+35
+00:01:10,651 --> 00:01:11,072
+a zip,
+
+36
+00:01:11,072 --> 00:01:12,332
+a container image,
+
+37
+00:01:12,332 --> 00:01:13,242
+ready to run.
+
+38
+00:01:13,792 --> 00:01:19,126
+An artifact has a name and a version, for example shop, one point four point zero.
+
+39
+00:01:19,676 --> 00:01:21,385
+It also has a fingerprint.
+
+40
+00:01:21,385 --> 00:01:22,108
+A checksum,
+
+41
+00:01:22,108 --> 00:01:24,080
+computed from the exact bytes.
+
+42
+00:01:24,080 --> 00:01:25,131
+Change one byte,
+
+43
+00:01:25,131 --> 00:01:26,972
+and the fingerprint changes.
+
+44
+00:01:27,522 --> 00:01:31,980
+So the fingerprint answers one question: is this the same file we tested?
+
+45
+00:01:33,530 --> 00:01:35,599
+Now the golden rule: build once.
+
+46
+00:01:36,149 --> 00:01:37,858
+The mistake looks innocent.
+
+47
+00:01:37,858 --> 00:01:38,744
+Build for dev.
+
+48
+00:01:38,744 --> 00:01:40,073
+Build again for test.
+
+49
+00:01:40,073 --> 00:01:41,781
+Build again for production.
+
+50
+00:01:42,331 --> 00:01:44,444
+Each build can differ: a timestamp,
+
+51
+00:01:44,444 --> 00:01:45,410
+a newer library,
+
+52
+00:01:45,410 --> 00:01:46,617
+a different machine.
+
+53
+00:01:46,617 --> 00:01:47,402
+Three builds,
+
+54
+00:01:47,402 --> 00:01:48,730
+three different files,
+
+55
+00:01:48,730 --> 00:01:50,481
+with the same version number.
+
+56
+00:01:51,031 --> 00:01:55,681
+What you tested is not what you ship. And nobody can tell, because the names match.
+
+57
+00:01:56,231 --> 00:02:01,543
+The fix: build one time, store that artifact, and move the same artifact everywhere.
+
+58
+00:02:02,093 --> 00:02:06,488
+Same bytes in dev, in test, and in production. The fingerprint proves it.
+
+59
+00:02:08,038 --> 00:02:11,473
+Where does the artifact live? In an artifact repository.
+
+60
+00:02:12,023 --> 00:02:14,180
+Think of it as a library for builds.
+
+61
+00:02:14,180 --> 00:02:15,618
+Every version is stored,
+
+62
+00:02:15,618 --> 00:02:17,655
+with its name and its fingerprint.
+
+63
+00:02:18,205 --> 00:02:18,799
+For jars,
+
+64
+00:02:18,799 --> 00:02:20,514
+that is a tool like Nexus.
+
+65
+00:02:20,514 --> 00:02:21,900
+For container images,
+
+66
+00:02:21,900 --> 00:02:22,626
+a registry,
+
+67
+00:02:22,626 --> 00:02:23,682
+like Docker Hub.
+
+68
+00:02:23,682 --> 00:02:25,991
+You will use both in this bootcamp.
+
+69
+00:02:26,541 --> 00:02:28,756
+One rule: versions are immutable.
+
+70
+00:02:28,756 --> 00:02:31,710
+Once one point four point zero is published,
+
+71
+00:02:31,710 --> 00:02:33,119
+nobody overwrites it.
+
+72
+00:02:33,119 --> 00:02:34,797
+A fix gets a new version.
+
+73
+00:02:35,347 --> 00:02:39,294
+Do not deploy from someone's laptop. Deploy from the repository.
+
+74
+00:02:40,844 --> 00:02:44,087
+Next, environments. Places where the artifact runs.
+
+75
+00:02:44,637 --> 00:02:46,072
+Dev is for developers,
+
+76
+00:02:46,072 --> 00:02:47,377
+and it breaks often.
+
+77
+00:02:47,377 --> 00:02:48,943
+Test checks it properly.
+
+78
+00:02:48,943 --> 00:02:51,031
+Staging is a copy of production,
+
+79
+00:02:51,031 --> 00:02:52,466
+for a final rehearsal.
+
+80
+00:02:52,466 --> 00:02:54,685
+Production is where customers are.
+
+81
+00:02:55,235 --> 00:02:58,145
+Each environment differs: a different database,
+
+82
+00:02:58,145 --> 00:02:59,384
+a different address,
+
+83
+00:02:59,384 --> 00:03:00,375
+debug on or off,
+
+84
+00:03:00,375 --> 00:03:01,613
+different passwords.
+
+85
+00:03:02,163 --> 00:03:05,164
+So how do you use one artifact in four places?
+
+86
+00:03:05,164 --> 00:03:07,056
+The settings live outside it.
+
+87
+00:03:07,056 --> 00:03:08,883
+The artifact stays the same,
+
+88
+00:03:08,883 --> 00:03:12,275
+and each environment supplies its own configuration.
+
+89
+00:03:12,825 --> 00:03:14,212
+Never bake a password,
+
+90
+00:03:14,212 --> 00:03:15,599
+or a database address,
+
+91
+00:03:15,599 --> 00:03:16,733
+into the artifact.
+
+92
+00:03:16,733 --> 00:03:18,372
+Put it in the environment.
+
+93
+00:03:18,922 --> 00:03:22,655
+Same artifact, different configuration. That is the whole trick.
+
+94
+00:03:24,205 --> 00:03:26,765
+Now promotion. Moving the artifact up.
+
+95
+00:03:27,315 --> 00:03:32,862
+Promote means: the same artifact, to the next environment, only after it passes the gate.
+
+96
+00:03:33,412 --> 00:03:35,136
+The artifact goes to dev.
+
+97
+00:03:35,136 --> 00:03:36,585
+Automated tests pass,
+
+98
+00:03:36,585 --> 00:03:38,034
+and it moves to test.
+
+99
+00:03:38,034 --> 00:03:39,207
+More checks pass,
+
+100
+00:03:39,207 --> 00:03:40,863
+and it moves to staging.
+
+101
+00:03:40,863 --> 00:03:41,207
+Then,
+
+102
+00:03:41,207 --> 00:03:41,966
+production.
+
+103
+00:03:42,516 --> 00:03:43,597
+Before every move,
+
+104
+00:03:43,597 --> 00:03:45,218
+you verify the fingerprint.
+
+105
+00:03:45,218 --> 00:03:46,059
+If it differs,
+
+106
+00:03:46,059 --> 00:03:46,599
+you stop.
+
+107
+00:03:46,599 --> 00:03:48,340
+Something changed on the way.
+
+108
+00:03:48,890 --> 00:03:50,671
+Each gate can be automatic,
+
+109
+00:03:50,671 --> 00:03:51,397
+like tests,
+
+110
+00:03:51,397 --> 00:03:52,056
+or manual,
+
+111
+00:03:52,056 --> 00:03:53,639
+like a person approving.
+
+112
+00:03:53,639 --> 00:03:56,080
+Lesson 146 showed you both.
+
+113
+00:03:56,630 --> 00:04:01,195
+A promoted artifact is a trusted artifact. The evidence travels with it.
+
+114
+00:04:02,745 --> 00:04:04,942
+What if production goes wrong? Rollback.
+
+115
+00:04:05,492 --> 00:04:07,514
+Because every version is stored,
+
+116
+00:04:07,514 --> 00:04:08,651
+and never changed,
+
+117
+00:04:08,651 --> 00:04:09,852
+going back is easy.
+
+118
+00:04:09,852 --> 00:04:12,063
+Deploy the previous artifact again.
+
+119
+00:04:12,613 --> 00:04:13,251
+No rebuild,
+
+120
+00:04:13,251 --> 00:04:13,946
+no guessing.
+
+121
+00:04:13,946 --> 00:04:16,091
+You already know that version worked,
+
+122
+00:04:16,091 --> 00:04:18,352
+because it ran in production yesterday.
+
+123
+00:04:18,902 --> 00:04:21,007
+That is why you keep old versions.
+
+124
+00:04:21,007 --> 00:04:24,598
+And why fast rollback is the safety net for fast releases.
+
+125
+00:04:25,148 --> 00:04:29,990
+Think of rollback as a seat belt. You hope not to use it, and you are glad it is there.
+
+126
+00:04:31,540 --> 00:04:35,657
+Go to the demo folder.
+
+127
+00:04:37,207 --> 00:04:39,106
+Look around.
+
+128
+00:04:39,656 --> 00:04:43,240
+A source folder, three configuration files, and three scripts.
+
+129
+00:04:43,790 --> 00:04:49,337
+The mistake first.
+
+130
+00:04:49,887 --> 00:04:54,665
+Three builds, three different fingerprints. Same version number, three different files.
+
+131
+00:04:55,215 --> 00:04:59,589
+Build once.
+
+132
+00:05:00,139 --> 00:05:03,680
+One build, one fingerprint. Remember the first few characters.
+
+133
+00:05:04,230 --> 00:05:08,390
+Promote to dev.
+
+134
+00:05:08,940 --> 00:05:11,927
+Same fingerprint, and the dev settings: debug on.
+
+135
+00:05:12,477 --> 00:05:13,714
+Promote to test.
+
+136
+00:05:15,564 --> 00:05:16,652
+Promote to prod.
+
+137
+00:05:18,702 --> 00:05:20,784
+The same fingerprint three times.
+
+138
+00:05:20,784 --> 00:05:21,919
+The same artifact.
+
+139
+00:05:21,919 --> 00:05:24,947
+Only the database and the debug setting changed,
+
+140
+00:05:24,947 --> 00:05:27,470
+because they come from each environment.
+
+141
+00:05:28,020 --> 00:05:32,777
+Tamper with it.
+
+142
+00:05:33,327 --> 00:05:35,226
+Try to promote.
+
+143
+00:05:36,376 --> 00:05:36,682
+Stop.
+
+144
+00:05:36,682 --> 00:05:38,766
+The fingerprint no longer matches,
+
+145
+00:05:38,766 --> 00:05:40,175
+so the move is refused.
+
+146
+00:05:40,175 --> 00:05:42,136
+This check just saved a release.
+
+147
+00:05:42,686 --> 00:05:46,569
+Build clean.
+
+148
+00:05:47,119 --> 00:05:48,228
+Promote again.
+
+149
+00:05:50,178 --> 00:05:53,442
+A new artifact, a new fingerprint, verified, and live.
+
+150
+00:05:53,992 --> 00:05:57,832
+Write it down.
+
+151
+00:06:08,582 --> 00:06:11,185
+Check the file.
+
+152
+00:06:12,735 --> 00:06:15,380
+Your practice task: build once, and promote it.
+
+153
+00:06:15,930 --> 00:06:19,386
+One: run the naive script, and see three different fingerprints.
+
+154
+00:06:19,936 --> 00:06:20,999
+Two: build once,
+
+155
+00:06:20,999 --> 00:06:22,328
+then promote to dev,
+
+156
+00:06:22,328 --> 00:06:22,660
+test,
+
+157
+00:06:22,660 --> 00:06:23,258
+and prod.
+
+158
+00:06:23,258 --> 00:06:25,782
+The fingerprint must match every time.
+
+159
+00:06:26,332 --> 00:06:30,172
+Three: tamper with the artifact, and try to promote. It must stop.
+
+160
+00:06:30,722 --> 00:06:34,071
+Four: build clean, promote again, and write your three lines.
+
+161
+00:06:36,121 --> 00:06:39,342
+Where to find the demo files. Pause here, and write it down.
+
+162
+00:06:39,892 --> 00:06:45,567
+One: the repository, github.com/it-waves/devops-ai.
+
+163
+00:06:46,117 --> 00:06:50,256
+Two: the folder academy/lesson148-demo.
+
+164
+00:06:50,806 --> 00:06:52,105
+Three: three scripts,
+
+165
+00:06:52,105 --> 00:06:52,477
+naive,
+
+166
+00:06:52,477 --> 00:06:52,848
+build,
+
+167
+00:06:52,848 --> 00:06:53,591
+and promote,
+
+168
+00:06:53,591 --> 00:06:54,581
+a source folder,
+
+169
+00:06:54,581 --> 00:06:55,757
+three config files,
+
+170
+00:06:55,757 --> 00:06:57,675
+and a read me with the answers.
+
+171
+00:06:58,225 --> 00:06:59,930
+Four: clone the repository,
+
+172
+00:06:59,930 --> 00:07:01,192
+and copy the folder.
+
+173
+00:07:01,192 --> 00:07:02,266
+You need a shell,
+
+174
+00:07:02,266 --> 00:07:02,960
+and python.
+
+175
+00:07:02,960 --> 00:07:04,476
+Nothing else to install.
+
+176
+00:07:05,026 --> 00:07:05,761
+Five: again,
+
+177
+00:07:05,761 --> 00:07:07,110
+no lab in this domain.
+
+178
+00:07:07,110 --> 00:07:08,459
+The practice is plain,
+
+179
+00:07:08,459 --> 00:07:10,850
+and the answers are on the next screen.
+
+180
+00:07:12,900 --> 00:07:15,375
+Check yourself. Six points. Tick each one.
+
+181
+00:07:15,925 --> 00:07:18,933
+One: the naive script shows three different fingerprints.
+
+182
+00:07:19,483 --> 00:07:21,680
+Two: one build gives one fingerprint.
+
+183
+00:07:22,230 --> 00:07:25,323
+Three: dev, test, and prod show the same fingerprint.
+
+184
+00:07:25,873 --> 00:07:29,137
+Four: but each shows its own database and debug setting.
+
+185
+00:07:29,687 --> 00:07:32,183
+Five: a tampered artifact is refused.
+
+186
+00:07:32,733 --> 00:07:35,613
+Six: your file has three lines, in your own words.
+
+187
+00:07:36,163 --> 00:07:38,638
+All six, and you understand the three ideas.
+
+188
+00:07:40,688 --> 00:07:42,459
+Your turn, on your own machine.
+
+189
+00:07:43,009 --> 00:07:44,843
+One: copy the demo folder.
+
+190
+00:07:45,393 --> 00:07:48,529
+Two: run the naive script, and compare the fingerprints.
+
+191
+00:07:49,079 --> 00:07:53,218
+Three: build once, promote three times, then tamper and watch it stop.
+
+192
+00:07:53,768 --> 00:07:55,347
+Four: write your three lines.
+
+193
+00:07:55,897 --> 00:07:57,458
+Five: tick the six points.
+
+194
+00:07:57,458 --> 00:08:01,422
+Then think about your own releases: do you rebuild for production?
+
+195
+00:08:01,972 --> 00:08:03,807
+Pause the video, and begin now.
+
+196
+00:08:19,357 --> 00:08:20,232
+Quick check.
+
+197
+00:08:20,782 --> 00:08:22,147
+What does build once mean?
+
+198
+00:08:22,697 --> 00:08:24,190
+What does the fingerprint prove?
+
+199
+00:08:24,740 --> 00:08:27,151
+Why do settings live outside the artifact?
+
+200
+00:08:27,701 --> 00:08:30,282
+What is promotion, and how does rollback work?
+
+201
+00:08:30,832 --> 00:08:33,032
+Objective covered: MC16,
+
+202
+00:08:33,032 --> 00:08:35,303
+objective four: build artifacts,
+
+203
+00:08:35,303 --> 00:08:36,226
+environments,
+
+204
+00:08:36,226 --> 00:08:37,787
+and release promotion.
+
+205
+00:08:38,337 --> 00:08:40,406
+Pause the video, and answer out loud.
+
+206
+00:08:50,956 --> 00:08:55,308
+Next time: DevOps security, SRE, and platform engineering.
+
+207
+00:08:55,858 --> 00:08:59,186
+If this helped, like, share and subscribe, so you do not miss it.

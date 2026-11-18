@@ -1,0 +1,30 @@
+Lesson 148 of the DevOps Engineering Bootcamp, the fourth lesson of the DevOps Fundamentals domain. A version passes every test, then breaks in production, because it was rebuilt on the way. In this lesson you learn the build artifact (one package with a name, a version and a fingerprint), the golden rule "build once", the artifact repository and why versions are immutable, environments (dev, test, staging, production) and why settings live outside the artifact, release promotion through gates, and rollback, the safety net that makes fast releases safe. In the live demo, a real terminal rebuilds by mistake (three different fingerprints), then builds once and promotes the same artifact to dev, test and prod with each environment's own settings, then a tampered artifact is refused, and a clean rebuild is verified and promoted.
+
+Chapters
+0:00 Tested one thing, shipped another
+0:33 What to expect
+1:01 The build artifact
+1:33 Build once
+2:07 The artifact repository
+2:40 Environments and configuration
+3:23 Promotion
+4:02 Rollback
+4:31 Live: build once, promote, tamper
+6:12 Your practice task
+6:35 Where to find the demo files
+7:12 Self-check
+7:40 Your turn
+8:19 Quick check and what is next
+
+Objectives covered: MC16-O04, build artifacts, environments and release promotion.
+
+Demo files: github.com/it-waves/devops-ai, in academy/lesson148-demo (naive.sh, build.sh, promote.sh, a src folder, three config files and a README with the answers). You need a shell and Python. This domain has no lab on purpose: it is about ideas and decisions, so the practice is a plain terminal exercise with a self-check.
+
+Honest notes: the terminal demo is a real recording of a real shell running small scripts written for this lesson. They are teaching stand-ins for real tools such as Nexus, a container registry and Jenkins, which come later in the bootcamp. The fingerprints on the illustration screens are example values. The narration is synthetic speech. The hook, plan, artifact, build once, repository, environments, promotion, rollback, task, files, self-check and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Infrastructure as Code, Config Management and Automation Explained | Lesson 147 https://youtu.be/ooQI-lskH5Y
+Next: DevOps security, SRE and platform engineering.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #buildartifacts #releasemanagement #cicd #devopsbootcamp
