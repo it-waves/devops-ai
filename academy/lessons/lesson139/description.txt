@@ -20,7 +20,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab139.sh and shortc
 Honest notes: the terminal demo is one real, continuous recording of pytest against the real CloudCart v0.2.0 running on a real Tomcat. The lab was run end to end: it passes 0 of 6 before you start and 6 of 6 with a reference solution, and lab down leaves nothing behind. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: Browser Tests with Playwright: Traces, Screenshots and the Trace Viewer | Lesson 138 https://youtu.be/wg4FW70eUcQ
-Next: Test coverage with pytest-cov, and what it does not tell you.
+Next: Test Coverage with pytest-cov: Find Untested Code and Its Limits | Lesson 140 https://youtu.be/JzXWdg86558
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
