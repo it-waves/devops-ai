@@ -1,0 +1,30 @@
+Lesson 146 of the DevOps Engineering Bootcamp, the second lesson of the DevOps Fundamentals domain. CI, continuous delivery and continuous deployment sound the same and mean three different things. In this lesson you learn what continuous integration really checks (and what it does not do), how continuous delivery keeps every release ready while a human presses the button, how continuous deployment removes the button so the tests decide, the five things that must be true before you remove the gate (strong tests, small changes, feature flags, fast rollback, monitoring), and how to choose between them by the cost of a mistake. In the live demo, one real pipeline script runs in all three modes: CI stops after the tests, delivery stops and waits for approval, deployment releases by itself. Then a bug is added on purpose, and the tests stop it before it reaches production.
+
+Chapters
+0:00 Same change, two outcomes
+0:27 What to expect
+0:53 Continuous integration
+1:23 Continuous delivery
+1:53 Continuous deployment
+2:20 Three pipelines side by side
+2:49 Before you remove the gate
+3:19 Which one to choose
+3:49 Live: one pipeline, three modes
+5:34 Your practice task
+5:59 Where to find the demo files
+6:37 Self-check
+7:03 Your turn
+7:39 Quick check
+
+Objectives covered: MC16-O02, distinguish CI, continuous delivery and continuous deployment.
+
+Demo files: github.com/it-waves/devops-ai, in academy/lesson146-demo (pipeline.sh, a small src folder and a README with the answers). You only need a shell and python3. This domain has no lab on purpose: it is about ideas and decisions, so the practice is a plain terminal exercise with a self-check.
+
+Honest notes: the terminal demo is a real recording of a real shell running a small pipeline script written for this lesson. It is a teaching stand-in for a real CI/CD system such as Jenkins or GitHub Actions, which come later in the bootcamp. The narration is synthetic speech. The hook, plan, CI, delivery, deployment, side-by-side lanes, safety, choose, task, files, self-check and recap screens are labelled illustrations, not captures.
+
+Previous lesson: DevOps Principles: Collaboration, Fast Feedback and Shared Ownership | Lesson 145 https://youtu.be/YBqqWfepo8I
+Next: infrastructure as code, configuration management and automation.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #cicd #continuousdelivery #continuousdeployment #devopsbootcamp

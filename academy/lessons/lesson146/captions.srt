@@ -1,0 +1,651 @@
+1
+00:00:00,500 --> 00:00:04,212
+A developer finishes a small change. It passes every test.
+
+2
+00:00:04,762 --> 00:00:05,505
+In one team,
+
+3
+00:00:05,505 --> 00:00:07,983
+it reaches customers the same afternoon.
+
+4
+00:00:07,983 --> 00:00:08,974
+In another team,
+
+5
+00:00:08,974 --> 00:00:10,274
+with the same change,
+
+6
+00:00:10,274 --> 00:00:12,442
+it waits three weeks for a meeting.
+
+7
+00:00:12,992 --> 00:00:17,835
+The difference is not the code. It is how far the pipeline is allowed to go, on its own.
+
+8
+00:00:18,385 --> 00:00:19,025
+Today: CI,
+
+9
+00:00:19,025 --> 00:00:20,305
+continuous delivery,
+
+10
+00:00:20,305 --> 00:00:21,969
+and continuous deployment.
+
+11
+00:00:21,969 --> 00:00:24,017
+Three names that sound the same,
+
+12
+00:00:24,017 --> 00:00:26,065
+and mean three different things.
+
+13
+00:00:27,615 --> 00:00:29,044
+Here is what to expect.
+
+14
+00:00:29,594 --> 00:00:32,645
+One: continuous integration, and what it really checks.
+
+15
+00:00:33,195 --> 00:00:36,566
+Two: continuous delivery, where a human presses the button.
+
+16
+00:00:37,116 --> 00:00:39,974
+Three: continuous deployment, where nobody does.
+
+17
+00:00:40,524 --> 00:00:42,525
+Four: a live demo of all three,
+
+18
+00:00:42,525 --> 00:00:44,460
+with one real pipeline script.
+
+19
+00:00:44,460 --> 00:00:46,267
+Then we break it on purpose,
+
+20
+00:00:46,267 --> 00:00:48,396
+and see what protects production.
+
+21
+00:00:48,946 --> 00:00:52,168
+This is lesson two of the DevOps fundamentals domain.
+
+22
+00:00:54,218 --> 00:00:56,927
+Start with continuous integration. CI.
+
+23
+00:00:57,477 --> 00:01:02,235
+Everyone merges their work into one shared branch, often. At least once a day.
+
+24
+00:01:02,785 --> 00:01:06,646
+Every merge starts an automatic build, and an automatic test run.
+
+25
+00:01:07,196 --> 00:01:08,244
+If something breaks,
+
+26
+00:01:08,244 --> 00:01:09,659
+the team learns in minutes,
+
+27
+00:01:09,659 --> 00:01:12,017
+while the change is still fresh in your mind.
+
+28
+00:01:12,567 --> 00:01:14,273
+Notice what CI does not do.
+
+29
+00:01:14,273 --> 00:01:16,988
+It does not put anything in front of users.
+
+30
+00:01:16,988 --> 00:01:22,167
+It only answers one question: does this change work together with everyone else's?
+
+31
+00:01:23,717 --> 00:01:26,512
+Next, continuous delivery. The first CD.
+
+32
+00:01:27,062 --> 00:01:28,690
+It starts where CI stops.
+
+33
+00:01:28,690 --> 00:01:30,058
+After the tests pass,
+
+34
+00:01:30,058 --> 00:01:32,207
+the pipeline packages the change,
+
+35
+00:01:32,207 --> 00:01:33,184
+into a release,
+
+36
+00:01:33,184 --> 00:01:34,422
+and keeps it ready.
+
+37
+00:01:34,972 --> 00:01:39,345
+At any moment, the latest version could go live. It is always deployable.
+
+38
+00:01:39,895 --> 00:01:41,490
+But a person decides when.
+
+39
+00:01:41,490 --> 00:01:42,840
+Maybe a product owner,
+
+40
+00:01:42,840 --> 00:01:43,822
+maybe a manager,
+
+41
+00:01:43,822 --> 00:01:45,478
+maybe the on-call engineer.
+
+42
+00:01:45,478 --> 00:01:46,828
+They press the button.
+
+43
+00:01:47,378 --> 00:01:52,136
+That button is called a gate, or an approval. It is a choice, and it is a valid one.
+
+44
+00:01:53,686 --> 00:01:56,481
+Then continuous deployment. The second CD.
+
+45
+00:01:57,031 --> 00:01:57,915
+Same pipeline,
+
+46
+00:01:57,915 --> 00:01:59,367
+but without the button.
+
+47
+00:01:59,367 --> 00:02:00,756
+If every check passes,
+
+48
+00:02:00,756 --> 00:02:03,281
+the change goes to production by itself.
+
+49
+00:02:03,831 --> 00:02:07,543
+No ticket, no meeting. A commit can reach users in minutes.
+
+50
+00:02:08,093 --> 00:02:09,132
+That sounds risky.
+
+51
+00:02:09,132 --> 00:02:09,709
+And it is,
+
+52
+00:02:09,709 --> 00:02:10,748
+unless your tests,
+
+53
+00:02:10,748 --> 00:02:11,902
+and your monitoring,
+
+54
+00:02:11,902 --> 00:02:14,152
+are strong enough to replace the human.
+
+55
+00:02:14,702 --> 00:02:19,182
+So the tests become the gate. The pipeline is the one that says yes, or no.
+
+56
+00:02:20,732 --> 00:02:24,935
+Let us watch the three side by side. One change, three pipelines.
+
+57
+00:02:25,485 --> 00:02:30,775
+The first stops after the tests. That is CI. The change is integrated, and proven.
+
+58
+00:02:31,325 --> 00:02:32,770
+The second goes further,
+
+59
+00:02:32,770 --> 00:02:33,734
+and is packaged.
+
+60
+00:02:33,734 --> 00:02:35,299
+Then it waits at the gate,
+
+61
+00:02:35,299 --> 00:02:36,082
+for a person.
+
+62
+00:02:36,082 --> 00:02:37,768
+That is continuous delivery.
+
+63
+00:02:38,318 --> 00:02:39,596
+The third has no gate.
+
+64
+00:02:39,596 --> 00:02:41,802
+It goes straight through to the users.
+
+65
+00:02:41,802 --> 00:02:43,545
+That is continuous deployment.
+
+66
+00:02:44,095 --> 00:02:48,191
+Same start, three finishing lines. Each one includes the one before.
+
+67
+00:02:49,741 --> 00:02:52,621
+Before you remove the gate, five things must be true.
+
+68
+00:02:53,171 --> 00:02:58,099
+One: strong automatic tests. If the tests miss a bug, nobody else will catch it.
+
+69
+00:02:58,649 --> 00:03:03,940
+Two: small changes. A small change is easy to understand, and easy to undo.
+
+70
+00:03:04,490 --> 00:03:08,650
+Three: feature flags. You can ship the code, and switch the feature on later.
+
+71
+00:03:09,200 --> 00:03:13,402
+Four: fast rollback. One command, and the last good version is back.
+
+72
+00:03:13,952 --> 00:03:18,752
+Five: monitoring and alerts, so a bad release is noticed in minutes, not days.
+
+73
+00:03:20,302 --> 00:03:23,758
+So which one should you choose? It depends on the cost of a mistake.
+
+74
+00:03:24,308 --> 00:03:25,292
+A busy web shop,
+
+75
+00:03:25,292 --> 00:03:26,276
+like CloudCart,
+
+76
+00:03:26,276 --> 00:03:28,429
+with good tests and quick rollback,
+
+77
+00:03:28,429 --> 00:03:31,135
+can go all the way to continuous deployment.
+
+78
+00:03:31,685 --> 00:03:32,140
+A bank,
+
+79
+00:03:32,140 --> 00:03:33,442
+or a medical device,
+
+80
+00:03:33,442 --> 00:03:35,329
+often keeps a human approval.
+
+81
+00:03:35,329 --> 00:03:37,151
+That is continuous delivery,
+
+82
+00:03:37,151 --> 00:03:38,127
+and it is fine.
+
+83
+00:03:38,677 --> 00:03:43,349
+And every team, in every case, starts with CI. Without it, nothing else works.
+
+84
+00:03:43,899 --> 00:03:48,166
+Many teams use both: automatic to staging, and a button for production.
+
+85
+00:03:49,716 --> 00:03:53,983
+Go to the demo folder.
+
+86
+00:03:55,533 --> 00:03:57,431
+Look around.
+
+87
+00:03:57,981 --> 00:04:02,440
+A script, pipeline.sh, and a folder with the shop code and its check.
+
+88
+00:04:02,990 --> 00:04:07,321
+The code.
+
+89
+00:04:07,871 --> 00:04:10,943
+One function. It multiplies a price by a quantity.
+
+90
+00:04:11,493 --> 00:04:15,653
+CI.
+
+91
+00:04:16,203 --> 00:04:16,606
+Build,
+
+92
+00:04:16,606 --> 00:04:16,943
+test,
+
+93
+00:04:16,943 --> 00:04:17,481
+package,
+
+94
+00:04:17,481 --> 00:04:17,817
+done.
+
+95
+00:04:17,817 --> 00:04:19,028
+Two checks passed.
+
+96
+00:04:19,028 --> 00:04:21,449
+The change is integrated and tested.
+
+97
+00:04:21,449 --> 00:04:22,795
+Nothing is deployed.
+
+98
+00:04:23,345 --> 00:04:28,251
+Delivery.
+
+99
+00:04:28,801 --> 00:04:33,473
+The same steps, then ready. It stops. Deployable, and waiting for a human.
+
+100
+00:04:34,023 --> 00:04:36,797
+A human approves.
+
+101
+00:04:38,147 --> 00:04:40,664
+Deploy. Production now runs release one.
+
+102
+00:04:41,214 --> 00:04:46,547
+Deployment.
+
+103
+00:04:47,097 --> 00:04:50,895
+No gate. The tests passed, so release two went live, by itself.
+
+104
+00:04:51,445 --> 00:04:56,522
+Break it.
+
+105
+00:04:57,072 --> 00:04:59,653
+Run it again.
+
+106
+00:05:00,703 --> 00:05:01,586
+The tests fail,
+
+107
+00:05:01,586 --> 00:05:03,940
+and the pipeline says: nothing released.
+
+108
+00:05:03,940 --> 00:05:05,883
+The bug never reached production.
+
+109
+00:05:05,883 --> 00:05:07,295
+The tests were the gate.
+
+110
+00:05:07,845 --> 00:05:10,427
+Check production.
+
+111
+00:05:10,977 --> 00:05:15,542
+Still two releases. The broken change was stopped, with no human involved.
+
+112
+00:05:16,092 --> 00:05:19,633
+Write it down.
+
+113
+00:05:28,583 --> 00:05:30,653
+Three short lines, in your own words.
+
+114
+00:05:31,203 --> 00:05:33,656
+Check the file.
+
+115
+00:05:35,206 --> 00:05:38,427
+Your practice task: run one pipeline in three modes.
+
+116
+00:05:38,977 --> 00:05:41,495
+One: run CI, and read the four steps.
+
+117
+00:05:42,045 --> 00:05:46,013
+Two: run delivery, and see it stop. Then run it again with approve.
+
+118
+00:05:46,563 --> 00:05:50,680
+Three: run deployment. Check that production now holds two releases.
+
+119
+00:05:51,230 --> 00:05:52,538
+Four: break the code,
+
+120
+00:05:52,538 --> 00:05:53,845
+run deployment again,
+
+121
+00:05:53,845 --> 00:05:56,398
+and confirm that production is untouched.
+
+122
+00:05:56,398 --> 00:05:58,142
+Then write your three lines.
+
+123
+00:06:00,192 --> 00:06:03,413
+Where to find the demo files. Pause here, and write it down.
+
+124
+00:06:03,963 --> 00:06:09,638
+One: the repository, github.com/it-waves/devops-ai.
+
+125
+00:06:10,188 --> 00:06:14,369
+Two: the folder academy/lesson146-demo.
+
+126
+00:06:14,919 --> 00:06:20,103
+Three: the script pipeline.sh, the source folder, and a read me with the answers.
+
+127
+00:06:20,653 --> 00:06:22,341
+Four: clone the repository,
+
+128
+00:06:22,341 --> 00:06:23,591
+and copy the folder.
+
+129
+00:06:23,591 --> 00:06:25,716
+You need a shell and python three.
+
+130
+00:06:25,716 --> 00:06:26,904
+Nothing to install.
+
+131
+00:06:27,454 --> 00:06:28,220
+Five: again,
+
+132
+00:06:28,220 --> 00:06:29,624
+no lab in this domain.
+
+133
+00:06:29,624 --> 00:06:31,667
+It is about ideas and decisions,
+
+134
+00:06:31,667 --> 00:06:33,263
+so the practice is plain,
+
+135
+00:06:33,263 --> 00:06:35,753
+and the answers are on the next screen.
+
+136
+00:06:37,803 --> 00:06:40,278
+Check yourself. Six points. Tick each one.
+
+137
+00:06:40,828 --> 00:06:43,110
+One: CI builds and tests, and stops.
+
+138
+00:06:43,660 --> 00:06:46,519
+Two: delivery stops at the gate, and says ready.
+
+139
+00:06:47,069 --> 00:06:48,797
+Three: approve releases it.
+
+140
+00:06:49,347 --> 00:06:51,566
+Four: deployment releases by itself.
+
+141
+00:06:52,116 --> 00:06:54,462
+Five: with the bug, nothing is released.
+
+142
+00:06:55,012 --> 00:06:59,322
+Six: production still holds two releases, and your file has three lines.
+
+143
+00:06:59,872 --> 00:07:01,728
+All six, and you know the difference.
+
+144
+00:07:03,778 --> 00:07:05,549
+Your turn, on your own machine.
+
+145
+00:07:06,099 --> 00:07:07,933
+One: copy the demo folder.
+
+146
+00:07:08,483 --> 00:07:10,382
+Two: run the three modes, in order.
+
+147
+00:07:10,932 --> 00:07:13,599
+Three: break the code, and run deployment again.
+
+148
+00:07:14,149 --> 00:07:15,727
+Four: write your three lines.
+
+149
+00:07:16,277 --> 00:07:17,803
+Five: tick the six points.
+
+150
+00:07:17,803 --> 00:07:22,144
+Then think about your own team: which of the three is your pipeline today?
+
+151
+00:07:22,694 --> 00:07:24,529
+Pause the video, and begin now.
+
+152
+00:07:40,079 --> 00:07:40,954
+Quick check.
+
+153
+00:07:41,504 --> 00:07:42,698
+What does CI check?
+
+154
+00:07:43,248 --> 00:07:45,894
+What is the difference between delivery and deployment?
+
+155
+00:07:46,444 --> 00:07:49,430
+Name three things you need before removing the gate.
+
+156
+00:07:49,980 --> 00:07:51,964
+Which one starts every team's journey?
+
+157
+00:07:52,514 --> 00:07:54,814
+Objective covered: MC16,
+
+158
+00:07:54,814 --> 00:07:57,039
+objective two: distinguish CI,
+
+159
+00:07:57,039 --> 00:07:58,522
+continuous delivery,
+
+160
+00:07:58,522 --> 00:08:00,450
+and continuous deployment.
+
+161
+00:08:01,000 --> 00:08:03,070
+Pause the video, and answer out loud.
+
+162
+00:08:13,620 --> 00:08:18,484
+Next time: infrastructure as code, configuration management, and automation.
+
+163
+00:08:19,034 --> 00:08:22,362
+If this helped, like, share and subscribe, so you do not miss it.
