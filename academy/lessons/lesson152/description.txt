@@ -21,7 +21,7 @@ Demo files: github.com/it-waves/devops-ai, in academy/lesson152-demo (baseline.t
 Honest notes: the terminal demo is a real recording of a real shell running a small script written for this lesson. The CloudCart numbers are example data, and plan.sh is a teaching stand-in: it checks that a plan has the right parts, not that the plan is wise. The narration is synthetic speech. The hook, plan, why-plans-fail, six-parts, CloudCart, what-comes-next, task, files, self-check and recap screens are labelled illustrations, not captures.
 
 Previous lesson: Find the Bottleneck: Why Faster Servers Do Not Speed Up Releases | Lesson 151 https://youtu.be/YeyPHx5cfqE
-Next: the DevOps Fundamentals mastery scenario.
+Next: DevOps Fundamentals Mastery: Fix a Real Delivery Review | Lesson 153 https://youtu.be/DneQ4GGzQFw
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
