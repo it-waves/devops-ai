@@ -1,0 +1,907 @@
+1
+00:00:00,500 --> 00:00:03,707
+A new checkout feature is ready to ship on Friday.
+
+2
+00:00:03,707 --> 00:00:04,926
+The total is wrong,
+
+3
+00:00:04,926 --> 00:00:06,850
+a test fails only on weekends,
+
+4
+00:00:06,850 --> 00:00:10,377
+and nothing stops a bad change from reaching customers.
+
+5
+00:00:10,927 --> 00:00:13,109
+Can you make this code trustworthy?
+
+6
+00:00:13,109 --> 00:00:13,856
+Not by hope.
+
+7
+00:00:13,856 --> 00:00:15,851
+With tests that catch real bugs,
+
+8
+00:00:15,851 --> 00:00:17,097
+a gate that says no,
+
+9
+00:00:17,097 --> 00:00:18,842
+and a report that proves it.
+
+10
+00:00:19,392 --> 00:00:22,243
+This is the software testing mastery lesson.
+
+11
+00:00:22,243 --> 00:00:23,409
+One real scenario,
+
+12
+00:00:23,409 --> 00:00:25,935
+every skill from the last nine lessons,
+
+13
+00:00:25,935 --> 00:00:28,203
+and a judge that checks six things.
+
+14
+00:00:28,753 --> 00:00:31,014
+Find it. Fix it. Gate it. Prove it.
+
+15
+00:00:32,564 --> 00:00:35,636
+Here is what to expect, from the first minute to the last.
+
+16
+00:00:36,186 --> 00:00:40,282
+One: a look back at the whole domain, eight objectives, in one picture.
+
+17
+00:00:40,832 --> 00:00:45,205
+Two: the mastery scenario. Five missions, in a fixed order, and a judge.
+
+18
+00:00:45,755 --> 00:00:50,235
+Three: a live worked example of the whole scenario, with real pytest.
+
+19
+00:00:50,785 --> 00:00:51,997
+Four: your own run,
+
+20
+00:00:51,997 --> 00:00:53,337
+judged by six checks,
+
+21
+00:00:53,337 --> 00:00:56,143
+with a report that documents what you found.
+
+22
+00:00:56,143 --> 00:00:57,036
+Then clean up.
+
+23
+00:00:57,586 --> 00:01:01,426
+This is lesson ten, the last lesson of the software testing domain.
+
+24
+00:01:01,976 --> 00:01:04,237
+Find it. Fix it. Gate it. Prove it.
+
+25
+00:01:06,287 --> 00:01:10,575
+First, the map of the domain. Eight objectives, and you have done every one.
+
+26
+00:01:11,125 --> 00:01:16,010
+Test types: unit, integration, API, end to end, smoke, and regression.
+
+27
+00:01:16,560 --> 00:01:21,936
+Assertions, fixtures, mocks, and isolation: small tests that fail for one reason.
+
+28
+00:01:22,486 --> 00:01:24,486
+Running tests and reading reports,
+
+29
+00:01:24,486 --> 00:01:25,722
+including exit codes,
+
+30
+00:01:25,722 --> 00:01:28,310
+and the browser tests with the trace viewer.
+
+31
+00:01:28,860 --> 00:01:32,935
+API and health tests: check the running service, not just the code.
+
+32
+00:01:33,485 --> 00:01:38,413
+Coverage: find the code nobody tests, and remember that coverage is not quality.
+
+33
+00:01:38,963 --> 00:01:43,870
+Tests in CI: a gate that says no, with a coverage floor and required checks.
+
+34
+00:01:44,420 --> 00:01:48,900
+Performance and security tests: a time budget, and a scan for secrets.
+
+35
+00:01:49,450 --> 00:01:52,799
+And flaky tests: find the cause, and never just rerun.
+
+36
+00:01:53,349 --> 00:01:55,973
+Today, they all work together in one scenario.
+
+37
+00:01:57,523 --> 00:02:00,616
+Five missions, and then the judge. Do them in this order.
+
+38
+00:02:01,166 --> 00:02:03,005
+Mission one: find the bug.
+
+39
+00:02:03,005 --> 00:02:03,994
+Run the tests.
+
+40
+00:02:03,994 --> 00:02:05,974
+One fails for a real reason.
+
+41
+00:02:05,974 --> 00:02:07,247
+The test is right,
+
+42
+00:02:07,247 --> 00:02:08,802
+and the code is wrong.
+
+43
+00:02:08,802 --> 00:02:09,721
+Fix the code.
+
+44
+00:02:10,271 --> 00:02:12,302
+Mission two: fix the flaky test.
+
+45
+00:02:12,302 --> 00:02:13,699
+It passes on weekdays,
+
+46
+00:02:13,699 --> 00:02:15,095
+and fails on weekends.
+
+47
+00:02:15,095 --> 00:02:16,238
+Pass a fixed date,
+
+48
+00:02:16,238 --> 00:02:18,079
+instead of reading the clock.
+
+49
+00:02:18,629 --> 00:02:20,524
+Mission three: cover the code.
+
+50
+00:02:20,524 --> 00:02:21,156
+Add tests,
+
+51
+00:02:21,156 --> 00:02:23,999
+until the coverage is ninety percent or more.
+
+52
+00:02:23,999 --> 00:02:26,969
+Test the edges: five thousand is free shipping,
+
+53
+00:02:26,969 --> 00:02:30,128
+and four thousand nine hundred ninety-nine is not.
+
+54
+00:02:30,678 --> 00:02:32,553
+Mission four: write the gate.
+
+55
+00:02:32,553 --> 00:02:35,204
+A CI script that fails when a test fails,
+
+56
+00:02:35,204 --> 00:02:37,338
+when coverage drops under ninety,
+
+57
+00:02:37,338 --> 00:02:39,019
+or when a secret is found.
+
+58
+00:02:39,569 --> 00:02:41,483
+Mission five: write the report.
+
+59
+00:02:41,483 --> 00:02:42,718
+Four lines: the bug,
+
+60
+00:02:42,718 --> 00:02:43,706
+the flaky cause,
+
+61
+00:02:43,706 --> 00:02:44,508
+the coverage,
+
+62
+00:02:44,508 --> 00:02:45,990
+and the number of tests.
+
+63
+00:02:46,540 --> 00:02:50,999
+That report is your evidence: what you found, what was flaky, and what you proved.
+
+64
+00:02:52,549 --> 00:02:57,648
+Go to the lab folder.
+
+65
+00:02:59,198 --> 00:03:01,096
+Look around.
+
+66
+00:03:01,646 --> 00:03:02,517
+The app code,
+
+67
+00:03:02,517 --> 00:03:03,387
+shop.py.
+
+68
+00:03:03,387 --> 00:03:04,592
+A folder of tests.
+
+69
+00:03:04,592 --> 00:03:05,395
+A task file.
+
+70
+00:03:05,395 --> 00:03:06,467
+And a CI script,
+
+71
+00:03:06,467 --> 00:03:08,140
+which does not exist yet,
+
+72
+00:03:08,140 --> 00:03:09,881
+because you will write it.
+
+73
+00:03:10,431 --> 00:03:15,914
+Mission one: run the tests.
+
+74
+00:03:16,464 --> 00:03:17,194
+One failed.
+
+75
+00:03:17,194 --> 00:03:18,656
+A cart with two lines,
+
+76
+00:03:18,656 --> 00:03:19,851
+ten dollars twice,
+
+77
+00:03:19,851 --> 00:03:21,313
+and five dollars once,
+
+78
+00:03:21,313 --> 00:03:23,505
+should total twenty-five dollars.
+
+79
+00:03:23,505 --> 00:03:24,966
+The code says fifteen.
+
+80
+00:03:24,966 --> 00:03:26,162
+The test is right.
+
+81
+00:03:26,162 --> 00:03:28,154
+The code ignores the quantity.
+
+82
+00:03:28,704 --> 00:03:36,619
+Fix the code.
+
+83
+00:03:37,169 --> 00:03:39,750
+Run again.
+
+84
+00:03:40,800 --> 00:03:43,659
+Three passed. But there is something wrong with one of them.
+
+85
+00:03:44,209 --> 00:03:49,542
+Mission two: the clock.
+
+86
+00:03:50,092 --> 00:03:52,178
+The test calls is weekend sale,
+
+87
+00:03:52,178 --> 00:03:53,053
+with no date.
+
+88
+00:03:53,053 --> 00:03:54,869
+So it reads the real clock.
+
+89
+00:03:54,869 --> 00:03:55,946
+Today it passes.
+
+90
+00:03:55,946 --> 00:03:56,888
+On a Saturday,
+
+91
+00:03:56,888 --> 00:03:57,493
+it fails,
+
+92
+00:03:57,493 --> 00:03:58,839
+with no code change.
+
+93
+00:03:59,389 --> 00:04:05,106
+Mission three: coverage.
+
+94
+00:04:05,656 --> 00:04:06,863
+Fifty-nine percent.
+
+95
+00:04:06,863 --> 00:04:11,500
+The column on the right lists the lines nobody tests: the unknown coupon,
+
+96
+00:04:11,500 --> 00:04:12,643
+the shipping rule,
+
+97
+00:04:12,643 --> 00:04:14,104
+and the whole checkout.
+
+98
+00:04:14,654 --> 00:04:25,961
+Rewrite the tests.
+
+99
+00:04:41,011 --> 00:04:45,363
+The error is checked with pytest raises. That covers the unknown coupon.
+
+100
+00:04:45,913 --> 00:04:50,756
+Add the rest.
+
+101
+00:05:18,506 --> 00:05:19,071
+Saturday,
+
+102
+00:05:19,071 --> 00:05:19,763
+and Friday,
+
+103
+00:05:19,763 --> 00:05:20,454
+both fixed.
+
+104
+00:05:20,454 --> 00:05:21,334
+Five thousand,
+
+105
+00:05:21,334 --> 00:05:24,038
+and four thousand nine hundred ninety-nine.
+
+106
+00:05:24,038 --> 00:05:25,106
+And one checkout,
+
+107
+00:05:25,106 --> 00:05:26,426
+from start to finish.
+
+108
+00:05:26,426 --> 00:05:27,935
+Nothing reads the clock.
+
+109
+00:05:28,485 --> 00:05:30,320
+Run with coverage.
+
+110
+00:05:34,570 --> 00:05:35,354
+Five passed.
+
+111
+00:05:35,354 --> 00:05:37,512
+And the coverage is above ninety.
+
+112
+00:05:37,512 --> 00:05:38,950
+Only one line is left,
+
+113
+00:05:38,950 --> 00:05:41,369
+the weekend discount inside checkout,
+
+114
+00:05:41,369 --> 00:05:42,676
+and that is allowed.
+
+115
+00:05:43,226 --> 00:05:47,600
+Mission four: the gate.
+
+116
+00:05:57,050 --> 00:05:58,821
+Three rules in three lines.
+
+117
+00:05:58,821 --> 00:06:01,838
+Run the tests with a coverage floor of ninety.
+
+118
+00:06:01,838 --> 00:06:03,543
+Fail if a secret is found.
+
+119
+00:06:03,543 --> 00:06:04,461
+Anything else,
+
+120
+00:06:04,461 --> 00:06:04,986
+success.
+
+121
+00:06:05,536 --> 00:06:09,056
+Run the gate.
+
+122
+00:06:09,606 --> 00:06:11,696
+Exit zero. The gate is open.
+
+123
+00:06:12,246 --> 00:06:15,617
+Plant a secret.
+
+124
+00:06:16,167 --> 00:06:17,276
+Run the gate.
+
+125
+00:06:20,726 --> 00:06:24,801
+Exit one. The gate is closed. A secret never reaches production.
+
+126
+00:06:25,351 --> 00:06:26,418
+Remove it.
+
+127
+00:06:27,768 --> 00:06:32,888
+Mission five: the report.
+
+128
+00:06:35,438 --> 00:06:38,723
+Look at it.
+
+129
+00:06:39,273 --> 00:06:39,767
+The bug,
+
+130
+00:06:39,767 --> 00:06:40,754
+the flaky cause,
+
+131
+00:06:40,754 --> 00:06:41,557
+the coverage,
+
+132
+00:06:41,557 --> 00:06:43,038
+and the number of tests.
+
+133
+00:06:43,038 --> 00:06:45,507
+A teammate can read this in ten seconds,
+
+134
+00:06:45,507 --> 00:06:46,804
+and check every line.
+
+135
+00:06:47,354 --> 00:06:49,722
+Run the judge.
+
+136
+00:06:50,272 --> 00:06:51,596
+Six checks: the fix,
+
+137
+00:06:51,596 --> 00:06:52,722
+a reliable suite,
+
+138
+00:06:52,722 --> 00:06:53,583
+the coverage,
+
+139
+00:06:53,583 --> 00:06:55,305
+three planted bugs caught,
+
+140
+00:06:55,305 --> 00:06:55,901
+the gate,
+
+141
+00:06:55,901 --> 00:06:56,894
+and the report.
+
+142
+00:06:56,894 --> 00:06:57,888
+Six out of six.
+
+143
+00:06:58,438 --> 00:07:00,400
+Clean up.
+
+144
+00:07:00,950 --> 00:07:02,998
+Removed. Nothing is left behind.
+
+145
+00:07:04,548 --> 00:07:08,559
+Your mastery task. The same scenario, on your own machine, without me.
+
+146
+00:07:09,109 --> 00:07:09,996
+Find the bug,
+
+147
+00:07:09,996 --> 00:07:11,157
+and fix the code.
+
+148
+00:07:11,157 --> 00:07:12,454
+Fix the flaky test,
+
+149
+00:07:12,454 --> 00:07:13,683
+with a fixed date.
+
+150
+00:07:13,683 --> 00:07:14,297
+No clock,
+
+151
+00:07:14,297 --> 00:07:14,980
+no random,
+
+152
+00:07:14,980 --> 00:07:15,594
+no sleep.
+
+153
+00:07:16,144 --> 00:07:17,039
+Cover the code,
+
+154
+00:07:17,039 --> 00:07:18,592
+to ninety percent or more,
+
+155
+00:07:18,592 --> 00:07:19,726
+and test the edges.
+
+156
+00:07:19,726 --> 00:07:23,248
+Your tests must catch the three bugs that the judge plants.
+
+157
+00:07:23,798 --> 00:07:24,974
+Write the CI gate.
+
+158
+00:07:24,974 --> 00:07:26,542
+It must pass when clean.
+
+159
+00:07:26,542 --> 00:07:27,979
+It must fail on a bug,
+
+160
+00:07:27,979 --> 00:07:29,025
+on low coverage,
+
+161
+00:07:29,025 --> 00:07:30,070
+and on a secret.
+
+162
+00:07:30,620 --> 00:07:33,948
+Write the four line report. Then lab check, and lab down.
+
+163
+00:07:35,998 --> 00:07:38,897
+Here is where to find everything for the whole domain.
+
+164
+00:07:38,897 --> 00:07:40,024
+Pause on this screen,
+
+165
+00:07:40,024 --> 00:07:40,990
+and write it down.
+
+166
+00:07:41,540 --> 00:07:43,250
+The labs live on GitHub,
+
+167
+00:07:43,250 --> 00:07:44,413
+at it-waves
+
+168
+00:07:44,413 --> 00:07:45,986
+/devops-ai,
+
+169
+00:07:45,986 --> 00:07:47,491
+in the folder academy,
+
+170
+00:07:47,491 --> 00:07:48,175
+/lab.
+
+171
+00:07:48,725 --> 00:07:52,586
+This lesson has two files: lab144.sh,
+
+172
+00:07:52,586 --> 00:07:55,231
+and shortcuts144.sh.
+
+173
+00:07:55,781 --> 00:07:56,642
+Install it,
+
+174
+00:07:56,642 --> 00:07:59,382
+on any Linux machine: sudo install,
+
+175
+00:07:59,382 --> 00:08:01,182
+dash m seven five five,
+
+176
+00:08:01,182 --> 00:08:03,296
+lab144.sh,
+
+177
+00:08:03,296 --> 00:08:04,548
+into /usr
+
+178
+00:08:04,548 --> 00:08:05,487
+/local
+
+179
+00:08:05,487 --> 00:08:06,427
+/sbin.
+
+180
+00:08:06,977 --> 00:08:11,630
+Load the short names with: source shortcuts144.sh.
+
+181
+00:08:11,630 --> 00:08:12,811
+You get two: lab,
+
+182
+00:08:12,811 --> 00:08:13,227
+and T.
+
+183
+00:08:13,777 --> 00:08:15,496
+You need python three,
+
+184
+00:08:15,496 --> 00:08:16,199
+pytest,
+
+185
+00:08:16,199 --> 00:08:17,527
+and pytest-cov.
+
+186
+00:08:17,527 --> 00:08:20,496
+On Debian or Ubuntu: sudo apt install,
+
+187
+00:08:20,496 --> 00:08:21,043
+dash Y,
+
+188
+00:08:21,043 --> 00:08:22,762
+python three pytest,
+
+189
+00:08:22,762 --> 00:08:25,105
+and python three pytest-cov.
+
+190
+00:08:25,655 --> 00:08:27,668
+Lab up prepares the project.
+
+191
+00:08:27,668 --> 00:08:29,609
+Lab check judges your work.
+
+192
+00:08:29,609 --> 00:08:31,334
+Lab down removes it all.
+
+193
+00:08:31,334 --> 00:08:33,419
+It uses the folder /opt
+
+194
+00:08:33,419 --> 00:08:35,216
+/lab144.
+
+195
+00:08:35,216 --> 00:08:37,517
+Only run it on your own machine.
+
+196
+00:08:38,067 --> 00:08:40,584
+The earlier lessons each have their own lab,
+
+197
+00:08:40,584 --> 00:08:41,843
+with the same pattern.
+
+198
+00:08:41,843 --> 00:08:44,360
+Redo any of them whenever you need practice.
+
+199
+00:08:46,410 --> 00:08:48,479
+Pass or fail. You need all six.
+
+200
+00:08:49,029 --> 00:08:52,059
+One: the bug is fixed, and totals count the quantity.
+
+201
+00:08:52,609 --> 00:08:57,857
+Two: the suite is reliable: twelve runs, three time zones, and no clock or random.
+
+202
+00:08:58,407 --> 00:09:02,012
+Three: coverage of shop.py is ninety percent or more.
+
+203
+00:09:02,562 --> 00:09:04,973
+Four: your tests catch three planted bugs.
+
+204
+00:09:05,523 --> 00:09:10,835
+Five: the CI gate passes when clean, and fails on a bug, low coverage, and a secret.
+
+205
+00:09:11,385 --> 00:09:13,966
+Six: the report has the four true values.
+
+206
+00:09:14,516 --> 00:09:15,817
+To pass, all six.
+
+207
+00:09:17,867 --> 00:09:19,638
+Your turn, on your own machine.
+
+208
+00:09:20,188 --> 00:09:23,153
+One: lab up. Run the tests, and fix the one bug.
+
+209
+00:09:23,703 --> 00:09:26,306
+Two: fix the flaky test, with a fixed date.
+
+210
+00:09:26,856 --> 00:09:29,949
+Three: cover the code. Test the edges, and the error.
+
+211
+00:09:30,499 --> 00:09:34,360
+Four: write the gate, and try to break it, with a bug, and with a secret.
+
+212
+00:09:34,910 --> 00:09:39,753
+Five: write the report. Then lab check, until six out of six. Then lab down.
+
+213
+00:09:40,303 --> 00:09:42,138
+Pause the video, and begin now.
+
+214
+00:09:57,688 --> 00:09:58,563
+Quick check.
+
+215
+00:09:59,113 --> 00:10:02,569
+Why must a test pass a fixed date, instead of reading the clock?
+
+216
+00:10:03,119 --> 00:10:06,105
+Why can coverage be high, and the tests still be weak?
+
+217
+00:10:06,655 --> 00:10:09,535
+What must a CI gate do, and when must it say no?
+
+218
+00:10:10,085 --> 00:10:11,451
+What does your report prove?
+
+219
+00:10:12,001 --> 00:10:15,199
+Objectives covered: all eight of MC15,
+
+220
+00:10:15,199 --> 00:10:16,975
+software testing and Q A.
+
+221
+00:10:16,975 --> 00:10:19,818
+Mastery evidence: a verifiable scenario,
+
+222
+00:10:19,818 --> 00:10:20,742
+with results,
+
+223
+00:10:20,742 --> 00:10:21,879
+troubleshooting,
+
+224
+00:10:21,879 --> 00:10:22,731
+and cleanup.
+
+225
+00:10:23,281 --> 00:10:25,351
+Pause the video, and answer out loud.
+
+226
+00:10:35,901 --> 00:10:39,527
+Congratulations: the software testing domain is complete.
+
+227
+00:10:40,077 --> 00:10:44,259
+If this helped, like, share and subscribe, so you do not miss the next domain.

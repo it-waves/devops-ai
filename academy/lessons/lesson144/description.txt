@@ -1,0 +1,26 @@
+Lesson 144 of the DevOps Engineering Bootcamp, the mastery lesson of the Software Testing and QA domain. A checkout feature is about to ship: the total is wrong, a test fails only on weekends, and nothing stops a bad change from reaching customers. In this lesson you put the whole domain to work in one verifiable scenario with five missions: find a real bug with pytest and fix the code, fix a flaky test by passing a fixed date instead of reading the clock, raise coverage to 90% or more by testing the edges and the error case, write a CI gate (ci.sh) that fails on a failing test, on low coverage and on a secret in the code, and write a short report with four true values. In the live demo, real pytest and pytest-cov run the full scenario from a failing test and 59% coverage to a passing suite, a gate that returns exit 0 and then exit 1 when a secret is planted, and a lab judge that reads 6 of 6. A lab judges you from 0 of 6 to 6 of 6, and the judge plants three bugs that your tests must catch.
+
+Chapters
+0:00 Find it. Fix it. Gate it.
+0:32 What to expect
+1:05 The whole domain in one map
+1:57 The five missions
+2:52 Live: the whole scenario, start to finish
+7:04 Your mastery task
+7:35 Where to find the labs
+8:46 Pass or fail rubric
+9:17 Your turn
+9:57 Quick check
+
+Objectives covered: all eight objectives of MC15, Software Testing and QA. Mastery evidence: an independently verifiable scenario, with results, troubleshooting (the real bug and the flaky test) and cleanup.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab144.sh and shortcuts144.sh). Install with: sudo install -m 755 lab144.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts144.sh. You need python3, pytest and pytest-cov (sudo apt install -y python3-pytest python3-pytest-cov). lab up works only in /opt/lab144 and does not touch anything else. lab down removes everything. Only run it on your own machine. The earlier lessons each have their own lab (lab135 to lab143), with the same pattern.
+
+Honest notes: the terminal demo is a real recording of real pytest and pytest-cov, run against a small pricing module written for the lab (not the real CloudCart code). The bug, the flaky test and the coverage numbers shown are exactly what the lab produces. The lab was run end to end: 0 of 6 before you start, 6 of 6 with a reference solution, and lab down leaves nothing behind. The narration is synthetic speech. The hook, plan, map, missions, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Flaky Tests: Find and Fix Time, Random, Order and Environment Problems | Lesson 143 https://youtu.be/pbW04VeNHc4
+Next: DevOps Fundamentals, a new domain: principles, collaboration and shared ownership.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #softwaretesting #pytest #cicd #devopsbootcamp
