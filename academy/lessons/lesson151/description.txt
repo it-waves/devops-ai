@@ -1,0 +1,28 @@
+Lesson 151 of the DevOps Engineering Bootcamp, the seventh lesson of the DevOps Fundamentals domain. A team can buy faster servers and hire more developers, and releases still take days, because one slow step sets the pace for the whole process. In this lesson you learn what a bottleneck is, the difference between work time and waiting time, flow efficiency and the value stream map, how to find the bottleneck (list the steps, measure work and wait, compare) and the usual suspects (slow reviews, manual approvals, flaky tests, waiting for environments, big batches), and the three rules for fixing it: one at a time, measure again, and expect the bottleneck to move. In the live demo, a real terminal measures a six-stage pipeline, finds the slow step, applies the fix, and shows the bottleneck moving to a new stage.
+
+Chapters
+0:00 Faster servers, still three days
+0:27 What to expect
+0:51 What is a bottleneck
+1:26 Work time, waiting time, flow efficiency
+2:07 How to find it
+2:41 Fixing it, and watching it move
+3:18 Live: find a bottleneck and watch it move
+4:42 Your practice task
+5:00 Where to find the demo files
+5:36 Self-check
+6:03 Your turn
+6:42 Quick check and what is next
+
+Objectives covered: MC16-O07, finding bottlenecks.
+
+Demo files: github.com/it-waves/devops-ai, in academy/lesson151-demo (stages.csv, stages_after.csv, bottleneck.sh and a README with the answers). You need a shell and awk. This domain has no lab on purpose: it is about ideas and decisions, so the practice is a plain terminal exercise with a self-check.
+
+Honest notes: the terminal demo is a real recording of a real shell running a small script written for this lesson. The stage times are example data, and bottleneck.sh is a teaching stand-in: real teams read these times from their pipeline, review and ticket tools. The narration is synthetic speech. The hook, plan, bottleneck, waiting, finding, fixing, task, files, self-check and recap screens are labelled illustrations, not captures.
+
+Previous lesson: The 4 Key DevOps Metrics: DORA Explained with a Real Deploy Log | Lesson 150 https://youtu.be/WQC2nApZWpo
+Next: a plan to improve a delivery process.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #bottleneck #flowefficiency #valuestreammap #devopsmetrics #devopsbootcamp

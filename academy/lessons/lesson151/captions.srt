@@ -1,0 +1,623 @@
+1
+00:00:00,500 --> 00:00:02,246
+A team buys faster servers.
+
+2
+00:00:02,246 --> 00:00:04,186
+They hire two more developers.
+
+3
+00:00:04,186 --> 00:00:05,479
+They add more tests,
+
+4
+00:00:05,479 --> 00:00:06,708
+to run in parallel.
+
+5
+00:00:07,258 --> 00:00:10,885
+And releases still take three days. Nothing got faster. Why?
+
+6
+00:00:11,435 --> 00:00:13,587
+Because they improved the wrong thing.
+
+7
+00:00:13,587 --> 00:00:17,891
+Somewhere in the process is one slow step that sets the pace for everything,
+
+8
+00:00:17,891 --> 00:00:19,477
+and they never looked at it.
+
+9
+00:00:20,027 --> 00:00:21,740
+Today: how to find that step.
+
+10
+00:00:21,740 --> 00:00:23,276
+We call it the bottleneck.
+
+11
+00:00:23,276 --> 00:00:24,516
+And we will find one,
+
+12
+00:00:24,516 --> 00:00:25,284
+with numbers,
+
+13
+00:00:25,284 --> 00:00:26,406
+in a real terminal.
+
+14
+00:00:27,956 --> 00:00:29,385
+Here is what to expect.
+
+15
+00:00:29,935 --> 00:00:32,517
+One: what a bottleneck is, and why it matters.
+
+16
+00:00:33,067 --> 00:00:36,629
+Two: work time versus waiting time, and flow efficiency.
+
+17
+00:00:37,179 --> 00:00:40,379
+Three: how to find the bottleneck, and the usual suspects.
+
+18
+00:00:40,929 --> 00:00:46,263
+Four: a live demo. We measure a pipeline, find the slow step, fix it, and measure again.
+
+19
+00:00:46,813 --> 00:00:50,162
+This is lesson seven of the DevOps fundamentals domain.
+
+20
+00:00:52,212 --> 00:00:53,855
+First, what is a bottleneck?
+
+21
+00:00:54,405 --> 00:00:55,459
+Think of a bottle.
+
+22
+00:00:55,459 --> 00:00:56,103
+It is wide,
+
+23
+00:00:56,103 --> 00:00:57,451
+but the neck is narrow.
+
+24
+00:00:57,451 --> 00:00:59,091
+No matter how fast you pour,
+
+25
+00:00:59,091 --> 00:01:01,551
+the water leaves at the speed of the neck.
+
+26
+00:01:02,101 --> 00:01:04,273
+A delivery process is the same.
+
+27
+00:01:04,273 --> 00:01:06,585
+Code flows through steps: review,
+
+28
+00:01:06,585 --> 00:01:07,005
+build,
+
+29
+00:01:07,005 --> 00:01:07,355
+test,
+
+30
+00:01:07,355 --> 00:01:07,986
+approval,
+
+31
+00:01:07,986 --> 00:01:08,476
+deploy.
+
+32
+00:01:08,476 --> 00:01:11,979
+The slowest step sets the speed of the whole line.
+
+33
+00:01:12,529 --> 00:01:15,568
+That means improving any other step changes nothing.
+
+34
+00:01:15,568 --> 00:01:17,264
+Make the build twice as fast,
+
+35
+00:01:17,264 --> 00:01:19,953
+and the release is still waiting for approval.
+
+36
+00:01:20,503 --> 00:01:24,983
+So the first rule of improvement: find the bottleneck before you fix anything.
+
+37
+00:01:26,533 --> 00:01:31,290
+Here is a surprise. Most of the time in a process is not work. It is waiting.
+
+38
+00:01:31,840 --> 00:01:33,353
+A change sits in a queue,
+
+39
+00:01:33,353 --> 00:01:34,745
+waiting for a reviewer.
+
+40
+00:01:34,745 --> 00:01:36,499
+Then waiting for an approval.
+
+41
+00:01:36,499 --> 00:01:38,859
+Then waiting for a free slot to deploy.
+
+42
+00:01:39,409 --> 00:01:41,693
+So measure two things for every step.
+
+43
+00:01:41,693 --> 00:01:44,595
+Work time: someone is actually doing something.
+
+44
+00:01:44,595 --> 00:01:47,558
+And wait time: the change is just sitting there.
+
+45
+00:01:48,108 --> 00:01:49,104
+Add up the work,
+
+46
+00:01:49,104 --> 00:01:50,349
+divide by the total.
+
+47
+00:01:50,349 --> 00:01:51,843
+That is flow efficiency.
+
+48
+00:01:51,843 --> 00:01:54,520
+Many teams find it is under 20 percent.
+
+49
+00:01:54,520 --> 00:01:56,200
+Eighty percent of the time,
+
+50
+00:01:56,200 --> 00:01:57,196
+nothing happens.
+
+51
+00:01:57,746 --> 00:02:02,551
+Drawing every step with its work and its waiting is called a value stream map.
+
+52
+00:02:02,551 --> 00:02:03,721
+It is just a table,
+
+53
+00:02:03,721 --> 00:02:04,522
+or a picture,
+
+54
+00:02:04,522 --> 00:02:05,938
+of where the time goes.
+
+55
+00:02:07,488 --> 00:02:09,045
+How do you find the bottleneck?
+
+56
+00:02:09,595 --> 00:02:12,689
+Step one: list every step, from commit to production.
+
+57
+00:02:13,239 --> 00:02:15,366
+Step two: measure the time in each,
+
+58
+00:02:15,366 --> 00:02:16,400
+work and waiting.
+
+59
+00:02:16,400 --> 00:02:18,163
+Use the data from your tools,
+
+60
+00:02:18,163 --> 00:02:18,892
+not guesses.
+
+61
+00:02:19,442 --> 00:02:23,453
+Step three: find the step with the biggest time. That is your candidate.
+
+62
+00:02:24,003 --> 00:02:27,006
+And a few suspects show up again and again.
+
+63
+00:02:27,006 --> 00:02:27,914
+Slow reviews.
+
+64
+00:02:27,914 --> 00:02:29,102
+Manual approvals.
+
+65
+00:02:29,102 --> 00:02:30,499
+Slow or flaky tests.
+
+66
+00:02:30,499 --> 00:02:32,385
+Waiting for an environment.
+
+67
+00:02:32,385 --> 00:02:33,502
+And big batches,
+
+68
+00:02:33,502 --> 00:02:36,227
+where changes wait until a release day.
+
+69
+00:02:36,777 --> 00:02:40,467
+Notice something about those. Most of them are waiting, not working.
+
+70
+00:02:42,017 --> 00:02:44,193
+Now the fix. And there are three rules.
+
+71
+00:02:44,743 --> 00:02:49,244
+One: fix one bottleneck at a time. Change one thing, so you know what helped.
+
+72
+00:02:49,794 --> 00:02:51,591
+Two: measure again afterwards.
+
+73
+00:02:51,591 --> 00:02:53,567
+The numbers from the last lesson,
+
+74
+00:02:53,567 --> 00:02:55,004
+lead time and frequency,
+
+75
+00:02:55,004 --> 00:02:56,920
+will tell you whether it worked.
+
+76
+00:02:57,470 --> 00:02:59,889
+Three: expect the bottleneck to move.
+
+77
+00:02:59,889 --> 00:03:01,981
+When the slowest step gets fast,
+
+78
+00:03:01,981 --> 00:03:04,139
+another step becomes the slowest.
+
+79
+00:03:04,139 --> 00:03:05,446
+That is not failure.
+
+80
+00:03:05,446 --> 00:03:06,558
+That is progress.
+
+81
+00:03:07,108 --> 00:03:11,374
+Then you repeat. Find, fix, measure. It is a loop, and it never ends.
+
+82
+00:03:11,924 --> 00:03:13,123
+In the next lesson,
+
+83
+00:03:13,123 --> 00:03:17,035
+we put it together: a plan to improve a real delivery process,
+
+84
+00:03:17,035 --> 00:03:17,855
+step by step.
+
+85
+00:03:19,405 --> 00:03:23,458
+Go to the demo folder.
+
+86
+00:03:25,008 --> 00:03:26,907
+Look around.
+
+87
+00:03:27,457 --> 00:03:30,017
+Two files of stage times, and one script.
+
+88
+00:03:30,567 --> 00:03:34,279
+The stage times.
+
+89
+00:03:34,829 --> 00:03:35,520
+Six stages,
+
+90
+00:03:35,520 --> 00:03:36,775
+from code to deploy.
+
+91
+00:03:36,775 --> 00:03:37,591
+For each one,
+
+92
+00:03:37,591 --> 00:03:38,721
+the hours of work,
+
+93
+00:03:38,721 --> 00:03:40,290
+and the hours of waiting.
+
+94
+00:03:40,840 --> 00:03:46,664
+Find the bottleneck.
+
+95
+00:03:47,214 --> 00:03:49,390
+Each bar is the time in one stage.
+
+96
+00:03:49,390 --> 00:03:51,630
+The longest bar is clear: approval.
+
+97
+00:03:51,630 --> 00:03:53,166
+30.5 hours,
+
+98
+00:03:53,166 --> 00:03:55,214
+44 percent of the total.
+
+99
+00:03:55,764 --> 00:03:56,955
+Look at the bottom.
+
+100
+00:03:56,955 --> 00:03:58,397
+70 hours in total,
+
+101
+00:03:58,397 --> 00:04:00,779
+but only 10.5 hours of work.
+
+102
+00:04:00,779 --> 00:04:02,847
+Flow efficiency: 15 percent.
+
+103
+00:04:03,397 --> 00:04:05,133
+Notice the review is long too.
+
+104
+00:04:05,133 --> 00:04:07,796
+But fixing the review first would barely help,
+
+105
+00:04:07,796 --> 00:04:09,648
+while approval holds everything.
+
+106
+00:04:10,198 --> 00:04:17,280
+After the fix.
+
+107
+00:04:17,830 --> 00:04:22,822
+Approval fell to 2.5 hours. The total fell from 70 hours to 26.
+
+108
+00:04:23,372 --> 00:04:25,942
+And look: the slowest stage is now code.
+
+109
+00:04:25,942 --> 00:04:27,290
+The bottleneck moved.
+
+110
+00:04:27,290 --> 00:04:29,282
+Flow efficiency: 40 percent.
+
+111
+00:04:29,832 --> 00:04:33,842
+Write it down.
+
+112
+00:04:39,192 --> 00:04:41,582
+Check the file.
+
+113
+00:04:43,132 --> 00:04:46,353
+Your practice task: find a bottleneck, and watch it move.
+
+114
+00:04:46,903 --> 00:04:50,253
+One: look at the stage times, and guess the slowest stage.
+
+115
+00:04:50,803 --> 00:04:52,915
+Two: run the script, and check your guess.
+
+116
+00:04:53,465 --> 00:04:57,262
+Three: run it on the after file, and find the new slowest stage.
+
+117
+00:04:57,812 --> 00:04:59,391
+Four: write your three lines.
+
+118
+00:05:01,441 --> 00:05:04,662
+Where to find the demo files. Pause here, and write it down.
+
+119
+00:05:05,212 --> 00:05:10,887
+One: the repository, github.com/it-waves/devops-ai.
+
+120
+00:05:11,437 --> 00:05:15,554
+Two: the folder academy/lesson151-demo.
+
+121
+00:05:16,104 --> 00:05:21,118
+Three: two stage files, one script called bottleneck, and a read me with the answers.
+
+122
+00:05:21,668 --> 00:05:23,373
+Four: clone the repository,
+
+123
+00:05:23,373 --> 00:05:24,636
+and copy the folder.
+
+124
+00:05:24,636 --> 00:05:25,710
+You need a shell,
+
+125
+00:05:25,710 --> 00:05:26,215
+and awk,
+
+126
+00:05:26,215 --> 00:05:28,110
+which every Linux machine has.
+
+127
+00:05:28,660 --> 00:05:29,396
+Five: again,
+
+128
+00:05:29,396 --> 00:05:30,745
+no lab in this domain.
+
+129
+00:05:30,745 --> 00:05:32,093
+The practice is plain,
+
+130
+00:05:32,093 --> 00:05:34,484
+and the answers are on the next screen.
+
+131
+00:05:36,534 --> 00:05:39,009
+Check yourself. Six points. Tick each one.
+
+132
+00:05:39,559 --> 00:05:42,268
+One: the slowest stage at the start is approval.
+
+133
+00:05:42,818 --> 00:05:44,973
+Two: the total time is 70 hours.
+
+134
+00:05:45,523 --> 00:05:47,891
+Three: flow efficiency is 15 percent.
+
+135
+00:05:48,441 --> 00:05:51,641
+Four: after the fix, the total is 26 hours.
+
+136
+00:05:52,191 --> 00:05:55,860
+Five: the slowest stage is now code. The bottleneck moved.
+
+137
+00:05:56,410 --> 00:05:59,290
+Six: your file has three lines, in your own words.
+
+138
+00:05:59,840 --> 00:06:01,995
+All six, and you can find a bottleneck.
+
+139
+00:06:04,045 --> 00:06:05,816
+Your turn, on your own machine.
+
+140
+00:06:06,366 --> 00:06:08,200
+One: copy the demo folder.
+
+141
+00:06:08,750 --> 00:06:10,734
+Two: run the script on both files.
+
+142
+00:06:11,284 --> 00:06:13,712
+Three: edit one number in the first file,
+
+143
+00:06:13,712 --> 00:06:14,718
+and run it again.
+
+144
+00:06:14,718 --> 00:06:16,554
+Watch the slowest stage change.
+
+145
+00:06:17,104 --> 00:06:20,048
+Four: write your three lines, and tick the six points.
+
+146
+00:06:20,598 --> 00:06:24,523
+Five: then think about your own process. Which step would you measure first?
+
+147
+00:06:25,073 --> 00:06:26,908
+Pause the video, and begin now.
+
+148
+00:06:42,458 --> 00:06:43,333
+Quick check.
+
+149
+00:06:43,883 --> 00:06:45,120
+What is a bottleneck?
+
+150
+00:06:45,670 --> 00:06:47,014
+What is flow efficiency?
+
+151
+00:06:47,564 --> 00:06:49,591
+Why fix one bottleneck at a time?
+
+152
+00:06:50,141 --> 00:06:51,890
+What happens after you fix one?
+
+153
+00:06:52,440 --> 00:06:57,539
+Objective covered: MC16, objective seven: finding bottlenecks.
+
+154
+00:06:58,089 --> 00:07:00,158
+Pause the video, and answer out loud.
+
+155
+00:07:10,708 --> 00:07:13,801
+Next time: a plan to improve a delivery process.
+
+156
+00:07:14,351 --> 00:07:17,679
+If this helped, like, share and subscribe, so you do not miss it.

@@ -1,0 +1,7 @@
+stage,work,wait
+code,6,2
+review,1,4
+build,0.5,0.5
+test,2,3
+approval,0.5,2
+deploy,0.5,4
