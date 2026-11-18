@@ -21,7 +21,7 @@ Demo files: github.com/it-waves/devops-ai, in academy/lesson150-demo (deploys.cs
 Honest notes: the terminal demo is a real recording of a real shell running a small script written for this lesson. The deploy logs are example data, and metrics.sh is a teaching stand-in: real teams read these numbers from their pipeline and incident tools. The narration is synthetic speech. The hook, plan, why, speed, stability, together, task, files, self-check and recap screens are labelled illustrations, not captures.
 
 Previous lesson: DevSecOps, SRE and Platform Engineering: Error Budgets Explained | Lesson 149 https://youtu.be/TGyKPrlb1Pk
-Next: finding the bottleneck in a delivery process.
+Next: Find the Bottleneck: Why Faster Servers Do Not Speed Up Releases | Lesson 151 https://youtu.be/YeyPHx5cfqE
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
