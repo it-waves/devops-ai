@@ -1,0 +1,4 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project><description>Waits 45 seconds, so you can watch executors and the queue.</description><keepDependencies>false</keepDependencies><properties/><scm class="hudson.scm.NullSCM"/><canRoam>true</canRoam><disabled>false</disabled><blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding><blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding><triggers/><concurrentBuild>true</concurrentBuild><builders><hudson.tasks.Shell><command>echo "slow build started"
+sleep 45
+echo "slow build finished"</command><configuredLocalRules/></hudson.tasks.Shell></builders><publishers/><buildWrappers/></project>
