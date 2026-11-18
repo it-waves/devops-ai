@@ -1,6 +1,6 @@
 1
 00:00:00,500 --> 00:00:05,471
-Is the shop up? Your server says yes. Tom cat is running, the process is alive.
+Is the shop up? Your server says yes. Tomcat is running, the process is alive.
 
 2
 00:00:06,021 --> 00:00:08,283
@@ -44,15 +44,15 @@ when it should?
 
 12
 00:00:21,713 --> 00:00:24,357
-Today you test the real Cloud Cart shop,
+Today you test the real CloudCart shop,
 
 13
 00:00:24,357 --> 00:00:25,613
-running on Tom cat,
+running on Tomcat,
 
 14
 00:00:25,613 --> 00:00:26,539
-with pie test.
+with pytest.
 
 15
 00:00:26,539 --> 00:00:27,002
@@ -88,7 +88,7 @@ Then a live demo against the real shop.
 
 23
 00:00:48,169 --> 00:00:49,242
-We start Tom cat,
+We start Tomcat,
 
 24
 00:00:49,242 --> 00:00:51,072
@@ -276,7 +276,7 @@ Then the data.
 
 70
 00:02:29,242 --> 00:02:30,630
-The reply is jay son,
+The reply is JSON,
 
 71
 00:02:30,630 --> 00:02:32,348
@@ -384,7 +384,7 @@ Four: wait for the server to be ready.
 
 97
 00:03:27,388 --> 00:03:28,905
-After you start Tom cat,
+After you start Tomcat,
 
 98
 00:03:28,905 --> 00:03:30,738
@@ -432,7 +432,7 @@ Look around.
 
 109
 00:03:54,507 --> 00:03:55,606
-A client dot pie,
+A client.py,
 
 110
 00:03:55,606 --> 00:03:56,575
@@ -444,7 +444,7 @@ the task file,
 
 112
 00:03:57,479 --> 00:03:58,836
-and a Tom cat folder,
+and a Tomcat folder,
 
 113
 00:03:58,836 --> 00:04:01,355
@@ -456,7 +456,7 @@ Start the shop.
 
 115
 00:04:09,026 --> 00:04:13,271
-Tom cat is starting. It needs a few seconds. So never test right away.
+Tomcat is starting. It needs a few seconds. So never test right away.
 
 116
 00:04:13,821 --> 00:04:20,904
@@ -488,7 +488,7 @@ Ask the API.
 
 123
 00:04:44,240 --> 00:04:46,224
-Four categories, as jay son.
+Four categories, as JSON.
 
 124
 00:04:46,774 --> 00:04:57,142
@@ -532,7 +532,7 @@ and returns the status,
 
 134
 00:05:15,300 --> 00:05:16,350
-and the jay son.
+and the JSON.
 
 135
 00:05:16,350 --> 00:05:18,186
@@ -668,7 +668,7 @@ Now an outage.
 
 168
 00:07:37,503 --> 00:07:41,770
-Tom cat is stopping. The shop is gone, and our tests do not know that yet.
+Tomcat is stopping. The shop is gone, and our tests do not know that yet.
 
 169
 00:07:42,320 --> 00:07:47,248
@@ -756,15 +756,15 @@ Clean up.
 
 190
 00:08:42,927 --> 00:08:45,295
-Tom cat stopped, and everything removed.
+Tomcat stopped, and everything removed.
 
 191
 00:08:46,845 --> 00:08:51,005
-Your lab task: test the Cloud Cart API yourself. Six checks.
+Your lab task: test the CloudCart API yourself. Six checks.
 
 192
 00:08:51,555 --> 00:08:54,584
-One: start Tom cat, and wait for health to say UP.
+One: start Tomcat, and wait for health to say UP.
 
 193
 00:08:55,134 --> 00:08:56,312
@@ -852,19 +852,19 @@ One: the repository,
 
 214
 00:09:31,232 --> 00:09:35,552
-git hub dot com slash it dash waves slash dev ops dash A I,
+github.com/it-waves/devops-ai,
 
 215
 00:09:35,552 --> 00:09:37,896
-in the folder academy slash lab.
+in the folder academy/lab.
 
 216
 00:09:38,446 --> 00:09:44,632
-Two: the files, lab one thirty-nine dot S H, and shortcuts one thirty-nine dot S H.
+Two: the files, lab139.sh, and shortcuts139.sh.
 
 217
 00:09:45,182 --> 00:09:50,644
-Three: install it, with sudo install, into slash user slash local slash S bin.
+Three: install it, with sudo install, into /usr/local/sbin.
 
 218
 00:09:51,194 --> 00:09:53,044
@@ -872,7 +872,7 @@ Four: load the short names,
 
 219
 00:09:53,044 --> 00:09:56,197
-with source shortcuts one thirty-nine dot S H.
+with source shortcuts139.sh.
 
 220
 00:09:56,197 --> 00:09:57,020
@@ -896,15 +896,15 @@ curl,
 
 225
 00:10:00,946 --> 00:10:01,881
-python three,
+python3,
 
 226
 00:10:01,881 --> 00:10:02,817
-and pie test.
+and pytest.
 
 227
 00:10:02,817 --> 00:10:06,272
-Lab up downloads Tom cat and Cloud Cart for you.
+Lab up downloads Tomcat and CloudCart for you.
 
 228
 00:10:06,822 --> 00:10:08,795
@@ -912,11 +912,11 @@ Six: only on your own machine,
 
 229
 00:10:08,795 --> 00:10:10,901
-with ports eight one three nine,
+with ports 8139,
 
 230
 00:10:10,901 --> 00:10:12,809
-and eight one four nine free.
+and 8149 free.
 
 231
 00:10:12,809 --> 00:10:14,651
@@ -932,7 +932,7 @@ Pass or fail rubric. Six points. All six to pass.
 
 234
 00:10:23,092 --> 00:10:25,588
-One: Tom cat is running, and health says UP.
+One: Tomcat is running, and health says UP.
 
 235
 00:10:26,138 --> 00:10:27,759
@@ -980,7 +980,7 @@ Your turn, on your own machine.
 
 246
 00:10:49,856 --> 00:10:54,250
-One: lab up, and read the task file. Start Tom cat, and wait for health.
+One: lab up, and read the task file. Start Tomcat, and wait for health.
 
 247
 00:10:54,800 --> 00:10:58,406
@@ -1024,7 +1024,7 @@ How do you wait for a server to be ready?
 
 257
 00:11:43,588 --> 00:11:49,839
-Objective covered: M C fifteen, objective four. API and health tests for Cloud Cart.
+Objective covered: MC15, objective four. API and health tests for CloudCart.
 
 258
 00:11:50,389 --> 00:11:52,458
