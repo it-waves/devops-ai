@@ -1,0 +1,28 @@
+Lesson 141 of the DevOps Engineering Bootcamp, in the Software Testing and QA domain. Tests that never run protect nothing. In this lesson you learn why tests belong in CI, the anatomy of a GitHub Actions workflow (on, permissions, jobs, steps, pinned actions), and what makes a run pass or fail: the exit code. You see pytest and a coverage gate (--cov-fail-under) fail on a planted bug, learn the "|| true" trap that silently kills a gate, why the upload step needs "if: always()", and how a required status check makes red mean stop. You write a real ci.yml, then look at two real GitHub Actions runs of a real repository: one red with an annotation on the exact failing line, one green with a saved coverage report. A lab judges you from 0 of 6 to 6 of 6, and runs your gate against a planted bug.
+
+Chapters
+0:00 Tests that never run protect nothing
+0:34 What to expect
+1:05 Why run tests in CI
+1:44 Anatomy of a workflow
+2:29 Pass and fail gates
+3:23 Live: a gate and a workflow
+6:30 A real run on GitHub
+8:13 Your lab task
+8:53 Where to find the lab
+9:44 Pass or fail rubric
+10:17 Your turn
+10:58 Quick check
+
+Objectives covered: MC15-O06, run tests in CI with pass and fail gates.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab141.sh and shortcuts141.sh). Install with: sudo install -m 755 lab141.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts141.sh. You need python3, pytest, pytest-cov and PyYAML (sudo apt install -y python3-pytest python3-pytest-cov python3-yaml). lab up works only in /opt/lab141 and does not touch anything else. lab down removes everything. Only run it on your own machine.
+
+Honest notes: the terminal demo is a real recording of pytest and the lab judge. The GitHub screens are real screenshots of real runs in github.com/it-waves/devops-ai (run 1 failed on a planted bug, run 2 passed after the fix), shown step by step, not a continuous recording. The required-status-check screen is an unsaved settings form, shown only to explain it. The lab was run end to end: 0 of 6 before you start, 6 of 6 with a reference solution, and lab down leaves nothing behind. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Test Coverage with pytest-cov: Find Untested Code and Its Limits | Lesson 140 https://youtu.be/JzXWdg86558
+Next: performance, load and security testing.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #githubactions #cicd #pytest #devopsbootcamp

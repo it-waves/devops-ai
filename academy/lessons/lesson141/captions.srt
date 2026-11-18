@@ -1,0 +1,1159 @@
+1
+00:00:00,500 --> 00:00:02,027
+It works on my machine.
+
+2
+00:00:02,027 --> 00:00:03,222
+Famous last words.
+
+3
+00:00:03,222 --> 00:00:04,749
+A teammate pushes code,
+
+4
+00:00:04,749 --> 00:00:06,409
+and nobody ran the tests.
+
+5
+00:00:06,959 --> 00:00:09,631
+Two days later a customer pays too little,
+
+6
+00:00:09,631 --> 00:00:11,476
+because a discount was wrong.
+
+7
+00:00:11,476 --> 00:00:12,620
+The tests existed.
+
+8
+00:00:12,620 --> 00:00:13,893
+They just never ran.
+
+9
+00:00:14,443 --> 00:00:15,612
+The fix is simple.
+
+10
+00:00:15,612 --> 00:00:17,300
+Let a robot run the tests,
+
+11
+00:00:17,300 --> 00:00:18,209
+on every push,
+
+12
+00:00:18,209 --> 00:00:19,508
+on a clean computer.
+
+13
+00:00:19,508 --> 00:00:20,612
+And if they fail,
+
+14
+00:00:20,612 --> 00:00:21,781
+the robot says no.
+
+15
+00:00:22,331 --> 00:00:24,167
+Today you build that robot.
+
+16
+00:00:24,167 --> 00:00:26,003
+A GitHub Actions workflow,
+
+17
+00:00:26,003 --> 00:00:27,159
+with a real gate.
+
+18
+00:00:27,159 --> 00:00:28,791
+You see a real run fail,
+
+19
+00:00:28,791 --> 00:00:30,151
+and a real run pass.
+
+20
+00:00:30,151 --> 00:00:33,211
+And a lab checks your gate by planting a bug.
+
+21
+00:00:34,761 --> 00:00:36,190
+Here is what to expect.
+
+22
+00:00:36,740 --> 00:00:38,831
+One: why tests belong in CI.
+
+23
+00:00:39,381 --> 00:00:44,458
+Two: the anatomy of a workflow file. The trigger, the permissions, the job, the steps.
+
+24
+00:00:45,008 --> 00:00:50,320
+Three: gates. What makes a run pass or fail, and how to make a gate that cannot be fooled.
+
+25
+00:00:50,870 --> 00:00:51,944
+Then a live demo.
+
+26
+00:00:51,944 --> 00:00:53,776
+We break the code on purpose,
+
+27
+00:00:53,776 --> 00:00:55,166
+watch the gate say no,
+
+28
+00:00:55,166 --> 00:00:56,366
+write the workflow,
+
+29
+00:00:56,366 --> 00:00:59,020
+and then look at two real runs on GitHub.
+
+30
+00:00:59,570 --> 00:01:03,879
+And a lab with six checks, including a planted bug that your gate must catch.
+
+31
+00:01:05,929 --> 00:01:07,529
+Why run tests in CI?
+
+32
+00:01:08,079 --> 00:01:09,466
+Because people forget.
+
+33
+00:01:09,466 --> 00:01:11,736
+And people have different computers.
+
+34
+00:01:11,736 --> 00:01:13,691
+A pipeline runs the same tests,
+
+35
+00:01:13,691 --> 00:01:14,510
+the same way,
+
+36
+00:01:14,510 --> 00:01:15,393
+on every push,
+
+37
+00:01:15,393 --> 00:01:16,591
+on a clean machine.
+
+38
+00:01:17,141 --> 00:01:18,374
+It gives fast feedback.
+
+39
+00:01:18,374 --> 00:01:20,519
+The author sees a red cross in a minute,
+
+40
+00:01:20,519 --> 00:01:22,986
+while the change is still fresh in their head.
+
+41
+00:01:23,536 --> 00:01:25,196
+It protects the main branch.
+
+42
+00:01:25,196 --> 00:01:27,803
+Nobody has to trust that the tests were run.
+
+43
+00:01:27,803 --> 00:01:29,936
+The proof is attached to the commit.
+
+44
+00:01:30,486 --> 00:01:31,709
+And it is a record.
+
+45
+00:01:31,709 --> 00:01:33,511
+Every run is saved: the log,
+
+46
+00:01:33,511 --> 00:01:34,219
+the report,
+
+47
+00:01:34,219 --> 00:01:34,798
+the time.
+
+48
+00:01:34,798 --> 00:01:35,635
+Months later,
+
+49
+00:01:35,635 --> 00:01:38,209
+you can see when a test started failing.
+
+50
+00:01:38,759 --> 00:01:42,919
+Tests that do not run automatically will, sooner or later, not run.
+
+51
+00:01:44,469 --> 00:01:49,376
+The anatomy of a workflow. A YAML file, in .github/workflows.
+
+52
+00:01:49,926 --> 00:01:50,965
+On: the trigger.
+
+53
+00:01:50,965 --> 00:01:52,135
+Run on every push,
+
+54
+00:01:52,135 --> 00:01:53,825
+and on every pull request.
+
+55
+00:01:53,825 --> 00:01:56,944
+That way a change is tested before it is merged.
+
+56
+00:01:57,494 --> 00:01:59,300
+Permissions: least privilege.
+
+57
+00:01:59,300 --> 00:02:01,605
+Contents read is enough to test code.
+
+58
+00:02:01,605 --> 00:02:05,217
+A test job should not be able to write to your repository.
+
+59
+00:02:05,767 --> 00:02:06,751
+Jobs: one job,
+
+60
+00:02:06,751 --> 00:02:07,594
+called test.
+
+61
+00:02:07,594 --> 00:02:09,983
+It runs on a fresh Ubuntu machine,
+
+62
+00:02:09,983 --> 00:02:11,248
+and has a timeout,
+
+63
+00:02:11,248 --> 00:02:14,130
+so a stuck test cannot run for six hours.
+
+64
+00:02:14,680 --> 00:02:16,279
+Steps: check out the code,
+
+65
+00:02:16,279 --> 00:02:17,141
+set up Python,
+
+66
+00:02:17,141 --> 00:02:18,248
+install the tools,
+
+67
+00:02:18,248 --> 00:02:19,110
+run the tests,
+
+68
+00:02:19,110 --> 00:02:20,525
+and upload the results.
+
+69
+00:02:21,075 --> 00:02:23,238
+And pin every action to a version,
+
+70
+00:02:23,238 --> 00:02:24,001
+like v4.
+
+71
+00:02:24,001 --> 00:02:24,891
+Never at main.
+
+72
+00:02:24,891 --> 00:02:27,308
+A moving version can change under you,
+
+73
+00:02:27,308 --> 00:02:27,944
+overnight.
+
+74
+00:02:29,494 --> 00:02:31,649
+Now the gates. What makes a run fail?
+
+75
+00:02:32,199 --> 00:02:32,821
+One rule.
+
+76
+00:02:32,821 --> 00:02:37,386
+A step fails when its command exits with a number other than zero.
+
+77
+00:02:37,386 --> 00:02:40,290
+pytest exits with one when a test fails.
+
+78
+00:02:40,290 --> 00:02:41,259
+The job stops,
+
+79
+00:02:41,259 --> 00:02:42,780
+and the run turns red.
+
+80
+00:02:43,330 --> 00:02:45,551
+A coverage gate is the same idea.
+
+81
+00:02:45,551 --> 00:02:49,388
+--cov-fail-under ninety makes pytest exit with a failure,
+
+82
+00:02:49,388 --> 00:02:52,013
+if coverage drops below ninety percent.
+
+83
+00:02:52,563 --> 00:02:54,115
+But watch for the trap.
+
+84
+00:02:54,115 --> 00:02:57,626
+Adding || true after the command makes it exit zero,
+
+85
+00:02:57,626 --> 00:02:58,099
+always.
+
+86
+00:02:58,099 --> 00:02:59,246
+The run is green,
+
+87
+00:02:59,246 --> 00:03:00,664
+and the gate is dead.
+
+88
+00:03:00,664 --> 00:03:03,229
+A gate that cannot fail is decoration.
+
+89
+00:03:03,779 --> 00:03:04,098
+Next,
+
+90
+00:03:04,098 --> 00:03:04,737
+if always,
+
+91
+00:03:04,737 --> 00:03:05,949
+on the upload step.
+
+92
+00:03:05,949 --> 00:03:06,970
+When tests fail,
+
+93
+00:03:06,970 --> 00:03:08,821
+you need the report the most.
+
+94
+00:03:08,821 --> 00:03:09,523
+Without it,
+
+95
+00:03:09,523 --> 00:03:11,246
+the upload step is skipped.
+
+96
+00:03:11,796 --> 00:03:12,620
+And finally,
+
+97
+00:03:12,620 --> 00:03:13,788
+make it required.
+
+98
+00:03:13,788 --> 00:03:15,642
+In the repository settings,
+
+99
+00:03:15,642 --> 00:03:18,389
+a rule can require the test job to pass,
+
+100
+00:03:18,389 --> 00:03:20,587
+before a pull request can merge.
+
+101
+00:03:20,587 --> 00:03:22,441
+Then red really means stop.
+
+102
+00:03:23,991 --> 00:03:29,068
+Go to the lab folder.
+
+103
+00:03:30,618 --> 00:03:32,517
+Look around.
+
+104
+00:03:33,067 --> 00:03:34,245
+Our pricing code,
+
+105
+00:03:34,245 --> 00:03:35,145
+cart.py,
+
+106
+00:03:35,145 --> 00:03:35,838
+six tests,
+
+107
+00:03:35,838 --> 00:03:38,194
+and an empty folder for workflows.
+
+108
+00:03:38,194 --> 00:03:39,233
+The gate first,
+
+109
+00:03:39,233 --> 00:03:39,787
+by hand.
+
+110
+00:03:40,337 --> 00:03:46,865
+The gate, by hand.
+
+111
+00:03:47,415 --> 00:03:48,106
+Six passed.
+
+112
+00:03:48,106 --> 00:03:51,748
+And the line: required coverage of ninety percent reached.
+
+113
+00:03:51,748 --> 00:03:51,999
+Now,
+
+114
+00:03:51,999 --> 00:03:54,135
+the number the pipeline will read.
+
+115
+00:03:54,685 --> 00:03:56,669
+The exit code.
+
+116
+00:03:57,219 --> 00:03:59,566
+Zero. Success. The step is green.
+
+117
+00:04:00,116 --> 00:04:06,644
+Plant a bug.
+
+118
+00:04:07,194 --> 00:04:09,903
+Run the gate.
+
+119
+00:04:12,653 --> 00:04:13,296
+A failure.
+
+120
+00:04:13,296 --> 00:04:13,681
+The F,
+
+121
+00:04:13,681 --> 00:04:16,444
+and the name of the test: the welcome code.
+
+122
+00:04:16,444 --> 00:04:16,894
+Notice,
+
+123
+00:04:16,894 --> 00:04:18,565
+the coverage did not drop.
+
+124
+00:04:18,565 --> 00:04:20,685
+Coverage stays a hundred percent.
+
+125
+00:04:20,685 --> 00:04:22,227
+The test caught the bug,
+
+126
+00:04:22,227 --> 00:04:23,320
+not the coverage.
+
+127
+00:04:23,870 --> 00:04:25,854
+The exit code.
+
+128
+00:04:26,404 --> 00:04:29,604
+One. Not zero. In CI, this is a red cross.
+
+129
+00:04:30,154 --> 00:04:32,756
+Restore it.
+
+130
+00:04:36,206 --> 00:04:40,772
+Where am I?
+
+131
+00:04:41,322 --> 00:04:46,698
+Zero out of six. Nothing exists yet. Honest, and useful: this is your starting line.
+
+132
+00:04:47,248 --> 00:04:53,562
+Write the workflow.
+
+133
+00:05:33,312 --> 00:05:34,080
+The trigger,
+
+134
+00:05:34,080 --> 00:05:35,104
+the permissions,
+
+135
+00:05:35,104 --> 00:05:36,576
+one job with a timeout,
+
+136
+00:05:36,576 --> 00:05:37,280
+five steps.
+
+137
+00:05:37,280 --> 00:05:37,856
+Checkout,
+
+138
+00:05:37,856 --> 00:05:38,304
+Python,
+
+139
+00:05:38,304 --> 00:05:39,072
+the install,
+
+140
+00:05:39,072 --> 00:05:39,648
+the gate,
+
+141
+00:05:39,648 --> 00:05:40,608
+and the upload,
+
+142
+00:05:40,608 --> 00:05:41,568
+with if always.
+
+143
+00:05:42,118 --> 00:05:44,486
+Judge again.
+
+144
+00:05:45,036 --> 00:05:45,989
+Six out of six.
+
+145
+00:05:45,989 --> 00:05:47,005
+It read my file,
+
+146
+00:05:47,005 --> 00:05:47,958
+found the gate,
+
+147
+00:05:47,958 --> 00:05:51,324
+and ran my pytest command twice: once on this code,
+
+148
+00:05:51,324 --> 00:05:52,340
+where it passed.
+
+149
+00:05:52,340 --> 00:05:54,753
+And once on a copy with a planted bug,
+
+150
+00:05:54,753 --> 00:05:56,087
+where it had to fail.
+
+151
+00:05:56,637 --> 00:06:01,288
+The trap.
+
+152
+00:06:04,338 --> 00:06:05,532
+Judge again.
+
+153
+00:06:06,682 --> 00:06:07,659
+Five out of six.
+
+154
+00:06:07,659 --> 00:06:11,018
+The last check fails: the gate passes on a planted bug.
+
+155
+00:06:11,018 --> 00:06:12,545
+The robot would be green,
+
+156
+00:06:12,545 --> 00:06:14,682
+and the bug would be in production.
+
+157
+00:06:15,232 --> 00:06:17,878
+Remove the trap.
+
+158
+00:06:20,528 --> 00:06:22,853
+Judge again.
+
+159
+00:06:23,403 --> 00:06:24,811
+Six out of six, again.
+
+160
+00:06:25,361 --> 00:06:27,324
+Clean up.
+
+161
+00:06:27,874 --> 00:06:29,730
+Removed. Nothing left behind.
+
+162
+00:06:31,280 --> 00:06:32,629
+Now the same idea,
+
+163
+00:06:32,629 --> 00:06:33,903
+running for real,
+
+164
+00:06:33,903 --> 00:06:34,728
+on GitHub.
+
+165
+00:06:34,728 --> 00:06:38,025
+This is a real capture of my own repository,
+
+166
+00:06:38,025 --> 00:06:38,775
+in Chrome.
+
+167
+00:06:38,775 --> 00:06:39,749
+Step by step.
+
+168
+00:06:40,299 --> 00:06:42,325
+I pushed a workflow like ours,
+
+169
+00:06:42,325 --> 00:06:43,744
+with the bug planted.
+
+170
+00:06:43,744 --> 00:06:45,229
+Then I pushed the fix.
+
+171
+00:06:45,229 --> 00:06:47,390
+The Actions tab lists both runs.
+
+172
+00:06:47,390 --> 00:06:49,416
+The first one has a red cross.
+
+173
+00:06:49,416 --> 00:06:51,307
+The second has a green tick.
+
+174
+00:06:51,857 --> 00:06:53,043
+Open the red run.
+
+175
+00:06:53,043 --> 00:06:54,717
+The status says failure,
+
+176
+00:06:54,717 --> 00:06:56,042
+and the total time.
+
+177
+00:06:56,042 --> 00:06:56,599
+The job,
+
+178
+00:06:56,599 --> 00:06:56,948
+test,
+
+179
+00:06:56,948 --> 00:06:58,064
+has a red cross.
+
+180
+00:06:58,064 --> 00:06:58,692
+Click it,
+
+181
+00:06:58,692 --> 00:07:00,156
+and the details open.
+
+182
+00:07:00,706 --> 00:07:01,521
+Scroll down.
+
+183
+00:07:01,521 --> 00:07:01,929
+First,
+
+184
+00:07:01,929 --> 00:07:03,017
+the job summary.
+
+185
+00:07:03,017 --> 00:07:06,278
+I made the workflow print a coverage table here,
+
+186
+00:07:06,278 --> 00:07:07,434
+with one command.
+
+187
+00:07:07,434 --> 00:07:08,045
+Below it,
+
+188
+00:07:08,045 --> 00:07:09,133
+the annotations.
+
+189
+00:07:09,683 --> 00:07:11,415
+And here is the best part.
+
+190
+00:07:11,415 --> 00:07:12,347
+An annotation,
+
+191
+00:07:12,347 --> 00:07:14,679
+on the exact line of the test file,
+
+192
+00:07:14,679 --> 00:07:15,612
+line eighteen.
+
+193
+00:07:15,612 --> 00:07:16,744
+The failing test,
+
+194
+00:07:16,744 --> 00:07:17,876
+the value we got,
+
+195
+00:07:17,876 --> 00:07:19,609
+and the value we expected.
+
+196
+00:07:19,609 --> 00:07:23,805
+A plugin turns a pytest failure into a message on the commit.
+
+197
+00:07:24,355 --> 00:07:26,448
+Now the log of the failing step.
+
+198
+00:07:26,448 --> 00:07:29,782
+The coverage line is there: ninety percent reached.
+
+199
+00:07:29,782 --> 00:07:30,959
+A hundred percent,
+
+200
+00:07:30,959 --> 00:07:31,286
+even.
+
+201
+00:07:31,286 --> 00:07:32,790
+And yet the run failed.
+
+202
+00:07:32,790 --> 00:07:33,640
+Further down,
+
+203
+00:07:33,640 --> 00:07:34,687
+the failed test,
+
+204
+00:07:34,687 --> 00:07:38,348
+and the last line: process completed with exit code one.
+
+205
+00:07:38,348 --> 00:07:40,441
+That is what turned the job red.
+
+206
+00:07:40,991 --> 00:07:42,270
+Now the green run,
+
+207
+00:07:42,270 --> 00:07:43,265
+after the fix.
+
+208
+00:07:43,265 --> 00:07:44,402
+Status: success,
+
+209
+00:07:44,402 --> 00:07:45,824
+twenty-four seconds.
+
+210
+00:07:45,824 --> 00:07:47,103
+And at the bottom,
+
+211
+00:07:47,103 --> 00:07:49,519
+the artifact: the coverage report,
+
+212
+00:07:49,519 --> 00:07:50,799
+the HTML files,
+
+213
+00:07:50,799 --> 00:07:52,575
+saved by the upload step,
+
+214
+00:07:52,575 --> 00:07:53,855
+ready to download.
+
+215
+00:07:54,405 --> 00:07:55,451
+One more screen,
+
+216
+00:07:55,451 --> 00:07:56,759
+and it is a setting.
+
+217
+00:07:56,759 --> 00:07:58,525
+In the repository settings,
+
+218
+00:07:58,525 --> 00:08:01,664
+a branch rule can require status checks to pass.
+
+219
+00:08:01,664 --> 00:08:02,841
+You tick this box,
+
+220
+00:08:02,841 --> 00:08:04,215
+and add the test job.
+
+221
+00:08:04,215 --> 00:08:04,934
+After that,
+
+222
+00:08:04,934 --> 00:08:08,728
+a pull request cannot be merged while the test job is red.
+
+223
+00:08:08,728 --> 00:08:11,017
+I opened this form only to show it,
+
+224
+00:08:11,017 --> 00:08:12,325
+and did not save it.
+
+225
+00:08:13,875 --> 00:08:18,632
+Your lab task: write a CI workflow with a gate that really works. Six checks.
+
+226
+00:08:19,182 --> 00:08:20,612
+One: write the file,
+
+227
+00:08:20,612 --> 00:08:21,398
+.github,
+
+228
+00:08:21,398 --> 00:08:22,541
+/workflows/
+
+229
+00:08:22,541 --> 00:08:23,899
+ci.yml.
+
+230
+00:08:23,899 --> 00:08:25,114
+It must be valid.
+
+231
+00:08:25,114 --> 00:08:26,329
+Two: run on push,
+
+232
+00:08:26,329 --> 00:08:27,758
+and on pull request.
+
+233
+00:08:28,308 --> 00:08:29,265
+Three: Ubuntu,
+
+234
+00:08:29,265 --> 00:08:29,949
+a timeout,
+
+235
+00:08:29,949 --> 00:08:31,042
+and permissions,
+
+236
+00:08:31,042 --> 00:08:31,999
+contents read.
+
+237
+00:08:31,999 --> 00:08:33,572
+Four: pin every action,
+
+238
+00:08:33,572 --> 00:08:35,007
+and include checkout.
+
+239
+00:08:35,557 --> 00:08:36,965
+Five: a pytest step,
+
+240
+00:08:36,965 --> 00:08:39,205
+with --cov-fail-under eighty or more,
+
+241
+00:08:39,205 --> 00:08:40,997
+and an upload artifact step,
+
+242
+00:08:40,997 --> 00:08:41,957
+with if always.
+
+243
+00:08:42,507 --> 00:08:44,849
+Six: the lab runs your command here,
+
+244
+00:08:44,849 --> 00:08:46,997
+and on a copy with a planted bug.
+
+245
+00:08:46,997 --> 00:08:47,842
+It must pass,
+
+246
+00:08:47,842 --> 00:08:49,274
+and then it must fail.
+
+247
+00:08:49,274 --> 00:08:50,250
+Then lab check,
+
+248
+00:08:50,250 --> 00:08:51,616
+until six out of six.
+
+249
+00:08:53,666 --> 00:08:56,461
+Where to find the lab. Pause here, and write it down.
+
+250
+00:08:57,011 --> 00:08:58,475
+One: the repository,
+
+251
+00:08:58,475 --> 00:09:02,795
+github.com/it-waves/devops-ai,
+
+252
+00:09:02,795 --> 00:09:05,139
+in the folder academy/lab.
+
+253
+00:09:05,689 --> 00:09:11,769
+Two: the files, lab141.sh, and shortcuts141.sh.
+
+254
+00:09:12,319 --> 00:09:17,780
+Three: install it, with sudo install, into /usr/local/sbin/.
+
+255
+00:09:18,330 --> 00:09:20,194
+Four: load the short names,
+
+256
+00:09:20,194 --> 00:09:23,231
+with source shortcuts141.sh.
+
+257
+00:09:23,231 --> 00:09:24,060
+Then lab up,
+
+258
+00:09:24,060 --> 00:09:24,750
+lab check,
+
+259
+00:09:24,750 --> 00:09:25,647
+and lab down.
+
+260
+00:09:26,197 --> 00:09:28,161
+Five: you need python three,
+
+261
+00:09:28,161 --> 00:09:28,792
+pytest,
+
+262
+00:09:28,792 --> 00:09:29,703
+pytest-cov,
+
+263
+00:09:29,703 --> 00:09:31,737
+and the python YAML package.
+
+264
+00:09:31,737 --> 00:09:34,752
+One apt install line gives you all of them.
+
+265
+00:09:35,302 --> 00:09:41,062
+Six: it only touches /opt/lab141. Lab down removes everything.
+
+266
+00:09:41,612 --> 00:09:43,255
+The link is in the description.
+
+267
+00:09:45,305 --> 00:09:48,953
+Pass or fail rubric. Six points. All six to pass.
+
+268
+00:09:49,503 --> 00:09:53,343
+One: ci.yml exists, and is valid YAML, with a job.
+
+269
+00:09:53,893 --> 00:09:56,602
+Two: it runs on push, and on pull request.
+
+270
+00:09:57,152 --> 00:10:01,099
+Three: Ubuntu, a timeout, and permissions with contents read.
+
+271
+00:10:01,649 --> 00:10:04,828
+Four: every action is pinned, and checkout is included.
+
+272
+00:10:05,378 --> 00:10:09,730
+Five: a gate of eighty percent or more, and an upload step with if always.
+
+273
+00:10:10,280 --> 00:10:14,056
+Six: the gate passes on this code, and fails on a planted bug.
+
+274
+00:10:14,606 --> 00:10:15,907
+Pass means all six.
+
+275
+00:10:17,957 --> 00:10:19,728
+Your turn, on your own machine.
+
+276
+00:10:20,278 --> 00:10:25,206
+One: lab up, read the task file, and try the gate by hand. Check the exit code.
+
+277
+00:10:25,756 --> 00:10:29,681
+Two: write the workflow file, with the trigger, the permissions, and the job.
+
+278
+00:10:30,231 --> 00:10:32,684
+Three: add the steps. Pin every action.
+
+279
+00:10:33,234 --> 00:10:36,520
+Four: add the gate, and the upload step with if always.
+
+280
+00:10:37,070 --> 00:10:40,547
+Five: lab check, until six out of six. Then lab down.
+
+281
+00:10:41,097 --> 00:10:42,932
+Pause the video, and begin now.
+
+282
+00:10:58,482 --> 00:10:59,357
+Quick check.
+
+283
+00:10:59,907 --> 00:11:01,485
+What makes a CI step fail?
+
+284
+00:11:02,035 --> 00:11:04,105
+Why must permissions be contents read?
+
+285
+00:11:04,655 --> 00:11:06,361
+What does || true do to a gate?
+
+286
+00:11:06,911 --> 00:11:09,087
+Why does the upload step need if always?
+
+287
+00:11:09,637 --> 00:11:16,229
+Objective covered: MC15, objective six. Tests in CI, with pass and fail gates.
+
+288
+00:11:16,779 --> 00:11:18,849
+Pause the video, and answer out loud.
+
+289
+00:11:29,399 --> 00:11:32,385
+Next: performance, load and security testing.
+
+290
+00:11:32,935 --> 00:11:36,263
+If this helped, like, share and subscribe, so you do not miss it.
