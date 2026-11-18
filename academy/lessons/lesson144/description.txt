@@ -19,7 +19,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab144.sh and shortc
 Honest notes: the terminal demo is a real recording of real pytest and pytest-cov, run against a small pricing module written for the lab (not the real CloudCart code). The bug, the flaky test and the coverage numbers shown are exactly what the lab produces. The lab was run end to end: 0 of 6 before you start, 6 of 6 with a reference solution, and lab down leaves nothing behind. The narration is synthetic speech. The hook, plan, map, missions, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: Flaky Tests: Find and Fix Time, Random, Order and Environment Problems | Lesson 143 https://youtu.be/pbW04VeNHc4
-Next: DevOps Fundamentals, a new domain: principles, collaboration and shared ownership.
+Next: https://youtu.be/YBqqWfepo8I
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
