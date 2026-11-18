@@ -11,7 +11,7 @@ def discount_cents(subtotal, code):
     if code is None:
         return 0
     if code == "WELCOME10":
-        return subtotal // 100
+        return subtotal // 10
     if code == "BULK":
         if subtotal >= 20000:
             return subtotal // 5
