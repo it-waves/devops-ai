@@ -1,0 +1,27 @@
+Lesson 140 of the DevOps Engineering Bootcamp, in the Software Testing and QA domain. Two tests pass and everything is green, but nine lines of the code never ran. In this lesson you learn what test coverage measures (statements and branches), how to run it with pytest-cov (--cov, term-missing, an HTML report, --cov-fail-under) and how to read the red, green and yellow lines of the real coverage report in a browser. Then you learn its biggest limit: a test with no assert can reach 100 percent coverage and still miss a planted bug. You raise a small CloudCart pricing module from 45 to 100 percent with real tests, and watch the right tests catch a bug that the hollow test lets through. A lab judges you from 0 of 6 to 6 of 6, and plants four bugs of its own to test your tests.
+
+Chapters
+0:00 Green is not the same as tested
+0:34 What to expect
+1:05 What coverage measures
+1:49 Running coverage
+2:28 The limits of coverage
+3:17 Live: report, tests, a bug
+11:16 Your lab task
+11:55 Where to find the lab
+12:43 Pass or fail rubric
+13:18 Your turn
+14:02 Quick check
+
+Objectives covered: MC15-O05, measure test coverage and understand its limits.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab140.sh and shortcuts140.sh). Install with: sudo install -m 755 lab140.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts140.sh. You need python3, pytest and pytest-cov (sudo apt install -y python3-pytest python3-pytest-cov). lab up works only in /opt/lab140 and does not touch anything else. lab down removes everything. Only run it on your own machine.
+
+Honest notes: the terminal demo and the coverage report in Chrome are one real, continuous recording of pytest-cov and the real HTML report that coverage.py writes. The lab was run end to end: it passes 0 of 6 before you start and 6 of 6 with a reference solution, and lab down leaves nothing behind. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Test the CloudCart API: Health Checks, Status Codes and pytest | Lesson 139 https://youtu.be/Z4iCSJmieH8
+Next: Tests in the pipeline: gates and a real GitHub Actions run.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #softwaretesting #testcoverage #pytest #devopsbootcamp

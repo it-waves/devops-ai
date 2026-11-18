@@ -1,0 +1,1263 @@
+1
+00:00:00,500 --> 00:00:04,916
+Your tests pass. Two out of two. Green. So, is the shop safe to ship?
+
+2
+00:00:05,466 --> 00:00:05,955
+Not yet.
+
+3
+00:00:05,955 --> 00:00:10,116
+Because a green test only tells you that the lines it ran were fine.
+
+4
+00:00:10,116 --> 00:00:12,869
+It says nothing about the lines it never ran.
+
+5
+00:00:13,419 --> 00:00:15,653
+Test coverage answers one question.
+
+6
+00:00:15,653 --> 00:00:18,653
+How much of my code did the tests actually run?
+
+7
+00:00:18,653 --> 00:00:21,525
+And it shows you the lines nobody has tested.
+
+8
+00:00:22,075 --> 00:00:25,669
+Today you measure coverage on the CloudCart pricing code,
+
+9
+00:00:25,669 --> 00:00:26,784
+with pytest-cov.
+
+10
+00:00:26,784 --> 00:00:28,334
+You open the real report.
+
+11
+00:00:28,334 --> 00:00:33,105
+And you learn the big limit: a hundred percent coverage can still miss a bug.
+
+12
+00:00:34,655 --> 00:00:36,084
+Here is what to expect.
+
+13
+00:00:36,634 --> 00:00:39,600
+One: what coverage measures. Lines, and branches.
+
+14
+00:00:40,150 --> 00:00:43,222
+Two: how to run it, and read the report, in the terminal.
+
+15
+00:00:43,772 --> 00:00:47,782
+Three: the limits. Why high coverage is not the same as good tests.
+
+16
+00:00:48,332 --> 00:00:49,476
+Then a live demo.
+
+17
+00:00:49,476 --> 00:00:51,561
+We start at forty-five percent,
+
+18
+00:00:51,561 --> 00:00:54,386
+open the real HTML report in a browser,
+
+19
+00:00:54,386 --> 00:00:55,933
+and climb to a hundred.
+
+20
+00:00:55,933 --> 00:00:57,278
+Then we plant a bug,
+
+21
+00:00:57,278 --> 00:00:58,892
+and see it slip through.
+
+22
+00:00:59,442 --> 00:01:04,221
+And a lab with six checks, including one that plants four bugs, to test your tests.
+
+23
+00:01:06,271 --> 00:01:07,722
+What does coverage measure?
+
+24
+00:01:08,272 --> 00:01:09,596
+While your tests run,
+
+25
+00:01:09,596 --> 00:01:11,109
+a tool watches the code.
+
+26
+00:01:11,109 --> 00:01:13,190
+Every line that runs gets a tick.
+
+27
+00:01:13,190 --> 00:01:13,884
+At the end,
+
+28
+00:01:13,884 --> 00:01:15,713
+it tells you which lines ran,
+
+29
+00:01:15,713 --> 00:01:16,848
+and which did not.
+
+30
+00:01:17,398 --> 00:01:22,496
+That is statement coverage. Twenty-one statements, twelve ran, nine did not. Simple.
+
+31
+00:01:23,046 --> 00:01:24,585
+Then there are branches.
+
+32
+00:01:24,585 --> 00:01:26,444
+An if has two ways out: true,
+
+33
+00:01:26,444 --> 00:01:27,021
+or false.
+
+34
+00:01:27,021 --> 00:01:29,907
+Branch coverage asks if your tests took both.
+
+35
+00:01:29,907 --> 00:01:32,215
+A test that only ever enters the if,
+
+36
+00:01:32,215 --> 00:01:34,972
+never checks what happens when it does not.
+
+37
+00:01:35,522 --> 00:01:36,200
+In Python,
+
+38
+00:01:36,200 --> 00:01:38,167
+the tool is coverage.py.
+
+39
+00:01:38,167 --> 00:01:40,879
+And pytest-cov plugs it into pytest,
+
+40
+00:01:40,879 --> 00:01:41,964
+with one option.
+
+41
+00:01:42,514 --> 00:01:46,145
+The point: coverage finds the code your tests never touch.
+
+42
+00:01:46,145 --> 00:01:48,210
+That is where untested bugs hide.
+
+43
+00:01:49,760 --> 00:01:50,827
+How do you run it?
+
+44
+00:01:51,377 --> 00:01:56,177
+Add dash dash cov, and the name of the module. That prints a table in the terminal.
+
+45
+00:01:56,727 --> 00:01:59,102
+Add cov report equals term-missing,
+
+46
+00:01:59,102 --> 00:02:01,545
+and the table gets a Missing column.
+
+47
+00:02:01,545 --> 00:02:03,852
+The exact line numbers nobody ran.
+
+48
+00:02:04,402 --> 00:02:06,479
+Or cov report equals HTML,
+
+49
+00:02:06,479 --> 00:02:08,698
+to write a folder of web pages.
+
+50
+00:02:08,698 --> 00:02:09,772
+Open the index,
+
+51
+00:02:09,772 --> 00:02:12,637
+and click a file: every line is colored.
+
+52
+00:02:13,187 --> 00:02:14,444
+And --cov-fail-under,
+
+53
+00:02:14,444 --> 00:02:15,371
+with a number.
+
+54
+00:02:15,371 --> 00:02:17,159
+If coverage drops below it,
+
+55
+00:02:17,159 --> 00:02:18,086
+the run fails,
+
+56
+00:02:18,086 --> 00:02:19,741
+and so does the pipeline.
+
+57
+00:02:19,741 --> 00:02:20,204
+A gate,
+
+58
+00:02:20,204 --> 00:02:21,528
+for the next lesson.
+
+59
+00:02:22,078 --> 00:02:27,774
+Switch on branch coverage in a small file, .coveragerc, so you see partial lines too.
+
+60
+00:02:29,324 --> 00:02:32,503
+Now the part most people miss. The limits of coverage.
+
+61
+00:02:33,053 --> 00:02:34,965
+Coverage counts lines that ran.
+
+62
+00:02:34,965 --> 00:02:36,692
+Not lines that were checked.
+
+63
+00:02:36,692 --> 00:02:38,049
+A test with no assert,
+
+64
+00:02:38,049 --> 00:02:40,454
+can run a hundred percent of your code,
+
+65
+00:02:40,454 --> 00:02:41,565
+and prove nothing.
+
+66
+00:02:42,115 --> 00:02:44,033
+Look for the bug that survives.
+
+67
+00:02:44,033 --> 00:02:46,137
+Plant a small mistake in the code,
+
+68
+00:02:46,137 --> 00:02:47,127
+a wrong divisor,
+
+69
+00:02:47,127 --> 00:02:48,179
+a wrong boundary.
+
+70
+00:02:48,179 --> 00:02:49,726
+If your tests still pass,
+
+71
+00:02:49,726 --> 00:02:51,459
+they are not protecting you.
+
+72
+00:02:52,009 --> 00:02:54,073
+Boundaries are the classic miss.
+
+73
+00:02:54,073 --> 00:02:55,428
+Seventy-five hundred,
+
+74
+00:02:55,428 --> 00:02:57,299
+and seventy-four ninety-nine.
+
+75
+00:02:57,299 --> 00:02:58,331
+Twenty thousand,
+
+76
+00:02:58,331 --> 00:03:01,363
+and nineteen thousand nine hundred ninety-nine.
+
+77
+00:03:01,363 --> 00:03:02,718
+Test the exact edges.
+
+78
+00:03:03,268 --> 00:03:06,534
+So use coverage the right way: to find what you forgot,
+
+79
+00:03:06,534 --> 00:03:08,078
+not to prove you are done.
+
+80
+00:03:08,078 --> 00:03:09,800
+Chasing the number is a trap.
+
+81
+00:03:09,800 --> 00:03:10,691
+Ninety percent,
+
+82
+00:03:10,691 --> 00:03:11,879
+with strong asserts,
+
+83
+00:03:11,879 --> 00:03:13,423
+beats a hundred with none.
+
+84
+00:03:13,973 --> 00:03:16,597
+And remember, covered code is not correct code.
+
+85
+00:03:18,147 --> 00:03:22,947
+Go to the lab folder.
+
+86
+00:03:24,497 --> 00:03:26,396
+Look around.
+
+87
+00:03:26,946 --> 00:03:27,722
+Our module,
+
+88
+00:03:27,722 --> 00:03:28,640
+cart.py,
+
+89
+00:03:28,640 --> 00:03:30,687
+the CloudCart pricing rules.
+
+90
+00:03:30,687 --> 00:03:32,805
+A tests folder with two tests.
+
+91
+00:03:32,805 --> 00:03:34,075
+And an out folder,
+
+92
+00:03:34,075 --> 00:03:34,499
+empty,
+
+93
+00:03:34,499 --> 00:03:35,628
+for our reports.
+
+94
+00:03:36,178 --> 00:03:39,976
+Run the tests.
+
+95
+00:03:40,526 --> 00:03:44,664
+Two passed. All green. But how much of cart.py did they run?
+
+96
+00:03:45,214 --> 00:03:49,801
+Measure it.
+
+97
+00:03:50,351 --> 00:03:51,171
+A new table.
+
+98
+00:03:51,171 --> 00:03:52,674
+Twenty-one statements,
+
+99
+00:03:52,674 --> 00:03:53,494
+nine missed.
+
+100
+00:03:53,494 --> 00:03:54,588
+Twelve branches,
+
+101
+00:03:54,588 --> 00:03:56,775
+three of them only partly taken.
+
+102
+00:03:56,775 --> 00:03:58,756
+Coverage: forty-five percent.
+
+103
+00:03:59,306 --> 00:04:04,042
+Which lines?
+
+104
+00:04:06,592 --> 00:04:07,781
+The Missing column.
+
+105
+00:04:07,781 --> 00:04:08,469
+Lines five,
+
+106
+00:04:08,469 --> 00:04:08,844
+eight,
+
+107
+00:04:08,844 --> 00:04:10,408
+and thirteen to nineteen.
+
+108
+00:04:10,408 --> 00:04:12,848
+That is the shipping for an empty cart,
+
+109
+00:04:12,848 --> 00:04:14,599
+the standard shipping price,
+
+110
+00:04:14,599 --> 00:04:16,476
+and all of the discount codes.
+
+111
+00:04:16,476 --> 00:04:17,664
+Nobody tested them.
+
+112
+00:04:17,664 --> 00:04:18,853
+This file is saved,
+
+113
+00:04:18,853 --> 00:04:20,416
+and the lab will read it.
+
+114
+00:04:20,966 --> 00:04:29,457
+An HTML report.
+
+115
+00:04:30,007 --> 00:04:34,594
+Coverage HTML written. A folder of web pages. Let us open it.
+
+116
+00:04:35,144 --> 00:04:36,166
+Numbers are good.
+
+117
+00:04:36,166 --> 00:04:37,248
+Colors are better.
+
+118
+00:04:37,248 --> 00:04:39,412
+Let us open the report in a browser,
+
+119
+00:04:39,412 --> 00:04:41,096
+and look at the code itself.
+
+120
+00:04:41,646 --> 00:04:42,767
+I open Chrome,
+
+121
+00:04:42,767 --> 00:04:45,572
+and type the path to the file: out,
+
+122
+00:04:45,572 --> 00:04:46,533
+htmlcov,
+
+123
+00:04:46,533 --> 00:04:47,975
+index.html.
+
+124
+00:04:47,975 --> 00:04:48,456
+Again,
+
+125
+00:04:48,456 --> 00:04:49,818
+no server needed.
+
+126
+00:04:49,818 --> 00:04:52,142
+It is just a folder of files.
+
+127
+00:04:52,692 --> 00:04:53,862
+This is the index.
+
+128
+00:04:53,862 --> 00:04:55,941
+The title says: coverage report,
+
+129
+00:04:55,941 --> 00:04:57,176
+forty-five percent.
+
+130
+00:04:57,176 --> 00:04:57,566
+Below,
+
+131
+00:04:57,566 --> 00:04:58,086
+a table,
+
+132
+00:04:58,086 --> 00:04:59,581
+one row for every file.
+
+133
+00:04:59,581 --> 00:05:00,426
+cart.py.
+
+134
+00:05:00,426 --> 00:05:01,921
+Statements: twenty-one,
+
+135
+00:05:01,921 --> 00:05:02,766
+nine missing,
+
+136
+00:05:02,766 --> 00:05:03,676
+none excluded.
+
+137
+00:05:03,676 --> 00:05:05,366
+Then the branches: twelve,
+
+138
+00:05:05,366 --> 00:05:06,601
+with three partial.
+
+139
+00:05:06,601 --> 00:05:08,096
+And the total coverage,
+
+140
+00:05:08,096 --> 00:05:08,941
+on the right.
+
+141
+00:05:08,941 --> 00:05:10,046
+In a big project,
+
+142
+00:05:10,046 --> 00:05:11,541
+this table is your map.
+
+143
+00:05:11,541 --> 00:05:13,945
+You click the column headers to sort,
+
+144
+00:05:13,945 --> 00:05:16,350
+and find the least tested file first.
+
+145
+00:05:16,900 --> 00:05:18,381
+I click the file name,
+
+146
+00:05:18,381 --> 00:05:19,997
+and now we see the code.
+
+147
+00:05:19,997 --> 00:05:22,286
+At the top: twenty-one statements.
+
+148
+00:05:22,286 --> 00:05:23,027
+Twelve run.
+
+149
+00:05:23,027 --> 00:05:23,902
+Nine missing.
+
+150
+00:05:23,902 --> 00:05:24,844
+Three partial.
+
+151
+00:05:24,844 --> 00:05:26,932
+Those four buttons are filters.
+
+152
+00:05:26,932 --> 00:05:30,298
+And the colors are on the left edge of every line.
+
+153
+00:05:30,848 --> 00:05:31,935
+Green lines ran.
+
+154
+00:05:31,935 --> 00:05:33,294
+Red lines never ran.
+
+155
+00:05:33,294 --> 00:05:34,721
+Look at the red ones.
+
+156
+00:05:34,721 --> 00:05:35,400
+Line five,
+
+157
+00:05:35,400 --> 00:05:36,419
+the empty cart.
+
+158
+00:05:36,419 --> 00:05:37,167
+Line eight,
+
+159
+00:05:37,167 --> 00:05:39,069
+the standard shipping price.
+
+160
+00:05:39,069 --> 00:05:42,602
+And lines thirteen to nineteen: every discount code.
+
+161
+00:05:43,152 --> 00:05:44,757
+I click the missing button,
+
+162
+00:05:44,757 --> 00:05:46,362
+and the red lines light up.
+
+163
+00:05:46,362 --> 00:05:47,729
+Only the problem lines,
+
+164
+00:05:47,729 --> 00:05:48,442
+highlighted.
+
+165
+00:05:48,442 --> 00:05:49,869
+That is your to do list.
+
+166
+00:05:49,869 --> 00:05:52,603
+Every red line is a test you have not written.
+
+167
+00:05:53,153 --> 00:05:54,745
+And now the yellow ones.
+
+168
+00:05:54,745 --> 00:05:56,935
+Look at line four: the note says,
+
+169
+00:05:56,935 --> 00:05:57,267
+four,
+
+170
+00:05:57,267 --> 00:05:57,665
+arrow,
+
+171
+00:05:57,665 --> 00:05:57,997
+five.
+
+172
+00:05:57,997 --> 00:06:00,916
+The test jumped to line five from line four,
+
+173
+00:06:00,916 --> 00:06:02,840
+but never took the other way.
+
+174
+00:06:02,840 --> 00:06:04,499
+That is a partial branch.
+
+175
+00:06:04,499 --> 00:06:05,627
+Same on line six,
+
+176
+00:06:05,627 --> 00:06:06,689
+and line eleven.
+
+177
+00:06:06,689 --> 00:06:07,551
+The code ran,
+
+178
+00:06:07,551 --> 00:06:09,409
+but only one side of the if.
+
+179
+00:06:24,859 --> 00:06:25,379
+Press R,
+
+180
+00:06:25,379 --> 00:06:27,591
+and the run lines are highlighted.
+
+181
+00:06:27,591 --> 00:06:28,112
+Press M,
+
+182
+00:06:28,112 --> 00:06:28,893
+and missing.
+
+183
+00:06:28,893 --> 00:06:29,413
+Press P,
+
+184
+00:06:29,413 --> 00:06:30,194
+for partial.
+
+185
+00:06:30,194 --> 00:06:32,080
+Those are keyboard shortcuts,
+
+186
+00:06:32,080 --> 00:06:34,032
+you can see the keyboard icon,
+
+187
+00:06:34,032 --> 00:06:34,683
+top right,
+
+188
+00:06:34,683 --> 00:06:35,854
+for the full list.
+
+189
+00:06:35,854 --> 00:06:37,480
+Press the same key again,
+
+190
+00:06:37,480 --> 00:06:39,302
+and the highlight goes away.
+
+191
+00:06:39,852 --> 00:06:40,530
+To go back,
+
+192
+00:06:40,530 --> 00:06:41,271
+click index.
+
+193
+00:06:41,271 --> 00:06:42,381
+Back to the table,
+
+194
+00:06:42,381 --> 00:06:43,616
+with the percentage.
+
+195
+00:06:43,616 --> 00:06:46,454
+This is the page you attach to a pull request,
+
+196
+00:06:46,454 --> 00:06:47,873
+or keep with the build.
+
+197
+00:06:48,423 --> 00:06:53,799
+That is the report. Now we go back to the terminal, and fix the red lines, one at a time.
+
+198
+00:07:12,849 --> 00:07:18,097
+Test one: edges.
+
+199
+00:07:25,547 --> 00:07:26,307
+Two asserts.
+
+200
+00:07:26,307 --> 00:07:28,779
+Seventy-four ninety-nine pays shipping,
+
+201
+00:07:28,779 --> 00:07:30,617
+and an empty cart ships free.
+
+202
+00:07:30,617 --> 00:07:34,166
+Those are the edges around the red lines five and eight.
+
+203
+00:07:34,716 --> 00:07:40,134
+Measure again.
+
+204
+00:07:41,184 --> 00:07:42,393
+Fifty-eight percent.
+
+205
+00:07:42,393 --> 00:07:44,992
+Lines five and eight are gone from Missing.
+
+206
+00:07:44,992 --> 00:07:46,987
+Only thirteen to nineteen remain.
+
+207
+00:07:47,537 --> 00:07:51,974
+Test two: codes.
+
+208
+00:08:06,024 --> 00:08:06,803
+Welcome ten.
+
+209
+00:08:06,803 --> 00:08:07,388
+And bulk,
+
+210
+00:08:07,388 --> 00:08:09,141
+at exactly twenty thousand,
+
+211
+00:08:09,141 --> 00:08:12,387
+and at nineteen thousand nine hundred ninety-nine,
+
+212
+00:08:12,387 --> 00:08:13,685
+just below the edge.
+
+213
+00:08:13,685 --> 00:08:14,464
+Real totals,
+
+214
+00:08:14,464 --> 00:08:15,048
+in cents.
+
+215
+00:08:15,598 --> 00:08:17,390
+Measure again.
+
+216
+00:08:22,040 --> 00:08:26,968
+Ninety-four percent. One line left: nineteen. The error for an unknown code.
+
+217
+00:08:27,518 --> 00:08:33,940
+Test three: error.
+
+218
+00:08:40,990 --> 00:08:42,931
+An unknown code must be refused.
+
+219
+00:08:43,481 --> 00:08:45,273
+Measure again.
+
+220
+00:08:49,923 --> 00:08:53,486
+A hundred percent. Nothing missing, and no partial branches.
+
+221
+00:08:54,036 --> 00:08:58,388
+A gate.
+
+222
+00:08:59,638 --> 00:09:02,800
+Required test coverage of ninety percent reached.
+
+223
+00:09:02,800 --> 00:09:04,349
+If it had dropped below,
+
+224
+00:09:04,349 --> 00:09:05,640
+this run would fail.
+
+225
+00:09:05,640 --> 00:09:09,835
+That is how a pipeline refuses a pull request that removes tests.
+
+226
+00:09:10,385 --> 00:09:18,129
+A hollow test.
+
+227
+00:09:33,679 --> 00:09:34,984
+It calls total cents,
+
+228
+00:09:34,984 --> 00:09:35,978
+with every code,
+
+229
+00:09:35,978 --> 00:09:36,909
+and every size.
+
+230
+00:09:36,909 --> 00:09:39,332
+And look: there is not a single assert.
+
+231
+00:09:39,882 --> 00:09:43,018
+Measure it.
+
+232
+00:09:46,768 --> 00:09:47,333
+One test.
+
+233
+00:09:47,333 --> 00:09:48,022
+No asserts.
+
+234
+00:09:48,022 --> 00:09:49,716
+A hundred percent coverage.
+
+235
+00:09:49,716 --> 00:09:51,221
+The number says perfect,
+
+236
+00:09:51,221 --> 00:09:52,976
+and the test proves nothing.
+
+237
+00:09:53,526 --> 00:09:58,774
+Save the file.
+
+238
+00:09:59,324 --> 00:10:08,562
+Plant the bug.
+
+239
+00:10:09,112 --> 00:10:14,018
+See it.
+
+240
+00:10:14,568 --> 00:10:18,280
+Line fourteen. Welcome ten now gives one percent, not ten.
+
+241
+00:10:18,830 --> 00:10:22,820
+The hollow test.
+
+242
+00:10:23,370 --> 00:10:28,298
+Passed. A hundred percent coverage, and the bug walked right through. Nobody noticed.
+
+243
+00:10:28,848 --> 00:10:32,986
+The real tests.
+
+244
+00:10:33,536 --> 00:10:33,974
+Failed.
+
+245
+00:10:33,974 --> 00:10:36,910
+The summary names the test: the discount codes.
+
+246
+00:10:36,910 --> 00:10:38,534
+The assert caught the bug.
+
+247
+00:10:38,534 --> 00:10:39,409
+Same coverage,
+
+248
+00:10:39,409 --> 00:10:41,408
+completely different protection.
+
+249
+00:10:41,958 --> 00:10:46,822
+Restore it.
+
+250
+00:10:47,372 --> 00:10:51,063
+All green.
+
+251
+00:10:51,613 --> 00:10:53,576
+Six passed. The bug is gone.
+
+252
+00:10:54,126 --> 00:11:00,206
+Where am I?
+
+253
+00:11:00,756 --> 00:11:01,789
+Four out of six.
+
+254
+00:11:01,789 --> 00:11:02,370
+Coverage,
+
+255
+00:11:02,370 --> 00:11:03,080
+the report,
+
+256
+00:11:03,080 --> 00:11:04,564
+and the bug check pass.
+
+257
+00:11:04,564 --> 00:11:07,405
+I still need a sixth test with real asserts,
+
+258
+00:11:07,405 --> 00:11:08,696
+and my final report.
+
+259
+00:11:08,696 --> 00:11:10,697
+That is the start of your task.
+
+260
+00:11:11,247 --> 00:11:13,210
+Clean up.
+
+261
+00:11:13,760 --> 00:11:15,616
+Removed. Nothing left behind.
+
+262
+00:11:17,166 --> 00:11:21,910
+Your lab task: take the coverage from forty-five percent to ninety or more,
+
+263
+00:11:21,910 --> 00:11:23,745
+with tests that really check.
+
+264
+00:11:23,745 --> 00:11:24,441
+Six checks.
+
+265
+00:11:24,991 --> 00:11:29,983
+One: save the start report. Two: make the HTML report, and open it.
+
+266
+00:11:30,533 --> 00:11:36,357
+Three: add tests until cart.py reaches ninety percent. You may not edit cart.py.
+
+267
+00:11:36,907 --> 00:11:40,704
+Four: write six tests or more, and every one must assert something.
+
+268
+00:11:41,254 --> 00:11:43,555
+Five: lab check plants four bugs,
+
+269
+00:11:43,555 --> 00:11:44,321
+one by one,
+
+270
+00:11:44,321 --> 00:11:45,716
+and runs your tests.
+
+271
+00:11:45,716 --> 00:11:48,156
+At least three bugs must be caught.
+
+272
+00:11:48,156 --> 00:11:49,619
+Test the exact edges.
+
+273
+00:11:49,619 --> 00:11:51,502
+Six: save the final report,
+
+274
+00:11:51,502 --> 00:11:52,547
+then lab check,
+
+275
+00:11:52,547 --> 00:11:54,011
+until six out of six.
+
+276
+00:11:56,061 --> 00:11:58,856
+Where to find the lab. Pause here, and write it down.
+
+277
+00:11:59,406 --> 00:12:00,870
+One: the repository,
+
+278
+00:12:00,870 --> 00:12:05,190
+github.com/it-waves/devops-ai,
+
+279
+00:12:05,190 --> 00:12:07,534
+in the folder academy/lab.
+
+280
+00:12:08,084 --> 00:12:13,481
+Two: the files, lab140.sh, and shortcuts140.sh.
+
+281
+00:12:14,031 --> 00:12:19,492
+Three: install it, with sudo install, into /usr/local/sbin/.
+
+282
+00:12:20,042 --> 00:12:21,900
+Four: load the short names,
+
+283
+00:12:21,900 --> 00:12:24,653
+with source shortcuts140.sh.
+
+284
+00:12:24,653 --> 00:12:25,478
+Then lab up,
+
+285
+00:12:25,478 --> 00:12:26,166
+lab check,
+
+286
+00:12:26,166 --> 00:12:27,061
+and lab down.
+
+287
+00:12:27,611 --> 00:12:29,602
+Five: you need python3,
+
+288
+00:12:29,602 --> 00:12:30,242
+pytest,
+
+289
+00:12:30,242 --> 00:12:31,451
+and pytest-cov.
+
+290
+00:12:31,451 --> 00:12:34,011
+One apt install line gives you both.
+
+291
+00:12:34,561 --> 00:12:40,065
+Six: it only touches /opt/lab140. Lab down removes everything.
+
+292
+00:12:40,615 --> 00:12:42,258
+The link is in the description.
+
+293
+00:12:44,308 --> 00:12:47,956
+Pass or fail rubric. Six points. All six to pass.
+
+294
+00:12:48,506 --> 00:12:52,645
+One: before.txt shows the starting coverage, under eighty percent.
+
+295
+00:12:53,195 --> 00:12:57,739
+Two: the HTML report exists, with a page for cart.py.
+
+296
+00:12:58,289 --> 00:13:02,406
+Three: cart.py has ninety percent or more, and you did not edit it.
+
+297
+00:13:02,956 --> 00:13:06,583
+Four: six tests or more. Every test asserts, and all pass.
+
+298
+00:13:07,133 --> 00:13:10,482
+Five: your tests catch at least three of the four planted bugs.
+
+299
+00:13:11,032 --> 00:13:14,979
+Six: after.txt shows the final coverage, ninety or more.
+
+300
+00:13:15,529 --> 00:13:16,830
+Pass means all six.
+
+301
+00:13:18,880 --> 00:13:20,651
+Your turn, on your own machine.
+
+302
+00:13:21,201 --> 00:13:25,958
+One: lab up, read the task file, and measure the start. Save before.txt.
+
+303
+00:13:26,508 --> 00:13:30,668
+Two: make the HTML report, and open it. Find the red lines.
+
+304
+00:13:31,218 --> 00:13:35,997
+Three: write a test for each red area. Use real asserts, and the exact edges.
+
+305
+00:13:36,547 --> 00:13:39,939
+Four: measure again, until you reach ninety percent or more.
+
+306
+00:13:40,489 --> 00:13:44,777
+Five: save after.txt, then lab check, until six out of six.
+
+307
+00:13:45,327 --> 00:13:47,161
+Pause the video, and begin now.
+
+308
+00:14:02,711 --> 00:14:03,586
+Quick check.
+
+309
+00:14:04,136 --> 00:14:05,586
+What does coverage measure?
+
+310
+00:14:06,136 --> 00:14:07,480
+What is a partial branch?
+
+311
+00:14:08,030 --> 00:14:10,804
+Can a hundred percent coverage hide a bug? How?
+
+312
+00:14:11,354 --> 00:14:12,890
+What does --cov-fail-under do?
+
+313
+00:14:13,440 --> 00:14:18,944
+Objective covered: MC15, objective five. Test coverage, and its limits.
+
+314
+00:14:19,494 --> 00:14:21,563
+Pause the video, and answer out loud.
+
+315
+00:14:32,113 --> 00:14:36,636
+Next: tests in the pipeline. Gates, and a real GitHub Actions run.
+
+316
+00:14:37,186 --> 00:14:40,514
+If this helped, like, share and subscribe, so you do not miss it.
