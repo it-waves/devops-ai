@@ -22,7 +22,7 @@ Demo files: github.com/it-waves/devops-ai, in academy/lesson145-demo (wall.log, 
 Honest notes: the terminal demo is a real recording of a real shell and awk, run on small example logs written for this lesson. The timelines (a 5.5-hour wall and an 8-minute pipeline) are an example, not a measurement of a real company. The narration is synthetic speech. The hook, plan, wall race, principles, loops, ownership, myths, task, files, self-check and recap screens are labelled illustrations, not captures.
 
 Previous lesson: Software Testing Mastery: Find the Bug, Fix Flaky Tests, Gate with CI and Prove It | Lesson 144 https://youtu.be/YEqxngkZqFU
-Next: continuous integration, continuous delivery and continuous deployment, and how they differ.
+Next: https://youtu.be/VmsQM8r-H-g
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
