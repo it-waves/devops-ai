@@ -1,0 +1,29 @@
+Lesson 149 of the DevOps Engineering Bootcamp, the fifth lesson of the DevOps Fundamentals domain. Security found at the end of a release is slow and costly, and downtime nobody has measured cannot be managed. In this lesson you learn DevSecOps and "shift left" (security checks for secrets, libraries, images and infrastructure files inside the pipeline), SRE (SLI, SLO and SLA, and why the target is never 100 percent), the error budget and what to do when it is healthy, low or spent, platform engineering (a paved road that teams share, built as a product), and how the three fit together. In the live demo, a real terminal runs a security gate that catches a hard-coded password, then passes after the fix, then calculates an error budget from a week of request numbers at three targets: ship, careful, and freeze.
+
+Chapters
+0:00 A secret in the code, downtime uncounted
+0:35 What to expect
+1:03 DevSecOps: shift left
+1:47 SRE, SLI and SLO
+2:37 The error budget
+3:16 Platform engineering
+3:52 How they fit together
+4:23 Live: a security gate and an error budget
+6:02 Your practice task
+6:20 Where to find the demo files
+6:56 Self-check
+7:24 Your turn
+8:01 Quick check and what is next
+
+Objectives covered: MC16-O05, DevSecOps, SRE and platform engineering.
+
+Demo files: github.com/it-waves/devops-ai, in academy/lesson149-demo (scan.sh, budget.sh, a src folder, a data folder with a week of request counts, and a README with the answers). You need a shell and awk. This domain has no lab on purpose: it is about ideas and decisions, so the practice is a plain terminal exercise with a self-check.
+
+Honest notes: the terminal demo is a real recording of a real shell running small scripts written for this lesson. The request numbers are example data, and the scan and budget scripts are teaching stand-ins for real security scanners and monitoring tools, which come later in the bootcamp. The narration is synthetic speech. The hook, plan, DevSecOps, SRE, error budget, platform, together, task, files, self-check and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Build Once: Artifacts, Environments and Release Promotion | Lesson 148 https://youtu.be/ZqbZTmZbdyc
+Next: the four key DevOps metrics.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #devsecops #sre #errorbudget #platformengineering #devopsbootcamp

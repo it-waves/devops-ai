@@ -1,0 +1,767 @@
+1
+00:00:00,500 --> 00:00:01,266
+Release day.
+
+2
+00:00:01,266 --> 00:00:02,350
+The app is ready.
+
+3
+00:00:02,350 --> 00:00:04,902
+Then the security team finds a password,
+
+4
+00:00:04,902 --> 00:00:06,306
+written in plain text,
+
+5
+00:00:06,306 --> 00:00:07,327
+inside the code.
+
+6
+00:00:07,877 --> 00:00:09,032
+The release stops.
+
+7
+00:00:09,032 --> 00:00:10,315
+Three weeks of work,
+
+8
+00:00:10,315 --> 00:00:10,828
+waiting.
+
+9
+00:00:10,828 --> 00:00:11,983
+And the same week,
+
+10
+00:00:11,983 --> 00:00:13,202
+the site goes down,
+
+11
+00:00:13,202 --> 00:00:16,474
+and nobody can say how much downtime is acceptable.
+
+12
+00:00:17,024 --> 00:00:18,280
+Good teams fix both.
+
+13
+00:00:18,280 --> 00:00:20,793
+They check security inside the pipeline,
+
+14
+00:00:20,793 --> 00:00:23,243
+they measure reliability with a number,
+
+15
+00:00:23,243 --> 00:00:26,133
+and they give everyone a paved road to follow.
+
+16
+00:00:26,683 --> 00:00:27,976
+Today: DevSecOps,
+
+17
+00:00:27,976 --> 00:00:28,384
+SRE,
+
+18
+00:00:28,384 --> 00:00:30,085
+and platform engineering.
+
+19
+00:00:30,085 --> 00:00:31,377
+Three modern ideas,
+
+20
+00:00:31,377 --> 00:00:33,894
+and what each one means for your job.
+
+21
+00:00:35,444 --> 00:00:36,873
+Here is what to expect.
+
+22
+00:00:37,423 --> 00:00:40,773
+One: DevSecOps, and why security moves to the left.
+
+23
+00:00:41,323 --> 00:00:44,928
+Two: SRE, and a clever idea called the error budget.
+
+24
+00:00:45,478 --> 00:00:49,382
+Three: platform engineering, and how teams share one paved road.
+
+25
+00:00:49,932 --> 00:00:51,108
+Four: a live demo.
+
+26
+00:00:51,108 --> 00:00:53,265
+A security gate catches a secret,
+
+27
+00:00:53,265 --> 00:00:55,422
+and we calculate an error budget,
+
+28
+00:00:55,422 --> 00:00:57,121
+from real request numbers.
+
+29
+00:00:57,671 --> 00:01:01,085
+This is lesson five of the DevOps fundamentals domain.
+
+30
+00:01:03,135 --> 00:01:04,607
+Start with DevSecOps.
+
+31
+00:01:05,157 --> 00:01:06,089
+In the old way,
+
+32
+00:01:06,089 --> 00:01:07,270
+security came last.
+
+33
+00:01:07,270 --> 00:01:10,067
+A separate team checked the finished product,
+
+34
+00:01:10,067 --> 00:01:11,310
+just before release.
+
+35
+00:01:11,310 --> 00:01:14,480
+Problems found there are slow and expensive to fix.
+
+36
+00:01:15,030 --> 00:01:17,704
+DevSecOps moves security to the left.
+
+37
+00:01:17,704 --> 00:01:18,253
+Earlier.
+
+38
+00:01:18,253 --> 00:01:19,213
+Into the code,
+
+39
+00:01:19,213 --> 00:01:20,721
+and into the pipeline.
+
+40
+00:01:20,721 --> 00:01:22,710
+Engineers call it shift left.
+
+41
+00:01:23,260 --> 00:01:25,573
+So the pipeline gets security steps.
+
+42
+00:01:25,573 --> 00:01:27,245
+Scan the code for secrets.
+
+43
+00:01:27,245 --> 00:01:29,494
+Scan the libraries for known holes.
+
+44
+00:01:29,494 --> 00:01:31,101
+Scan the container image.
+
+45
+00:01:31,101 --> 00:01:33,350
+And check the infrastructure files.
+
+46
+00:01:33,900 --> 00:01:35,224
+Each scan is a gate.
+
+47
+00:01:35,224 --> 00:01:36,018
+If it fails,
+
+48
+00:01:36,018 --> 00:01:37,871
+the change does not move on,
+
+49
+00:01:37,871 --> 00:01:39,724
+exactly like a failing test.
+
+50
+00:01:40,274 --> 00:01:42,910
+And security stops being one team's job.
+
+51
+00:01:42,910 --> 00:01:44,623
+It becomes everyone's job,
+
+52
+00:01:44,623 --> 00:01:46,205
+with the tools built in.
+
+53
+00:01:47,755 --> 00:01:50,976
+Next, SRE. Site reliability engineering.
+
+54
+00:01:51,526 --> 00:01:52,909
+It started at Google.
+
+55
+00:01:52,909 --> 00:01:56,792
+The idea: run operations the way a software engineer would.
+
+56
+00:01:56,792 --> 00:01:57,450
+With code,
+
+57
+00:01:57,450 --> 00:01:58,109
+with data,
+
+58
+00:01:58,109 --> 00:01:59,228
+and with numbers.
+
+59
+00:01:59,778 --> 00:02:01,708
+So reliability gets a number.
+
+60
+00:02:01,708 --> 00:02:02,107
+First,
+
+61
+00:02:02,107 --> 00:02:02,707
+an SLI,
+
+62
+00:02:02,707 --> 00:02:05,968
+a service level indicator: something you measure,
+
+63
+00:02:05,968 --> 00:02:08,631
+like the share of requests that succeed.
+
+64
+00:02:09,181 --> 00:02:10,150
+Then an SLO,
+
+65
+00:02:10,150 --> 00:02:12,779
+a service level objective: the target.
+
+66
+00:02:12,779 --> 00:02:13,609
+For example,
+
+67
+00:02:13,609 --> 00:02:17,138
+99.9 percent of requests succeed.
+
+68
+00:02:17,688 --> 00:02:19,174
+An SLA is different.
+
+69
+00:02:19,174 --> 00:02:21,200
+It is a promise to a customer,
+
+70
+00:02:21,200 --> 00:02:22,955
+often with money attached.
+
+71
+00:02:22,955 --> 00:02:25,049
+The SLO is the internal goal,
+
+72
+00:02:25,049 --> 00:02:26,264
+a little stricter.
+
+73
+00:02:26,814 --> 00:02:30,772
+And here is a surprise: the target is never one hundred percent.
+
+74
+00:02:30,772 --> 00:02:33,369
+A hundred percent is impossibly expensive,
+
+75
+00:02:33,369 --> 00:02:35,966
+and users would not notice the difference.
+
+76
+00:02:37,516 --> 00:02:39,692
+That gap has a name: the error budget.
+
+77
+00:02:40,242 --> 00:02:43,122
+If the target is 99.9 percent,
+
+78
+00:02:43,122 --> 00:02:46,122
+you are allowed to fail one request in a thousand.
+
+79
+00:02:46,122 --> 00:02:47,922
+That allowance is your budget.
+
+80
+00:02:48,472 --> 00:02:52,440
+Think of it as a monthly allowance. Every failure spends a little of it.
+
+81
+00:02:52,990 --> 00:02:56,510
+Budget left? Ship new features, take risks. It is healthy.
+
+82
+00:02:57,060 --> 00:03:00,345
+Budget almost gone? Ship small, careful changes.
+
+83
+00:03:00,895 --> 00:03:04,714
+Budget spent? Freeze features, and fix reliability first.
+
+84
+00:03:05,264 --> 00:03:07,079
+This ends the old argument.
+
+85
+00:03:07,079 --> 00:03:08,558
+Developers want speed,
+
+86
+00:03:08,558 --> 00:03:10,306
+operations want stability.
+
+87
+00:03:10,306 --> 00:03:14,608
+The budget is the shared rule that both teams agreed in advance.
+
+88
+00:03:16,158 --> 00:03:18,313
+Third idea: platform engineering.
+
+89
+00:03:18,863 --> 00:03:20,141
+As a company grows,
+
+90
+00:03:20,141 --> 00:03:22,967
+every team solves the same problems again.
+
+91
+00:03:22,967 --> 00:03:24,918
+Each builds its own pipeline,
+
+92
+00:03:24,918 --> 00:03:25,995
+its own servers,
+
+93
+00:03:25,995 --> 00:03:27,609
+its own security checks.
+
+94
+00:03:28,159 --> 00:03:30,876
+A platform team builds those things once,
+
+95
+00:03:30,876 --> 00:03:31,738
+as a product.
+
+96
+00:03:31,738 --> 00:03:32,599
+A paved road.
+
+97
+00:03:32,599 --> 00:03:34,587
+Teams get a standard pipeline,
+
+98
+00:03:34,587 --> 00:03:36,045
+standard environments,
+
+99
+00:03:36,045 --> 00:03:37,503
+and security built in.
+
+100
+00:03:38,053 --> 00:03:39,832
+Developers serve themselves.
+
+101
+00:03:39,832 --> 00:03:40,531
+No tickets,
+
+102
+00:03:40,531 --> 00:03:41,230
+no waiting.
+
+103
+00:03:41,230 --> 00:03:42,819
+The road is the easy way,
+
+104
+00:03:42,819 --> 00:03:43,963
+so they choose it.
+
+105
+00:03:44,513 --> 00:03:47,690
+The platform team treats developers as its customers,
+
+106
+00:03:47,690 --> 00:03:50,507
+and measures success by how smoothly they ship.
+
+107
+00:03:52,057 --> 00:03:53,593
+How do the three fit together?
+
+108
+00:03:54,143 --> 00:03:56,969
+Platform engineering builds the paved road.
+
+109
+00:03:56,969 --> 00:04:00,188
+DevSecOps puts the security gates on that road.
+
+110
+00:04:00,188 --> 00:04:03,343
+And SRE measures whether the road is reliable,
+
+111
+00:04:03,343 --> 00:04:04,788
+with the error budget.
+
+112
+00:04:05,338 --> 00:04:09,157
+Different jobs, one goal: ship fast, safely, and reliably.
+
+113
+00:04:09,707 --> 00:04:13,168
+Notice the pattern from the whole domain: shared ownership,
+
+114
+00:04:13,168 --> 00:04:13,990
+fast feedback,
+
+115
+00:04:13,990 --> 00:04:14,635
+automation,
+
+116
+00:04:14,635 --> 00:04:15,574
+and measurement.
+
+117
+00:04:16,124 --> 00:04:17,259
+In the next lesson,
+
+118
+00:04:17,259 --> 00:04:19,469
+we take the measurement idea further,
+
+119
+00:04:19,469 --> 00:04:21,500
+with the four key DevOps metrics.
+
+120
+00:04:23,050 --> 00:04:27,295
+Go to the demo folder.
+
+121
+00:04:28,845 --> 00:04:30,744
+Look around.
+
+122
+00:04:31,294 --> 00:04:36,521
+Source code, request data, and two scripts: a security scan, and a budget calculator.
+
+123
+00:04:37,071 --> 00:04:42,639
+The request data.
+
+124
+00:04:43,189 --> 00:04:46,069
+Seven days: total requests, and how many failed.
+
+125
+00:04:46,619 --> 00:04:50,565
+Run the security gate.
+
+126
+00:04:51,115 --> 00:04:51,427
+Fail.
+
+127
+00:04:51,427 --> 00:04:53,793
+A password is written inside the code.
+
+128
+00:04:53,793 --> 00:04:55,537
+This change would stop here,
+
+129
+00:04:55,537 --> 00:04:57,281
+before any customer sees it.
+
+130
+00:04:57,831 --> 00:05:02,865
+Fix it.
+
+131
+00:05:03,415 --> 00:05:04,333
+Scan again.
+
+132
+00:05:05,883 --> 00:05:07,760
+Pass. No secrets in the code.
+
+133
+00:05:08,310 --> 00:05:16,737
+Budget, at 99.9.
+
+134
+00:05:17,287 --> 00:05:21,939
+About five hundred thirty failures against seven hundred thousand requests.
+
+135
+00:05:21,939 --> 00:05:25,103
+The budget allows six hundred ninety-nine failures,
+
+136
+00:05:25,103 --> 00:05:27,088
+and we used 47 percent.
+
+137
+00:05:27,088 --> 00:05:27,399
+Ship.
+
+138
+00:05:27,949 --> 00:05:31,127
+A stricter target.
+
+139
+00:05:31,677 --> 00:05:36,051
+Same failures, but a smaller budget. Ninety-four percent used. Careful.
+
+140
+00:05:36,601 --> 00:05:38,350
+Stricter again.
+
+141
+00:05:39,700 --> 00:05:44,073
+Freeze. The budget is spent. The stricter the promise, the less room to fail.
+
+142
+00:05:44,623 --> 00:05:48,463
+Write it down.
+
+143
+00:05:58,713 --> 00:06:01,231
+Check the file.
+
+144
+00:06:02,781 --> 00:06:06,024
+Your practice task: catch a secret, and spend a budget.
+
+145
+00:06:06,574 --> 00:06:08,771
+One: run the scan, and see the failure.
+
+146
+00:06:09,321 --> 00:06:12,436
+Two: fix the password, and scan again. It must pass.
+
+147
+00:06:12,986 --> 00:06:16,634
+Three: run the budget at three targets, and compare the answers.
+
+148
+00:06:17,184 --> 00:06:18,762
+Four: write your three lines.
+
+149
+00:06:20,812 --> 00:06:24,033
+Where to find the demo files. Pause here, and write it down.
+
+150
+00:06:24,583 --> 00:06:30,258
+One: the repository, github.com/it-waves/devops-ai.
+
+151
+00:06:30,808 --> 00:06:34,989
+Two: the folder academy/lesson149-demo.
+
+152
+00:06:35,539 --> 00:06:36,930
+Three: a source folder,
+
+153
+00:06:36,930 --> 00:06:37,776
+a data folder,
+
+154
+00:06:37,776 --> 00:06:38,501
+two scripts,
+
+155
+00:06:38,501 --> 00:06:39,468
+scan and budget,
+
+156
+00:06:39,468 --> 00:06:41,342
+and a read me with the answers.
+
+157
+00:06:41,892 --> 00:06:43,597
+Four: clone the repository,
+
+158
+00:06:43,597 --> 00:06:44,861
+and copy the folder.
+
+159
+00:06:44,861 --> 00:06:45,934
+You need a shell,
+
+160
+00:06:45,934 --> 00:06:46,440
+and awk,
+
+161
+00:06:46,440 --> 00:06:48,335
+which every Linux machine has.
+
+162
+00:06:48,885 --> 00:06:49,620
+Five: again,
+
+163
+00:06:49,620 --> 00:06:50,969
+no lab in this domain.
+
+164
+00:06:50,969 --> 00:06:52,318
+The practice is plain,
+
+165
+00:06:52,318 --> 00:06:54,709
+and the answers are on the next screen.
+
+166
+00:06:56,759 --> 00:06:59,234
+Check yourself. Six points. Tick each one.
+
+167
+00:06:59,784 --> 00:07:02,514
+One: the scan fails on the hard-coded password.
+
+168
+00:07:03,064 --> 00:07:05,262
+Two: after the fix, the scan passes.
+
+169
+00:07:05,812 --> 00:07:09,118
+Three: at 99.9, the budget is healthy.
+
+170
+00:07:09,668 --> 00:07:12,356
+Four: at 99.95, careful.
+
+171
+00:07:12,906 --> 00:07:15,637
+Five: at 99.99, freeze.
+
+172
+00:07:16,187 --> 00:07:19,067
+Six: your file has three lines, in your own words.
+
+173
+00:07:19,617 --> 00:07:22,092
+All six, and you understand the three ideas.
+
+174
+00:07:24,142 --> 00:07:25,913
+Your turn, on your own machine.
+
+175
+00:07:26,463 --> 00:07:28,297
+One: copy the demo folder.
+
+176
+00:07:28,847 --> 00:07:31,962
+Two: run the scan, fix the password, and scan again.
+
+177
+00:07:32,512 --> 00:07:36,139
+Three: run the budget three times, with three different targets.
+
+178
+00:07:36,689 --> 00:07:38,267
+Four: write your three lines.
+
+179
+00:07:38,817 --> 00:07:43,767
+Five: tick the six points. Then think about your own service: what would its target be?
+
+180
+00:07:44,317 --> 00:07:46,151
+Pause the video, and begin now.
+
+181
+00:08:01,701 --> 00:08:02,576
+Quick check.
+
+182
+00:08:03,126 --> 00:08:04,555
+What does shift left mean?
+
+183
+00:08:05,105 --> 00:08:06,492
+What is an error budget?
+
+184
+00:08:07,042 --> 00:08:08,919
+What happens when the budget is spent?
+
+185
+00:08:09,469 --> 00:08:11,112
+What does a platform team build?
+
+186
+00:08:11,662 --> 00:08:14,079
+Objective covered: MC16,
+
+187
+00:08:14,079 --> 00:08:16,263
+objective five: DevSecOps,
+
+188
+00:08:16,263 --> 00:08:16,731
+SRE,
+
+189
+00:08:16,731 --> 00:08:18,680
+and platform engineering.
+
+190
+00:08:19,230 --> 00:08:21,300
+Pause the video, and answer out loud.
+
+191
+00:08:31,850 --> 00:08:34,623
+Next time: the four key DevOps metrics.
+
+192
+00:08:35,173 --> 00:08:38,501
+If this helped, like, share and subscribe, so you do not miss it.
