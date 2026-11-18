@@ -1,0 +1,627 @@
+1
+00:00:00,500 --> 00:00:03,273
+Two teams. Both say they are great at DevOps.
+
+2
+00:00:03,823 --> 00:00:05,589
+One ships many times a week,
+
+3
+00:00:05,589 --> 00:00:07,607
+and fixes problems in two hours.
+
+4
+00:00:07,607 --> 00:00:09,499
+The other ships twice a month,
+
+5
+00:00:09,499 --> 00:00:10,445
+in a big batch,
+
+6
+00:00:10,445 --> 00:00:12,399
+and fixes problems in two days.
+
+7
+00:00:12,949 --> 00:00:16,085
+Who is better? Opinions will not settle it. Numbers will.
+
+8
+00:00:16,635 --> 00:00:18,921
+Today: the four key DevOps metrics.
+
+9
+00:00:18,921 --> 00:00:22,096
+Four numbers that show how a team really performs,
+
+10
+00:00:22,096 --> 00:00:24,635
+and how you can calculate them yourself.
+
+11
+00:00:26,185 --> 00:00:27,614
+Here is what to expect.
+
+12
+00:00:28,164 --> 00:00:30,895
+One: why we measure, and what makes a good metric.
+
+13
+00:00:31,445 --> 00:00:34,517
+Two: the two speed metrics, frequency and lead time.
+
+14
+00:00:35,067 --> 00:00:39,056
+Three: the two stability metrics, failure rate and time to restore.
+
+15
+00:00:39,606 --> 00:00:45,324
+Four: a live demo. We calculate all four, from a real deploy log, for two different teams.
+
+16
+00:00:45,874 --> 00:00:49,180
+This is lesson six of the DevOps fundamentals domain.
+
+17
+00:00:51,230 --> 00:00:52,275
+Start with why.
+
+18
+00:00:52,825 --> 00:00:56,456
+In the last lesson we met the error budget: reliability,
+
+19
+00:00:56,456 --> 00:00:57,817
+turned into a number.
+
+20
+00:00:57,817 --> 00:01:01,188
+The same idea applies to the whole delivery process.
+
+21
+00:01:01,738 --> 00:01:02,725
+Without numbers,
+
+22
+00:01:02,725 --> 00:01:04,266
+improvement is guesswork.
+
+23
+00:01:04,266 --> 00:01:07,473
+Everyone has a feeling about where the slow part is,
+
+24
+00:01:07,473 --> 00:01:09,077
+and the feelings disagree.
+
+25
+00:01:09,627 --> 00:01:13,030
+A research group called DORA studied thousands of teams,
+
+26
+00:01:13,030 --> 00:01:16,008
+and found four measures that predict performance.
+
+27
+00:01:16,008 --> 00:01:18,561
+Teams that score well on them ship faster,
+
+28
+00:01:18,561 --> 00:01:20,080
+and are also more stable.
+
+29
+00:01:20,630 --> 00:01:21,981
+Notice that last part.
+
+30
+00:01:21,981 --> 00:01:24,684
+Speed and stability do not fight each other.
+
+31
+00:01:24,684 --> 00:01:26,219
+The best teams have both.
+
+32
+00:01:27,769 --> 00:01:29,646
+The first two metrics measure speed.
+
+33
+00:01:30,196 --> 00:01:32,259
+Metric one: deployment frequency.
+
+34
+00:01:32,259 --> 00:01:34,696
+How often do you release to production?
+
+35
+00:01:34,696 --> 00:01:35,196
+Per day,
+
+36
+00:01:35,196 --> 00:01:35,758
+per week,
+
+37
+00:01:35,758 --> 00:01:36,383
+per month.
+
+38
+00:01:36,933 --> 00:01:39,606
+Frequent releases mean small releases.
+
+39
+00:01:39,606 --> 00:01:41,927
+Small changes are easier to test,
+
+40
+00:01:41,927 --> 00:01:43,404
+easier to understand,
+
+41
+00:01:43,404 --> 00:01:44,741
+and easier to undo.
+
+42
+00:01:45,291 --> 00:01:47,493
+Metric two: lead time for changes.
+
+43
+00:01:47,493 --> 00:01:50,213
+How long from a developer committing code,
+
+44
+00:01:50,213 --> 00:01:52,480
+to that code running for customers?
+
+45
+00:01:53,030 --> 00:01:55,398
+Short lead time means fast feedback,
+
+46
+00:01:55,398 --> 00:01:56,384
+and fast fixes.
+
+47
+00:01:56,384 --> 00:01:59,673
+Long lead time usually hides waiting: for reviews,
+
+48
+00:01:59,673 --> 00:02:00,593
+for approvals,
+
+49
+00:02:00,593 --> 00:02:01,777
+for a release day.
+
+50
+00:02:03,327 --> 00:02:05,418
+The next two metrics measure stability.
+
+51
+00:02:05,968 --> 00:02:08,126
+Metric three: change failure rate.
+
+52
+00:02:08,126 --> 00:02:09,460
+Of all your releases,
+
+53
+00:02:09,460 --> 00:02:12,063
+what share cause a problem in production?
+
+54
+00:02:12,063 --> 00:02:12,761
+A rollback,
+
+55
+00:02:12,761 --> 00:02:13,333
+a hotfix,
+
+56
+00:02:13,333 --> 00:02:13,968
+an outage.
+
+57
+00:02:14,518 --> 00:02:16,480
+Metric four: time to restore.
+
+58
+00:02:16,480 --> 00:02:18,239
+When something does break,
+
+59
+00:02:18,239 --> 00:02:21,148
+how long until customers are working again?
+
+60
+00:02:21,148 --> 00:02:22,974
+Some teams call it MTTR,
+
+61
+00:02:22,974 --> 00:02:24,395
+mean time to recover.
+
+62
+00:02:24,945 --> 00:02:26,329
+Failures will happen.
+
+63
+00:02:26,329 --> 00:02:28,042
+The question is how often,
+
+64
+00:02:28,042 --> 00:02:29,887
+and how quickly you recover.
+
+65
+00:02:29,887 --> 00:02:31,402
+That is why automation,
+
+66
+00:02:31,402 --> 00:02:31,798
+tests,
+
+67
+00:02:31,798 --> 00:02:33,116
+and rollback matter.
+
+68
+00:02:33,666 --> 00:02:40,450
+And here is the connection to the pipeline: every earlier lesson in this domain pushes at least one of these four numbers.
+
+69
+00:02:42,000 --> 00:02:44,453
+Read the four numbers together, never alone.
+
+70
+00:02:45,003 --> 00:02:48,709
+High frequency with a high failure rate means you are rushing.
+
+71
+00:02:48,709 --> 00:02:54,027
+Low failure rate with a very slow lead time means you are being careful in the wrong way.
+
+72
+00:02:54,577 --> 00:02:55,438
+Two warnings.
+
+73
+00:02:55,438 --> 00:02:55,836
+First,
+
+74
+00:02:55,836 --> 00:02:58,418
+these numbers describe a team's system,
+
+75
+00:02:58,418 --> 00:02:59,279
+not a person.
+
+76
+00:02:59,279 --> 00:03:02,193
+Never use them to rank or blame individuals.
+
+77
+00:03:02,743 --> 00:03:03,165
+Second,
+
+78
+00:03:03,165 --> 00:03:05,031
+when a number becomes a target,
+
+79
+00:03:05,031 --> 00:03:05,934
+people game it.
+
+80
+00:03:05,934 --> 00:03:08,343
+Use the metrics to start a conversation,
+
+81
+00:03:08,343 --> 00:03:10,871
+and to see whether a change really helped.
+
+82
+00:03:11,421 --> 00:03:16,413
+Pick one number to improve, change one thing, and measure again. That is the whole method.
+
+83
+00:03:16,963 --> 00:03:20,377
+In the next lesson, we use these numbers to find the bottleneck.
+
+84
+00:03:21,927 --> 00:03:25,852
+Go to the demo folder.
+
+85
+00:03:27,402 --> 00:03:29,301
+Look around.
+
+86
+00:03:29,851 --> 00:03:33,584
+Two deploy logs, and one script that calculates the four metrics.
+
+87
+00:03:34,134 --> 00:03:37,718
+The deploy log.
+
+88
+00:03:38,268 --> 00:03:40,759
+One row per release: when it was committed,
+
+89
+00:03:40,759 --> 00:03:41,802
+when it went live,
+
+90
+00:03:41,802 --> 00:03:42,845
+whether it failed,
+
+91
+00:03:42,845 --> 00:03:44,583
+and when service was restored.
+
+92
+00:03:45,133 --> 00:03:50,424
+Calculate.
+
+93
+00:03:50,974 --> 00:03:53,103
+Twelve deployments in four weeks,
+
+94
+00:03:53,103 --> 00:03:53,941
+three a week.
+
+95
+00:03:53,941 --> 00:03:54,586
+Lead time,
+
+96
+00:03:54,586 --> 00:03:56,199
+15.5 hours.
+
+97
+00:03:56,199 --> 00:03:57,038
+Failure rate,
+
+98
+00:03:57,038 --> 00:03:58,199
+17 percent,
+
+99
+00:03:58,199 --> 00:03:59,102
+two of twelve.
+
+100
+00:03:59,102 --> 00:04:00,393
+And time to restore,
+
+101
+00:04:00,393 --> 00:04:01,683
+2.2 hours.
+
+102
+00:04:02,233 --> 00:04:08,292
+The second team.
+
+103
+00:04:08,842 --> 00:04:12,959
+Only four rows. Big batches, committed days before they go live.
+
+104
+00:04:13,509 --> 00:04:16,176
+Calculate again.
+
+105
+00:04:17,526 --> 00:04:18,978
+One deployment a week.
+
+106
+00:04:18,978 --> 00:04:19,638
+Lead time,
+
+107
+00:04:19,638 --> 00:04:22,806
+262 hours: more than ten days.
+
+108
+00:04:22,806 --> 00:04:24,522
+Half of all releases fail,
+
+109
+00:04:24,522 --> 00:04:27,360
+and it takes almost 40 hours to restore.
+
+110
+00:04:27,910 --> 00:04:32,646
+Same company, same tools. The numbers tell the story, without any opinions.
+
+111
+00:04:33,196 --> 00:04:36,844
+Write it down.
+
+112
+00:04:47,294 --> 00:04:49,876
+Check the file.
+
+113
+00:04:51,426 --> 00:04:53,687
+Your practice task: measure two teams.
+
+114
+00:04:54,237 --> 00:04:57,971
+One: look at the first deploy log, and guess which team is healthier.
+
+115
+00:04:58,521 --> 00:05:02,403
+Two: run the script on both logs, and compare all four numbers.
+
+116
+00:05:02,953 --> 00:05:05,332
+Three: change one row in the first log,
+
+117
+00:05:05,332 --> 00:05:06,551
+make a release fail,
+
+118
+00:05:06,551 --> 00:05:07,588
+and run it again.
+
+119
+00:05:07,588 --> 00:05:08,991
+Watch the numbers move.
+
+120
+00:05:09,541 --> 00:05:11,119
+Four: write your four lines.
+
+121
+00:05:13,169 --> 00:05:16,390
+Where to find the demo files. Pause here, and write it down.
+
+122
+00:05:16,940 --> 00:05:22,615
+One: the repository, github.com/it-waves/devops-ai.
+
+123
+00:05:23,165 --> 00:05:26,984
+Two: the folder academy/lesson150-demo.
+
+124
+00:05:27,534 --> 00:05:32,334
+Three: two deploy logs, one script called metrics, and a read me with the answers.
+
+125
+00:05:32,884 --> 00:05:34,589
+Four: clone the repository,
+
+126
+00:05:34,589 --> 00:05:35,852
+and copy the folder.
+
+127
+00:05:35,852 --> 00:05:36,926
+You need a shell,
+
+128
+00:05:36,926 --> 00:05:37,431
+and awk,
+
+129
+00:05:37,431 --> 00:05:39,326
+which every Linux machine has.
+
+130
+00:05:39,876 --> 00:05:40,612
+Five: again,
+
+131
+00:05:40,612 --> 00:05:41,961
+no lab in this domain.
+
+132
+00:05:41,961 --> 00:05:43,309
+The practice is plain,
+
+133
+00:05:43,309 --> 00:05:45,700
+and the answers are on the next screen.
+
+134
+00:05:47,750 --> 00:05:50,225
+Check yourself. Six points. Tick each one.
+
+135
+00:05:50,775 --> 00:05:53,228
+One: team one deploys three times a week.
+
+136
+00:05:53,778 --> 00:05:56,594
+Two: team one lead time is about fifteen hours.
+
+137
+00:05:57,144 --> 00:06:00,088
+Three: team one failure rate is 17 percent.
+
+138
+00:06:00,638 --> 00:06:03,113
+Four: team two fails half of its releases.
+
+139
+00:06:03,663 --> 00:06:07,631
+Five: after your change, a number moved, and you can say which one.
+
+140
+00:06:08,181 --> 00:06:11,082
+Six: your file has four lines, in your own words.
+
+141
+00:06:11,632 --> 00:06:13,552
+All six, and you can measure a team.
+
+142
+00:06:15,602 --> 00:06:17,373
+Your turn, on your own machine.
+
+143
+00:06:17,923 --> 00:06:19,757
+One: copy the demo folder.
+
+144
+00:06:20,307 --> 00:06:22,313
+Two: run the script on both logs.
+
+145
+00:06:22,863 --> 00:06:26,297
+Three: edit one row so a release fails, and run it again.
+
+146
+00:06:26,847 --> 00:06:29,791
+Four: write your four lines, and tick the six points.
+
+147
+00:06:30,341 --> 00:06:35,013
+Five: then think about your own team. Which of the four numbers would you improve first?
+
+148
+00:06:35,563 --> 00:06:37,398
+Pause the video, and begin now.
+
+149
+00:06:52,948 --> 00:06:53,823
+Quick check.
+
+150
+00:06:54,373 --> 00:06:56,101
+Which two metrics measure speed?
+
+151
+00:06:56,651 --> 00:06:58,208
+Which two measure stability?
+
+152
+00:06:58,758 --> 00:07:00,059
+Why read them together?
+
+153
+00:07:00,609 --> 00:07:02,188
+What does lead time include?
+
+154
+00:07:02,738 --> 00:07:08,498
+Objective covered: MC16, objective six: the four key DevOps metrics.
+
+155
+00:07:09,048 --> 00:07:11,117
+Pause the video, and answer out loud.
+
+156
+00:07:21,667 --> 00:07:23,822
+Next time: finding the bottleneck.
+
+157
+00:07:24,372 --> 00:07:27,700
+If this helped, like, share and subscribe, so you do not miss it.

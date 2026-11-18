@@ -1,0 +1,28 @@
+Lesson 150 of the DevOps Engineering Bootcamp, the sixth lesson of the DevOps Fundamentals domain. Without numbers, improving how a team delivers software is guesswork. In this lesson you learn the four key DevOps metrics from the DORA research: deployment frequency and lead time for changes (speed), and change failure rate and time to restore (stability). You also learn why to read them together, why they describe a team and never a person, and why a number that becomes a target gets gamed. In the live demo, a real terminal calculates all four metrics from a deploy log for two different teams, so you can see a healthy team and a struggling one side by side.
+
+Chapters
+0:00 Two teams, which one is better?
+0:25 What to expect
+0:50 Why we measure
+1:27 Speed: frequency and lead time
+2:02 Stability: failure rate and restore time
+2:41 Reading them together
+3:21 Live: the four metrics from a deploy log
+4:50 Your practice task
+5:12 Where to find the demo files
+5:47 Self-check
+6:15 Your turn
+6:52 Quick check and what is next
+
+Objectives covered: MC16-O06, the four key DevOps metrics.
+
+Demo files: github.com/it-waves/devops-ai, in academy/lesson150-demo (deploys.csv, deploys_slow.csv, metrics.sh and a README with the answers). You need a shell and awk. This domain has no lab on purpose: it is about ideas and decisions, so the practice is a plain terminal exercise with a self-check.
+
+Honest notes: the terminal demo is a real recording of a real shell running a small script written for this lesson. The deploy logs are example data, and metrics.sh is a teaching stand-in: real teams read these numbers from their pipeline and incident tools. The narration is synthetic speech. The hook, plan, why, speed, stability, together, task, files, self-check and recap screens are labelled illustrations, not captures.
+
+Previous lesson: DevSecOps, SRE and Platform Engineering: Error Budgets Explained | Lesson 149 https://youtu.be/TGyKPrlb1Pk
+Next: finding the bottleneck in a delivery process.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #dora #devopsmetrics #deploymentfrequency #leadtime #devopsbootcamp
