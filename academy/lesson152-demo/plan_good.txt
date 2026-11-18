@@ -1,0 +1,6 @@
+baseline=lead time 3 days, 1 deploy per week
+bottleneck=manual approval, 30 of 70 hours
+change=replace the manual approval with an automatic check
+target=lead time 2 days by 15 December
+measure=lead time and deploys per week, every Friday
+risk=the check misses a bad change, so keep one-click rollback

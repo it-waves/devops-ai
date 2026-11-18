@@ -1,0 +1,683 @@
+1
+00:00:00,500 --> 00:00:03,992
+A team has fifty ideas for making delivery better.
+
+2
+00:00:03,992 --> 00:00:04,970
+Faster builds.
+
+3
+00:00:04,970 --> 00:00:05,668
+New tools.
+
+4
+00:00:05,668 --> 00:00:06,785
+More automation.
+
+5
+00:00:06,785 --> 00:00:07,903
+A new dashboard.
+
+6
+00:00:08,453 --> 00:00:10,223
+They start all fifty at once.
+
+7
+00:00:10,223 --> 00:00:11,261
+Six months later,
+
+8
+00:00:11,261 --> 00:00:12,481
+nothing is finished,
+
+9
+00:00:12,481 --> 00:00:14,618
+and nobody can say what got better.
+
+10
+00:00:15,168 --> 00:00:17,574
+A good improvement plan is the opposite.
+
+11
+00:00:17,574 --> 00:00:18,295
+It is small.
+
+12
+00:00:18,295 --> 00:00:19,738
+It starts with a number,
+
+13
+00:00:19,738 --> 00:00:20,761
+picks one change,
+
+14
+00:00:20,761 --> 00:00:22,144
+and ends with a number.
+
+15
+00:00:22,694 --> 00:00:27,131
+Today, we build that plan for CloudCart, and we check it in a real terminal.
+
+16
+00:00:28,681 --> 00:00:30,110
+Here is what to expect.
+
+17
+00:00:30,660 --> 00:00:33,647
+One: why plans fail, and what a good plan looks like.
+
+18
+00:00:34,197 --> 00:00:36,629
+Two: the six parts of an improvement plan.
+
+19
+00:00:37,179 --> 00:00:41,787
+Three: a worked plan for CloudCart, using the numbers from the last two lessons.
+
+20
+00:00:42,337 --> 00:00:46,881
+Four: a live demo. We check a weak plan, then a good one, then you write your own.
+
+21
+00:00:47,431 --> 00:00:50,823
+This is lesson 8 of the DevOps fundamentals domain.
+
+22
+00:00:52,873 --> 00:00:55,070
+First, why do improvement plans fail?
+
+23
+00:00:55,620 --> 00:01:00,762
+Reason one: they are vague. Be faster. Improve quality. Nobody can tell if it worked.
+
+24
+00:01:01,312 --> 00:01:03,746
+Reason two: they change too much at once.
+
+25
+00:01:03,746 --> 00:01:05,053
+If five things change,
+
+26
+00:01:05,053 --> 00:01:07,072
+you cannot learn which one helped.
+
+27
+00:01:07,622 --> 00:01:09,545
+Reason three: they have no number.
+
+28
+00:01:09,545 --> 00:01:11,016
+Without a starting number,
+
+29
+00:01:11,016 --> 00:01:12,430
+you cannot show progress.
+
+30
+00:01:12,430 --> 00:01:13,392
+Without a target,
+
+31
+00:01:13,392 --> 00:01:15,259
+you never know when you are done.
+
+32
+00:01:15,809 --> 00:01:18,068
+And reason four: they ignore people.
+
+33
+00:01:18,068 --> 00:01:20,201
+A tool does not improve a process.
+
+34
+00:01:20,201 --> 00:01:22,209
+People who agree on the goal do.
+
+35
+00:01:22,759 --> 00:01:25,810
+A good plan fixes all four. Let us see its parts.
+
+36
+00:01:27,360 --> 00:01:29,323
+A practical plan has six parts.
+
+37
+00:01:29,873 --> 00:01:30,974
+One: the baseline.
+
+38
+00:01:30,974 --> 00:01:32,136
+Where are we today?
+
+39
+00:01:32,136 --> 00:01:33,176
+Use real numbers,
+
+40
+00:01:33,176 --> 00:01:35,867
+like the four metrics from lesson 150.
+
+41
+00:01:36,417 --> 00:01:37,624
+Two: the bottleneck.
+
+42
+00:01:37,624 --> 00:01:39,434
+Which one step is the slowest?
+
+43
+00:01:39,434 --> 00:01:42,028
+Lesson 151 showed how to find it.
+
+44
+00:01:42,578 --> 00:01:46,994
+Three: one change. Exactly one. Something that attacks that bottleneck.
+
+45
+00:01:47,544 --> 00:01:48,645
+Four: the target.
+
+46
+00:01:48,645 --> 00:01:49,940
+A number and a date.
+
+47
+00:01:49,940 --> 00:01:50,718
+For example,
+
+48
+00:01:50,718 --> 00:01:52,855
+lead time from three days to two,
+
+49
+00:01:52,855 --> 00:01:54,733
+by the fifteenth of December.
+
+50
+00:01:55,283 --> 00:01:58,419
+Five: how you will measure. What do you check, and how often.
+
+51
+00:01:58,969 --> 00:01:59,834
+Six: the risk.
+
+52
+00:01:59,834 --> 00:02:01,068
+What could go wrong,
+
+53
+00:02:01,068 --> 00:02:02,611
+and how will you recover?
+
+54
+00:02:02,611 --> 00:02:04,093
+Every change has a risk,
+
+55
+00:02:04,093 --> 00:02:06,500
+and a plan that says so is more honest.
+
+56
+00:02:08,050 --> 00:02:10,887
+Now, CloudCart. Our example online shop.
+
+57
+00:02:11,437 --> 00:02:13,346
+Today it deploys once a week.
+
+58
+00:02:13,346 --> 00:02:16,704
+A change takes about three days to reach customers.
+
+59
+00:02:16,704 --> 00:02:18,942
+Seventeen percent of deploys fail.
+
+60
+00:02:18,942 --> 00:02:20,653
+Restoring takes two hours.
+
+61
+00:02:21,203 --> 00:02:24,790
+Measuring the stages shows the bottleneck: manual approval.
+
+62
+00:02:24,790 --> 00:02:26,491
+Thirty hours out of seventy,
+
+63
+00:02:26,491 --> 00:02:28,862
+waiting for a person to click a button.
+
+64
+00:02:29,412 --> 00:02:30,966
+So the change is simple.
+
+65
+00:02:30,966 --> 00:02:35,238
+Replace the manual approval with an automatic check: tests passed,
+
+66
+00:02:35,238 --> 00:02:35,950
+scan clean,
+
+67
+00:02:35,950 --> 00:02:36,921
+budget healthy.
+
+68
+00:02:37,471 --> 00:02:41,802
+The target: lead time from three days to two, by the fifteenth of December.
+
+69
+00:02:42,352 --> 00:02:45,709
+The risk: the automatic check could miss a bad change.
+
+70
+00:02:45,709 --> 00:02:47,946
+So we keep one-click rollback ready,
+
+71
+00:02:47,946 --> 00:02:49,563
+from lesson 146.
+
+72
+00:02:50,113 --> 00:02:51,766
+Notice what we did not do.
+
+73
+00:02:51,766 --> 00:02:53,993
+We did not rewrite the application.
+
+74
+00:02:53,993 --> 00:02:55,392
+We did not buy a tool.
+
+75
+00:02:55,392 --> 00:02:56,346
+One bottleneck,
+
+76
+00:02:56,346 --> 00:02:57,046
+one change.
+
+77
+00:02:58,596 --> 00:03:01,839
+What comes after the first change? Your plan needs an order.
+
+78
+00:03:02,389 --> 00:03:04,432
+Start with changes that are small,
+
+79
+00:03:04,432 --> 00:03:05,454
+safe and visible.
+
+80
+00:03:05,454 --> 00:03:06,957
+A quick win builds trust,
+
+81
+00:03:06,957 --> 00:03:09,962
+and trust is what you need for the bigger changes.
+
+82
+00:03:10,512 --> 00:03:13,403
+Then repeat the loop from lesson 151.
+
+83
+00:03:13,403 --> 00:03:13,895
+Measure.
+
+84
+00:03:13,895 --> 00:03:15,186
+The bottleneck moves.
+
+85
+00:03:15,186 --> 00:03:16,293
+Pick the next one.
+
+86
+00:03:16,843 --> 00:03:19,318
+And share the numbers with everybody.
+
+87
+00:03:19,318 --> 00:03:20,054
+Developers,
+
+88
+00:03:20,054 --> 00:03:20,589
+testers,
+
+89
+00:03:20,589 --> 00:03:21,325
+operations,
+
+90
+00:03:21,325 --> 00:03:21,927
+security.
+
+91
+00:03:21,927 --> 00:03:24,335
+Shared numbers are shared ownership.
+
+92
+00:03:24,335 --> 00:03:26,944
+That is the first principle of DevOps,
+
+93
+00:03:26,944 --> 00:03:28,683
+from lesson 141.
+
+94
+00:03:29,233 --> 00:03:32,923
+So an improvement plan is not a document that sits in a folder.
+
+95
+00:03:32,923 --> 00:03:35,207
+It is a loop that a team runs together.
+
+96
+00:03:36,757 --> 00:03:40,810
+Go to the demo folder.
+
+97
+00:03:42,360 --> 00:03:44,259
+Look around.
+
+98
+00:03:44,809 --> 00:03:46,345
+Four files and a script.
+
+99
+00:03:46,895 --> 00:03:51,268
+Today's numbers.
+
+100
+00:03:51,818 --> 00:03:53,053
+One deploy a week.
+
+101
+00:03:53,053 --> 00:03:54,494
+Lead time three days.
+
+102
+00:03:54,494 --> 00:03:56,346
+Seventeen percent failures.
+
+103
+00:03:56,346 --> 00:03:57,787
+Two hours to restore.
+
+104
+00:03:57,787 --> 00:04:00,394
+And the slowest step: manual approval.
+
+105
+00:04:00,944 --> 00:04:05,318
+A weak plan.
+
+106
+00:04:05,868 --> 00:04:06,576
+Look at it.
+
+107
+00:04:06,576 --> 00:04:06,898
+Slow.
+
+108
+00:04:06,898 --> 00:04:07,607
+Everything.
+
+109
+00:04:07,607 --> 00:04:08,251
+Be faster.
+
+110
+00:04:08,251 --> 00:04:10,183
+And three changes in one line.
+
+111
+00:04:10,183 --> 00:04:12,502
+This is the kind of plan that fails.
+
+112
+00:04:13,052 --> 00:04:18,898
+Check the weak plan.
+
+113
+00:04:19,448 --> 00:04:24,994
+Six fixes needed. Every part is missing or too vague. The script tells you exactly which.
+
+114
+00:04:25,544 --> 00:04:29,640
+A good plan.
+
+115
+00:04:30,190 --> 00:04:31,784
+A real number for today.
+
+116
+00:04:31,784 --> 00:04:32,714
+One slow step,
+
+117
+00:04:32,714 --> 00:04:33,777
+with its number.
+
+118
+00:04:33,777 --> 00:04:34,507
+One change.
+
+119
+00:04:34,507 --> 00:04:35,902
+A target with a date.
+
+120
+00:04:35,902 --> 00:04:36,566
+A measure.
+
+121
+00:04:36,566 --> 00:04:37,828
+And an honest risk.
+
+122
+00:04:38,378 --> 00:04:40,447
+Check the good plan.
+
+123
+00:04:41,997 --> 00:04:45,581
+All six parts are fine. One change, one number, one date.
+
+124
+00:04:46,131 --> 00:04:49,992
+Write your own.
+
+125
+00:05:02,242 --> 00:05:06,061
+Check your plan.
+
+126
+00:05:07,611 --> 00:05:10,704
+Your practice task: write and check an improvement plan.
+
+127
+00:05:11,254 --> 00:05:15,158
+One: read the baseline, and the weak plan. Find what is wrong with it.
+
+128
+00:05:15,708 --> 00:05:18,972
+Two: check the weak plan with the script, and count the fixes.
+
+129
+00:05:19,522 --> 00:05:21,890
+Three: write your own plan, in six lines.
+
+130
+00:05:22,440 --> 00:05:25,875
+Four: run the script on it, until every line says okay.
+
+131
+00:05:27,925 --> 00:05:31,146
+Where to find the demo files. Pause here, and write it down.
+
+132
+00:05:31,696 --> 00:05:37,371
+One: the repository, github.com/it-waves/devops-ai.
+
+133
+00:05:37,921 --> 00:05:41,974
+Two: the folder academy/lesson152-demo.
+
+134
+00:05:42,524 --> 00:05:43,957
+Three: a baseline file,
+
+135
+00:05:43,957 --> 00:05:44,704
+a weak plan,
+
+136
+00:05:44,704 --> 00:05:45,452
+a good plan,
+
+137
+00:05:45,452 --> 00:05:47,009
+and a script called plan,
+
+138
+00:05:47,009 --> 00:05:47,943
+with a read me.
+
+139
+00:05:48,493 --> 00:05:50,170
+Four: clone the repository,
+
+140
+00:05:50,170 --> 00:05:51,413
+and copy the folder.
+
+141
+00:05:51,413 --> 00:05:52,965
+You need a shell and awk,
+
+142
+00:05:52,965 --> 00:05:54,829
+which every Linux machine has.
+
+143
+00:05:55,379 --> 00:05:57,237
+Five: no lab in this domain.
+
+144
+00:05:57,237 --> 00:05:59,892
+The next lesson is the mastery scenario,
+
+145
+00:05:59,892 --> 00:06:01,352
+and it uses this plan.
+
+146
+00:06:03,402 --> 00:06:05,877
+Check yourself. Six points. Tick each one.
+
+147
+00:06:06,427 --> 00:06:08,560
+One: the weak plan needs six fixes.
+
+148
+00:06:09,110 --> 00:06:11,713
+Two: the good plan has one change, not three.
+
+149
+00:06:12,263 --> 00:06:14,588
+Three: the target has a number and a date.
+
+150
+00:06:15,138 --> 00:06:17,975
+Four: your plan starts from a real baseline number.
+
+151
+00:06:18,525 --> 00:06:21,512
+Five: your plan names a risk, and a way to recover.
+
+152
+00:06:22,062 --> 00:06:24,302
+Six: your script run says plan ready.
+
+153
+00:06:24,852 --> 00:06:27,817
+All six, and you can write a practical improvement plan.
+
+154
+00:06:29,867 --> 00:06:31,638
+Your turn, on your own machine.
+
+155
+00:06:32,188 --> 00:06:34,022
+One: copy the demo folder.
+
+156
+00:06:34,572 --> 00:06:37,495
+Two: run the script on the weak plan and the good plan.
+
+157
+00:06:38,045 --> 00:06:42,482
+Three: write a plan for your own team, or for a project you know. Six lines.
+
+158
+00:06:43,032 --> 00:06:46,083
+Four: run the script, and fix every line it flags.
+
+159
+00:06:46,633 --> 00:06:48,895
+Five: show the plan to one colleague.
+
+160
+00:06:48,895 --> 00:06:51,585
+If they cannot say what changes and by when,
+
+161
+00:06:51,585 --> 00:06:52,564
+make it smaller.
+
+162
+00:06:53,114 --> 00:06:54,948
+Pause the video, and begin now.
+
+163
+00:07:10,498 --> 00:07:11,373
+Quick check.
+
+164
+00:07:11,923 --> 00:07:13,672
+Name the six parts of a plan.
+
+165
+00:07:14,222 --> 00:07:15,609
+Why only one change?
+
+166
+00:07:16,159 --> 00:07:17,759
+What does a good target look like?
+
+167
+00:07:18,309 --> 00:07:19,439
+Why name the risk?
+
+168
+00:07:19,989 --> 00:07:25,387
+Objective covered: MC16, objective 8: a practical improvement plan.
+
+169
+00:07:25,937 --> 00:07:28,006
+Pause the video, and answer out loud.
+
+170
+00:07:38,556 --> 00:07:42,183
+Next time: the mastery scenario for DevOps fundamentals.
+
+171
+00:07:42,733 --> 00:07:46,061
+If this helped, like, share and subscribe, so you do not miss it.

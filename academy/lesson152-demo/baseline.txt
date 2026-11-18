@@ -1,0 +1,7 @@
+CloudCart delivery today (example data from lessons 150 and 151)
+deploys per week=1
+lead time=3 days
+change failure rate=17%
+time to restore=2 hours
+slowest step=manual approval, 30 of 70 hours
+flow efficiency=15%

@@ -1,0 +1,28 @@
+Lesson 152 of the DevOps Engineering Bootcamp, the eighth lesson of the DevOps Fundamentals domain. A list of fifty improvement ideas rarely improves anything, but a small plan with a number at the start, one change, and a number at the end does. In this lesson you learn why improvement plans fail (vague, too much at once, no numbers, no people), the six parts of a practical plan (baseline, bottleneck, one change, target, measure, risk), and how to turn the metrics from lesson 150 and the bottleneck from lesson 151 into a worked plan for CloudCart. In the live demo, a real terminal checks a weak plan (six fixes needed), then a good plan (ready), and then you write and check your own.
+
+Chapters
+0:00 Fifty ideas, nothing finished
+0:28 What to expect
+0:52 Why plans fail
+1:27 The six parts of a plan
+2:08 A worked plan for CloudCart
+2:58 What comes next
+3:36 Live: check a plan, then write yours
+5:07 Your practice task
+5:27 Where to find the demo files
+6:03 Self-check
+6:29 Your turn
+7:10 Quick check and what is next
+
+Objectives covered: MC16-O08, a practical DevOps improvement plan for CloudCart.
+
+Demo files: github.com/it-waves/devops-ai, in academy/lesson152-demo (baseline.txt, plan_weak.txt, plan_good.txt, plan.sh and a README with the answers). You need a shell and awk. This domain has no lab on purpose: it is about ideas and decisions, so the practice is a plain terminal exercise with a self-check.
+
+Honest notes: the terminal demo is a real recording of a real shell running a small script written for this lesson. The CloudCart numbers are example data, and plan.sh is a teaching stand-in: it checks that a plan has the right parts, not that the plan is wise. The narration is synthetic speech. The hook, plan, why-plans-fail, six-parts, CloudCart, what-comes-next, task, files, self-check and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Find the Bottleneck: Why Faster Servers Do Not Speed Up Releases | Lesson 151 https://youtu.be/YeyPHx5cfqE
+Next: the DevOps Fundamentals mastery scenario.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #devopsplan #continuousimprovement #cloudcart #devopsmetrics #devopsbootcamp

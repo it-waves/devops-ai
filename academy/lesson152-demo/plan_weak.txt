@@ -1,0 +1,6 @@
+baseline=slow
+bottleneck=everything
+change=buy faster servers and hire more people and add more tests
+target=be faster
+measure=
+risk=
