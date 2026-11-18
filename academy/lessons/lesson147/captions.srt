@@ -1,0 +1,831 @@
+1
+00:00:00,500 --> 00:00:01,716
+It is Friday night.
+
+2
+00:00:01,716 --> 00:00:02,804
+A server is slow,
+
+3
+00:00:02,804 --> 00:00:04,916
+and an engineer fixes it by hand.
+
+4
+00:00:04,916 --> 00:00:05,876
+A setting here,
+
+5
+00:00:05,876 --> 00:00:06,900
+a package there.
+
+6
+00:00:07,450 --> 00:00:12,698
+Nobody writes it down. Six months later, the server dies. And nobody can rebuild it.
+
+7
+00:00:13,248 --> 00:00:15,358
+A second team has the same problem.
+
+8
+00:00:15,358 --> 00:00:17,769
+But their server is described in a file,
+
+9
+00:00:17,769 --> 00:00:19,819
+and a new one is ready in minutes.
+
+10
+00:00:20,369 --> 00:00:22,417
+Today: infrastructure as code,
+
+11
+00:00:22,417 --> 00:00:24,123
+configuration management,
+
+12
+00:00:24,123 --> 00:00:25,147
+and automation.
+
+13
+00:00:25,147 --> 00:00:27,946
+The three ideas that make servers boring,
+
+14
+00:00:27,946 --> 00:00:28,902
+in a good way.
+
+15
+00:00:30,452 --> 00:00:31,881
+Here is what to expect.
+
+16
+00:00:32,431 --> 00:00:35,994
+One: infrastructure as code, and why a file beats a memory.
+
+17
+00:00:36,544 --> 00:00:41,088
+Two: configuration management, and one magic word: idempotent.
+
+18
+00:00:41,638 --> 00:00:46,801
+Three: drift, and how to find it and fix it. Then automation, and which tools do what.
+
+19
+00:00:47,351 --> 00:00:48,520
+Four: a live demo.
+
+20
+00:00:48,520 --> 00:00:50,794
+We run a naive script and break it,
+
+21
+00:00:50,794 --> 00:00:52,093
+then run a safe one,
+
+22
+00:00:52,093 --> 00:00:53,588
+cause drift on purpose,
+
+23
+00:00:53,588 --> 00:00:54,497
+and repair it.
+
+24
+00:00:55,047 --> 00:00:58,375
+This is lesson three of the DevOps fundamentals domain.
+
+25
+00:01:00,425 --> 00:01:03,028
+Start with infrastructure as code. IaC.
+
+26
+00:01:03,578 --> 00:01:05,492
+Infrastructure is the servers,
+
+27
+00:01:05,492 --> 00:01:06,321
+the networks,
+
+28
+00:01:06,321 --> 00:01:07,215
+the databases,
+
+29
+00:01:07,215 --> 00:01:08,427
+the load balancers.
+
+30
+00:01:08,427 --> 00:01:10,724
+The things your application runs on.
+
+31
+00:01:11,274 --> 00:01:13,230
+Instead of clicking in a console,
+
+32
+00:01:13,230 --> 00:01:14,830
+you describe them in files.
+
+33
+00:01:14,830 --> 00:01:15,956
+The files are text,
+
+34
+00:01:15,956 --> 00:01:17,141
+so they live in Git.
+
+35
+00:01:17,691 --> 00:01:19,085
+That gives you history,
+
+36
+00:01:19,085 --> 00:01:19,510
+review,
+
+37
+00:01:19,510 --> 00:01:20,298
+and rollback.
+
+38
+00:01:20,298 --> 00:01:21,813
+Who changed the firewall,
+
+39
+00:01:21,813 --> 00:01:22,116
+when,
+
+40
+00:01:22,116 --> 00:01:22,601
+and why?
+
+41
+00:01:22,601 --> 00:01:23,814
+It is in the commit.
+
+42
+00:01:24,364 --> 00:01:26,614
+And you can build the same thing again,
+
+43
+00:01:26,614 --> 00:01:27,653
+in another region,
+
+44
+00:01:27,653 --> 00:01:28,750
+or another account.
+
+45
+00:01:28,750 --> 00:01:29,846
+From the same file.
+
+46
+00:01:31,396 --> 00:01:35,343
+Now the big idea, in a picture. The same code, many servers.
+
+47
+00:01:35,893 --> 00:01:36,387
+By hand,
+
+48
+00:01:36,387 --> 00:01:38,552
+every server is a little different.
+
+49
+00:01:38,552 --> 00:01:40,469
+Engineers call them snowflakes,
+
+50
+00:01:40,469 --> 00:01:42,015
+because no two are alike.
+
+51
+00:01:42,565 --> 00:01:47,941
+With code, you stamp out copies. Four servers, built from one file, and all identical.
+
+52
+00:01:48,491 --> 00:01:49,318
+Need a fifth?
+
+53
+00:01:49,318 --> 00:01:50,526
+Run the code again.
+
+54
+00:01:50,526 --> 00:01:51,544
+A server breaks?
+
+55
+00:01:51,544 --> 00:01:53,261
+Do not repair it for hours.
+
+56
+00:01:53,261 --> 00:01:53,960
+Replace it,
+
+57
+00:01:53,960 --> 00:01:55,169
+from the same file.
+
+58
+00:01:55,719 --> 00:01:57,048
+Servers stop being pets,
+
+59
+00:01:57,048 --> 00:01:58,044
+and become cattle.
+
+60
+00:01:58,044 --> 00:01:59,207
+You do not name them,
+
+61
+00:01:59,207 --> 00:02:00,647
+and you do not nurse them.
+
+62
+00:02:02,197 --> 00:02:06,186
+Next, configuration management. It answers a different question.
+
+63
+00:02:06,736 --> 00:02:08,504
+IaC creates the machine.
+
+64
+00:02:08,504 --> 00:02:11,904
+Configuration management sets it up: the packages,
+
+65
+00:02:11,904 --> 00:02:12,584
+the users,
+
+66
+00:02:12,584 --> 00:02:13,468
+the settings,
+
+67
+00:02:13,468 --> 00:02:14,352
+the services.
+
+68
+00:02:14,902 --> 00:02:16,557
+You do not write the steps.
+
+69
+00:02:16,557 --> 00:02:20,296
+You describe the end result you want: this package installed,
+
+70
+00:02:20,296 --> 00:02:22,013
+this file with this content.
+
+71
+00:02:22,013 --> 00:02:23,606
+That is the desired state.
+
+72
+00:02:24,156 --> 00:02:29,020
+The tool compares the desired state with reality, and changes only what is different.
+
+73
+00:02:29,570 --> 00:02:32,725
+That brings us to the magic word: idempotent.
+
+74
+00:02:32,725 --> 00:02:33,566
+Run it once,
+
+75
+00:02:33,566 --> 00:02:34,477
+or ten times,
+
+76
+00:02:34,477 --> 00:02:36,370
+and the result is the same.
+
+77
+00:02:36,370 --> 00:02:38,402
+A second run changes nothing.
+
+78
+00:02:38,952 --> 00:02:39,600
+Without it,
+
+79
+00:02:39,600 --> 00:02:42,074
+running a script twice can break a server.
+
+80
+00:02:42,074 --> 00:02:42,545
+With it,
+
+81
+00:02:42,545 --> 00:02:43,959
+you can run it any time,
+
+82
+00:02:43,959 --> 00:02:44,371
+safely.
+
+83
+00:02:45,921 --> 00:02:47,457
+Now the enemy: drift.
+
+84
+00:02:48,007 --> 00:02:53,362
+Your server matches the code today. And then, at night, someone edits a file by hand.
+
+85
+00:02:53,912 --> 00:02:57,880
+Now the server no longer matches the code. That gap is called drift.
+
+86
+00:02:58,430 --> 00:02:59,545
+Drift is dangerous,
+
+87
+00:02:59,545 --> 00:03:01,307
+because nobody knows about it.
+
+88
+00:03:01,307 --> 00:03:02,716
+The code says one thing,
+
+89
+00:03:02,716 --> 00:03:04,360
+and production does another.
+
+90
+00:03:04,910 --> 00:03:06,390
+The cure has two steps.
+
+91
+00:03:06,390 --> 00:03:06,775
+First,
+
+92
+00:03:06,775 --> 00:03:09,605
+detect it: compare the server with the code.
+
+93
+00:03:09,605 --> 00:03:11,664
+Then fix it: run the code again,
+
+94
+00:03:11,664 --> 00:03:13,593
+and the server converges back.
+
+95
+00:03:14,143 --> 00:03:17,151
+And the rule for the team: change the code, not the server.
+
+96
+00:03:18,701 --> 00:03:20,493
+Third idea: automation.
+
+97
+00:03:21,043 --> 00:03:22,726
+If you do a task by hand,
+
+98
+00:03:22,726 --> 00:03:23,130
+twice,
+
+99
+00:03:23,130 --> 00:03:24,274
+and it is boring,
+
+100
+00:03:24,274 --> 00:03:25,688
+and it follows steps,
+
+101
+00:03:25,688 --> 00:03:26,899
+it is a candidate.
+
+102
+00:03:26,899 --> 00:03:27,842
+Build the app.
+
+103
+00:03:27,842 --> 00:03:28,784
+Run the tests.
+
+104
+00:03:28,784 --> 00:03:29,861
+Create a server.
+
+105
+00:03:29,861 --> 00:03:31,006
+Apply the config.
+
+106
+00:03:31,556 --> 00:03:33,552
+Good automation is repeatable,
+
+107
+00:03:33,552 --> 00:03:36,214
+because it runs the same way every time.
+
+108
+00:03:36,214 --> 00:03:36,947
+It is fast,
+
+109
+00:03:36,947 --> 00:03:38,344
+and it is documented,
+
+110
+00:03:38,344 --> 00:03:41,006
+because the script is the documentation.
+
+111
+00:03:41,556 --> 00:03:42,592
+But start small.
+
+112
+00:03:42,592 --> 00:03:44,275
+Automate the most painful,
+
+113
+00:03:44,275 --> 00:03:45,893
+most frequent task first.
+
+114
+00:03:45,893 --> 00:03:49,194
+Automating a bad process only makes it fail faster.
+
+115
+00:03:49,744 --> 00:03:52,918
+Manual work that is repetitive has a name: toil.
+
+116
+00:03:52,918 --> 00:03:54,638
+The aim is to remove toil,
+
+117
+00:03:54,638 --> 00:03:57,018
+and spend the time on better things.
+
+118
+00:03:58,568 --> 00:04:01,512
+Which tools do what? A quick map, for the road ahead.
+
+119
+00:04:02,062 --> 00:04:07,673
+Terraform creates infrastructure: servers, networks, cloud resources. That is IaC.
+
+120
+00:04:08,223 --> 00:04:10,133
+Ansible configures machines,
+
+121
+00:04:10,133 --> 00:04:10,883
+over SSH,
+
+122
+00:04:10,883 --> 00:04:12,179
+from a description.
+
+123
+00:04:12,179 --> 00:04:14,431
+That is configuration management.
+
+124
+00:04:14,981 --> 00:04:19,245
+Docker and Kubernetes go one step further: you ship a whole image,
+
+125
+00:04:19,245 --> 00:04:20,215
+and replace it,
+
+126
+00:04:20,215 --> 00:04:21,701
+instead of changing it.
+
+127
+00:04:22,251 --> 00:04:22,757
+Jenkins,
+
+128
+00:04:22,757 --> 00:04:23,958
+and GitHub Actions,
+
+129
+00:04:23,958 --> 00:04:25,855
+run all of this automatically,
+
+130
+00:04:25,855 --> 00:04:26,867
+on every commit.
+
+131
+00:04:26,867 --> 00:04:29,333
+We will meet each one in this bootcamp.
+
+132
+00:04:29,883 --> 00:04:33,190
+The tools change. The ideas in this lesson stay the same.
+
+133
+00:04:34,740 --> 00:04:39,028
+Go to the demo folder.
+
+134
+00:04:40,578 --> 00:04:42,477
+Look around.
+
+135
+00:04:43,027 --> 00:04:45,693
+Two scripts, and a folder with the desired state.
+
+136
+00:04:46,243 --> 00:04:50,851
+The desired state.
+
+137
+00:04:51,401 --> 00:04:56,329
+Two settings: port eighty eighty, and mode prod. This is what the server should look like.
+
+138
+00:04:56,879 --> 00:05:02,917
+The naive way.
+
+139
+00:05:03,467 --> 00:05:04,960
+Run it again.
+
+140
+00:05:06,010 --> 00:05:10,127
+Look at the result.
+
+141
+00:05:10,677 --> 00:05:11,210
+Doubled.
+
+142
+00:05:11,210 --> 00:05:12,676
+The same two settings,
+
+143
+00:05:12,676 --> 00:05:13,075
+twice.
+
+144
+00:05:13,075 --> 00:05:15,207
+Running it twice broke the file.
+
+145
+00:05:15,207 --> 00:05:17,205
+This script is not idempotent.
+
+146
+00:05:17,755 --> 00:05:21,467
+The safe way.
+
+147
+00:05:22,017 --> 00:05:26,668
+Changed, and changed. It created both files, to match the desired state.
+
+148
+00:05:27,218 --> 00:05:28,114
+Run it again.
+
+149
+00:05:29,764 --> 00:05:35,332
+Ok, and ok. Nothing changed, because nothing was different. That is idempotent.
+
+150
+00:05:35,882 --> 00:05:40,767
+Cause drift.
+
+151
+00:05:41,317 --> 00:05:44,859
+Detect it.
+
+152
+00:05:45,409 --> 00:05:47,926
+Drift. The server no longer matches the code.
+
+153
+00:05:48,476 --> 00:05:52,679
+Fix it.
+
+154
+00:05:53,229 --> 00:05:57,687
+Changed, only the one file that was wrong. The other file was left alone.
+
+155
+00:05:58,237 --> 00:06:01,352
+Check again.
+
+156
+00:06:01,902 --> 00:06:03,203
+Clean. No drift.
+
+157
+00:06:03,753 --> 00:06:07,593
+Write it down.
+
+158
+00:06:15,043 --> 00:06:17,539
+Check the file.
+
+159
+00:06:19,089 --> 00:06:22,353
+Your practice task: break a script, then do it the safe way.
+
+160
+00:06:22,903 --> 00:06:26,423
+One: run the naive script twice, and look at the doubled file.
+
+161
+00:06:26,973 --> 00:06:32,114
+Two: run the apply script twice. The first run changes, the second says ok.
+
+162
+00:06:32,664 --> 00:06:37,123
+Three: edit the server file by hand, and run the check. It must say drift.
+
+163
+00:06:37,673 --> 00:06:42,814
+Four: run apply again, and check again. It must say clean. Then write your three lines.
+
+164
+00:06:44,864 --> 00:06:48,085
+Where to find the demo files. Pause here, and write it down.
+
+165
+00:06:48,635 --> 00:06:54,310
+One: the repository, github.com/it-waves/devops-ai.
+
+166
+00:06:54,860 --> 00:06:59,212
+Two: the folder academy/lesson147-demo.
+
+167
+00:06:59,762 --> 00:07:01,067
+Three: three scripts,
+
+168
+00:07:01,067 --> 00:07:01,439
+naive,
+
+169
+00:07:01,439 --> 00:07:01,812
+apply,
+
+170
+00:07:01,812 --> 00:07:02,433
+and check,
+
+171
+00:07:02,433 --> 00:07:03,489
+a desired folder,
+
+172
+00:07:03,489 --> 00:07:05,415
+and a read me with the answers.
+
+173
+00:07:05,965 --> 00:07:07,680
+Four: clone the repository,
+
+174
+00:07:07,680 --> 00:07:08,951
+and copy the folder.
+
+175
+00:07:08,951 --> 00:07:10,348
+You need only a shell.
+
+176
+00:07:10,348 --> 00:07:11,555
+Nothing to install.
+
+177
+00:07:12,105 --> 00:07:12,840
+Five: again,
+
+178
+00:07:12,840 --> 00:07:14,189
+no lab in this domain.
+
+179
+00:07:14,189 --> 00:07:15,538
+The practice is plain,
+
+180
+00:07:15,538 --> 00:07:17,929
+and the answers are on the next screen.
+
+181
+00:07:19,979 --> 00:07:22,454
+Check yourself. Six points. Tick each one.
+
+182
+00:07:23,004 --> 00:07:26,204
+One: the naive script doubles the file on the second run.
+
+183
+00:07:26,754 --> 00:07:28,994
+Two: apply changes on the first run.
+
+184
+00:07:29,544 --> 00:07:31,634
+Three: and says ok on the second.
+
+185
+00:07:32,184 --> 00:07:34,915
+Four: a manual edit makes the check say drift.
+
+186
+00:07:35,465 --> 00:07:38,281
+Five: apply fixes it, and the check says clean.
+
+187
+00:07:38,831 --> 00:07:41,711
+Six: your file has three lines, in your own words.
+
+188
+00:07:42,261 --> 00:07:44,736
+All six, and you understand the three ideas.
+
+189
+00:07:46,786 --> 00:07:48,557
+Your turn, on your own machine.
+
+190
+00:07:49,107 --> 00:07:50,941
+One: copy the demo folder.
+
+191
+00:07:51,491 --> 00:07:54,606
+Two: run the naive script twice, and see the problem.
+
+192
+00:07:55,156 --> 00:07:59,039
+Three: run apply twice, then cause drift, detect it, and fix it.
+
+193
+00:07:59,589 --> 00:08:01,167
+Four: write your three lines.
+
+194
+00:08:01,717 --> 00:08:03,286
+Five: tick the six points.
+
+195
+00:08:03,286 --> 00:08:07,328
+Then think about your own servers: is anything there built by hand?
+
+196
+00:08:07,878 --> 00:08:09,713
+Pause the video, and begin now.
+
+197
+00:08:25,263 --> 00:08:26,138
+Quick check.
+
+198
+00:08:26,688 --> 00:08:28,437
+What is infrastructure as code?
+
+199
+00:08:28,987 --> 00:08:30,715
+What does idempotent mean?
+
+200
+00:08:31,265 --> 00:08:33,228
+What is drift, and how do you fix it?
+
+201
+00:08:33,778 --> 00:08:37,042
+Name a tool for IaC, and one for configuration.
+
+202
+00:08:37,592 --> 00:08:39,850
+Objective covered: MC16,
+
+203
+00:08:39,850 --> 00:08:42,763
+objective three: infrastructure as code,
+
+204
+00:08:42,763 --> 00:08:44,584
+configuration management,
+
+205
+00:08:44,584 --> 00:08:45,677
+and automation.
+
+206
+00:08:46,227 --> 00:08:48,296
+Pause the video, and answer out loud.
+
+207
+00:08:58,846 --> 00:09:02,836
+Next time: build artifacts, environments, and release promotion.
+
+208
+00:09:03,386 --> 00:09:06,714
+If this helped, like, share and subscribe, so you do not miss it.

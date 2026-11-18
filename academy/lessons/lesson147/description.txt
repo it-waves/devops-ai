@@ -1,0 +1,30 @@
+Lesson 147 of the DevOps Engineering Bootcamp, the third lesson of the DevOps Fundamentals domain. Servers fixed by hand cannot be rebuilt, repeated or trusted. In this lesson you learn infrastructure as code (describe servers, networks and databases in files kept in Git, so you get history, review and rollback), why the same code makes identical servers ("cattle, not pets"), configuration management and the desired state, the key word idempotent (run it once or ten times, the result is the same), drift (when a server stops matching its code, and how to detect and fix it), automation and toil, and which tool does what: Terraform, Ansible, Docker, Kubernetes, Jenkins and GitHub Actions. In the live demo, a real terminal runs a naive script twice and breaks the file, then a safe idempotent script (changed on the first run, ok on the second), then a hand edit causes drift, which a check detects and the same code repairs.
+
+Chapters
+0:00 Fixed by hand, lost forever
+0:30 What to expect
+0:59 Infrastructure as code
+1:30 Same code, many servers
+2:01 Configuration management and idempotence
+2:45 Drift: detect and fix
+3:18 Automation and toil
+3:58 Which tool does what
+4:34 Live demo: naive, idempotent and drift
+6:18 Your practice task
+6:44 Where to find the demo files
+7:19 Self-check
+7:46 Your turn
+8:24 Quick check and what is next
+
+Objectives covered: MC16-O03, infrastructure as code, configuration management and automation.
+
+Demo files: github.com/it-waves/devops-ai, in academy/lesson147-demo (naive.sh, apply.sh, check.sh, a desired folder and a README with the answers). You only need a shell. This domain has no lab on purpose: it is about ideas and decisions, so the practice is a plain terminal exercise with a self-check.
+
+Honest notes: the terminal demo is a real recording of a real shell running small scripts written for this lesson. They are teaching stand-ins for real tools such as Terraform and Ansible, which come later in the bootcamp. The narration is synthetic speech. The hook, plan, I A C, same-code, configuration, drift, automation, tools, task, files, self-check and recap screens are labelled illustrations, not captures.
+
+Previous lesson: CI vs Continuous Delivery vs Continuous Deployment: The Difference | Lesson 146 https://youtu.be/VmsQM8r-H-g
+Next: build artifacts, environments and release promotion.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #infrastructureascode #iac #configurationmanagement #devopsbootcamp
