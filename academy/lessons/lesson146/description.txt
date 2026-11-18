@@ -23,7 +23,7 @@ Demo files: github.com/it-waves/devops-ai, in academy/lesson146-demo (pipeline.s
 Honest notes: the terminal demo is a real recording of a real shell running a small pipeline script written for this lesson. It is a teaching stand-in for a real CI/CD system such as Jenkins or GitHub Actions, which come later in the bootcamp. The narration is synthetic speech. The hook, plan, CI, delivery, deployment, side-by-side lanes, safety, choose, task, files, self-check and recap screens are labelled illustrations, not captures.
 
 Previous lesson: DevOps Principles: Collaboration, Fast Feedback and Shared Ownership | Lesson 145 https://youtu.be/YBqqWfepo8I
-Next: infrastructure as code, configuration management and automation.
+Next: Infrastructure as Code, Config Management and Automation Explained | Lesson 147 https://youtu.be/ooQI-lskH5Y
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
