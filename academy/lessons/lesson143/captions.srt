@@ -1,0 +1,819 @@
+1
+00:00:00,500 --> 00:00:05,321
+The build is red. You click rerun. It goes green. Nobody looks at what happened.
+
+2
+00:00:05,871 --> 00:00:07,471
+Tomorrow it is red again.
+
+3
+00:00:07,471 --> 00:00:07,855
+Rerun.
+
+4
+00:00:07,855 --> 00:00:08,239
+Green.
+
+5
+00:00:08,239 --> 00:00:09,199
+Within a month,
+
+6
+00:00:09,199 --> 00:00:13,359
+the whole team has learned one thing: red does not mean anything.
+
+7
+00:00:13,909 --> 00:00:16,367
+That is the real cost of a flaky test.
+
+8
+00:00:16,367 --> 00:00:18,177
+It does not just waste time.
+
+9
+00:00:18,177 --> 00:00:22,187
+It teaches people to ignore the one signal that protects them.
+
+10
+00:00:22,737 --> 00:00:24,953
+Today you learn to find the cause.
+
+11
+00:00:24,953 --> 00:00:25,279
+Time,
+
+12
+00:00:25,279 --> 00:00:25,996
+randomness,
+
+13
+00:00:25,996 --> 00:00:26,387
+order,
+
+14
+00:00:26,387 --> 00:00:27,430
+and environment.
+
+15
+00:00:27,430 --> 00:00:30,559
+You see a test pass and fail with the same code.
+
+16
+00:00:30,559 --> 00:00:33,297
+And a lab judges whether your fix is real.
+
+17
+00:00:34,847 --> 00:00:36,276
+Here is what to expect.
+
+18
+00:00:36,826 --> 00:00:41,306
+One: what a flaky test is, and the four causes behind almost all of them.
+
+19
+00:00:41,856 --> 00:00:44,587
+Two: how to fix each cause, instead of hiding it.
+
+20
+00:00:45,137 --> 00:00:48,742
+Three: what never to do, and what to do while the fix is waiting.
+
+21
+00:00:49,292 --> 00:00:51,811
+Then a live demo with real pytest.
+
+22
+00:00:51,811 --> 00:00:54,049
+A random failure you can replay.
+
+23
+00:00:54,049 --> 00:00:55,728
+A test that fails alone.
+
+24
+00:00:55,728 --> 00:00:58,316
+A test that only works in one folder.
+
+25
+00:00:58,866 --> 00:01:00,331
+And a lab with six checks,
+
+26
+00:01:00,331 --> 00:01:04,050
+including two planted bugs that your fixed tests must still catch.
+
+27
+00:01:06,100 --> 00:01:09,198
+A flaky test passes and fails on the same code.
+
+28
+00:01:09,198 --> 00:01:11,439
+So the code is not the only input.
+
+29
+00:01:11,439 --> 00:01:12,955
+Something else changes.
+
+30
+00:01:12,955 --> 00:01:14,932
+There are four usual suspects.
+
+31
+00:01:15,482 --> 00:01:16,113
+The clock.
+
+32
+00:01:16,113 --> 00:01:18,131
+The test reads the current time.
+
+33
+00:01:18,131 --> 00:01:20,150
+It passes at ten in the morning,
+
+34
+00:01:20,150 --> 00:01:21,790
+and fails at ten at night,
+
+35
+00:01:21,790 --> 00:01:22,736
+or on a Sunday,
+
+36
+00:01:22,736 --> 00:01:24,250
+or in another time zone.
+
+37
+00:01:24,800 --> 00:01:25,550
+Randomness.
+
+38
+00:01:25,550 --> 00:01:26,163
+The test,
+
+39
+00:01:26,163 --> 00:01:26,982
+or the code,
+
+40
+00:01:26,982 --> 00:01:28,481
+makes a random choice.
+
+41
+00:01:28,481 --> 00:01:29,845
+Most runs are lucky.
+
+42
+00:01:29,845 --> 00:01:31,072
+Some runs are not.
+
+43
+00:01:31,622 --> 00:01:32,037
+Order.
+
+44
+00:01:32,037 --> 00:01:35,012
+One test leaves something behind: a global,
+
+45
+00:01:35,012 --> 00:01:35,496
+a file,
+
+46
+00:01:35,496 --> 00:01:35,911
+a row.
+
+47
+00:01:35,911 --> 00:01:37,779
+Another test depends on it.
+
+48
+00:01:37,779 --> 00:01:38,678
+Run it alone,
+
+49
+00:01:38,678 --> 00:01:40,062
+or in another order,
+
+50
+00:01:40,062 --> 00:01:41,030
+and it breaks.
+
+51
+00:01:41,580 --> 00:01:42,396
+Environment.
+
+52
+00:01:42,396 --> 00:01:44,029
+The test needs a folder,
+
+53
+00:01:44,029 --> 00:01:44,506
+a file,
+
+54
+00:01:44,506 --> 00:01:44,982
+a port,
+
+55
+00:01:44,982 --> 00:01:45,662
+a network,
+
+56
+00:01:45,662 --> 00:01:46,343
+or a tool.
+
+57
+00:01:46,343 --> 00:01:47,975
+It works on one machine,
+
+58
+00:01:47,975 --> 00:01:49,132
+and nowhere else.
+
+59
+00:01:49,682 --> 00:01:54,247
+Four causes. And all four mean the test depends on something it does not control.
+
+60
+00:01:55,797 --> 00:02:00,618
+The fix is always the same idea. Take control of the thing the test depends on.
+
+61
+00:02:01,168 --> 00:02:03,216
+For the clock: pass the time in.
+
+62
+00:02:03,216 --> 00:02:04,816
+A test with a fixed date,
+
+63
+00:02:04,816 --> 00:02:05,904
+a Monday at nine,
+
+64
+00:02:05,904 --> 00:02:07,952
+gives the same answer every day,
+
+65
+00:02:07,952 --> 00:02:09,168
+in every time zone.
+
+66
+00:02:09,718 --> 00:02:11,509
+For randomness: replace it.
+
+67
+00:02:11,509 --> 00:02:13,897
+A fake call that fails exactly once,
+
+68
+00:02:13,897 --> 00:02:14,627
+on purpose,
+
+69
+00:02:14,627 --> 00:02:17,479
+is better than a call that fails sometimes.
+
+70
+00:02:17,479 --> 00:02:18,540
+Or fix the seed,
+
+71
+00:02:18,540 --> 00:02:19,402
+and print it,
+
+72
+00:02:19,402 --> 00:02:21,260
+so you can replay a failure.
+
+73
+00:02:21,810 --> 00:02:26,866
+For order: no shared state. Every test builds what it needs, and leaves nothing behind.
+
+74
+00:02:27,416 --> 00:02:30,018
+For environment: use a temporary folder.
+
+75
+00:02:30,018 --> 00:02:31,514
+pytest gives you one,
+
+76
+00:02:31,514 --> 00:02:32,620
+called tmp_path,
+
+77
+00:02:32,620 --> 00:02:33,986
+fresh for every test.
+
+78
+00:02:34,536 --> 00:02:36,798
+Make the cause visible. Then remove it.
+
+79
+00:02:38,348 --> 00:02:41,377
+Now what not to do. There are four tempting answers.
+
+80
+00:02:41,927 --> 00:02:42,552
+Rerun it.
+
+81
+00:02:42,552 --> 00:02:46,233
+Many pipelines can retry a failed test automatically.
+
+82
+00:02:46,233 --> 00:02:47,900
+It turns red into green,
+
+83
+00:02:47,900 --> 00:02:49,428
+and hides the problem.
+
+84
+00:02:49,428 --> 00:02:51,165
+The test is still broken.
+
+85
+00:02:51,715 --> 00:02:52,201
+Skip it.
+
+86
+00:02:52,201 --> 00:02:53,660
+The test no longer runs,
+
+87
+00:02:53,660 --> 00:02:55,726
+so it no longer protects anything.
+
+88
+00:02:55,726 --> 00:02:58,157
+And skipped tests are rarely un-skipped.
+
+89
+00:02:58,707 --> 00:02:59,627
+Quarantine it.
+
+90
+00:02:59,627 --> 00:03:00,876
+This one is honest,
+
+91
+00:03:00,876 --> 00:03:02,124
+if it is temporary.
+
+92
+00:03:02,124 --> 00:03:03,044
+Move it aside,
+
+93
+00:03:03,044 --> 00:03:03,964
+with an owner,
+
+94
+00:03:03,964 --> 00:03:04,555
+a ticket,
+
+95
+00:03:04,555 --> 00:03:05,278
+and a date.
+
+96
+00:03:05,828 --> 00:03:06,235
+Fix it.
+
+97
+00:03:06,235 --> 00:03:07,107
+Find the cause,
+
+98
+00:03:07,107 --> 00:03:08,211
+take control of it,
+
+99
+00:03:08,211 --> 00:03:10,187
+and prove the test can still fail,
+
+100
+00:03:10,187 --> 00:03:11,524
+when the code is wrong.
+
+101
+00:03:12,074 --> 00:03:14,997
+A fixed flaky test is a test you can trust again.
+
+102
+00:03:16,547 --> 00:03:21,624
+Go to the lab folder.
+
+103
+00:03:23,174 --> 00:03:25,073
+Look around.
+
+104
+00:03:25,623 --> 00:03:27,031
+Our scheduling code,
+
+105
+00:03:27,031 --> 00:03:28,369
+cartsched.py,
+
+106
+00:03:28,369 --> 00:03:29,355
+and the tests.
+
+107
+00:03:29,355 --> 00:03:30,623
+And a demo folder.
+
+108
+00:03:30,623 --> 00:03:31,045
+First,
+
+109
+00:03:31,045 --> 00:03:32,876
+a flaky test I can replay.
+
+110
+00:03:33,426 --> 00:03:39,144
+Read the test.
+
+111
+00:03:39,694 --> 00:03:40,657
+A retry helper,
+
+112
+00:03:40,657 --> 00:03:42,968
+and a call that fails half the time,
+
+113
+00:03:42,968 --> 00:03:43,610
+at random.
+
+114
+00:03:43,610 --> 00:03:44,445
+Two attempts.
+
+115
+00:03:44,445 --> 00:03:45,216
+So it fails,
+
+116
+00:03:45,216 --> 00:03:46,243
+one run in four.
+
+117
+00:03:46,793 --> 00:03:52,852
+Run it eight times.
+
+118
+00:03:53,402 --> 00:03:54,103
+Six pass.
+
+119
+00:03:54,103 --> 00:03:56,131
+Seeds four and seven fail.
+
+120
+00:03:56,131 --> 00:03:56,911
+Same code.
+
+121
+00:03:56,911 --> 00:03:57,690
+Same test.
+
+122
+00:03:57,690 --> 00:04:00,186
+Only the random numbers changed.
+
+123
+00:04:00,736 --> 00:04:03,872
+Replay seed four.
+
+124
+00:04:04,722 --> 00:04:05,213
+Failed.
+
+125
+00:04:05,213 --> 00:04:05,634
+Again,
+
+126
+00:04:05,634 --> 00:04:06,265
+it fails.
+
+127
+00:04:06,265 --> 00:04:09,843
+A flaky failure became a failure you can reproduce,
+
+128
+00:04:09,843 --> 00:04:10,544
+on demand.
+
+129
+00:04:10,544 --> 00:04:12,018
+Now you can debug it.
+
+130
+00:04:12,568 --> 00:04:17,538
+Test alone.
+
+131
+00:04:19,288 --> 00:04:24,515
+Failed, alone. It only passes when the test before it has run. That is hidden state.
+
+132
+00:04:25,065 --> 00:04:30,078
+Change folder.
+
+133
+00:04:30,628 --> 00:04:33,935
+Run from there.
+
+134
+00:04:36,585 --> 00:04:37,015
+Failed.
+
+135
+00:04:37,015 --> 00:04:38,734
+It reads config.json,
+
+136
+00:04:38,734 --> 00:04:40,208
+from the current folder.
+
+137
+00:04:40,208 --> 00:04:43,156
+It only works when you stand in the right place.
+
+138
+00:04:43,706 --> 00:04:47,695
+Back.
+
+139
+00:04:48,245 --> 00:04:53,280
+Time zones.
+
+140
+00:04:53,830 --> 00:04:58,459
+Another zone.
+
+141
+00:04:59,009 --> 00:04:59,900
+Different hours.
+
+142
+00:04:59,900 --> 00:05:02,461
+A test that reads the clock sees one of these.
+
+143
+00:05:02,461 --> 00:05:04,577
+Which one depends on where you run it.
+
+144
+00:05:05,127 --> 00:05:12,124
+The fix.
+
+145
+00:05:30,874 --> 00:05:35,696
+No random. A list counts the calls. The first call fails. The second works.
+
+146
+00:05:36,246 --> 00:05:40,320
+Replay seed four.
+
+147
+00:05:41,370 --> 00:05:45,701
+Passed. And it passes for every seed, because nothing is random any more.
+
+148
+00:05:46,251 --> 00:05:50,838
+Where am I?
+
+149
+00:05:51,388 --> 00:05:53,585
+Zero out of six. Your starting line.
+
+150
+00:05:54,135 --> 00:05:56,098
+Clean up.
+
+151
+00:05:56,648 --> 00:05:58,504
+Removed. Nothing left behind.
+
+152
+00:06:00,054 --> 00:06:03,894
+Your lab task: fix the flaky tests, for real. Six checks.
+
+153
+00:06:04,444 --> 00:06:05,998
+Do not change the code,
+
+154
+00:06:05,998 --> 00:06:07,011
+only the tests.
+
+155
+00:06:07,011 --> 00:06:08,227
+Pass a fixed time.
+
+156
+00:06:08,227 --> 00:06:09,308
+Use a fake call.
+
+157
+00:06:09,308 --> 00:06:10,254
+Use tmp_path.
+
+158
+00:06:10,254 --> 00:06:11,335
+No shared state.
+
+159
+00:06:11,885 --> 00:06:16,471
+One and two: the suite passes twenty times in a row, and in three time zones.
+
+160
+00:06:17,021 --> 00:06:19,830
+Three and four: it passes from another folder,
+
+161
+00:06:19,830 --> 00:06:21,539
+and every test passes alone.
+
+162
+00:06:21,539 --> 00:06:22,760
+At least five tests.
+
+163
+00:06:23,310 --> 00:06:27,065
+Five: no clock, no random, no sleep, and no skip or xfail.
+
+164
+00:06:27,615 --> 00:06:30,479
+Six: the judge plants two bugs in the code.
+
+165
+00:06:30,479 --> 00:06:32,278
+Your tests must catch both.
+
+166
+00:06:32,278 --> 00:06:33,277
+Then lab check,
+
+167
+00:06:33,277 --> 00:06:34,676
+until six out of six.
+
+168
+00:06:36,726 --> 00:06:39,521
+Where to find the lab. Pause here, and write it down.
+
+169
+00:06:40,071 --> 00:06:41,535
+One: the repository,
+
+170
+00:06:41,535 --> 00:06:45,855
+github.com/it-waves/devops-ai,
+
+171
+00:06:45,855 --> 00:06:48,199
+in the folder academy/lab.
+
+172
+00:06:48,749 --> 00:06:54,722
+Two: the files, lab143.sh, and shortcuts143.sh.
+
+173
+00:06:55,272 --> 00:07:00,733
+Three: install it, with sudo install, into /usr/local/sbin/.
+
+174
+00:07:01,283 --> 00:07:03,107
+Four: load the short names,
+
+175
+00:07:03,107 --> 00:07:06,215
+with source shortcuts143.sh.
+
+176
+00:07:06,215 --> 00:07:07,026
+Then lab up,
+
+177
+00:07:07,026 --> 00:07:07,701
+lab check,
+
+178
+00:07:07,701 --> 00:07:08,579
+and lab down.
+
+179
+00:07:09,129 --> 00:07:14,399
+Five: you need Python 3, and pytest. One apt install line gives you both.
+
+180
+00:07:14,949 --> 00:07:20,751
+Six: it only touches /opt/lab143. Lab down removes everything.
+
+181
+00:07:21,301 --> 00:07:22,944
+The link is in the description.
+
+182
+00:07:24,994 --> 00:07:28,642
+Pass or fail rubric. Six points. All six to pass.
+
+183
+00:07:29,192 --> 00:07:31,624
+One: the suite passes twenty runs in a row.
+
+184
+00:07:32,174 --> 00:07:34,350
+Two: it passes in three time zones.
+
+185
+00:07:34,900 --> 00:07:36,927
+Three: it passes from another folder.
+
+186
+00:07:37,477 --> 00:07:39,653
+Four: every test passes on its own.
+
+187
+00:07:40,203 --> 00:07:43,317
+Five: no clock, random, sleep, skip or xfail.
+
+188
+00:07:43,867 --> 00:07:46,214
+Six: the tests catch two planted bugs.
+
+189
+00:07:46,764 --> 00:07:48,065
+Pass means all six.
+
+190
+00:07:50,115 --> 00:07:51,886
+Your turn, on your own machine.
+
+191
+00:07:52,436 --> 00:07:57,321
+One: lab up. Read the task file. Run the tests a few times, and see them fail.
+
+192
+00:07:57,871 --> 00:08:01,732
+Two: fix the clock test. Pass a fixed date, and test the edges.
+
+193
+00:08:02,282 --> 00:08:06,826
+Three: fix the retry test with a fake call. Test the success, and the give up.
+
+194
+00:08:07,376 --> 00:08:11,600
+Four: fix the config test with tmp_path, and remove the shared state.
+
+195
+00:08:12,150 --> 00:08:15,628
+Five: lab check, until six out of six. Then lab down.
+
+196
+00:08:16,178 --> 00:08:18,012
+Pause the video, and begin now.
+
+197
+00:08:33,562 --> 00:08:34,437
+Quick check.
+
+198
+00:08:34,987 --> 00:08:37,632
+What are the four usual causes of a flaky test?
+
+199
+00:08:38,182 --> 00:08:40,699
+Why is rerunning a failed test not a fix?
+
+200
+00:08:41,249 --> 00:08:43,105
+How does a fixed seed help you debug?
+
+201
+00:08:43,655 --> 00:08:45,895
+How do you prove a fixed test can still fail?
+
+202
+00:08:46,445 --> 00:08:52,653
+Objective covered: MC15, objective eight. Flaky and environment dependent tests.
+
+203
+00:08:53,203 --> 00:08:55,273
+Pause the video, and answer out loud.
+
+204
+00:09:05,823 --> 00:09:09,876
+Next: the testing mastery scenario, the whole domain in one lab.
+
+205
+00:09:10,426 --> 00:09:13,754
+If this helped, like, share and subscribe, so you do not miss it.

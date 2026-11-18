@@ -1,0 +1,27 @@
+Lesson 143 of the DevOps Engineering Bootcamp, in the Software Testing and QA domain. The build is red, you click rerun, it goes green, and nobody looks at why. In this lesson you learn what a flaky test is and the four causes behind almost all of them: the clock, randomness, test order and the environment. You learn how to fix each one by taking control of what the test depends on (pass the time in, fake the call, share no state, use tmp_path), why rerunning or skipping a test is not a fix, and what an honest quarantine looks like. In the live demo, real pytest runs a randomly failing test with eight seeds (seeds 4 and 7 fail), replays a failure on demand, shows a test that fails alone and a test that only works from one folder, compares the time in two time zones, and fixes the retry test with a fake call. A lab judges you from 0 of 6 to 6 of 6: you fix flaky tests for real, and the judge plants two bugs that your fixed tests must still catch.
+
+Chapters
+0:00 Red that means nothing
+0:34 What to expect
+1:05 Four causes of flaky tests
+1:55 How to fix each one
+2:37 What not to do
+3:16 Live: flaky tests, replayed and fixed
+5:59 Your lab task
+6:36 Where to find the lab
+7:24 Pass or fail rubric
+7:49 Your turn
+8:33 Quick check
+
+Objectives covered: MC15-O08, flaky and environment-dependent tests.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab143.sh and shortcuts143.sh). Install with: sudo install -m 755 lab143.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts143.sh. You need python3 and pytest (sudo apt install -y python3-pytest). lab up works only in /opt/lab143 and does not touch anything else. lab down removes everything. Only run it on your own machine.
+
+Honest notes: the terminal demo is a real recording of real pytest. The flaky failure is a small test written for the lab: it uses random numbers, and the demo fixes the random seed for each run so that the same failure can be replayed exactly (that is the point of the lesson). Which seeds fail is fixed, but the timings that pytest prints vary from run to run. The lab was run end to end: 0 of 6 before you start, 6 of 6 with a reference solution, and lab down leaves nothing behind. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Performance, Load and Security Testing: p95, Budgets and Secret Scans | Lesson 142 https://youtu.be/eyI6JEF5oAQ
+Next: the testing mastery scenario, the whole domain in one lab.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #flakytests #pytest #softwaretesting #devopsbootcamp
