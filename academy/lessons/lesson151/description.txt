@@ -21,7 +21,7 @@ Demo files: github.com/it-waves/devops-ai, in academy/lesson151-demo (stages.csv
 Honest notes: the terminal demo is a real recording of a real shell running a small script written for this lesson. The stage times are example data, and bottleneck.sh is a teaching stand-in: real teams read these times from their pipeline, review and ticket tools. The narration is synthetic speech. The hook, plan, bottleneck, waiting, finding, fixing, task, files, self-check and recap screens are labelled illustrations, not captures.
 
 Previous lesson: The 4 Key DevOps Metrics: DORA Explained with a Real Deploy Log | Lesson 150 https://youtu.be/WQC2nApZWpo
-Next: a plan to improve a delivery process.
+Next: Your DevOps Improvement Plan: Write a Practical CloudCart Plan | Lesson 152 https://youtu.be/aYiqseKLCOI
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
