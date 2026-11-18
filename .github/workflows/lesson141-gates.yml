@@ -1,0 +1,31 @@
+name: tests-and-gates
+on:
+  workflow_dispatch:
+  push:
+    paths: ['academy/lesson141-demo/**', '.github/workflows/lesson141-gates.yml']
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: academy/lesson141-demo
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install test tools
+        run: python -m pip install pytest pytest-cov pytest-github-actions-annotate-failures
+      - name: Tests with a coverage gate
+        run: python -m pytest --cov=cart --cov-report=html:htmlcov --cov-fail-under=90 -q
+      - name: Coverage in the job summary
+        if: always()
+        run: python -m coverage report --format=markdown >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: academy/lesson141-demo/htmlcov
