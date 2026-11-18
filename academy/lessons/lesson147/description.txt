@@ -23,7 +23,7 @@ Demo files: github.com/it-waves/devops-ai, in academy/lesson147-demo (naive.sh, 
 Honest notes: the terminal demo is a real recording of a real shell running small scripts written for this lesson. They are teaching stand-ins for real tools such as Terraform and Ansible, which come later in the bootcamp. The narration is synthetic speech. The hook, plan, I A C, same-code, configuration, drift, automation, tools, task, files, self-check and recap screens are labelled illustrations, not captures.
 
 Previous lesson: CI vs Continuous Delivery vs Continuous Deployment: The Difference | Lesson 146 https://youtu.be/VmsQM8r-H-g
-Next: build artifacts, environments and release promotion.
+Next: Build Once: Artifacts, Environments and Release Promotion | Lesson 148 https://youtu.be/ZqbZTmZbdyc
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
