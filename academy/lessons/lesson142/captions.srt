@@ -1,0 +1,787 @@
+1
+00:00:00,500 --> 00:00:01,543
+Every test passed.
+
+2
+00:00:01,543 --> 00:00:02,760
+The release went out.
+
+3
+00:00:02,760 --> 00:00:06,004
+And then five hundred people logged in at the same time.
+
+4
+00:00:06,554 --> 00:00:08,830
+The page took twenty seconds to load.
+
+5
+00:00:08,830 --> 00:00:10,798
+Nothing was wrong with the code.
+
+6
+00:00:10,798 --> 00:00:13,381
+The code was just never tested under load.
+
+7
+00:00:13,931 --> 00:00:14,920
+And last month,
+
+8
+00:00:14,920 --> 00:00:17,559
+someone pasted a secret key into a file,
+
+9
+00:00:17,559 --> 00:00:20,000
+and pushed it to a public repository.
+
+10
+00:00:20,000 --> 00:00:21,781
+No test ever looked for it.
+
+11
+00:00:22,331 --> 00:00:25,858
+Today you learn the checks that sit beside your tests.
+
+12
+00:00:25,858 --> 00:00:26,445
+How fast.
+
+13
+00:00:26,445 --> 00:00:27,555
+How many at once.
+
+14
+00:00:27,555 --> 00:00:29,710
+And is anything dangerous inside.
+
+15
+00:00:29,710 --> 00:00:31,343
+You run a real load test,
+
+16
+00:00:31,343 --> 00:00:33,041
+and a lab judges your own.
+
+17
+00:00:34,591 --> 00:00:36,020
+Here is what to expect.
+
+18
+00:00:36,570 --> 00:00:40,965
+One: the kinds of performance test. Performance, load, stress, and soak.
+
+19
+00:00:41,515 --> 00:00:46,742
+Two: what to measure. Latency, throughput, and errors. And why we never trust an average.
+
+20
+00:00:47,292 --> 00:00:51,580
+Three: security checks. Secrets, dependencies, code, and a running app.
+
+21
+00:00:52,130 --> 00:00:53,308
+Then a live demo.
+
+22
+00:00:53,308 --> 00:00:54,418
+A real load run,
+
+23
+00:00:54,418 --> 00:00:56,428
+against a real small service.
+
+24
+00:00:56,428 --> 00:00:57,746
+Then a secret scan,
+
+25
+00:00:57,746 --> 00:00:59,063
+with a planted key.
+
+26
+00:00:59,613 --> 00:01:03,474
+And a lab with six checks. You write the load script, and the scanner.
+
+27
+00:01:05,524 --> 00:01:07,404
+Four kinds of performance test.
+
+28
+00:01:07,404 --> 00:01:11,284
+They all ask one question: what happens when the system is busy?
+
+29
+00:01:11,834 --> 00:01:13,114
+A performance test.
+
+30
+00:01:13,114 --> 00:01:13,721
+One user,
+
+31
+00:01:13,721 --> 00:01:14,328
+or a few.
+
+32
+00:01:14,328 --> 00:01:16,282
+How fast is a single request?
+
+33
+00:01:16,282 --> 00:01:17,765
+This is your baseline.
+
+34
+00:01:18,315 --> 00:01:19,083
+A load test.
+
+35
+00:01:19,083 --> 00:01:21,899
+The traffic you expect on a normal busy day.
+
+36
+00:01:21,899 --> 00:01:23,243
+Fifty people at once,
+
+37
+00:01:23,243 --> 00:01:23,499
+say.
+
+38
+00:01:23,499 --> 00:01:24,651
+Does it stay fast?
+
+39
+00:01:25,201 --> 00:01:26,033
+A stress test.
+
+40
+00:01:26,033 --> 00:01:27,282
+More than you expect,
+
+41
+00:01:27,282 --> 00:01:28,651
+until something breaks.
+
+42
+00:01:28,651 --> 00:01:29,840
+You learn the limit,
+
+43
+00:01:29,840 --> 00:01:31,327
+and how it fails: slowly,
+
+44
+00:01:31,327 --> 00:01:32,219
+or all at once.
+
+45
+00:01:32,769 --> 00:01:38,721
+A soak test. Normal load, for hours. It finds the slow leaks: memory, connections, disk.
+
+46
+00:01:39,271 --> 00:01:43,986
+Start small. A load test on every release beats a giant test once a year.
+
+47
+00:01:45,536 --> 00:01:47,307
+What do you measure? Three numbers.
+
+48
+00:01:47,857 --> 00:01:48,362
+Latency.
+
+49
+00:01:48,362 --> 00:01:50,069
+How long one request takes,
+
+50
+00:01:50,069 --> 00:01:51,081
+in milliseconds.
+
+51
+00:01:51,081 --> 00:01:52,788
+Do not look at the average.
+
+52
+00:01:52,788 --> 00:01:54,747
+An average hides the slow ones.
+
+53
+00:01:55,297 --> 00:01:56,854
+Look at the p95.
+
+54
+00:01:56,854 --> 00:01:57,992
+Sort all the times.
+
+55
+00:01:57,992 --> 00:02:01,585
+Ninety-five out of a hundred requests were faster than this.
+
+56
+00:02:01,585 --> 00:02:03,681
+It is what your unlucky users feel.
+
+57
+00:02:04,231 --> 00:02:08,221
+Throughput. Requests per second. How much work the system really finishes.
+
+58
+00:02:08,771 --> 00:02:14,253
+Error rate. How many requests failed. A fast answer that is an error is not a fast answer.
+
+59
+00:02:14,803 --> 00:02:16,019
+Then set a budget.
+
+60
+00:02:16,019 --> 00:02:19,193
+p95 under three hundred milliseconds,
+
+61
+00:02:19,193 --> 00:02:20,273
+and zero errors.
+
+62
+00:02:20,273 --> 00:02:23,379
+A budget turns a number into a pass or a fail.
+
+63
+00:02:24,929 --> 00:02:25,712
+Now security.
+
+64
+00:02:25,712 --> 00:02:27,578
+You do not need to be a hacker.
+
+65
+00:02:27,578 --> 00:02:29,505
+You need a few automatic checks,
+
+66
+00:02:29,505 --> 00:02:30,348
+on every push.
+
+67
+00:02:30,898 --> 00:02:31,840
+A secrets scan.
+
+68
+00:02:31,840 --> 00:02:34,604
+Look for keys and passwords inside the code.
+
+69
+00:02:34,604 --> 00:02:36,300
+This is the cheapest check,
+
+70
+00:02:36,300 --> 00:02:37,682
+and the most valuable.
+
+71
+00:02:38,232 --> 00:02:39,396
+A dependency scan.
+
+72
+00:02:39,396 --> 00:02:41,983
+Your code uses other people's libraries.
+
+73
+00:02:41,983 --> 00:02:44,312
+Is a version known to be vulnerable?
+
+74
+00:02:44,862 --> 00:02:50,216
+A code scan. A tool reads your code, and warns about risky patterns. Without running it.
+
+75
+00:02:50,766 --> 00:02:52,292
+A scan of the running app.
+
+76
+00:02:52,292 --> 00:02:53,817
+A tool probes a test copy,
+
+77
+00:02:53,817 --> 00:02:55,166
+like an attacker would,
+
+78
+00:02:55,166 --> 00:02:55,929
+from outside.
+
+79
+00:02:56,479 --> 00:02:58,188
+The idea is to shift left.
+
+80
+00:02:58,188 --> 00:03:01,016
+Find the problem on the developer's laptop,
+
+81
+00:03:01,016 --> 00:03:02,265
+or in the pipeline.
+
+82
+00:03:02,265 --> 00:03:03,448
+Not in production,
+
+83
+00:03:03,448 --> 00:03:04,500
+from a stranger.
+
+84
+00:03:06,050 --> 00:03:11,149
+Go to the lab folder.
+
+85
+00:03:12,699 --> 00:03:14,597
+Look around.
+
+86
+00:03:15,147 --> 00:03:17,850
+A small service is already running here.
+
+87
+00:03:17,850 --> 00:03:19,066
+And a demo folder,
+
+88
+00:03:19,066 --> 00:03:20,687
+with a tiny load script.
+
+89
+00:03:20,687 --> 00:03:21,092
+First,
+
+90
+00:03:21,092 --> 00:03:21,903
+one request,
+
+91
+00:03:21,903 --> 00:03:22,443
+by hand.
+
+92
+00:03:22,993 --> 00:03:27,260
+One request.
+
+93
+00:03:28,610 --> 00:03:32,685
+The answer, and twenty milliseconds. That is one user. Our baseline.
+
+94
+00:03:33,235 --> 00:03:39,144
+Read the script.
+
+95
+00:03:39,694 --> 00:03:40,099
+Short.
+
+96
+00:03:40,099 --> 00:03:40,909
+Ten workers,
+
+97
+00:03:40,909 --> 00:03:41,922
+sixty requests.
+
+98
+00:03:41,922 --> 00:03:43,205
+It times every one,
+
+99
+00:03:43,205 --> 00:03:43,947
+sorts them,
+
+100
+00:03:43,947 --> 00:03:46,513
+and takes the ninety-fifth percentile.
+
+101
+00:03:46,513 --> 00:03:47,660
+It counts errors.
+
+102
+00:03:47,660 --> 00:03:50,766
+And it exits with one if the budget is broken.
+
+103
+00:03:51,316 --> 00:03:54,111
+Run the load.
+
+104
+00:03:55,461 --> 00:03:56,579
+Sixty requests,
+
+105
+00:03:56,579 --> 00:03:57,473
+ten at once.
+
+106
+00:03:57,473 --> 00:03:58,516
+p95,
+
+107
+00:03:58,516 --> 00:04:00,380
+about fifty milliseconds.
+
+108
+00:04:00,380 --> 00:04:01,274
+Zero errors.
+
+109
+00:04:01,274 --> 00:04:01,796
+Notice,
+
+110
+00:04:01,796 --> 00:04:06,118
+ten users at once is slower than one: twenty became fifty.
+
+111
+00:04:06,118 --> 00:04:07,087
+That is load.
+
+112
+00:04:07,637 --> 00:04:12,992
+A slower path.
+
+113
+00:04:13,542 --> 00:04:17,361
+p95, five hundred and sixteen. Far over the budget.
+
+114
+00:04:17,911 --> 00:04:19,895
+The exit code.
+
+115
+00:04:20,445 --> 00:04:26,226
+One. The budget gate failed, exactly like a failing test. In CI, this is a red cross.
+
+116
+00:04:26,776 --> 00:04:33,688
+Scan for secrets.
+
+117
+00:04:34,238 --> 00:04:36,585
+Nothing printed. Check the exit code.
+
+118
+00:04:37,135 --> 00:04:39,119
+Type: echo, dollar, question mark.
+
+119
+00:04:39,669 --> 00:04:43,253
+One. For grep, one means: found nothing. That is good news here.
+
+120
+00:04:43,803 --> 00:04:47,451
+Plant a key.
+
+121
+00:04:49,401 --> 00:04:51,790
+Scan again.
+
+122
+00:04:53,540 --> 00:04:53,906
+Found.
+
+123
+00:04:53,906 --> 00:04:54,455
+The file,
+
+124
+00:04:54,455 --> 00:04:55,248
+and the line.
+
+125
+00:04:55,248 --> 00:04:56,896
+A pipeline would fail here,
+
+126
+00:04:56,896 --> 00:04:59,641
+and the key would never reach the repository.
+
+127
+00:05:00,191 --> 00:05:02,815
+Clean up.
+
+128
+00:05:03,365 --> 00:05:08,720
+Where am I?
+
+129
+00:05:09,270 --> 00:05:13,089
+Zero out of six. That is your starting line. Honest, and useful.
+
+130
+00:05:13,639 --> 00:05:15,601
+Clean up.
+
+131
+00:05:16,151 --> 00:05:19,693
+Removed. The service is stopped too. Nothing left behind.
+
+132
+00:05:21,243 --> 00:05:25,723
+Your lab task: write a real load check, and a secrets scanner. Six checks.
+
+133
+00:05:26,273 --> 00:05:28,056
+One: write load.py.
+
+134
+00:05:28,056 --> 00:05:30,581
+It uses only the standard library,
+
+135
+00:05:30,581 --> 00:05:32,215
+threads and urllib.
+
+136
+00:05:32,215 --> 00:05:34,295
+It runs and writes a report,
+
+137
+00:05:34,295 --> 00:05:34,592
+out,
+
+138
+00:05:34,592 --> 00:05:35,038
+/
+
+139
+00:05:35,038 --> 00:05:36,449
+report.json.
+
+140
+00:05:36,999 --> 00:05:39,803
+Two and three: the report has the right keys,
+
+141
+00:05:39,803 --> 00:05:40,738
+sixty requests,
+
+142
+00:05:40,738 --> 00:05:41,486
+ten workers.
+
+143
+00:05:41,486 --> 00:05:46,471
+And the p95 must be the real ninety-fifth percentile of your own list.
+
+144
+00:05:47,021 --> 00:05:51,480
+Four: a four hundred and four counts as an error, and the run exits with one.
+
+145
+00:05:52,030 --> 00:05:55,891
+Five: a budget flag. Cart passes. The slow path fails.
+
+146
+00:05:56,441 --> 00:05:57,827
+Six: scan.sh.
+
+147
+00:05:57,827 --> 00:05:59,522
+A clean folder passes.
+
+148
+00:05:59,522 --> 00:06:00,600
+A planted key,
+
+149
+00:06:00,600 --> 00:06:02,294
+or a planted password,
+
+150
+00:06:02,294 --> 00:06:02,756
+fails.
+
+151
+00:06:02,756 --> 00:06:03,912
+Then lab check,
+
+152
+00:06:03,912 --> 00:06:05,529
+until six out of six.
+
+153
+00:06:07,579 --> 00:06:10,374
+Where to find the lab. Pause here, and write it down.
+
+154
+00:06:10,924 --> 00:06:12,388
+One: the repository,
+
+155
+00:06:12,388 --> 00:06:16,708
+github.com/it-waves/devops-ai,
+
+156
+00:06:16,708 --> 00:06:19,052
+in the folder academy/lab.
+
+157
+00:06:19,602 --> 00:06:25,554
+Two: the files, lab142.sh, and shortcuts142.sh.
+
+158
+00:06:26,104 --> 00:06:31,565
+Three: install it, with sudo install, into /usr/local/sbin/.
+
+159
+00:06:32,115 --> 00:06:33,973
+Four: load the short names,
+
+160
+00:06:33,973 --> 00:06:37,002
+with source shortcuts142.sh.
+
+161
+00:06:37,002 --> 00:06:37,828
+Then lab up,
+
+162
+00:06:37,828 --> 00:06:38,516
+lab check,
+
+163
+00:06:38,516 --> 00:06:39,411
+and lab down.
+
+164
+00:06:39,961 --> 00:06:43,502
+Five: you only need Python 3. Nothing else to install.
+
+165
+00:06:44,052 --> 00:06:47,788
+Six: it only touches /opt/lab142,
+
+166
+00:06:47,788 --> 00:06:51,388
+and a small service on local port eight one four two.
+
+167
+00:06:51,388 --> 00:06:53,290
+Lab down removes everything.
+
+168
+00:06:53,840 --> 00:06:55,482
+The link is in the description.
+
+169
+00:06:57,532 --> 00:07:01,180
+Pass or fail rubric. Six points. All six to pass.
+
+170
+00:07:01,730 --> 00:07:04,653
+One: load.py runs, and writes the report.
+
+171
+00:07:05,203 --> 00:07:10,024
+Two: the report has all the keys, sixty requests, ten workers, zero errors.
+
+172
+00:07:10,574 --> 00:07:13,347
+Three: p95 is the real percentile.
+
+173
+00:07:13,897 --> 00:07:17,311
+Four: a four hundred and four is an error, and fails the run.
+
+174
+00:07:17,861 --> 00:07:21,914
+Five: the budget gate passes on cart, and fails on the slow path.
+
+175
+00:07:22,464 --> 00:07:27,776
+Six: the scanner passes a clean folder, and fails a planted key and a planted password.
+
+176
+00:07:28,326 --> 00:07:29,627
+Pass means all six.
+
+177
+00:07:31,677 --> 00:07:33,448
+Your turn, on your own machine.
+
+178
+00:07:33,998 --> 00:07:37,560
+One: lab up. Read the task file. Try the service with curl.
+
+179
+00:07:38,110 --> 00:07:43,038
+Two: write the load script, step by step. First one request, then many, with threads.
+
+180
+00:07:43,588 --> 00:07:48,196
+Three: time each one, sort the times, and take the percentile. Write the report.
+
+181
+00:07:48,746 --> 00:07:53,034
+Four: add the error count, and the budget exit code. Then write the scanner.
+
+182
+00:07:53,584 --> 00:07:57,062
+Five: lab check, until six out of six. Then lab down.
+
+183
+00:07:57,612 --> 00:07:59,446
+Pause the video, and begin now.
+
+184
+00:08:14,996 --> 00:08:15,871
+Quick check.
+
+185
+00:08:16,421 --> 00:08:19,429
+What is the difference between a load test and a stress test?
+
+186
+00:08:19,979 --> 00:08:22,603
+Why look at the p95, not the average?
+
+187
+00:08:23,153 --> 00:08:25,670
+What is a budget, and what does it do in CI?
+
+188
+00:08:26,220 --> 00:08:29,079
+Name two security checks that need no running app.
+
+189
+00:08:29,629 --> 00:08:31,835
+Objective covered: MC15,
+
+190
+00:08:31,835 --> 00:08:32,974
+objective seven.
+
+191
+00:08:32,974 --> 00:08:33,828
+Performance,
+
+192
+00:08:33,828 --> 00:08:34,184
+load,
+
+193
+00:08:34,184 --> 00:08:35,679
+and security testing,
+
+194
+00:08:35,679 --> 00:08:37,458
+and what each one proves.
+
+195
+00:08:38,008 --> 00:08:40,077
+Pause the video, and answer out loud.
+
+196
+00:08:50,627 --> 00:08:54,425
+Next: flaky tests, and tests that depend on their environment.
+
+197
+00:08:54,975 --> 00:08:58,303
+If this helped, like, share and subscribe, so you do not miss it.

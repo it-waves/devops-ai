@@ -1,0 +1,27 @@
+Lesson 142 of the DevOps Engineering Bootcamp, in the Software Testing and QA domain. Every test passed, and the page still took 20 seconds when 500 people logged in, and a secret key still reached the repository. In this lesson you learn the four kinds of performance test (performance, load, stress and soak), the three numbers to measure (latency, throughput and error rate), why you look at the p95 and never the average, and how a budget turns a number into a pass or a fail in CI. You also learn the security checks that sit beside your tests: secrets scans, dependency scans, code scans and live scans, and why you shift them left. In the live demo you run a real load test (60 requests, 10 at once) against a small real service, watch a slow path fail a 300 ms budget, then scan for a planted fake AWS key. A lab judges you from 0 of 6 to 6 of 6: you write your own load script and your own secrets scanner.
+
+Chapters
+0:00 Passing tests is not enough
+0:34 What to expect
+1:05 Four kinds of performance test
+1:45 What to measure
+2:24 Security checks
+3:05 Live: a load run and a secret scan
+5:20 Your lab task
+6:07 Where to find the lab
+6:57 Pass or fail rubric
+7:31 Your turn
+8:14 Quick check
+
+Objectives covered: MC15-O07, performance, load and security testing, and what each one proves.
+
+Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab142.sh and shortcuts142.sh). Install with: sudo install -m 755 lab142.sh /usr/local/sbin/ then run lab up, lab check and lab down after loading the short names with: source shortcuts142.sh. You only need python3. lab up works only in /opt/lab142 and starts a small service on 127.0.0.1 port 8142; lab down stops it and removes everything. Only run it on your own machine.
+
+Honest notes: the terminal demo is a real recording of a real load run against a small service that the lab starts, and of a real grep secret scan. The service is a tiny stand-in written for the lab (a fast path and a deliberately slow path), not CloudCart, and the load script is a small teaching script using only the Python standard library, not a professional load-testing tool. The key that is found is a fake key planted for the demo. The lab was run end to end: 0 of 6 before you start, 6 of 6 with a reference solution, and lab down leaves nothing behind. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
+
+Previous lesson: Tests in CI: GitHub Actions Pass/Fail Gates, Coverage and Required Checks | Lesson 141 https://youtu.be/1CbWE8CNlfc
+Next: flaky tests and environment-dependent tests.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #loadtesting #performancetesting #devsecops #devopsbootcamp
