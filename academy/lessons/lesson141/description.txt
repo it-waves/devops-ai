@@ -21,7 +21,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab141.sh and shortc
 Honest notes: the terminal demo is a real recording of pytest and the lab judge. The GitHub screens are real screenshots of real runs in github.com/it-waves/devops-ai (run 1 failed on a planted bug, run 2 passed after the fix), shown step by step, not a continuous recording. The required-status-check screen is an unsaved settings form, shown only to explain it. The lab was run end to end: 0 of 6 before you start, 6 of 6 with a reference solution, and lab down leaves nothing behind. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: Test Coverage with pytest-cov: Find Untested Code and Its Limits | Lesson 140 https://youtu.be/JzXWdg86558
-Next: performance, load and security testing.
+Next: Performance, Load and Security Testing: p95, Budgets and Secret Scans | Lesson 142 https://youtu.be/eyI6JEF5oAQ
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
