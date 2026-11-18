@@ -1,0 +1,5 @@
+service,dev_team,owner,oncall
+cart,cart,ops-handoff,-
+search,catalog,ops-handoff,-
+pay,payments,ops-handoff,-
+email,growth,ops-handoff,-

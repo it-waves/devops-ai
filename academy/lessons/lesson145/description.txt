@@ -1,0 +1,29 @@
+Lesson 145 of the DevOps Engineering Bootcamp, the first lesson of the DevOps Fundamentals domain. The same bug, the same code: in one company the developer hears back in 8 minutes, in another it takes 5.5 hours. The difference is how the people work together. In this lesson you learn the wall between development and operations and why it hurts, the four core principles (collaboration, fast feedback, shared ownership and continuous improvement), the three feedback loops (your own tests, the pipeline, production) and how to find what is slowing each one, what "you build it, you run it" and a blameless post mortem mean in practice, and three myths: DevOps is not a tool, not a team and not only speed. In the live demo, a real terminal measures both ways of working from two event logs with a small awk script (330 minutes against 8 minutes), then fixes a services list so every service is owned by the team that builds it, with one person on call from that team.
+
+Chapters
+0:00 Same bug, same code
+0:29 What to expect
+0:56 The wall between dev and ops
+1:37 Four principles
+2:19 Three feedback loops
+2:58 You build it, you run it
+3:30 Three myths
+3:55 Live: measure feedback and fix ownership
+6:14 Your practice task
+6:48 Where to find the demo files
+7:34 Self-check
+8:03 Your turn
+8:41 Quick check
+
+Objectives covered: MC16-O01, DevOps principles: collaboration, feedback and shared ownership.
+
+Demo files: github.com/it-waves/devops-ai, in academy/lesson145-demo (wall.log, shared.log, services.csv, members.csv and a README with the answers). You only need a shell and awk. This domain has no lab on purpose: it is about ideas and decisions, so the practice is a plain terminal exercise with a self-check. Labs return in the domains where you build and break something.
+
+Honest notes: the terminal demo is a real recording of a real shell and awk, run on small example logs written for this lesson. The timelines (a 5.5-hour wall and an 8-minute pipeline) are an example, not a measurement of a real company. The narration is synthetic speech. The hook, plan, wall race, principles, loops, ownership, myths, task, files, self-check and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Software Testing Mastery: Find the Bug, Fix Flaky Tests, Gate with CI and Prove It | Lesson 144 https://youtu.be/YEqxngkZqFU
+Next: continuous integration, continuous delivery and continuous deployment, and how they differ.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #devopsprinciples #cicd #sre #devopsbootcamp

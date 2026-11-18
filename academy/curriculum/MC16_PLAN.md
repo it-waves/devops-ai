@@ -12,4 +12,7 @@
 | L152 | O08 | Design a practical DevOps improvement plan for CloudCart | Illustrated plan; written plan file checked by a lab |
 | L153 | mastery | DevOps fundamentals mastery scenario (lab up/check/down, 0/N to N/N) | live; lab info on screen |
 
-Each lesson: demo, independent task with lab (up/check/down tested 0/N to N/N), pass/fail rubric, objective ID in description. Honest labels as always. Next domain after MC16: MC17 Jenkins.
+Each lesson: demo, practice task, self-check list (no lab, see policy below), objective ID in description. Honest labels as always. Next domain after MC16: MC17 Jenkins.
+
+## Lab policy (owner decision, 2026-11-18)
+MC16 is conceptual: NO lab judge per lesson. Use illustrations plus one small real terminal demo with published demo files (academy/lessonNNN-demo), and a self-check instead of a lab rubric. A domain needs a lab only when students build, run or break something real (Linux, Git, Docker, databases, testing, Jenkins, Terraform...). Decide per domain; the mastery lesson of a conceptual domain is a documented scenario (written plan checked against a rubric), not a lab.
