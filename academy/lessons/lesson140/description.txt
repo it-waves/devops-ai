@@ -20,7 +20,7 @@ Get the lab: github.com/it-waves/devops-ai, in academy/lab (lab140.sh and shortc
 Honest notes: the terminal demo and the coverage report in Chrome are one real, continuous recording of pytest-cov and the real HTML report that coverage.py writes. The lab was run end to end: it passes 0 of 6 before you start and 6 of 6 with a reference solution, and lab down leaves nothing behind. The narration is synthetic speech. The hook, plan, concept, task, lab info, rubric and recap screens are labelled illustrations, not captures. Your own run is unverified until you do it.
 
 Previous lesson: Test the CloudCart API: Health Checks, Status Codes and pytest | Lesson 139 https://youtu.be/Z4iCSJmieH8
-Next: Tests in the pipeline: gates and a real GitHub Actions run.
+Next: Tests in CI: GitHub Actions Pass/Fail Gates, Coverage and Required Checks | Lesson 141 https://youtu.be/1CbWE8CNlfc
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
