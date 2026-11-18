@@ -1,0 +1,27 @@
+Lesson 153 of the DevOps Engineering Bootcamp, the mastery lesson of the DevOps Fundamentals domain. Knowing the ideas is not the same as doing the work, so this lesson is a test you pass with evidence. You get a CloudCart delivery review with ten deploys, six pipeline stages and one wrong row in the data. You measure the four key metrics, doubt a result that looks too good, find the impossible row, keep a safe copy and fix it, find the bottleneck and the flow efficiency, write a six-part improvement plan, write a report, run an independent check, and clean up. The lesson ends with a look back at all eight lessons of the domain.
+
+Chapters
+0:00 Eight lessons, one test
+0:30 What to expect
+0:52 The scenario
+1:27 The six jobs
+1:56 Live: the full walk-through
+4:39 Your mastery evidence
+5:13 A look back at the domain
+5:46 Where to find the lab files
+6:20 Self-check
+6:46 Your turn
+7:22 Quick check and what is next
+
+Objectives covered: MC16 mastery evidence, a documented delivery review with results, troubleshooting and cleanup.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lesson153-demo (shop_deploys.csv, shop_stages.csv, metrics.sh, bottleneck.sh, plan.sh, check.sh and a README with the answers). The same repository holds every demo from lessons 141 to 153. You need a shell and awk. This domain has no hosted lab on purpose: the scenario runs in a plain terminal and check.sh verifies your evidence independently.
+
+Honest notes: the terminal demo is a real recording of a real shell running small scripts written for these lessons. The CloudCart numbers are example data, with one row made wrong on purpose for the troubleshooting step. The scripts are teaching stand-ins: real teams read these times from their pipeline, review and incident tools. The narration is synthetic speech. The hook, plan, scenario, jobs, evidence, domain look-back, files, self-check and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Your DevOps Improvement Plan: Write a Practical CloudCart Plan | Lesson 152 https://youtu.be/aYiqseKLCOI
+Next: the Jenkins domain.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #devopsfundamentals #devopsmastery #cloudcart #devopsmetrics #devopsbootcamp
