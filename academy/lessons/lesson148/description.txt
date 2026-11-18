@@ -23,7 +23,7 @@ Demo files: github.com/it-waves/devops-ai, in academy/lesson148-demo (naive.sh, 
 Honest notes: the terminal demo is a real recording of a real shell running small scripts written for this lesson. They are teaching stand-ins for real tools such as Nexus, a container registry and Jenkins, which come later in the bootcamp. The fingerprints on the illustration screens are example values. The narration is synthetic speech. The hook, plan, artifact, build once, repository, environments, promotion, rollback, task, files, self-check and recap screens are labelled illustrations, not captures.
 
 Previous lesson: Infrastructure as Code, Config Management and Automation Explained | Lesson 147 https://youtu.be/ooQI-lskH5Y
-Next: DevOps security, SRE and platform engineering.
+Next: DevSecOps, SRE and Platform Engineering: Error Budgets Explained | Lesson 149 https://youtu.be/TGyKPrlb1Pk
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
