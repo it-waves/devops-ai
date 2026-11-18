@@ -3,16 +3,16 @@ Lesson 149 of the DevOps Engineering Bootcamp, the fifth lesson of the DevOps Fu
 Chapters
 0:00 A secret in the code, downtime uncounted
 0:35 What to expect
-1:03 DevSecOps: shift left
+1:02 DevSecOps: shift left
 1:47 SRE, SLI and SLO
 2:37 The error budget
-3:16 Platform engineering
-3:52 How they fit together
-4:23 Live: a security gate and an error budget
+3:15 Platform engineering
+3:51 How they fit together
+4:22 Live: a security gate and an error budget
 6:02 Your practice task
 6:20 Where to find the demo files
 6:56 Self-check
-7:24 Your turn
+7:23 Your turn
 8:01 Quick check and what is next
 
 Objectives covered: MC16-O05, DevSecOps, SRE and platform engineering.
