@@ -19,10 +19,10 @@ Objectives covered: MC16-O05, DevSecOps, SRE and platform engineering.
 
 Demo files: github.com/it-waves/devops-ai, in academy/lesson149-demo (scan.sh, budget.sh, a src folder, a data folder with a week of request counts, and a README with the answers). You need a shell and awk. This domain has no lab on purpose: it is about ideas and decisions, so the practice is a plain terminal exercise with a self-check.
 
-Honest notes: the terminal demo is a real recording of a real shell running small scripts written for this lesson. The request numbers are example data, and the scan and budget scripts are teaching stand-ins for real security scanners and monitoring tools, which come later in the bootcamp. The narration is synthetic speech. The hook, plan, DevSecOps, SRE, error budget, platform, together, task, files, self-check and recap screens are labelled illustrations, not captures.
+Honest notes: the terminal demo is a real recording of a real shell running small scripts written for this lesson. The request numbers are example data, and the scan and budget scripts are teaching stand-ins for real security scanners and monitoring tools, which come later in the bootcamp. Correction: at about 5:17 the narration says "about five hundred thirty failures"; the correct number on screen, 330 failures (47 percent of the 699 allowed), is the right one. The narration is synthetic speech. The hook, plan, DevSecOps, SRE, error budget, platform, together, task, files, self-check and recap screens are labelled illustrations, not captures.
 
 Previous lesson: Build Once: Artifacts, Environments and Release Promotion | Lesson 148 https://youtu.be/ZqbZTmZbdyc
-Next: the four key DevOps metrics.
+Next: The 4 Key DevOps Metrics: DORA Explained with a Real Deploy Log | Lesson 150 https://youtu.be/WQC2nApZWpo
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
