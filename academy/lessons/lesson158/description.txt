@@ -1,0 +1,26 @@
+Lesson 158 of the DevOps Engineering Bootcamp, the fifth lesson of the Jenkins domain. A password inside a pipeline is a password waiting to leak. You learn the four places secrets leak, how the Jenkins credentials store works, then watch a real live run in Jenkins: add Secret text and Username with password credentials, open one and see it Concealed, leak a token on purpose into the build log, fix it with withCredentials and watch the log show four stars, then use both kinds together and see why masking is not a vault. You finish with the rules, the common mistakes and a lab you can repeat.
+
+Chapters
+0:00 Secrets out of pipelines
+0:26 What to expect
+0:55 Where secrets leak
+1:32 The credentials store
+2:10 Live: leak it, then fix it
+6:04 The rules
+6:37 Common mistakes
+7:13 Where to find the lab
+8:02 Your turn
+8:43 Quick check and what is next
+
+Objectives covered: MC17-O05 Manage credentials and keep secrets out of Jenkins pipelines.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab158.sh and shortcuts158.sh). Needs the Jenkins from lesson 155. "lab up" prepares the lab, "lab files" writes the leaky and the safe Jenkinsfile to ~/jenkins-lab158, and "lab down" cleans everything up. Use your own machine only, and only fake secrets.
+
+Honest notes: the Jenkins screens are a real continuous recording of Jenkins 2.580 LTS. The token and password in the demo are fake lab values made up for this lesson. Plugins in the recording came from a local update centre because of sandbox network limits. Masking only hides the exact value, as the last demo shows. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, leaks, store, rules, mistakes, files, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Build and Test CloudCart with Maven in Jenkins: Red to Green | Lesson 157 https://youtu.be/c42qeRRZNm0
+Next: triggers, quality gates and publishing artifacts.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #jenkins #jenkinscredentials #secretsmanagement #cicd #devopsbootcamp #learnjenkins

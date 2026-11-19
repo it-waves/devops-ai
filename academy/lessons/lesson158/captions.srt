@@ -1,0 +1,915 @@
+1
+00:00:00,500 --> 00:00:04,063
+A password inside a pipeline is a password waiting to leak.
+
+2
+00:00:04,613 --> 00:00:06,328
+It leaks into the repository,
+
+3
+00:00:06,328 --> 00:00:07,452
+into the build log,
+
+4
+00:00:07,452 --> 00:00:08,871
+and onto a screen share.
+
+5
+00:00:08,871 --> 00:00:09,936
+And once it leaks,
+
+6
+00:00:09,936 --> 00:00:11,887
+you have to change it everywhere.
+
+7
+00:00:12,437 --> 00:00:15,620
+Today you learn the Jenkins way: store a secret once,
+
+8
+00:00:15,620 --> 00:00:17,482
+and let the pipeline borrow it,
+
+9
+00:00:17,482 --> 00:00:17,963
+by name.
+
+10
+00:00:18,513 --> 00:00:20,018
+You will see a real leak,
+
+11
+00:00:20,018 --> 00:00:21,163
+with a real secret,
+
+12
+00:00:21,163 --> 00:00:22,186
+in the build log.
+
+13
+00:00:22,186 --> 00:00:23,451
+Then you will fix it,
+
+14
+00:00:23,451 --> 00:00:25,318
+and watch the secret disappear.
+
+15
+00:00:26,868 --> 00:00:28,297
+Here is what to expect.
+
+16
+00:00:28,847 --> 00:00:31,087
+One: the four places where secrets leak.
+
+17
+00:00:31,637 --> 00:00:36,331
+Two: how the Jenkins credentials store works, and the kinds of credential it holds.
+
+18
+00:00:36,881 --> 00:00:40,005
+Three: a live demo in the real Jenkins screens.
+
+19
+00:00:40,005 --> 00:00:41,268
+We add credentials,
+
+20
+00:00:41,268 --> 00:00:42,597
+leak one on purpose,
+
+21
+00:00:42,597 --> 00:00:43,062
+fix it,
+
+22
+00:00:43,062 --> 00:00:44,923
+then use two kinds together.
+
+23
+00:00:45,473 --> 00:00:49,591
+Four: why masking is not a vault, and the rules that keep a team safe.
+
+24
+00:00:50,141 --> 00:00:53,063
+This is objective five of the Jenkins domain.
+
+25
+00:00:55,113 --> 00:00:56,884
+Four places where secrets leak.
+
+26
+00:00:57,434 --> 00:00:58,776
+One: the Jenkinsfile.
+
+27
+00:00:58,776 --> 00:00:59,752
+It lives in git,
+
+28
+00:00:59,752 --> 00:01:03,108
+so a password typed there stays in the history forever.
+
+29
+00:01:03,658 --> 00:01:05,115
+Two: the console output.
+
+30
+00:01:05,115 --> 00:01:08,998
+Any command that prints the secret writes it into the build log,
+
+31
+00:01:08,998 --> 00:01:11,061
+for everyone who can read the job.
+
+32
+00:01:11,611 --> 00:01:13,611
+Three: the job configuration.
+
+33
+00:01:13,611 --> 00:01:18,438
+A secret pasted into a build step is plain text on the configure page.
+
+34
+00:01:18,988 --> 00:01:24,982
+Four: environment dumps. A debug line that prints every variable also prints every secret.
+
+35
+00:01:25,532 --> 00:01:29,313
+The cure is the same for all four: keep the secret out of the code,
+
+36
+00:01:29,313 --> 00:01:30,780
+and borrow it at run time.
+
+37
+00:01:32,330 --> 00:01:33,994
+How the credentials store works.
+
+38
+00:01:34,544 --> 00:01:39,408
+You add a credential once, in the credentials store. Jenkins encrypts it on disk.
+
+39
+00:01:39,958 --> 00:01:41,712
+Every credential has an ID.
+
+40
+00:01:41,712 --> 00:01:42,777
+That is its name,
+
+41
+00:01:42,777 --> 00:01:45,910
+and it is the only thing a pipeline ever mentions.
+
+42
+00:01:46,460 --> 00:01:48,810
+The pipeline says: with credentials,
+
+43
+00:01:48,810 --> 00:01:49,397
+this ID.
+
+44
+00:01:49,397 --> 00:01:52,138
+Jenkins hands the secret to that one step,
+
+45
+00:01:52,138 --> 00:01:53,052
+as a variable.
+
+46
+00:01:53,602 --> 00:01:55,954
+And if the secret appears in the log,
+
+47
+00:01:55,954 --> 00:01:58,242
+Jenkins replaces it with four stars.
+
+48
+00:01:58,242 --> 00:01:59,703
+That is called masking.
+
+49
+00:02:00,253 --> 00:02:03,801
+Credentials come in kinds: secret text for a token,
+
+50
+00:02:03,801 --> 00:02:05,401
+username with password,
+
+51
+00:02:05,401 --> 00:02:06,305
+an SSH key,
+
+52
+00:02:06,305 --> 00:02:07,279
+a secret file,
+
+53
+00:02:07,279 --> 00:02:08,531
+and a certificate.
+
+54
+00:02:10,081 --> 00:02:15,137
+A real Jenkins, again. I sign in as admin. We start with the credentials store.
+
+55
+00:02:23,687 --> 00:02:24,761
+Manage Jenkins,
+
+56
+00:02:24,761 --> 00:02:25,978
+then Credentials.
+
+57
+00:02:25,978 --> 00:02:27,338
+This page is empty.
+
+58
+00:02:27,338 --> 00:02:29,915
+Stores scoped to Jenkins: one store,
+
+59
+00:02:29,915 --> 00:02:30,846
+named System,
+
+60
+00:02:30,846 --> 00:02:32,492
+with the Global domain.
+
+61
+00:02:32,492 --> 00:02:34,354
+That is where we add ours.
+
+62
+00:02:34,904 --> 00:02:35,860
+Click System,
+
+63
+00:02:35,860 --> 00:02:36,743
+then Global.
+
+64
+00:02:36,743 --> 00:02:38,289
+Then Add Credentials.
+
+65
+00:02:38,289 --> 00:02:41,011
+Jenkins shows the kinds it can store.
+
+66
+00:02:41,011 --> 00:02:42,704
+Username with password,
+
+67
+00:02:42,704 --> 00:02:43,440
+SSH key,
+
+68
+00:02:43,440 --> 00:02:44,323
+secret file,
+
+69
+00:02:44,323 --> 00:02:45,206
+secret text,
+
+70
+00:02:45,206 --> 00:02:46,530
+and a certificate.
+
+71
+00:02:47,080 --> 00:02:48,842
+Our first one is a token,
+
+72
+00:02:48,842 --> 00:02:50,392
+so I pick Secret text,
+
+73
+00:02:50,392 --> 00:02:51,449
+and click Next.
+
+74
+00:02:51,449 --> 00:02:52,787
+Scope stays Global.
+
+75
+00:02:52,787 --> 00:02:54,971
+The secret is the token itself.
+
+76
+00:02:54,971 --> 00:02:56,662
+The ID is deploy-token,
+
+77
+00:02:56,662 --> 00:02:57,789
+short and clear.
+
+78
+00:02:57,789 --> 00:02:59,903
+A description helps your team.
+
+79
+00:02:59,903 --> 00:03:00,819
+Click Create.
+
+80
+00:03:06,369 --> 00:03:08,865
+Second one: Username with password.
+
+81
+00:03:08,865 --> 00:03:10,649
+The username is deployer,
+
+82
+00:03:10,649 --> 00:03:13,074
+the password goes in the next box,
+
+83
+00:03:13,074 --> 00:03:15,214
+and the ID is registry-login.
+
+84
+00:03:15,214 --> 00:03:15,713
+Create.
+
+85
+00:03:16,263 --> 00:03:17,366
+Both are listed,
+
+86
+00:03:17,366 --> 00:03:19,020
+with their ID and kind.
+
+87
+00:03:19,020 --> 00:03:22,053
+Now the important part: I open deploy-token,
+
+88
+00:03:22,053 --> 00:03:23,225
+and click Update.
+
+89
+00:03:23,225 --> 00:03:24,948
+Look at the secret field.
+
+90
+00:03:24,948 --> 00:03:26,189
+It says Concealed.
+
+91
+00:03:26,189 --> 00:03:27,844
+Nobody can read it back,
+
+92
+00:03:27,844 --> 00:03:29,084
+not even an admin.
+
+93
+00:03:29,634 --> 00:03:30,491
+Now the demo.
+
+94
+00:03:30,491 --> 00:03:31,085
+New Item,
+
+95
+00:03:31,085 --> 00:03:31,810
+a Pipeline,
+
+96
+00:03:31,810 --> 00:03:33,062
+named secrets-demo.
+
+97
+00:03:33,062 --> 00:03:33,458
+First,
+
+98
+00:03:33,458 --> 00:03:34,380
+the wrong way,
+
+99
+00:03:34,380 --> 00:03:36,292
+the way many beginners start.
+
+100
+00:03:36,292 --> 00:03:39,786
+The token is typed straight into the pipeline script,
+
+101
+00:03:39,786 --> 00:03:41,368
+and the stage prints it.
+
+102
+00:03:51,918 --> 00:03:52,254
+Save,
+
+103
+00:03:52,254 --> 00:03:53,195
+and Build Now.
+
+104
+00:03:53,195 --> 00:03:54,877
+Jenkins queues the build,
+
+105
+00:03:54,877 --> 00:03:55,549
+starts it,
+
+106
+00:03:55,549 --> 00:03:56,827
+and runs the stage.
+
+107
+00:03:56,827 --> 00:03:58,508
+That takes a few seconds,
+
+108
+00:03:58,508 --> 00:04:01,064
+and the stage simply prints the token,
+
+109
+00:04:01,064 --> 00:04:01,804
+as written.
+
+110
+00:04:01,804 --> 00:04:03,149
+Open Console Output.
+
+111
+00:04:03,149 --> 00:04:03,956
+There it is.
+
+112
+00:04:03,956 --> 00:04:04,695
+The secret,
+
+113
+00:04:04,695 --> 00:04:05,637
+in clear text,
+
+114
+00:04:05,637 --> 00:04:06,780
+in the build log.
+
+115
+00:04:06,780 --> 00:04:10,008
+Anyone who can read this job can read the token.
+
+116
+00:04:10,558 --> 00:04:11,724
+Now the right way.
+
+117
+00:04:11,724 --> 00:04:12,825
+I open Configure,
+
+118
+00:04:12,825 --> 00:04:14,314
+and rewrite the script.
+
+119
+00:04:14,314 --> 00:04:16,256
+Watch the editor while I type.
+
+120
+00:04:16,256 --> 00:04:18,652
+The line that held the token is gone.
+
+121
+00:04:18,652 --> 00:04:19,494
+In its place,
+
+122
+00:04:19,494 --> 00:04:22,343
+with credentials takes the ID deploy-token,
+
+123
+00:04:22,343 --> 00:04:25,127
+and hands the step a variable called TOKEN.
+
+124
+00:04:25,127 --> 00:04:26,292
+Inside that block,
+
+125
+00:04:26,292 --> 00:04:29,271
+the same echo command now prints the variable.
+
+126
+00:04:29,271 --> 00:04:31,796
+The pipeline never contains the secret,
+
+127
+00:04:31,796 --> 00:04:32,702
+only its name.
+
+128
+00:04:33,252 --> 00:04:33,660
+Build.
+
+129
+00:04:33,660 --> 00:04:35,357
+Jenkins saves the script,
+
+130
+00:04:35,357 --> 00:04:36,918
+and runs the new build.
+
+131
+00:04:36,918 --> 00:04:39,022
+This takes a few seconds again.
+
+132
+00:04:39,022 --> 00:04:40,923
+Now open the Console Output.
+
+133
+00:04:40,923 --> 00:04:42,280
+The stage still ran,
+
+134
+00:04:42,280 --> 00:04:43,638
+with the real token.
+
+135
+00:04:43,638 --> 00:04:45,606
+But the log shows four stars.
+
+136
+00:04:45,606 --> 00:04:46,692
+That is masking.
+
+137
+00:04:47,242 --> 00:04:48,684
+Now both kinds together,
+
+138
+00:04:48,684 --> 00:04:50,065
+plus a normal variable.
+
+139
+00:04:50,065 --> 00:04:53,128
+The username and password come from registry-login.
+
+140
+00:04:53,128 --> 00:04:54,269
+The plain variable,
+
+141
+00:04:54,269 --> 00:04:54,749
+APP_ENV,
+
+142
+00:04:54,749 --> 00:04:55,590
+is not secret,
+
+143
+00:04:55,590 --> 00:04:56,791
+so it stays visible.
+
+144
+00:04:56,791 --> 00:04:57,151
+Build,
+
+145
+00:04:57,151 --> 00:04:58,172
+and read the log.
+
+146
+00:04:58,172 --> 00:04:59,914
+Jenkins runs the build again.
+
+147
+00:04:59,914 --> 00:05:00,755
+While it runs,
+
+148
+00:05:00,755 --> 00:05:03,217
+notice what we print: the plain variable,
+
+149
+00:05:03,217 --> 00:05:04,238
+the build number,
+
+150
+00:05:04,238 --> 00:05:05,019
+the username,
+
+151
+00:05:05,019 --> 00:05:06,040
+and the password.
+
+152
+00:05:06,040 --> 00:05:08,742
+Jenkins only masks what it knows is a secret.
+
+153
+00:05:08,742 --> 00:05:09,943
+Secrets are starred,
+
+154
+00:05:09,943 --> 00:05:11,925
+and the plain values are visible.
+
+155
+00:05:24,475 --> 00:05:25,470
+One last lesson,
+
+156
+00:05:25,470 --> 00:05:26,279
+about limits.
+
+157
+00:05:26,279 --> 00:05:27,336
+I open Configure,
+
+158
+00:05:27,336 --> 00:05:29,264
+and add one line to the script.
+
+159
+00:05:29,264 --> 00:05:32,623
+The line pipes the token through a command called rev,
+
+160
+00:05:32,623 --> 00:05:34,365
+which prints text backwards.
+
+161
+00:05:34,365 --> 00:05:36,355
+If a step transforms the secret,
+
+162
+00:05:36,355 --> 00:05:38,470
+for example it prints it reversed,
+
+163
+00:05:38,470 --> 00:05:40,460
+Jenkins no longer recognises it,
+
+164
+00:05:40,460 --> 00:05:42,326
+and it shows up in clear text.
+
+165
+00:05:42,326 --> 00:05:42,762
+I save,
+
+166
+00:05:42,762 --> 00:05:44,006
+and build once more.
+
+167
+00:05:44,006 --> 00:05:45,001
+Jenkins runs it,
+
+168
+00:05:45,001 --> 00:05:46,618
+and we wait a few seconds.
+
+169
+00:05:46,618 --> 00:05:48,795
+Masking only hides the exact value.
+
+170
+00:05:57,345 --> 00:05:59,067
+So masking is a safety net,
+
+171
+00:05:59,067 --> 00:05:59,832
+not a vault.
+
+172
+00:05:59,832 --> 00:06:03,212
+The real protection is who may read and edit the job.
+
+173
+00:06:04,762 --> 00:06:07,237
+Masking is not a vault. These are the rules.
+
+174
+00:06:07,787 --> 00:06:11,092
+One: never type a secret into a Jenkinsfile,
+
+175
+00:06:11,092 --> 00:06:11,900
+a job step,
+
+176
+00:06:11,900 --> 00:06:12,561
+or a log.
+
+177
+00:06:12,561 --> 00:06:13,736
+Use credentials,
+
+178
+00:06:13,736 --> 00:06:14,251
+always.
+
+179
+00:06:14,801 --> 00:06:18,577
+Two: never print a secret, or transform it, not even to debug.
+
+180
+00:06:19,127 --> 00:06:23,692
+Three: give each credential the smallest scope, and only to the jobs that need it.
+
+181
+00:06:24,242 --> 00:06:29,127
+Four: control who can edit pipelines. Whoever edits the script can reach the secret.
+
+182
+00:06:29,677 --> 00:06:30,485
+Five: rotate.
+
+183
+00:06:30,485 --> 00:06:32,348
+Change a secret on a schedule,
+
+184
+00:06:32,348 --> 00:06:34,336
+and at once when someone leaves.
+
+185
+00:06:34,336 --> 00:06:36,013
+You change it in one place.
+
+186
+00:06:37,563 --> 00:06:39,440
+Five mistakes with credentials.
+
+187
+00:06:39,990 --> 00:06:44,366
+One: a secret as a plain environment variable in the Jenkinsfile.
+
+188
+00:06:44,366 --> 00:06:45,228
+It is in git,
+
+189
+00:06:45,228 --> 00:06:46,156
+in clear text.
+
+190
+00:06:46,706 --> 00:06:50,994
+Two: echo of a secret, to see if it works. It works, and it is in the log.
+
+191
+00:06:51,544 --> 00:06:56,984
+Three: one global admin token for every job. When it leaks, everything is exposed.
+
+192
+00:06:57,534 --> 00:07:00,190
+Four: a credential ID that does not match.
+
+193
+00:07:00,190 --> 00:07:03,218
+The build fails with: could not find credentials.
+
+194
+00:07:03,218 --> 00:07:04,391
+Check the spelling,
+
+195
+00:07:04,391 --> 00:07:05,256
+and the scope.
+
+196
+00:07:05,806 --> 00:07:11,566
+Five: never rotating. A secret that never changes is a secret that someone already has.
+
+197
+00:07:13,116 --> 00:07:15,911
+Where to find the lab. Pause here, and write it down.
+
+198
+00:07:16,461 --> 00:07:17,925
+One: the repository,
+
+199
+00:07:17,925 --> 00:07:22,245
+git hub dot com slash it dash waves slash dev ops dash A I,
+
+200
+00:07:22,245 --> 00:07:24,589
+in the folder academy slash lab.
+
+201
+00:07:25,139 --> 00:07:31,091
+Two: the files, lab one fifty-eight dot S H, and shortcuts one fifty-eight dot S H.
+
+202
+00:07:31,641 --> 00:07:37,102
+Three: install it, with sudo install, into slash user slash local slash S bin.
+
+203
+00:07:37,652 --> 00:07:39,456
+Four: load the short names,
+
+204
+00:07:39,456 --> 00:07:42,528
+with source shortcuts one fifty-eight dot S H.
+
+205
+00:07:42,528 --> 00:07:43,330
+Then lab up,
+
+206
+00:07:43,330 --> 00:07:44,265
+and lab files.
+
+207
+00:07:44,815 --> 00:07:49,636
+Five: lab files writes the leaky and the safe pipeline scripts into a folder,
+
+208
+00:07:49,636 --> 00:07:50,575
+ready to paste.
+
+209
+00:07:51,125 --> 00:07:54,661
+Six: you need the Jenkins from lesson one fifty-five.
+
+210
+00:07:54,661 --> 00:07:57,931
+Lab down removes the lab credentials and the job.
+
+211
+00:07:58,481 --> 00:08:00,123
+The link is in the description.
+
+212
+00:08:02,173 --> 00:08:03,944
+Your turn, on your own machine.
+
+213
+00:08:04,494 --> 00:08:07,416
+One: lab up, then lab files, and read both scripts.
+
+214
+00:08:07,966 --> 00:08:13,342
+Two: add a secret text credential, with the ID deploy-token. Use a fake value.
+
+215
+00:08:13,892 --> 00:08:17,519
+Three: build the leaky script, and find the secret in the console.
+
+216
+00:08:18,069 --> 00:08:22,080
+Four: build the safe script, and check that the log shows four stars.
+
+217
+00:08:22,630 --> 00:08:25,382
+Five: lab down, to remove everything you made.
+
+218
+00:08:25,932 --> 00:08:27,766
+Pause the video, and begin now.
+
+219
+00:08:43,316 --> 00:08:44,191
+Quick check.
+
+220
+00:08:44,741 --> 00:08:46,085
+Where do secrets leak?
+
+221
+00:08:46,635 --> 00:08:49,237
+What does a pipeline mention, instead of the secret?
+
+222
+00:08:49,787 --> 00:08:52,219
+What does masking do, and what can it not do?
+
+223
+00:08:52,769 --> 00:08:55,948
+Which rule do you break, if you echo a secret to debug?
+
+224
+00:08:56,498 --> 00:08:58,847
+Objective covered: MC17,
+
+225
+00:08:58,847 --> 00:08:59,915
+objective five.
+
+226
+00:08:59,915 --> 00:09:03,901
+Managing credentials and environment variables securely.
+
+227
+00:09:04,451 --> 00:09:06,520
+Pause the video, and answer out loud.
+
+228
+00:09:17,070 --> 00:09:19,886
+Next: triggers, quality gates and publishing.
+
+229
+00:09:20,436 --> 00:09:23,764
+If this helped, like, share and subscribe, so you do not miss it.
