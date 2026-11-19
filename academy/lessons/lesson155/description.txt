@@ -1,0 +1,24 @@
+Lesson 155 of the DevOps Engineering Bootcamp, the second lesson of the Jenkins domain. A Jenkins server builds and deploys your code, so whoever controls it controls your delivery. In this lesson you learn how Jenkins is installed (package, container or war file), four safety rules (Java 21, never run as root, a proxy with HTTPS, protect and back up Jenkins home), and then you watch the real setup wizard on a brand new Jenkins 2.580 LTS: unlock with the one time admin password, install the suggested plugins, create your own admin, set the Jenkins URL, check the three security settings, create a second user, review the system settings and see where updates appear.
+
+Chapters
+0:00 A password you never set
+0:29 What to expect
+0:53 Install it safely
+1:55 Live: the real setup wizard
+5:51 First-day checklist
+6:22 Where to find the lab
+7:10 Your turn
+7:51 Quick check and what is next
+
+Objectives covered: MC17-O02 Install Jenkins safely and configure initial administration.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab155.sh and shortcuts155.sh). Needs Java 21 and internet. Run "lab up", open localhost:8080, run "lab pass" to print the unlock password, and "lab down" removes everything. Use your own machine only, as a normal user.
+
+Honest notes: the setup screens are a real continuous recording of a brand new Jenkins 2.580 LTS. The coloured boxes and labels on top are overlays added for teaching. In the recording, plugins were installed from the Jenkins Maven repository through a local update centre because of sandbox network limits; the wizard screens are the same. Jenkins ran as a normal non-root user. The lab password is a simple throw-away one for a lab machine: use a long password from a password manager in real life. The narration is synthetic speech. The hook, plan, install-rules, checklist, files, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Jenkins Explained: A Live UI Tour, Controller, Agents and Executors | Lesson 154 https://youtu.be/RuIaLXgD9tM
+Next: your first Jenkinsfile, a pipeline as code.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #jenkins #jenkinstutorial #jenkinssecurity #devopsbootcamp #learnjenkins

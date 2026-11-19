@@ -1,0 +1,811 @@
+1
+00:00:00,500 --> 00:00:05,919
+You downloaded Jenkins. You started it. And a page asks you for a password you never set.
+
+2
+00:00:06,469 --> 00:00:07,642
+What is that password?
+
+3
+00:00:07,642 --> 00:00:08,282
+Where is it?
+
+4
+00:00:08,282 --> 00:00:11,802
+And what should you set up before anyone else touches this server?
+
+5
+00:00:12,352 --> 00:00:16,606
+A Jenkins server that builds and deploys your code is a powerful thing.
+
+6
+00:00:16,606 --> 00:00:17,804
+Whoever controls it,
+
+7
+00:00:17,804 --> 00:00:19,182
+controls your delivery.
+
+8
+00:00:19,182 --> 00:00:21,099
+So the first ten minutes matter.
+
+9
+00:00:21,649 --> 00:00:23,754
+Today you install Jenkins safely,
+
+10
+00:00:23,754 --> 00:00:26,433
+and you do the first administration steps,
+
+11
+00:00:26,433 --> 00:00:27,071
+on screen,
+
+12
+00:00:27,071 --> 00:00:28,027
+click by click.
+
+13
+00:00:29,577 --> 00:00:31,006
+Here is what to expect.
+
+14
+00:00:31,556 --> 00:00:35,247
+One: how Jenkins is installed, and the safe way to run it.
+
+15
+00:00:35,797 --> 00:00:41,600
+Two: the real setup wizard. Unlock, plugins, first admin, and the Jenkins URL.
+
+16
+00:00:42,150 --> 00:00:44,859
+Three: the security checks that most people skip.
+
+17
+00:00:45,409 --> 00:00:49,057
+Four: your own user accounts, the system settings, and updates.
+
+18
+00:00:49,607 --> 00:00:52,316
+This is objective two of the Jenkins domain.
+
+19
+00:00:54,366 --> 00:00:55,625
+Install it safely.
+
+20
+00:00:56,175 --> 00:00:57,948
+Jenkins is a Java program,
+
+21
+00:00:57,948 --> 00:00:59,107
+so it needs Java.
+
+22
+00:00:59,107 --> 00:01:01,358
+This course uses Java twenty one,
+
+23
+00:01:01,358 --> 00:01:05,519
+which the current long term support line of Jenkins supports.
+
+24
+00:01:06,069 --> 00:01:07,864
+You can run it three ways.
+
+25
+00:01:07,864 --> 00:01:08,762
+As a package,
+
+26
+00:01:08,762 --> 00:01:09,383
+on Linux.
+
+27
+00:01:09,383 --> 00:01:10,419
+As a container.
+
+28
+00:01:10,419 --> 00:01:11,455
+Or as one file,
+
+29
+00:01:11,455 --> 00:01:12,352
+the war file,
+
+30
+00:01:12,352 --> 00:01:13,595
+started with Java.
+
+31
+00:01:13,595 --> 00:01:16,081
+All three give you the same Jenkins.
+
+32
+00:01:16,081 --> 00:01:16,840
+In our lab,
+
+33
+00:01:16,840 --> 00:01:18,221
+we use the war file,
+
+34
+00:01:18,221 --> 00:01:20,362
+because you can see everything.
+
+35
+00:01:20,912 --> 00:01:23,123
+Rule one: never run Jenkins as root.
+
+36
+00:01:23,123 --> 00:01:24,720
+Make a normal user for it.
+
+37
+00:01:24,720 --> 00:01:26,378
+If a build ever goes wrong,
+
+38
+00:01:26,378 --> 00:01:29,019
+root would let it damage the whole machine.
+
+39
+00:01:29,569 --> 00:01:32,816
+Rule two: Jenkins listens on port 8080.
+
+40
+00:01:32,816 --> 00:01:33,898
+For a real team,
+
+41
+00:01:33,898 --> 00:01:36,401
+put it behind a proxy with HTTPS,
+
+42
+00:01:36,401 --> 00:01:39,040
+so passwords are not sent in the clear.
+
+43
+00:01:39,040 --> 00:01:42,219
+And do not open the port to the whole internet.
+
+44
+00:01:42,769 --> 00:01:45,289
+Rule three: know where Jenkins home is.
+
+45
+00:01:45,289 --> 00:01:46,129
+All settings,
+
+46
+00:01:46,129 --> 00:01:47,938
+jobs and secrets live there.
+
+47
+00:01:47,938 --> 00:01:48,648
+Protect it,
+
+48
+00:01:48,648 --> 00:01:49,617
+and back it up.
+
+49
+00:01:50,167 --> 00:01:54,370
+Rule four: use the long term support line, and update it regularly.
+
+50
+00:01:55,920 --> 00:01:57,249
+Now the real thing.
+
+51
+00:01:57,249 --> 00:01:58,649
+A brand new Jenkins,
+
+52
+00:01:58,649 --> 00:01:59,558
+never set up,
+
+53
+00:01:59,558 --> 00:02:00,608
+on one machine.
+
+54
+00:02:00,608 --> 00:02:04,176
+This is one continuous recording of the real setup.
+
+55
+00:02:04,726 --> 00:02:05,685
+I open Chrome,
+
+56
+00:02:05,685 --> 00:02:07,055
+and type localhost,
+
+57
+00:02:07,055 --> 00:02:08,425
+colon 8080.
+
+58
+00:02:08,425 --> 00:02:10,753
+Jenkins does not show a dashboard.
+
+59
+00:02:10,753 --> 00:02:12,397
+It shows Unlock Jenkins.
+
+60
+00:02:12,397 --> 00:02:14,109
+This is a safety feature.
+
+61
+00:02:14,109 --> 00:02:17,191
+Until you prove that you control the machine,
+
+62
+00:02:17,191 --> 00:02:19,041
+nobody can set anything up.
+
+63
+00:02:19,591 --> 00:02:23,600
+The page names a file on the server: initial admin password.
+
+64
+00:02:23,600 --> 00:02:27,341
+Jenkins wrote a one time password there when it started.
+
+65
+00:02:27,341 --> 00:02:29,746
+Only someone who can read that file,
+
+66
+00:02:29,746 --> 00:02:30,481
+or the log,
+
+67
+00:02:30,481 --> 00:02:31,350
+is the owner.
+
+68
+00:02:31,350 --> 00:02:32,686
+I copy the password,
+
+69
+00:02:32,686 --> 00:02:34,023
+paste it in the box,
+
+70
+00:02:34,023 --> 00:02:35,292
+and click Continue.
+
+71
+00:02:35,842 --> 00:02:37,140
+Customize Jenkins.
+
+72
+00:02:37,140 --> 00:02:38,006
+Two choices.
+
+73
+00:02:38,006 --> 00:02:42,045
+Install suggested plugins gives you the common set: Git,
+
+74
+00:02:42,045 --> 00:02:42,767
+pipelines,
+
+75
+00:02:42,767 --> 00:02:43,632
+credentials,
+
+76
+00:02:43,632 --> 00:02:44,426
+timestamps,
+
+77
+00:02:44,426 --> 00:02:45,075
+and more.
+
+78
+00:02:45,075 --> 00:02:48,753
+Select plugins to install lets you pick one by one.
+
+79
+00:02:48,753 --> 00:02:49,763
+As a beginner,
+
+80
+00:02:49,763 --> 00:02:51,422
+take the suggested set.
+
+81
+00:02:51,422 --> 00:02:54,019
+You can add or remove plugins later.
+
+82
+00:02:54,019 --> 00:02:56,471
+I click Install suggested plugins.
+
+83
+00:02:57,021 --> 00:03:00,384
+Jenkins now downloads and installs the plugins.
+
+84
+00:03:00,384 --> 00:03:03,747
+Each tile turns green when its plugin is ready.
+
+85
+00:03:03,747 --> 00:03:04,963
+If one turns red,
+
+86
+00:03:04,963 --> 00:03:05,893
+do not panic.
+
+87
+00:03:05,893 --> 00:03:06,895
+You can retry,
+
+88
+00:03:06,895 --> 00:03:07,753
+or continue,
+
+89
+00:03:07,753 --> 00:03:10,258
+and fix it later in Manage Jenkins.
+
+90
+00:03:10,258 --> 00:03:12,189
+This takes a minute or two.
+
+91
+00:03:34,739 --> 00:03:36,375
+Create First Admin User.
+
+92
+00:03:36,375 --> 00:03:38,078
+This is your own account.
+
+93
+00:03:38,078 --> 00:03:39,237
+Type a user name,
+
+94
+00:03:39,237 --> 00:03:40,872
+a strong password twice,
+
+95
+00:03:40,872 --> 00:03:41,894
+your full name,
+
+96
+00:03:41,894 --> 00:03:42,780
+and an email.
+
+97
+00:03:42,780 --> 00:03:45,506
+In this lab I use a simple lab password,
+
+98
+00:03:45,506 --> 00:03:47,891
+because it is a throw away machine.
+
+99
+00:03:47,891 --> 00:03:48,777
+In real life,
+
+100
+00:03:48,777 --> 00:03:51,775
+use a long password from a password manager.
+
+101
+00:03:51,775 --> 00:03:53,342
+Then Save and Continue.
+
+102
+00:04:01,892 --> 00:04:03,532
+Instance Configuration.
+
+103
+00:04:03,532 --> 00:04:08,737
+The Jenkins URL is the address that everyone uses to reach this server.
+
+104
+00:04:08,737 --> 00:04:11,946
+Jenkins puts it in emails and in build links.
+
+105
+00:04:11,946 --> 00:04:13,515
+Here it is localhost,
+
+106
+00:04:13,515 --> 00:04:14,941
+colon 8080.
+
+107
+00:04:14,941 --> 00:04:16,153
+On a real server,
+
+108
+00:04:16,153 --> 00:04:17,436
+set the real name,
+
+109
+00:04:17,436 --> 00:04:18,506
+with HTTPS.
+
+110
+00:04:18,506 --> 00:04:20,217
+I click Save and Finish.
+
+111
+00:04:20,767 --> 00:04:21,863
+Jenkins is ready.
+
+112
+00:04:21,863 --> 00:04:23,667
+I click Start using Jenkins.
+
+113
+00:04:23,667 --> 00:04:25,342
+And here is the dashboard,
+
+114
+00:04:25,342 --> 00:04:27,082
+with our own admin account.
+
+115
+00:04:27,632 --> 00:04:31,273
+Now the part that many people skip: check the security.
+
+116
+00:04:31,273 --> 00:04:32,266
+Manage Jenkins,
+
+117
+00:04:32,266 --> 00:04:33,193
+then Security.
+
+118
+00:04:33,193 --> 00:04:36,371
+Authentication says: Jenkins' own user database.
+
+119
+00:04:36,371 --> 00:04:38,358
+Allow users to sign up is off,
+
+120
+00:04:38,358 --> 00:04:40,741
+so strangers cannot create accounts.
+
+121
+00:04:40,741 --> 00:04:44,184
+Authorization says: Logged in users can do anything.
+
+122
+00:04:44,184 --> 00:04:45,706
+That is fine for a lab.
+
+123
+00:04:45,706 --> 00:04:47,891
+And anonymous read access is off.
+
+124
+00:04:47,891 --> 00:04:50,672
+Someone who is not signed in sees nothing.
+
+125
+00:04:50,672 --> 00:04:51,864
+Check these three,
+
+126
+00:04:51,864 --> 00:04:52,592
+every time.
+
+127
+00:04:53,142 --> 00:04:53,489
+Next,
+
+128
+00:04:53,489 --> 00:04:53,905
+Users.
+
+129
+00:04:53,905 --> 00:04:55,501
+Back in Manage Jenkins,
+
+130
+00:04:55,501 --> 00:04:55,917
+Users.
+
+131
+00:04:55,917 --> 00:04:58,068
+Here is the one account I made.
+
+132
+00:04:58,068 --> 00:05:00,150
+Create User adds a second one.
+
+133
+00:05:00,150 --> 00:05:02,648
+Give every person their own account.
+
+134
+00:05:02,648 --> 00:05:04,730
+Never share the admin account.
+
+135
+00:05:04,730 --> 00:05:06,881
+I create a user called dev one.
+
+136
+00:05:07,431 --> 00:05:08,189
+Now System.
+
+137
+00:05:08,189 --> 00:05:10,810
+Here you can change the Jenkins URL,
+
+138
+00:05:10,810 --> 00:05:12,396
+and the system message.
+
+139
+00:05:12,396 --> 00:05:13,154
+Then Nodes,
+
+140
+00:05:13,154 --> 00:05:14,395
+the built in node,
+
+141
+00:05:14,395 --> 00:05:15,361
+and Configure.
+
+142
+00:05:15,361 --> 00:05:17,567
+Look at the number of executors.
+
+143
+00:05:17,567 --> 00:05:18,257
+It is two.
+
+144
+00:05:18,257 --> 00:05:20,395
+Many real teams set it to zero,
+
+145
+00:05:20,395 --> 00:05:22,394
+so builds run only on agents.
+
+146
+00:05:22,394 --> 00:05:24,049
+In this lab we keep two.
+
+147
+00:05:24,599 --> 00:05:25,142
+Finally,
+
+148
+00:05:25,142 --> 00:05:26,498
+plugins and updates.
+
+149
+00:05:26,498 --> 00:05:27,787
+On the Updates tab,
+
+150
+00:05:27,787 --> 00:05:32,399
+Jenkins tells you when a plugin has a new version or a security fix.
+
+151
+00:05:32,399 --> 00:05:33,417
+Read the notes,
+
+152
+00:05:33,417 --> 00:05:34,570
+and update often.
+
+153
+00:05:34,570 --> 00:05:39,725
+A Jenkins that is never updated becomes the weakest machine in your company.
+
+154
+00:05:40,275 --> 00:05:42,111
+That is a safe first setup.
+
+155
+00:05:42,111 --> 00:05:42,587
+Unlock,
+
+156
+00:05:42,587 --> 00:05:43,811
+suggested plugins,
+
+157
+00:05:43,811 --> 00:05:44,831
+your own admin,
+
+158
+00:05:44,831 --> 00:05:45,919
+the right URL,
+
+159
+00:05:45,919 --> 00:05:47,075
+security checked,
+
+160
+00:05:47,075 --> 00:05:48,639
+one account per person,
+
+161
+00:05:48,639 --> 00:05:50,067
+and updates in sight.
+
+162
+00:05:51,617 --> 00:05:53,132
+Your first-day checklist.
+
+163
+00:05:53,682 --> 00:05:57,266
+One: Jenkins runs as a normal user, never as root.
+
+164
+00:05:57,816 --> 00:06:01,890
+Two: you unlocked it with the one time password, and made your own admin.
+
+165
+00:06:02,440 --> 00:06:05,214
+Three: sign up is off, and anonymous read is off.
+
+166
+00:06:05,764 --> 00:06:09,710
+Four: every person has their own account. Nobody shares admin.
+
+167
+00:06:10,260 --> 00:06:15,850
+Five: the Jenkins URL is right, and HTTPS is on, for a real server.
+
+168
+00:06:16,400 --> 00:06:21,328
+Six: plugins are few, and updates are checked. And Jenkins home is backed up.
+
+169
+00:06:22,878 --> 00:06:25,673
+Where to find the lab. Pause here, and write it down.
+
+170
+00:06:26,223 --> 00:06:27,687
+One: the repository,
+
+171
+00:06:27,687 --> 00:06:32,007
+git hub dot com slash it dash waves slash dev ops dash A I,
+
+172
+00:06:32,007 --> 00:06:34,351
+in the folder academy slash lab.
+
+173
+00:06:34,901 --> 00:06:41,066
+Two: the files, lab155.sh, and shortcuts155.sh.
+
+174
+00:06:41,616 --> 00:06:47,077
+Three: install it, with sudo install, into slash user slash local slash S bin.
+
+175
+00:06:47,627 --> 00:06:49,462
+Four: load the short names,
+
+176
+00:06:49,462 --> 00:06:52,520
+with source shortcuts155.sh.
+
+177
+00:06:52,520 --> 00:06:53,336
+Then lab up,
+
+178
+00:06:53,336 --> 00:06:54,219
+and lab down.
+
+179
+00:06:54,769 --> 00:06:56,764
+Five: you need Java twenty one,
+
+180
+00:06:56,764 --> 00:06:58,502
+and an internet connection.
+
+181
+00:06:58,502 --> 00:07:00,690
+The lab downloads Jenkins for you,
+
+182
+00:07:00,690 --> 00:07:02,620
+and shows you the unlock page.
+
+183
+00:07:03,170 --> 00:07:07,010
+Six: only on your own machine. Lab down removes everything.
+
+184
+00:07:07,560 --> 00:07:09,203
+The link is in the description.
+
+185
+00:07:11,253 --> 00:07:13,024
+Your turn, on your own machine.
+
+186
+00:07:13,574 --> 00:07:16,944
+One: lab up. Open localhost:8080.
+
+187
+00:07:17,494 --> 00:07:21,270
+Two: find the initial admin password, and unlock Jenkins.
+
+188
+00:07:21,820 --> 00:07:25,810
+Three: install the suggested plugins, and create your own admin.
+
+189
+00:07:26,360 --> 00:07:30,178
+Four: open Security, and check sign up and anonymous read.
+
+190
+00:07:30,728 --> 00:07:33,566
+Five: create a second user. Then lab down.
+
+191
+00:07:34,116 --> 00:07:35,950
+Pause the video, and begin now.
+
+192
+00:07:51,500 --> 00:07:52,375
+Quick check.
+
+193
+00:07:52,925 --> 00:07:55,506
+Why does Jenkins ask for a password you never set?
+
+194
+00:07:56,056 --> 00:07:58,189
+Why should Jenkins never run as root?
+
+195
+00:07:58,739 --> 00:08:01,150
+Which two security settings do you check first?
+
+196
+00:08:01,700 --> 00:08:04,047
+Why does every person need their own account?
+
+197
+00:08:04,597 --> 00:08:06,976
+Objective covered: MC17,
+
+198
+00:08:06,976 --> 00:08:07,985
+objective two.
+
+199
+00:08:07,985 --> 00:08:09,860
+Installing Jenkins safely,
+
+200
+00:08:09,860 --> 00:08:12,383
+and the first administration steps.
+
+201
+00:08:12,933 --> 00:08:15,003
+Pause the video, and answer out loud.
+
+202
+00:08:25,553 --> 00:08:28,881
+Next: your first Jenkinsfile, a pipeline as code.
+
+203
+00:08:29,431 --> 00:08:32,759
+If this helped, like, share and subscribe, so you do not miss it.
