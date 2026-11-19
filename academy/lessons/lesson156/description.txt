@@ -1,0 +1,26 @@
+Lesson 156 of the DevOps Engineering Bootcamp, the third lesson of the Jenkins domain. Instead of clicking through Jenkins, you write the whole delivery process as code in a Jenkinsfile. You learn the five parts of a declarative pipeline (pipeline, agent, stages, steps, post), how declarative differs from scripted, and then you build one live in real Jenkins 2.580 LTS: a one-stage Hello pipeline, then Build, Test and Deploy stages, then a post section with always, success and failure, and finally a deliberate failure so you can read the red stage, the skipped Deploy and the failure message.
+
+Chapters
+0:00 Your pipeline, written down
+0:34 What to expect
+1:01 Anatomy of a Jenkinsfile
+1:52 Declarative or scripted
+2:37 Live: your first pipeline
+5:42 The post section
+6:17 Common mistakes
+6:57 Where to find the lab
+7:47 Your turn
+8:25 Quick check and what is next
+
+Objectives covered: MC17-O03 Write a Jenkinsfile: stages, steps, agents and post.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab156.sh and shortcuts156.sh). "lab files" writes four ready Jenkinsfiles (version 1 to 4) to ~/jenkins-lab156 for you to paste into a Pipeline job on the Jenkins from Lesson 155; "lab clean" removes them. Use your own machine only.
+
+Honest notes: the Jenkins screens are a real continuous recording of Jenkins 2.580 LTS, with the Jenkinsfile typed into the job's script box and built for real. The coloured boxes and labels on top are overlays added for teaching. Plugins in the recording came from the Jenkins Maven repository through a local update centre because of sandbox network limits; the screens are the same. The stage commands are teaching stand-ins that print messages; real Maven builds come in the next lessons. The narration is synthetic speech. The hook, plan, anatomy, comparison, post, mistakes, files, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Install Jenkins Safely: Unlock, First Admin and Security Checks | Lesson 155 PREV_LINK
+Next: building the CloudCart application with Maven in Jenkins.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #jenkins #jenkinsfile #jenkinspipeline #devopsbootcamp #learnjenkins
