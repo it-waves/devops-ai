@@ -1,0 +1,731 @@
+1
+00:00:00,500 --> 00:00:01,845
+It works on my machine.
+
+2
+00:00:01,845 --> 00:00:03,892
+Every team has heard that sentence,
+
+3
+00:00:03,892 --> 00:00:05,705
+and every team has paid for it.
+
+4
+00:00:06,255 --> 00:00:10,479
+Jenkins fixes it with one rule: the build runs somewhere neutral,
+
+5
+00:00:10,479 --> 00:00:11,779
+from the repository,
+
+6
+00:00:11,779 --> 00:00:13,338
+the same way every time.
+
+7
+00:00:13,888 --> 00:00:14,285
+Today,
+
+8
+00:00:14,285 --> 00:00:18,060
+Jenkins builds and tests the real CloudCart application,
+
+9
+00:00:18,060 --> 00:00:18,789
+with Maven,
+
+10
+00:00:18,789 --> 00:00:21,504
+and shows you the test results as charts.
+
+11
+00:00:22,054 --> 00:00:23,804
+You will see a build go green,
+
+12
+00:00:23,804 --> 00:00:25,087
+then break on purpose,
+
+13
+00:00:25,087 --> 00:00:25,962
+then get fixed.
+
+14
+00:00:25,962 --> 00:00:28,411
+And you will learn how to read every step.
+
+15
+00:00:29,961 --> 00:00:31,390
+Here is what to expect.
+
+16
+00:00:31,940 --> 00:00:34,820
+One: how a change travels from a commit to a result.
+
+17
+00:00:35,370 --> 00:00:39,594
+Two: the Jenkinsfile that lives inside the CloudCart repository.
+
+18
+00:00:40,144 --> 00:00:41,504
+Three: a live build.
+
+19
+00:00:41,504 --> 00:00:43,611
+We tell Jenkins where Maven is,
+
+20
+00:00:43,611 --> 00:00:44,630
+create the job,
+
+21
+00:00:44,630 --> 00:00:45,038
+build,
+
+22
+00:00:45,038 --> 00:00:46,057
+read the tests,
+
+23
+00:00:46,057 --> 00:00:47,824
+and download the war file.
+
+24
+00:00:48,374 --> 00:00:53,174
+Four: a way to read a red build, in the right order, and five mistakes to avoid.
+
+25
+00:00:53,724 --> 00:00:56,519
+This is objective four of the Jenkins domain.
+
+26
+00:00:58,569 --> 00:00:59,977
+The journey of one change.
+
+27
+00:01:00,527 --> 00:01:03,130
+A developer pushes a commit to the repository.
+
+28
+00:01:03,680 --> 00:01:07,605
+Jenkins checks out the code, and reads the Jenkinsfile inside it.
+
+29
+00:01:08,155 --> 00:01:10,950
+Maven compiles the code, then runs the tests.
+
+30
+00:01:11,500 --> 00:01:16,705
+Jenkins collects the test results, so you get numbers and charts, not only a long log.
+
+31
+00:01:17,255 --> 00:01:19,539
+Maven packages the web application,
+
+32
+00:01:19,539 --> 00:01:20,388
+the war file,
+
+33
+00:01:20,388 --> 00:01:23,847
+and Jenkins keeps it as an artifact you can download.
+
+34
+00:01:24,397 --> 00:01:28,962
+If any step fails, the pipeline stops, and the red stage tells you where to look.
+
+35
+00:01:30,512 --> 00:01:34,011
+Here is the Jenkinsfile in the CloudCart repository.
+
+36
+00:01:34,561 --> 00:01:34,943
+Tools,
+
+37
+00:01:34,943 --> 00:01:39,207
+maven: this names the Maven that Jenkins knows from its tools page,
+
+38
+00:01:39,207 --> 00:01:42,198
+and puts it on the path for the whole pipeline.
+
+39
+00:01:42,748 --> 00:01:46,908
+Three stages: Build, Test and Package. Names that tell the story.
+
+40
+00:01:47,458 --> 00:01:50,338
+Build compiles the code. Test runs the tests.
+
+41
+00:01:50,888 --> 00:01:51,681
+Under Test,
+
+42
+00:01:51,681 --> 00:01:52,547
+post always,
+
+43
+00:01:52,547 --> 00:01:53,052
+JUnit.
+
+44
+00:01:53,052 --> 00:01:56,298
+This reads the report files that Maven wrote,
+
+45
+00:01:56,298 --> 00:01:58,462
+and gives Jenkins the results,
+
+46
+00:01:58,462 --> 00:01:59,400
+pass or fail.
+
+47
+00:01:59,950 --> 00:02:01,383
+Package builds the war,
+
+48
+00:02:01,383 --> 00:02:03,314
+and archive artifacts keeps it,
+
+49
+00:02:03,314 --> 00:02:06,179
+so anyone can download exactly what was built.
+
+50
+00:02:06,729 --> 00:02:12,617
+The dash B flag makes Maven print clean batch logs. That is what you want inside Jenkins.
+
+51
+00:02:14,167 --> 00:02:15,280
+A real Jenkins,
+
+52
+00:02:15,280 --> 00:02:17,656
+and the real CloudCart project,
+
+53
+00:02:17,656 --> 00:02:18,918
+in one recording.
+
+54
+00:02:18,918 --> 00:02:20,328
+I sign in as admin.
+
+55
+00:02:20,328 --> 00:02:20,774
+First,
+
+56
+00:02:20,774 --> 00:02:23,298
+Jenkins needs to know about Maven.
+
+57
+00:02:23,848 --> 00:02:24,952
+Manage Jenkins,
+
+58
+00:02:24,952 --> 00:02:25,910
+then Plugins,
+
+59
+00:02:25,910 --> 00:02:27,603
+then Installed plugins.
+
+60
+00:02:27,603 --> 00:02:30,328
+Scroll to the M's: Maven Integration.
+
+61
+00:02:30,328 --> 00:02:33,789
+This plugin is what gives Jenkins a Maven tool.
+
+62
+00:02:41,339 --> 00:02:42,965
+Back to Manage Jenkins,
+
+63
+00:02:42,965 --> 00:02:43,743
+then Tools.
+
+64
+00:02:43,743 --> 00:02:46,218
+Scroll down to Maven installations,
+
+65
+00:02:46,218 --> 00:02:47,633
+and click Add Maven.
+
+66
+00:02:47,633 --> 00:02:49,542
+I name it maven three nine.
+
+67
+00:02:49,542 --> 00:02:51,734
+This machine already has Maven,
+
+68
+00:02:51,734 --> 00:02:54,139
+so I untick install automatically,
+
+69
+00:02:54,139 --> 00:02:55,907
+and give its home folder.
+
+70
+00:02:55,907 --> 00:02:56,614
+Then Save.
+
+71
+00:03:03,164 --> 00:03:08,945
+Now the job. New Item. The name: CloudCart build. The type: Pipeline. Click OK.
+
+72
+00:03:09,495 --> 00:03:11,242
+In the Pipeline section,
+
+73
+00:03:11,242 --> 00:03:15,174
+I change the definition to Pipeline script from SCM.
+
+74
+00:03:15,174 --> 00:03:18,669
+That says: the pipeline lives in the repository.
+
+75
+00:03:18,669 --> 00:03:19,470
+SCM: Git.
+
+76
+00:03:19,470 --> 00:03:23,037
+The repository U R L is a folder on this machine.
+
+77
+00:03:23,037 --> 00:03:25,367
+At work it is a git hub address.
+
+78
+00:03:25,367 --> 00:03:26,750
+The branch is main,
+
+79
+00:03:26,750 --> 00:03:29,590
+and the script path stays Jenkinsfile.
+
+80
+00:03:29,590 --> 00:03:29,954
+Save.
+
+81
+00:03:38,504 --> 00:03:39,144
+Build Now.
+
+82
+00:03:39,144 --> 00:03:41,256
+This first build is the slow one.
+
+83
+00:03:41,256 --> 00:03:45,352
+Maven downloads everything the project needs from Maven Central.
+
+84
+00:03:45,902 --> 00:03:48,707
+While we wait: Jenkins checked out the code,
+
+85
+00:03:48,707 --> 00:03:50,811
+and found the Jenkinsfile in it.
+
+86
+00:03:50,811 --> 00:03:53,871
+That is why this job needs no script of its own.
+
+87
+00:03:53,871 --> 00:03:54,955
+When it finishes,
+
+88
+00:03:54,955 --> 00:03:56,358
+the stages turn green,
+
+89
+00:03:56,358 --> 00:03:57,059
+one by one.
+
+90
+00:04:13,609 --> 00:04:13,938
+Done,
+
+91
+00:04:13,938 --> 00:04:14,597
+and green.
+
+92
+00:04:14,597 --> 00:04:15,717
+I open the build,
+
+93
+00:04:15,717 --> 00:04:17,562
+and click Pipeline Overview.
+
+94
+00:04:17,562 --> 00:04:17,957
+Build,
+
+95
+00:04:17,957 --> 00:04:19,077
+Test and Package,
+
+96
+00:04:19,077 --> 00:04:20,329
+each with its time.
+
+97
+00:04:25,879 --> 00:04:27,034
+Now Test Result.
+
+98
+00:04:27,034 --> 00:04:28,261
+Thirty two tests,
+
+99
+00:04:28,261 --> 00:04:29,128
+none failed,
+
+100
+00:04:29,128 --> 00:04:30,283
+listed by class.
+
+101
+00:04:30,283 --> 00:04:34,903
+This page exists because of the JUnit line in the Jenkinsfile.
+
+102
+00:04:44,453 --> 00:04:45,797
+Back on the job page.
+
+103
+00:04:45,797 --> 00:04:47,717
+Under artifacts: the war file.
+
+104
+00:04:47,717 --> 00:04:49,317
+That is the build output,
+
+105
+00:04:49,317 --> 00:04:51,493
+ready to deploy in a later lesson.
+
+106
+00:04:52,043 --> 00:04:53,541
+Now a real-life moment.
+
+107
+00:04:53,541 --> 00:04:56,731
+A developer pushes a change to the shipping rule.
+
+108
+00:04:56,731 --> 00:04:58,294
+I click Build Now again.
+
+109
+00:05:12,844 --> 00:05:13,111
+Red.
+
+110
+00:05:13,111 --> 00:05:14,581
+The Test stage failed,
+
+111
+00:05:14,581 --> 00:05:16,051
+and Package never ran.
+
+112
+00:05:16,051 --> 00:05:17,187
+I open the build.
+
+113
+00:05:17,187 --> 00:05:19,526
+Changes shows the commit behind it,
+
+114
+00:05:19,526 --> 00:05:21,398
+with its author and message.
+
+115
+00:05:21,398 --> 00:05:25,808
+Test Result shows one failed test: free shipping at the threshold.
+
+116
+00:05:25,808 --> 00:05:26,476
+Red stage,
+
+117
+00:05:26,476 --> 00:05:27,278
+test result,
+
+118
+00:05:27,278 --> 00:05:27,746
+commit.
+
+119
+00:05:27,746 --> 00:05:29,484
+That is the fastest route.
+
+120
+00:05:32,034 --> 00:05:34,679
+The developer fixes the rule, and we build again.
+
+121
+00:05:41,229 --> 00:05:42,008
+Green again.
+
+122
+00:05:42,008 --> 00:05:43,048
+On the job page,
+
+123
+00:05:43,048 --> 00:05:44,996
+look at the Test Result Trend.
+
+124
+00:05:44,996 --> 00:05:45,776
+One red bar,
+
+125
+00:05:45,776 --> 00:05:47,010
+between green ones.
+
+126
+00:05:47,010 --> 00:05:49,933
+That is the health of your project over time.
+
+127
+00:05:53,483 --> 00:05:58,432
+A real build, a real failure, and a real fix. That is Maven in Jenkins.
+
+128
+00:05:59,982 --> 00:06:01,774
+How to read a red build, in order.
+
+129
+00:06:02,324 --> 00:06:07,401
+One: which stage is red? That tells you the kind of problem: build, test or package.
+
+130
+00:06:07,951 --> 00:06:11,258
+Two: Changes. Who changed what since the last green build?
+
+131
+00:06:11,808 --> 00:06:16,779
+Three: Test Result. Which test failed, and why? Look at expected, against actual.
+
+132
+00:06:17,329 --> 00:06:21,659
+Four: Console Output, only for the full detail. Start from the bottom.
+
+133
+00:06:22,209 --> 00:06:25,708
+Five: fix, push, build. Watch the trend go green again.
+
+134
+00:06:27,258 --> 00:06:29,647
+Five mistakes with Maven in Jenkins.
+
+135
+00:06:30,197 --> 00:06:32,509
+One: the tool is not configured.
+
+136
+00:06:32,509 --> 00:06:33,953
+The error says: mvn,
+
+137
+00:06:33,953 --> 00:06:35,253
+command not found.
+
+138
+00:06:35,253 --> 00:06:36,770
+Check Manage Jenkins,
+
+139
+00:06:36,770 --> 00:06:37,203
+Tools,
+
+140
+00:06:37,203 --> 00:06:41,248
+and make sure the name matches the Jenkinsfile exactly.
+
+141
+00:06:41,798 --> 00:06:46,854
+Two: no JUnit line. The build is green or red, but there are no test charts.
+
+142
+00:06:47,404 --> 00:06:52,311
+Three: skipping tests to go faster. A green build that tested nothing is a lie.
+
+143
+00:06:52,861 --> 00:06:54,191
+Four: no Maven cache.
+
+144
+00:06:54,191 --> 00:06:56,662
+Every build downloads everything again,
+
+145
+00:06:56,662 --> 00:06:57,423
+and is slow.
+
+146
+00:06:57,423 --> 00:06:59,197
+Keep a cache between builds.
+
+147
+00:06:59,747 --> 00:07:02,978
+Five: editing the job instead of the Jenkinsfile.
+
+148
+00:07:02,978 --> 00:07:05,498
+The pipeline belongs in the repository,
+
+149
+00:07:05,498 --> 00:07:06,403
+with the code.
+
+150
+00:07:07,953 --> 00:07:10,748
+Where to find the lab. Pause here, and write it down.
+
+151
+00:07:11,298 --> 00:07:12,762
+One: the repository,
+
+152
+00:07:12,762 --> 00:07:17,082
+git hub dot com slash it dash waves slash dev ops dash A I,
+
+153
+00:07:17,082 --> 00:07:19,426
+in the folder academy slash lab.
+
+154
+00:07:19,976 --> 00:07:26,205
+Two: the files, lab157 dot sh, and shortcuts one fifty-seven dot sh.
+
+155
+00:07:26,755 --> 00:07:32,216
+Three: install it, with sudo install, into slash user slash local slash S bin.
+
+156
+00:07:32,766 --> 00:07:34,624
+Four: load the short names,
+
+157
+00:07:34,624 --> 00:07:37,788
+with source shortcuts one fifty-seven dot sh.
+
+158
+00:07:37,788 --> 00:07:38,613
+Then lab up,
+
+159
+00:07:38,613 --> 00:07:39,508
+and lab repo.
+
+160
+00:07:40,058 --> 00:07:43,962
+Five: lab bad makes the broken commit. Lab fix repairs it.
+
+161
+00:07:44,512 --> 00:07:48,291
+Six: you need the Jenkins from lesson one fifty-five,
+
+162
+00:07:48,291 --> 00:07:49,004
+plus Java,
+
+163
+00:07:49,004 --> 00:07:50,002
+Maven and git.
+
+164
+00:07:50,002 --> 00:07:52,213
+Lab down removes the lab files.
+
+165
+00:07:52,763 --> 00:07:54,406
+The link is in the description.
+
+166
+00:07:56,456 --> 00:07:58,227
+Your turn, on your own machine.
+
+167
+00:07:58,777 --> 00:08:02,595
+One: lab up, then lab repo, and read the Jenkinsfile it made.
+
+168
+00:08:03,145 --> 00:08:06,815
+Two: add the Maven tool, and create the job from SCM.
+
+169
+00:08:07,365 --> 00:08:10,650
+Three: build it, and open Test Result and the war file.
+
+170
+00:08:11,200 --> 00:08:14,016
+Four: lab bad, build, and find the failed test.
+
+171
+00:08:14,566 --> 00:08:17,169
+Five: lab fix, build, and look at the trend.
+
+172
+00:08:17,719 --> 00:08:19,553
+Pause the video, and begin now.
+
+173
+00:08:35,103 --> 00:08:35,978
+Quick check.
+
+174
+00:08:36,528 --> 00:08:38,917
+Which line gives Jenkins the Maven tool?
+
+175
+00:08:39,467 --> 00:08:41,856
+Which line gives you test results and charts?
+
+176
+00:08:42,406 --> 00:08:44,646
+What is the fastest route through a red build?
+
+177
+00:08:45,196 --> 00:08:47,543
+Why is a build with skipped tests dangerous?
+
+178
+00:08:48,093 --> 00:08:50,529
+Objective covered: MC17,
+
+179
+00:08:50,529 --> 00:08:51,637
+objective four.
+
+180
+00:08:51,637 --> 00:08:55,624
+Building and testing CloudCart with Maven in Jenkins.
+
+181
+00:08:56,174 --> 00:08:58,243
+Pause the video, and answer out loud.
+
+182
+00:09:08,793 --> 00:09:12,121
+Next: credentials, keeping secrets out of your pipelines.
+
+183
+00:09:12,671 --> 00:09:15,999
+If this helped, like, share and subscribe, so you do not miss it.

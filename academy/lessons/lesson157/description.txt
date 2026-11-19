@@ -1,0 +1,26 @@
+Lesson 157 of the DevOps Engineering Bootcamp, the fourth lesson of the Jenkins domain. "It works on my machine" stops being an excuse when a neutral Jenkins build compiles and tests the code the same way every time. You follow one change from commit to result, see the short Jenkinsfile that lives in the CloudCart repository, then watch a real live run: add Maven as a tool, create a Pipeline job from the repository, build, read the stage view and test report, break a test on purpose, find it fast, fix it and watch the trend recover. You finish with the red-build routine and the common mistakes.
+
+Chapters
+0:00 Build and test, anywhere
+0:29 What to expect
+0:58 The journey of one change
+1:30 The Jenkinsfile in CloudCart
+2:13 Live: build, break, fix
+5:59 Reading a red build
+6:26 Common mistakes
+7:07 Where to find the lab
+7:55 Your turn
+8:34 Quick check and what is next
+
+Objectives covered: MC17-O04 Build and test CloudCart in Jenkins with Maven.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab157.sh and shortcuts157.sh). Needs the Jenkins from lesson 155, Java, Maven and git. "lab up" starts Jenkins, "lab repo" creates the CloudCart repository, "lab bad" breaks one test, "lab fix" repairs it and "lab down" cleans everything up. Use your own machine only.
+
+Honest notes: the Jenkins screens are a real continuous recording of Jenkins 2.580 LTS building and testing the real CloudCart project with Maven (32 tests; the bad commit makes one fail). The coloured boxes and labels on top are overlays added for teaching. Plugins in the recording came from a local update centre because of sandbox network limits. The lab repository is a local folder (Jenkins needs a local-checkout switch for that); in real life you would use a GitHub URL. The narration is synthetic speech. The hook, plan, journey, Jenkinsfile, red-build, mistakes, files, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Your First Jenkinsfile: Stages, Steps, Agents and Post | Lesson 156 https://youtu.be/zoApz2IMF-k
+Next: credentials, keeping secrets out of pipelines.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #jenkins #maven #jenkinspipeline #cicd #devopsbootcamp #learnjenkins
