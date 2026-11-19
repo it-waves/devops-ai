@@ -220,7 +220,7 @@ I open Chrome,
 
 56
 00:02:05,685 --> 00:02:07,055
-and type localhost,
+and type localhost
 
 57
 00:02:07,055 --> 00:02:08,425
@@ -416,7 +416,7 @@ Jenkins puts it in emails and in build links.
 
 105
 00:04:11,946 --> 00:04:13,515
-Here it is localhost,
+Here it is localhost
 
 106
 00:04:13,515 --> 00:04:14,941
