@@ -18,7 +18,7 @@ Lab files: github.com/it-waves/devops-ai, in academy/lab (lab156.sh and shortcut
 
 Honest notes: the Jenkins screens are a real continuous recording of Jenkins 2.580 LTS, with the Jenkinsfile typed into the job's script box and built for real. The coloured boxes and labels on top are overlays added for teaching. Plugins in the recording came from the Jenkins Maven repository through a local update centre because of sandbox network limits; the screens are the same. The stage commands are teaching stand-ins that print messages; real Maven builds come in the next lessons. The narration is synthetic speech. The hook, plan, anatomy, comparison, post, mistakes, files, your-turn and recap screens are labelled illustrations, not captures.
 
-Previous lesson: Install Jenkins Safely: Unlock, First Admin and Security Checks | Lesson 155 PREV_LINK
+Previous lesson: Install Jenkins Safely: Unlock, First Admin and Security Checks | Lesson 155 https://youtu.be/V9pUs5iB0ZQ
 Next: building the CloudCart application with Maven in Jenkins.
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
