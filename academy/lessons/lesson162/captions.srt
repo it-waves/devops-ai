@@ -1,0 +1,899 @@
+1
+00:00:00,500 --> 00:00:02,697
+Your Jenkins server will fail one day.
+
+2
+00:00:03,247 --> 00:00:07,663
+A disk fills up. An upgrade goes wrong. Someone deletes the wrong job.
+
+3
+00:00:08,213 --> 00:00:11,971
+Then there is only one question: how fast can you get it back?
+
+4
+00:00:11,971 --> 00:00:14,819
+A team with a tested backup answers in minutes.
+
+5
+00:00:14,819 --> 00:00:17,001
+A team without one answers in weeks,
+
+6
+00:00:17,001 --> 00:00:17,728
+from memory.
+
+7
+00:00:18,278 --> 00:00:20,760
+Today you do all of it in real Jenkins.
+
+8
+00:00:20,760 --> 00:00:21,714
+You back it up,
+
+9
+00:00:21,714 --> 00:00:22,287
+break it,
+
+10
+00:00:22,287 --> 00:00:22,987
+restore it,
+
+11
+00:00:22,987 --> 00:00:23,941
+and upgrade it.
+
+12
+00:00:23,941 --> 00:00:25,659
+And you fix a failed build.
+
+13
+00:00:27,209 --> 00:00:28,638
+Here is what to expect.
+
+14
+00:00:29,188 --> 00:00:33,220
+One: the four ideas. Backup, restore, upgrade, and triage.
+
+15
+00:00:33,770 --> 00:00:37,226
+Two: a picture of Jenkins home, and what goes in a backup.
+
+16
+00:00:37,776 --> 00:00:39,041
+Three: a live demo,
+
+17
+00:00:39,041 --> 00:00:40,306
+in a real terminal,
+
+18
+00:00:40,306 --> 00:00:42,436
+and in the real Jenkins screens.
+
+19
+00:00:42,436 --> 00:00:43,168
+We back up,
+
+20
+00:00:43,168 --> 00:00:44,233
+we delete a job,
+
+21
+00:00:44,233 --> 00:00:45,164
+we restore it,
+
+22
+00:00:45,164 --> 00:00:46,629
+we fix a broken build,
+
+23
+00:00:46,629 --> 00:00:49,424
+and we upgrade Jenkins to a newer version.
+
+24
+00:00:49,974 --> 00:00:52,790
+Four: the common mistakes, and where to find the lab.
+
+25
+00:00:53,340 --> 00:00:56,178
+This is objective nine of the Jenkins domain.
+
+26
+00:00:57,728 --> 00:00:58,944
+Four words to know.
+
+27
+00:00:59,494 --> 00:01:02,438
+Backup: a copy of Jenkins home, kept somewhere else.
+
+28
+00:01:02,988 --> 00:01:06,785
+Restore: bring back one job, or the whole server, from that copy.
+
+29
+00:01:07,335 --> 00:01:10,407
+Upgrade: swap the war file, and keep the home folder.
+
+30
+00:01:10,957 --> 00:01:14,456
+Triage: find which stage failed, then read the first error.
+
+31
+00:01:15,006 --> 00:01:19,550
+Backup, restore, upgrade, triage. Practise all four, before you need them.
+
+32
+00:01:21,100 --> 00:01:26,732
+Here is Jenkins home, in one picture. Everything Jenkins knows lives in this one folder.
+
+33
+00:01:27,282 --> 00:01:30,903
+The file config.xml holds the main settings.
+
+34
+00:01:30,903 --> 00:01:33,220
+The folder jobs holds every job,
+
+35
+00:01:33,220 --> 00:01:34,813
+and its build history.
+
+36
+00:01:35,363 --> 00:01:38,385
+The folder plugins holds the installed plugins.
+
+37
+00:01:38,385 --> 00:01:42,500
+The folder secrets holds the keys that protect your credentials.
+
+38
+00:01:42,500 --> 00:01:44,621
+Guard the backup like a password.
+
+39
+00:01:45,171 --> 00:01:47,968
+The folders workspace and caches are different.
+
+40
+00:01:47,968 --> 00:01:49,277
+Jenkins rebuilds them,
+
+41
+00:01:49,277 --> 00:01:50,526
+so we leave them out.
+
+42
+00:01:51,076 --> 00:01:53,082
+The war file is Jenkins itself.
+
+43
+00:01:53,082 --> 00:01:55,216
+It lives outside the home folder.
+
+44
+00:01:55,216 --> 00:01:57,804
+That is why an upgrade replaces the war,
+
+45
+00:01:57,804 --> 00:01:59,033
+and keeps the home.
+
+46
+00:01:59,583 --> 00:02:02,762
+Backup the home. Swap the war. That is the whole idea.
+
+47
+00:02:04,312 --> 00:02:05,298
+A real Jenkins,
+
+48
+00:02:05,298 --> 00:02:06,548
+signed in as admin.
+
+49
+00:02:06,548 --> 00:02:08,652
+It has been working for a while.
+
+50
+00:02:08,652 --> 00:02:09,178
+One job,
+
+51
+00:02:09,178 --> 00:02:10,296
+CloudCart build,
+
+52
+00:02:10,296 --> 00:02:11,743
+with two green builds.
+
+53
+00:02:11,743 --> 00:02:14,899
+Everything it knows lives in one folder on disk,
+
+54
+00:02:14,899 --> 00:02:16,214
+called Jenkins home.
+
+55
+00:02:16,214 --> 00:02:17,529
+Today we back it up,
+
+56
+00:02:17,529 --> 00:02:18,121
+break it,
+
+57
+00:02:18,121 --> 00:02:18,844
+restore it,
+
+58
+00:02:18,844 --> 00:02:19,568
+upgrade it,
+
+59
+00:02:19,568 --> 00:02:21,080
+and fix a failed build.
+
+60
+00:02:21,630 --> 00:02:22,029
+First,
+
+61
+00:02:22,029 --> 00:02:22,761
+the backup.
+
+62
+00:02:22,761 --> 00:02:25,556
+This is a terminal on the Jenkins machine.
+
+63
+00:02:25,556 --> 00:02:28,151
+Jenkins keeps everything in one folder,
+
+64
+00:02:28,151 --> 00:02:30,347
+and its path is in this variable.
+
+65
+00:02:30,347 --> 00:02:31,079
+Here it is.
+
+66
+00:02:31,079 --> 00:02:32,809
+Now the folders inside it.
+
+67
+00:02:33,359 --> 00:02:34,645
+Four things matter.
+
+68
+00:02:34,645 --> 00:02:36,405
+The file config.xml,
+
+69
+00:02:36,405 --> 00:02:37,623
+the main settings.
+
+70
+00:02:37,623 --> 00:02:38,706
+The folder jobs,
+
+71
+00:02:38,706 --> 00:02:40,872
+every job and its build history.
+
+72
+00:02:40,872 --> 00:02:42,158
+The folder plugins,
+
+73
+00:02:42,158 --> 00:02:43,647
+the installed plugins.
+
+74
+00:02:43,647 --> 00:02:45,204
+And the folder secrets,
+
+75
+00:02:45,204 --> 00:02:47,844
+the keys that protect your credentials.
+
+76
+00:02:47,844 --> 00:02:50,281
+Workspace and caches can be rebuilt,
+
+77
+00:02:50,281 --> 00:02:51,364
+so we skip them.
+
+78
+00:02:51,914 --> 00:02:53,475
+Now the backup itself.
+
+79
+00:02:53,475 --> 00:02:54,823
+The command is tar.
+
+80
+00:02:54,823 --> 00:02:56,242
+czf means: create,
+
+81
+00:02:56,242 --> 00:02:56,881
+compress,
+
+82
+00:02:56,881 --> 00:02:58,513
+and write to this file.
+
+83
+00:02:58,513 --> 00:03:01,635
+We save it in a folder outside Jenkins home,
+
+84
+00:03:01,635 --> 00:03:04,757
+and we exclude the workspace and the caches.
+
+85
+00:03:05,307 --> 00:03:06,784
+It takes a few seconds,
+
+86
+00:03:06,784 --> 00:03:08,454
+because plugins are large.
+
+87
+00:03:08,454 --> 00:03:09,353
+While it runs,
+
+88
+00:03:09,353 --> 00:03:11,600
+remember the first rule of backups.
+
+89
+00:03:11,600 --> 00:03:14,169
+A copy on the same disk is not a backup.
+
+90
+00:03:14,169 --> 00:03:15,711
+Send it to another disk,
+
+91
+00:03:15,711 --> 00:03:16,867
+or another server,
+
+92
+00:03:16,867 --> 00:03:17,637
+every night.
+
+93
+00:03:23,487 --> 00:03:28,415
+Check the result. List the backup folder. The archive is there, and this is its size.
+
+94
+00:03:28,965 --> 00:03:29,262
+Now,
+
+95
+00:03:29,262 --> 00:03:30,226
+the disaster.
+
+96
+00:03:30,226 --> 00:03:32,820
+Someone deletes the job by mistake.
+
+97
+00:03:32,820 --> 00:03:33,636
+In Jenkins,
+
+98
+00:03:33,636 --> 00:03:35,267
+open CloudCart build.
+
+99
+00:03:35,267 --> 00:03:36,157
+On the left,
+
+100
+00:03:36,157 --> 00:03:37,862
+choose Delete Pipeline.
+
+101
+00:03:37,862 --> 00:03:39,419
+And confirm with Yes.
+
+102
+00:03:39,969 --> 00:03:43,958
+The dashboard is empty. The job is gone, and so is its history.
+
+103
+00:03:44,508 --> 00:03:45,660
+Now the restore.
+
+104
+00:03:45,660 --> 00:03:47,531
+We only need that one job.
+
+105
+00:03:47,531 --> 00:03:51,059
+Tar can extract a single folder from the archive.
+
+106
+00:03:51,059 --> 00:03:53,650
+Extract jobs slash CloudCart build,
+
+107
+00:03:53,650 --> 00:03:54,946
+into Jenkins home.
+
+108
+00:03:54,946 --> 00:03:56,817
+Then list the jobs folder.
+
+109
+00:03:57,367 --> 00:03:59,602
+But Jenkins still shows nothing.
+
+110
+00:03:59,602 --> 00:04:01,558
+It keeps its jobs in memory.
+
+111
+00:04:01,558 --> 00:04:02,955
+Open Manage Jenkins,
+
+112
+00:04:02,955 --> 00:04:05,889
+and choose Reload Configuration from Disk.
+
+113
+00:04:05,889 --> 00:04:06,797
+Then confirm.
+
+114
+00:04:10,747 --> 00:04:12,162
+Back to the dashboard.
+
+115
+00:04:12,162 --> 00:04:13,191
+The job is back,
+
+116
+00:04:13,191 --> 00:04:14,155
+with build one,
+
+117
+00:04:14,155 --> 00:04:15,056
+and build two.
+
+118
+00:04:15,056 --> 00:04:18,786
+Remember: a backup you have never restored is only a hope.
+
+119
+00:04:18,786 --> 00:04:19,493
+Test yours.
+
+120
+00:04:20,043 --> 00:04:30,283
+Now a build that fails. New Item, named broken build, of type Pipeline. Then OK.
+
+121
+00:04:32,733 --> 00:04:34,030
+Here is the script.
+
+122
+00:04:34,030 --> 00:04:35,121
+Read it with me.
+
+123
+00:04:35,121 --> 00:04:35,803
+One stage,
+
+124
+00:04:35,803 --> 00:04:36,213
+Build.
+
+125
+00:04:36,213 --> 00:04:37,987
+It gets the code from git.
+
+126
+00:04:37,987 --> 00:04:39,283
+Then it runs Maven,
+
+127
+00:04:39,283 --> 00:04:41,193
+with the goal clean package.
+
+128
+00:04:41,193 --> 00:04:42,694
+Except in this script,
+
+129
+00:04:42,694 --> 00:04:43,786
+there is a typo.
+
+130
+00:04:43,786 --> 00:04:46,515
+Package is spelled without the letter A.
+
+131
+00:04:47,065 --> 00:04:49,731
+Save, and Build Now. Then open the console.
+
+132
+00:04:56,481 --> 00:04:56,778
+Red.
+
+133
+00:04:56,778 --> 00:04:58,487
+Triage has three steps.
+
+134
+00:04:58,487 --> 00:05:00,269
+One: which stage failed?
+
+135
+00:05:00,269 --> 00:05:01,977
+Open Pipeline Overview.
+
+136
+00:05:01,977 --> 00:05:03,685
+The Build stage is red.
+
+137
+00:05:03,685 --> 00:05:06,730
+Two: find the first error in the console,
+
+138
+00:05:06,730 --> 00:05:07,993
+not the last one.
+
+139
+00:05:07,993 --> 00:05:09,107
+Three: read it.
+
+140
+00:05:09,107 --> 00:05:10,889
+Unknown lifecycle phase,
+
+141
+00:05:10,889 --> 00:05:11,409
+packge.
+
+142
+00:05:11,409 --> 00:05:12,375
+It is a typo.
+
+143
+00:05:12,925 --> 00:05:18,813
+Fix the script. Open Configure, and go to the Pipeline section.
+
+144
+00:05:19,363 --> 00:05:20,535
+Retype the script.
+
+145
+00:05:20,535 --> 00:05:22,944
+The only change is one word: package,
+
+146
+00:05:22,944 --> 00:05:24,117
+with the letter A.
+
+147
+00:05:24,117 --> 00:05:26,135
+Everything else stays the same.
+
+148
+00:05:26,135 --> 00:05:26,787
+Then Save.
+
+149
+00:05:31,037 --> 00:05:36,391
+Build Now again. Maven runs, and the console ends with Finished: success. Green.
+
+150
+00:05:39,641 --> 00:05:41,061
+Now the upgrade drill.
+
+151
+00:05:41,061 --> 00:05:43,321
+This second Jenkins is a throwaway,
+
+152
+00:05:43,321 --> 00:05:44,354
+on another port.
+
+153
+00:05:44,354 --> 00:05:50,163
+Look at the bottom right of the page: the version is two point five five five point three.
+
+154
+00:05:50,163 --> 00:05:51,132
+It has one job,
+
+155
+00:05:51,132 --> 00:05:52,100
+with one build.
+
+156
+00:05:52,650 --> 00:05:54,260
+Rule one: back up first.
+
+157
+00:05:54,260 --> 00:05:55,937
+Go to the upgrade folder,
+
+158
+00:05:55,937 --> 00:05:57,414
+and stop this Jenkins.
+
+159
+00:05:57,414 --> 00:05:59,024
+Archive its home folder.
+
+160
+00:05:59,024 --> 00:06:01,909
+Then point the Jenkins home variable at it.
+
+161
+00:06:02,459 --> 00:06:04,305
+Rule two: swap the war file.
+
+162
+00:06:04,305 --> 00:06:06,019
+The war is Jenkins itself.
+
+163
+00:06:06,019 --> 00:06:07,140
+Keep the old one,
+
+164
+00:06:07,140 --> 00:06:08,789
+in case you must go back.
+
+165
+00:06:08,789 --> 00:06:10,108
+Copy the new one in.
+
+166
+00:06:10,108 --> 00:06:11,888
+And ask it for its version.
+
+167
+00:06:12,438 --> 00:06:13,817
+Now start Jenkins again,
+
+168
+00:06:13,817 --> 00:06:15,195
+on the same home folder.
+
+169
+00:06:15,195 --> 00:06:17,665
+The first start after an upgrade is slower,
+
+170
+00:06:17,665 --> 00:06:21,571
+because Jenkins checks every job and plugin against the new version.
+
+171
+00:06:21,571 --> 00:06:22,490
+While it starts,
+
+172
+00:06:22,490 --> 00:06:24,960
+here is the checklist for after an upgrade.
+
+173
+00:06:24,960 --> 00:06:26,453
+The version in the footer.
+
+174
+00:06:26,453 --> 00:06:26,970
+The jobs,
+
+175
+00:06:26,970 --> 00:06:28,004
+and their history.
+
+176
+00:06:28,004 --> 00:06:28,981
+The plugins page,
+
+177
+00:06:28,981 --> 00:06:29,727
+for warnings.
+
+178
+00:06:29,727 --> 00:06:30,819
+And one test build.
+
+179
+00:06:30,819 --> 00:06:32,025
+If anything is wrong,
+
+180
+00:06:32,025 --> 00:06:33,691
+the way back is simple: stop,
+
+181
+00:06:33,691 --> 00:06:34,897
+put the old war back,
+
+182
+00:06:34,897 --> 00:06:36,218
+and restore the backup.
+
+183
+00:06:36,218 --> 00:06:37,654
+That is why we kept both.
+
+184
+00:06:45,404 --> 00:06:46,463
+Reload the page.
+
+185
+00:06:46,463 --> 00:06:50,171
+The footer now says two point five eight zero point two.
+
+186
+00:06:50,171 --> 00:06:52,488
+The job demo upgrade is still here,
+
+187
+00:06:52,488 --> 00:06:53,746
+with its old build.
+
+188
+00:06:53,746 --> 00:06:55,004
+Run one test build.
+
+189
+00:07:03,154 --> 00:07:07,421
+Green. That is a safe upgrade: back up, swap the war, check, and test.
+
+190
+00:07:08,971 --> 00:07:10,123
+Five mistakes.
+
+191
+00:07:10,673 --> 00:07:14,854
+One: the backup sits on the same disk. When the disk dies, both die.
+
+192
+00:07:15,404 --> 00:07:20,247
+Two: a backup nobody has restored. Practise a restore, before the bad day.
+
+193
+00:07:20,797 --> 00:07:25,256
+Three: upgrading with no backup. Always back up first, and keep the old war.
+
+194
+00:07:25,806 --> 00:07:31,054
+Four: upgrading Jenkins and every plugin on the same day. Change one thing at a time.
+
+195
+00:07:31,604 --> 00:07:36,126
+Five: reading the last error. Read the first error, it is usually the cause.
+
+196
+00:07:37,676 --> 00:07:40,471
+Where to find the lab. Pause here, and write it down.
+
+197
+00:07:41,021 --> 00:07:42,485
+One: the repository,
+
+198
+00:07:42,485 --> 00:07:46,805
+GitHub dot com slash it dash waves slash dev ops dash A I,
+
+199
+00:07:46,805 --> 00:07:49,149
+in the folder academy slash lab.
+
+200
+00:07:49,699 --> 00:07:55,757
+Two: the files, lab162 dot S H, and shortcuts one sixty-two dot S H.
+
+201
+00:07:56,307 --> 00:08:01,769
+Three: install it, with sudo install, into slash user slash local slash S bin.
+
+202
+00:08:02,319 --> 00:08:07,844
+Four: load the short names, with source shortcuts one sixty-two dot S H. Then lab up.
+
+203
+00:08:08,394 --> 00:08:10,766
+Five: lab backup makes the archive.
+
+204
+00:08:10,766 --> 00:08:12,935
+Lab restore brings one job back.
+
+205
+00:08:12,935 --> 00:08:17,205
+Lab old starts the throwaway old Jenkins for the upgrade drill.
+
+206
+00:08:17,755 --> 00:08:21,402
+Six: you need the Jenkins from lesson one fifty-five,
+
+207
+00:08:21,402 --> 00:08:22,021
+and Java.
+
+208
+00:08:22,021 --> 00:08:24,155
+Lab down removes the lab files.
+
+209
+00:08:24,705 --> 00:08:26,347
+The link is in the description.
+
+210
+00:08:27,897 --> 00:08:29,668
+Your turn, on your own machine.
+
+211
+00:08:30,218 --> 00:08:33,098
+One: lab up, and make a backup with lab backup.
+
+212
+00:08:33,648 --> 00:08:36,720
+Two: delete a job, and restore it from the archive.
+
+213
+00:08:37,270 --> 00:08:40,704
+Three: break a pipeline on purpose, and find the first error.
+
+214
+00:08:41,254 --> 00:08:44,582
+Four: start the throwaway old Jenkins, and upgrade it.
+
+215
+00:08:45,132 --> 00:08:49,548
+Five: check the version, the job, and run one test build. Then lab down.
+
+216
+00:08:50,098 --> 00:08:51,933
+Pause the video, and begin now.
+
+217
+00:09:07,483 --> 00:09:08,358
+Quick check.
+
+218
+00:09:08,908 --> 00:09:10,721
+What goes into a Jenkins backup?
+
+219
+00:09:11,271 --> 00:09:13,618
+Why is a backup on the same disk not enough?
+
+220
+00:09:14,168 --> 00:09:16,301
+How do you bring back one deleted job?
+
+221
+00:09:16,851 --> 00:09:18,963
+What do you read first, in a failed build?
+
+222
+00:09:19,513 --> 00:09:25,593
+Objective covered: MC17-O09. Backup, upgrade and troubleshooting.
+
+223
+00:09:26,143 --> 00:09:28,212
+Pause the video, and answer out loud.
+
+224
+00:09:38,762 --> 00:09:43,712
+Next: the Jenkins mastery lesson, a full scenario you can verify yourself.
+
+225
+00:09:44,262 --> 00:09:47,590
+If this helped, like, share and subscribe, so you do not miss it.

@@ -1,0 +1,25 @@
+Lesson 162 of the DevOps Engineering Bootcamp, the ninth lesson of the Jenkins domain. A Jenkins server will fail one day, and the team with a tested backup is back in minutes. You learn four ideas: backup, restore, upgrade and triage, and what lives inside Jenkins home. Then watch it all live, in a real terminal and in the real Jenkins screens: back up Jenkins home with tar, delete a job, restore just that job from the archive and reload it from disk, break a build with a typo and find the first error, and upgrade a throwaway Jenkins from 2.555.3 to 2.580.2 by swapping the war file. You finish with the common mistakes and a lab you can repeat.
+
+Chapters
+0:00 Back up. Break it. Bring it back.
+0:27 What to expect
+0:57 Backup, restore, upgrade, triage
+1:21 What is in Jenkins home
+2:04 Live: backup, restore, triage, upgrade
+7:08 Common mistakes
+7:37 Where to find the lab
+8:27 Your turn
+9:07 Quick check and what is next
+
+Objectives covered: MC17-O09 Back up, upgrade and troubleshoot Jenkins.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab162.sh and shortcuts162.sh). Needs the Jenkins from lesson 155, tar and Java on your own machine. "lab up" checks them, "lab backup" archives Jenkins home, "lab restore JOB" brings one job back, "lab old" starts a throwaway old Jenkins on port 8081 for the upgrade drill, and "lab down" cleans up. Use your own machine only.
+
+Honest notes: the terminal and Jenkins screens are a real continuous recording of Jenkins 2.580 LTS and a throwaway Jenkins 2.555.3 that I upgraded for the demo, with real files and real builds. The job and its two builds were created before recording. The throwaway Jenkins runs with no security: never do that for a real server. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, words, home-folder, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Jenkins Approvals, Promotion, Rollback and Notifications (Live Gates) | Lesson 161 https://youtu.be/GaGsNjjpFYE
+Next: the Jenkins mastery lesson, a full scenario you can verify yourself.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #jenkins #cicd #jenkinsbackup #devopsbootcamp #learnjenkins #jenkinsupgrade
