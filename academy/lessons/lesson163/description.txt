@@ -1,0 +1,25 @@
+Lesson 163 of the DevOps Engineering Bootcamp, the mastery lesson of the Jenkins domain. Nine lessons of Jenkins, and now you prove it. You see the whole domain on one page, then one scenario with seven checks that a script runs against your own Jenkins: it answers, the job exists, the build is green, the war file is archived, a person approved the release, the secret is masked in the log, and a backup holds the job. Watch it all live, in the real Jenkins screens and a real terminal: add a credential, write and build a release pipeline, approve the gate, back up Jenkins, run the checks to seven of seven, keep the results file as evidence, and clean everything up. You finish with what to do when a check fails, and a lab you can repeat.
+
+Chapters
+0:00 Prove it. Then clean up.
+0:28 What to expect
+0:55 The Jenkins domain on one page
+1:36 The scenario and seven checks
+2:11 Live: build, check, back up, clean up
+5:24 When a check fails
+6:01 Where to find the lab
+6:49 Your turn
+7:29 Quick check and what is next
+
+Objectives covered: MC17 mastery evidence. An independently verifiable scenario that uses MC17-O01 to MC17-O09, with documented results, troubleshooting and cleanup.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab163.sh and shortcuts163.sh). Needs the Jenkins from lesson 155, curl, tar and Java on your own machine. Set JENKINS_AUTH to your user:password (or user:token) and JENKINS_HOME to your Jenkins home. "lab up" checks the setup, "lab check" runs the seven checks and saves results.txt, "lab backup" archives Jenkins home, and "lab down" deletes the scenario job, the credential and the lab files. Use your own machine only.
+
+Honest notes: the terminal and Jenkins screens are a real continuous recording of Jenkins 2.580 LTS with a real Maven build of CloudCart and the real check script. The Jenkins was reset to an empty state before recording, and it already held the credentials from earlier lessons. The pipeline reads CloudCart from a local git folder. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, domain, scenario, troubleshooting, lab, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Jenkins Backup, Restore, Upgrade and Failed-Build Triage (Live) | Lesson 162 https://youtu.be/R-f-tIWYKs4
+Next: a new domain, SonarQube, and how it keeps code quality honest.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #jenkins #cicd #jenkinspipeline #devopsbootcamp #learnjenkins #devopsprojects

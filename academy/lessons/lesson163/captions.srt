@@ -1,0 +1,807 @@
+1
+00:00:00,500 --> 00:00:03,913
+You have learned nine things about Jenkins. But can you prove it?
+
+2
+00:00:04,463 --> 00:00:06,642
+A tutorial that works on the video,
+
+3
+00:00:06,642 --> 00:00:09,505
+is not the same as a skill that works for you.
+
+4
+00:00:09,505 --> 00:00:10,377
+In a real job,
+
+5
+00:00:10,377 --> 00:00:12,307
+someone will ask: does it work?
+
+6
+00:00:12,307 --> 00:00:12,805
+Show me.
+
+7
+00:00:13,355 --> 00:00:14,741
+So today is different.
+
+8
+00:00:14,741 --> 00:00:16,946
+We build one real release pipeline,
+
+9
+00:00:16,946 --> 00:00:17,765
+from nothing.
+
+10
+00:00:17,765 --> 00:00:19,214
+And a script checks it,
+
+11
+00:00:19,214 --> 00:00:20,915
+with seven tests that pass,
+
+12
+00:00:20,915 --> 00:00:21,419
+or fail.
+
+13
+00:00:21,969 --> 00:00:22,838
+Seven of seven,
+
+14
+00:00:22,838 --> 00:00:24,577
+and you have mastered Jenkins.
+
+15
+00:00:24,577 --> 00:00:26,374
+Then we write down the results,
+
+16
+00:00:26,374 --> 00:00:27,302
+and we clean up.
+
+17
+00:00:28,852 --> 00:00:30,281
+Here is what to expect.
+
+18
+00:00:30,831 --> 00:00:33,541
+One: the whole Jenkins domain, on one page.
+
+19
+00:00:34,091 --> 00:00:36,373
+Two: the scenario, and the seven checks.
+
+20
+00:00:36,923 --> 00:00:38,128
+Three: a live demo,
+
+21
+00:00:38,128 --> 00:00:39,904
+in the real Jenkins screens,
+
+22
+00:00:39,904 --> 00:00:41,362
+and in a real terminal.
+
+23
+00:00:41,362 --> 00:00:42,123
+We build it,
+
+24
+00:00:42,123 --> 00:00:42,884
+we check it,
+
+25
+00:00:42,884 --> 00:00:43,772
+we back it up,
+
+26
+00:00:43,772 --> 00:00:45,167
+we record the results,
+
+27
+00:00:45,167 --> 00:00:46,182
+and we clean up.
+
+28
+00:00:46,732 --> 00:00:50,017
+Four: what to do when a check fails, and where to find the lab.
+
+29
+00:00:50,567 --> 00:00:53,597
+This is the mastery lesson of the Jenkins domain.
+
+30
+00:00:55,147 --> 00:00:59,456
+The Jenkins domain, on one page. Nine objectives, nine lessons.
+
+31
+00:01:00,006 --> 00:01:01,634
+One: the architecture.
+
+32
+00:01:01,634 --> 00:01:02,449
+Controller,
+
+33
+00:01:02,449 --> 00:01:02,967
+agents,
+
+34
+00:01:02,967 --> 00:01:03,707
+executors,
+
+35
+00:01:03,707 --> 00:01:04,595
+and plugins.
+
+36
+00:01:04,595 --> 00:01:06,149
+Two: install Jenkins,
+
+37
+00:01:06,149 --> 00:01:08,369
+and set up the administration.
+
+38
+00:01:08,919 --> 00:01:10,651
+Three: the Jenkinsfile,
+
+39
+00:01:10,651 --> 00:01:12,238
+with stages and steps.
+
+40
+00:01:12,238 --> 00:01:14,547
+Four: build and test CloudCart,
+
+41
+00:01:14,547 --> 00:01:15,340
+with Maven.
+
+42
+00:01:15,890 --> 00:01:17,169
+Five: credentials,
+
+43
+00:01:17,169 --> 00:01:19,016
+and environment variables.
+
+44
+00:01:19,016 --> 00:01:20,010
+Six: triggers,
+
+45
+00:01:20,010 --> 00:01:21,431
+the SonarQube gate,
+
+46
+00:01:21,431 --> 00:01:22,141
+and Nexus.
+
+47
+00:01:22,691 --> 00:01:23,759
+Seven: agents,
+
+48
+00:01:23,759 --> 00:01:24,827
+and artifacts.
+
+49
+00:01:24,827 --> 00:01:26,047
+Eight: approval,
+
+50
+00:01:26,047 --> 00:01:26,810
+promotion,
+
+51
+00:01:26,810 --> 00:01:27,496
+rollback,
+
+52
+00:01:27,496 --> 00:01:28,869
+and notifications.
+
+53
+00:01:28,869 --> 00:01:29,861
+Nine: backup,
+
+54
+00:01:29,861 --> 00:01:30,471
+upgrade,
+
+55
+00:01:30,471 --> 00:01:31,310
+and triage.
+
+56
+00:01:31,860 --> 00:01:34,932
+Today one scenario uses the heart of all nine.
+
+57
+00:01:36,482 --> 00:01:41,282
+The scenario. Release CloudCart, and prove it. Seven checks, run by a script.
+
+58
+00:01:41,832 --> 00:01:47,699
+One: Jenkins answers, and your login works. Two: the job cloudcart-mastery exists.
+
+59
+00:01:48,249 --> 00:01:52,366
+Three: the last build is a success. It ran Maven, and the tests.
+
+60
+00:01:52,916 --> 00:01:57,332
+Four: the war file is archived. Five: a person approved the release.
+
+61
+00:01:57,882 --> 00:02:02,618
+Six: the secret is masked in the log. Seven: a backup holds the job.
+
+62
+00:02:03,168 --> 00:02:07,307
+The script checks the facts, not your word. That is what makes it independent.
+
+63
+00:02:07,857 --> 00:02:09,713
+Seven of seven, is mastery.
+
+64
+00:02:11,263 --> 00:02:12,352
+A real Jenkins,
+
+65
+00:02:12,352 --> 00:02:13,731
+signed in as admin.
+
+66
+00:02:13,731 --> 00:02:14,601
+It is empty.
+
+67
+00:02:14,601 --> 00:02:15,182
+No jobs,
+
+68
+00:02:15,182 --> 00:02:17,069
+and no release credential.
+
+69
+00:02:17,069 --> 00:02:18,666
+We start from nothing.
+
+70
+00:02:20,016 --> 00:02:20,394
+First,
+
+71
+00:02:20,394 --> 00:02:21,214
+the terminal.
+
+72
+00:02:21,214 --> 00:02:23,044
+The lab command is installed.
+
+73
+00:02:23,044 --> 00:02:25,253
+Lab up checks that Jenkins answers,
+
+74
+00:02:25,253 --> 00:02:27,461
+and says where the results will go.
+
+75
+00:02:28,011 --> 00:02:29,395
+Now the check script.
+
+76
+00:02:29,395 --> 00:02:31,505
+Lab check runs the seven checks.
+
+77
+00:02:31,505 --> 00:02:32,889
+Nothing is built yet,
+
+78
+00:02:32,889 --> 00:02:34,142
+so only one passes.
+
+79
+00:02:34,142 --> 00:02:36,779
+Every failure tells you what to do next.
+
+80
+00:02:37,329 --> 00:02:38,816
+Step one: the secret.
+
+81
+00:02:38,816 --> 00:02:40,728
+Jenkins stores credentials,
+
+82
+00:02:40,728 --> 00:02:43,349
+so a pipeline never holds a password.
+
+83
+00:02:43,349 --> 00:02:44,765
+Open Manage Jenkins,
+
+84
+00:02:44,765 --> 00:02:45,969
+then Credentials.
+
+85
+00:02:49,019 --> 00:02:49,809
+Then System,
+
+86
+00:02:49,809 --> 00:02:50,600
+then Global.
+
+87
+00:02:50,600 --> 00:02:53,893
+These pages decide where a credential can be used.
+
+88
+00:02:53,893 --> 00:02:54,750
+Global means,
+
+89
+00:02:54,750 --> 00:02:56,528
+everywhere in this Jenkins.
+
+90
+00:02:57,078 --> 00:03:01,174
+And choose Add Credentials. Jenkins asks for the kind of credential.
+
+91
+00:03:01,724 --> 00:03:04,095
+The kind is username with password.
+
+92
+00:03:04,095 --> 00:03:05,450
+That is the default.
+
+93
+00:03:05,450 --> 00:03:07,415
+The username is dana-release.
+
+94
+00:03:07,415 --> 00:03:09,447
+The password is a made up one.
+
+95
+00:03:09,447 --> 00:03:11,005
+The ID is release-bot.
+
+96
+00:03:11,005 --> 00:03:13,647
+That is the name the pipeline will use.
+
+97
+00:03:13,647 --> 00:03:14,460
+Then Create.
+
+98
+00:03:18,410 --> 00:03:20,021
+Step two: the pipeline.
+
+99
+00:03:20,021 --> 00:03:20,652
+New Item,
+
+100
+00:03:20,652 --> 00:03:22,403
+named cloudcart-mastery,
+
+101
+00:03:22,403 --> 00:03:23,594
+of type Pipeline.
+
+102
+00:03:23,594 --> 00:03:26,255
+This type runs a script that we write.
+
+103
+00:03:26,255 --> 00:03:26,816
+Then OK.
+
+104
+00:03:30,966 --> 00:03:32,572
+Read the script with me.
+
+105
+00:03:32,572 --> 00:03:33,376
+Four stages.
+
+106
+00:03:33,376 --> 00:03:35,317
+Build and test gets the code,
+
+107
+00:03:35,317 --> 00:03:36,857
+and runs Maven package,
+
+108
+00:03:36,857 --> 00:03:38,598
+which also runs the tests.
+
+109
+00:03:38,598 --> 00:03:40,406
+Archive keeps the war file.
+
+110
+00:03:40,406 --> 00:03:42,213
+Approve waits for a person.
+
+111
+00:03:42,213 --> 00:03:44,892
+Release uses the credential release-bot,
+
+112
+00:03:44,892 --> 00:03:45,829
+and prints it,
+
+113
+00:03:45,829 --> 00:03:47,904
+to prove that Jenkins masks it.
+
+114
+00:03:48,454 --> 00:03:48,782
+Save,
+
+115
+00:03:48,782 --> 00:03:49,698
+and Build Now.
+
+116
+00:03:49,698 --> 00:03:51,335
+Jenkins starts the build,
+
+117
+00:03:51,335 --> 00:03:52,710
+and fetches the code.
+
+118
+00:03:52,710 --> 00:03:54,150
+Then open the console.
+
+119
+00:04:05,500 --> 00:04:06,380
+Maven builds,
+
+120
+00:04:06,380 --> 00:04:07,666
+and the tests pass.
+
+121
+00:04:07,666 --> 00:04:09,832
+The archive stage keeps the war.
+
+122
+00:04:09,832 --> 00:04:11,388
+Now the pipeline waits,
+
+123
+00:04:11,388 --> 00:04:12,810
+at the Approve stage.
+
+124
+00:04:12,810 --> 00:04:14,502
+This is the release gate.
+
+125
+00:04:14,502 --> 00:04:16,329
+Only a person can continue.
+
+126
+00:04:16,329 --> 00:04:17,276
+Click Proceed.
+
+127
+00:04:20,326 --> 00:04:21,504
+Finished: success.
+
+128
+00:04:21,504 --> 00:04:23,401
+Now look at the release line.
+
+129
+00:04:23,401 --> 00:04:23,925
+It says,
+
+130
+00:04:23,925 --> 00:04:25,626
+releasing as dana-release,
+
+131
+00:04:25,626 --> 00:04:26,672
+with four stars.
+
+132
+00:04:26,672 --> 00:04:28,177
+The password is masked.
+
+133
+00:04:28,727 --> 00:04:30,063
+Back to the terminal.
+
+134
+00:04:30,063 --> 00:04:31,336
+Run the check again.
+
+135
+00:04:31,336 --> 00:04:32,481
+Six of seven pass.
+
+136
+00:04:32,481 --> 00:04:35,980
+The one failure says exactly what is missing: a backup.
+
+137
+00:04:36,530 --> 00:04:37,565
+Make the backup.
+
+138
+00:04:37,565 --> 00:04:39,699
+Lab backup archives Jenkins home.
+
+139
+00:04:39,699 --> 00:04:41,186
+It takes a few seconds,
+
+140
+00:04:41,186 --> 00:04:42,738
+and then shows the size.
+
+141
+00:04:43,288 --> 00:04:46,595
+Check once more. Seven of seven. Every check passes.
+
+142
+00:04:53,745 --> 00:04:55,693
+Results are part of the mastery.
+
+143
+00:04:55,693 --> 00:04:58,006
+The check script saved them in a file.
+
+144
+00:04:58,006 --> 00:04:58,554
+Print it.
+
+145
+00:04:58,554 --> 00:05:00,442
+This is your evidence: keep it,
+
+146
+00:05:00,442 --> 00:05:01,233
+and share it.
+
+147
+00:05:01,783 --> 00:05:02,124
+Last,
+
+148
+00:05:02,124 --> 00:05:02,942
+the cleanup.
+
+149
+00:05:02,942 --> 00:05:05,261
+Lab down deletes the scenario job,
+
+150
+00:05:05,261 --> 00:05:06,283
+the credential,
+
+151
+00:05:06,283 --> 00:05:07,306
+and the backup.
+
+152
+00:05:07,306 --> 00:05:09,079
+Your Jenkins itself stays.
+
+153
+00:05:09,629 --> 00:05:11,488
+Run the check one last time.
+
+154
+00:05:11,488 --> 00:05:13,347
+Only the first check passes.
+
+155
+00:05:13,347 --> 00:05:14,476
+Jenkins is alive,
+
+156
+00:05:14,476 --> 00:05:16,136
+and the scenario is gone.
+
+157
+00:05:16,686 --> 00:05:17,632
+In the browser,
+
+158
+00:05:17,632 --> 00:05:19,463
+the dashboard is empty again.
+
+159
+00:05:19,463 --> 00:05:19,842
+Built,
+
+160
+00:05:19,842 --> 00:05:20,284
+proved,
+
+161
+00:05:20,284 --> 00:05:20,852
+recorded,
+
+162
+00:05:20,852 --> 00:05:21,798
+and cleaned up.
+
+163
+00:05:21,798 --> 00:05:22,808
+That is mastery.
+
+164
+00:05:24,358 --> 00:05:27,025
+When a check fails, the message tells you where to look.
+
+165
+00:05:27,575 --> 00:05:29,471
+One: Jenkins does not answer.
+
+166
+00:05:29,471 --> 00:05:30,386
+Is it running?
+
+167
+00:05:30,386 --> 00:05:31,564
+Is the port right?
+
+168
+00:05:31,564 --> 00:05:33,591
+Is the user and password right?
+
+169
+00:05:34,141 --> 00:05:37,789
+Two: the job is missing. The name must match, letter for letter.
+
+170
+00:05:38,339 --> 00:05:42,328
+Three: the build is red. Open the console, and read the first error.
+
+171
+00:05:42,878 --> 00:05:46,355
+Four: no artifact. Check the archive step, and its path.
+
+172
+00:05:46,905 --> 00:05:50,916
+Five: no approval. The input step must be answered by a person.
+
+173
+00:05:51,466 --> 00:05:56,394
+Six: the secret is visible. Never echo plain text. Use with credentials.
+
+174
+00:05:56,944 --> 00:06:00,123
+Seven: no backup. Run lab backup, and check again.
+
+175
+00:06:01,673 --> 00:06:04,468
+Where to find the lab. Pause here, and write it down.
+
+176
+00:06:05,018 --> 00:06:06,482
+One: the repository,
+
+177
+00:06:06,482 --> 00:06:10,802
+github.com/it-waves/devops-ai,
+
+178
+00:06:10,802 --> 00:06:13,146
+in the folder academy/lab.
+
+179
+00:06:13,696 --> 00:06:19,712
+Two: the files, lab163.sh, and shortcuts163.sh.
+
+180
+00:06:20,262 --> 00:06:25,723
+Three: install it, with sudo install, into /usr/local/sbin.
+
+181
+00:06:26,273 --> 00:06:31,798
+Four: load the short names, with source shortcuts163.sh. Then lab up.
+
+182
+00:06:32,348 --> 00:06:38,194
+Five: lab check runs the seven checks. Lab backup makes the archive. Lab down cleans up.
+
+183
+00:06:38,744 --> 00:06:42,221
+Six: you need the Jenkins from lesson 155,
+
+184
+00:06:42,221 --> 00:06:42,811
+and Java.
+
+185
+00:06:42,811 --> 00:06:45,698
+Set your login in the variable JENKINS_AUTH.
+
+186
+00:06:46,248 --> 00:06:47,891
+The link is in the description.
+
+187
+00:06:49,441 --> 00:06:51,212
+Your turn, on your own machine.
+
+188
+00:06:51,762 --> 00:06:54,812
+One: lab up, then lab check. See the failures first.
+
+189
+00:06:55,362 --> 00:06:59,629
+Two: add the credential release-bot. Then create the pipeline, and build it.
+
+190
+00:07:00,179 --> 00:07:02,995
+Three: approve the release, and read the masked line.
+
+191
+00:07:03,545 --> 00:07:07,364
+Four: lab backup, and lab check, until you see seven of seven.
+
+192
+00:07:07,914 --> 00:07:11,604
+Five: keep the results file as your evidence. Then lab down.
+
+193
+00:07:12,154 --> 00:07:13,989
+Pause the video, and begin now.
+
+194
+00:07:29,539 --> 00:07:30,414
+Quick check.
+
+195
+00:07:30,964 --> 00:07:32,841
+Which check proves a secret is safe?
+
+196
+00:07:33,391 --> 00:07:36,015
+Why does a release need a person to approve it?
+
+197
+00:07:36,565 --> 00:07:38,229
+What makes this check independent?
+
+198
+00:07:38,779 --> 00:07:40,422
+What did you clean up, and why?
+
+199
+00:07:40,972 --> 00:07:46,454
+Objective covered: MC17, the mastery evidence. The whole Jenkins domain.
+
+200
+00:07:47,004 --> 00:07:49,074
+Pause the video, and answer out loud.
+
+201
+00:07:59,624 --> 00:08:04,125
+Next: a new domain. SonarQube, and how it keeps code quality honest.
+
+202
+00:08:04,675 --> 00:08:08,003
+If this helped, like, share and subscribe, so you do not miss it.
