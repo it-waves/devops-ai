@@ -1,0 +1,1047 @@
+1
+00:00:00,500 --> 00:00:02,591
+One computer cannot build everything.
+
+2
+00:00:03,141 --> 00:00:04,648
+A team has Linux builds,
+
+3
+00:00:04,648 --> 00:00:05,590
+Windows builds,
+
+4
+00:00:05,590 --> 00:00:06,281
+slow tests,
+
+5
+00:00:06,281 --> 00:00:08,480
+and ten developers pushing at once.
+
+6
+00:00:08,480 --> 00:00:10,553
+If one machine does all the work,
+
+7
+00:00:10,553 --> 00:00:12,186
+everybody waits in a line.
+
+8
+00:00:12,736 --> 00:00:14,809
+Jenkins solves this with agents.
+
+9
+00:00:14,809 --> 00:00:16,752
+The controller plans the work.
+
+10
+00:00:16,752 --> 00:00:17,594
+Agents do it,
+
+11
+00:00:17,594 --> 00:00:18,760
+on other machines,
+
+12
+00:00:18,760 --> 00:00:19,861
+at the same time.
+
+13
+00:00:20,411 --> 00:00:22,070
+Today you add a real agent,
+
+14
+00:00:22,070 --> 00:00:23,544
+send a real build to it,
+
+15
+00:00:23,544 --> 00:00:26,001
+and learn where the files go afterwards.
+
+16
+00:00:27,551 --> 00:00:28,980
+Here is what to expect.
+
+17
+00:00:34,530 --> 00:00:38,050
+One: the words. Controller, agent, executor, label.
+
+18
+00:00:46,600 --> 00:00:50,462
+Two: where the files live. Workspace, artifacts, and the stash.
+
+19
+00:00:59,012 --> 00:01:00,283
+Three: a live demo,
+
+20
+00:01:00,283 --> 00:01:02,158
+in the real Jenkins screens.
+
+21
+00:01:02,158 --> 00:01:03,228
+We add an agent,
+
+22
+00:01:03,228 --> 00:01:04,433
+send builds to it,
+
+23
+00:01:04,433 --> 00:01:06,709
+watch two builds run side by side,
+
+24
+00:01:06,709 --> 00:01:07,512
+keep a file,
+
+25
+00:01:07,512 --> 00:01:09,721
+and pass a file between machines.
+
+26
+00:01:20,271 --> 00:01:23,087
+Four: the common mistakes, and where to find the lab.
+
+27
+00:01:23,637 --> 00:01:26,602
+This is objective seven of the Jenkins domain.
+
+28
+00:01:28,652 --> 00:01:29,868
+Four words to know.
+
+29
+00:01:30,418 --> 00:01:32,864
+The controller is the brain of Jenkins.
+
+30
+00:01:32,864 --> 00:01:33,993
+It keeps the jobs,
+
+31
+00:01:33,993 --> 00:01:34,746
+the history,
+
+32
+00:01:34,746 --> 00:01:35,812
+and the settings.
+
+33
+00:01:35,812 --> 00:01:37,129
+It decides what runs,
+
+34
+00:01:37,129 --> 00:01:37,757
+and where.
+
+35
+00:01:38,307 --> 00:01:39,960
+An agent is another machine,
+
+36
+00:01:39,960 --> 00:01:40,904
+or another user,
+
+37
+00:01:40,904 --> 00:01:42,262
+that does the building.
+
+38
+00:01:42,262 --> 00:01:44,033
+It connects to the controller,
+
+39
+00:01:44,033 --> 00:01:45,155
+and waits for work.
+
+40
+00:01:45,705 --> 00:01:48,440
+An executor is one build slot on a machine.
+
+41
+00:01:48,440 --> 00:01:52,510
+An agent with two executors can run two builds at the same time.
+
+42
+00:01:53,060 --> 00:01:55,060
+A label is a tag on a machine.
+
+43
+00:01:55,060 --> 00:01:56,927
+A pipeline asks for a label,
+
+44
+00:01:56,927 --> 00:01:58,127
+for example maven,
+
+45
+00:01:58,127 --> 00:02:01,060
+and Jenkins picks any machine that wears it.
+
+46
+00:02:01,610 --> 00:02:05,173
+So the pipeline never names a machine. It names what it needs.
+
+47
+00:02:06,723 --> 00:02:08,430
+Now, where do the files live?
+
+48
+00:02:08,980 --> 00:02:10,647
+Every job gets a workspace.
+
+49
+00:02:10,647 --> 00:02:11,574
+It is a folder,
+
+50
+00:02:11,574 --> 00:02:13,550
+on the agent that ran the build.
+
+51
+00:02:13,550 --> 00:02:15,403
+The code is checked out there,
+
+52
+00:02:15,403 --> 00:02:17,812
+and the build writes its results there.
+
+53
+00:02:18,362 --> 00:02:23,610
+A workspace is working space, not storage. It can be wiped, and it stays on one machine.
+
+54
+00:02:24,160 --> 00:02:25,232
+To keep a result,
+
+55
+00:02:25,232 --> 00:02:25,925
+archive it.
+
+56
+00:02:25,925 --> 00:02:30,023
+The archiveArtifacts step copies chosen files to the controller,
+
+57
+00:02:30,023 --> 00:02:31,474
+attached to that build,
+
+58
+00:02:31,474 --> 00:02:32,672
+for download later.
+
+59
+00:02:33,222 --> 00:02:35,257
+To pass a file to a later stage,
+
+60
+00:02:35,257 --> 00:02:37,102
+maybe on a different machine,
+
+61
+00:02:37,102 --> 00:02:38,565
+use stash and unstash.
+
+62
+00:02:38,565 --> 00:02:41,682
+Stash saves files for the rest of this one build.
+
+63
+00:02:41,682 --> 00:02:43,209
+Un stash puts them back,
+
+64
+00:02:43,209 --> 00:02:43,782
+anywhere.
+
+65
+00:02:44,332 --> 00:02:49,452
+Archive is for people, and for history. Stash is for the pipeline, for the next stage.
+
+66
+00:02:51,002 --> 00:02:52,054
+A real Jenkins.
+
+67
+00:02:52,054 --> 00:02:53,386
+I sign in as admin.
+
+68
+00:02:53,386 --> 00:02:56,682
+On the left is the Build Executor Status panel.
+
+69
+00:02:56,682 --> 00:02:58,155
+There is one machine,
+
+70
+00:02:58,155 --> 00:02:59,417
+the built in node,
+
+71
+00:02:59,417 --> 00:03:01,591
+and its two executors are idle.
+
+72
+00:03:01,591 --> 00:03:03,695
+That is the controller itself.
+
+73
+00:03:04,245 --> 00:03:05,648
+Now we add an agent.
+
+74
+00:03:05,648 --> 00:03:06,700
+Manage Jenkins,
+
+75
+00:03:06,700 --> 00:03:07,471
+then Nodes.
+
+76
+00:03:07,471 --> 00:03:08,663
+Here is the list.
+
+77
+00:03:08,663 --> 00:03:10,276
+Only the built in node,
+
+78
+00:03:10,276 --> 00:03:10,837
+for now.
+
+79
+00:03:11,387 --> 00:03:11,529
+New Node.
+
+80
+00:03:11,529 --> 00:03:11,686
+I name it,
+
+81
+00:03:11,686 --> 00:03:11,937
+build agent one.
+
+82
+00:03:11,937 --> 00:03:12,377
+The type is Permanent Agent,
+
+83
+00:03:12,377 --> 00:03:12,707
+a machine that stays.
+
+84
+00:03:12,707 --> 00:03:12,817
+Create.
+
+85
+00:03:18,367 --> 00:03:18,557
+Now its settings.
+
+86
+00:03:18,557 --> 00:03:19,219
+The remote root directory is the folder where it will work,
+
+87
+00:03:19,219 --> 00:03:19,544
+the workspaces live under it.
+
+88
+00:03:19,544 --> 00:03:19,712
+The labels are,
+
+89
+00:03:19,712 --> 00:03:19,779
+linux,
+
+90
+00:03:19,779 --> 00:03:19,891
+and maven.
+
+91
+00:03:19,891 --> 00:03:20,160
+The number of executors,
+
+92
+00:03:20,160 --> 00:03:20,306
+I set to two.
+
+93
+00:03:20,306 --> 00:03:21,360
+The launch method is already the one we want: launch agent by connecting it to the controller.
+
+94
+00:03:21,360 --> 00:03:21,573
+The agent calls us,
+
+95
+00:03:21,573 --> 00:03:21,831
+so no firewall problem.
+
+96
+00:03:21,831 --> 00:03:21,887
+Save.
+
+97
+00:03:30,437 --> 00:03:30,768
+The new node appears,
+
+98
+00:03:30,768 --> 00:03:31,036
+with a red cross.
+
+99
+00:03:31,036 --> 00:03:31,398
+Jenkins knows about it,
+
+100
+00:03:31,398 --> 00:03:31,918
+but no machine has connected yet.
+
+101
+00:03:31,918 --> 00:03:32,044
+Open it,
+
+102
+00:03:32,044 --> 00:03:33,069
+and Jenkins prints the exact command to run on the other machine,
+
+103
+00:03:33,069 --> 00:03:33,289
+with a secret,
+
+104
+00:03:33,289 --> 00:03:33,699
+and the WebSocket option,
+
+105
+00:03:33,699 --> 00:03:34,298
+so the agent uses the normal web port.
+
+106
+00:03:42,848 --> 00:03:44,070
+On the other machine,
+
+107
+00:03:44,070 --> 00:03:45,409
+I run that one command.
+
+108
+00:03:45,409 --> 00:03:48,726
+Here the other machine is a second user on this computer,
+
+109
+00:03:48,726 --> 00:03:49,483
+called agent.
+
+110
+00:03:49,483 --> 00:03:51,462
+It is java dash jar agent dot jar,
+
+111
+00:03:51,462 --> 00:03:52,160
+the address,
+
+112
+00:03:52,160 --> 00:03:52,684
+the name,
+
+113
+00:03:52,684 --> 00:03:53,557
+and the secret.
+
+114
+00:04:04,107 --> 00:04:04,553
+Back to the node list.
+
+115
+00:04:04,553 --> 00:04:04,999
+The red cross is gone.
+
+116
+00:04:04,999 --> 00:04:05,525
+Build agent one is online,
+
+117
+00:04:05,525 --> 00:04:05,910
+with two executors,
+
+118
+00:04:05,910 --> 00:04:06,923
+and it shows its own disk space and response time.
+
+119
+00:04:07,473 --> 00:04:08,862
+Now the simplest use.
+
+120
+00:04:08,862 --> 00:04:09,853
+A new Pipeline,
+
+121
+00:04:09,853 --> 00:04:10,977
+named agent test.
+
+122
+00:04:10,977 --> 00:04:13,357
+The script asks for the label maven.
+
+123
+00:04:13,357 --> 00:04:15,142
+It prints the machine name,
+
+124
+00:04:15,142 --> 00:04:15,737
+the user,
+
+125
+00:04:15,737 --> 00:04:16,729
+and the folder,
+
+126
+00:04:16,729 --> 00:04:18,448
+then waits twenty seconds.
+
+127
+00:04:18,448 --> 00:04:20,828
+I will explain the wait in a moment.
+
+128
+00:04:24,378 --> 00:04:24,740
+Save,
+
+129
+00:04:24,740 --> 00:04:25,754
+and Build Now.
+
+130
+00:04:25,754 --> 00:04:26,985
+Open the console.
+
+131
+00:04:26,985 --> 00:04:30,462
+The first lines say: running on build agent one,
+
+132
+00:04:30,462 --> 00:04:32,345
+in slash home slash agent,
+
+133
+00:04:32,345 --> 00:04:33,359
+slash Jenkins,
+
+134
+00:04:33,359 --> 00:04:34,517
+slash workspace,
+
+135
+00:04:34,517 --> 00:04:35,749
+slash agent test.
+
+136
+00:04:36,299 --> 00:04:37,773
+That is the workspace.
+
+137
+00:04:37,773 --> 00:04:39,047
+It is on the agent,
+
+138
+00:04:39,047 --> 00:04:40,991
+under the agent's own folder,
+
+139
+00:04:40,991 --> 00:04:42,465
+not on the controller.
+
+140
+00:04:42,465 --> 00:04:43,672
+The user is agent,
+
+141
+00:04:43,672 --> 00:04:44,476
+not Jenkins.
+
+142
+00:04:44,476 --> 00:04:45,683
+Different machine,
+
+143
+00:04:45,683 --> 00:04:46,688
+different user,
+
+144
+00:04:46,688 --> 00:04:47,627
+same pipeline.
+
+145
+00:04:48,177 --> 00:04:53,233
+Now executors. Build Now, three times, quickly. That is the reason for the wait.
+
+146
+00:04:53,783 --> 00:04:55,540
+Look at the executor panel.
+
+147
+00:04:55,540 --> 00:04:57,623
+Build agent one runs two builds,
+
+148
+00:04:57,623 --> 00:04:58,991
+one on each executor.
+
+149
+00:04:58,991 --> 00:05:01,269
+The third build waits in the queue,
+
+150
+00:05:01,269 --> 00:05:02,636
+until a slot is free.
+
+151
+00:05:03,186 --> 00:05:05,655
+A queue means you need more executors,
+
+152
+00:05:05,655 --> 00:05:06,629
+or more agents.
+
+153
+00:05:06,629 --> 00:05:08,319
+Jenkins shows the problem,
+
+154
+00:05:08,319 --> 00:05:08,903
+honestly.
+
+155
+00:05:09,453 --> 00:05:10,146
+Now files.
+
+156
+00:05:10,146 --> 00:05:11,185
+A new Pipeline,
+
+157
+00:05:11,185 --> 00:05:12,778
+named cloud cart agent.
+
+158
+00:05:12,778 --> 00:05:15,756
+This script builds cloud cart on the agent,
+
+159
+00:05:15,756 --> 00:05:16,518
+with Maven.
+
+160
+00:05:16,518 --> 00:05:18,804
+Then it archives the web archive,
+
+161
+00:05:18,804 --> 00:05:19,843
+and stashes it.
+
+162
+00:05:23,393 --> 00:05:26,328
+The second stage asks for a different machine,
+
+163
+00:05:26,328 --> 00:05:27,477
+the built in node.
+
+164
+00:05:27,477 --> 00:05:28,945
+It unstashes the file,
+
+165
+00:05:28,945 --> 00:05:29,775
+and lists it.
+
+166
+00:05:29,775 --> 00:05:30,094
+Save,
+
+167
+00:05:30,094 --> 00:05:30,987
+and Build Now.
+
+168
+00:05:31,537 --> 00:05:32,748
+Open the console.
+
+169
+00:05:32,748 --> 00:05:35,454
+Stage one: running on build agent one.
+
+170
+00:05:35,454 --> 00:05:37,234
+Maven builds the package,
+
+171
+00:05:37,234 --> 00:05:39,014
+in the agent's workspace.
+
+172
+00:05:39,014 --> 00:05:39,370
+Then,
+
+173
+00:05:39,370 --> 00:05:40,794
+archiving artifacts,
+
+174
+00:05:40,794 --> 00:05:41,079
+and,
+
+175
+00:05:41,079 --> 00:05:42,289
+stashed one file.
+
+176
+00:05:42,839 --> 00:05:44,788
+Stage two: running on Jenkins,
+
+177
+00:05:44,788 --> 00:05:46,738
+in the controller's workspace.
+
+178
+00:05:46,738 --> 00:05:48,167
+And there is the file,
+
+179
+00:05:48,167 --> 00:05:49,401
+cloud cart dot war,
+
+180
+00:05:49,401 --> 00:05:51,415
+arrived from the other machine.
+
+181
+00:05:51,965 --> 00:05:53,223
+Now the build page.
+
+182
+00:05:53,223 --> 00:05:54,283
+Under the build,
+
+183
+00:05:54,283 --> 00:05:55,474
+the archived file,
+
+184
+00:05:55,474 --> 00:05:56,732
+cloud cart dot war,
+
+185
+00:05:56,732 --> 00:05:57,924
+ready to download.
+
+186
+00:05:57,924 --> 00:05:59,513
+It stays with the build,
+
+187
+00:05:59,513 --> 00:06:01,565
+even if the workspace is wiped.
+
+188
+00:06:02,115 --> 00:06:06,802
+The workspaces link lists the folder on each machine that ran this build.
+
+189
+00:06:06,802 --> 00:06:07,893
+One on the agent,
+
+190
+00:06:07,893 --> 00:06:09,306
+one on the controller.
+
+191
+00:06:09,306 --> 00:06:10,975
+I open the controller one,
+
+192
+00:06:10,975 --> 00:06:13,029
+and the unstashed file is here,
+
+193
+00:06:13,029 --> 00:06:15,790
+only because the second stage asked for it.
+
+194
+00:06:16,340 --> 00:06:17,307
+One more thing,
+
+195
+00:06:17,307 --> 00:06:19,371
+the mistake everyone makes once.
+
+196
+00:06:19,371 --> 00:06:20,338
+A new Pipeline,
+
+197
+00:06:20,338 --> 00:06:21,628
+named needs windows.
+
+198
+00:06:21,628 --> 00:06:23,562
+It asks for the label windows.
+
+199
+00:06:23,562 --> 00:06:24,852
+No machine wears it.
+
+200
+00:06:39,402 --> 00:06:40,054
+Build Now.
+
+201
+00:06:40,054 --> 00:06:41,620
+The build does not fail.
+
+202
+00:06:41,620 --> 00:06:42,208
+It waits.
+
+203
+00:06:42,208 --> 00:06:43,317
+Open the console.
+
+204
+00:06:43,317 --> 00:06:45,339
+Still waiting to schedule task.
+
+205
+00:06:45,339 --> 00:06:48,080
+There are no nodes with the label windows.
+
+206
+00:06:48,080 --> 00:06:49,450
+It will wait forever.
+
+207
+00:06:53,000 --> 00:06:54,216
+When a build waits,
+
+208
+00:06:54,216 --> 00:06:55,368
+read this message.
+
+209
+00:06:55,368 --> 00:06:56,136
+It says why.
+
+210
+00:06:56,136 --> 00:06:57,544
+Usually a wrong label,
+
+211
+00:06:57,544 --> 00:06:59,336
+or an agent that is offline.
+
+212
+00:06:59,886 --> 00:07:01,545
+That is the whole picture.
+
+213
+00:07:01,545 --> 00:07:03,077
+A controller that plans,
+
+214
+00:07:03,077 --> 00:07:04,162
+agents that work,
+
+215
+00:07:04,162 --> 00:07:05,374
+labels that choose,
+
+216
+00:07:05,374 --> 00:07:07,353
+and files that move on purpose.
+
+217
+00:07:08,903 --> 00:07:10,055
+Five mistakes.
+
+218
+00:07:10,605 --> 00:07:13,062
+One: running builds on the controller.
+
+219
+00:07:13,062 --> 00:07:15,520
+Give it zero executors in a real team,
+
+220
+00:07:15,520 --> 00:07:16,813
+and let agents work.
+
+221
+00:07:17,363 --> 00:07:22,675
+Two: one executor on a big machine. Match executors to the cores, and to the memory.
+
+222
+00:07:23,225 --> 00:07:28,196
+Three: a label nobody wears. The build waits forever. Read the console message.
+
+223
+00:07:28,746 --> 00:07:32,692
+Four: treating the workspace as storage. Archive what you need to keep.
+
+224
+00:07:33,242 --> 00:07:35,275
+Five: archiving huge folders.
+
+225
+00:07:35,275 --> 00:07:37,728
+Archive only the files people need,
+
+226
+00:07:37,728 --> 00:07:40,602
+and stash only what the next stage needs.
+
+227
+00:07:42,152 --> 00:07:44,947
+Where to find the lab. Pause here, and write it down.
+
+228
+00:07:45,497 --> 00:07:46,961
+One: the repository,
+
+229
+00:07:46,961 --> 00:07:51,281
+GitHub dot com slash it dash waves slash devops-ai,
+
+230
+00:07:51,281 --> 00:07:53,625
+in the folder academy slash lab.
+
+231
+00:07:54,175 --> 00:07:59,807
+Two: the files, lab one sixty dot S H, and shortcuts one sixty dot S H.
+
+232
+00:08:00,357 --> 00:08:05,818
+Three: install it, with sudo install, into slash user slash local slash S bin.
+
+233
+00:08:06,368 --> 00:08:08,207
+Four: load the short names,
+
+234
+00:08:08,207 --> 00:08:10,933
+with source shortcuts one sixty dot S H.
+
+235
+00:08:10,933 --> 00:08:11,750
+Then lab up,
+
+236
+00:08:11,750 --> 00:08:12,704
+and lab agent.
+
+237
+00:08:13,254 --> 00:08:15,750
+Five: lab agent creates the agent user,
+
+238
+00:08:15,750 --> 00:08:18,374
+and prints the one command to connect it.
+
+239
+00:08:18,374 --> 00:08:21,190
+Lab files writes the three pipeline scripts.
+
+240
+00:08:21,740 --> 00:08:25,372
+Six: you need the Jenkins from lesson one fifty-five,
+
+241
+00:08:25,372 --> 00:08:25,989
+and Java.
+
+242
+00:08:25,989 --> 00:08:29,484
+Lab down stops the agent and removes the lab files.
+
+243
+00:08:30,034 --> 00:08:31,677
+The link is in the description.
+
+244
+00:08:33,727 --> 00:08:35,498
+Your turn, on your own machine.
+
+245
+00:08:36,048 --> 00:08:39,418
+One: lab up, then lab agent, and read the command it prints.
+
+246
+00:08:39,968 --> 00:08:43,168
+Two: add the node in the Jenkins screens, and connect it.
+
+247
+00:08:43,718 --> 00:08:47,238
+Three: run the agent test, three times, and watch the queue.
+
+248
+00:08:47,788 --> 00:08:51,842
+Four: run the cloud cart pipeline, and download the archived file.
+
+249
+00:08:52,392 --> 00:08:57,640
+Five: ask for a label nobody wears, and read the console message. Then lab down.
+
+250
+00:08:58,190 --> 00:09:00,024
+Pause the video, and begin now.
+
+251
+00:09:15,574 --> 00:09:16,449
+Quick check.
+
+252
+00:09:16,999 --> 00:09:19,815
+What is the difference between a controller and an agent?
+
+253
+00:09:20,365 --> 00:09:21,666
+What is an executor?
+
+254
+00:09:22,216 --> 00:09:24,499
+When do you archive, and when do you stash?
+
+255
+00:09:25,049 --> 00:09:26,713
+Why does a build wait forever?
+
+256
+00:09:27,263 --> 00:09:29,753
+Objective covered: M C seventeen,
+
+257
+00:09:29,753 --> 00:09:30,961
+objective seven.
+
+258
+00:09:30,961 --> 00:09:32,395
+Distributed agents,
+
+259
+00:09:32,395 --> 00:09:34,281
+workspaces and artifacts.
+
+260
+00:09:34,831 --> 00:09:36,901
+Pause the video, and answer out loud.
+
+261
+00:09:47,451 --> 00:09:51,120
+Next: approval, promotion, rollback and notifications.
+
+262
+00:09:51,670 --> 00:09:54,998
+If this helped, like, share and subscribe, so you do not miss it.

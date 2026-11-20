@@ -1,0 +1,25 @@
+Lesson 160 of the DevOps Engineering Bootcamp, the seventh lesson of the Jenkins domain. One Jenkins machine cannot do everything. You learn the four words that matter, controller, agent, executor and label, and where a build's files live: the workspace, the archive and the stash. Then watch a real live run: add a real agent node in the Jenkins screens, run a pipeline on it by label, see two builds share the executors while a third waits in the queue, build CloudCart on the agent, archive the war file, stash it and unstash it on the controller, and finally watch a build wait forever for a label nobody has. You finish with the common mistakes and a lab you can repeat.
+
+Chapters
+0:00 Agents, labels, artifacts
+0:27 What to expect
+1:28 Controller, agent, executor, label
+2:06 Where the files live
+2:50 Live: add an agent, run, archive, stash
+7:08 Common mistakes
+7:41 Where to find the lab
+8:33 Your turn
+9:15 Quick check and what is next
+
+Objectives covered: MC17-O07 Run builds on distributed agents and manage workspaces and artifacts.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab160.sh and shortcuts160.sh). Needs the Jenkins from lesson 155, Java and Maven on your own machine. "lab up" checks them, "lab agent" creates a separate agent user and prints the connect steps, "lab files" writes the three Jenkinsfiles to ~/jenkins-lab160, and "lab down" stops the agent and cleans up. Use your own machine only, throwaway passwords only.
+
+Honest notes: the Jenkins screens are a real continuous recording of Jenkins 2.580 LTS with a real agent running as a separate user on the same machine, so it shows the idea without a second computer. The lab passwords are throwaway values. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, words, files, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Jenkins Triggers, Quality Gates and Nexus Releases (Live Poll, Gate, Publish) | Lesson 159 https://youtu.be/z0HEAZ2kW8o
+Next: approvals, promotion, rollback and notifications.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #jenkins #jenkinsagent #cicd #pipeline #devopsbootcamp #learnjenkins
