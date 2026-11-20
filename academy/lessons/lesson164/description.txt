@@ -1,0 +1,25 @@
+Lesson 164 of the DevOps Engineering Bootcamp, the first lesson of the SonarQube domain. Your tests are green, but is the code safe? SonarQube reads every line without running it and tells you what is wrong, where, and how bad. You learn four words (analysis, issue, quality profile, quality gate), the three software qualities (Security, Reliability, Maintainability), severities and A to E ratings, and the clean as you code idea. Then a live tour of a real SonarQube on real CloudCart code: Projects, the Summary page, the Issues page with filters, one security issue with its Where, Why and How to fix tabs, the Sonar way quality gate and the quality profiles.
+
+Chapters
+0:00 Green tests. Is it safe?
+0:25 What to expect
+0:50 Four words to know
+1:14 Three software qualities
+1:55 Live tour of SonarQube
+4:22 Common mistakes
+4:53 Where to find the lab
+5:38 Your turn
+6:20 Quick check and what is next
+
+Objectives covered: MC18-O01. Static analysis, quality gates, quality profiles and issue types.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab164.sh and shortcuts164.sh). "lab files" writes a small demo file with seeded defects into your CloudCart folder, and "lab down" removes it. You install your own SonarQube in the next lesson. Use your own machine only.
+
+Honest notes: the SonarQube screens are a real continuous recording of SonarQube Community Build 26.11 running on a lab machine, with a real analysis of CloudCart plus one demo file with seeded defects. It uses the built-in embedded database, which is for evaluation only. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, words, qualities, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Jenkins Mastery Check: Build, Prove and Clean Up a Release (Live) | Lesson 163 https://youtu.be/mhpR7mgG6yg
+Next: install a SonarQube lab and connect to it.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #sonarqube #staticanalysis #codequality #qualitygate #devopsbootcamp #learnsonarqube

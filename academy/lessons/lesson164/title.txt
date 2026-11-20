@@ -1,0 +1,1 @@
+SonarQube Explained: Static Analysis, Quality Gates and Issues (Live Tour) | Lesson 164
