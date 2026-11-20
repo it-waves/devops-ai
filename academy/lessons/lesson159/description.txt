@@ -1,0 +1,25 @@
+Lesson 159 of the DevOps Engineering Bootcamp, the sixth lesson of the Jenkins domain. A build that waits for a click is not continuous integration. You learn how builds start, how a SonarQube quality gate stops bad code, and why a Nexus release can never be uploaded twice. Then watch a real live run: Poll SCM starts a build from a commit, a remote trigger starts one from a URL, SonarQube analyses the code, the gate fails on a planted bug and passes after the fix, and a pipeline publishes version 0.2.0 to Nexus, where a second upload is refused until you bump the version to 0.2.1. You finish with the common mistakes and a lab you can repeat.
+
+Chapters
+0:00 Triggers, gates, releases
+0:30 What to expect
+0:57 How builds start
+1:35 From commit to release
+2:10 Live: trigger, gate, publish
+14:51 Common mistakes
+15:20 Where to find the lab
+16:11 Your turn
+16:51 Quick check and what is next
+
+Objectives covered: MC17-O06 Trigger builds automatically, enforce a quality gate and publish a release artifact to Nexus.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab159.sh and shortcuts159.sh). Needs the Jenkins from lesson 155, SonarQube and Nexus on your own machine. "lab up" checks the three servers, "lab repo" prepares the code, "lab bug", "lab fix" and "lab bump" play the commits, "lab files" writes the two Jenkinsfiles to ~/jenkins-lab159, and "lab down" cleans up. Use your own machine only, throwaway passwords only.
+
+Honest notes: the Jenkins, SonarQube and Nexus screens are a real continuous recording of Jenkins 2.580 LTS, SonarQube 26.11 Community and Nexus 3.98. The lab passwords are throwaway values. The plugins came from a local update centre because of sandbox network limits. The developer commits in the demo were made by a script that plays the same git commits a developer would make, so the timing fits the narration. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, triggers, road, mistakes, files, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Jenkins Credentials: Keep Secrets Out of Pipelines (Live Leak and Fix) | Lesson 158 https://youtu.be/NeC1iTK5FjI
+Next: distributed agents, workspaces and artifacts.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #jenkins #sonarqube #nexus #qualitygate #cicd #devopsbootcamp #learnjenkins

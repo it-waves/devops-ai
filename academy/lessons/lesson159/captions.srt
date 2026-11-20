@@ -1,0 +1,1163 @@
+1
+00:00:00,500 --> 00:00:04,489
+A build that waits for someone to click is not continuous integration.
+
+2
+00:00:05,039 --> 00:00:07,575
+Today three things happen on their own.
+
+3
+00:00:07,575 --> 00:00:09,721
+A build starts when code changes.
+
+4
+00:00:09,721 --> 00:00:11,411
+SonarQube judges the code,
+
+5
+00:00:11,411 --> 00:00:12,907
+and can stop the build.
+
+6
+00:00:12,907 --> 00:00:15,378
+And Nexus stores the finished release,
+
+7
+00:00:15,378 --> 00:00:17,263
+so nobody ever overwrites it.
+
+8
+00:00:17,813 --> 00:00:19,451
+You will see all three,
+
+9
+00:00:19,451 --> 00:00:21,729
+on real servers: a real Jenkins,
+
+10
+00:00:21,729 --> 00:00:22,939
+a real SonarQube,
+
+11
+00:00:22,939 --> 00:00:24,149
+and a real Nexus.
+
+12
+00:00:24,699 --> 00:00:28,966
+And you will watch a bad commit get stopped by the quality gate, before it ships.
+
+13
+00:00:30,516 --> 00:00:31,945
+Here is what to expect.
+
+14
+00:00:32,495 --> 00:00:35,013
+One: the ways a build can start by itself.
+
+15
+00:00:35,563 --> 00:00:38,912
+Two: the road from commit to release, and where the gate sits.
+
+16
+00:00:39,462 --> 00:00:40,782
+Three: a live demo,
+
+17
+00:00:40,782 --> 00:00:42,172
+in three real tools.
+
+18
+00:00:42,172 --> 00:00:44,187
+Polling and a remote trigger.
+
+19
+00:00:44,187 --> 00:00:45,993
+A quality gate that fails,
+
+20
+00:00:45,993 --> 00:00:46,827
+then passes.
+
+21
+00:00:46,827 --> 00:00:48,425
+And a publish to Nexus,
+
+22
+00:00:48,425 --> 00:00:49,467
+with a refusal.
+
+23
+00:00:50,017 --> 00:00:52,833
+Four: the common mistakes, and where to find the lab.
+
+24
+00:00:53,383 --> 00:00:56,135
+This is objective six of the Jenkins domain.
+
+25
+00:00:58,185 --> 00:00:59,934
+How does a build start by itself?
+
+26
+00:01:00,484 --> 00:01:02,358
+Jenkins has four main ways.
+
+27
+00:01:02,358 --> 00:01:04,163
+One: poll the source code.
+
+28
+00:01:04,163 --> 00:01:05,343
+Jenkins asks git,
+
+29
+00:01:05,343 --> 00:01:06,592
+every few minutes,
+
+30
+00:01:06,592 --> 00:01:07,980
+if anything changed.
+
+31
+00:01:07,980 --> 00:01:08,882
+It is simple,
+
+32
+00:01:08,882 --> 00:01:11,172
+and it works behind any firewall.
+
+33
+00:01:11,722 --> 00:01:12,682
+Two: a webhook.
+
+34
+00:01:12,682 --> 00:01:16,458
+The git server calls a Jenkins address the moment you push.
+
+35
+00:01:16,458 --> 00:01:17,290
+It is faster,
+
+36
+00:01:17,290 --> 00:01:19,914
+and it asks nothing when nothing changed.
+
+37
+00:01:20,464 --> 00:01:24,880
+Three: a timer. Build every night, whatever happened. Good for slow checks.
+
+38
+00:01:25,430 --> 00:01:29,249
+Four: another job. When one build finishes, the next one starts.
+
+39
+00:01:29,799 --> 00:01:34,151
+In the demo we use polling, and a remote trigger, which is how a webhook works.
+
+40
+00:01:35,701 --> 00:01:37,578
+Now the road from commit to release.
+
+41
+00:01:38,128 --> 00:01:41,542
+A developer commits. Jenkins builds, and runs the tests.
+
+42
+00:01:42,092 --> 00:01:44,314
+Then SonarQube analyses the code.
+
+43
+00:01:44,314 --> 00:01:45,526
+It looks for bugs,
+
+44
+00:01:45,526 --> 00:01:48,961
+security problems and smells that tests do not see.
+
+45
+00:01:49,511 --> 00:01:52,181
+The quality gate is a pass or fail rule.
+
+46
+00:01:52,181 --> 00:01:53,849
+For example: no new bugs.
+
+47
+00:01:53,849 --> 00:01:54,650
+If it fails,
+
+48
+00:01:54,650 --> 00:01:56,252
+the pipeline stops here.
+
+49
+00:01:56,802 --> 00:02:01,901
+Only a build that passes the gate is published to Nexus, the artifact repository.
+
+50
+00:02:02,451 --> 00:02:04,524
+A release in Nexus is immutable.
+
+51
+00:02:04,524 --> 00:02:07,439
+The same version can never be uploaded twice.
+
+52
+00:02:07,439 --> 00:02:08,605
+That is a feature,
+
+53
+00:02:08,605 --> 00:02:09,512
+not a problem.
+
+54
+00:02:11,062 --> 00:02:16,587
+A real Jenkins, again. I sign in as admin. We start with the simplest trigger, polling.
+
+55
+00:02:23,137 --> 00:02:25,975
+New Item. A Pipeline, named CloudCart poll.
+
+56
+00:02:26,525 --> 00:02:28,762
+Scroll down to Build Triggers.
+
+57
+00:02:28,762 --> 00:02:30,328
+Here are the choices.
+
+58
+00:02:30,328 --> 00:02:32,118
+Trigger builds remotely.
+
+59
+00:02:32,118 --> 00:02:33,535
+Build periodically.
+
+60
+00:02:33,535 --> 00:02:34,654
+And Poll SCM.
+
+61
+00:02:34,654 --> 00:02:35,997
+I tick Poll SCM.
+
+62
+00:02:36,547 --> 00:02:38,465
+The schedule is five stars.
+
+63
+00:02:38,465 --> 00:02:38,963
+Minute,
+
+64
+00:02:38,963 --> 00:02:39,318
+hour,
+
+65
+00:02:39,318 --> 00:02:39,602
+day,
+
+66
+00:02:39,602 --> 00:02:40,029
+month,
+
+67
+00:02:40,029 --> 00:02:40,597
+weekday.
+
+68
+00:02:40,597 --> 00:02:42,729
+Five stars means every minute.
+
+69
+00:02:42,729 --> 00:02:43,653
+In real life,
+
+70
+00:02:43,653 --> 00:02:46,637
+five minutes is kinder to your git server.
+
+71
+00:02:47,187 --> 00:02:47,539
+Next,
+
+72
+00:02:47,539 --> 00:02:49,228
+Trigger builds remotely.
+
+73
+00:02:49,228 --> 00:02:49,932
+I tick it,
+
+74
+00:02:49,932 --> 00:02:51,340
+and give it a token,
+
+75
+00:02:51,340 --> 00:02:52,044
+lab token.
+
+76
+00:02:52,044 --> 00:02:56,126
+Now this job has an address that outside systems can call.
+
+77
+00:02:56,676 --> 00:02:58,447
+In the Pipeline section,
+
+78
+00:02:58,447 --> 00:03:00,587
+the definition is from SCM.
+
+79
+00:03:00,587 --> 00:03:00,883
+Git,
+
+80
+00:03:00,883 --> 00:03:02,359
+the repository path,
+
+81
+00:03:02,359 --> 00:03:03,466
+and the branch,
+
+82
+00:03:03,466 --> 00:03:03,835
+main.
+
+83
+00:03:03,835 --> 00:03:07,230
+The Jenkinsfile is already in the repository.
+
+84
+00:03:07,230 --> 00:03:07,599
+Save.
+
+85
+00:03:08,149 --> 00:03:08,809
+Build Now,
+
+86
+00:03:08,809 --> 00:03:09,139
+once,
+
+87
+00:03:09,139 --> 00:03:11,319
+to give polling a starting point.
+
+88
+00:03:11,319 --> 00:03:14,422
+While it runs: the build clones the repository,
+
+89
+00:03:14,422 --> 00:03:15,611
+compiles the code,
+
+90
+00:03:15,611 --> 00:03:17,130
+and runs all the tests.
+
+91
+00:03:37,680 --> 00:03:38,278
+Now Dana,
+
+92
+00:03:38,278 --> 00:03:39,074
+a developer,
+
+93
+00:03:39,074 --> 00:03:40,535
+pushes a small commit.
+
+94
+00:03:40,535 --> 00:03:41,930
+A note in the readme.
+
+95
+00:03:41,930 --> 00:03:43,523
+I do nothing in Jenkins.
+
+96
+00:03:43,523 --> 00:03:44,918
+Watch the build list.
+
+97
+00:03:44,918 --> 00:03:45,980
+Within a minute,
+
+98
+00:03:45,980 --> 00:03:47,640
+build number two appears,
+
+99
+00:03:47,640 --> 00:03:48,304
+by itself.
+
+100
+00:04:28,854 --> 00:04:29,963
+Open the console.
+
+101
+00:04:29,963 --> 00:04:33,811
+The first lines tell the cause: started by an SCM change.
+
+102
+00:04:33,811 --> 00:04:35,702
+Polling found the new commit.
+
+103
+00:04:36,252 --> 00:04:37,505
+Now the faster way.
+
+104
+00:04:37,505 --> 00:04:40,077
+A git server calls the trigger address,
+
+105
+00:04:40,077 --> 00:04:41,396
+the moment you push.
+
+106
+00:04:41,396 --> 00:04:43,177
+I open that address myself,
+
+107
+00:04:43,177 --> 00:04:44,562
+with the token in it,
+
+108
+00:04:44,562 --> 00:04:46,540
+exactly as a git server would.
+
+109
+00:04:46,540 --> 00:04:47,793
+Build three starts.
+
+110
+00:04:58,343 --> 00:05:01,399
+The cause is different: started by remote host.
+
+111
+00:05:01,399 --> 00:05:01,985
+Same job,
+
+112
+00:05:01,985 --> 00:05:03,285
+a different trigger.
+
+113
+00:05:03,285 --> 00:05:05,171
+Polling asks again and again.
+
+114
+00:05:05,171 --> 00:05:07,837
+A webhook speaks only when there is news.
+
+115
+00:05:08,387 --> 00:05:14,445
+Now quality. SonarQube is a second real server, here on port nine thousand. I sign in.
+
+116
+00:05:34,995 --> 00:05:36,922
+The home page lists projects.
+
+117
+00:05:36,922 --> 00:05:37,719
+Our project,
+
+118
+00:05:37,719 --> 00:05:38,449
+CloudCart,
+
+119
+00:05:38,449 --> 00:05:39,047
+is empty.
+
+120
+00:05:39,047 --> 00:05:40,841
+It has never been analysed.
+
+121
+00:05:51,391 --> 00:05:52,668
+Open Quality Gates.
+
+122
+00:05:52,668 --> 00:05:55,022
+Our gate is called CloudCart gate.
+
+123
+00:05:55,022 --> 00:05:57,510
+One condition: new bugs must be zero.
+
+124
+00:05:57,510 --> 00:05:58,452
+Remember that.
+
+125
+00:06:09,002 --> 00:06:10,127
+Back to Jenkins.
+
+126
+00:06:10,127 --> 00:06:11,182
+A new Pipeline,
+
+127
+00:06:11,182 --> 00:06:12,941
+named CloudCart quality.
+
+128
+00:06:12,941 --> 00:06:14,910
+The script has three stages.
+
+129
+00:06:14,910 --> 00:06:15,543
+Checkout.
+
+130
+00:06:15,543 --> 00:06:15,895
+Test.
+
+131
+00:06:15,895 --> 00:06:17,302
+And the Sonar stage,
+
+132
+00:06:17,302 --> 00:06:18,990
+which runs the analysis,
+
+133
+00:06:18,990 --> 00:06:20,607
+and waits for the gate.
+
+134
+00:06:27,157 --> 00:06:29,736
+The Sonar token comes from credentials,
+
+135
+00:06:29,736 --> 00:06:31,587
+the same way as last lesson.
+
+136
+00:06:31,587 --> 00:06:33,240
+The script only names it.
+
+137
+00:06:33,240 --> 00:06:34,034
+The setting,
+
+138
+00:06:34,034 --> 00:06:35,224
+quality gate wait,
+
+139
+00:06:35,224 --> 00:06:37,803
+makes the build stop if the gate fails.
+
+140
+00:06:38,353 --> 00:06:38,683
+Save,
+
+141
+00:06:38,683 --> 00:06:39,609
+and Build Now.
+
+142
+00:06:39,609 --> 00:06:41,395
+This is the first analysis,
+
+143
+00:06:41,395 --> 00:06:43,181
+so it becomes our baseline.
+
+144
+00:06:43,181 --> 00:06:44,769
+It takes about a minute.
+
+145
+00:06:44,769 --> 00:06:47,018
+The scanner reads every Java file,
+
+146
+00:06:47,018 --> 00:06:49,068
+sends the results to SonarQube,
+
+147
+00:06:49,068 --> 00:06:50,854
+and the server judges them.
+
+148
+00:07:06,404 --> 00:07:07,846
+While we wait: a bug,
+
+149
+00:07:07,846 --> 00:07:08,464
+in Sonar,
+
+150
+00:07:08,464 --> 00:07:10,592
+is code that is probably wrong.
+
+151
+00:07:10,592 --> 00:07:11,278
+Not style,
+
+152
+00:07:11,278 --> 00:07:11,965
+not taste.
+
+153
+00:07:11,965 --> 00:07:12,377
+Wrong.
+
+154
+00:07:12,377 --> 00:07:15,535
+That is why a gate on new bugs is a fair rule.
+
+155
+00:08:01,085 --> 00:08:06,781
+Open the console. The last lines say it: quality gate status, passed. The baseline is set.
+
+156
+00:08:07,331 --> 00:08:11,939
+In SonarQube the project now has a dashboard, with the gate result, passed.
+
+157
+00:08:12,489 --> 00:08:17,673
+Now Dana adds coupon validation, and pushes. The commit looks fine. Build Now.
+
+158
+00:09:23,223 --> 00:09:24,228
+The tests pass.
+
+159
+00:09:24,228 --> 00:09:25,502
+The build compiles.
+
+160
+00:09:25,502 --> 00:09:28,518
+But the console says it: quality gate status,
+
+161
+00:09:28,518 --> 00:09:28,987
+failed.
+
+162
+00:09:28,987 --> 00:09:30,395
+And the build is red.
+
+163
+00:09:30,395 --> 00:09:31,467
+Jenkins stopped,
+
+164
+00:09:31,467 --> 00:09:33,143
+because the gate said so.
+
+165
+00:09:33,693 --> 00:09:33,949
+Why?
+
+166
+00:09:33,949 --> 00:09:34,783
+In SonarQube,
+
+167
+00:09:34,783 --> 00:09:36,899
+open the issues for the new code.
+
+168
+00:09:36,899 --> 00:09:37,668
+One new bug.
+
+169
+00:09:37,668 --> 00:09:40,233
+The code compares the value with itself,
+
+170
+00:09:40,233 --> 00:09:42,029
+so the check can never fail.
+
+171
+00:09:42,029 --> 00:09:44,080
+A test would not have caught it.
+
+172
+00:09:44,080 --> 00:09:44,914
+The gate did.
+
+173
+00:09:45,464 --> 00:09:46,921
+Dana fixes the check,
+
+174
+00:09:46,921 --> 00:09:47,685
+and pushes.
+
+175
+00:09:47,685 --> 00:09:48,378
+Build Now,
+
+176
+00:09:48,378 --> 00:09:48,795
+again.
+
+177
+00:09:48,795 --> 00:09:50,391
+The same analysis runs,
+
+178
+00:09:50,391 --> 00:09:51,779
+with the fixed code.
+
+179
+00:11:04,329 --> 00:11:09,577
+Quality gate status: passed. The build is green, and the bad code never reached a release.
+
+180
+00:11:10,127 --> 00:11:11,926
+SonarQube has done its job.
+
+181
+00:11:11,926 --> 00:11:12,859
+Now I stop it,
+
+182
+00:11:12,859 --> 00:11:14,924
+to free memory on this machine,
+
+183
+00:11:14,924 --> 00:11:15,990
+and start Nexus.
+
+184
+00:11:15,990 --> 00:11:18,123
+Nexus is a big Java application,
+
+185
+00:11:18,123 --> 00:11:20,388
+and needs about a minute to start.
+
+186
+00:11:20,388 --> 00:11:21,454
+While it starts,
+
+187
+00:11:21,454 --> 00:11:23,453
+a word about repository types.
+
+188
+00:11:23,453 --> 00:11:25,319
+A hosted repository is ours,
+
+189
+00:11:25,319 --> 00:11:26,385
+we upload to it.
+
+190
+00:11:26,385 --> 00:11:29,317
+A proxy repository caches the outside world,
+
+191
+00:11:29,317 --> 00:11:30,583
+like Maven Central.
+
+192
+00:11:30,583 --> 00:11:34,114
+A group joins several repositories under one address.
+
+193
+00:11:34,114 --> 00:11:36,047
+Today we use two hosted ones.
+
+194
+00:12:24,597 --> 00:12:31,082
+Last tool: Nexus, a real artifact repository, here on port eighty eighty one. I sign in.
+
+195
+00:12:39,632 --> 00:12:40,491
+Open Browse.
+
+196
+00:12:40,491 --> 00:12:45,213
+Two hosted repositories of ours: corp releases and corp snapshots.
+
+197
+00:12:45,213 --> 00:12:46,858
+Corp releases is empty.
+
+198
+00:12:46,858 --> 00:12:48,933
+Releases there are immutable.
+
+199
+00:13:01,483 --> 00:13:02,669
+Back to Jenkins.
+
+200
+00:13:02,669 --> 00:13:03,781
+A new Pipeline,
+
+201
+00:13:03,781 --> 00:13:05,190
+CloudCart publish.
+
+202
+00:13:05,190 --> 00:13:06,524
+One stage deploys,
+
+203
+00:13:06,524 --> 00:13:07,339
+with Maven.
+
+204
+00:13:07,339 --> 00:13:10,156
+It uses the credential nexus deployer.
+
+205
+00:13:10,156 --> 00:13:11,861
+That is a limited user,
+
+206
+00:13:11,861 --> 00:13:13,417
+who can only publish.
+
+207
+00:13:13,417 --> 00:13:14,603
+Never the admin.
+
+208
+00:13:15,153 --> 00:13:15,496
+Save,
+
+209
+00:13:15,496 --> 00:13:16,455
+and Build Now.
+
+210
+00:13:16,455 --> 00:13:18,168
+Maven builds the package,
+
+211
+00:13:18,168 --> 00:13:19,813
+and uploads it to Nexus.
+
+212
+00:13:19,813 --> 00:13:21,320
+Each file is uploaded,
+
+213
+00:13:21,320 --> 00:13:22,416
+the web archive,
+
+214
+00:13:22,416 --> 00:13:23,239
+and the pom.
+
+215
+00:13:35,789 --> 00:13:36,877
+Open the console.
+
+216
+00:13:36,877 --> 00:13:38,669
+Look for the lines that say,
+
+217
+00:13:38,669 --> 00:13:39,757
+uploaded to corp.
+
+218
+00:13:39,757 --> 00:13:42,445
+Those are the files that arrived in Nexus.
+
+219
+00:13:42,995 --> 00:13:43,613
+In Nexus,
+
+220
+00:13:43,613 --> 00:13:44,643
+refresh Browse.
+
+221
+00:13:44,643 --> 00:13:45,604
+Under academy,
+
+222
+00:13:45,604 --> 00:13:46,360
+CloudCart,
+
+223
+00:13:46,360 --> 00:13:49,313
+there is version zero point two point zero.
+
+224
+00:13:49,313 --> 00:13:50,824
+The release is stored.
+
+225
+00:13:51,374 --> 00:13:54,489
+Now the same build again, same version. Build Now.
+
+226
+00:14:05,039 --> 00:14:05,590
+Refused.
+
+227
+00:14:05,590 --> 00:14:08,487
+The message says: redeploy is not allowed.
+
+228
+00:14:08,487 --> 00:14:10,831
+Nexus protects a released version.
+
+229
+00:14:10,831 --> 00:14:14,831
+Nobody can silently replace what users already downloaded.
+
+230
+00:14:15,381 --> 00:14:17,080
+The fix is a new version.
+
+231
+00:14:17,080 --> 00:14:18,643
+Dana bumps the version,
+
+232
+00:14:18,643 --> 00:14:20,546
+to zero point two point one,
+
+233
+00:14:20,546 --> 00:14:21,293
+and pushes.
+
+234
+00:14:21,293 --> 00:14:21,973
+Build Now.
+
+235
+00:14:32,523 --> 00:14:33,872
+The build is green.
+
+236
+00:14:33,872 --> 00:14:34,511
+In Nexus,
+
+237
+00:14:34,511 --> 00:14:39,837
+version zero point two point one now sits beside zero point two point zero.
+
+238
+00:14:39,837 --> 00:14:41,328
+Each release is kept,
+
+239
+00:14:41,328 --> 00:14:42,891
+and each one is final.
+
+240
+00:14:43,441 --> 00:14:44,890
+That is the whole road.
+
+241
+00:14:44,890 --> 00:14:45,520
+A trigger,
+
+242
+00:14:45,520 --> 00:14:46,024
+a build,
+
+243
+00:14:46,024 --> 00:14:46,465
+a gate,
+
+244
+00:14:46,465 --> 00:14:47,347
+and a release.
+
+245
+00:14:47,347 --> 00:14:48,545
+Each step can fail,
+
+246
+00:14:48,545 --> 00:14:50,246
+and each failure is useful.
+
+247
+00:14:51,796 --> 00:14:52,948
+Five mistakes.
+
+248
+00:14:53,498 --> 00:14:57,786
+One: polling every minute on a big server. Use five minutes, or a webhook.
+
+249
+00:14:58,336 --> 00:15:00,931
+Two: a quality gate on the whole project.
+
+250
+00:15:00,931 --> 00:15:02,893
+Old problems block every build.
+
+251
+00:15:02,893 --> 00:15:04,032
+Gate the new code.
+
+252
+00:15:04,582 --> 00:15:09,915
+Three: publishing before the gate. Always analyse first, and publish only what passed.
+
+253
+00:15:10,465 --> 00:15:15,095
+Four: deploying releases as admin. Use a limited user, and a credential.
+
+254
+00:15:15,645 --> 00:15:19,805
+Five: redeploying the same release version. Bump the version instead.
+
+255
+00:15:21,355 --> 00:15:24,150
+Where to find the lab. Pause here, and write it down.
+
+256
+00:15:24,700 --> 00:15:26,164
+One: the repository,
+
+257
+00:15:26,164 --> 00:15:30,484
+git hub dot com slash it dash waves slash dev ops dash A I,
+
+258
+00:15:30,484 --> 00:15:32,828
+in the folder academy slash lab.
+
+259
+00:15:33,378 --> 00:15:39,586
+Two: the files, lab one fifty-nine dot S H, and shortcuts one fifty-nine dot S H.
+
+260
+00:15:40,136 --> 00:15:45,597
+Three: install it, with sudo install, into slash user slash local slash S bin.
+
+261
+00:15:46,147 --> 00:15:48,012
+Four: load the short names,
+
+262
+00:15:48,012 --> 00:15:51,119
+with source shortcuts one fifty-nine dot S H.
+
+263
+00:15:51,119 --> 00:15:51,948
+Then lab up,
+
+264
+00:15:51,948 --> 00:15:52,846
+and lab repo.
+
+265
+00:15:53,396 --> 00:15:54,309
+Five: lab bug,
+
+266
+00:15:54,309 --> 00:15:57,180
+lab fix and lab bump play the three commits.
+
+267
+00:15:57,180 --> 00:16:00,052
+Lab files writes the three pipeline scripts.
+
+268
+00:16:00,602 --> 00:16:04,339
+Six: you need the Jenkins from lesson one fifty-five,
+
+269
+00:16:04,339 --> 00:16:05,185
+a SonarQube,
+
+270
+00:16:05,185 --> 00:16:06,032
+and a Nexus.
+
+271
+00:16:06,032 --> 00:16:08,218
+Lab down removes the lab files.
+
+272
+00:16:08,768 --> 00:16:10,410
+The link is in the description.
+
+273
+00:16:12,460 --> 00:16:14,231
+Your turn, on your own machine.
+
+274
+00:16:14,781 --> 00:16:17,533
+One: lab up, then lab repo, and read the scripts.
+
+275
+00:16:18,083 --> 00:16:21,560
+Two: create the poll job, and watch a commit start a build.
+
+276
+00:16:22,110 --> 00:16:26,270
+Three: run the quality pipeline, then lab bug, and see the gate fail.
+
+277
+00:16:26,820 --> 00:16:28,740
+Four: lab fix, and see it pass.
+
+278
+00:16:29,290 --> 00:16:33,599
+Five: publish to Nexus twice, and read the refusal. Then lab down.
+
+279
+00:16:34,149 --> 00:16:35,984
+Pause the video, and begin now.
+
+280
+00:16:51,534 --> 00:16:52,409
+Quick check.
+
+281
+00:16:52,959 --> 00:16:55,263
+Name two ways a build starts by itself.
+
+282
+00:16:55,813 --> 00:16:57,306
+What does a quality gate do?
+
+283
+00:16:57,856 --> 00:17:00,757
+Why can a release version not be uploaded twice?
+
+284
+00:17:01,307 --> 00:17:03,142
+Why publish only after the gate?
+
+285
+00:17:03,692 --> 00:17:06,086
+Objective covered: M C seventeen,
+
+286
+00:17:06,086 --> 00:17:07,101
+objective six.
+
+287
+00:17:07,101 --> 00:17:07,754
+Triggers,
+
+288
+00:17:07,754 --> 00:17:10,583
+quality gates and publishing artifacts.
+
+289
+00:17:11,133 --> 00:17:13,202
+Pause the video, and answer out loud.
+
+290
+00:17:23,752 --> 00:17:27,293
+Next: distributed agents, workspaces and artifacts.
+
+291
+00:17:27,843 --> 00:17:31,171
+If this helped, like, share and subscribe, so you do not miss it.
