@@ -18,7 +18,7 @@ Lab files: github.com/it-waves/devops-ai, in academy/lab (lab162.sh and shortcut
 Honest notes: the terminal and Jenkins screens are a real continuous recording of Jenkins 2.580 LTS and a throwaway Jenkins 2.555.3 that I upgraded for the demo, with real files and real builds. The job and its two builds were created before recording. The throwaway Jenkins runs with no security: never do that for a real server. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, words, home-folder, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
 
 Previous lesson: Jenkins Approvals, Promotion, Rollback and Notifications (Live Gates) | Lesson 161 https://youtu.be/GaGsNjjpFYE
-Next: the Jenkins mastery lesson, a full scenario you can verify yourself.
+Next: Jenkins Mastery Check: Build, Prove and Clean Up a Release (Live) | Lesson 163 https://youtu.be/mhpR7mgG6yg
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
