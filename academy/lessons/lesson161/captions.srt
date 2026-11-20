@@ -1,0 +1,1051 @@
+1
+00:00:00,500 --> 00:00:02,825
+Never ship to production on a single click.
+
+2
+00:00:03,375 --> 00:00:06,127
+A bad release can cost a company a whole day.
+
+3
+00:00:06,127 --> 00:00:07,167
+Customers see it,
+
+4
+00:00:07,167 --> 00:00:08,145
+the phones ring,
+
+5
+00:00:08,145 --> 00:00:09,307
+and everybody asks,
+
+6
+00:00:09,307 --> 00:00:10,714
+who pressed the button?
+
+7
+00:00:11,264 --> 00:00:12,970
+A good pipeline has a gate.
+
+8
+00:00:12,970 --> 00:00:13,539
+It stops,
+
+9
+00:00:13,539 --> 00:00:15,687
+and waits for a person to say yes.
+
+10
+00:00:15,687 --> 00:00:18,909
+It moves a build forward one environment at a time.
+
+11
+00:00:18,909 --> 00:00:20,552
+It can go back in seconds.
+
+12
+00:00:20,552 --> 00:00:22,827
+And it tells the team what happened.
+
+13
+00:00:23,377 --> 00:00:26,917
+Today you build all four in real Jenkins: an approval,
+
+14
+00:00:26,917 --> 00:00:27,703
+a promotion,
+
+15
+00:00:27,703 --> 00:00:28,424
+a rollback,
+
+16
+00:00:28,424 --> 00:00:29,670
+and a notification.
+
+17
+00:00:31,220 --> 00:00:32,649
+Here is what to expect.
+
+18
+00:00:33,199 --> 00:00:37,679
+One: the four ideas. Approval, promotion, rollback, notification.
+
+19
+00:00:38,229 --> 00:00:40,619
+Two: how they fit together, in one picture.
+
+20
+00:00:41,169 --> 00:00:42,460
+Three: a live demo,
+
+21
+00:00:42,460 --> 00:00:44,364
+in the real Jenkins screens.
+
+22
+00:00:44,364 --> 00:00:46,403
+We pause a build for approval,
+
+23
+00:00:46,403 --> 00:00:47,695
+then say no to one.
+
+24
+00:00:47,695 --> 00:00:50,958
+Then we promote a real CloudCart build from dev,
+
+25
+00:00:50,958 --> 00:00:51,706
+to staging,
+
+26
+00:00:51,706 --> 00:00:52,658
+to production.
+
+27
+00:00:52,658 --> 00:00:54,629
+Then we roll production back.
+
+28
+00:00:54,629 --> 00:00:57,553
+And we watch the team notifications arrive.
+
+29
+00:00:58,103 --> 00:01:00,919
+Four: the common mistakes, and where to find the lab.
+
+30
+00:01:01,469 --> 00:01:04,285
+This is objective eight of the Jenkins domain.
+
+31
+00:01:05,835 --> 00:01:06,859
+Four ideas.
+
+32
+00:01:07,409 --> 00:01:08,895
+An approval is a gate.
+
+33
+00:01:08,895 --> 00:01:11,395
+The pipeline pauses at an input step,
+
+34
+00:01:11,395 --> 00:01:13,692
+and waits for a person to approve,
+
+35
+00:01:13,692 --> 00:01:14,300
+or abort.
+
+36
+00:01:14,850 --> 00:01:18,836
+A promotion moves the same build to the next environment: dev,
+
+37
+00:01:18,836 --> 00:01:19,672
+then staging,
+
+38
+00:01:19,672 --> 00:01:20,700
+then production.
+
+39
+00:01:20,700 --> 00:01:22,822
+You promote the build you tested.
+
+40
+00:01:22,822 --> 00:01:24,172
+You never rebuild it.
+
+41
+00:01:24,722 --> 00:01:30,056
+A rollback is a way back. A job that puts the previous good version live again, fast.
+
+42
+00:01:30,606 --> 00:01:32,486
+A notification tells people.
+
+43
+00:01:32,486 --> 00:01:33,157
+A message,
+
+44
+00:01:33,157 --> 00:01:34,500
+to chat or to email,
+
+45
+00:01:34,500 --> 00:01:36,111
+when a release succeeds,
+
+46
+00:01:36,111 --> 00:01:36,514
+fails,
+
+47
+00:01:36,514 --> 00:01:37,454
+or is stopped.
+
+48
+00:01:38,004 --> 00:01:41,588
+Gate, promote, roll back, tell. That is a release you can trust.
+
+49
+00:01:43,138 --> 00:01:45,378
+Here is how they fit together in our demo.
+
+50
+00:01:45,928 --> 00:01:47,160
+The build runs once,
+
+51
+00:01:47,160 --> 00:01:48,946
+and the war file is archived.
+
+52
+00:01:48,946 --> 00:01:50,424
+It goes straight to dev,
+
+53
+00:01:50,424 --> 00:01:51,224
+with no gate,
+
+54
+00:01:51,224 --> 00:01:52,456
+because dev is safe.
+
+55
+00:01:53,006 --> 00:01:53,920
+Before staging,
+
+56
+00:01:53,920 --> 00:01:54,896
+there is a gate.
+
+57
+00:01:54,896 --> 00:01:55,993
+A person approves.
+
+58
+00:01:55,993 --> 00:01:57,090
+Before production,
+
+59
+00:01:57,090 --> 00:01:58,492
+there is a second gate,
+
+60
+00:01:58,492 --> 00:02:00,686
+and only an admin may press release.
+
+61
+00:02:01,236 --> 00:02:03,334
+Each environment gets the same file.
+
+62
+00:02:03,334 --> 00:02:05,724
+Production points at the current release,
+
+63
+00:02:05,724 --> 00:02:07,764
+with a link called current.war.
+
+64
+00:02:08,314 --> 00:02:11,846
+Rollback is just moving that link back to an older release.
+
+65
+00:02:11,846 --> 00:02:12,983
+Nothing is rebuilt,
+
+66
+00:02:12,983 --> 00:02:14,181
+so it takes seconds.
+
+67
+00:02:14,731 --> 00:02:19,083
+And at the end, success, failure, or stopped, a message goes out to the team.
+
+68
+00:02:20,633 --> 00:02:21,663
+A real Jenkins,
+
+69
+00:02:21,663 --> 00:02:22,967
+signed in as admin.
+
+70
+00:02:22,967 --> 00:02:24,545
+The dashboard is empty.
+
+71
+00:02:24,545 --> 00:02:26,742
+Everything you see in this demo,
+
+72
+00:02:26,742 --> 00:02:27,634
+I create now,
+
+73
+00:02:27,634 --> 00:02:28,526
+from scratch.
+
+74
+00:02:32,276 --> 00:02:32,721
+First,
+
+75
+00:02:32,721 --> 00:02:34,054
+the simplest gate.
+
+76
+00:02:34,054 --> 00:02:34,721
+New Item.
+
+77
+00:02:34,721 --> 00:02:35,462
+I name it,
+
+78
+00:02:35,462 --> 00:02:36,573
+hello approval.
+
+79
+00:02:36,573 --> 00:02:38,129
+The type is Pipeline,
+
+80
+00:02:38,129 --> 00:02:40,129
+a script that Jenkins runs,
+
+81
+00:02:40,129 --> 00:02:41,092
+step by step.
+
+82
+00:02:41,092 --> 00:02:41,684
+Then OK.
+
+83
+00:02:43,534 --> 00:02:45,446
+The script has three stages.
+
+84
+00:02:45,446 --> 00:02:45,855
+Build,
+
+85
+00:02:45,855 --> 00:02:46,402
+Approve,
+
+86
+00:02:46,402 --> 00:02:47,152
+and Deploy.
+
+87
+00:02:47,152 --> 00:02:49,269
+The Approve stage has one step,
+
+88
+00:02:49,269 --> 00:02:49,678
+input.
+
+89
+00:02:49,678 --> 00:02:54,457
+It is a built in step that pauses the pipeline until a person answers.
+
+90
+00:02:54,457 --> 00:02:56,368
+Its message is the question,
+
+91
+00:02:56,368 --> 00:02:57,597
+deploy to staging.
+
+92
+00:02:57,597 --> 00:02:59,714
+And its ok button says Approve.
+
+93
+00:02:59,714 --> 00:03:02,171
+Each stage is a box in the pipeline,
+
+94
+00:03:02,171 --> 00:03:03,673
+and they run in order.
+
+95
+00:03:05,923 --> 00:03:06,267
+Save,
+
+96
+00:03:06,267 --> 00:03:07,297
+then Build Now.
+
+97
+00:03:07,297 --> 00:03:09,427
+The build runs the first stage,
+
+98
+00:03:09,427 --> 00:03:10,938
+then reaches the gate.
+
+99
+00:03:10,938 --> 00:03:12,106
+Open the console.
+
+100
+00:03:12,106 --> 00:03:13,961
+Here the build has stopped.
+
+101
+00:03:13,961 --> 00:03:16,022
+The last line is the question,
+
+102
+00:03:16,022 --> 00:03:17,259
+deploy to staging,
+
+103
+00:03:17,259 --> 00:03:19,045
+with two choices: Approve,
+
+104
+00:03:19,045 --> 00:03:19,663
+or Abort.
+
+105
+00:03:19,663 --> 00:03:22,136
+Nothing runs until a person answers.
+
+106
+00:03:22,686 --> 00:03:23,707
+I click Approve.
+
+107
+00:03:23,707 --> 00:03:25,174
+The pipeline continues.
+
+108
+00:03:25,174 --> 00:03:26,577
+The Deploy stage runs,
+
+109
+00:03:26,577 --> 00:03:28,044
+and the build finishes,
+
+110
+00:03:28,044 --> 00:03:28,873
+with success.
+
+111
+00:03:29,423 --> 00:03:34,287
+Now the other answer. Build Now again. Open the console, and wait for the question.
+
+112
+00:03:36,037 --> 00:03:37,726
+This time I click Abort.
+
+113
+00:03:37,726 --> 00:03:38,852
+The build stops.
+
+114
+00:03:38,852 --> 00:03:40,822
+The Deploy stage never runs.
+
+115
+00:03:40,822 --> 00:03:42,371
+In the list of builds,
+
+116
+00:03:42,371 --> 00:03:43,919
+the result is aborted,
+
+117
+00:03:43,919 --> 00:03:44,271
+grey,
+
+118
+00:03:44,271 --> 00:03:44,834
+not red.
+
+119
+00:03:44,834 --> 00:03:46,030
+A person said no.
+
+120
+00:03:46,030 --> 00:03:47,578
+That is not a failure.
+
+121
+00:03:57,228 --> 00:03:58,479
+Now a real release.
+
+122
+00:03:58,479 --> 00:03:59,466
+A new Pipeline,
+
+123
+00:03:59,466 --> 00:04:01,112
+named CloudCart release.
+
+124
+00:04:01,112 --> 00:04:02,362
+Here is the script,
+
+125
+00:04:02,362 --> 00:04:03,350
+in three parts.
+
+126
+00:04:03,350 --> 00:04:05,917
+Stage one builds CloudCart with Maven,
+
+127
+00:04:05,917 --> 00:04:07,628
+and archives the war file.
+
+128
+00:04:07,628 --> 00:04:10,130
+Stage two copies it to the dev folder.
+
+129
+00:04:10,130 --> 00:04:11,314
+Then comes a gate,
+
+130
+00:04:11,314 --> 00:04:12,565
+promote to staging,
+
+131
+00:04:12,565 --> 00:04:14,145
+and the copy to staging.
+
+132
+00:04:14,145 --> 00:04:15,395
+Then a second gate,
+
+133
+00:04:15,395 --> 00:04:16,843
+release to production.
+
+134
+00:04:16,843 --> 00:04:20,990
+This one has submitter admin: only the user admin may press it.
+
+135
+00:04:20,990 --> 00:04:21,319
+Last,
+
+136
+00:04:21,319 --> 00:04:23,689
+the production stage copies the war,
+
+137
+00:04:23,689 --> 00:04:26,388
+and moves the link current.war to it.
+
+138
+00:04:26,388 --> 00:04:27,572
+And at the bottom,
+
+139
+00:04:27,572 --> 00:04:28,691
+the post section.
+
+140
+00:04:28,691 --> 00:04:30,403
+When the release succeeds,
+
+141
+00:04:30,403 --> 00:04:31,127
+is stopped,
+
+142
+00:04:31,127 --> 00:04:31,719
+or fails,
+
+143
+00:04:31,719 --> 00:04:34,089
+Jenkins sends a message to the team.
+
+144
+00:04:34,089 --> 00:04:35,537
+We will see it arrive.
+
+145
+00:04:36,087 --> 00:04:36,440
+Save,
+
+146
+00:04:36,440 --> 00:04:37,427
+and Build Now.
+
+147
+00:04:37,427 --> 00:04:38,626
+Open the console.
+
+148
+00:04:38,626 --> 00:04:40,672
+Maven is building CloudCart.
+
+149
+00:04:40,672 --> 00:04:42,999
+This takes about fifteen seconds.
+
+150
+00:04:42,999 --> 00:04:44,763
+Then the war is archived,
+
+151
+00:04:44,763 --> 00:04:46,033
+and copied to dev.
+
+152
+00:04:46,033 --> 00:04:47,161
+Dev has no gate,
+
+153
+00:04:47,161 --> 00:04:48,290
+so it just goes.
+
+154
+00:04:51,040 --> 00:04:52,325
+Now the first gate.
+
+155
+00:04:52,325 --> 00:04:53,611
+Promote to staging.
+
+156
+00:04:53,611 --> 00:04:54,694
+I click Approve.
+
+157
+00:04:54,694 --> 00:04:57,333
+The same war file is copied to staging.
+
+158
+00:04:57,883 --> 00:04:58,927
+The second gate.
+
+159
+00:04:58,927 --> 00:05:00,362
+Release to production.
+
+160
+00:05:00,362 --> 00:05:01,406
+I click Release.
+
+161
+00:05:01,406 --> 00:05:02,581
+The war is copied,
+
+162
+00:05:02,581 --> 00:05:03,821
+and the link moves.
+
+163
+00:05:03,821 --> 00:05:05,126
+Look at the listing.
+
+164
+00:05:05,126 --> 00:05:08,649
+current.war points to cloudcart-1.war.
+
+165
+00:05:08,649 --> 00:05:09,889
+That is production,
+
+166
+00:05:09,889 --> 00:05:10,150
+now.
+
+167
+00:05:10,700 --> 00:05:16,140
+Success. And look at the last lines. Jenkins posted the message to the team, using curl.
+
+168
+00:05:28,690 --> 00:05:29,485
+Release two.
+
+169
+00:05:29,485 --> 00:05:30,545
+Build Now again,
+
+170
+00:05:30,545 --> 00:05:32,070
+and approve both gates,
+
+171
+00:05:32,070 --> 00:05:33,263
+exactly as before.
+
+172
+00:05:33,263 --> 00:05:34,190
+First Approve,
+
+173
+00:05:34,190 --> 00:05:35,052
+then Release.
+
+174
+00:05:35,052 --> 00:05:37,570
+The build takes about fifteen seconds,
+
+175
+00:05:37,570 --> 00:05:39,426
+so I wait for each question.
+
+176
+00:05:39,426 --> 00:05:41,746
+The link now points to release two.
+
+177
+00:05:46,296 --> 00:05:48,528
+Now suppose release two has a bug,
+
+178
+00:05:48,528 --> 00:05:50,301
+and customers are shouting.
+
+179
+00:05:50,301 --> 00:05:51,877
+We need production back,
+
+180
+00:05:51,877 --> 00:05:52,140
+now.
+
+181
+00:05:52,140 --> 00:05:53,125
+A new Pipeline,
+
+182
+00:05:53,125 --> 00:05:54,833
+named CloudCart rollback.
+
+183
+00:05:54,833 --> 00:05:56,015
+It is a small job,
+
+184
+00:05:56,015 --> 00:05:58,050
+and it does one thing: go back.
+
+185
+00:06:02,700 --> 00:06:04,049
+It has one parameter,
+
+186
+00:06:04,049 --> 00:06:04,563
+version,
+
+187
+00:06:04,563 --> 00:06:06,425
+with the choices two and one.
+
+188
+00:06:06,425 --> 00:06:10,793
+The only stage moves the link current.war to the chosen release,
+
+189
+00:06:10,793 --> 00:06:12,527
+and prints where it points.
+
+190
+00:06:12,527 --> 00:06:13,747
+Nothing is rebuilt.
+
+191
+00:06:13,747 --> 00:06:14,068
+Save,
+
+192
+00:06:14,068 --> 00:06:14,967
+and Build Now.
+
+193
+00:06:14,967 --> 00:06:17,408
+The first run registers the parameter.
+
+194
+00:06:17,408 --> 00:06:19,206
+Release two is already live,
+
+195
+00:06:19,206 --> 00:06:21,004
+so this run changes nothing.
+
+196
+00:06:22,654 --> 00:06:25,517
+Now the button says Build with Parameters.
+
+197
+00:06:25,517 --> 00:06:26,949
+I choose version one,
+
+198
+00:06:26,949 --> 00:06:27,630
+and Build.
+
+199
+00:06:27,630 --> 00:06:28,789
+Open the console.
+
+200
+00:06:28,789 --> 00:06:33,560
+readlink says: current.war points to cloudcart-1.war.
+
+201
+00:06:33,560 --> 00:06:35,878
+Production is back on release one,
+
+202
+00:06:35,878 --> 00:06:36,628
+in seconds.
+
+203
+00:06:37,178 --> 00:06:37,509
+Last,
+
+204
+00:06:37,509 --> 00:06:38,105
+the team.
+
+205
+00:06:38,105 --> 00:06:39,562
+This is the lab inbox,
+
+206
+00:06:39,562 --> 00:06:41,151
+running on this machine,
+
+207
+00:06:41,151 --> 00:06:43,403
+on port eighty eighty ninety nine.
+
+208
+00:06:43,403 --> 00:06:45,059
+Each release posted here.
+
+209
+00:06:45,059 --> 00:06:46,383
+Release one is live.
+
+210
+00:06:46,383 --> 00:06:47,708
+Release two is live.
+
+211
+00:06:47,708 --> 00:06:47,973
+And,
+
+212
+00:06:47,973 --> 00:06:50,490
+production rolled back to release one.
+
+213
+00:06:51,040 --> 00:06:52,140
+In your company,
+
+214
+00:06:52,140 --> 00:06:54,410
+the same post step goes to Slack,
+
+215
+00:06:54,410 --> 00:06:54,823
+Teams,
+
+216
+00:06:54,823 --> 00:06:55,442
+or email.
+
+217
+00:06:55,442 --> 00:06:59,018
+The idea is the same: a build always tells the team.
+
+218
+00:06:59,568 --> 00:07:01,572
+That is a release you can trust.
+
+219
+00:07:01,572 --> 00:07:03,138
+A gate before every risk.
+
+220
+00:07:03,138 --> 00:07:05,017
+The same build moving forward.
+
+221
+00:07:05,017 --> 00:07:05,705
+A way back.
+
+222
+00:07:05,705 --> 00:07:07,334
+And a message to the team.
+
+223
+00:07:08,884 --> 00:07:10,036
+Five mistakes.
+
+224
+00:07:10,586 --> 00:07:15,343
+One: no gate before production. Add an input step, and limit who may approve it.
+
+225
+00:07:15,893 --> 00:07:20,523
+Two: rebuilding for each environment. Build once, and promote the same file.
+
+226
+00:07:21,073 --> 00:07:23,503
+Three: an input step with no timeout.
+
+227
+00:07:23,503 --> 00:07:26,328
+A forgotten gate holds an executor forever.
+
+228
+00:07:26,328 --> 00:07:27,707
+Wrap it in a timeout.
+
+229
+00:07:28,257 --> 00:07:32,353
+Four: a rollback nobody has tried. Practise it, before the bad day.
+
+230
+00:07:32,903 --> 00:07:38,642
+Five: silent pipelines. Always send a message, for success, for failure, and for stopped.
+
+231
+00:07:40,192 --> 00:07:42,987
+Where to find the lab. Pause here, and write it down.
+
+232
+00:07:43,537 --> 00:07:45,001
+One: the repository,
+
+233
+00:07:45,001 --> 00:07:49,321
+GitHub dot com slash it dash waves slash dev ops dash A I,
+
+234
+00:07:49,321 --> 00:07:51,665
+in the folder academy slash lab.
+
+235
+00:07:52,215 --> 00:07:58,231
+Two: the files, lab161 dot S H, and shortcuts one sixty-one dot S H.
+
+236
+00:07:58,781 --> 00:08:04,242
+Three: install it, with sudo install, into slash user slash local slash S bin.
+
+237
+00:08:04,792 --> 00:08:10,360
+Four: load the short names, with source shortcuts one sixty-one dot S H. Then lab up.
+
+238
+00:08:10,910 --> 00:08:13,961
+Five: lab files writes the three pipeline scripts,
+
+239
+00:08:13,961 --> 00:08:16,585
+and lab hook starts the notification inbox.
+
+240
+00:08:17,135 --> 00:08:20,765
+Six: you need the Jenkins from lesson one fifty-five,
+
+241
+00:08:20,765 --> 00:08:21,450
+and Maven.
+
+242
+00:08:21,450 --> 00:08:24,943
+Lab down stops the inbox and removes the lab files.
+
+243
+00:08:25,493 --> 00:08:27,135
+The link is in the description.
+
+244
+00:08:29,185 --> 00:08:30,956
+Your turn, on your own machine.
+
+245
+00:08:31,506 --> 00:08:33,852
+One: lab up, lab hook, and lab files.
+
+246
+00:08:34,402 --> 00:08:38,925
+Two: create hello approval, and answer it twice: once Approve, once Abort.
+
+247
+00:08:39,475 --> 00:08:44,083
+Three: create CloudCart release, and promote a build all the way to production.
+
+248
+00:08:44,633 --> 00:08:48,153
+Four: create CloudCart rollback, and roll production back.
+
+249
+00:08:48,703 --> 00:08:52,884
+Five: open the inbox, and read your three messages. Then lab down.
+
+250
+00:08:53,434 --> 00:08:55,269
+Pause the video, and begin now.
+
+251
+00:09:10,819 --> 00:09:11,694
+Quick check.
+
+252
+00:09:12,244 --> 00:09:13,716
+What does an input step do?
+
+253
+00:09:14,266 --> 00:09:16,954
+Why promote the same build, instead of rebuilding?
+
+254
+00:09:17,504 --> 00:09:19,466
+How does a rollback work in our demo?
+
+255
+00:09:20,016 --> 00:09:21,979
+Why should an input step have a timeout?
+
+256
+00:09:22,529 --> 00:09:25,004
+Objective covered: M C seventeen,
+
+257
+00:09:25,004 --> 00:09:26,204
+objective eight.
+
+258
+00:09:26,204 --> 00:09:26,879
+Approval,
+
+259
+00:09:26,879 --> 00:09:27,629
+promotion,
+
+260
+00:09:27,629 --> 00:09:29,654
+rollback and notifications.
+
+261
+00:09:30,204 --> 00:09:32,274
+Pause the video, and answer out loud.
+
+262
+00:09:42,824 --> 00:09:45,896
+Next: backup, upgrade and troubleshooting Jenkins.
+
+263
+00:09:46,446 --> 00:09:49,774
+If this helped, like, share and subscribe, so you do not miss it.

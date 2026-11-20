@@ -1,0 +1,25 @@
+Lesson 161 of the DevOps Engineering Bootcamp, the eighth lesson of the Jenkins domain. A release should not ship just because a build went green. You learn four ideas: an approval gate, promotion of the same build from dev to staging to production, rollback, and a notification when it finishes. Then watch a real live run in Jenkins: a pipeline that pauses at an input step and waits for a person, an abort, a CloudCart release with two gates where only admin may release to production, a rollback job that moves the production link back to release one in seconds, and a team inbox that receives a message for each outcome. You finish with the common mistakes and a lab you can repeat.
+
+Chapters
+0:00 Gate, promote, roll back, tell
+0:31 What to expect
+1:05 Approval, promotion, rollback, notification
+1:43 How they fit together
+2:20 Live: approve, promote, roll back, notify
+7:08 Common mistakes
+7:40 Where to find the lab
+8:29 Your turn
+9:10 Quick check and what is next
+
+Objectives covered: MC17-O08 Implement deployment approval, promotion, rollback, and notifications.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab161.sh and shortcuts161.sh). Needs the Jenkins from lesson 155 and Maven on your own machine. "lab up" checks them, "lab hook" starts a small local inbox on port 8099, "lab files" writes the three Jenkinsfiles to ~/jenkins-lab161, and "lab down" stops the inbox and cleans up. Use your own machine only.
+
+Honest notes: the Jenkins screens are a real continuous recording of Jenkins 2.580 LTS, with real approvals, a real Maven build and a real rollback. The team inbox is a tiny local web page standing in for Slack or email, so it shows the idea without an account. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, words, files, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Jenkins Agents: Labels, Executors, Archive and Stash (Live, Real Agent) | Lesson 160 https://youtu.be/s6DAzNVe2us
+Next: backup, upgrade and troubleshooting Jenkins.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #jenkins #cicd #pipeline #devopsbootcamp #learnjenkins #jenkinsapproval
