@@ -18,7 +18,7 @@ Lab files: github.com/it-waves/devops-ai, in academy/lab (lab166.sh and shortcut
 Honest notes: the terminal and browser are a real continuous recording of SonarQube Community Build 26.11 analysing the CloudCart project with the Sonar Maven plugin. The token shown on screen belongs to a throwaway lab server and was deleted afterwards; never show a real token. The terminal output is filtered with grep to show only the important lines. Coverage shows an error because no coverage report was produced yet; the next lessons cover that. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, how-it-works, needs, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
 
 Previous lesson: Install SonarQube: Your Own Lab Server, Step by Step (Live) | Lesson 165 https://youtu.be/KHu1y_wySAo
-Next: read the results, the issues, the metrics and the coverage.
+Next: Read SonarQube Results: Bugs, Vulnerabilities and Coverage, Fix One (Live) | Lesson 167 https://youtu.be/kNLp6_Ywzi8
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
