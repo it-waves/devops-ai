@@ -1,0 +1,25 @@
+Lesson 165 of the DevOps Engineering Bootcamp, SonarQube domain. Install your own SonarQube server and prove that it is ready and safe. You learn what to check before you start (Java 17 or newer, free memory, a free port, a normal user, and why the built-in database is for a lab only), why the server, scanner and Java versions must match, and then you watch a real install live: check Java and memory, unzip, edit the settings, start the server, wait for the status to say UP, log in, change the default admin password, open the System page, and run a four-check script that gives you four of four.
+
+Chapters
+0:00 Your own SonarQube
+0:23 What to expect
+0:46 What you need before you start
+1:13 Versions must match
+1:42 Live install of SonarQube
+5:47 Common mistakes
+6:11 Where to find the lab
+6:58 Your turn
+7:33 Quick check and what is next
+
+Objectives covered: MC18-O02. Install and connect a compatible lab instance.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab165.sh and shortcuts165.sh). "lab check" runs four checks (Java 17 or newer, server UP, health GREEN, default admin password no longer works) and saves results165.txt; "lab stop" stops your server (set SONAR_HOME). Set SONAR_PASSWORD to your admin password. You download SonarQube yourself from the official download page. Use your own machine only.
+
+Honest notes: the terminal and browser are a real continuous recording of SonarQube Community Build 26.11 starting for the first time on a lab machine. The zip was already downloaded before recording, so the download page is only described. This lab machine's disk is almost full, so the data and temp folders are placed on a RAM disk (shown on screen); on your own machine keep the defaults. The memory-mapping setting is for lab machines only. The built-in database is for evaluation only. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, requirements, versions, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: SonarQube Explained: Static Analysis, Quality Gates and Issues (Live Tour) | Lesson 164 https://youtu.be/qQpzmKCm2uI
+Next: scan a real Maven project with SonarQube and see the results.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #sonarqube #staticanalysis #codequality #devopsbootcamp #learnsonarqube #devopsprojects
