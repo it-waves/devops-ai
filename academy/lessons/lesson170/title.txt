@@ -1,0 +1,1 @@
+SonarQube Tokens and Permissions: Revoke, Fail, Rotate (Live) | Lesson 170

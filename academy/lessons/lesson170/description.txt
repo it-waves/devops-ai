@@ -1,0 +1,25 @@
+Lesson 170 of the DevOps Engineering Bootcamp, SonarQube domain. A token is a password for a program, so treat it like one. You learn the three kinds of SonarQube token (user, global analysis, project analysis), what least privilege means, and the life of a token: make it, store it in Jenkins credentials, use it by name, revoke it, rotate it. Then you watch it live: make a Project Analysis Token with a name and an expiry date, prove it is small (it is refused for an administrator action), revoke the old token, watch the Jenkins build fail with 401 Unauthorized, update the Jenkins credential, and watch the build pass without touching the code.
+
+Chapters
+0:00 A password for a program
+0:23 What to expect
+0:55 Three kinds of token
+1:38 The life of a token
+2:15 Live: revoke, fail, rotate, pass
+7:07 Common mistakes
+7:47 Where to find the lab
+8:34 Your turn
+9:18 Quick check and what is next
+
+Objectives covered: MC18-O07. Tokens and permissions.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab170.sh and shortcuts170.sh). Load the short names with "source shortcuts170.sh". "try_token NAME" asks SonarQube an administrator question with the token in variable NAME, "leakcheck" looks for tokens in your repository, and "lab check" runs four checks (your user token can administer, the CI analysis token is refused, no token in the code, the last Jenkins build is SUCCESS) and saves results170.txt. Set ANALYSIS_TOKEN, SONAR_TOKEN and JENKINS_AUTH to your own values and never store them in a file in a repository. Use your own machine only.
+
+Honest notes: the browser and terminal are a real continuous recording of SonarQube Community Build 26.11 and Jenkins 2.580 with the SonarQube Scanner plugin, analysing the CloudCart project with the Sonar Maven plugin and JaCoCo 0.8.12. The tokens and passwords belong to a throwaway lab server that runs only on the recording machine, so the token shown on screen is useless to anyone else. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, concept, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Jenkins + SonarQube: Scan and Quality Gate in a Pipeline, Fail It, Fix It (Live) | Lesson 169 https://youtu.be/G7z7KEOw8c0
+Next: how to diagnose a failing pipeline, step by step.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #jenkins #sonarqube #tokens #leastprivilege #cicd #pipeline #devopsbootcamp #learnjenkins
