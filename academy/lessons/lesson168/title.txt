@@ -1,0 +1,1 @@
+SonarQube Quality Gate: Custom Rule, Fail It, Fix It, Pass It (Live) | Lesson 168

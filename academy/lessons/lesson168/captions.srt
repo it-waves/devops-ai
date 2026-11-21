@@ -1,0 +1,911 @@
+1
+00:00:00,500 --> 00:00:01,560
+Your scan passes.
+
+2
+00:00:01,560 --> 00:00:03,181
+The dashboard says Passed.
+
+3
+00:00:03,181 --> 00:00:04,304
+Everyone is happy.
+
+4
+00:00:04,304 --> 00:00:06,175
+But what exactly did it check?
+
+5
+00:00:06,725 --> 00:00:09,583
+And what if your coverage is only fifty-nine percent?
+
+6
+00:00:10,133 --> 00:00:14,315
+Today we learn the quality gate. The rule that decides, pass or fail.
+
+7
+00:00:14,865 --> 00:00:16,170
+We build our own gate.
+
+8
+00:00:16,170 --> 00:00:18,067
+We make a build fail on purpose.
+
+9
+00:00:18,067 --> 00:00:19,194
+And then we fix it,
+
+10
+00:00:19,194 --> 00:00:20,262
+and watch it pass.
+
+11
+00:00:21,812 --> 00:00:23,241
+Here is what to expect.
+
+12
+00:00:23,791 --> 00:00:27,439
+One: what a quality gate is, and the built-in one, Sonar way.
+
+13
+00:00:27,989 --> 00:00:33,088
+Two: new code, and overall code. This is the idea that surprises most people.
+
+14
+00:00:33,638 --> 00:00:34,881
+Three: a live demo.
+
+15
+00:00:34,881 --> 00:00:35,992
+We copy the gate,
+
+16
+00:00:35,992 --> 00:00:37,300
+add a coverage rule,
+
+17
+00:00:37,300 --> 00:00:38,870
+attach it to Cloud Cart,
+
+18
+00:00:38,870 --> 00:00:39,393
+fail it,
+
+19
+00:00:39,393 --> 00:00:39,851
+fix it,
+
+20
+00:00:39,851 --> 00:00:40,635
+and pass it.
+
+21
+00:00:41,185 --> 00:00:44,983
+Four: the limits of a gate, the common mistakes, and the lab files.
+
+22
+00:00:45,533 --> 00:00:48,711
+This is objective five of the Sonar cube domain.
+
+23
+00:00:50,261 --> 00:00:51,584
+What is a quality gate?
+
+24
+00:00:52,134 --> 00:00:54,602
+A gate is a short list of conditions.
+
+25
+00:00:54,602 --> 00:00:56,471
+Each condition is a measure,
+
+26
+00:00:56,471 --> 00:00:57,338
+a comparison,
+
+27
+00:00:57,338 --> 00:00:58,205
+and a number.
+
+28
+00:00:58,205 --> 00:00:59,673
+For example: coverage,
+
+29
+00:00:59,673 --> 00:01:00,541
+is less than,
+
+30
+00:01:00,541 --> 00:01:01,542
+eighty percent.
+
+31
+00:01:02,092 --> 00:01:03,208
+After every scan,
+
+32
+00:01:03,208 --> 00:01:05,374
+the server checks each condition.
+
+33
+00:01:05,374 --> 00:01:06,490
+If one is broken,
+
+34
+00:01:06,490 --> 00:01:07,737
+the gate is Failed.
+
+35
+00:01:07,737 --> 00:01:08,918
+If none is broken,
+
+36
+00:01:08,918 --> 00:01:09,772
+it is Passed.
+
+37
+00:01:10,322 --> 00:01:12,328
+Sonar way is the built-in gate.
+
+38
+00:01:12,328 --> 00:01:13,494
+It is the default,
+
+39
+00:01:13,494 --> 00:01:15,371
+so every new project uses it.
+
+40
+00:01:15,371 --> 00:01:17,766
+It checks four things: no new issues,
+
+41
+00:01:17,766 --> 00:01:19,190
+new hotspots reviewed,
+
+42
+00:01:19,190 --> 00:01:22,104
+coverage on new code at least eighty percent,
+
+43
+00:01:22,104 --> 00:01:25,340
+and duplication on new code at most three percent.
+
+44
+00:01:25,890 --> 00:01:26,962
+Notice the word,
+
+45
+00:01:26,962 --> 00:01:27,229
+new.
+
+46
+00:01:27,229 --> 00:01:30,108
+Sonar way only judges the code you changed.
+
+47
+00:01:30,108 --> 00:01:32,184
+It does not judge the old code.
+
+48
+00:01:32,734 --> 00:01:35,511
+That is a good start for a team with old code.
+
+49
+00:01:35,511 --> 00:01:36,718
+But it means an old,
+
+50
+00:01:36,718 --> 00:01:38,408
+weak project can still pass.
+
+51
+00:01:39,958 --> 00:01:42,731
+So, what is new code, and what is overall code?
+
+52
+00:01:43,281 --> 00:01:46,188
+New code is what changed since a reference point.
+
+53
+00:01:46,188 --> 00:01:48,679
+Overall code is everything in the project.
+
+54
+00:01:49,229 --> 00:01:52,129
+A gate on new code says: do not make it worse.
+
+55
+00:01:52,129 --> 00:01:56,290
+A gate on overall code says: the whole project must reach a level.
+
+56
+00:01:56,840 --> 00:01:58,134
+Most teams use both.
+
+57
+00:01:58,134 --> 00:02:01,045
+New code rules keep the quality from falling.
+
+58
+00:02:01,045 --> 00:02:02,921
+An overall rule sets a floor,
+
+59
+00:02:02,921 --> 00:02:04,861
+and you raise it step by step.
+
+60
+00:02:05,411 --> 00:02:09,763
+Two rules. You cannot edit Sonar way. You copy it, and change the copy.
+
+61
+00:02:10,313 --> 00:02:14,687
+Then you attach the copy to a project. Each project can have its own gate.
+
+62
+00:02:16,237 --> 00:02:18,084
+Let us start in the browser.
+
+63
+00:02:18,084 --> 00:02:20,393
+We log in to the Sonar cube server,
+
+64
+00:02:20,393 --> 00:02:22,043
+with the user name admin,
+
+65
+00:02:22,043 --> 00:02:23,428
+and the lab password,
+
+66
+00:02:23,428 --> 00:02:24,748
+which shows as dots.
+
+67
+00:02:24,748 --> 00:02:26,331
+Then we open Cloud Cart,
+
+68
+00:02:26,331 --> 00:02:27,650
+on the Summary page.
+
+69
+00:02:39,300 --> 00:02:40,037
+At the top,
+
+70
+00:02:40,037 --> 00:02:41,175
+the quality gate.
+
+71
+00:02:41,175 --> 00:02:41,643
+Passed.
+
+72
+00:02:41,643 --> 00:02:42,045
+Green.
+
+73
+00:02:42,045 --> 00:02:45,057
+But look at the coverage on the overall code.
+
+74
+00:02:45,057 --> 00:02:46,731
+About fifty-nine percent.
+
+75
+00:02:46,731 --> 00:02:47,400
+It passes,
+
+76
+00:02:47,400 --> 00:02:49,074
+and the coverage is weak.
+
+77
+00:02:49,074 --> 00:02:49,342
+Why?
+
+78
+00:02:49,342 --> 00:02:50,948
+Let us look at the gate.
+
+79
+00:02:51,498 --> 00:02:53,666
+We open the Quality Gates page.
+
+80
+00:02:53,666 --> 00:02:54,295
+One gate,
+
+81
+00:02:54,295 --> 00:02:54,995
+Sonar way.
+
+82
+00:02:54,995 --> 00:02:55,554
+Default,
+
+83
+00:02:55,554 --> 00:02:56,463
+and built in.
+
+84
+00:02:56,463 --> 00:02:57,792
+You cannot edit it.
+
+85
+00:02:58,342 --> 00:02:59,869
+Look at the conditions.
+
+86
+00:02:59,869 --> 00:03:01,130
+They are all under,
+
+87
+00:03:01,130 --> 00:03:02,657
+Conditions on New Code.
+
+88
+00:03:02,657 --> 00:03:03,388
+New issues,
+
+89
+00:03:03,388 --> 00:03:04,583
+hotspots reviewed,
+
+90
+00:03:04,583 --> 00:03:05,977
+coverage on new code,
+
+91
+00:03:05,977 --> 00:03:07,836
+and duplication on new code.
+
+92
+00:03:07,836 --> 00:03:09,961
+Nothing about the whole project.
+
+93
+00:03:09,961 --> 00:03:11,952
+That is why Cloud Cart passes.
+
+94
+00:03:12,502 --> 00:03:17,900
+We make our own gate. We click Copy. We give it a name: Cloud Cart gate. And we create it.
+
+95
+00:03:20,950 --> 00:03:23,608
+The copy has the same four conditions.
+
+96
+00:03:23,608 --> 00:03:24,658
+Now we add one.
+
+97
+00:03:24,658 --> 00:03:26,267
+We click Add Condition.
+
+98
+00:03:26,267 --> 00:03:26,967
+We choose,
+
+99
+00:03:26,967 --> 00:03:28,086
+On Overall Code.
+
+100
+00:03:28,086 --> 00:03:29,765
+The measure is Coverage.
+
+101
+00:03:29,765 --> 00:03:30,885
+And the rule is,
+
+102
+00:03:30,885 --> 00:03:31,794
+is less than,
+
+103
+00:03:31,794 --> 00:03:32,494
+sixty-two.
+
+104
+00:03:32,494 --> 00:03:33,963
+We add the condition.
+
+105
+00:03:35,613 --> 00:03:37,730
+Now the gate has five conditions.
+
+106
+00:03:37,730 --> 00:03:42,286
+The last one says: overall coverage must be at least sixty-two percent.
+
+107
+00:03:42,286 --> 00:03:44,018
+Our project has fifty-nine.
+
+108
+00:03:44,568 --> 00:03:47,494
+A gate does nothing until a project uses it.
+
+109
+00:03:47,494 --> 00:03:49,422
+We open the project settings,
+
+110
+00:03:49,422 --> 00:03:51,151
+and the Quality Gate page.
+
+111
+00:03:51,151 --> 00:03:51,816
+We choose,
+
+112
+00:03:51,816 --> 00:03:54,143
+Always use a specific quality gate.
+
+113
+00:03:54,143 --> 00:03:55,738
+We pick Cloud Cart gate.
+
+114
+00:03:55,738 --> 00:03:56,337
+And save.
+
+115
+00:03:56,337 --> 00:04:00,526
+Notice the message: the change applies after the next analysis.
+
+116
+00:04:01,076 --> 00:04:02,140
+Now the terminal.
+
+117
+00:04:02,140 --> 00:04:04,205
+The gate is checked after a scan,
+
+118
+00:04:04,205 --> 00:04:05,269
+so we scan again.
+
+119
+00:04:05,269 --> 00:04:06,083
+Same command,
+
+120
+00:04:06,083 --> 00:04:07,710
+with the short name: scan.
+
+121
+00:04:10,560 --> 00:04:11,618
+Watch the output.
+
+122
+00:04:11,618 --> 00:04:12,488
+The tests run,
+
+123
+00:04:12,488 --> 00:04:14,416
+the coverage report is written,
+
+124
+00:04:14,416 --> 00:04:16,468
+and the new analysis is uploaded.
+
+125
+00:04:16,468 --> 00:04:18,458
+The server then checks the gate.
+
+126
+00:04:18,458 --> 00:04:20,075
+This takes under a minute.
+
+127
+00:04:48,325 --> 00:04:49,648
+Back in the browser.
+
+128
+00:04:49,648 --> 00:04:51,433
+We reload the Summary page.
+
+129
+00:04:51,433 --> 00:04:52,822
+Quality gate: Failed.
+
+130
+00:04:52,822 --> 00:04:54,145
+And it tells us why.
+
+131
+00:04:54,145 --> 00:04:54,740
+Coverage,
+
+132
+00:04:54,740 --> 00:04:55,996
+fifty-nine percent,
+
+133
+00:04:55,996 --> 00:04:57,518
+is less than sixty-two.
+
+134
+00:04:57,518 --> 00:04:59,568
+That is the condition we added.
+
+135
+00:05:00,118 --> 00:05:01,063
+In a pipeline,
+
+136
+00:05:01,063 --> 00:05:02,954
+this Failed stops the build.
+
+137
+00:05:02,954 --> 00:05:05,251
+Let us prove it from the terminal.
+
+138
+00:05:05,251 --> 00:05:05,926
+Lab check.
+
+139
+00:05:05,926 --> 00:05:07,209
+The token is valid.
+
+140
+00:05:07,209 --> 00:05:09,235
+The project uses its own gate.
+
+141
+00:05:09,235 --> 00:05:11,194
+The gate has a coverage rule.
+
+142
+00:05:11,194 --> 00:05:13,017
+But the gate is not Passed.
+
+143
+00:05:13,017 --> 00:05:13,963
+Three of four.
+
+144
+00:05:14,513 --> 00:05:15,389
+Now we fix it.
+
+145
+00:05:15,389 --> 00:05:17,079
+We do not lower the number.
+
+146
+00:05:17,079 --> 00:05:17,892
+We add tests.
+
+147
+00:05:17,892 --> 00:05:20,583
+We write a test class for the pricing code,
+
+148
+00:05:20,583 --> 00:05:22,711
+the file with the lowest coverage.
+
+149
+00:05:22,711 --> 00:05:23,837
+Seven small tests,
+
+150
+00:05:23,837 --> 00:05:25,339
+each one calls a method,
+
+151
+00:05:25,339 --> 00:05:26,716
+and checks the result.
+
+152
+00:05:27,266 --> 00:05:29,719
+We check the file is there. And we scan again.
+
+153
+00:05:34,369 --> 00:05:34,758
+Again,
+
+154
+00:05:34,758 --> 00:05:35,667
+the tests run.
+
+155
+00:05:35,667 --> 00:05:36,964
+Now there are forty,
+
+156
+00:05:36,964 --> 00:05:38,327
+and all of them pass.
+
+157
+00:05:38,327 --> 00:05:40,338
+The coverage report is written,
+
+158
+00:05:40,338 --> 00:05:42,220
+and the analysis is uploaded.
+
+159
+00:06:16,270 --> 00:06:17,559
+Back in the browser.
+
+160
+00:06:17,559 --> 00:06:19,300
+We reload the Summary page.
+
+161
+00:06:19,300 --> 00:06:20,654
+Quality gate: Passed.
+
+162
+00:06:20,654 --> 00:06:21,234
+Coverage,
+
+163
+00:06:21,234 --> 00:06:22,459
+sixty-four percent.
+
+164
+00:06:22,459 --> 00:06:23,877
+It is above sixty-two.
+
+165
+00:06:23,877 --> 00:06:24,973
+The number moved,
+
+166
+00:06:24,973 --> 00:06:26,779
+because we added real tests,
+
+167
+00:06:26,779 --> 00:06:27,939
+and scanned again.
+
+168
+00:06:28,489 --> 00:06:33,737
+Finally, the proof. Lab check. Four of four. Own gate, coverage rule, and Passed.
+
+169
+00:06:36,287 --> 00:06:39,338
+The results are saved in a file. That is your evidence.
+
+170
+00:06:40,888 --> 00:06:42,381
+Now, the limits of a gate.
+
+171
+00:06:42,931 --> 00:06:48,137
+A gate is only as good as its rules. If the rules are weak, the gate passes weak code.
+
+172
+00:06:48,687 --> 00:06:49,975
+A gate can be gamed.
+
+173
+00:06:49,975 --> 00:06:51,844
+Someone can lower the number,
+
+174
+00:06:51,844 --> 00:06:53,841
+or exclude files from the scan,
+
+175
+00:06:53,841 --> 00:06:54,937
+to turn it green.
+
+176
+00:06:54,937 --> 00:06:58,159
+A pass that you did not earn is worse than a fail.
+
+177
+00:06:58,709 --> 00:07:00,627
+And a gate cannot see everything.
+
+178
+00:07:00,627 --> 00:07:02,895
+It does not know if the design is good,
+
+179
+00:07:02,895 --> 00:07:04,697
+or if the tests check anything.
+
+180
+00:07:04,697 --> 00:07:06,965
+It only checks the numbers you gave it.
+
+181
+00:07:07,515 --> 00:07:10,693
+So: few rules, clear rules, and raise them slowly.
+
+182
+00:07:12,243 --> 00:07:13,395
+Five mistakes.
+
+183
+00:07:13,945 --> 00:07:18,382
+One: editing the numbers, to make a failed gate pass. Fix the code instead.
+
+184
+00:07:18,932 --> 00:07:21,994
+Two: forgetting to attach the gate to the project.
+
+185
+00:07:21,994 --> 00:07:23,524
+The default gate is used,
+
+186
+00:07:23,524 --> 00:07:25,055
+and your rule never runs.
+
+187
+00:07:25,605 --> 00:07:30,085
+Three: forty rules. Nobody understands why the build failed. Keep a few.
+
+188
+00:07:30,635 --> 00:07:36,075
+Four: a rule on new code only, for a project with old weak code. It never improves.
+
+189
+00:07:36,625 --> 00:07:38,374
+Five: reading the dashboard,
+
+190
+00:07:38,374 --> 00:07:39,998
+but not failing the build.
+
+191
+00:07:39,998 --> 00:07:40,747
+Next lesson,
+
+192
+00:07:40,747 --> 00:07:42,684
+we connect the gate to Jenkins.
+
+193
+00:07:44,234 --> 00:07:47,029
+Where to find the lab. Pause here, and write it down.
+
+194
+00:07:47,579 --> 00:07:49,043
+One: the repository,
+
+195
+00:07:49,043 --> 00:07:53,363
+git hub dot com slash it dash waves slash dev ops dash A I,
+
+196
+00:07:53,363 --> 00:07:55,707
+in the folder academy slash lab.
+
+197
+00:07:56,257 --> 00:08:02,187
+Two: the files, lab one sixty-eight dot S H, and shortcuts one sixty-eight dot S H.
+
+198
+00:08:02,737 --> 00:08:04,679
+Three: load the short names,
+
+199
+00:08:04,679 --> 00:08:07,868
+with source shortcuts one sixty-eight dot S H.
+
+200
+00:08:07,868 --> 00:08:11,127
+Then scan runs the Maven command with Ja Co Co,
+
+201
+00:08:11,127 --> 00:08:13,276
+and lab check tests the result.
+
+202
+00:08:13,826 --> 00:08:16,239
+Four: set the variable Sonar token,
+
+203
+00:08:16,239 --> 00:08:17,825
+to your own user token.
+
+204
+00:08:17,825 --> 00:08:20,653
+Never put it in a file in the repository.
+
+205
+00:08:21,203 --> 00:08:22,507
+Five: copy the gate,
+
+206
+00:08:22,507 --> 00:08:23,941
+add the coverage rule,
+
+207
+00:08:23,941 --> 00:08:24,593
+attach it,
+
+208
+00:08:24,593 --> 00:08:25,180
+and scan.
+
+209
+00:08:25,180 --> 00:08:26,028
+Make it fail.
+
+210
+00:08:26,028 --> 00:08:27,006
+Then add tests,
+
+211
+00:08:27,006 --> 00:08:28,115
+and make it pass.
+
+212
+00:08:28,665 --> 00:08:30,307
+The link is in the description.
+
+213
+00:08:31,857 --> 00:08:32,732
+Your turn.
+
+214
+00:08:33,282 --> 00:08:37,442
+One: open Quality Gates, and read the four conditions of Sonar way.
+
+215
+00:08:37,992 --> 00:08:42,877
+Two: copy it, and add a coverage rule on overall code, a little above your number.
+
+216
+00:08:43,427 --> 00:08:47,118
+Three: attach the gate to your project, and scan. Does it fail?
+
+217
+00:08:47,668 --> 00:08:50,548
+Four: add tests, and scan again, until it passes.
+
+218
+00:08:51,098 --> 00:08:53,743
+Five: run lab check, and get four of four.
+
+219
+00:08:54,293 --> 00:08:56,021
+Pause the video, and do it now.
+
+220
+00:09:11,571 --> 00:09:12,446
+Quick check.
+
+221
+00:09:12,996 --> 00:09:14,318
+What is a quality gate?
+
+222
+00:09:14,868 --> 00:09:17,450
+Why can an old weak project pass Sonar way?
+
+223
+00:09:17,999 --> 00:09:20,602
+Why do you copy Sonar way, and not edit it?
+
+224
+00:09:21,152 --> 00:09:23,286
+What is the wrong way to make a gate pass?
+
+225
+00:09:23,836 --> 00:09:29,254
+Objective covered: M C eighteen, objective five. The quality gate and its limits.
+
+226
+00:09:29,804 --> 00:09:31,874
+Pause the video, and answer out loud.
+
+227
+00:09:42,424 --> 00:09:46,413
+Next: the gate in a Jenkins pipeline, and how it stops a build.
+
+228
+00:09:46,963 --> 00:09:50,291
+If this helped, like, share and subscribe, so you do not miss it.

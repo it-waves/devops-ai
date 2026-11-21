@@ -1,0 +1,26 @@
+Lesson 168 of the DevOps Engineering Bootcamp, SonarQube domain. Learn what a quality gate is and how it decides pass or fail after every scan. You learn the built-in Sonar way gate, the difference between new code and overall code, and why an old weak project can still pass. Then you watch it live: copy Sonar way, add an overall coverage rule, attach the gate to the Cloud Cart project, scan and watch it fail, add real unit tests, scan again and watch it pass. You also learn the limits of a gate and how it gets gamed.
+
+Chapters
+0:00 Pass or fail?
+0:21 What to expect
+0:49 What is a quality gate?
+1:39 New code and overall code
+2:15 Live: fail it, fix it, pass it
+6:40 The limits of a gate
+7:11 Common mistakes
+7:43 Where to find the lab
+8:31 Your turn
+9:11 Quick check and what is next
+
+Objectives covered: MC18-O05. The quality gate and its limits.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab168.sh and shortcuts168.sh). "scan" runs the Maven command with JaCoCo and "lab check" runs four checks (token valid, project uses its own gate, gate has an overall coverage rule, gate is Passed) and saves results168.txt. Set SONAR_TOKEN to your own user token and never store it in a file in a repository. Use your own machine only.
+
+Honest notes: the terminal and browser are a real continuous recording of SonarQube Community Build 26.11 analysing the CloudCart project with the Sonar Maven plugin and JaCoCo 0.8.12. The browser is zoomed out so all cards fit on screen. The token and password belong to a throwaway lab server. The terminal output is filtered with grep to show only the important lines. The fix is a new unit test class added to the lab code. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, concept, limits, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Read SonarQube Results: Bugs, Vulnerabilities and Coverage, Fix One (Live) | Lesson 167 https://youtu.be/kNLp6_Ywzi8
+Next: the quality gate in a Jenkins pipeline, and how it stops a build.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #sonarqube #qualitygate #codecoverage #codequality #maven #devopsbootcamp #learnsonarqube
