@@ -19,7 +19,7 @@ Lab files: github.com/it-waves/devops-ai, in academy/lab (lab168.sh and shortcut
 Honest notes: the terminal and browser are a real continuous recording of SonarQube Community Build 26.11 analysing the CloudCart project with the Sonar Maven plugin and JaCoCo 0.8.12. The browser is zoomed out so all cards fit on screen. The token and password belong to a throwaway lab server. The terminal output is filtered with grep to show only the important lines. The fix is a new unit test class added to the lab code. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, concept, limits, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
 
 Previous lesson: Read SonarQube Results: Bugs, Vulnerabilities and Coverage, Fix One (Live) | Lesson 167 https://youtu.be/kNLp6_Ywzi8
-Next: the quality gate in a Jenkins pipeline, and how it stops a build.
+Next: Jenkins + SonarQube: Scan and Quality Gate in a Pipeline, Fail It, Fix It (Live) | Lesson 169 https://youtu.be/G7z7KEOw8c0
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
