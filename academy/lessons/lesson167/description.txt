@@ -18,7 +18,7 @@ Lab files: github.com/it-waves/devops-ai, in academy/lab (lab167.sh and shortcut
 Honest notes: the terminal and browser are a real continuous recording of SonarQube Community Build 26.11 analysing the CloudCart project with the Sonar Maven plugin and JaCoCo 0.8.12. The browser is zoomed out so all cards fit on screen. The token and password belong to a throwaway lab server. The terminal output is filtered with grep to show only the important lines. The fix replaces MD5 with SHA-256 in one line of the lab code. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, measures, priorities, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
 
 Previous lesson: Scan a Maven Project with SonarQube: Token, One Command, Results (Live) | Lesson 166 https://youtu.be/7oCtMJPR1No
-Next: the quality gate, and how it can fail a build.
+Next: Quality Gate: Custom Rule, Fail It, Fix It, Pass It (Live) | Lesson 168 https://youtu.be/UfBd7tK0iyE
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
