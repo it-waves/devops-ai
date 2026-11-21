@@ -1,0 +1,747 @@
+1
+00:00:00,500 --> 00:00:05,471
+You have a SonarQube server. But it is empty. How do your own code and the server meet?
+
+2
+00:00:06,021 --> 00:00:06,786
+With a scan.
+
+3
+00:00:06,786 --> 00:00:08,954
+One Maven command reads your code,
+
+4
+00:00:08,954 --> 00:00:09,528
+tests it,
+
+5
+00:00:09,528 --> 00:00:11,759
+and sends the report to the server.
+
+6
+00:00:12,309 --> 00:00:17,280
+But the server will not accept it from just anyone. You need a token, and a project key.
+
+7
+00:00:17,830 --> 00:00:22,822
+Today we run a real scan on the CloudCart project, and watch it appear in the browser.
+
+8
+00:00:24,372 --> 00:00:25,801
+Here is what to expect.
+
+9
+00:00:26,351 --> 00:00:28,549
+One: how a scan works, in three parts.
+
+10
+00:00:29,099 --> 00:00:34,155
+Two: the three things a scan needs. A token, a project key, and the server address.
+
+11
+00:00:34,705 --> 00:00:35,967
+Three: a live scan.
+
+12
+00:00:35,967 --> 00:00:37,163
+We create a token,
+
+13
+00:00:37,163 --> 00:00:38,625
+run the Maven command,
+
+14
+00:00:38,625 --> 00:00:39,688
+read the output,
+
+15
+00:00:39,688 --> 00:00:41,083
+and open the results.
+
+16
+00:00:41,633 --> 00:00:44,257
+Four: the common mistakes, and the lab files.
+
+17
+00:00:44,807 --> 00:00:47,858
+This is objective three of the SonarQube domain.
+
+18
+00:00:49,408 --> 00:00:50,517
+How a scan works.
+
+19
+00:00:51,067 --> 00:00:51,446
+First,
+
+20
+00:00:51,446 --> 00:00:54,289
+Maven builds your project and runs the tests.
+
+21
+00:00:54,289 --> 00:00:56,374
+It also writes a coverage report,
+
+22
+00:00:56,374 --> 00:00:57,574
+if you ask for one.
+
+23
+00:00:58,124 --> 00:00:58,546
+Second,
+
+24
+00:00:58,546 --> 00:01:00,715
+the scanner reads your source files,
+
+25
+00:01:00,715 --> 00:01:01,859
+and looks for bugs,
+
+26
+00:01:01,859 --> 00:01:03,607
+smells and security problems.
+
+27
+00:01:04,157 --> 00:01:08,381
+Third, it packs the results into one report, and uploads it to the server.
+
+28
+00:01:08,931 --> 00:01:11,204
+The server then processes that report.
+
+29
+00:01:11,204 --> 00:01:12,580
+It takes a few seconds.
+
+30
+00:01:12,580 --> 00:01:15,032
+Then the project shows up in the browser.
+
+31
+00:01:15,582 --> 00:01:20,809
+Important: the scanner does the heavy work. The server only stores and shows the results.
+
+32
+00:01:22,359 --> 00:01:24,620
+Next, the three things every scan needs.
+
+33
+00:01:25,170 --> 00:01:29,266
+The server address. For us, that is localhost, port nine thousand.
+
+34
+00:01:29,816 --> 00:01:30,876
+The project key.
+
+35
+00:01:30,876 --> 00:01:33,658
+A short name that is unique on the server.
+
+36
+00:01:33,658 --> 00:01:34,916
+Ours is CloudCart.
+
+37
+00:01:34,916 --> 00:01:36,837
+Scan again with the same key,
+
+38
+00:01:36,837 --> 00:01:39,950
+and you add a new analysis to the same project.
+
+39
+00:01:40,500 --> 00:01:41,402
+And the token.
+
+40
+00:01:41,402 --> 00:01:43,078
+It proves who is scanning.
+
+41
+00:01:43,078 --> 00:01:44,368
+It is a long secret,
+
+42
+00:01:44,368 --> 00:01:46,366
+like a password made for tools.
+
+43
+00:01:46,916 --> 00:01:49,784
+Never type the token into a file that you share.
+
+44
+00:01:49,784 --> 00:01:51,874
+Pass it as an environment variable.
+
+45
+00:01:51,874 --> 00:01:53,188
+We will do that today.
+
+46
+00:01:53,738 --> 00:01:57,962
+And use the full plugin name, with its group. Then Maven always finds it.
+
+47
+00:01:59,512 --> 00:02:00,352
+Let us scan.
+
+48
+00:02:00,352 --> 00:02:01,962
+We start in a terminal,
+
+49
+00:02:01,962 --> 00:02:04,272
+in the CloudCart project folder.
+
+50
+00:02:04,272 --> 00:02:05,742
+We run ls to see it.
+
+51
+00:02:05,742 --> 00:02:07,492
+There is a pom.xml,
+
+52
+00:02:07,492 --> 00:02:09,033
+and the source folder.
+
+53
+00:02:09,033 --> 00:02:11,203
+That is a normal Maven project.
+
+54
+00:02:11,753 --> 00:02:13,719
+Does it have any Sonar settings?
+
+55
+00:02:13,719 --> 00:02:15,994
+We search the pom for the word sonar,
+
+56
+00:02:15,994 --> 00:02:17,346
+and count the matches.
+
+57
+00:02:17,346 --> 00:02:17,653
+Zero.
+
+58
+00:02:17,653 --> 00:02:20,665
+So you do not have to change your project at all.
+
+59
+00:02:20,665 --> 00:02:23,123
+The scan is added from the command line.
+
+60
+00:02:23,673 --> 00:02:24,748
+Now the browser.
+
+61
+00:02:24,748 --> 00:02:26,024
+We open localhost,
+
+62
+00:02:26,024 --> 00:02:27,300
+port nine thousand,
+
+63
+00:02:27,300 --> 00:02:29,583
+and log in with the admin account.
+
+64
+00:02:29,583 --> 00:02:32,604
+The Projects page offers to create a project,
+
+65
+00:02:32,604 --> 00:02:35,492
+because the server has never seen our code.
+
+66
+00:02:42,042 --> 00:02:42,429
+First,
+
+67
+00:02:42,429 --> 00:02:43,075
+the token.
+
+68
+00:02:43,075 --> 00:02:44,688
+We open the account menu,
+
+69
+00:02:44,688 --> 00:02:45,334
+top right,
+
+70
+00:02:45,334 --> 00:02:46,754
+and choose My Account.
+
+71
+00:02:46,754 --> 00:02:48,174
+Then the Security tab.
+
+72
+00:02:48,174 --> 00:02:49,658
+Here you create tokens.
+
+73
+00:02:56,208 --> 00:02:58,886
+We give the token a name: CloudCart scan.
+
+74
+00:02:58,886 --> 00:03:00,863
+We choose the type: user token.
+
+75
+00:03:00,863 --> 00:03:01,819
+It acts as you,
+
+76
+00:03:01,819 --> 00:03:02,776
+so it can scan,
+
+77
+00:03:02,776 --> 00:03:04,306
+and it can read results.
+
+78
+00:03:04,306 --> 00:03:04,689
+Later,
+
+79
+00:03:04,689 --> 00:03:05,582
+for pipelines,
+
+80
+00:03:05,582 --> 00:03:08,451
+we will use a safer token that can only scan.
+
+81
+00:03:08,451 --> 00:03:09,918
+Then we press Generate.
+
+82
+00:03:09,918 --> 00:03:11,767
+The token is shown only once.
+
+83
+00:03:11,767 --> 00:03:13,361
+A real token is a secret,
+
+84
+00:03:13,361 --> 00:03:15,784
+so never show it in a video or a chat.
+
+85
+00:03:15,784 --> 00:03:17,314
+This one is for the lab,
+
+86
+00:03:17,314 --> 00:03:19,419
+and we will delete it afterwards.
+
+87
+00:03:21,469 --> 00:03:22,793
+Back in the terminal.
+
+88
+00:03:22,793 --> 00:03:25,631
+We keep the token in an environment variable,
+
+89
+00:03:25,631 --> 00:03:26,767
+named Sonar token.
+
+90
+00:03:26,767 --> 00:03:29,164
+The scanner reads that name by itself.
+
+91
+00:03:29,164 --> 00:03:30,614
+We load it from a file,
+
+92
+00:03:30,614 --> 00:03:33,074
+so that it never appears on the screen.
+
+93
+00:03:33,624 --> 00:03:34,514
+Now the scan.
+
+94
+00:03:34,514 --> 00:03:35,747
+One Maven command.
+
+95
+00:03:35,747 --> 00:03:38,213
+Verify builds and tests the project.
+
+96
+00:03:38,213 --> 00:03:40,542
+Then comes the Sonar Maven plugin,
+
+97
+00:03:40,542 --> 00:03:41,844
+with its full name.
+
+98
+00:03:41,844 --> 00:03:43,487
+We give the project key,
+
+99
+00:03:43,487 --> 00:03:45,063
+and the server address.
+
+100
+00:03:45,063 --> 00:03:46,501
+We filter the output,
+
+101
+00:03:46,501 --> 00:03:48,899
+to show only the lines that matter.
+
+102
+00:03:49,449 --> 00:03:50,575
+Watch the output.
+
+103
+00:03:50,575 --> 00:03:51,900
+First the tests run,
+
+104
+00:03:51,900 --> 00:03:52,828
+and they pass.
+
+105
+00:03:52,828 --> 00:03:55,744
+Then the Java sensor reads the source files.
+
+106
+00:03:55,744 --> 00:03:58,195
+Then the analysis report is uploaded.
+
+107
+00:03:58,745 --> 00:04:00,652
+It says: analysis successful.
+
+108
+00:04:00,652 --> 00:04:01,901
+And: build success.
+
+109
+00:04:01,901 --> 00:04:04,005
+Maven did all of this by itself,
+
+110
+00:04:04,005 --> 00:04:05,188
+in under a minute.
+
+111
+00:04:27,738 --> 00:04:28,766
+Now the browser.
+
+112
+00:04:28,766 --> 00:04:30,438
+We open the Projects page,
+
+113
+00:04:30,438 --> 00:04:31,338
+and reload it.
+
+114
+00:04:31,338 --> 00:04:32,559
+Cloud cart is here.
+
+115
+00:04:32,559 --> 00:04:34,616
+The server processed the report,
+
+116
+00:04:34,616 --> 00:04:37,509
+and created the project from the project key.
+
+117
+00:04:42,059 --> 00:04:42,580
+Open it.
+
+118
+00:04:42,580 --> 00:04:43,947
+This is the overview.
+
+119
+00:04:43,947 --> 00:04:45,835
+At the top: the project name,
+
+120
+00:04:45,835 --> 00:04:47,268
+and the lines of code.
+
+121
+00:04:47,268 --> 00:04:49,482
+Then the project health dashboard.
+
+122
+00:04:49,482 --> 00:04:49,872
+First,
+
+123
+00:04:49,872 --> 00:04:51,435
+the quality gate status.
+
+124
+00:04:51,435 --> 00:04:52,412
+It says Passed.
+
+125
+00:04:52,412 --> 00:04:52,737
+Next,
+
+126
+00:04:52,737 --> 00:04:54,756
+the number of issues: fourteen.
+
+127
+00:04:54,756 --> 00:04:55,928
+Then duplications,
+
+128
+00:04:55,928 --> 00:04:56,774
+and coverage.
+
+129
+00:04:56,774 --> 00:04:58,337
+Coverage shows an error,
+
+130
+00:04:58,337 --> 00:05:01,527
+because we did not ask for a coverage report yet.
+
+131
+00:05:01,527 --> 00:05:02,634
+That is expected.
+
+132
+00:05:02,634 --> 00:05:04,523
+We fix it in the next lesson.
+
+133
+00:05:05,973 --> 00:05:06,930
+One more place.
+
+134
+00:05:06,930 --> 00:05:07,888
+The Issues tab.
+
+135
+00:05:07,888 --> 00:05:10,761
+Here are the real problems the scanner found,
+
+136
+00:05:10,761 --> 00:05:11,846
+in our real code.
+
+137
+00:05:11,846 --> 00:05:12,868
+Each has a file,
+
+138
+00:05:12,868 --> 00:05:13,762
+a line number,
+
+139
+00:05:13,762 --> 00:05:14,719
+and a severity.
+
+140
+00:05:18,269 --> 00:05:18,780
+Finally,
+
+141
+00:05:18,780 --> 00:05:20,504
+prove it from the terminal.
+
+142
+00:05:20,504 --> 00:05:21,589
+We run lab check.
+
+143
+00:05:21,589 --> 00:05:23,696
+It checks four things: the token,
+
+144
+00:05:23,696 --> 00:05:24,462
+the project,
+
+145
+00:05:24,462 --> 00:05:25,292
+the analysis,
+
+146
+00:05:25,292 --> 00:05:26,696
+and the lines of code.
+
+147
+00:05:28,246 --> 00:05:29,055
+Four of four.
+
+148
+00:05:29,055 --> 00:05:31,047
+The results are saved in a file.
+
+149
+00:05:31,047 --> 00:05:32,417
+That is your evidence.
+
+150
+00:05:32,417 --> 00:05:33,164
+Next lesson,
+
+151
+00:05:33,164 --> 00:05:35,094
+we read these results properly.
+
+152
+00:05:36,644 --> 00:05:37,796
+Five mistakes.
+
+153
+00:05:38,346 --> 00:05:43,743
+One: leaving out the full plugin name. Maven says: no plugin found for prefix sonar.
+
+154
+00:05:44,293 --> 00:05:49,115
+Two: a wrong or expired token. The scan fails with an authorization error.
+
+155
+00:05:49,665 --> 00:05:54,422
+Three: a different project key each time. You get many projects, with no history.
+
+156
+00:05:54,972 --> 00:05:59,281
+Four: saving the token in the pom, or in git. Anyone can then use it.
+
+157
+00:05:59,831 --> 00:06:04,461
+Five: opening the dashboard too early. Wait for the server to finish processing.
+
+158
+00:06:06,011 --> 00:06:08,806
+Where to find the lab. Pause here, and write it down.
+
+159
+00:06:09,356 --> 00:06:10,820
+One: the repository,
+
+160
+00:06:10,820 --> 00:06:15,140
+GitHub dot com slash it dash waves slash devops-ai,
+
+161
+00:06:15,140 --> 00:06:17,484
+in the folder academy slash lab.
+
+162
+00:06:18,034 --> 00:06:24,242
+Two: the files, lab166.sh, and shortcuts166.sh.
+
+163
+00:06:24,792 --> 00:06:26,764
+Three: load the short names,
+
+164
+00:06:26,764 --> 00:06:29,863
+with source shortcuts166.sh.
+
+165
+00:06:29,863 --> 00:06:32,187
+Then scan runs the Maven command,
+
+166
+00:06:32,187 --> 00:06:34,370
+and lab check tests the result.
+
+167
+00:06:34,920 --> 00:06:37,287
+Four: set the variable Sonar token,
+
+168
+00:06:37,287 --> 00:06:38,505
+to your own token.
+
+169
+00:06:38,505 --> 00:06:41,278
+Never put it in a file in the repository.
+
+170
+00:06:41,828 --> 00:06:46,777
+Five: your project can be any Maven project. Cloud cart is the one we use.
+
+171
+00:06:47,327 --> 00:06:48,970
+The link is in the description.
+
+172
+00:06:50,520 --> 00:06:51,395
+Your turn.
+
+173
+00:06:51,945 --> 00:06:56,510
+One: create a token in your own server, and keep it in an environment variable.
+
+174
+00:06:57,060 --> 00:07:00,985
+Two: run the scan on a Maven project, with the full plugin name.
+
+175
+00:07:01,535 --> 00:07:05,951
+Three: find your project on the Projects page, and open the Issues tab.
+
+176
+00:07:06,501 --> 00:07:09,019
+Four: run lab check, and get four of four.
+
+177
+00:07:09,569 --> 00:07:12,982
+Five: write down your project key and your server address.
+
+178
+00:07:13,532 --> 00:07:15,260
+Pause the video, and do it now.
+
+179
+00:07:30,810 --> 00:07:31,685
+Quick check.
+
+180
+00:07:32,235 --> 00:07:34,005
+What are the three things a scan needs?
+
+181
+00:07:34,555 --> 00:07:37,158
+Who does the heavy work, the scanner or the server?
+
+182
+00:07:37,708 --> 00:07:40,247
+Why use an environment variable for the token?
+
+183
+00:07:40,797 --> 00:07:43,847
+What happens if you scan with the same project key again?
+
+184
+00:07:44,397 --> 00:07:50,968
+Objective covered: MC18, objective three. Run analysis for a Java Maven project.
+
+185
+00:07:51,518 --> 00:07:53,587
+Pause the video, and answer out loud.
+
+186
+00:08:04,137 --> 00:08:07,743
+Next: read the results, the issues, the metrics, and the coverage.
+
+187
+00:08:08,293 --> 00:08:11,621
+If this helped, like, share and subscribe, so you do not miss it.

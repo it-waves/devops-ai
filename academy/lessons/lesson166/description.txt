@@ -1,0 +1,25 @@
+Lesson 166 of the DevOps Engineering Bootcamp, SonarQube domain. Run a real analysis of a Java Maven project and watch it appear on your own SonarQube server. You learn how a scan works (build and test, scan, upload, show), the three things every scan needs (the server address, a project key and a token), and then you watch it live: check that the project has no Sonar settings, log in, create a token in My Account, keep it in an environment variable, run the Maven scan with the full plugin name, read the output, and open the new project and its issues in the browser. You finish with the common mistakes and a four-check lab script.
+
+Chapters
+0:00 Scan your code
+0:24 What to expect
+0:49 How a scan works
+1:22 What a scan needs
+1:59 Live: scan Cloud Cart
+5:36 Common mistakes
+6:06 Where to find the lab
+6:50 Your turn
+7:31 Quick check and what is next
+
+Objectives covered: MC18-O03. Run analysis for a Java Maven project.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab166.sh and shortcuts166.sh). "scan" runs the Maven command and "lab check" runs four checks (token valid, project exists, analysis uploaded, lines of code counted) and saves results166.txt. Set SONAR_TOKEN to your own token and never store it in a file in a repository. Use your own machine only.
+
+Honest notes: the terminal and browser are a real continuous recording of SonarQube Community Build 26.11 analysing the CloudCart project with the Sonar Maven plugin. The token shown on screen belongs to a throwaway lab server and was deleted afterwards; never show a real token. The terminal output is filtered with grep to show only the important lines. Coverage shows an error because no coverage report was produced yet; the next lessons cover that. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, how-it-works, needs, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Install SonarQube: Your Own Lab Server, Step by Step (Live) | Lesson 165 https://youtu.be/KHu1y_wySAo
+Next: read the results, the issues, the metrics and the coverage.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #sonarqube #maven #staticanalysis #codequality #devopsbootcamp #learnsonarqube
