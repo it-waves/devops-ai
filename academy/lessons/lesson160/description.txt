@@ -3,13 +3,13 @@ Lesson 160 of the DevOps Engineering Bootcamp, the seventh lesson of the Jenkins
 Chapters
 0:00 Agents, labels, artifacts
 0:27 What to expect
-1:28 Controller, agent, executor, label
-2:06 Where the files live
-2:50 Live: add an agent, run, archive, stash
-7:08 Common mistakes
-7:41 Where to find the lab
-8:33 Your turn
-9:15 Quick check and what is next
+0:57 Controller, agent, executor, label
+1:35 Where the files live
+2:19 Live: add an agent, run, archive, stash
+7:42 Common mistakes
+8:16 Where to find the lab
+9:07 Your turn
+9:49 Quick check and what is next
 
 Objectives covered: MC17-O07 Run builds on distributed agents and manage workspaces and artifacts.
 
