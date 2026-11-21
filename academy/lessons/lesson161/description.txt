@@ -17,7 +17,7 @@ Lab files: github.com/it-waves/devops-ai, in academy/lab (lab161.sh and shortcut
 
 Honest notes: the Jenkins screens are a real continuous recording of Jenkins 2.580 LTS, with real approvals, a real Maven build and a real rollback. The team inbox is a tiny local web page standing in for Slack or email, so it shows the idea without an account. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, words, files, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
 
-Previous lesson: Jenkins Agents: Labels, Executors, Archive and Stash (Live, Real Agent) | Lesson 160 https://youtu.be/s6DAzNVe2us
+Previous lesson: Jenkins Agents: Labels, Executors, Archive and Stash (Live, Real Agent) | Lesson 160 https://youtu.be/B7gM1pLspM4
 Next: backup, upgrade and troubleshooting Jenkins.
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
