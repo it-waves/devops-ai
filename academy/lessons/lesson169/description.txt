@@ -1,0 +1,25 @@
+Lesson 169 of the DevOps Engineering Bootcamp, SonarQube domain. Learn how a Jenkins pipeline runs a SonarQube scan and then waits for the quality gate, so a failed gate fails the build. You learn what the official SonarQube Scanner plugin adds, how the server entry, the token credential and the webhook work together, and why a timeout matters. Then you watch it live: save the SonarQube server in Jenkins, create the webhook in SonarQube, read the Jenkinsfile, run the build and watch it stop at the gate, add real unit tests, run it again and watch it pass.
+
+Chapters
+0:00 A gate nobody enforces?
+0:25 What to expect
+0:57 Why the official plugin?
+1:39 How the pieces talk
+2:16 Live: the gate stops the build
+8:14 Common mistakes
+8:56 Where to find the lab
+9:41 Your turn
+10:22 Quick check and what is next
+
+Objectives covered: MC18-O06. Scanning and the quality gate in a pipeline.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab169.sh and shortcuts169.sh). "lab check" runs four checks (Jenkins login works, SonarQube has a webhook to Jenkins, the last build waited for the quality gate, the last build is SUCCESS) and saves results169.txt. Set JENKINS_AUTH and SONAR_TOKEN to your own values and never store them in a file in a repository. Use your own machine only.
+
+Honest notes: the browser and terminal are a real continuous recording of Jenkins 2.580 with the SonarQube Scanner plugin and SonarQube Community Build 26.11 analysing the CloudCart project with the Sonar Maven plugin and JaCoCo 0.8.12. The plugin was installed before the recording. The tokens and passwords belong to a throwaway lab server. The fix is a new unit test class added to the lab code. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, concept, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: SonarQube Quality Gate: Custom Rule, Fail It, Fix It, Pass It (Live) | Lesson 168 https://youtu.be/UfBd7tK0iyE
+Next: tokens and permissions for SonarQube and Jenkins.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #jenkins #sonarqube #qualitygate #cicd #pipeline #devopsbootcamp #learnjenkins

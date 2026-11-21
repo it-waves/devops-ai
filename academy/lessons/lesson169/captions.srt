@@ -1,0 +1,1047 @@
+1
+00:00:00,500 --> 00:00:01,239
+Last lesson,
+
+2
+00:00:01,239 --> 00:00:02,718
+the quality gate failed.
+
+3
+00:00:02,718 --> 00:00:04,012
+And nothing happened.
+
+4
+00:00:04,012 --> 00:00:04,936
+Nobody stopped.
+
+5
+00:00:04,936 --> 00:00:06,537
+The code just kept moving.
+
+6
+00:00:07,087 --> 00:00:11,951
+That is the problem. A gate that only shows red on a dashboard, is a suggestion.
+
+7
+00:00:12,501 --> 00:00:14,627
+Today we connect it to Jenkins.
+
+8
+00:00:14,627 --> 00:00:15,999
+When the gate fails,
+
+9
+00:00:15,999 --> 00:00:17,097
+the build fails.
+
+10
+00:00:17,097 --> 00:00:17,782
+No deploy.
+
+11
+00:00:17,782 --> 00:00:18,537
+No release.
+
+12
+00:00:18,537 --> 00:00:19,840
+The pipeline stops.
+
+13
+00:00:20,390 --> 00:00:24,849
+We use the official plugin, a webhook, and one line: wait for quality gate.
+
+14
+00:00:26,399 --> 00:00:27,828
+Here is what to expect.
+
+15
+00:00:28,378 --> 00:00:32,346
+One: why we use the official Sonar cube plugin, and what it adds.
+
+16
+00:00:32,896 --> 00:00:38,059
+Two: how Jenkins, the scanner and the server talk to each other. Including the webhook.
+
+17
+00:00:38,609 --> 00:00:39,939
+Three: a live demo.
+
+18
+00:00:39,939 --> 00:00:42,249
+We connect Jenkins to Sonar cube,
+
+19
+00:00:42,249 --> 00:00:43,370
+add the webhook,
+
+20
+00:00:43,370 --> 00:00:44,700
+and run a pipeline.
+
+21
+00:00:44,700 --> 00:00:46,170
+It fails at the gate.
+
+22
+00:00:46,170 --> 00:00:47,290
+We fix the code.
+
+23
+00:00:47,290 --> 00:00:48,550
+And it goes green.
+
+24
+00:00:49,100 --> 00:00:52,386
+Four: the mistakes that waste hours, and the lab files.
+
+25
+00:00:52,936 --> 00:00:55,965
+This is objective six of the Sonar cube domain.
+
+26
+00:00:57,515 --> 00:00:58,880
+First, why a plugin?
+
+27
+00:00:59,430 --> 00:01:02,013
+You can already run a scan from Jenkins.
+
+28
+00:01:02,013 --> 00:01:03,046
+Just call Maven,
+
+29
+00:01:03,046 --> 00:01:04,337
+with the Sonar goal.
+
+30
+00:01:04,337 --> 00:01:06,726
+We did that in lesson one fifty-nine.
+
+31
+00:01:07,276 --> 00:01:10,178
+The official Sonar cube plugin adds three things.
+
+32
+00:01:10,728 --> 00:01:16,296
+One: a place to register the server, with its address and its token. Once, for every job.
+
+33
+00:01:16,846 --> 00:01:19,247
+Two: a step called with Sonar cube env.
+
+34
+00:01:19,247 --> 00:01:22,018
+It gives your scan the address and the token,
+
+35
+00:01:22,018 --> 00:01:24,419
+without you pasting them in the script.
+
+36
+00:01:24,969 --> 00:01:27,593
+Three: a step called wait for quality gate.
+
+37
+00:01:27,593 --> 00:01:28,996
+It pauses the pipeline,
+
+38
+00:01:28,996 --> 00:01:30,949
+asks the server for the verdict,
+
+39
+00:01:30,949 --> 00:01:33,268
+and fails the build if the gate fails.
+
+40
+00:01:33,818 --> 00:01:38,703
+The token stays in the Jenkins credentials. It never appears in your pipeline file.
+
+41
+00:01:40,253 --> 00:01:41,640
+How do the pieces talk?
+
+42
+00:01:42,190 --> 00:01:46,990
+Step one: the scan runs inside the build, and uploads its report to the server.
+
+43
+00:01:47,540 --> 00:01:50,513
+Step two: the server does not answer right away.
+
+44
+00:01:50,513 --> 00:01:53,052
+It analyses the report in the background.
+
+45
+00:01:53,052 --> 00:01:54,601
+This takes a few seconds.
+
+46
+00:01:55,151 --> 00:01:57,081
+Step three: when it is finished,
+
+47
+00:01:57,081 --> 00:01:59,615
+the server calls a web address on Jenkins.
+
+48
+00:01:59,615 --> 00:02:01,123
+That call is the webhook.
+
+49
+00:02:01,123 --> 00:02:02,511
+It carries the verdict.
+
+50
+00:02:03,061 --> 00:02:05,472
+Step four: the wait step receives it.
+
+51
+00:02:05,472 --> 00:02:05,928
+Passed,
+
+52
+00:02:05,928 --> 00:02:07,296
+the pipeline goes on.
+
+53
+00:02:07,296 --> 00:02:07,752
+Failed,
+
+54
+00:02:07,752 --> 00:02:09,056
+the pipeline aborts.
+
+55
+00:02:09,606 --> 00:02:11,406
+So the webhook is the bridge.
+
+56
+00:02:11,406 --> 00:02:12,089
+Without it,
+
+57
+00:02:12,089 --> 00:02:13,330
+the wait step waits,
+
+58
+00:02:13,330 --> 00:02:14,510
+until it times out.
+
+59
+00:02:14,510 --> 00:02:15,814
+Always add a timeout.
+
+60
+00:02:17,364 --> 00:02:18,485
+Let us build it.
+
+61
+00:02:18,485 --> 00:02:20,027
+We sign in to Jenkins.
+
+62
+00:02:20,027 --> 00:02:21,078
+Manage Jenkins,
+
+63
+00:02:21,078 --> 00:02:21,638
+Plugins,
+
+64
+00:02:21,638 --> 00:02:22,900
+Installed plugins.
+
+65
+00:02:22,900 --> 00:02:24,301
+We search for sonar.
+
+66
+00:02:24,301 --> 00:02:27,804
+The SonarQube Scanner plugin is already installed.
+
+67
+00:02:27,804 --> 00:02:30,327
+I installed it before the recording,
+
+68
+00:02:30,327 --> 00:02:32,499
+from the Jenkins update centre,
+
+69
+00:02:32,499 --> 00:02:34,111
+then restarted Jenkins.
+
+70
+00:02:34,661 --> 00:02:36,578
+Now we register the server.
+
+71
+00:02:36,578 --> 00:02:37,643
+Manage Jenkins,
+
+72
+00:02:37,643 --> 00:02:38,495
+then System.
+
+73
+00:02:38,495 --> 00:02:40,624
+We scroll down to the section,
+
+74
+00:02:40,624 --> 00:02:41,902
+SonarQube servers.
+
+75
+00:02:41,902 --> 00:02:43,535
+We click Add SonarQube.
+
+76
+00:03:02,885 --> 00:03:03,804
+Three fields.
+
+77
+00:03:03,804 --> 00:03:04,935
+The name: sonar.
+
+78
+00:03:04,935 --> 00:03:07,692
+This is the name the pipeline will use.
+
+79
+00:03:07,692 --> 00:03:09,813
+The server address: localhost,
+
+80
+00:03:09,813 --> 00:03:11,156
+port nine thousand.
+
+81
+00:03:11,156 --> 00:03:12,145
+And the token,
+
+82
+00:03:12,145 --> 00:03:14,195
+from the Jenkins credentials.
+
+83
+00:03:14,195 --> 00:03:15,397
+Never typed here.
+
+84
+00:03:15,397 --> 00:03:15,963
+We save.
+
+85
+00:03:22,813 --> 00:03:24,614
+Second piece: the webhook.
+
+86
+00:03:24,614 --> 00:03:26,346
+We sign in to Sonar cube.
+
+87
+00:03:26,346 --> 00:03:27,385
+Administration,
+
+88
+00:03:27,385 --> 00:03:28,355
+Configuration,
+
+89
+00:03:28,355 --> 00:03:28,979
+Webhooks.
+
+90
+00:03:28,979 --> 00:03:30,087
+We click Create.
+
+91
+00:03:39,837 --> 00:03:41,081
+The name: jenkins.
+
+92
+00:03:41,081 --> 00:03:42,809
+The address: our Jenkins,
+
+93
+00:03:42,809 --> 00:03:43,224
+slash,
+
+94
+00:03:43,224 --> 00:03:44,813
+sonarqube dash webhook,
+
+95
+00:03:44,813 --> 00:03:45,228
+slash.
+
+96
+00:03:45,228 --> 00:03:47,232
+Do not forget the last slash.
+
+97
+00:03:47,232 --> 00:03:48,131
+We create it.
+
+98
+00:03:48,131 --> 00:03:51,379
+Now the server knows where to send the verdict.
+
+99
+00:03:51,929 --> 00:03:53,880
+Third piece: the pipeline file.
+
+100
+00:03:53,880 --> 00:03:54,887
+In the terminal.
+
+101
+00:03:54,887 --> 00:03:56,712
+We are in the project folder.
+
+102
+00:03:56,712 --> 00:03:58,222
+We show the Jenkinsfile.
+
+103
+00:03:58,772 --> 00:03:59,682
+Three stages.
+
+104
+00:03:59,682 --> 00:04:00,732
+Build and test,
+
+105
+00:04:00,732 --> 00:04:02,481
+with the coverage report.
+
+106
+00:04:02,481 --> 00:04:02,831
+Scan,
+
+107
+00:04:02,831 --> 00:04:04,721
+inside with Sonar cube env,
+
+108
+00:04:04,721 --> 00:04:05,561
+named sonar.
+
+109
+00:04:05,561 --> 00:04:08,361
+And Quality gate: wait for quality gate,
+
+110
+00:04:08,361 --> 00:04:09,760
+abort pipeline true,
+
+111
+00:04:09,760 --> 00:04:12,000
+with a timeout of three minutes.
+
+112
+00:04:12,000 --> 00:04:15,290
+The scan line also skips the two browser files,
+
+113
+00:04:15,290 --> 00:04:16,969
+to keep this demo quick.
+
+114
+00:04:17,519 --> 00:04:20,933
+The job already exists. We open it, and click Build Now.
+
+115
+00:04:26,483 --> 00:04:27,542
+Now the console.
+
+116
+00:04:27,542 --> 00:04:29,530
+Jenkins shows every line live.
+
+117
+00:04:29,530 --> 00:04:32,444
+Maven builds the project and runs the tests,
+
+118
+00:04:32,444 --> 00:04:35,955
+and the coverage tool records which lines they touch.
+
+119
+00:04:36,505 --> 00:04:37,366
+While it runs,
+
+120
+00:04:37,366 --> 00:04:39,519
+remember the gate from last lesson.
+
+121
+00:04:39,519 --> 00:04:42,225
+Our project has fifty-nine percent coverage.
+
+122
+00:04:42,225 --> 00:04:43,701
+The rule says sixty-two.
+
+123
+00:04:43,701 --> 00:04:44,931
+So this should fail.
+
+124
+00:04:45,481 --> 00:04:47,017
+Build and test is done,
+
+125
+00:04:47,017 --> 00:04:48,552
+and all the tests pass.
+
+126
+00:04:48,552 --> 00:04:50,088
+Next is the Scan stage.
+
+127
+00:04:50,088 --> 00:04:52,958
+It is the same scan as in the last lessons,
+
+128
+00:04:52,958 --> 00:04:54,561
+but now Jenkins runs it,
+
+129
+00:04:54,561 --> 00:04:58,900
+and passes in the address and the token from the server we saved.
+
+130
+00:04:59,450 --> 00:05:01,281
+No password is typed anywhere.
+
+131
+00:05:01,281 --> 00:05:03,905
+Jenkins keeps the token in its credentials,
+
+132
+00:05:03,905 --> 00:05:06,895
+and hands it to the scanner as a hidden variable.
+
+133
+00:05:07,445 --> 00:05:09,192
+The scanner reads the files,
+
+134
+00:05:09,192 --> 00:05:10,190
+runs its checks,
+
+135
+00:05:10,190 --> 00:05:11,625
+and uploads one report.
+
+136
+00:05:11,625 --> 00:05:13,933
+Then Sonar cube computes the verdict,
+
+137
+00:05:13,933 --> 00:05:15,680
+and sends it to our webhook.
+
+138
+00:05:21,230 --> 00:05:25,987
+Failed. The last stage is red. Let us look at the end of the console, to see why.
+
+139
+00:05:26,537 --> 00:05:26,889
+Here.
+
+140
+00:05:26,889 --> 00:05:28,227
+The task completed.
+
+141
+00:05:28,227 --> 00:05:29,353
+Quality gate is,
+
+142
+00:05:29,353 --> 00:05:30,057
+E R R O R.
+
+143
+00:05:30,057 --> 00:05:34,561
+And the last line: Pipeline aborted due to quality gate failure.
+
+144
+00:05:34,561 --> 00:05:35,828
+The build stopped,
+
+145
+00:05:35,828 --> 00:05:37,588
+because the gate said no.
+
+146
+00:05:38,138 --> 00:05:41,594
+In Sonar cube, the same story. Quality gate: Failed.
+
+147
+00:05:44,644 --> 00:05:45,500
+Quick question.
+
+148
+00:05:45,500 --> 00:05:48,066
+What happens if the webhook address is wrong?
+
+149
+00:05:48,066 --> 00:05:48,979
+Pause the video,
+
+150
+00:05:48,979 --> 00:05:50,063
+and think about it.
+
+151
+00:06:00,613 --> 00:06:03,808
+The answer: Jenkins waits for the full three minutes,
+
+152
+00:06:03,808 --> 00:06:05,858
+because the verdict never arrives,
+
+153
+00:06:05,858 --> 00:06:08,089
+and then the timeout stops the build.
+
+154
+00:06:08,089 --> 00:06:09,958
+That is why we add the timeout.
+
+155
+00:06:09,958 --> 00:06:14,842
+And abort pipeline true is the part that turns a failed gate into a failed build.
+
+156
+00:06:15,392 --> 00:06:16,239
+Now we fix it,
+
+157
+00:06:16,239 --> 00:06:17,086
+the right way,
+
+158
+00:06:17,086 --> 00:06:17,751
+with tests.
+
+159
+00:06:17,751 --> 00:06:19,022
+Back in the terminal.
+
+160
+00:06:19,022 --> 00:06:21,684
+We create a test class for the pricing code,
+
+161
+00:06:21,684 --> 00:06:22,288
+as before.
+
+162
+00:06:22,288 --> 00:06:23,317
+And we commit it,
+
+163
+00:06:23,317 --> 00:06:23,861
+with git.
+
+164
+00:06:30,111 --> 00:06:33,525
+The commit is in. We go back to the job, and click Build Now.
+
+165
+00:06:39,275 --> 00:06:44,267
+Again, three stages. The tests now include the new ones, so the coverage goes up.
+
+166
+00:06:44,817 --> 00:06:46,550
+We watch the console again.
+
+167
+00:06:46,550 --> 00:06:47,898
+Maven runs the tests,
+
+168
+00:06:47,898 --> 00:06:49,695
+now with the new test class,
+
+169
+00:06:49,695 --> 00:06:52,198
+and the coverage report is built again.
+
+170
+00:06:52,748 --> 00:06:54,878
+Then the scan uploads the new report,
+
+171
+00:06:54,878 --> 00:06:58,103
+and Sonar cube compares the new coverage with sixty-two.
+
+172
+00:06:58,653 --> 00:06:59,823
+Another question.
+
+173
+00:06:59,823 --> 00:07:01,612
+Who decides the sixty-two?
+
+174
+00:07:01,612 --> 00:07:02,232
+A person,
+
+175
+00:07:02,232 --> 00:07:03,196
+in Sonar cube,
+
+176
+00:07:03,196 --> 00:07:04,228
+not in Jenkins.
+
+177
+00:07:04,228 --> 00:07:06,568
+Jenkins only asks for the verdict,
+
+178
+00:07:06,568 --> 00:07:07,463
+and obeys it.
+
+179
+00:07:08,013 --> 00:07:10,136
+Let us recall the three pieces.
+
+180
+00:07:10,136 --> 00:07:11,231
+One: the server,
+
+181
+00:07:11,231 --> 00:07:13,832
+saved in Jenkins under the name sonar.
+
+182
+00:07:13,832 --> 00:07:14,996
+Two: the webhook,
+
+183
+00:07:14,996 --> 00:07:15,954
+in Sonar cube,
+
+184
+00:07:15,954 --> 00:07:17,666
+pointing back to Jenkins.
+
+185
+00:07:17,666 --> 00:07:19,035
+Three: the pipeline,
+
+186
+00:07:19,035 --> 00:07:21,773
+with the scan and the wait for the gate.
+
+187
+00:07:26,323 --> 00:07:30,291
+Green. All three stages. The gate passed, and the pipeline went on.
+
+188
+00:07:30,841 --> 00:07:32,804
+Notice what we did not change.
+
+189
+00:07:32,804 --> 00:07:33,590
+Not Jenkins,
+
+190
+00:07:33,590 --> 00:07:34,571
+not Sonar cube.
+
+191
+00:07:34,571 --> 00:07:35,487
+Only the code.
+
+192
+00:07:35,487 --> 00:07:38,039
+The gate and the pipeline are the same.
+
+193
+00:07:38,039 --> 00:07:43,667
+That is the point of putting the gate in the pipeline: the rule is applied every time,
+
+194
+00:07:43,667 --> 00:07:45,433
+and nobody has to remember.
+
+195
+00:07:45,983 --> 00:07:49,823
+The console agrees. Quality gate is, O K. Finished: success.
+
+196
+00:07:51,573 --> 00:07:52,584
+In a real team,
+
+197
+00:07:52,584 --> 00:07:56,355
+a red build like the first one would also notify people,
+
+198
+00:07:56,355 --> 00:07:57,501
+by email or chat.
+
+199
+00:07:57,501 --> 00:07:59,993
+The developer sees it within minutes,
+
+200
+00:07:59,993 --> 00:08:02,283
+and fixes it before anyone merges.
+
+201
+00:08:02,833 --> 00:08:05,585
+Finally, the proof. Lab check. Four of four.
+
+202
+00:08:06,135 --> 00:08:07,156
+Jenkins answers.
+
+203
+00:08:07,156 --> 00:08:08,368
+The webhook exists.
+
+204
+00:08:08,368 --> 00:08:10,282
+The build waited for the gate.
+
+205
+00:08:10,282 --> 00:08:11,558
+And the gate passed.
+
+206
+00:08:11,558 --> 00:08:13,217
+The results are in a file.
+
+207
+00:08:14,767 --> 00:08:15,919
+Five mistakes.
+
+208
+00:08:16,469 --> 00:08:18,172
+One: forgetting the webhook.
+
+209
+00:08:18,172 --> 00:08:19,328
+The pipeline hangs,
+
+210
+00:08:19,328 --> 00:08:20,423
+until the timeout.
+
+211
+00:08:20,423 --> 00:08:21,153
+If it hangs,
+
+212
+00:08:21,153 --> 00:08:22,613
+check the webhook first.
+
+213
+00:08:23,163 --> 00:08:25,056
+Two: a wrong webhook address.
+
+214
+00:08:25,056 --> 00:08:26,948
+Missing the slash at the end,
+
+215
+00:08:26,948 --> 00:08:28,123
+or the wrong port.
+
+216
+00:08:28,123 --> 00:08:30,407
+Sonar cube shows the last delivery,
+
+217
+00:08:30,407 --> 00:08:31,452
+with its status.
+
+218
+00:08:31,452 --> 00:08:31,974
+Read it.
+
+219
+00:08:32,524 --> 00:08:38,070
+Three: no timeout. A lost webhook means a build that waits for ever, and blocks an agent.
+
+220
+00:08:38,620 --> 00:08:43,954
+Four: putting the token in the Jenkinsfile. Use the credential, in the Jenkins settings.
+
+221
+00:08:44,504 --> 00:08:47,793
+Five: the wait step in the same stage as the scan,
+
+222
+00:08:47,793 --> 00:08:50,753
+holding a build agent while the server works.
+
+223
+00:08:50,753 --> 00:08:51,739
+Fine for a lab.
+
+224
+00:08:51,739 --> 00:08:52,857
+In a busy system,
+
+225
+00:08:52,857 --> 00:08:54,436
+wait on the server side,
+
+226
+00:08:54,436 --> 00:08:55,554
+without an agent.
+
+227
+00:08:57,104 --> 00:08:59,899
+Where to find the lab. Pause here, and write it down.
+
+228
+00:09:00,449 --> 00:09:01,913
+One: the repository,
+
+229
+00:09:01,913 --> 00:09:06,233
+git hub dot com slash it dash waves slash dev ops dash A I,
+
+230
+00:09:06,233 --> 00:09:08,577
+in the folder academy slash lab.
+
+231
+00:09:09,127 --> 00:09:15,271
+Two: the files, lab one sixty-nine dot S H, and shortcuts one sixty-nine dot S H.
+
+232
+00:09:15,821 --> 00:09:17,647
+Three: load the short names,
+
+233
+00:09:17,647 --> 00:09:20,582
+with source shortcuts one sixty-nine dot S H.
+
+234
+00:09:20,582 --> 00:09:22,669
+Then lab check tests your setup.
+
+235
+00:09:23,219 --> 00:09:24,803
+Four: set Jenkins auth,
+
+236
+00:09:24,803 --> 00:09:25,904
+and Sonar token,
+
+237
+00:09:25,904 --> 00:09:26,800
+as variables,
+
+238
+00:09:26,800 --> 00:09:28,108
+to your own values.
+
+239
+00:09:28,108 --> 00:09:31,069
+Never put them in a file in the repository.
+
+240
+00:09:31,619 --> 00:09:33,178
+Five: install the plugin,
+
+241
+00:09:33,178 --> 00:09:34,424
+register the server,
+
+242
+00:09:34,424 --> 00:09:35,421
+add the webhook,
+
+243
+00:09:35,421 --> 00:09:36,045
+and build.
+
+244
+00:09:36,045 --> 00:09:36,855
+Make it fail,
+
+245
+00:09:36,855 --> 00:09:37,977
+then make it pass.
+
+246
+00:09:38,527 --> 00:09:40,169
+The link is in the description.
+
+247
+00:09:41,719 --> 00:09:42,594
+Your turn.
+
+248
+00:09:43,144 --> 00:09:48,477
+One: install the SonarQube Scanner plugin in your Jenkins, and register your server.
+
+249
+00:09:49,027 --> 00:09:52,590
+Two: add the webhook in Sonar cube, with the slash at the end.
+
+250
+00:09:53,140 --> 00:09:58,217
+Three: add the two stages to your Jenkinsfile, and run it. Does the gate stop the build?
+
+251
+00:09:58,767 --> 00:10:02,116
+Four: fix the code, and run it again, until it is green.
+
+252
+00:10:02,666 --> 00:10:05,312
+Five: run lab check, and get four of four.
+
+253
+00:10:05,862 --> 00:10:07,590
+Pause the video, and do it now.
+
+254
+00:10:23,140 --> 00:10:24,015
+Quick check.
+
+255
+00:10:24,565 --> 00:10:25,930
+What does the webhook do?
+
+256
+00:10:26,480 --> 00:10:28,037
+What happens if it is missing?
+
+257
+00:10:28,587 --> 00:10:30,699
+Why use a timeout around the wait step?
+
+258
+00:10:31,249 --> 00:10:32,636
+Where does the token live?
+
+259
+00:10:33,186 --> 00:10:39,053
+Objective covered: M C eighteen, objective six. Scanning and the gate in a pipeline.
+
+260
+00:10:39,603 --> 00:10:41,672
+Pause the video, and answer out loud.
+
+261
+00:10:52,222 --> 00:10:56,638
+Next: tokens and permissions, who may scan, and who may change the gate.
+
+262
+00:10:57,188 --> 00:11:00,516
+If this helped, like, share and subscribe, so you do not miss it.

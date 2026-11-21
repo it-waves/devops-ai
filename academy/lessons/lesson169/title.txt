@@ -1,0 +1,1 @@
+Jenkins + SonarQube: Scan and Quality Gate in a Pipeline, Fail It, Fix It (Live) | Lesson 169
