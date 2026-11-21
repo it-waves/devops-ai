@@ -1,0 +1,25 @@
+Lesson 167 of the DevOps Engineering Bootcamp, SonarQube domain. Read a real SonarQube report and learn what each number means. You learn the six measures (bugs, vulnerabilities, security hotspots, code smells, duplication and coverage), how to decide what to fix first (severity, type, new code), and why coverage is not the same as quality. Then you watch it live: add JaCoCo to the Maven scan to get a coverage report, read the Summary page, open a vulnerability and its rule, find the files with the least coverage, fix the weak hash in the code with vim, scan again and see the number go down.
+
+Chapters
+0:00 Read the report
+0:22 What to expect
+0:45 The six measures
+1:20 What to fix first
+1:49 Live: read, fix, scan again
+6:44 Common mistakes
+7:11 Where to find the lab
+7:57 Your turn
+8:35 Quick check and what is next
+
+Objectives covered: MC18-O04. Interpret SonarQube results.
+
+Lab files: github.com/it-waves/devops-ai, in academy/lab (lab167.sh and shortcuts167.sh). "scan" runs the Maven command with JaCoCo and "lab check" runs four checks (token valid, coverage reported, issues read, two analyses so you can compare) and saves results167.txt. Set SONAR_TOKEN to your own user token and never store it in a file in a repository. Use your own machine only.
+
+Honest notes: the terminal and browser are a real continuous recording of SonarQube Community Build 26.11 analysing the CloudCart project with the Sonar Maven plugin and JaCoCo 0.8.12. The browser is zoomed out so all cards fit on screen. The token and password belong to a throwaway lab server. The terminal output is filtered with grep to show only the important lines. The fix replaces MD5 with SHA-256 in one line of the lab code. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, measures, priorities, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: Scan a Maven Project with SonarQube: Token, One Command, Results (Live) | Lesson 166 https://youtu.be/7oCtMJPR1No
+Next: the quality gate, and how it can fail a build.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #sonarqube #jacoco #codecoverage #codequality #maven #devopsbootcamp #learnsonarqube

@@ -1,0 +1,819 @@
+1
+00:00:00,500 --> 00:00:01,716
+Your scan finished.
+
+2
+00:00:01,716 --> 00:00:03,316
+The server shows numbers.
+
+3
+00:00:03,316 --> 00:00:03,636
+Bugs.
+
+4
+00:00:03,636 --> 00:00:04,660
+Vulnerabilities.
+
+5
+00:00:04,660 --> 00:00:05,236
+Coverage.
+
+6
+00:00:05,236 --> 00:00:07,092
+But what do they really mean?
+
+7
+00:00:07,642 --> 00:00:09,263
+And which one should you fix first?
+
+8
+00:00:09,813 --> 00:00:13,675
+Today we read a real Sonar cube report, one measure at a time.
+
+9
+00:00:14,225 --> 00:00:15,986
+We add the coverage report.
+
+10
+00:00:15,986 --> 00:00:17,356
+We open a real issue.
+
+11
+00:00:17,356 --> 00:00:18,334
+And we fix one,
+
+12
+00:00:18,334 --> 00:00:19,313
+and scan again,
+
+13
+00:00:19,313 --> 00:00:21,009
+to see the number go down.
+
+14
+00:00:22,559 --> 00:00:23,988
+Here is what to expect.
+
+15
+00:00:24,538 --> 00:00:27,354
+One: the six measures, and what each one tells you.
+
+16
+00:00:27,904 --> 00:00:29,974
+Two: how to decide what to fix first.
+
+17
+00:00:30,524 --> 00:00:31,818
+Three: a live demo.
+
+18
+00:00:31,818 --> 00:00:33,861
+We add coverage with Ja Co Co,
+
+19
+00:00:33,861 --> 00:00:35,155
+read the dashboard,
+
+20
+00:00:35,155 --> 00:00:36,108
+open an issue,
+
+21
+00:00:36,108 --> 00:00:36,585
+fix it,
+
+22
+00:00:36,585 --> 00:00:37,606
+and scan again.
+
+23
+00:00:38,156 --> 00:00:40,780
+Four: the common mistakes, and the lab files.
+
+24
+00:00:41,330 --> 00:00:44,253
+This is objective four of the Sonar cube domain.
+
+25
+00:00:45,803 --> 00:00:46,934
+The six measures.
+
+26
+00:00:47,484 --> 00:00:52,134
+Bugs. Code that is probably wrong, and can break at run time. Fix these first.
+
+27
+00:00:52,684 --> 00:00:56,610
+Vulnerabilities. Code that an attacker could use. Fix these next.
+
+28
+00:00:57,160 --> 00:00:58,363
+Security hotspots.
+
+29
+00:00:58,363 --> 00:01:00,035
+Code that might be risky.
+
+30
+00:01:00,035 --> 00:01:01,640
+A person must review it,
+
+31
+00:01:01,640 --> 00:01:02,376
+and decide.
+
+32
+00:01:02,376 --> 00:01:03,847
+In the newest version,
+
+33
+00:01:03,847 --> 00:01:06,589
+they are merged into the security issues.
+
+34
+00:01:07,139 --> 00:01:12,174
+Code smells. Code that works, but is hard to read or change. They add up, slowly.
+
+35
+00:01:12,724 --> 00:01:13,540
+Duplication.
+
+36
+00:01:13,540 --> 00:01:14,492
+The same code,
+
+37
+00:01:14,492 --> 00:01:15,988
+copied in many places.
+
+38
+00:01:15,988 --> 00:01:16,600
+Coverage.
+
+39
+00:01:16,600 --> 00:01:19,252
+The share of lines that your tests run.
+
+40
+00:01:20,802 --> 00:01:22,423
+Now, what do you fix first?
+
+41
+00:01:22,973 --> 00:01:27,475
+Use severity. Blocker and critical first. Then major. Minor last.
+
+42
+00:01:28,025 --> 00:01:31,011
+Use type. Bugs and vulnerabilities before smells.
+
+43
+00:01:31,561 --> 00:01:36,041
+Look at new code. A team should not make the report worse. Fix what you touch.
+
+44
+00:01:36,591 --> 00:01:38,307
+And coverage is not quality.
+
+45
+00:01:38,307 --> 00:01:41,247
+A high number only says the tests ran the lines.
+
+46
+00:01:41,247 --> 00:01:43,759
+It does not say the tests check anything.
+
+47
+00:01:44,309 --> 00:01:48,235
+The loop is simple: read, pick one, fix it, scan again, and compare.
+
+48
+00:01:49,785 --> 00:01:51,690
+Let us start in the terminal,
+
+49
+00:01:51,690 --> 00:01:53,331
+in the Cloud Cart folder.
+
+50
+00:01:53,331 --> 00:01:56,418
+The server already has our scan from last time.
+
+51
+00:01:56,418 --> 00:01:57,863
+But coverage was zero.
+
+52
+00:01:57,863 --> 00:01:59,833
+Does the pom mention Ja Co Co?
+
+53
+00:01:59,833 --> 00:02:01,212
+We count the matches.
+
+54
+00:02:01,212 --> 00:02:01,541
+Zero.
+
+55
+00:02:01,541 --> 00:02:05,678
+The token from last time is already in an environment variable.
+
+56
+00:02:07,728 --> 00:02:10,742
+Ja Co Co is the tool that measures coverage.
+
+57
+00:02:10,742 --> 00:02:12,454
+It watches the tests run,
+
+58
+00:02:12,454 --> 00:02:14,988
+and records which lines they touched.
+
+59
+00:02:14,988 --> 00:02:16,563
+We do not edit the pom.
+
+60
+00:02:16,563 --> 00:02:19,440
+We add Ja Co Co to the same Maven command.
+
+61
+00:02:19,440 --> 00:02:21,426
+One goal comes before verify,
+
+62
+00:02:21,426 --> 00:02:22,796
+to attach the agent.
+
+63
+00:02:22,796 --> 00:02:23,891
+One comes after,
+
+64
+00:02:23,891 --> 00:02:25,261
+to write the report.
+
+65
+00:02:25,261 --> 00:02:27,590
+Sonar finds that report by itself.
+
+66
+00:02:28,140 --> 00:02:29,231
+Watch the output.
+
+67
+00:02:29,231 --> 00:02:30,514
+First the tests run,
+
+68
+00:02:30,514 --> 00:02:32,632
+with the Ja Co Co agent attached.
+
+69
+00:02:32,632 --> 00:02:33,723
+Thirty-two tests,
+
+70
+00:02:33,723 --> 00:02:35,071
+and all of them pass.
+
+71
+00:02:35,071 --> 00:02:37,381
+Then the coverage report is written.
+
+72
+00:02:37,381 --> 00:02:39,307
+Notice the order: tests first,
+
+73
+00:02:39,307 --> 00:02:40,205
+then coverage,
+
+74
+00:02:40,205 --> 00:02:41,104
+then the scan.
+
+75
+00:02:41,104 --> 00:02:44,441
+The scan needs the coverage report to exist already.
+
+76
+00:02:44,441 --> 00:02:47,008
+Then the Sonar sensor reads that report,
+
+77
+00:02:47,008 --> 00:02:49,383
+and uploads everything to the server.
+
+78
+00:02:49,383 --> 00:02:51,052
+This takes under a minute.
+
+79
+00:03:08,602 --> 00:03:10,000
+Analysis successful.
+
+80
+00:03:10,000 --> 00:03:11,119
+Now the browser.
+
+81
+00:03:11,119 --> 00:03:13,078
+The server asks for a login.
+
+82
+00:03:13,078 --> 00:03:15,526
+We log in with the user name admin,
+
+83
+00:03:15,526 --> 00:03:16,994
+and the lab password,
+
+84
+00:03:16,994 --> 00:03:18,393
+which shows as dots.
+
+85
+00:03:18,393 --> 00:03:20,072
+Then we open Cloud Cart.
+
+86
+00:03:20,072 --> 00:03:22,170
+Then we open the Summary page.
+
+87
+00:03:36,720 --> 00:03:38,047
+On the Summary page,
+
+88
+00:03:38,047 --> 00:03:40,105
+we choose the Overall Code tab.
+
+89
+00:03:40,105 --> 00:03:41,964
+Security: three open issues.
+
+90
+00:03:41,964 --> 00:03:43,690
+These are vulnerabilities,
+
+91
+00:03:43,690 --> 00:03:46,213
+weak spots that an attacker could use.
+
+92
+00:03:48,563 --> 00:03:49,389
+Reliability.
+
+93
+00:03:49,389 --> 00:03:50,696
+Eleven open issues.
+
+94
+00:03:50,696 --> 00:03:54,963
+Most of them are bugs: code that will probably behave wrongly.
+
+95
+00:03:55,513 --> 00:03:56,559
+Maintainability.
+
+96
+00:03:56,559 --> 00:03:56,885
+Zero.
+
+97
+00:03:56,885 --> 00:03:57,931
+In this version,
+
+98
+00:03:57,931 --> 00:04:01,460
+each issue is counted under the quality it hurts most.
+
+99
+00:04:01,460 --> 00:04:04,793
+So there is no purely maintainability problem here.
+
+100
+00:04:05,343 --> 00:04:06,265
+Now coverage.
+
+101
+00:04:06,265 --> 00:04:08,607
+Last lesson it said zero percent.
+
+102
+00:04:08,607 --> 00:04:10,806
+Now it says fifty-nine percent,
+
+103
+00:04:10,806 --> 00:04:13,573
+on four hundred and two lines to cover.
+
+104
+00:04:13,573 --> 00:04:15,063
+Ja Co Co measured it.
+
+105
+00:04:15,063 --> 00:04:15,843
+Next to it,
+
+106
+00:04:15,843 --> 00:04:17,759
+duplications: zero percent.
+
+107
+00:04:18,309 --> 00:04:18,653
+Last,
+
+108
+00:04:18,653 --> 00:04:19,892
+security hotspots.
+
+109
+00:04:19,892 --> 00:04:21,613
+The card says deprecated.
+
+110
+00:04:21,613 --> 00:04:22,715
+In this version,
+
+111
+00:04:22,715 --> 00:04:25,331
+hotspots are shown as security issues,
+
+112
+00:04:25,331 --> 00:04:27,052
+the ones we just counted.
+
+113
+00:04:27,052 --> 00:04:29,530
+So there is no separate review list.
+
+114
+00:04:30,080 --> 00:04:31,378
+Back to the numbers.
+
+115
+00:04:31,378 --> 00:04:33,650
+We click the three vulnerabilities.
+
+116
+00:04:33,650 --> 00:04:35,208
+This is the issues list,
+
+117
+00:04:35,208 --> 00:04:36,311
+filtered by type.
+
+118
+00:04:36,311 --> 00:04:37,804
+Each row has a message,
+
+119
+00:04:37,804 --> 00:04:38,259
+a file,
+
+120
+00:04:38,259 --> 00:04:39,232
+and a severity.
+
+121
+00:04:43,182 --> 00:04:46,342
+We open the critical one: a weak hash algorithm.
+
+122
+00:04:46,342 --> 00:04:47,133
+On the left,
+
+123
+00:04:47,133 --> 00:04:47,725
+the code,
+
+124
+00:04:47,725 --> 00:04:49,503
+with the exact line marked.
+
+125
+00:04:49,503 --> 00:04:50,359
+And the tabs.
+
+126
+00:04:50,359 --> 00:04:51,741
+Why is this an issue.
+
+127
+00:04:51,741 --> 00:04:52,004
+And,
+
+128
+00:04:52,004 --> 00:04:53,124
+how can I fix it.
+
+129
+00:04:55,474 --> 00:04:57,071
+The rule explains it.
+
+130
+00:04:57,071 --> 00:04:58,516
+M D five is broken.
+
+131
+00:04:58,516 --> 00:05:02,244
+Attackers can make two inputs with the same hash.
+
+132
+00:05:02,244 --> 00:05:04,754
+The fix: use S H A two fifty-six.
+
+133
+00:05:05,304 --> 00:05:06,756
+Where is coverage weak?
+
+134
+00:05:06,756 --> 00:05:08,587
+We open the coverage measure,
+
+135
+00:05:08,587 --> 00:05:09,787
+as a list of files.
+
+136
+00:05:09,787 --> 00:05:11,492
+Each file has a percentage.
+
+137
+00:05:11,492 --> 00:05:13,197
+This is where to add tests.
+
+138
+00:05:16,947 --> 00:05:18,810
+Now we fix the vulnerability.
+
+139
+00:05:18,810 --> 00:05:20,158
+Back in the terminal,
+
+140
+00:05:20,158 --> 00:05:21,700
+we open the file in vim,
+
+141
+00:05:21,700 --> 00:05:23,048
+on line twenty-three.
+
+142
+00:05:25,098 --> 00:05:28,298
+We replace M D five with S H A two fifty-six,
+
+143
+00:05:28,298 --> 00:05:30,361
+using the substitute command.
+
+144
+00:05:30,361 --> 00:05:31,925
+Then we save and quit.
+
+145
+00:05:32,475 --> 00:05:36,934
+We check the change. Line twenty-three now says S H A two fifty-six.
+
+146
+00:05:37,484 --> 00:05:41,068
+And we scan again. Same command, with the short name: scan.
+
+147
+00:05:43,018 --> 00:05:43,397
+Again,
+
+148
+00:05:43,397 --> 00:05:44,282
+the tests run,
+
+149
+00:05:44,282 --> 00:05:46,241
+the coverage report is written,
+
+150
+00:05:46,241 --> 00:05:48,326
+and the new analysis is uploaded.
+
+151
+00:05:48,326 --> 00:05:51,233
+The server will compare it with the first one.
+
+152
+00:05:51,233 --> 00:05:53,066
+Wait for analysis successful.
+
+153
+00:06:08,616 --> 00:06:09,938
+Back in the browser.
+
+154
+00:06:09,938 --> 00:06:11,722
+We reload the Summary page,
+
+155
+00:06:11,722 --> 00:06:12,780
+on overall code.
+
+156
+00:06:12,780 --> 00:06:14,498
+Security: two open issues.
+
+157
+00:06:14,498 --> 00:06:15,357
+It was three.
+
+158
+00:06:15,357 --> 00:06:16,481
+The number moved,
+
+159
+00:06:16,481 --> 00:06:18,199
+because we fixed the code,
+
+160
+00:06:18,199 --> 00:06:19,389
+and scanned again.
+
+161
+00:06:26,939 --> 00:06:27,512
+Finally,
+
+162
+00:06:27,512 --> 00:06:29,446
+prove it from the terminal.
+
+163
+00:06:29,446 --> 00:06:30,162
+Lab check.
+
+164
+00:06:30,162 --> 00:06:31,021
+Token valid.
+
+165
+00:06:31,021 --> 00:06:32,310
+Coverage reported.
+
+166
+00:06:32,310 --> 00:06:33,170
+Issues read.
+
+167
+00:06:33,170 --> 00:06:34,387
+And two analyses,
+
+168
+00:06:34,387 --> 00:06:36,966
+so you can compare before and after.
+
+169
+00:06:39,516 --> 00:06:43,441
+Four of four. The results are saved in a file. That is your evidence.
+
+170
+00:06:44,991 --> 00:06:46,143
+Five mistakes.
+
+171
+00:06:46,693 --> 00:06:50,320
+One: forgetting the coverage report. Then coverage stays empty.
+
+172
+00:06:50,870 --> 00:06:55,883
+Two: chasing a high coverage number. Tests must check results, not just run lines.
+
+173
+00:06:56,433 --> 00:07:00,486
+Three: fixing smells first, and leaving the bugs and vulnerabilities.
+
+174
+00:07:01,036 --> 00:07:05,303
+Four: marking an issue as false positive, just to make the number go down.
+
+175
+00:07:05,853 --> 00:07:10,461
+Five: not scanning again after a fix. The server only knows what you upload.
+
+176
+00:07:12,011 --> 00:07:14,806
+Where to find the lab. Pause here, and write it down.
+
+177
+00:07:15,356 --> 00:07:16,820
+One: the repository,
+
+178
+00:07:16,820 --> 00:07:21,140
+git hub dot com slash it dash waves slash dev ops dash A I,
+
+179
+00:07:21,140 --> 00:07:23,484
+in the folder academy slash lab.
+
+180
+00:07:24,034 --> 00:07:30,455
+Two: the files, lab one sixty-seven dot S H, and shortcuts one sixty-seven dot S H.
+
+181
+00:07:31,005 --> 00:07:32,962
+Three: load the short names,
+
+182
+00:07:32,962 --> 00:07:36,177
+with source shortcuts one sixty-seven dot S H.
+
+183
+00:07:36,177 --> 00:07:39,462
+Then scan runs the Maven command with Ja Co Co,
+
+184
+00:07:39,462 --> 00:07:41,629
+and lab check tests the result.
+
+185
+00:07:42,179 --> 00:07:44,592
+Four: set the variable Sonar token,
+
+186
+00:07:44,592 --> 00:07:46,178
+to your own user token.
+
+187
+00:07:46,178 --> 00:07:49,006
+Never put it in a file in the repository.
+
+188
+00:07:49,556 --> 00:07:54,377
+Five: scan, fix one issue, scan again. Then lab check needs two analyses.
+
+189
+00:07:54,927 --> 00:07:56,570
+The link is in the description.
+
+190
+00:07:58,120 --> 00:07:58,995
+Your turn.
+
+191
+00:07:59,545 --> 00:08:03,577
+One: scan your project with Ja Co Co, and find the coverage number.
+
+192
+00:08:04,127 --> 00:08:08,073
+Two: open the vulnerabilities, and read one rule. Why is it an issue?
+
+193
+00:08:08,623 --> 00:08:11,183
+Three: find the file with the lowest coverage.
+
+194
+00:08:11,733 --> 00:08:15,019
+Four: fix one issue, scan again, and compare the numbers.
+
+195
+00:08:15,569 --> 00:08:18,214
+Five: run lab check, and get four of four.
+
+196
+00:08:18,764 --> 00:08:20,492
+Pause the video, and do it now.
+
+197
+00:08:36,042 --> 00:08:36,917
+Quick check.
+
+198
+00:08:37,467 --> 00:08:39,877
+Which two types do you fix before code smells?
+
+199
+00:08:40,427 --> 00:08:42,091
+What does coverage really measure?
+
+200
+00:08:42,641 --> 00:08:44,369
+Why scan again after a fix?
+
+201
+00:08:44,919 --> 00:08:46,541
+What is a security hotspot?
+
+202
+00:08:47,091 --> 00:08:51,933
+Objective covered: M C eighteen, objective four. Interpret the results.
+
+203
+00:08:52,483 --> 00:08:54,553
+Pause the video, and answer out loud.
+
+204
+00:09:05,103 --> 00:09:08,047
+Next: the quality gate, and how it can fail a build.
+
+205
+00:09:08,597 --> 00:09:11,925
+If this helped, like, share and subscribe, so you do not miss it.
