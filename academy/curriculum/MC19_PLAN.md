@@ -22,3 +22,8 @@ Next domain after MC19: MC20 GitHub Actions. CloudCart v1 lands after MC19 (CLOU
 - Wizard completion for dev: /home/claude/jenkins-lab/wiz174.py; reset174.sh = reset173 + wizard.
 - Role flow verified in UI: Edit Privileges -> Filter 'view-maven2-cloudcart' -> tick rows cloudcart-releases-* and cloudcart-snapshots-* (all actions, scoped to two repos); Filter 'view-maven2-maven-public' -> tick maven-public-read and -browse; Confirm (4 selected); Create. User form: Roles transfer list: click role name then 'Move selected to right' arrow; Create. User page shows Privileges / Security Tree preview.
 - lesson174 scaffold copied from lesson173 (head/record/jhome etc. sed 173->174); body.py, scenes.py, steps.py still L173 content and must be rewritten.
+
+## L175 notes (Make it trustworthy, O06-O07)
+- Narrow the deployer: add/edit/read only (no delete) with a 403 proof on delete.
+- Add cloudcart repos to the maven-public group so a consumer resolves cart-core.
+- Cleanup policies, provenance, backups.
