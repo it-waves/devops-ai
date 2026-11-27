@@ -1,0 +1,25 @@
+Lesson 172 of the DevOps Engineering Bootcamp, SonarQube mastery check. Prove you can run the whole quality pipeline yourself. You build a Cloud Cart gate with a coverage rule of 62 percent, connect SonarQube to Jenkins with a web hook, and watch the pipeline FAIL because coverage is 59.1%. Then you fix it by adding a test, watch it pass, find a leaked token in the code, remove it and revoke it. The lab has seven independent checks. Seven of seven is mastery.
+
+Chapters
+0:00 Prove it. Seven checks
+0:31 What you will build
+1:00 The SonarQube domain
+1:36 The scenario
+2:15 Live: build, break, fix, prove
+8:33 Common mistakes
+9:12 Where to find the lab
+10:02 Your turn
+10:43 Recap and what is next
+
+Objectives covered: MC18 mastery evidence. Build, break, fix, prove and clean up a quality gate pipeline.
+
+Lab files: lab172.sh and shortcuts172.sh in github.com/it-waves/devops-ai under academy/lab. Run lab up, do the work, then lab check until it shows 7 of 7, then lab down.
+
+Honest notes: the browser and terminal are a real continuous recording of SonarQube Community Build 26.11 and Jenkins 2.580 analysing the CloudCart project with the Sonar Maven plugin and JaCoCo. The passwords and tokens belong to a throwaway lab server that runs only on the recording machine, and the token in the repository is a planted fake. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The plan, scenario, mistakes, lab, your-turn and recap screens are labelled illustrations, not captures. Waiting time for builds was kept real, with the narration filling it. Use your own machine only.
+
+Previous lesson: Jenkins + SonarQube Pipeline Failing? Fix 4 Real Failures Live | Lesson 171 https://youtu.be/YK2oy2dNJSA
+Next: Nexus Repository.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #jenkins #sonarqube #qualitygate #cicd #pipeline #devopsbootcamp #learnjenkins

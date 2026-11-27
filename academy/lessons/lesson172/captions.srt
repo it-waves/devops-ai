@@ -1,0 +1,1131 @@
+1
+00:00:00,500 --> 00:00:04,020
+You have learned eight things about SonarQube. But can you prove it?
+
+2
+00:00:04,570 --> 00:00:09,267
+A demo that works on a video is not the same as a skill that works for you.
+
+3
+00:00:09,267 --> 00:00:10,144
+In a real job,
+
+4
+00:00:10,144 --> 00:00:13,840
+someone will ask: is the quality gate really protecting us?
+
+5
+00:00:13,840 --> 00:00:14,341
+Show me.
+
+6
+00:00:14,891 --> 00:00:16,340
+So today is different.
+
+7
+00:00:16,340 --> 00:00:18,647
+We build one real quality pipeline,
+
+8
+00:00:18,647 --> 00:00:19,503
+from nothing,
+
+9
+00:00:19,503 --> 00:00:22,139
+and a script checks it with seven tests.
+
+10
+00:00:22,139 --> 00:00:23,194
+Each one passes,
+
+11
+00:00:23,194 --> 00:00:23,787
+or fails.
+
+12
+00:00:24,337 --> 00:00:25,215
+Seven of seven,
+
+13
+00:00:25,215 --> 00:00:27,089
+and you have mastered SonarQube.
+
+14
+00:00:27,089 --> 00:00:28,904
+Then we write down the results,
+
+15
+00:00:28,904 --> 00:00:29,841
+and we clean up.
+
+16
+00:00:31,391 --> 00:00:32,820
+Here is what to expect.
+
+17
+00:00:33,370 --> 00:00:36,229
+One: the whole SonarQube domain, on one page.
+
+18
+00:00:36,779 --> 00:00:39,062
+Two: the scenario, and the seven checks.
+
+19
+00:00:39,612 --> 00:00:40,825
+Three: a live demo,
+
+20
+00:00:40,825 --> 00:00:43,508
+in the real SonarQube and Jenkins screens,
+
+21
+00:00:43,508 --> 00:00:44,978
+and in a real terminal.
+
+22
+00:00:44,978 --> 00:00:45,744
+We build it,
+
+23
+00:00:45,744 --> 00:00:47,213
+we break it on purpose,
+
+24
+00:00:47,213 --> 00:00:47,852
+we fix it,
+
+25
+00:00:47,852 --> 00:00:48,619
+we check it,
+
+26
+00:00:48,619 --> 00:00:49,896
+we keep the results,
+
+27
+00:00:49,896 --> 00:00:50,918
+and we clean up.
+
+28
+00:00:51,468 --> 00:00:54,754
+Four: what to do when a check fails, and where to find the lab.
+
+29
+00:00:55,304 --> 00:00:58,525
+This is the mastery lesson of the SonarQube domain.
+
+30
+00:01:00,075 --> 00:01:04,491
+The SonarQube domain, on one page. Eight objectives, eight lessons.
+
+31
+00:01:05,041 --> 00:01:06,462
+One: static analysis,
+
+32
+00:01:06,462 --> 00:01:07,409
+quality gates,
+
+33
+00:01:07,409 --> 00:01:08,762
+profiles and issues.
+
+34
+00:01:08,762 --> 00:01:10,522
+Two: install a lab server,
+
+35
+00:01:10,522 --> 00:01:11,740
+and connect to it.
+
+36
+00:01:12,290 --> 00:01:14,368
+Three: scan a Maven project.
+
+37
+00:01:14,368 --> 00:01:15,555
+Four: read bugs,
+
+38
+00:01:15,555 --> 00:01:16,742
+vulnerabilities,
+
+39
+00:01:16,742 --> 00:01:17,410
+hotspots,
+
+40
+00:01:17,410 --> 00:01:19,266
+duplication and coverage.
+
+41
+00:01:19,816 --> 00:01:21,512
+Five: build a quality gate,
+
+42
+00:01:21,512 --> 00:01:22,769
+and know its limits.
+
+43
+00:01:22,769 --> 00:01:25,533
+Six: put the scan and the gate into Jenkins.
+
+44
+00:01:26,083 --> 00:01:31,480
+Seven: tokens and permissions. Eight: diagnose failures, by reading the first error.
+
+45
+00:01:32,030 --> 00:01:35,017
+Today one scenario uses the heart of all eight.
+
+46
+00:01:36,567 --> 00:01:37,436
+The scenario.
+
+47
+00:01:37,436 --> 00:01:40,243
+A CloudCart pipeline that stops weak code,
+
+48
+00:01:40,243 --> 00:01:41,178
+and proves it.
+
+49
+00:01:41,178 --> 00:01:42,047
+Seven checks,
+
+50
+00:01:42,047 --> 00:01:43,116
+run by a script.
+
+51
+00:01:43,666 --> 00:01:49,874
+One: SonarQube is up. Two: your own gate, Cloud Cart gate, requires coverage of sixty two.
+
+52
+00:01:50,424 --> 00:01:55,480
+Three: a web hook calls Jenkins back. Four: the coverage is sixty two or more.
+
+53
+00:01:56,030 --> 00:02:01,513
+Five: the gate for the project says OK. Six: the last Jenkins build is a success.
+
+54
+00:02:02,063 --> 00:02:07,098
+Seven: no token in the code. That last one is a trap, and we will fall in it on purpose.
+
+55
+00:02:07,648 --> 00:02:11,786
+The script checks the facts, not your word. That is what makes it independent.
+
+56
+00:02:12,336 --> 00:02:14,192
+Seven of seven, is mastery.
+
+57
+00:02:15,742 --> 00:02:16,937
+A real SonarQube,
+
+58
+00:02:16,937 --> 00:02:18,835
+signed in as administrator.
+
+59
+00:02:18,835 --> 00:02:20,733
+The projects page is empty.
+
+60
+00:02:20,733 --> 00:02:21,787
+No project yet,
+
+61
+00:02:21,787 --> 00:02:23,966
+and no quality gate of our own.
+
+62
+00:02:23,966 --> 00:02:25,513
+We start from nothing.
+
+63
+00:02:27,863 --> 00:02:28,256
+First,
+
+64
+00:02:28,256 --> 00:02:29,108
+the terminal.
+
+65
+00:02:29,108 --> 00:02:31,008
+The lab command is installed.
+
+66
+00:02:31,008 --> 00:02:33,302
+Lab up checks that SonarQube is up,
+
+67
+00:02:33,302 --> 00:02:34,678
+that Jenkins answers,
+
+68
+00:02:34,678 --> 00:02:36,972
+and says where the results will go.
+
+69
+00:02:37,522 --> 00:02:38,816
+Now the check script.
+
+70
+00:02:38,816 --> 00:02:40,787
+Lab check runs the seven checks.
+
+71
+00:02:40,787 --> 00:02:42,080
+Nothing is built yet,
+
+72
+00:02:42,080 --> 00:02:43,374
+so most of them fail,
+
+73
+00:02:43,374 --> 00:02:46,084
+and every failure tells you what to do next.
+
+74
+00:02:46,084 --> 00:02:49,718
+Look at the last one: it says there is a token in the code.
+
+75
+00:02:49,718 --> 00:02:51,197
+We will come back to it.
+
+76
+00:02:57,747 --> 00:03:01,907
+Step one: the quality gate. In SonarQube, we open Quality Gates.
+
+77
+00:03:06,957 --> 00:03:08,641
+The default is Sonar way,
+
+78
+00:03:08,641 --> 00:03:10,527
+and it only judges new code.
+
+79
+00:03:10,527 --> 00:03:12,414
+We never change the default.
+
+80
+00:03:12,414 --> 00:03:13,491
+We make our own.
+
+81
+00:03:13,491 --> 00:03:13,828
+Copy,
+
+82
+00:03:13,828 --> 00:03:15,917
+and we name it Cloud Cart gate.
+
+83
+00:03:21,967 --> 00:03:23,217
+Then Add Condition.
+
+84
+00:03:23,217 --> 00:03:25,585
+A condition is one rule of the gate.
+
+85
+00:03:25,585 --> 00:03:27,099
+We choose overall code,
+
+86
+00:03:27,099 --> 00:03:29,796
+because we want the whole project judged,
+
+87
+00:03:29,796 --> 00:03:31,309
+not only the new lines.
+
+88
+00:03:31,309 --> 00:03:32,888
+The measure is Coverage.
+
+89
+00:03:32,888 --> 00:03:35,125
+And the rule: less than sixty two.
+
+90
+00:03:35,125 --> 00:03:35,849
+Below that,
+
+91
+00:03:35,849 --> 00:03:36,836
+the gate fails.
+
+92
+00:03:42,886 --> 00:03:44,598
+And we make it the default,
+
+93
+00:03:44,598 --> 00:03:45,866
+in the Actions menu,
+
+94
+00:03:45,866 --> 00:03:46,817
+Set as Default.
+
+95
+00:03:46,817 --> 00:03:47,578
+From now on,
+
+96
+00:03:47,578 --> 00:03:50,177
+every new project is judged by this gate,
+
+97
+00:03:50,177 --> 00:03:51,762
+unless we choose another.
+
+98
+00:03:51,762 --> 00:03:54,171
+The project we scan next will meet it.
+
+99
+00:03:59,721 --> 00:04:01,303
+Step two: the web hook.
+
+100
+00:04:01,303 --> 00:04:02,540
+In Administration,
+
+101
+00:04:02,540 --> 00:04:03,503
+Configuration,
+
+102
+00:04:03,503 --> 00:04:04,191
+Web hooks.
+
+103
+00:04:04,191 --> 00:04:07,904
+A web hook is how SonarQube tells Jenkins the verdict.
+
+104
+00:04:07,904 --> 00:04:08,660
+Without it,
+
+105
+00:04:08,660 --> 00:04:11,135
+the gate stage never gets an answer.
+
+106
+00:04:11,135 --> 00:04:12,098
+We create one.
+
+107
+00:04:12,098 --> 00:04:13,473
+The name is jenkins,
+
+108
+00:04:13,473 --> 00:04:15,605
+and the address is our Jenkins,
+
+109
+00:04:15,605 --> 00:04:16,980
+with the last slash.
+
+110
+00:04:19,530 --> 00:04:21,298
+Step three: the pipeline.
+
+111
+00:04:21,298 --> 00:04:22,077
+In Jenkins,
+
+112
+00:04:22,077 --> 00:04:23,208
+we open the job,
+
+113
+00:04:23,208 --> 00:04:24,552
+cloud cart mastery.
+
+114
+00:04:24,552 --> 00:04:27,099
+It has three stages: build and test,
+
+115
+00:04:27,099 --> 00:04:27,453
+scan,
+
+116
+00:04:27,453 --> 00:04:28,938
+and the quality gate.
+
+117
+00:04:28,938 --> 00:04:30,282
+We click Build Now.
+
+118
+00:04:30,832 --> 00:04:32,160
+We open the console.
+
+119
+00:04:32,160 --> 00:04:33,620
+Build and test passes.
+
+120
+00:04:33,620 --> 00:04:35,015
+The scan is accepted.
+
+121
+00:04:35,015 --> 00:04:37,272
+Now Jenkins waits for the verdict,
+
+122
+00:04:37,272 --> 00:04:38,533
+one minute at most.
+
+123
+00:04:39,083 --> 00:04:42,441
+Here is what happens inside SonarQube while we wait.
+
+124
+00:04:42,441 --> 00:04:44,766
+The compute engine takes the report,
+
+125
+00:04:44,766 --> 00:04:46,186
+computes the measures,
+
+126
+00:04:46,186 --> 00:04:48,704
+and checks every condition of the gate,
+
+127
+00:04:48,704 --> 00:04:49,415
+one by one.
+
+128
+00:04:49,415 --> 00:04:51,610
+Then SonarQube calls the web hook,
+
+129
+00:04:51,610 --> 00:04:53,547
+and Jenkins hears the verdict.
+
+130
+00:04:54,097 --> 00:04:55,587
+Two sides to this wait.
+
+131
+00:04:55,587 --> 00:04:57,271
+SonarQube judges the code,
+
+132
+00:04:57,271 --> 00:04:59,927
+and the web hook carries the answer back.
+
+133
+00:04:59,927 --> 00:05:00,898
+Both must work.
+
+134
+00:05:00,898 --> 00:05:04,396
+Remember lesson one seventy-one: without the web hook,
+
+135
+00:05:04,396 --> 00:05:05,756
+this stage times out,
+
+136
+00:05:05,756 --> 00:05:06,663
+with no error.
+
+137
+00:05:15,213 --> 00:05:15,492
+Red.
+
+138
+00:05:15,492 --> 00:05:18,637
+Pipeline aborted due to quality gate failure.
+
+139
+00:05:18,637 --> 00:05:20,454
+This is not a broken tool.
+
+140
+00:05:20,454 --> 00:05:21,642
+This is the gate,
+
+141
+00:05:21,642 --> 00:05:22,620
+doing its job.
+
+142
+00:05:22,620 --> 00:05:24,087
+We ask SonarQube why.
+
+143
+00:05:27,137 --> 00:05:28,277
+The project page.
+
+144
+00:05:28,277 --> 00:05:28,746
+Failed,
+
+145
+00:05:28,746 --> 00:05:32,499
+with one condition: coverage is below sixty two percent.
+
+146
+00:05:32,499 --> 00:05:34,175
+The gate wants sixty two,
+
+147
+00:05:34,175 --> 00:05:35,649
+and the code has less.
+
+148
+00:05:40,199 --> 00:05:41,297
+The fix is tests,
+
+149
+00:05:41,297 --> 00:05:42,394
+not a lower gate.
+
+150
+00:05:42,394 --> 00:05:43,427
+In the terminal,
+
+151
+00:05:43,427 --> 00:05:46,719
+we copy the missing test file into the test folder.
+
+152
+00:05:46,719 --> 00:05:47,881
+Then we commit it,
+
+153
+00:05:47,881 --> 00:05:48,720
+with a short,
+
+154
+00:05:48,720 --> 00:05:49,624
+clear message.
+
+155
+00:05:49,624 --> 00:05:50,721
+One small commit,
+
+156
+00:05:50,721 --> 00:05:52,722
+so the history tells the story.
+
+157
+00:05:57,272 --> 00:06:01,880
+Now we build again. We go back to the job, and click Build Now, one more time.
+
+158
+00:06:05,930 --> 00:06:07,291
+We open the console.
+
+159
+00:06:07,291 --> 00:06:08,243
+While it runs,
+
+160
+00:06:08,243 --> 00:06:10,216
+notice what we did not touch.
+
+161
+00:06:10,216 --> 00:06:11,372
+Not the pipeline.
+
+162
+00:06:11,372 --> 00:06:12,257
+Not the gate.
+
+163
+00:06:12,257 --> 00:06:13,209
+Not SonarQube.
+
+164
+00:06:13,209 --> 00:06:14,638
+We changed one thing,
+
+165
+00:06:14,638 --> 00:06:15,318
+the tests,
+
+166
+00:06:15,318 --> 00:06:16,815
+so if this goes green,
+
+167
+00:06:16,815 --> 00:06:18,175
+we know exactly why.
+
+168
+00:06:18,725 --> 00:06:21,142
+And notice what the pipeline is doing.
+
+169
+00:06:21,142 --> 00:06:22,350
+It builds the code,
+
+170
+00:06:22,350 --> 00:06:23,622
+and runs every test.
+
+171
+00:06:23,622 --> 00:06:26,611
+Then it measures which lines the tests touched.
+
+172
+00:06:26,611 --> 00:06:27,693
+That is coverage.
+
+173
+00:06:27,693 --> 00:06:29,664
+The scan sends it to SonarQube,
+
+174
+00:06:29,664 --> 00:06:32,208
+and the gate compares it with sixty two.
+
+175
+00:06:32,758 --> 00:06:34,657
+Maven is slower than it looks.
+
+176
+00:06:34,657 --> 00:06:35,923
+It runs forty tests,
+
+177
+00:06:35,923 --> 00:06:37,126
+builds the package,
+
+178
+00:06:37,126 --> 00:06:39,974
+and instruments the code to measure coverage.
+
+179
+00:06:39,974 --> 00:06:42,316
+On a real project this takes minutes,
+
+180
+00:06:42,316 --> 00:06:45,734
+which is why the scan comes only after the tests pass,
+
+181
+00:06:45,734 --> 00:06:48,139
+and why the gate waits for the answer.
+
+182
+00:06:52,689 --> 00:06:57,020
+The tests pass. The scan is accepted. The verdict arrives. And now, green.
+
+183
+00:07:02,070 --> 00:07:04,176
+Look at the project in SonarQube.
+
+184
+00:07:04,176 --> 00:07:04,622
+Passed,
+
+185
+00:07:04,622 --> 00:07:05,771
+with a green mark.
+
+186
+00:07:05,771 --> 00:07:09,025
+And the coverage on overall code is above the line.
+
+187
+00:07:11,075 --> 00:07:12,472
+Back to the terminal.
+
+188
+00:07:12,472 --> 00:07:13,536
+Lab check again.
+
+189
+00:07:13,536 --> 00:07:14,734
+Six of seven pass.
+
+190
+00:07:14,734 --> 00:07:15,332
+The gate,
+
+191
+00:07:15,332 --> 00:07:16,197
+the web hook,
+
+192
+00:07:16,197 --> 00:07:17,062
+the coverage,
+
+193
+00:07:17,062 --> 00:07:19,124
+the project gate and the build.
+
+194
+00:07:19,124 --> 00:07:21,187
+One fails: a token in the code.
+
+195
+00:07:21,737 --> 00:07:23,660
+This is the troubleshooting.
+
+196
+00:07:23,660 --> 00:07:27,713
+Leak check shows the file and the line: scripts/deploy.env.
+
+197
+00:07:27,713 --> 00:07:28,263
+A token,
+
+198
+00:07:28,263 --> 00:07:30,186
+committed in the repository.
+
+199
+00:07:30,186 --> 00:07:31,560
+We treat it as real,
+
+200
+00:07:31,560 --> 00:07:32,659
+so it is leaked.
+
+201
+00:07:33,209 --> 00:07:34,038
+Two actions.
+
+202
+00:07:34,038 --> 00:07:34,452
+First,
+
+203
+00:07:34,452 --> 00:07:36,109
+remove it from the code.
+
+204
+00:07:36,109 --> 00:07:36,593
+Second,
+
+205
+00:07:36,593 --> 00:07:38,181
+revoke it in SonarQube,
+
+206
+00:07:38,181 --> 00:07:39,148
+in My Account,
+
+207
+00:07:39,148 --> 00:07:39,769
+Security,
+
+208
+00:07:39,769 --> 00:07:41,979
+as we did in lesson one seventy.
+
+209
+00:07:41,979 --> 00:07:44,188
+Removing the file is not enough,
+
+210
+00:07:44,188 --> 00:07:46,191
+because the history keeps it.
+
+211
+00:07:46,191 --> 00:07:47,503
+The token must die.
+
+212
+00:07:48,053 --> 00:07:51,999
+Lab check one more time. Seven of seven. Every check passes.
+
+213
+00:07:52,549 --> 00:07:54,527
+Results are part of the mastery.
+
+214
+00:07:54,527 --> 00:07:56,505
+The script saved them in a file.
+
+215
+00:07:56,505 --> 00:07:57,062
+Print it.
+
+216
+00:07:57,062 --> 00:07:58,978
+This is your evidence: keep it,
+
+217
+00:07:58,978 --> 00:07:59,781
+and share it.
+
+218
+00:08:00,331 --> 00:08:00,663
+Last,
+
+219
+00:08:00,663 --> 00:08:01,458
+the cleanup.
+
+220
+00:08:01,458 --> 00:08:03,379
+Lab down deletes the project,
+
+221
+00:08:03,379 --> 00:08:04,241
+the web hook,
+
+222
+00:08:04,241 --> 00:08:04,837
+the gate,
+
+223
+00:08:04,837 --> 00:08:05,632
+and the job.
+
+224
+00:08:05,632 --> 00:08:07,819
+It keeps a copy of your evidence.
+
+225
+00:08:07,819 --> 00:08:10,337
+SonarQube and Jenkins themselves stay.
+
+226
+00:08:10,887 --> 00:08:12,524
+Run the check once more.
+
+227
+00:08:12,524 --> 00:08:13,479
+Only two pass.
+
+228
+00:08:13,479 --> 00:08:14,775
+SonarQube is alive,
+
+229
+00:08:14,775 --> 00:08:16,345
+and your code is clean.
+
+230
+00:08:16,345 --> 00:08:17,777
+The scenario is gone.
+
+231
+00:08:22,127 --> 00:08:23,167
+In the browser,
+
+232
+00:08:23,167 --> 00:08:25,454
+the projects page is empty again.
+
+233
+00:08:25,454 --> 00:08:26,493
+And in Jenkins,
+
+234
+00:08:26,493 --> 00:08:27,602
+the job is gone.
+
+235
+00:08:27,602 --> 00:08:28,018
+Built,
+
+236
+00:08:28,018 --> 00:08:28,503
+broken,
+
+237
+00:08:28,503 --> 00:08:28,918
+fixed,
+
+238
+00:08:28,918 --> 00:08:29,404
+proved,
+
+239
+00:08:29,404 --> 00:08:30,304
+written down,
+
+240
+00:08:30,304 --> 00:08:31,344
+and cleaned up.
+
+241
+00:08:31,344 --> 00:08:32,453
+That is mastery.
+
+242
+00:08:34,003 --> 00:08:36,670
+When a check fails, the message tells you where to look.
+
+243
+00:08:37,220 --> 00:08:41,636
+One: SonarQube is not up. Run the start command, and wait for the word UP.
+
+244
+00:08:42,186 --> 00:08:43,667
+Two: the gate is missing.
+
+245
+00:08:43,667 --> 00:08:44,851
+The name must match,
+
+246
+00:08:44,851 --> 00:08:45,918
+letter for letter,
+
+247
+00:08:45,918 --> 00:08:47,695
+and the rule must be coverage,
+
+248
+00:08:47,695 --> 00:08:48,287
+sixty two.
+
+249
+00:08:48,837 --> 00:08:53,680
+Three: no web hook. Without it, the gate stage waits, and times out, with no error.
+
+250
+00:08:54,230 --> 00:08:58,048
+Four: the coverage is low. Add tests. Do not lower the gate.
+
+251
+00:08:58,598 --> 00:09:03,505
+Five: the gate says failed. Open the project page, and read the failing condition.
+
+252
+00:09:04,055 --> 00:09:07,980
+Six: the build is red. Open the console, and read the first error.
+
+253
+00:09:08,530 --> 00:09:11,901
+Seven: a token in the code. Remove it, and revoke it.
+
+254
+00:09:13,451 --> 00:09:16,246
+Where to find the lab. Pause here, and write it down.
+
+255
+00:09:16,796 --> 00:09:25,030
+One: the repository, github.com/it-waves/devops-ai, in the folder academy/lab.
+
+256
+00:09:25,580 --> 00:09:31,788
+Two: the files, lab172.sh and shortcuts172.sh.
+
+257
+00:09:32,338 --> 00:09:37,778
+Three: install it with sudo install, into /usr/local/sbin/.
+
+258
+00:09:38,328 --> 00:09:43,832
+Four: load the short names with source shortcuts172.sh. Then lab up.
+
+259
+00:09:44,382 --> 00:09:50,206
+Five: lab check runs the seven checks. Lab down cleans up. Leak check looks for tokens.
+
+260
+00:09:50,756 --> 00:09:55,202
+Six: you need the SonarQube and Jenkins from the earlier lessons.
+
+261
+00:09:55,202 --> 00:09:57,596
+Set your user token in SONAR_TOKEN,
+
+262
+00:09:57,596 --> 00:09:59,716
+and your login in JENKINS_AUTH.
+
+263
+00:10:00,266 --> 00:10:01,909
+The link is in the description.
+
+264
+00:10:03,459 --> 00:10:05,230
+Your turn, on your own machine.
+
+265
+00:10:05,780 --> 00:10:08,830
+One: lab up, then lab check. See the failures first.
+
+266
+00:10:09,380 --> 00:10:11,343
+Two: build your gate and your web hook.
+
+267
+00:10:11,893 --> 00:10:15,754
+Three: build the pipeline, read the first failure, and add the tests.
+
+268
+00:10:16,304 --> 00:10:18,121
+Four: find the leaked token,
+
+269
+00:10:18,121 --> 00:10:18,770
+remove it,
+
+270
+00:10:18,770 --> 00:10:19,679
+and revoke it.
+
+271
+00:10:19,679 --> 00:10:20,652
+Then lab check,
+
+272
+00:10:20,652 --> 00:10:22,534
+until you see seven of seven.
+
+273
+00:10:23,084 --> 00:10:26,774
+Five: keep the results file as your evidence. Then lab down.
+
+274
+00:10:27,324 --> 00:10:29,052
+Pause the video, and do it now.
+
+275
+00:10:44,602 --> 00:10:45,477
+Quick check.
+
+276
+00:10:46,027 --> 00:10:48,160
+Why does the gate stage need a web hook?
+
+277
+00:10:48,710 --> 00:10:51,974
+The gate says failed. Do you fix the pipeline, or the code?
+
+278
+00:10:52,524 --> 00:10:56,065
+You removed a leaked token from the code. What else must you do?
+
+279
+00:10:56,615 --> 00:10:58,621
+What makes the seven checks independent?
+
+280
+00:10:59,171 --> 00:11:03,373
+Objective covered: SonarQube mastery. The whole domain, proved.
+
+281
+00:11:03,923 --> 00:11:05,993
+Pause the video, and answer out loud.
+
+282
+00:11:16,543 --> 00:11:21,001
+Next: a new domain. Nexus Repository, where your builds find a home.
+
+283
+00:11:21,551 --> 00:11:24,879
+If this helped, like, share and subscribe, so you do not miss it.
