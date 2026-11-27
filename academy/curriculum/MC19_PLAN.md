@@ -12,3 +12,9 @@ Real Nexus Repository Community Edition 3.98.1 (extracted at /tmp/nx, REAL_NEXUS
 | L176 | O08 troubleshoot; mastery | "Break it, fix it, prove it": four real failures (401, 403, missing artifact or stale metadata, repository offline) read from the first error, then the mastery scenario with lab176.sh up/check/down, results, cleanup, lab info on screen |
 
 Next domain after MC19: MC20 GitHub Actions. CloudCart v1 lands after MC19 (CLOUDCART_ROADMAP.md).
+
+## L174 build notes (in progress)
+- Dev assets: /home/claude/jenkins-lab/cart-core (pom with distributionManagement, JUnit test), reset174.sh (fresh Nexus + wizard done via wiz174.py).
+- Verified flow: repos cloudcart-snapshots (Snapshot, allow redeploy) and cloudcart-releases (Release, disable redeploy); role cart-deployer (repo view privileges on both + maven-public read/browse); user cart-deployer; settings.xml servers ids must equal distributionManagement ids, mirror of * to maven-public; `mvn deploy` uploads timestamped snapshot to cloudcart-snapshots (plugins fetched through the mirror).
+- Live plan: UI create 2 repos, role, user; terminal: cat pom/settings, mvn deploy (grep summary) twice, UI browse, version -> 1.0.0 release deploy, curl retrieve by path and search API, CI variant with env vars (no secrets in pom).
+- Create forms are at #preview/admin/repository/repositories (Create Repository), #preview/admin/security/roles, #preview/admin/security/users.
