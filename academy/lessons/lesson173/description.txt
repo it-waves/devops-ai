@@ -1,0 +1,26 @@
+Lesson 173 of the DevOps Engineering Bootcamp. Every build downloads the same libraries from the internet, and your own code has no safe home. One server fixes both: a repository manager. In this lesson you learn the three kinds of Nexus repository, hosted, proxy and group, then set up a real Nexus Repository live from a fresh install, secure it, and prove it works: a 401 with anonymous access off, a library fetched from Maven Central then served from cache in milliseconds, and our own file stored and read back through one group address.
+
+Chapters
+0:00 The build that downloads the internet
+0:42 What to expect
+1:16 Hosted, proxy and group (MC19-O01)
+2:16 Live: the server, who runs it, the first password (MC19-O02)
+3:43 Live: first sign in and the setup wizard
+5:52 Live: dashboard, health checks and repositories
+7:23 Live: group members, proxy and hosted settings
+8:21 Live: proof, 401, cache and hosted upload
+10:16 What we proved
+10:42 Common mistakes
+11:13 Your turn
+11:52 Quick check and what is next
+
+Objectives covered: MC19-O01 (hosted, proxy and group repositories) and MC19-O02 (install and secure a lab Nexus).
+
+Honest notes: the browser and terminal are a real continuous recording of Sonatype Nexus Repository Community Edition 3.98.1 running on a throwaway lab server, with Maven Central as the real remote. The setup wizard includes accepting the Sonatype end user license agreement and a required base telemetry notice: the Community Edition sends a small daily usage report to Sonatype, and if it cannot be sent for 30 days the server becomes read only. Read the license for yourself before you use it at work. The password shown belongs to the throwaway lab server. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The plan, concept, mistakes, your-turn and recap screens are labelled illustrations, not captures. Use your own machine only.
+
+Previous lesson: SonarQube Mastery: Build, Break, Fix, Prove and Clean Up a Quality Gate (Live) | Lesson 172 https://youtu.be/lsj6Mqw9KDM
+Next: our own snapshot and release repositories, and shipping Cloud Cart to them with Maven.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #nexus #nexusrepository #maven #artifactmanagement #cicd #devopsbootcamp #sonatype

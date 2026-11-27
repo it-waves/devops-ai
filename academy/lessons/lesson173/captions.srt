@@ -1,0 +1,1183 @@
+1
+00:00:00,500 --> 00:00:03,957
+Every time a Cloud Cart developer builds the project,
+
+2
+00:00:03,957 --> 00:00:07,414
+Maven downloads the same libraries from the internet.
+
+3
+00:00:07,414 --> 00:00:07,805
+Again,
+
+4
+00:00:07,805 --> 00:00:08,457
+and again.
+
+5
+00:00:09,007 --> 00:00:10,053
+Fifty developers.
+
+6
+00:00:10,053 --> 00:00:11,221
+Forty builds a day.
+
+7
+00:00:11,221 --> 00:00:15,834
+All asking a server on the other side of the world for the very same files.
+
+8
+00:00:16,384 --> 00:00:18,461
+And the code your own team builds?
+
+9
+00:00:18,461 --> 00:00:19,683
+It has no safe home.
+
+10
+00:00:19,683 --> 00:00:20,905
+It sits on a laptop,
+
+11
+00:00:20,905 --> 00:00:22,249
+or in a shared folder,
+
+12
+00:00:22,249 --> 00:00:24,021
+with no history and no rules.
+
+13
+00:00:24,571 --> 00:00:26,736
+One server fixes both problems.
+
+14
+00:00:26,736 --> 00:00:29,111
+It is called a repository manager,
+
+15
+00:00:29,111 --> 00:00:30,787
+and today we set one up,
+
+16
+00:00:30,787 --> 00:00:31,415
+for real.
+
+17
+00:00:31,415 --> 00:00:32,742
+It is called Nexus.
+
+18
+00:00:33,292 --> 00:00:33,943
+By the end,
+
+19
+00:00:33,943 --> 00:00:35,421
+you will have started it,
+
+20
+00:00:35,421 --> 00:00:36,013
+signed in,
+
+21
+00:00:36,013 --> 00:00:36,663
+secured it,
+
+22
+00:00:36,663 --> 00:00:39,443
+and watched all three kinds of repository work,
+
+23
+00:00:39,443 --> 00:00:40,567
+with your own eyes.
+
+24
+00:00:42,117 --> 00:00:43,546
+Here is what to expect.
+
+25
+00:00:44,096 --> 00:00:49,728
+One: the idea, in pictures. Three kinds of repository: hosted, proxy, and group.
+
+26
+00:00:50,278 --> 00:00:51,392
+Two: a live setup,
+
+27
+00:00:51,392 --> 00:00:52,629
+from a fresh server.
+
+28
+00:00:52,629 --> 00:00:54,113
+We check who it runs as,
+
+29
+00:00:54,113 --> 00:00:55,968
+we sign in for the first time,
+
+30
+00:00:55,968 --> 00:00:57,020
+and we secure it.
+
+31
+00:00:57,570 --> 00:00:58,568
+Three: the proof.
+
+32
+00:00:58,568 --> 00:01:02,383
+We download a library through the proxy and watch the cache fill.
+
+33
+00:01:02,383 --> 00:01:03,675
+We store our own file.
+
+34
+00:01:03,675 --> 00:01:05,847
+And we read both through one address.
+
+35
+00:01:06,397 --> 00:01:12,078
+This lesson covers the first two objectives of the Nexus domain: the three repository types,
+
+36
+00:01:12,078 --> 00:01:14,610
+and installing and securing a lab server.
+
+37
+00:01:16,160 --> 00:01:16,543
+First,
+
+38
+00:01:16,543 --> 00:01:17,117
+the idea.
+
+39
+00:01:17,117 --> 00:01:19,607
+Think of your Maven build as a shopper.
+
+40
+00:01:19,607 --> 00:01:21,138
+When it needs a library,
+
+41
+00:01:21,138 --> 00:01:22,415
+it asks one address.
+
+42
+00:01:22,415 --> 00:01:23,947
+That address is a group.
+
+43
+00:01:24,497 --> 00:01:28,847
+A group is a single address with several repositories behind it.
+
+44
+00:01:28,847 --> 00:01:30,207
+The build asks once.
+
+45
+00:01:30,207 --> 00:01:31,498
+Nexus looks inside,
+
+46
+00:01:31,498 --> 00:01:32,110
+in order,
+
+47
+00:01:32,110 --> 00:01:35,441
+and answers from the first one that has the file.
+
+48
+00:01:35,991 --> 00:01:37,995
+A hosted repository is yours.
+
+49
+00:01:37,995 --> 00:01:40,897
+Cloud Cart's own releases are kept in one.
+
+50
+00:01:40,897 --> 00:01:42,071
+Work in progress,
+
+51
+00:01:42,071 --> 00:01:43,039
+the snapshots,
+
+52
+00:01:43,039 --> 00:01:44,352
+is kept in another.
+
+53
+00:01:44,352 --> 00:01:45,595
+You write to them,
+
+54
+00:01:45,595 --> 00:01:46,977
+and nobody else can.
+
+55
+00:01:47,527 --> 00:01:50,796
+A proxy repository is a cache of somebody else's.
+
+56
+00:01:50,796 --> 00:01:53,598
+This one stands in front of Maven Central.
+
+57
+00:01:53,598 --> 00:01:56,133
+The first time a library is asked for,
+
+58
+00:01:56,133 --> 00:01:58,468
+Nexus fetches it from the internet,
+
+59
+00:01:58,468 --> 00:01:59,602
+and keeps a copy.
+
+60
+00:02:00,152 --> 00:02:01,135
+The second time,
+
+61
+00:02:01,135 --> 00:02:03,286
+everyone on the team gets the copy,
+
+62
+00:02:03,286 --> 00:02:04,639
+in a few milliseconds.
+
+63
+00:02:04,639 --> 00:02:06,482
+And if the internet goes down,
+
+64
+00:02:06,482 --> 00:02:07,896
+your builds still work.
+
+65
+00:02:08,446 --> 00:02:10,901
+So remember three short sentences.
+
+66
+00:02:10,901 --> 00:02:12,273
+Group: one address.
+
+67
+00:02:12,273 --> 00:02:13,212
+Hosted: ours.
+
+68
+00:02:13,212 --> 00:02:15,017
+Proxy: a cache of theirs.
+
+69
+00:02:16,567 --> 00:02:18,183
+Here is a brand new Nexus,
+
+70
+00:02:18,183 --> 00:02:19,986
+exactly as a student gets it.
+
+71
+00:02:19,986 --> 00:02:21,540
+We start in the terminal,
+
+72
+00:02:21,540 --> 00:02:23,218
+with three quick questions,
+
+73
+00:02:23,218 --> 00:02:25,207
+before we ever open the browser.
+
+74
+00:02:25,757 --> 00:02:26,618
+Question one.
+
+75
+00:02:26,618 --> 00:02:28,606
+Who is this server running as?
+
+76
+00:02:28,606 --> 00:02:29,599
+The command ps,
+
+77
+00:02:29,599 --> 00:02:30,858
+for the user nexus,
+
+78
+00:02:30,858 --> 00:02:32,050
+lists its process.
+
+79
+00:02:32,600 --> 00:02:34,723
+Look at the first column: nexus.
+
+80
+00:02:34,723 --> 00:02:35,652
+A normal user,
+
+81
+00:02:35,652 --> 00:02:37,177
+with no special powers.
+
+82
+00:02:37,177 --> 00:02:39,765
+Never run a repository manager as root.
+
+83
+00:02:39,765 --> 00:02:42,418
+It stores everything your company ships,
+
+84
+00:02:42,418 --> 00:02:44,143
+so if it is ever attacked,
+
+85
+00:02:44,143 --> 00:02:45,934
+the damage must stay small.
+
+86
+00:02:47,484 --> 00:02:51,494
+Question two. Where does it keep its files? We list the install folder.
+
+87
+00:02:52,044 --> 00:02:52,702
+Two parts.
+
+88
+00:02:52,702 --> 00:02:54,281
+The program is in nexus.
+
+89
+00:02:54,281 --> 00:02:55,728
+Everything you create,
+
+90
+00:02:55,728 --> 00:02:56,847
+the repositories,
+
+91
+00:02:56,847 --> 00:02:57,505
+the files,
+
+92
+00:02:57,505 --> 00:02:58,360
+the settings,
+
+93
+00:02:58,360 --> 00:02:59,676
+is in sonatype-work.
+
+94
+00:02:59,676 --> 00:03:01,649
+That is the folder to back up.
+
+95
+00:03:01,649 --> 00:03:04,610
+We will come back to it later in this domain.
+
+96
+00:03:06,160 --> 00:03:07,117
+Question three.
+
+97
+00:03:07,117 --> 00:03:09,542
+How do we sign in the very first time?
+
+98
+00:03:09,542 --> 00:03:11,521
+Nexus made a one-time password,
+
+99
+00:03:11,521 --> 00:03:12,988
+and saved it in a file.
+
+100
+00:03:12,988 --> 00:03:13,754
+We print it.
+
+101
+00:03:15,504 --> 00:03:17,543
+That long text is the password,
+
+102
+00:03:17,543 --> 00:03:19,318
+and the user name is admin.
+
+103
+00:03:19,318 --> 00:03:22,737
+Nexus deletes this file when we change the password,
+
+104
+00:03:22,737 --> 00:03:25,894
+so nobody can find an old password lying around.
+
+105
+00:03:27,444 --> 00:03:29,147
+And is the server ready?
+
+106
+00:03:29,147 --> 00:03:30,850
+It listens on port 8081.
+
+107
+00:03:30,850 --> 00:03:32,412
+We ask for its status,
+
+108
+00:03:32,412 --> 00:03:34,612
+and print only the status code.
+
+109
+00:03:35,162 --> 00:03:39,215
+200 means: ready. Now we have what we need to open the browser.
+
+110
+00:03:43,465 --> 00:03:44,591
+In the browser,
+
+111
+00:03:44,591 --> 00:03:46,468
+the address is localhost,
+
+112
+00:03:46,468 --> 00:03:47,219
+port 8081.
+
+113
+00:03:47,219 --> 00:03:49,546
+This is the Nexus sign in page.
+
+114
+00:03:49,546 --> 00:03:51,273
+The user name is admin.
+
+115
+00:03:51,823 --> 00:03:52,841
+For the password,
+
+116
+00:03:52,841 --> 00:03:54,637
+we type what the file gave us.
+
+117
+00:03:54,637 --> 00:03:56,313
+The dots hide it as we type,
+
+118
+00:03:56,313 --> 00:03:59,247
+which is exactly what a password field should do.
+
+119
+00:04:00,897 --> 00:04:04,908
+A real Nexus always starts a setup wizard on the first sign in.
+
+120
+00:04:04,908 --> 00:04:06,373
+This is the real thing,
+
+121
+00:04:06,373 --> 00:04:07,901
+and you will see it too.
+
+122
+00:04:07,901 --> 00:04:09,238
+We click Get Started.
+
+123
+00:04:12,488 --> 00:04:14,542
+Step one: set an admin password.
+
+124
+00:04:14,542 --> 00:04:17,366
+The first one was only for the first minute.
+
+125
+00:04:17,366 --> 00:04:18,457
+We choose a long,
+
+126
+00:04:18,457 --> 00:04:19,163
+unique one,
+
+127
+00:04:19,163 --> 00:04:20,318
+and type it twice.
+
+128
+00:04:26,768 --> 00:04:27,955
+Nexus signs us out,
+
+129
+00:04:27,955 --> 00:04:29,954
+to prove the new password works.
+
+130
+00:04:29,954 --> 00:04:31,203
+We refresh the page,
+
+131
+00:04:31,203 --> 00:04:33,390
+and sign in again with the new one.
+
+132
+00:04:33,390 --> 00:04:34,765
+The wizard carries on,
+
+133
+00:04:34,765 --> 00:04:36,389
+with a second Get Started.
+
+134
+00:04:40,539 --> 00:04:42,560
+The next screens are a welcome,
+
+135
+00:04:42,560 --> 00:04:43,603
+and the license.
+
+136
+00:04:43,603 --> 00:04:48,428
+This is the Sonatype end user license agreement for the Community Edition.
+
+137
+00:04:48,428 --> 00:04:50,124
+In a real job you read it,
+
+138
+00:04:50,124 --> 00:04:51,754
+and your company decides.
+
+139
+00:04:51,754 --> 00:04:52,601
+For this lab,
+
+140
+00:04:52,601 --> 00:04:53,449
+we accept it,
+
+141
+00:04:53,449 --> 00:04:54,427
+and click Next.
+
+142
+00:04:57,777 --> 00:05:02,356
+Step three is the most important security choice: anonymous access.
+
+143
+00:05:02,356 --> 00:05:03,517
+If it is enabled,
+
+144
+00:05:03,517 --> 00:05:07,549
+anyone who can reach the server can read your repositories,
+
+145
+00:05:07,549 --> 00:05:08,643
+with no sign in.
+
+146
+00:05:08,643 --> 00:05:12,538
+Disabled means every single request must prove who it is.
+
+147
+00:05:12,538 --> 00:05:13,905
+We keep it disabled.
+
+148
+00:05:22,955 --> 00:05:25,528
+The last step is honest about something.
+
+149
+00:05:25,528 --> 00:05:29,066
+The Community Edition sends a small report to Sonatype,
+
+150
+00:05:29,066 --> 00:05:29,774
+once a day.
+
+151
+00:05:29,774 --> 00:05:32,154
+If it cannot send it for thirty days,
+
+152
+00:05:32,154 --> 00:05:33,890
+the server turns read only.
+
+153
+00:05:33,890 --> 00:05:36,013
+So on a network with no internet,
+
+154
+00:05:36,013 --> 00:05:38,007
+you would need another edition.
+
+155
+00:05:38,007 --> 00:05:39,101
+We understand it,
+
+156
+00:05:39,101 --> 00:05:39,808
+and finish.
+
+157
+00:05:52,058 --> 00:05:57,072
+This is the dashboard, the home page of a Nexus server. Along the top, four cards.
+
+158
+00:06:02,422 --> 00:06:05,430
+The first card is the System Health Check. We open it.
+
+159
+00:06:08,780 --> 00:06:10,570
+Eighteen checks are healthy,
+
+160
+00:06:10,570 --> 00:06:11,528
+and one is not.
+
+161
+00:06:11,528 --> 00:06:14,149
+Default Admin Credentials is healthy now,
+
+162
+00:06:14,149 --> 00:06:16,195
+because we changed the password.
+
+163
+00:06:16,195 --> 00:06:21,053
+The unhealthy one says Nexus uses its default key to encrypt stored secrets.
+
+164
+00:06:21,053 --> 00:06:23,611
+For production you provide your own key.
+
+165
+00:06:23,611 --> 00:06:25,081
+It is a hardening step,
+
+166
+00:06:25,081 --> 00:06:26,295
+beyond today's lab,
+
+167
+00:06:26,295 --> 00:06:27,254
+and we note it.
+
+168
+00:06:32,104 --> 00:06:38,014
+Back on the dashboard. Repositories: six. Components: zero, because nothing is stored yet.
+
+169
+00:06:38,564 --> 00:06:40,006
+And here is a table,
+
+170
+00:06:40,006 --> 00:06:41,954
+the repositories by format.
+
+171
+00:06:41,954 --> 00:06:43,180
+Maven: one proxy,
+
+172
+00:06:43,180 --> 00:06:43,973
+two hosted,
+
+173
+00:06:43,973 --> 00:06:44,694
+one group.
+
+174
+00:06:44,694 --> 00:06:47,291
+That is exactly the picture we drew.
+
+175
+00:06:47,291 --> 00:06:49,166
+Nexus created them for us.
+
+176
+00:06:53,116 --> 00:06:53,590
+Browse,
+
+177
+00:06:53,590 --> 00:06:54,673
+in the left bar,
+
+178
+00:06:54,673 --> 00:06:56,230
+lists every repository.
+
+179
+00:06:56,230 --> 00:06:58,329
+Look at the Type column: proxy,
+
+180
+00:06:58,329 --> 00:06:58,735
+group,
+
+181
+00:06:58,735 --> 00:06:59,480
+and hosted.
+
+182
+00:06:59,480 --> 00:07:02,188
+The filters on the left narrow the list.
+
+183
+00:07:02,188 --> 00:07:03,271
+We choose Maven.
+
+184
+00:07:05,521 --> 00:07:06,753
+Four repositories.
+
+185
+00:07:06,753 --> 00:07:08,601
+maven-central is the proxy.
+
+186
+00:07:08,601 --> 00:07:10,380
+maven-public is the group.
+
+187
+00:07:10,380 --> 00:07:14,144
+maven-releases and maven-snapshots are the hosted ones.
+
+188
+00:07:14,144 --> 00:07:15,718
+Now let us look inside,
+
+189
+00:07:15,718 --> 00:07:17,361
+starting with the group.
+
+190
+00:07:23,411 --> 00:07:23,972
+Settings,
+
+191
+00:07:23,972 --> 00:07:25,095
+then Repositories,
+
+192
+00:07:25,095 --> 00:07:27,216
+is where you create and edit them.
+
+193
+00:07:27,216 --> 00:07:28,339
+We open the group,
+
+194
+00:07:28,339 --> 00:07:29,150
+maven-public.
+
+195
+00:07:31,700 --> 00:07:33,036
+Here are its members,
+
+196
+00:07:33,036 --> 00:07:34,244
+in order: releases,
+
+197
+00:07:34,244 --> 00:07:34,880
+snapshots,
+
+198
+00:07:34,880 --> 00:07:35,644
+and central.
+
+199
+00:07:35,644 --> 00:07:36,789
+The order matters,
+
+200
+00:07:36,789 --> 00:07:39,079
+because Nexus asks the first member,
+
+201
+00:07:39,079 --> 00:07:40,096
+then the second,
+
+202
+00:07:40,096 --> 00:07:41,051
+then the third.
+
+203
+00:07:41,051 --> 00:07:43,086
+Our own repositories come first.
+
+204
+00:07:43,086 --> 00:07:49,193
+So a Cloud Cart release can never be replaced by a library with the same name from the internet.
+
+205
+00:07:54,543 --> 00:07:55,631
+Now the proxy,
+
+206
+00:07:55,631 --> 00:07:56,720
+maven-central.
+
+207
+00:07:56,720 --> 00:07:59,052
+Scroll down to Remote Storage.
+
+208
+00:07:59,052 --> 00:08:03,094
+This is the address it copies from: repo1.maven.org.
+
+209
+00:08:03,094 --> 00:08:04,804
+That is Maven Central.
+
+210
+00:08:10,254 --> 00:08:11,847
+And a hosted repository,
+
+211
+00:08:11,847 --> 00:08:12,843
+maven-releases.
+
+212
+00:08:12,843 --> 00:08:17,754
+The Deployment Policy decides whether a file can be replaced after upload.
+
+213
+00:08:17,754 --> 00:08:20,409
+We keep that for the lesson about trust.
+
+214
+00:08:21,959 --> 00:08:22,804
+Now the proof,
+
+215
+00:08:22,804 --> 00:08:23,770
+in the terminal.
+
+216
+00:08:23,770 --> 00:08:24,133
+First,
+
+217
+00:08:24,133 --> 00:08:26,608
+the address a build would use: the group.
+
+218
+00:08:26,608 --> 00:08:28,238
+We keep it in a short name,
+
+219
+00:08:28,238 --> 00:08:28,359
+G.
+
+220
+00:08:28,909 --> 00:08:31,876
+And the file we want: the pom of JUnit,
+
+221
+00:08:31,876 --> 00:08:33,017
+version 4.13.2.
+
+222
+00:08:33,017 --> 00:08:34,387
+We keep that in P.
+
+223
+00:08:34,387 --> 00:08:37,506
+A build asks for files like this all day.
+
+224
+00:08:38,056 --> 00:08:42,280
+We ask the group for it, without signing in, and print only the status code.
+
+225
+00:08:42,830 --> 00:08:44,173
+401: unauthorized.
+
+226
+00:08:44,173 --> 00:08:45,962
+Anonymous access is off,
+
+227
+00:08:45,962 --> 00:08:47,230
+so Nexus refuses.
+
+228
+00:08:47,230 --> 00:08:51,108
+The setting we chose in the wizard is doing its job.
+
+229
+00:08:52,658 --> 00:08:55,183
+Now with the user name and the password.
+
+230
+00:08:55,183 --> 00:08:58,024
+This is the first request ever for this file,
+
+231
+00:08:58,024 --> 00:09:00,802
+so Nexus has to fetch it from Maven Central.
+
+232
+00:09:00,802 --> 00:09:02,065
+We print the status,
+
+233
+00:09:02,065 --> 00:09:03,580
+and the time in seconds.
+
+234
+00:09:04,130 --> 00:09:08,226
+200, and about half a second. That includes the trip to the internet.
+
+235
+00:09:09,776 --> 00:09:11,952
+Now exactly the same request, again.
+
+236
+00:09:13,302 --> 00:09:13,951
+200 again.
+
+237
+00:09:13,951 --> 00:09:17,258
+But look at the time: a few hundredths of a second.
+
+238
+00:09:17,258 --> 00:09:19,268
+The answer came from the cache.
+
+239
+00:09:19,268 --> 00:09:21,473
+The internet was not asked at all.
+
+240
+00:09:26,623 --> 00:09:30,015
+Let us see that cache in the browser. We open maven-central.
+
+241
+00:09:32,565 --> 00:09:33,750
+It holds JUnit,
+
+242
+00:09:33,750 --> 00:09:34,935
+version 4.13.2,
+
+243
+00:09:34,935 --> 00:09:36,279
+and the pom file.
+
+244
+00:09:36,279 --> 00:09:39,360
+A minute ago this repository was empty.
+
+245
+00:09:39,360 --> 00:09:43,232
+Nexus saved a copy the first time somebody asked.
+
+246
+00:09:44,782 --> 00:09:48,073
+Now the hosted side: a file that only we have.
+
+247
+00:09:48,073 --> 00:09:49,576
+We make a small file,
+
+248
+00:09:49,576 --> 00:09:51,865
+and upload it to maven-releases,
+
+249
+00:09:51,865 --> 00:09:53,511
+as the component hello,
+
+250
+00:09:53,511 --> 00:09:54,370
+version 1.0,
+
+251
+00:09:54,370 --> 00:09:56,302
+in the group com cloudcart.
+
+252
+00:09:56,852 --> 00:09:57,807
+201: created.
+
+253
+00:09:57,807 --> 00:10:01,043
+Our file now lives in the hosted repository.
+
+254
+00:10:01,043 --> 00:10:03,101
+Now we ask the group for it,
+
+255
+00:10:03,101 --> 00:10:05,086
+the same address as before.
+
+256
+00:10:05,636 --> 00:10:06,422
+There it is.
+
+257
+00:10:06,422 --> 00:10:09,694
+The same group served a library from the internet,
+
+258
+00:10:09,694 --> 00:10:10,872
+kept in the cache,
+
+259
+00:10:10,872 --> 00:10:12,771
+and a file that only we have.
+
+260
+00:10:12,771 --> 00:10:13,556
+One address,
+
+261
+00:10:13,556 --> 00:10:15,258
+three kinds of repository.
+
+262
+00:10:16,808 --> 00:10:18,391
+Look back at what we did.
+
+263
+00:10:18,391 --> 00:10:21,558
+We checked that the server is not running as root.
+
+264
+00:10:21,558 --> 00:10:23,458
+We changed the first password.
+
+265
+00:10:23,458 --> 00:10:25,422
+We turned anonymous access off,
+
+266
+00:10:25,422 --> 00:10:27,005
+and proved it with a 401.
+
+267
+00:10:27,555 --> 00:10:31,941
+And we watched the three repository types work: a proxy that caches,
+
+268
+00:10:31,941 --> 00:10:34,908
+a hosted repository that stores our own files,
+
+269
+00:10:34,908 --> 00:10:37,875
+and a group that serves both from one address.
+
+270
+00:10:37,875 --> 00:10:41,294
+That is the foundation of everything that comes next.
+
+271
+00:10:42,844 --> 00:10:44,295
+Four mistakes to avoid.
+
+272
+00:10:44,845 --> 00:10:47,598
+One: pointing builds straight at Maven Central.
+
+273
+00:10:47,598 --> 00:10:48,711
+You lose the cache,
+
+274
+00:10:48,711 --> 00:10:51,465
+and your own artifacts are not at that address.
+
+275
+00:10:51,465 --> 00:10:52,695
+Builds ask the group.
+
+276
+00:10:53,245 --> 00:10:58,835
+Two: leaving anonymous access on, or keeping the first password. Both are open doors.
+
+277
+00:10:59,385 --> 00:11:03,557
+Three: putting the proxy before the hosted repositories in a group.
+
+278
+00:11:03,557 --> 00:11:04,927
+The order is priority.
+
+279
+00:11:04,927 --> 00:11:06,297
+Yours must come first.
+
+280
+00:11:06,847 --> 00:11:11,433
+Four: running Nexus as root, or never backing up the sonatype-work folder.
+
+281
+00:11:12,983 --> 00:11:15,223
+Your turn, on your own machine, in a lab.
+
+282
+00:11:15,773 --> 00:11:20,125
+One: start a Nexus. Find the user it runs as, and the first password.
+
+283
+00:11:20,675 --> 00:11:24,387
+Two: finish the wizard, and keep anonymous access disabled.
+
+284
+00:11:24,937 --> 00:11:29,630
+Three: fetch one library through maven-public, twice, and compare the two times.
+
+285
+00:11:30,180 --> 00:11:34,362
+Four: upload a file to maven-releases, and read it back through the group.
+
+286
+00:11:34,912 --> 00:11:36,640
+Pause the video, and do it now.
+
+287
+00:11:52,190 --> 00:11:53,065
+Quick check.
+
+288
+00:11:53,615 --> 00:11:56,964
+What are the three kinds of repository, and which one is a cache?
+
+289
+00:11:57,514 --> 00:12:00,479
+Why do builds ask the group, and not Maven Central?
+
+290
+00:12:01,029 --> 00:12:03,888
+Why must a group list the hosted repositories first?
+
+291
+00:12:04,438 --> 00:12:07,659
+Why does a server run as its own user, and not as root?
+
+292
+00:12:08,209 --> 00:12:10,279
+Pause the video, and answer out loud.
+
+293
+00:12:20,829 --> 00:12:26,311
+Objectives covered: the three repository types, and installing and securing a lab server.
+
+294
+00:12:26,861 --> 00:12:29,832
+Next: our own snapshot and release repositories,
+
+295
+00:12:29,832 --> 00:12:32,493
+and shipping Cloud Cart to them with Maven.
+
+296
+00:12:33,043 --> 00:12:37,246
+If this helped, like, share and subscribe, so you do not miss the next lesson.
