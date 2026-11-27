@@ -1,0 +1,31 @@
+Lesson 175 of the DevOps Engineering Bootcamp. Your repository works, but can you trust it? In this lesson we make Nexus Repository trustworthy, on a real server, with a real browser and a real terminal. You prove that a release is immutable, see who uploaded it and from where, and compare its SHA-1 checksum with the file you download yourself. You narrow the deployer role until a delete is refused with a 403. Then you keep the repository healthy: a task that trims old snapshots, a task that compacts the blob store and really frees the disk, a cleanup policy for a proxy cache, a scheduled database backup, a soft quota, and the status checks you can hand to a load balancer.
+
+Chapters
+0:00 Four bad mornings
+0:37 What to expect
+1:16 Immutable is not untouchable (MC19-O06)
+2:09 Clean up and back up (MC19-O07)
+3:01 Live: prove it, protect it, clean it, back it up
+3:15 Live: uploader, checksums and a tamper test (MC19-O06)
+5:09 Live: least privilege, and the 403 (MC19-O06)
+7:18 Live: trim snapshots and compact the blob store (MC19-O07)
+10:51 Live: a cleanup policy for a stale cache (MC19-O07)
+12:30 Live: back up the database and the blobs (MC19-O07)
+13:58 Live: soft quota and metric health (MC19-O07)
+15:03 Common mistakes
+15:37 Your turn
+16:21 What we proved and what is next
+
+Objectives covered: MC19-O06 (immutability, checksums and least-privilege access) and MC19-O07 (cleanup tasks, cleanup policies, blob store compaction and backups).
+
+Honest notes: the browser and terminal are a real continuous recording of Sonatype Nexus Repository Community Edition 3.98.1 on a throwaway lab server, continuing from Lessons 173 and 174. Passwords shown belong to that throwaway server. In the terminal, a small helper named keep prints only the lines that matter from the Maven output, and nx is a short alias for curl with the deployer login. The coloured boxes and labels on top are overlays added for teaching. Because tasks finish in a few seconds on this tiny repository, the pauses while they run are real but short. The narration is synthetic speech. The plan, concept, mistakes, your-turn and recap screens are labelled illustrations, not captures. Use your own machine only.
+
+Previous lesson: Nexus Repository: Snapshot and Release Repos, a Safe Deployer and Maven Deploy, Live | Lesson 174 https://youtu.be/Rl7uCqRKrwA
+Next: Lesson 176, troubleshooting four classic Nexus failures, and the mastery lab for this domain.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+❤ If our lessons have helped you, consider buying us a coffee. Your support means more than you know and helps us keep education free. Thank you for being part of this journey!
+☕ https://ko-fi.com/devopssimplifiedhq
+
+#devops #nexus #nexusrepository #maven #checksum #leastprivilege #backup #devopsbootcamp

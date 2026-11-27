@@ -1,0 +1,1347 @@
+1
+00:00:00,500 --> 00:00:02,121
+Imagine four bad mornings.
+
+2
+00:00:02,671 --> 00:00:04,578
+One: someone deletes a release,
+
+3
+00:00:04,578 --> 00:00:06,854
+and every build that needs it breaks.
+
+4
+00:00:06,854 --> 00:00:08,207
+Two: the disk is full,
+
+5
+00:00:08,207 --> 00:00:12,143
+and half of it is old snapshots that nobody will ever use again.
+
+6
+00:00:12,693 --> 00:00:16,770
+Three: the jar on a server is not the jar your pipeline built,
+
+7
+00:00:16,770 --> 00:00:18,085
+and nobody can tell.
+
+8
+00:00:18,085 --> 00:00:19,531
+Four: the server dies,
+
+9
+00:00:19,531 --> 00:00:21,504
+and everything on it dies too.
+
+10
+00:00:22,054 --> 00:00:23,794
+A repository is a promise.
+
+11
+00:00:23,794 --> 00:00:25,267
+Last time we made one.
+
+12
+00:00:25,267 --> 00:00:28,479
+Today we make the promise keep itself: prove it,
+
+13
+00:00:28,479 --> 00:00:29,216
+protect it,
+
+14
+00:00:29,216 --> 00:00:29,818
+clean it,
+
+15
+00:00:29,818 --> 00:00:30,822
+and back it up.
+
+16
+00:00:31,372 --> 00:00:35,937
+All of it live, on the same real Nexus, with the same Cloud Cart library.
+
+17
+00:00:37,487 --> 00:00:38,916
+Here is what to expect.
+
+18
+00:00:39,466 --> 00:00:40,480
+One: two ideas,
+
+19
+00:00:40,480 --> 00:00:41,291
+in pictures.
+
+20
+00:00:41,291 --> 00:00:43,725
+Immutable does not mean untouchable.
+
+21
+00:00:43,725 --> 00:00:46,293
+And cleaning up is a job in two steps.
+
+22
+00:00:46,843 --> 00:00:48,062
+Two: the live work,
+
+23
+00:00:48,062 --> 00:00:48,960
+in four parts.
+
+24
+00:00:48,960 --> 00:00:50,820
+Prove where a file came from.
+
+25
+00:00:50,820 --> 00:00:52,745
+Take away the power to delete.
+
+26
+00:00:52,745 --> 00:00:54,734
+Keep only the newest snapshots.
+
+27
+00:00:54,734 --> 00:00:55,888
+And take a backup.
+
+28
+00:00:56,438 --> 00:00:58,150
+Three: a proof for each.
+
+29
+00:00:58,150 --> 00:01:00,931
+A checksum that catches a changed file.
+
+30
+00:01:00,931 --> 00:01:02,215
+A 403 on a delete.
+
+31
+00:01:02,215 --> 00:01:04,568
+A repository that really shrinks.
+
+32
+00:01:04,568 --> 00:01:06,422
+And a backup file on disk.
+
+33
+00:01:06,972 --> 00:01:11,270
+This lesson covers two objectives of the Nexus domain: immutability,
+
+34
+00:01:11,270 --> 00:01:12,850
+retention and provenance,
+
+35
+00:01:12,850 --> 00:01:13,924
+then permissions,
+
+36
+00:01:13,924 --> 00:01:15,378
+backups and monitoring.
+
+37
+00:01:16,928 --> 00:01:20,189
+First idea: immutable does not mean untouchable.
+
+38
+00:01:20,189 --> 00:01:20,868
+Last time,
+
+39
+00:01:20,868 --> 00:01:23,382
+Nexus refused to overwrite a release.
+
+40
+00:01:23,382 --> 00:01:25,420
+That is the deployment policy,
+
+41
+00:01:25,420 --> 00:01:28,341
+and it protects a file from being replaced.
+
+42
+00:01:28,891 --> 00:01:32,418
+But a person with the delete privilege can still remove it.
+
+43
+00:01:32,418 --> 00:01:33,614
+And once it is gone,
+
+44
+00:01:33,614 --> 00:01:37,559
+someone can publish a different jar under the same version number.
+
+45
+00:01:37,559 --> 00:01:40,070
+The deployment policy never saw it coming.
+
+46
+00:01:40,620 --> 00:01:41,752
+So we add layers.
+
+47
+00:01:41,752 --> 00:01:42,418
+Layer one,
+
+48
+00:01:42,418 --> 00:01:44,816
+the deployment policy: no overwrite.
+
+49
+00:01:44,816 --> 00:01:45,483
+Layer two,
+
+50
+00:01:45,483 --> 00:01:48,613
+least privilege: the deployer can add and read,
+
+51
+00:01:48,613 --> 00:01:49,612
+but not delete.
+
+52
+00:01:49,612 --> 00:01:50,412
+Layer three,
+
+53
+00:01:50,412 --> 00:01:52,943
+provenance: every file has a checksum,
+
+54
+00:01:52,943 --> 00:01:55,074
+and a record of who uploaded it,
+
+55
+00:01:55,074 --> 00:01:55,807
+from where,
+
+56
+00:01:55,807 --> 00:01:56,407
+and when.
+
+57
+00:01:56,957 --> 00:01:59,078
+Provenance does not stop a change.
+
+58
+00:01:59,078 --> 00:02:00,700
+It makes a change visible.
+
+59
+00:02:00,700 --> 00:02:03,257
+A checksum is a fingerprint of the bytes.
+
+60
+00:02:03,257 --> 00:02:04,255
+Change one byte,
+
+61
+00:02:04,255 --> 00:02:06,002
+and the fingerprint changes.
+
+62
+00:02:06,552 --> 00:02:08,451
+So: prevent, restrict, prove.
+
+63
+00:02:10,001 --> 00:02:12,743
+Second idea: cleaning up takes two steps.
+
+64
+00:02:12,743 --> 00:02:14,749
+When Nexus deletes a snapshot,
+
+65
+00:02:14,749 --> 00:02:17,424
+it does not free the disk straight away.
+
+66
+00:02:17,424 --> 00:02:19,764
+It only marks the files as deleted.
+
+67
+00:02:19,764 --> 00:02:20,700
+A second task,
+
+68
+00:02:20,700 --> 00:02:22,439
+called compact blob store,
+
+69
+00:02:22,439 --> 00:02:23,910
+removes them for real.
+
+70
+00:02:24,460 --> 00:02:26,217
+What to delete is a policy.
+
+71
+00:02:26,217 --> 00:02:27,127
+For snapshots,
+
+72
+00:02:27,127 --> 00:02:30,444
+a simple and safe rule: keep the newest few builds,
+
+73
+00:02:30,444 --> 00:02:31,745
+and let the rest go.
+
+74
+00:02:31,745 --> 00:02:33,241
+Releases are different.
+
+75
+00:02:33,241 --> 00:02:36,428
+A release is deleted only when a person means it.
+
+76
+00:02:36,978 --> 00:02:39,451
+Third idea: a backup has two halves.
+
+77
+00:02:39,451 --> 00:02:42,405
+The database holds the list of what exists.
+
+78
+00:02:42,405 --> 00:02:44,535
+The blob store holds the bytes.
+
+79
+00:02:44,535 --> 00:02:45,634
+Lose either one,
+
+80
+00:02:45,634 --> 00:02:47,626
+and the repository is broken.
+
+81
+00:02:47,626 --> 00:02:50,305
+So the backup takes the database first,
+
+82
+00:02:50,305 --> 00:02:51,336
+then the blobs.
+
+83
+00:02:51,886 --> 00:02:54,702
+And a healthy server is watched: free space,
+
+84
+00:02:54,702 --> 00:02:55,726
+blob store size,
+
+85
+00:02:55,726 --> 00:02:57,134
+and the health checks.
+
+86
+00:02:57,134 --> 00:02:58,606
+So: two steps to clean,
+
+87
+00:02:58,606 --> 00:03:00,014
+two halves to back up.
+
+88
+00:03:01,564 --> 00:03:05,288
+We continue from the end of the last lesson: the same Nexus,
+
+89
+00:03:05,288 --> 00:03:06,467
+signed in as admin,
+
+90
+00:03:06,467 --> 00:03:09,880
+with cart-core published as a release and as snapshots.
+
+91
+00:03:09,880 --> 00:03:11,432
+We start with provenance.
+
+92
+00:03:11,432 --> 00:03:14,535
+How do we know that this file is the one we built?
+
+93
+00:03:15,085 --> 00:03:17,922
+In Browse, we open the releases repository.
+
+94
+00:03:22,272 --> 00:03:24,683
+We expand the tree, one level at a time.
+
+95
+00:03:25,233 --> 00:03:26,193
+First, com.
+
+96
+00:03:29,343 --> 00:03:30,601
+Then, Cloud Cart.
+
+97
+00:03:33,451 --> 00:03:34,646
+Then, cart-core.
+
+98
+00:03:37,596 --> 00:03:40,455
+And finally, the version, 1.0.0.
+
+99
+00:03:44,005 --> 00:03:45,690
+These are the files of our release.
+
+100
+00:03:46,240 --> 00:03:48,011
+The jar is the one that matters.
+
+101
+00:03:48,561 --> 00:03:49,602
+We click the jar.
+
+102
+00:03:49,602 --> 00:03:52,297
+The panel on the right is the file's record.
+
+103
+00:03:52,297 --> 00:03:53,951
+Here are its path and size,
+
+104
+00:03:53,951 --> 00:03:55,421
+and when it was created.
+
+105
+00:03:55,421 --> 00:03:58,791
+And here is the part we care about today: the uploader,
+
+106
+00:03:58,791 --> 00:03:59,648
+cart-deployer,
+
+107
+00:03:59,648 --> 00:04:01,425
+and the address it came from.
+
+108
+00:04:01,975 --> 00:04:03,127
+We scroll back up.
+
+109
+00:04:04,677 --> 00:04:07,407
+Next to Summary is a tab called Attributes.
+
+110
+00:04:11,757 --> 00:04:17,411
+It holds the file's checksums: SHA-1, SHA-256, and MD5.
+
+111
+00:04:17,961 --> 00:04:20,316
+A checksum is a fingerprint of the bytes,
+
+112
+00:04:20,316 --> 00:04:23,187
+and Nexus computed it the moment the file arrived.
+
+113
+00:04:23,737 --> 00:04:25,542
+Now we check it ourselves.
+
+114
+00:04:25,542 --> 00:04:26,653
+In the terminal,
+
+115
+00:04:26,653 --> 00:04:29,708
+two small helpers I defined for this lesson.
+
+116
+00:04:29,708 --> 00:04:31,999
+REL is the folder of the release.
+
+117
+00:04:31,999 --> 00:04:33,040
+And nx is curl,
+
+118
+00:04:33,040 --> 00:04:36,303
+with the deployer's credentials already inside.
+
+119
+00:04:36,853 --> 00:04:37,261
+First,
+
+120
+00:04:37,261 --> 00:04:40,463
+we ask Nexus for the recorded SHA-1 of the jar.
+
+121
+00:04:40,463 --> 00:04:43,052
+This is the fingerprint it wrote down,
+
+122
+00:04:43,052 --> 00:04:44,959
+on the day the file arrived.
+
+123
+00:04:45,509 --> 00:04:48,475
+Now we download the jar, to a folder of our own.
+
+124
+00:04:51,625 --> 00:04:53,779
+And we compute the SHA-1 ourselves.
+
+125
+00:04:54,329 --> 00:04:55,865
+The same forty characters.
+
+126
+00:04:56,415 --> 00:04:59,658
+The file we hold is exactly the file that was uploaded.
+
+127
+00:05:00,208 --> 00:05:01,844
+What if someone changes it?
+
+128
+00:05:01,844 --> 00:05:02,814
+We copy the jar,
+
+129
+00:05:02,814 --> 00:05:04,208
+add a single character,
+
+130
+00:05:04,208 --> 00:05:05,299
+and compute again.
+
+131
+00:05:05,299 --> 00:05:06,572
+Completely different.
+
+132
+00:05:06,572 --> 00:05:07,602
+One byte changed,
+
+133
+00:05:07,602 --> 00:05:09,360
+and the fingerprint tells us.
+
+134
+00:05:09,910 --> 00:05:12,234
+Provenance tells us a file changed.
+
+135
+00:05:12,234 --> 00:05:14,956
+It does not stop anyone from deleting it.
+
+136
+00:05:14,956 --> 00:05:15,156
+So,
+
+137
+00:05:15,156 --> 00:05:16,749
+second: least privilege.
+
+138
+00:05:16,749 --> 00:05:21,463
+Last lesson the deployer received every action on our two repositories,
+
+139
+00:05:21,463 --> 00:05:23,057
+to keep the setup short.
+
+140
+00:05:23,057 --> 00:05:26,443
+Today we take back the one it never needed: delete.
+
+141
+00:05:26,993 --> 00:05:28,103
+We open Roles.
+
+142
+00:05:33,953 --> 00:05:36,043
+Then, we open the cart-deployer role.
+
+143
+00:05:39,793 --> 00:05:42,460
+Under Privileges, we click Edit privileges.
+
+144
+00:05:45,010 --> 00:05:47,594
+We filter by the releases repository.
+
+145
+00:05:47,594 --> 00:05:48,571
+The first row,
+
+146
+00:05:48,571 --> 00:05:49,409
+with a star,
+
+147
+00:05:49,409 --> 00:05:50,736
+means every action.
+
+148
+00:05:50,736 --> 00:05:51,644
+We untick it.
+
+149
+00:05:51,644 --> 00:05:54,786
+Then we tick only what a deployer needs: add,
+
+150
+00:05:54,786 --> 00:05:56,183
+to upload new files.
+
+151
+00:05:56,183 --> 00:05:57,300
+Browse and read,
+
+152
+00:05:57,300 --> 00:05:58,837
+to see and fetch them.
+
+153
+00:05:58,837 --> 00:05:59,465
+And edit,
+
+154
+00:05:59,465 --> 00:06:03,236
+because Maven updates a metadata file on every deploy.
+
+155
+00:06:03,236 --> 00:06:04,423
+Delete stays off.
+
+156
+00:06:04,973 --> 00:06:07,341
+The same for the snapshots repository.
+
+157
+00:06:12,091 --> 00:06:13,585
+We filter by its name.
+
+158
+00:06:14,135 --> 00:06:15,329
+We untick the star.
+
+159
+00:06:16,979 --> 00:06:18,131
+Then, we tick add.
+
+160
+00:06:19,781 --> 00:06:20,720
+Then, browse.
+
+161
+00:06:23,870 --> 00:06:24,851
+Then, edit.
+
+162
+00:06:25,401 --> 00:06:26,191
+And read.
+
+163
+00:06:28,241 --> 00:06:33,766
+Ten privileges in total: four on each of our repositories, and two on the public group.
+
+164
+00:06:34,316 --> 00:06:35,255
+We confirm.
+
+165
+00:06:39,605 --> 00:06:41,034
+Then, we save the role.
+
+166
+00:06:45,384 --> 00:06:46,355
+Now the proof.
+
+167
+00:06:46,355 --> 00:06:47,464
+As the deployer,
+
+168
+00:06:47,464 --> 00:06:49,752
+we try to delete the release jar.
+
+169
+00:06:49,752 --> 00:06:52,456
+The helper prints only the status code.
+
+170
+00:06:52,456 --> 00:06:53,496
+403: forbidden.
+
+171
+00:06:53,496 --> 00:06:56,547
+The deployer can no longer remove a release,
+
+172
+00:06:56,547 --> 00:06:57,725
+even by accident.
+
+173
+00:06:57,725 --> 00:06:59,875
+And if its password ever leaks,
+
+174
+00:06:59,875 --> 00:07:02,579
+nobody can use it to erase our history.
+
+175
+00:07:03,129 --> 00:07:05,657
+Does the deployer still do its job?
+
+176
+00:07:05,657 --> 00:07:07,534
+We go back to the project,
+
+177
+00:07:07,534 --> 00:07:09,629
+and deploy the next snapshot,
+
+178
+00:07:09,629 --> 00:07:10,062
+1.1.0.
+
+179
+00:07:10,062 --> 00:07:10,712
+It works.
+
+180
+00:07:10,712 --> 00:07:11,001
+Add,
+
+181
+00:07:11,001 --> 00:07:14,179
+edit and read are all that a deployer needs.
+
+182
+00:07:18,529 --> 00:07:18,931
+Third,
+
+183
+00:07:18,931 --> 00:07:19,601
+retention.
+
+184
+00:07:19,601 --> 00:07:20,808
+Snapshots pile up.
+
+185
+00:07:20,808 --> 00:07:22,818
+Every deploy adds a new build,
+
+186
+00:07:22,818 --> 00:07:26,236
+and nobody ever asks for build one from last month.
+
+187
+00:07:26,236 --> 00:07:28,045
+To have something to clean,
+
+188
+00:07:28,045 --> 00:07:29,452
+we deploy twice more.
+
+189
+00:07:48,502 --> 00:07:53,541
+The search API lists every snapshot build in the repository.
+
+190
+00:07:53,541 --> 00:07:53,961
+Five.
+
+191
+00:07:53,961 --> 00:07:55,221
+Two from 1.0.0,
+
+192
+00:07:55,221 --> 00:07:57,405
+which is already released,
+
+193
+00:07:57,405 --> 00:07:59,169
+and three from 1.1.0.
+
+194
+00:07:59,719 --> 00:08:01,041
+Now the cleaning job.
+
+195
+00:08:07,491 --> 00:08:10,051
+Settings, System, Tasks, and Create task.
+
+196
+00:08:13,101 --> 00:08:14,595
+There are many task types.
+
+197
+00:08:15,145 --> 00:08:17,619
+The one we want is Maven, delete snapshot.
+
+198
+00:08:22,369 --> 00:08:26,956
+We name it trim-snapshots, and choose the repository: cloudcart-snapshots.
+
+199
+00:08:30,906 --> 00:08:32,869
+Minimum versions retained: two.
+
+200
+00:08:34,819 --> 00:08:37,037
+We keep the newest two builds, and no more.
+
+201
+00:08:37,587 --> 00:08:41,065
+Retention days: zero, because we do not need an age rule.
+
+202
+00:08:41,615 --> 00:08:43,492
+And Remove if released: on.
+
+203
+00:08:44,042 --> 00:08:48,799
+A snapshot whose release exists, like 1.0.0, has done its job.
+
+204
+00:08:49,349 --> 00:08:52,315
+The schedule says Manual, so we decide when it runs.
+
+205
+00:08:59,665 --> 00:09:01,926
+In real life, you would pick daily, at night.
+
+206
+00:09:02,476 --> 00:09:03,820
+We click Create task.
+
+207
+00:09:08,770 --> 00:09:09,922
+Then, we open it.
+
+208
+00:09:15,272 --> 00:09:16,552
+And we click Run now.
+
+209
+00:09:19,802 --> 00:09:22,554
+The task runs, and it finishes in a few seconds.
+
+210
+00:09:27,104 --> 00:09:29,387
+We ask the search API again.
+
+211
+00:09:29,387 --> 00:09:31,507
+The 1.0.0 builds are gone,
+
+212
+00:09:31,507 --> 00:09:34,197
+because that version is released.
+
+213
+00:09:34,197 --> 00:09:35,420
+And from 1.1.0,
+
+214
+00:09:35,420 --> 00:09:37,621
+only the newest two remain.
+
+215
+00:09:38,171 --> 00:09:40,254
+But the disk has not changed yet.
+
+216
+00:09:40,254 --> 00:09:41,200
+In Blob Stores,
+
+217
+00:09:41,200 --> 00:09:43,409
+the default store has a blob count.
+
+218
+00:09:43,409 --> 00:09:44,166
+Remember it.
+
+219
+00:09:47,116 --> 00:09:49,377
+Those deleted files are only marked.
+
+220
+00:09:54,527 --> 00:09:58,047
+We create the second task: Admin, compact blob store.
+
+221
+00:10:00,597 --> 00:10:02,219
+We name it compact-default.
+
+222
+00:10:07,769 --> 00:10:09,305
+We choose the default store.
+
+223
+00:10:12,955 --> 00:10:14,064
+And we create it.
+
+224
+00:10:22,514 --> 00:10:23,431
+We open it.
+
+225
+00:10:29,781 --> 00:10:30,933
+We click Run now.
+
+226
+00:10:34,283 --> 00:10:37,377
+The task runs, and the blobs are removed from the disk.
+
+227
+00:10:41,627 --> 00:10:44,123
+Back in Blob Stores: the count has dropped.
+
+228
+00:10:49,773 --> 00:10:51,287
+The space is really free.
+
+229
+00:10:51,837 --> 00:10:53,949
+One more tool: cleanup policies.
+
+230
+00:10:54,499 --> 00:10:55,994
+They work for any format,
+
+231
+00:10:55,994 --> 00:10:56,831
+on a schedule,
+
+232
+00:10:56,831 --> 00:11:00,238
+and they are perfect for proxy caches that grow and grow.
+
+233
+00:11:00,788 --> 00:11:02,388
+We open Cleanup Policies.
+
+234
+00:11:08,138 --> 00:11:09,333
+And we create one.
+
+235
+00:11:12,983 --> 00:11:14,455
+A name: stale-cache.
+
+236
+00:11:16,705 --> 00:11:18,177
+The format: Maven.
+
+237
+00:11:23,327 --> 00:11:24,500
+And a criterion.
+
+238
+00:11:25,050 --> 00:11:27,247
+The criterion is Component usage.
+
+239
+00:11:32,797 --> 00:11:35,827
+We remove what nobody has downloaded in sixty days.
+
+240
+00:11:36,377 --> 00:11:40,473
+Before anything is deleted, the preview shows what the policy would remove.
+
+241
+00:11:41,823 --> 00:11:43,380
+We choose maven-central.
+
+242
+00:11:47,130 --> 00:11:50,053
+Nothing matches yet, because our cache is brand new.
+
+243
+00:11:50,603 --> 00:11:51,925
+We save the policy.
+
+244
+00:11:57,575 --> 00:11:58,663
+And we attach it.
+
+245
+00:11:59,213 --> 00:12:02,008
+We open the maven-central repository.
+
+246
+00:12:06,758 --> 00:12:09,211
+In the Cleanup section, we find our policy.
+
+247
+00:12:15,161 --> 00:12:16,441
+We move it to Applied.
+
+248
+00:12:20,791 --> 00:12:21,751
+And we save.
+
+249
+00:12:27,301 --> 00:12:30,245
+From now on, the nightly cleanup service does the work.
+
+250
+00:12:30,795 --> 00:12:32,331
+Fourth, the server itself.
+
+251
+00:12:37,781 --> 00:12:40,597
+In Nexus, the database is backed up by a task.
+
+252
+00:12:41,147 --> 00:12:44,390
+We create one: Admin, backup H2 database.
+
+253
+00:12:47,240 --> 00:12:49,203
+We name it nightly-db-backup.
+
+254
+00:12:54,453 --> 00:12:56,351
+And we give it a folder on the server.
+
+255
+00:12:59,401 --> 00:13:01,193
+We scroll down, and continue.
+
+256
+00:13:07,243 --> 00:13:08,758
+Then, we create the task.
+
+257
+00:13:13,608 --> 00:13:15,869
+In real life, you would run it every night.
+
+258
+00:13:16,419 --> 00:13:17,571
+We open the task.
+
+259
+00:13:22,821 --> 00:13:23,973
+Here is its page.
+
+260
+00:13:24,523 --> 00:13:25,675
+We click Run now.
+
+261
+00:13:29,025 --> 00:13:30,092
+And we confirm.
+
+262
+00:13:36,342 --> 00:13:38,113
+The backup runs in a few seconds.
+
+263
+00:13:38,663 --> 00:13:39,997
+And here is the proof,
+
+264
+00:13:39,997 --> 00:13:41,816
+in the terminal: one zip file,
+
+265
+00:13:41,816 --> 00:13:42,907
+with today's date,
+
+266
+00:13:42,907 --> 00:13:44,180
+in the backup folder.
+
+267
+00:13:44,180 --> 00:13:45,575
+That is the first half.
+
+268
+00:13:46,125 --> 00:13:48,309
+The second half is the blob store.
+
+269
+00:13:48,309 --> 00:13:50,171
+It is a plain folder on disk,
+
+270
+00:13:50,171 --> 00:13:52,484
+and a backup copies that folder too.
+
+271
+00:13:52,484 --> 00:13:53,704
+The database first,
+
+272
+00:13:53,704 --> 00:13:54,668
+then the blobs,
+
+273
+00:13:54,668 --> 00:13:57,943
+so that every file the database knows about exists.
+
+274
+00:13:58,493 --> 00:13:59,539
+Now, watching.
+
+275
+00:14:06,489 --> 00:14:09,134
+In Blob Stores, we open the default store.
+
+276
+00:14:12,284 --> 00:14:13,905
+And we enable a soft quota.
+
+277
+00:14:16,355 --> 00:14:17,977
+The type: Space remaining.
+
+278
+00:14:21,827 --> 00:14:23,853
+The limit: one thousand megabytes.
+
+279
+00:14:25,703 --> 00:14:29,223
+Below that, Nexus raises an alert, before the disk is full.
+
+280
+00:14:32,573 --> 00:14:33,107
+Settings,
+
+281
+00:14:33,107 --> 00:14:33,936
+Metric health,
+
+282
+00:14:33,936 --> 00:14:35,773
+shows the checks of the server,
+
+283
+00:14:35,773 --> 00:14:36,425
+one by one,
+
+284
+00:14:36,425 --> 00:14:38,973
+including the blob store quota we just set.
+
+285
+00:14:41,723 --> 00:14:43,419
+And for a load balancer,
+
+286
+00:14:43,419 --> 00:14:44,903
+or a monitoring tool,
+
+287
+00:14:44,903 --> 00:14:48,224
+there is a status endpoint that needs no login.
+
+288
+00:14:48,224 --> 00:14:49,425
+200 means: ready.
+
+289
+00:14:49,975 --> 00:14:52,122
+That is a trustworthy repository.
+
+290
+00:14:52,122 --> 00:14:53,748
+Every file can be proved,
+
+291
+00:14:53,748 --> 00:14:56,546
+nobody holds more power than the job needs,
+
+292
+00:14:56,546 --> 00:14:58,563
+old builds clean themselves up,
+
+293
+00:14:58,563 --> 00:15:00,449
+and the server can come back.
+
+294
+00:15:00,999 --> 00:15:02,706
+Now, the mistakes to avoid.
+
+295
+00:15:04,256 --> 00:15:05,707
+Four mistakes to avoid.
+
+296
+00:15:06,257 --> 00:15:09,497
+One: believing that no overwrite means no loss.
+
+297
+00:15:09,497 --> 00:15:12,943
+A user with delete can still empty the repository.
+
+298
+00:15:12,943 --> 00:15:14,253
+Give deployers add,
+
+299
+00:15:14,253 --> 00:15:15,218
+edit and read,
+
+300
+00:15:15,218 --> 00:15:16,390
+and nothing more.
+
+301
+00:15:16,940 --> 00:15:20,250
+Two: deleting snapshots and forgetting to compact.
+
+302
+00:15:20,250 --> 00:15:21,574
+The disk stays full,
+
+303
+00:15:21,574 --> 00:15:23,361
+and nobody understands why.
+
+304
+00:15:23,911 --> 00:15:26,120
+Three: backing up only the database.
+
+305
+00:15:26,120 --> 00:15:27,164
+The list is safe,
+
+306
+00:15:27,164 --> 00:15:29,373
+but the files it points to are gone.
+
+307
+00:15:29,923 --> 00:15:32,450
+Four: a backup that was never restored,
+
+308
+00:15:32,450 --> 00:15:34,458
+or a quota that nobody watches.
+
+309
+00:15:34,458 --> 00:15:35,560
+Test the restore,
+
+310
+00:15:35,560 --> 00:15:36,856
+and read the alerts.
+
+311
+00:15:38,406 --> 00:15:40,646
+Your turn, on your own machine, in a lab.
+
+312
+00:15:41,196 --> 00:15:43,394
+One: open the jar of your release,
+
+313
+00:15:43,394 --> 00:15:47,596
+and compare its SHA-1 in Nexus with the one you compute yourself.
+
+314
+00:15:48,146 --> 00:15:53,031
+Two: narrow your deployer to add, browse, edit and read, and prove the 403.
+
+315
+00:15:53,581 --> 00:15:55,535
+Three: deploy a few snapshots,
+
+316
+00:15:55,535 --> 00:15:57,618
+create the delete snapshot task,
+
+317
+00:15:57,618 --> 00:15:58,074
+run it,
+
+318
+00:15:58,074 --> 00:15:59,832
+and compact the blob store.
+
+319
+00:16:00,382 --> 00:16:04,030
+Four: schedule a database backup, run it, and find the file.
+
+320
+00:16:04,580 --> 00:16:06,308
+Pause the video, and do it now.
+
+321
+00:16:21,858 --> 00:16:22,733
+Quick check.
+
+322
+00:16:23,283 --> 00:16:25,864
+What does a checksum prove, and what does it not stop?
+
+323
+00:16:26,414 --> 00:16:29,614
+Which privilege did we take away from the deployer, and why?
+
+324
+00:16:30,164 --> 00:16:32,575
+Why does cleaning snapshots need two tasks?
+
+325
+00:16:33,125 --> 00:16:35,130
+What are the two halves of a Nexus backup?
+
+326
+00:16:35,680 --> 00:16:37,749
+Pause the video, and answer out loud.
+
+327
+00:16:48,299 --> 00:16:50,383
+Objectives covered: immutability,
+
+328
+00:16:50,383 --> 00:16:51,961
+retention and provenance,
+
+329
+00:16:51,961 --> 00:16:53,034
+then permissions,
+
+330
+00:16:53,034 --> 00:16:54,486
+backups and monitoring.
+
+331
+00:16:55,036 --> 00:16:55,990
+Next: break it,
+
+332
+00:16:55,990 --> 00:16:56,435
+fix it,
+
+333
+00:16:56,435 --> 00:16:57,007
+prove it.
+
+334
+00:16:57,007 --> 00:16:58,215
+Four real failures,
+
+335
+00:16:58,215 --> 00:16:59,868
+read from the first error,
+
+336
+00:16:59,868 --> 00:17:01,457
+and the mastery scenario.
+
+337
+00:17:02,007 --> 00:17:06,210
+If this helped, like, share and subscribe, so you do not miss the next lesson.
