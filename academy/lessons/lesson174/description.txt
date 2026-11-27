@@ -21,8 +21,12 @@ Objectives covered: MC19-O03 (snapshot and release repositories), MC19-O04 (publ
 Honest notes: the browser and terminal are a real continuous recording of Sonatype Nexus Repository Community Edition 3.98.1 running on a throwaway lab server, continuing from Lesson 173. The password typed on screen belongs to that throwaway server. In the terminal, a small helper named keep prints only the test, upload and result lines of the Maven output. In this lesson the deployer gets every action on the two Cloud Cart repositories, to keep the setup short. The next lesson narrows it. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The plan, concept, mistakes, your-turn and recap screens are labelled illustrations, not captures. Use your own machine only.
 
 Previous lesson: Nexus Repository: Hosted, Proxy and Group, Installed and Secured Live | Lesson 173 https://youtu.be/M-23FUXp4hg
-Next: making it trustworthy. Narrower permissions, clean-up rules, and proof of where every file came from.
+Next lesson: Nexus Repository: Checksums, Least-Privilege Roles, Cleanup Tasks and Backups, Live | Lesson 175 https://youtu.be/PJXl-Q-Ux30
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+❤ If our lessons have helped you, consider buying us a coffee. Your support means more than you know and helps us keep education free. Thank you for being part of this journey!
+☕ https://ko-fi.com/devopssimplifiedhq
+
 
 #devops #nexus #nexusrepository #maven #mavendeploy #artifactmanagement #cicd #devopsbootcamp
