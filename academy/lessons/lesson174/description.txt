@@ -1,0 +1,28 @@
+Lesson 174 of the DevOps Engineering Bootcamp. Your build is green, but the jar sits in a folder called target, and nobody else can use it. In this lesson Cloud Cart's core library, cart-core, gets a real home in Nexus Repository. You learn the difference between a snapshot and a release, create a snapshot repository that allows redeploy and a release repository that refuses it, build a deployer role and user that can do one job and nothing else, and configure Maven so the repository IDs match and no password is ever stored in a file. Then you ship: a snapshot twice, a release once, an attempt to overwrite the release that Nexus refuses with a 409, and finally you fetch your files back by path and by search.
+
+Chapters
+0:00 Where does a build go?
+0:43 What to expect
+1:21 Snapshot and release (MC19-O03)
+2:07 Deployer and Maven wiring (MC19-O05)
+2:51 Live: the snapshot and release repositories (MC19-O03)
+4:35 Live: a role and a user that can only deploy (MC19-O05)
+6:43 Live: the pom, settings.xml and no password in files (MC19-O05)
+7:48 Live: mvn deploy, a snapshot twice (MC19-O04)
+9:11 Live: the release, and the 409 refusal (MC19-O04)
+10:03 Live: fetch it back, search, prove no secrets (MC19-O04)
+10:54 What we proved
+11:14 Common mistakes
+11:52 Your turn
+12:39 Quick check and what is next
+
+Objectives covered: MC19-O03 (snapshot and release repositories), MC19-O04 (publish and retrieve with Maven) and MC19-O05 (Maven settings, matching IDs and safe credentials).
+
+Honest notes: the browser and terminal are a real continuous recording of Sonatype Nexus Repository Community Edition 3.98.1 running on a throwaway lab server, continuing from Lesson 173. The password typed on screen belongs to that throwaway server. In the terminal, a small helper named keep prints only the test, upload and result lines of the Maven output. In this lesson the deployer gets every action on the two Cloud Cart repositories, to keep the setup short. The next lesson narrows it. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The plan, concept, mistakes, your-turn and recap screens are labelled illustrations, not captures. Use your own machine only.
+
+Previous lesson: Nexus Repository: Hosted, Proxy and Group, Installed and Secured Live | Lesson 173 https://youtu.be/M-23FUXp4hg
+Next: making it trustworthy. Narrower permissions, clean-up rules, and proof of where every file came from.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #nexus #nexusrepository #maven #mavendeploy #artifactmanagement #cicd #devopsbootcamp
