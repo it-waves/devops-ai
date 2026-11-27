@@ -1,0 +1,1431 @@
+1
+00:00:00,500 --> 00:00:05,172
+It is two in the morning. The pipeline is red. The log has two thousand lines.
+
+2
+00:00:05,722 --> 00:00:06,713
+Where do you look?
+
+3
+00:00:06,713 --> 00:00:08,531
+Most people scroll to the bottom,
+
+4
+00:00:08,531 --> 00:00:09,798
+and read the last line.
+
+5
+00:00:09,798 --> 00:00:11,119
+That is the wrong place.
+
+6
+00:00:11,669 --> 00:00:14,528
+Today you learn one habit: read the first error.
+
+7
+00:00:14,528 --> 00:00:17,506
+Then we break a real pipeline four different ways,
+
+8
+00:00:17,506 --> 00:00:18,518
+and fix each one,
+
+9
+00:00:18,518 --> 00:00:18,816
+live.
+
+10
+00:00:19,366 --> 00:00:22,331
+Name the hop. Test it alone. Change one thing.
+
+11
+00:00:23,881 --> 00:00:25,310
+Here is what to expect.
+
+12
+00:00:25,860 --> 00:00:30,660
+One: the four places a SonarQube pipeline can fail, and what each one looks like.
+
+13
+00:00:31,210 --> 00:00:35,562
+Two: a method with five questions, that works for any failing pipeline.
+
+14
+00:00:36,112 --> 00:00:37,416
+Three: a live demo.
+
+15
+00:00:37,416 --> 00:00:38,515
+A wrong address.
+
+16
+00:00:38,515 --> 00:00:39,956
+A server that is off.
+
+17
+00:00:39,956 --> 00:00:41,741
+A gate that never answers.
+
+18
+00:00:41,741 --> 00:00:43,388
+And a gate that says no.
+
+19
+00:00:43,388 --> 00:00:44,486
+We fix each one,
+
+20
+00:00:44,486 --> 00:00:47,163
+and each fix shows us the next problem.
+
+21
+00:00:47,713 --> 00:00:49,889
+Four: the common mistakes, and your turn.
+
+22
+00:00:50,439 --> 00:00:53,468
+This is objective eight of the SonarQube domain.
+
+23
+00:00:55,018 --> 00:00:57,663
+First, the four places a pipeline can fail.
+
+24
+00:00:58,213 --> 00:00:58,458
+One.
+
+25
+00:00:58,458 --> 00:01:00,661
+The scanner cannot reach the server.
+
+26
+00:01:00,661 --> 00:01:03,660
+The message says: failed to query server version,
+
+27
+00:01:03,660 --> 00:01:05,924
+and it shows the address that failed.
+
+28
+00:01:05,924 --> 00:01:07,638
+Either the address is wrong,
+
+29
+00:01:07,638 --> 00:01:08,923
+or the server is off.
+
+30
+00:01:09,473 --> 00:01:09,730
+Two.
+
+31
+00:01:09,730 --> 00:01:10,953
+The server answers,
+
+32
+00:01:10,953 --> 00:01:11,725
+but says no.
+
+33
+00:01:11,725 --> 00:01:13,591
+The message says four oh one,
+
+34
+00:01:13,591 --> 00:01:14,684
+or four oh three.
+
+35
+00:01:14,684 --> 00:01:15,842
+That is the token,
+
+36
+00:01:15,842 --> 00:01:17,515
+and we fixed it last time.
+
+37
+00:01:18,065 --> 00:01:18,444
+Three.
+
+38
+00:01:18,444 --> 00:01:19,518
+Everything works,
+
+39
+00:01:19,518 --> 00:01:21,096
+but the gate stage waits,
+
+40
+00:01:21,096 --> 00:01:22,296
+and then times out.
+
+41
+00:01:22,296 --> 00:01:23,875
+There is no error at all.
+
+42
+00:01:23,875 --> 00:01:26,211
+The reply never came back to Jenkins.
+
+43
+00:01:26,211 --> 00:01:27,537
+That is the web hook.
+
+44
+00:01:28,087 --> 00:01:28,425
+Four.
+
+45
+00:01:28,425 --> 00:01:29,572
+The gate answers,
+
+46
+00:01:29,572 --> 00:01:30,990
+and the answer is no.
+
+47
+00:01:30,990 --> 00:01:33,352
+The message says: pipeline aborted,
+
+48
+00:01:33,352 --> 00:01:34,769
+quality gate failure.
+
+49
+00:01:34,769 --> 00:01:36,524
+This is not a broken tool.
+
+50
+00:01:36,524 --> 00:01:37,739
+This is your code,
+
+51
+00:01:37,739 --> 00:01:40,034
+and the pipeline is doing its job.
+
+52
+00:01:40,584 --> 00:01:44,680
+Four places, four different messages. The message tells you where to look.
+
+53
+00:01:46,230 --> 00:01:50,518
+Now, the method. Five questions. Ask them in this order, every time.
+
+54
+00:01:51,068 --> 00:01:51,300
+One.
+
+55
+00:01:51,300 --> 00:01:52,401
+Which stage is red?
+
+56
+00:01:52,401 --> 00:01:54,662
+The stage view tells you in one second.
+
+57
+00:01:54,662 --> 00:01:56,401
+Do not read anything else yet.
+
+58
+00:01:56,951 --> 00:01:57,196
+Two.
+
+59
+00:01:57,196 --> 00:01:58,663
+What is the first error?
+
+60
+00:01:58,663 --> 00:01:59,763
+Not the last line.
+
+61
+00:01:59,763 --> 00:02:01,658
+The first line that says error.
+
+62
+00:02:01,658 --> 00:02:04,226
+Everything after it is usually just noise.
+
+63
+00:02:04,776 --> 00:02:05,160
+Three.
+
+64
+00:02:05,160 --> 00:02:06,184
+Which hop is it?
+
+65
+00:02:06,184 --> 00:02:07,656
+Jenkins to the scanner.
+
+66
+00:02:07,656 --> 00:02:09,320
+The scanner to the server.
+
+67
+00:02:09,320 --> 00:02:10,792
+The server to the gate.
+
+68
+00:02:10,792 --> 00:02:12,392
+The gate back to Jenkins.
+
+69
+00:02:12,942 --> 00:02:13,289
+Four.
+
+70
+00:02:13,289 --> 00:02:14,540
+Test that one hop,
+
+71
+00:02:14,540 --> 00:02:14,957
+alone,
+
+72
+00:02:14,957 --> 00:02:16,069
+outside Jenkins.
+
+73
+00:02:16,069 --> 00:02:17,320
+One small command,
+
+74
+00:02:17,320 --> 00:02:18,015
+like curl,
+
+75
+00:02:18,015 --> 00:02:19,683
+gives a clear yes or no.
+
+76
+00:02:20,233 --> 00:02:20,537
+Five.
+
+77
+00:02:20,537 --> 00:02:21,571
+Change one thing.
+
+78
+00:02:21,571 --> 00:02:22,180
+Run again.
+
+79
+00:02:22,180 --> 00:02:23,700
+If you change two things,
+
+80
+00:02:23,700 --> 00:02:25,951
+you will never know which one worked.
+
+81
+00:02:32,001 --> 00:02:32,891
+Let us do it.
+
+82
+00:02:32,891 --> 00:02:34,259
+We start in Jenkins.
+
+83
+00:02:34,259 --> 00:02:35,012
+We sign in,
+
+84
+00:02:35,012 --> 00:02:36,175
+and open the job,
+
+85
+00:02:36,175 --> 00:02:37,475
+cloud cart quality.
+
+86
+00:02:37,475 --> 00:02:41,376
+It is the pipeline from the last lessons: build and test,
+
+87
+00:02:41,376 --> 00:02:41,718
+scan,
+
+88
+00:02:41,718 --> 00:02:42,881
+and quality gate.
+
+89
+00:02:46,931 --> 00:02:48,041
+We click Build Now,
+
+90
+00:02:48,041 --> 00:02:49,267
+and open the console.
+
+91
+00:02:49,267 --> 00:02:50,961
+We have not touched the code.
+
+92
+00:02:50,961 --> 00:02:53,356
+Someone just changed something around it,
+
+93
+00:02:53,356 --> 00:02:54,758
+and we do not know what.
+
+94
+00:02:54,758 --> 00:02:55,400
+Let us see.
+
+95
+00:02:55,950 --> 00:02:57,033
+The first stage,
+
+96
+00:02:57,033 --> 00:02:58,048
+build and test,
+
+97
+00:02:58,048 --> 00:02:59,671
+does not need SonarQube.
+
+98
+00:02:59,671 --> 00:03:02,783
+It compiles the code and runs the forty tests.
+
+99
+00:03:02,783 --> 00:03:03,460
+It passes.
+
+100
+00:03:04,010 --> 00:03:05,624
+Now the Scan stage starts.
+
+101
+00:03:05,624 --> 00:03:07,425
+It tries to reach the server,
+
+102
+00:03:07,425 --> 00:03:08,667
+and send the report.
+
+103
+00:03:08,667 --> 00:03:10,282
+Let us wait a few seconds.
+
+104
+00:03:17,432 --> 00:03:17,699
+Red.
+
+105
+00:03:17,699 --> 00:03:18,967
+Failure number one.
+
+106
+00:03:18,967 --> 00:03:20,703
+Question one: which stage?
+
+107
+00:03:20,703 --> 00:03:21,037
+Scan.
+
+108
+00:03:21,037 --> 00:03:23,040
+Question two: the first error.
+
+109
+00:03:23,040 --> 00:03:24,843
+We do not go to the bottom.
+
+110
+00:03:24,843 --> 00:03:27,714
+We look for the first line that says error.
+
+111
+00:03:28,264 --> 00:03:28,978
+Here it is.
+
+112
+00:03:28,978 --> 00:03:30,989
+Failed to query server version.
+
+113
+00:03:30,989 --> 00:03:32,286
+Call to the address,
+
+114
+00:03:32,286 --> 00:03:32,935
+localhost,
+
+115
+00:03:32,935 --> 00:03:34,946
+port nine thousand one hundred,
+
+116
+00:03:34,946 --> 00:03:35,400
+failed.
+
+117
+00:03:35,400 --> 00:03:37,282
+The message does not say why.
+
+118
+00:03:37,282 --> 00:03:39,358
+But it does give us the address.
+
+119
+00:03:39,908 --> 00:03:41,761
+Notice what it does not say.
+
+120
+00:03:41,761 --> 00:03:43,813
+A wrong token says four oh one,
+
+121
+00:03:43,813 --> 00:03:44,805
+not authorized.
+
+122
+00:03:44,805 --> 00:03:45,136
+Here,
+
+123
+00:03:45,136 --> 00:03:46,526
+nobody even answered.
+
+124
+00:03:46,526 --> 00:03:46,725
+So,
+
+125
+00:03:46,725 --> 00:03:49,504
+two possible causes: the address is wrong,
+
+126
+00:03:49,504 --> 00:03:50,894
+or the server is off.
+
+127
+00:03:51,444 --> 00:03:53,297
+Question four: test the hop,
+
+128
+00:03:53,297 --> 00:03:53,694
+alone.
+
+129
+00:03:53,694 --> 00:03:54,753
+In the terminal.
+
+130
+00:03:54,753 --> 00:03:56,871
+We ask the address from the log,
+
+131
+00:03:56,871 --> 00:03:58,923
+port nine thousand one hundred,
+
+132
+00:03:58,923 --> 00:03:59,915
+for its status.
+
+133
+00:03:59,915 --> 00:04:01,173
+Nothing comes back.
+
+134
+00:04:01,173 --> 00:04:03,555
+Curl says seven: connection refused.
+
+135
+00:04:03,555 --> 00:04:05,540
+Now we ask port nine thousand.
+
+136
+00:04:05,540 --> 00:04:06,996
+It answers: status UP.
+
+137
+00:04:07,546 --> 00:04:12,965
+So the server is healthy. The address in Jenkins is wrong. A typo, a very common one.
+
+138
+00:04:18,015 --> 00:04:19,601
+The fix is in Jenkins.
+
+139
+00:04:19,601 --> 00:04:20,682
+Manage Jenkins,
+
+140
+00:04:20,682 --> 00:04:21,187
+System.
+
+141
+00:04:21,187 --> 00:04:24,070
+We scroll down to the SonarQube servers.
+
+142
+00:04:24,070 --> 00:04:27,747
+The server URL says port nine thousand one hundred.
+
+143
+00:04:27,747 --> 00:04:30,270
+We change it to port nine thousand,
+
+144
+00:04:30,270 --> 00:04:31,135
+and we save.
+
+145
+00:04:34,685 --> 00:04:34,921
+Now,
+
+146
+00:04:34,921 --> 00:04:35,923
+a second failure.
+
+147
+00:04:35,923 --> 00:04:37,868
+While we were fixing the address,
+
+148
+00:04:37,868 --> 00:04:41,228
+a colleague stopped the SonarQube server for maintenance.
+
+149
+00:04:41,228 --> 00:04:42,171
+In the terminal,
+
+150
+00:04:42,171 --> 00:04:43,645
+that is the stop command.
+
+151
+00:04:49,195 --> 00:04:53,632
+We run the build again. The address is right this time. Let us see what the log says.
+
+152
+00:04:54,182 --> 00:04:59,110
+The build and test stage passes again. And the Scan stage is starting. Let us wait.
+
+153
+00:05:05,860 --> 00:05:06,519
+Red again.
+
+154
+00:05:06,519 --> 00:05:07,112
+And look.
+
+155
+00:05:07,112 --> 00:05:10,734
+It is the same message: failed to query server version.
+
+156
+00:05:10,734 --> 00:05:13,631
+But the address now says port nine thousand,
+
+157
+00:05:13,631 --> 00:05:14,553
+the right one.
+
+158
+00:05:14,553 --> 00:05:16,134
+The symptom is the same.
+
+159
+00:05:16,134 --> 00:05:17,648
+The cause is different.
+
+160
+00:05:17,648 --> 00:05:19,492
+That is why we test the hop.
+
+161
+00:05:20,042 --> 00:05:22,202
+We ask the server for its status.
+
+162
+00:05:22,202 --> 00:05:22,726
+Nothing.
+
+163
+00:05:22,726 --> 00:05:23,773
+Curl says seven.
+
+164
+00:05:23,773 --> 00:05:25,017
+The server is down.
+
+165
+00:05:25,017 --> 00:05:26,064
+Not the address.
+
+166
+00:05:26,064 --> 00:05:26,784
+The server.
+
+167
+00:05:27,334 --> 00:05:28,637
+We start it again.
+
+168
+00:05:28,637 --> 00:05:29,723
+sonar.sh start.
+
+169
+00:05:29,723 --> 00:05:31,533
+Then we watch the status,
+
+170
+00:05:31,533 --> 00:05:32,908
+every five seconds,
+
+171
+00:05:32,908 --> 00:05:34,139
+until it says UP.
+
+172
+00:05:34,689 --> 00:05:37,809
+While we wait: SonarQube is three programs in one.
+
+173
+00:05:37,809 --> 00:05:39,619
+A web server for the screens.
+
+174
+00:05:39,619 --> 00:05:41,429
+A search engine for the data.
+
+175
+00:05:41,429 --> 00:05:42,739
+And a compute engine,
+
+176
+00:05:42,739 --> 00:05:44,487
+that processes your reports.
+
+177
+00:05:44,487 --> 00:05:46,296
+They start one after another,
+
+178
+00:05:46,296 --> 00:05:48,044
+and it takes about a minute.
+
+179
+00:05:48,594 --> 00:05:50,417
+STARTING means: not ready yet.
+
+180
+00:05:50,417 --> 00:05:51,390
+If you scan now,
+
+181
+00:05:51,390 --> 00:05:52,545
+you can fail again.
+
+182
+00:05:52,545 --> 00:05:54,247
+Always wait for the word UP.
+
+183
+00:05:54,797 --> 00:05:57,549
+UP. The server is ready. We run the build again.
+
+184
+00:06:26,099 --> 00:06:27,319
+We click Build Now,
+
+185
+00:06:27,319 --> 00:06:28,667
+and open the console.
+
+186
+00:06:28,667 --> 00:06:30,079
+Build and test passes.
+
+187
+00:06:30,079 --> 00:06:31,556
+And now the Scan stage.
+
+188
+00:06:31,556 --> 00:06:33,032
+Let us watch carefully.
+
+189
+00:06:33,582 --> 00:06:34,251
+This time,
+
+190
+00:06:34,251 --> 00:06:35,253
+the scan works.
+
+191
+00:06:35,253 --> 00:06:35,854
+No error.
+
+192
+00:06:35,854 --> 00:06:37,124
+The report is sent.
+
+193
+00:06:37,124 --> 00:06:39,463
+The next stage is the quality gate.
+
+194
+00:06:39,463 --> 00:06:41,668
+Jenkins now waits for the answer,
+
+195
+00:06:41,668 --> 00:06:43,673
+and the timeout is one minute.
+
+196
+00:06:44,223 --> 00:06:46,076
+Here is what this stage does.
+
+197
+00:06:46,076 --> 00:06:47,034
+After the scan,
+
+198
+00:06:47,034 --> 00:06:50,357
+SonarQube needs a little time to process the report,
+
+199
+00:06:50,357 --> 00:06:51,762
+in the compute engine.
+
+200
+00:06:51,762 --> 00:06:53,615
+Jenkins asks: is it finished?
+
+201
+00:06:53,615 --> 00:06:55,149
+And what is the verdict?
+
+202
+00:06:55,149 --> 00:06:57,002
+Then it waits for the answer.
+
+203
+00:06:57,552 --> 00:06:59,808
+The answer should arrive by itself.
+
+204
+00:06:59,808 --> 00:07:02,258
+SonarQube is supposed to call Jenkins,
+
+205
+00:07:02,258 --> 00:07:03,289
+when it is done.
+
+206
+00:07:03,289 --> 00:07:06,448
+Keep that in mind: someone has to make that call.
+
+207
+00:07:06,998 --> 00:07:08,395
+While the clock runs,
+
+208
+00:07:08,395 --> 00:07:10,457
+let us write down the evidence.
+
+209
+00:07:10,457 --> 00:07:11,988
+Build and test: passed.
+
+210
+00:07:11,988 --> 00:07:12,853
+Scan: passed,
+
+211
+00:07:12,853 --> 00:07:14,716
+and the report was accepted.
+
+212
+00:07:14,716 --> 00:07:16,179
+Quality gate: waiting.
+
+213
+00:07:16,179 --> 00:07:18,441
+So the pipeline reaches SonarQube,
+
+214
+00:07:18,441 --> 00:07:20,504
+and SonarQube takes the report.
+
+215
+00:07:20,504 --> 00:07:22,899
+The problem is not on the way there.
+
+216
+00:07:22,899 --> 00:07:24,363
+It is on the way back.
+
+217
+00:07:24,913 --> 00:07:27,678
+Let us use this minute to look at the clock.
+
+218
+00:07:27,678 --> 00:07:28,683
+In the pipeline,
+
+219
+00:07:28,683 --> 00:07:31,133
+the one minute timeout is a safety net.
+
+220
+00:07:31,133 --> 00:07:31,825
+Without it,
+
+221
+00:07:31,825 --> 00:07:36,160
+a build that waits for an answer that never comes would wait forever,
+
+222
+00:07:36,160 --> 00:07:37,542
+and block the machine.
+
+223
+00:07:37,542 --> 00:07:40,307
+A timeout turns silence into a clear result.
+
+224
+00:07:40,307 --> 00:07:41,187
+Remember that.
+
+225
+00:07:41,187 --> 00:07:42,129
+It saves hours.
+
+226
+00:07:42,679 --> 00:07:43,162
+We wait.
+
+227
+00:07:43,162 --> 00:07:43,886
+And we wait.
+
+228
+00:07:43,886 --> 00:07:44,851
+Nothing happens.
+
+229
+00:07:44,851 --> 00:07:46,179
+This is failure three,
+
+230
+00:07:46,179 --> 00:07:49,015
+and the strange part is that there is no error.
+
+231
+00:08:05,565 --> 00:08:06,132
+Time out.
+
+232
+00:08:06,132 --> 00:08:07,772
+Timeout has been exceeded.
+
+233
+00:08:07,772 --> 00:08:10,483
+The stage did not fail because of an error.
+
+234
+00:08:10,483 --> 00:08:12,626
+It failed because nobody answered.
+
+235
+00:08:17,176 --> 00:08:18,878
+Question three: which hop?
+
+236
+00:08:18,878 --> 00:08:21,496
+The reply from the gate back to Jenkins.
+
+237
+00:08:21,496 --> 00:08:22,870
+Let us ask SonarQube.
+
+238
+00:08:22,870 --> 00:08:24,179
+We open the project,
+
+239
+00:08:24,179 --> 00:08:24,899
+cloud cart.
+
+240
+00:08:25,449 --> 00:08:26,489
+Look at the top.
+
+241
+00:08:26,489 --> 00:08:28,115
+The quality gate: failed.
+
+242
+00:08:28,115 --> 00:08:30,586
+SonarQube had the answer a minute ago.
+
+243
+00:08:30,586 --> 00:08:32,212
+It never reached Jenkins.
+
+244
+00:08:34,262 --> 00:08:37,192
+SonarQube reports back through a web hook.
+
+245
+00:08:37,192 --> 00:08:40,890
+A web hook is a call that SonarQube makes to Jenkins,
+
+246
+00:08:40,890 --> 00:08:42,913
+when an analysis is finished.
+
+247
+00:08:42,913 --> 00:08:44,518
+We open Administration,
+
+248
+00:08:44,518 --> 00:08:45,495
+Configuration,
+
+249
+00:08:45,495 --> 00:08:46,193
+Web hooks.
+
+250
+00:08:46,193 --> 00:08:47,448
+The list is empty.
+
+251
+00:08:47,448 --> 00:08:48,704
+That is the cause.
+
+252
+00:08:52,254 --> 00:08:53,276
+We create one.
+
+253
+00:08:53,276 --> 00:08:54,590
+The name: jenkins.
+
+254
+00:08:54,590 --> 00:08:56,123
+The URL: our Jenkins,
+
+255
+00:08:56,123 --> 00:08:56,561
+slash,
+
+256
+00:08:56,561 --> 00:08:58,313
+sonarqube dash web hook,
+
+257
+00:08:58,313 --> 00:08:58,751
+slash.
+
+258
+00:08:58,751 --> 00:09:00,430
+The last slash matters.
+
+259
+00:09:00,430 --> 00:09:01,598
+We click Create.
+
+260
+00:09:06,648 --> 00:09:08,185
+We run the build again.
+
+261
+00:09:08,185 --> 00:09:08,853
+Build Now,
+
+262
+00:09:08,853 --> 00:09:09,922
+and the console.
+
+263
+00:09:09,922 --> 00:09:11,660
+The first two stages pass,
+
+264
+00:09:11,660 --> 00:09:12,328
+as before.
+
+265
+00:09:12,328 --> 00:09:13,731
+The scan is accepted.
+
+266
+00:09:14,281 --> 00:09:17,694
+And this time, the gate answers quickly. And the answer is no.
+
+267
+00:09:42,444 --> 00:09:43,292
+Failure four.
+
+268
+00:09:43,292 --> 00:09:44,401
+Pipeline aborted,
+
+269
+00:09:44,401 --> 00:09:46,228
+due to quality gate failure,
+
+270
+00:09:46,228 --> 00:09:46,619
+ERROR.
+
+271
+00:09:46,619 --> 00:09:48,185
+Look at what this means.
+
+272
+00:09:48,185 --> 00:09:49,946
+The pipeline is not broken.
+
+273
+00:09:49,946 --> 00:09:50,990
+Every hop works.
+
+274
+00:09:50,990 --> 00:09:52,686
+SonarQube judged the code,
+
+275
+00:09:52,686 --> 00:09:55,100
+and the verdict was: not good enough.
+
+276
+00:09:55,100 --> 00:09:57,252
+The pipeline stopped the release.
+
+277
+00:09:57,252 --> 00:09:58,231
+It did its job.
+
+278
+00:10:01,781 --> 00:10:03,363
+Why was the verdict no?
+
+279
+00:10:03,363 --> 00:10:04,533
+We ask SonarQube.
+
+280
+00:10:04,533 --> 00:10:05,702
+The project page.
+
+281
+00:10:05,702 --> 00:10:06,184
+Failed.
+
+282
+00:10:06,184 --> 00:10:07,216
+And the reason,
+
+283
+00:10:07,216 --> 00:10:11,687
+in one line: coverage on overall code is below sixty two percent.
+
+284
+00:10:11,687 --> 00:10:14,026
+The gate wants at least sixty two.
+
+285
+00:10:14,576 --> 00:10:14,846
+Now,
+
+286
+00:10:14,846 --> 00:10:17,209
+the wrong fix is to lower the gate.
+
+287
+00:10:17,209 --> 00:10:19,031
+The right fix is the tests.
+
+288
+00:10:19,031 --> 00:10:22,136
+One class has no tests at all: Legacy Pricing.
+
+289
+00:10:22,136 --> 00:10:23,216
+In the terminal,
+
+290
+00:10:23,216 --> 00:10:25,038
+we look at the test folder.
+
+291
+00:10:25,038 --> 00:10:26,523
+The file is not there.
+
+292
+00:10:28,573 --> 00:10:33,309
+We add the missing test file, and commit it. One small commit, with a clear message.
+
+293
+00:10:38,359 --> 00:10:40,190
+We run the build one more time.
+
+294
+00:10:40,190 --> 00:10:40,781
+Build Now,
+
+295
+00:10:40,781 --> 00:10:41,726
+and the console.
+
+296
+00:10:41,726 --> 00:10:43,261
+We have changed one thing,
+
+297
+00:10:43,261 --> 00:10:45,506
+so we will know exactly what fixed it.
+
+298
+00:10:46,056 --> 00:10:50,877
+Build and test passes. The scan is accepted. The gate answers. And now, green.
+
+299
+00:11:16,227 --> 00:11:17,983
+All three stages are green.
+
+300
+00:11:17,983 --> 00:11:19,024
+The gate passed.
+
+301
+00:11:19,024 --> 00:11:21,171
+We open the project in SonarQube,
+
+302
+00:11:21,171 --> 00:11:22,732
+to see it for ourselves.
+
+303
+00:11:22,732 --> 00:11:23,188
+Passed.
+
+304
+00:11:23,188 --> 00:11:25,464
+And the coverage is above the line.
+
+305
+00:11:33,014 --> 00:11:34,631
+Look back at what we did.
+
+306
+00:11:34,631 --> 00:11:35,536
+Four failures.
+
+307
+00:11:35,536 --> 00:11:37,089
+Four different messages.
+
+308
+00:11:37,089 --> 00:11:39,223
+Four different fixes: an address,
+
+309
+00:11:39,223 --> 00:11:39,805
+a server,
+
+310
+00:11:39,805 --> 00:11:40,516
+a web hook,
+
+311
+00:11:40,516 --> 00:11:41,486
+and some tests.
+
+312
+00:11:41,486 --> 00:11:42,586
+We never guessed.
+
+313
+00:11:42,586 --> 00:11:45,366
+We asked the same five questions each time.
+
+314
+00:11:46,916 --> 00:11:48,068
+Five mistakes.
+
+315
+00:11:48,618 --> 00:11:50,666
+One: reading only the last line.
+
+316
+00:11:50,666 --> 00:11:52,458
+The first error is above it.
+
+317
+00:11:52,458 --> 00:11:55,082
+The last line is usually only the result.
+
+318
+00:11:55,632 --> 00:11:57,473
+Two: restarting everything.
+
+319
+00:11:57,473 --> 00:11:58,019
+Jenkins,
+
+320
+00:11:58,019 --> 00:11:58,701
+SonarQube,
+
+321
+00:11:58,701 --> 00:11:59,928
+the server itself.
+
+322
+00:11:59,928 --> 00:12:01,224
+It hides the cause,
+
+323
+00:12:01,224 --> 00:12:03,611
+and sometimes it creates a new one.
+
+324
+00:12:04,161 --> 00:12:06,232
+Three: changing two things at once.
+
+325
+00:12:06,232 --> 00:12:06,942
+If it works,
+
+326
+00:12:06,942 --> 00:12:08,126
+you do not know why.
+
+327
+00:12:08,126 --> 00:12:08,836
+If it fails,
+
+328
+00:12:08,836 --> 00:12:10,966
+you do not know which change did it.
+
+329
+00:12:11,516 --> 00:12:15,420
+Four: scanning while the server still says STARTING. Always wait for UP.
+
+330
+00:12:15,970 --> 00:12:19,735
+Five: lowering the quality gate to make the pipeline green.
+
+331
+00:12:19,735 --> 00:12:20,884
+That is not a fix.
+
+332
+00:12:20,884 --> 00:12:22,479
+It is hiding the problem.
+
+333
+00:12:22,479 --> 00:12:23,373
+Add the tests.
+
+334
+00:12:24,923 --> 00:12:25,798
+Your turn.
+
+335
+00:12:26,348 --> 00:12:30,252
+One: change the SonarQube address in Jenkins to a wrong port,
+
+336
+00:12:30,252 --> 00:12:31,276
+and run the job.
+
+337
+00:12:31,276 --> 00:12:32,620
+Find the first error.
+
+338
+00:12:33,170 --> 00:12:34,519
+Two: stop your server,
+
+339
+00:12:34,519 --> 00:12:35,501
+and run the job.
+
+340
+00:12:35,501 --> 00:12:37,894
+Compare the message with the first one.
+
+341
+00:12:37,894 --> 00:12:38,814
+It is the same.
+
+342
+00:12:38,814 --> 00:12:41,084
+Find the difference with a curl test.
+
+343
+00:12:41,634 --> 00:12:46,285
+Three: delete the web hook, and watch the gate stage time out. Then create it again.
+
+344
+00:12:46,835 --> 00:12:51,486
+Four: remove one test, and read the quality gate failure in the project page.
+
+345
+00:12:52,036 --> 00:12:54,788
+Five: after each fix, change only one thing.
+
+346
+00:12:55,338 --> 00:12:57,066
+Pause the video, and do it now.
+
+347
+00:13:12,616 --> 00:13:13,491
+Quick check.
+
+348
+00:13:14,041 --> 00:13:16,025
+What are the five questions of the method?
+
+349
+00:13:16,575 --> 00:13:21,375
+Failed to query server version. Which two causes, and how do you tell them apart?
+
+350
+00:13:21,925 --> 00:13:25,082
+The gate stage times out with no error. What is missing?
+
+351
+00:13:25,632 --> 00:13:28,896
+The gate says failed. Do you fix the pipeline, or the code?
+
+352
+00:13:29,446 --> 00:13:31,706
+Objective covered: M C eighteen,
+
+353
+00:13:31,706 --> 00:13:32,837
+objective eight.
+
+354
+00:13:32,837 --> 00:13:34,037
+Diagnose scanner,
+
+355
+00:13:34,037 --> 00:13:35,803
+server and gate failures.
+
+356
+00:13:36,353 --> 00:13:38,423
+Pause the video, and answer out loud.
+
+357
+00:13:48,973 --> 00:13:54,861
+Next: the SonarQube mastery lesson. A real scenario, a check script, and a clean finish.
+
+358
+00:13:55,411 --> 00:13:58,739
+If this helped, like, share and subscribe, so you do not miss it.

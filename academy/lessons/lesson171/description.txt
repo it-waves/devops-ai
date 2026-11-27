@@ -1,0 +1,22 @@
+Lesson 171 of the DevOps Engineering Bootcamp, SonarQube domain. A pipeline goes red at two in the morning and the log has two thousand lines. Where do you look? Not at the last line. You learn one habit, read the FIRST error, and a five-question method: which stage failed, what is the first error, which hop in the chain is it, test that hop alone, change one thing. Then you watch four real failures happen and get fixed live: a wrong port in the Jenkins SonarQube server entry, a SonarQube server that is stopped (same message, different cause), a missing web hook that makes the gate stage time out with no error, and a quality gate that says no because coverage is 59.1% against a 62% rule.
+
+Chapters
+0:00 Red pipeline. Where do you look?
+0:23 What to expect
+0:54 Where a pipeline can fail
+1:45 Five questions
+2:27 Live: four failures, four fixes
+11:46 Common mistakes
+12:24 Your turn
+13:12 Quick check and what is next
+
+Objectives covered: MC18-O08. Diagnose scanner, server and quality gate failures.
+
+Honest notes: the browser and terminal are a real continuous recording of SonarQube Community Build 26.11 and Jenkins 2.580 with the SonarQube Scanner plugin, analysing the CloudCart project with the Sonar Maven plugin and JaCoCo. The passwords and tokens belong to a throwaway lab server that runs only on the recording machine. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, concept, mistakes, your-turn and recap screens are labelled illustrations, not captures. Waiting time for builds was kept real, with the narration filling it. Use your own machine only.
+
+Previous lesson: SonarQube Tokens and Permissions: Revoke, Fail, Rotate (Live) | Lesson 170 https://youtu.be/c6jBuSw6P8w
+Next: SonarQube mastery check, build, prove and clean up a quality pipeline.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+#devops #jenkins #sonarqube #troubleshooting #qualitygate #cicd #pipeline #devopsbootcamp #learnjenkins

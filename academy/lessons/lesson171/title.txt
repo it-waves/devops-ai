@@ -1,0 +1,1 @@
+Jenkins + SonarQube Pipeline Failing? Fix 4 Real Failures Live | Lesson 171
