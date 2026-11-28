@@ -11,3 +11,8 @@ Few, comprehensive lessons (12 to 20 min), one continuous live recording per les
 
 ## Decision: approved 2026-11-27 (owner said yes)
 Real runs need a throwaway public repository (free hosted minutes) in the owner's GitHub account/org, driven through the owner's signed-in Chrome. Repo: cloudcart-actions-lab, created through the owner signed-in Chrome, deleted after MC20. Fallback if declined: nektos/act on a local runner (not real GitHub UI; weaker).
+
+## Status (2026-11-27)
+- Repo it-waves/cloudcart-actions-lab created (public), Claude GitHub App access granted for that one repo (owner approved via GitHub Mobile). Revoke access and delete the repo after MC20.
+- Clone at /home/claude/cloudcart-actions-lab, branch main holds cart-core (pom, Cart, CartTest) and no workflow yet. Push works (a "push negotiation failed" warning is harmless).
+- Next: L177 script, scenes, steps; record in the owner Chrome on github.com (signed in as it-waves).
