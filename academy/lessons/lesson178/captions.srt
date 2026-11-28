@@ -1,0 +1,1111 @@
+1
+00:00:00,500 --> 00:00:00,972
+Friday,
+
+2
+00:00:00,972 --> 00:00:02,052
+four forty five.
+
+3
+00:00:02,052 --> 00:00:04,279
+A developer fixes one tiny thing,
+
+4
+00:00:04,279 --> 00:00:05,629
+a greater than sign,
+
+5
+00:00:05,629 --> 00:00:07,113
+and pushes the change.
+
+6
+00:00:07,663 --> 00:00:09,061
+The pipeline is green.
+
+7
+00:00:09,061 --> 00:00:10,269
+Everything deploys.
+
+8
+00:00:10,269 --> 00:00:11,158
+And on Monday,
+
+9
+00:00:11,158 --> 00:00:13,573
+customers cannot see a single product.
+
+10
+00:00:14,123 --> 00:00:17,826
+Nothing in the pipeline asked the application a real question.
+
+11
+00:00:17,826 --> 00:00:19,319
+Nothing stopped the line.
+
+12
+00:00:19,319 --> 00:00:21,589
+And nobody could go back in one click.
+
+13
+00:00:22,139 --> 00:00:23,614
+Today we fix all three.
+
+14
+00:00:23,614 --> 00:00:25,410
+Gates that stop a bad build.
+
+15
+00:00:25,410 --> 00:00:27,013
+Secrets that stay secret.
+
+16
+00:00:27,013 --> 00:00:31,629
+A release that switches traffic only when the new version proves itself,
+
+17
+00:00:31,629 --> 00:00:33,297
+and rolls back in seconds.
+
+18
+00:00:33,847 --> 00:00:39,287
+Real Jenkins, real Nexus, real Tomcat, and a real router. Deploy without fear.
+
+19
+00:00:40,837 --> 00:00:42,266
+Here is what to expect.
+
+20
+00:00:42,816 --> 00:00:43,533
+One: gates.
+
+21
+00:00:43,533 --> 00:00:46,855
+How a pipeline refuses to move a bad build forward,
+
+22
+00:00:46,855 --> 00:00:48,875
+and where a human must say yes.
+
+23
+00:00:49,425 --> 00:00:54,545
+Two: secrets and least privilege. Where a password lives, and what a stolen one can do.
+
+24
+00:00:55,095 --> 00:00:59,852
+Three: release strategies. Rolling, blue green, and canary, and how to go back.
+
+25
+00:01:00,402 --> 00:01:04,328
+Four: verification. A smoke test, and a message to the team.
+
+26
+00:01:04,878 --> 00:01:06,413
+Then we run all of it,
+
+27
+00:01:06,413 --> 00:01:06,762
+live.
+
+28
+00:01:06,762 --> 00:01:12,067
+This lesson covers objectives four to seven of the CI CD Engineering domain.
+
+29
+00:01:13,617 --> 00:01:17,329
+First, gates. A gate is a place where the pipeline can say no.
+
+30
+00:01:17,879 --> 00:01:19,993
+The first gate is the test gate.
+
+31
+00:01:19,993 --> 00:01:21,182
+If one test fails,
+
+32
+00:01:21,182 --> 00:01:22,305
+the stage is red,
+
+33
+00:01:22,305 --> 00:01:24,683
+and every stage after it is skipped.
+
+34
+00:01:24,683 --> 00:01:27,458
+Nothing broken gets published or deployed.
+
+35
+00:01:28,008 --> 00:01:29,864
+The second is a quality gate.
+
+36
+00:01:29,864 --> 00:01:32,680
+A tool such as sonar cube measures the code,
+
+37
+00:01:32,680 --> 00:01:35,432
+and the pipeline fails when coverage drops,
+
+38
+00:01:35,432 --> 00:01:36,648
+or new bugs appear.
+
+39
+00:01:37,198 --> 00:01:38,957
+The third is a human gate.
+
+40
+00:01:38,957 --> 00:01:40,175
+A manual approval,
+
+41
+00:01:40,175 --> 00:01:41,393
+before production.
+
+42
+00:01:41,393 --> 00:01:42,747
+The pipeline pauses,
+
+43
+00:01:42,747 --> 00:01:43,897
+shows a question,
+
+44
+00:01:43,897 --> 00:01:45,454
+and waits for a person.
+
+45
+00:01:46,004 --> 00:01:49,350
+Use automatic gates for anything a machine can judge,
+
+46
+00:01:49,350 --> 00:01:52,443
+and a human gate for risk a machine cannot judge.
+
+47
+00:01:52,443 --> 00:01:55,284
+And always keep the log of who approved what.
+
+48
+00:01:56,834 --> 00:02:00,823
+Second, secrets. A secret is a password, a token, or a key.
+
+49
+00:02:01,373 --> 00:02:03,976
+Rule one: a secret never goes into Git.
+
+50
+00:02:03,976 --> 00:02:05,644
+Not in the pipeline file,
+
+51
+00:02:05,644 --> 00:02:06,712
+not in a script,
+
+52
+00:02:06,712 --> 00:02:08,247
+not in a settings file.
+
+53
+00:02:08,247 --> 00:02:09,715
+Git remembers forever.
+
+54
+00:02:10,265 --> 00:02:12,968
+Rule two: the secret lives in one place,
+
+55
+00:02:12,968 --> 00:02:14,319
+Jenkins credentials.
+
+56
+00:02:14,319 --> 00:02:16,550
+The pipeline asks for it by name,
+
+57
+00:02:16,550 --> 00:02:19,929
+and Jenkins hands it over only while the job runs.
+
+58
+00:02:20,479 --> 00:02:23,358
+Rule three: if the secret appears in a log,
+
+59
+00:02:23,358 --> 00:02:25,770
+Jenkins replaces it with four stars.
+
+60
+00:02:25,770 --> 00:02:27,243
+But do not rely on it.
+
+61
+00:02:27,243 --> 00:02:28,649
+Never print a secret.
+
+62
+00:02:29,199 --> 00:02:30,989
+Rule four: least privilege.
+
+63
+00:02:30,989 --> 00:02:33,706
+The deploy identity can upload a release.
+
+64
+00:02:33,706 --> 00:02:35,098
+It cannot delete one.
+
+65
+00:02:35,098 --> 00:02:36,556
+If its password leaks,
+
+66
+00:02:36,556 --> 00:02:37,882
+the damage is small.
+
+67
+00:02:39,432 --> 00:02:43,336
+Third, how a new version reaches users. Three common strategies.
+
+68
+00:02:43,886 --> 00:02:44,407
+Rolling.
+
+69
+00:02:44,407 --> 00:02:46,359
+Replace servers one at a time.
+
+70
+00:02:46,359 --> 00:02:46,749
+Cheap,
+
+71
+00:02:46,749 --> 00:02:47,790
+but for a while,
+
+72
+00:02:47,790 --> 00:02:49,417
+old and new run together,
+
+73
+00:02:49,417 --> 00:02:51,694
+and going back means rolling again.
+
+74
+00:02:52,244 --> 00:02:52,970
+Blue green.
+
+75
+00:02:52,970 --> 00:02:55,016
+Two identical production sides.
+
+76
+00:02:55,016 --> 00:02:56,204
+Users are on blue.
+
+77
+00:02:56,204 --> 00:02:58,581
+You deploy the new version to green,
+
+78
+00:02:58,581 --> 00:03:00,033
+test it with no users,
+
+79
+00:03:00,033 --> 00:03:01,815
+and then switch the router.
+
+80
+00:03:01,815 --> 00:03:03,465
+Going back is one switch.
+
+81
+00:03:04,015 --> 00:03:04,482
+Canary.
+
+82
+00:03:04,482 --> 00:03:06,349
+Send a small slice of users,
+
+83
+00:03:06,349 --> 00:03:07,215
+five percent,
+
+84
+00:03:07,215 --> 00:03:08,482
+to the new version.
+
+85
+00:03:08,482 --> 00:03:09,615
+Watch the errors.
+
+86
+00:03:09,615 --> 00:03:10,949
+Then grow the slice,
+
+87
+00:03:10,949 --> 00:03:11,482
+or stop.
+
+88
+00:03:12,032 --> 00:03:12,864
+And rollback.
+
+89
+00:03:12,864 --> 00:03:15,040
+Because Nexus keeps every version,
+
+90
+00:03:15,040 --> 00:03:16,704
+rollback is not a rebuild.
+
+91
+00:03:16,704 --> 00:03:20,224
+It is a promotion of an older file that already worked.
+
+92
+00:03:20,774 --> 00:03:24,742
+In the demo we use blue green, because it shows the idea most clearly.
+
+93
+00:03:26,292 --> 00:03:30,985
+Fourth, verification. A green deploy only means the file was copied.
+
+94
+00:03:31,535 --> 00:03:35,532
+A smoke test asks the running application a few real questions.
+
+95
+00:03:35,532 --> 00:03:37,626
+Is the version the one we expect?
+
+96
+00:03:37,626 --> 00:03:39,276
+Does the home page answer?
+
+97
+00:03:39,276 --> 00:03:41,115
+Does the product list answer?
+
+98
+00:03:41,115 --> 00:03:42,575
+If any answer is wrong,
+
+99
+00:03:42,575 --> 00:03:43,717
+the release stops.
+
+100
+00:03:44,267 --> 00:03:45,812
+Keep it small and fast.
+
+101
+00:03:45,812 --> 00:03:48,364
+A smoke test is not a full test suite.
+
+102
+00:03:48,364 --> 00:03:51,051
+It is the question: is anything on fire?
+
+103
+00:03:51,601 --> 00:03:52,665
+And tell people.
+
+104
+00:03:52,665 --> 00:03:53,662
+A notification,
+
+105
+00:03:53,662 --> 00:03:54,793
+in chat or email,
+
+106
+00:03:54,793 --> 00:03:55,924
+with the version,
+
+107
+00:03:55,924 --> 00:03:56,655
+the result,
+
+108
+00:03:56,655 --> 00:03:58,252
+and a link to the build.
+
+109
+00:03:58,252 --> 00:04:01,777
+A failure nobody hears about is a failure that lasts.
+
+110
+00:04:03,327 --> 00:04:04,241
+Same Jenkins,
+
+111
+00:04:04,241 --> 00:04:05,226
+same two jobs.
+
+112
+00:04:05,226 --> 00:04:07,617
+The pipeline has a new last stage,
+
+113
+00:04:07,617 --> 00:04:08,531
+a smoke test,
+
+114
+00:04:08,531 --> 00:04:11,696
+and the promote job now has an approval step.
+
+115
+00:04:11,696 --> 00:04:15,423
+Production is serving version one point oh point one.
+
+116
+00:04:15,973 --> 00:04:16,317
+First,
+
+117
+00:04:16,317 --> 00:04:17,064
+the terminal.
+
+118
+00:04:17,064 --> 00:04:19,475
+Production is reached through one address,
+
+119
+00:04:19,475 --> 00:04:20,106
+the router.
+
+120
+00:04:20,106 --> 00:04:21,541
+We ask it for its health.
+
+121
+00:04:22,091 --> 00:04:26,699
+Version one point oh point one. The router file says where it sends the traffic.
+
+122
+00:04:27,249 --> 00:04:32,241
+Port ninety one oh three, and the comment says blue. Blue is serving users. And green?
+
+123
+00:04:33,891 --> 00:04:35,512
+Empty. Green is waiting.
+
+124
+00:04:36,062 --> 00:04:38,281
+Now a developer tidies the shipping rule.
+
+125
+00:04:41,431 --> 00:04:45,186
+One symbol changed. Greater than or equal, became greater than.
+
+126
+00:04:45,736 --> 00:04:48,232
+It looks harmless. The developer commits it.
+
+127
+00:04:50,182 --> 00:04:52,870
+In Jenkins, we open Cloud Cart CI.
+
+128
+00:04:56,720 --> 00:04:57,893
+And click Build Now.
+
+129
+00:05:00,543 --> 00:05:02,058
+We open the stages view.
+
+130
+00:05:06,808 --> 00:05:08,087
+The pipeline runs.
+
+131
+00:05:08,087 --> 00:05:09,081
+Secrets check,
+
+132
+00:05:09,081 --> 00:05:09,650
+version,
+
+133
+00:05:09,650 --> 00:05:11,355
+and then build and test.
+
+134
+00:05:11,355 --> 00:05:11,640
+Red.
+
+135
+00:05:11,640 --> 00:05:13,203
+The line stopped here.
+
+136
+00:05:13,203 --> 00:05:13,771
+Publish,
+
+137
+00:05:13,771 --> 00:05:16,045
+deploy and smoke test never ran.
+
+138
+00:05:24,295 --> 00:05:26,236
+We open the console, to see why.
+
+139
+00:05:31,086 --> 00:05:32,076
+One test failed,
+
+140
+00:05:32,076 --> 00:05:32,571
+by name.
+
+141
+00:05:32,571 --> 00:05:34,490
+Free shipping at the threshold.
+
+142
+00:05:34,490 --> 00:05:37,955
+The old rule gave free shipping at exactly seventy five.
+
+143
+00:05:37,955 --> 00:05:39,255
+The new one does not.
+
+144
+00:05:39,255 --> 00:05:40,430
+The gate caught it.
+
+145
+00:05:40,980 --> 00:05:43,732
+Back in the terminal, the team has already been told.
+
+146
+00:05:45,382 --> 00:05:48,797
+Version one point oh point two was never published.
+
+147
+00:05:48,797 --> 00:05:50,805
+Nexus has nothing to clean up,
+
+148
+00:05:50,805 --> 00:05:52,211
+and dev is untouched.
+
+149
+00:05:52,211 --> 00:05:53,617
+We revert the change.
+
+150
+00:05:54,167 --> 00:05:56,066
+In Jenkins, Build Now again.
+
+151
+00:05:59,516 --> 00:06:01,030
+We open the stages view.
+
+152
+00:06:05,580 --> 00:06:06,724
+Green all the way,
+
+153
+00:06:06,724 --> 00:06:08,566
+including the new smoke test.
+
+154
+00:06:08,566 --> 00:06:10,663
+Version one point oh point three.
+
+155
+00:06:10,663 --> 00:06:12,124
+The number two is gone,
+
+156
+00:06:12,124 --> 00:06:13,204
+and that is fine.
+
+157
+00:06:13,204 --> 00:06:14,284
+Numbers are free.
+
+158
+00:06:42,434 --> 00:06:43,736
+We open the console.
+
+159
+00:06:49,386 --> 00:06:53,332
+Smoke test, passed. The application answered all three questions.
+
+160
+00:06:53,882 --> 00:06:54,633
+Now secrets.
+
+161
+00:06:54,633 --> 00:06:56,261
+At the top of the console,
+
+162
+00:06:56,261 --> 00:06:57,450
+in the first stage,
+
+163
+00:06:57,450 --> 00:06:59,578
+I printed the password on purpose.
+
+164
+00:07:00,128 --> 00:07:05,632
+Jenkins replaced it with four stars. A safety net, not a plan. Never print a secret.
+
+165
+00:07:06,182 --> 00:07:10,001
+Where does the real password live? In Jenkins, under Credentials.
+
+166
+00:07:15,051 --> 00:07:18,934
+One entry, nexus deployer. The pipeline asks for it by name.
+
+167
+00:07:19,484 --> 00:07:24,006
+And what can this identity do? It can upload. Can it delete a release? We try.
+
+168
+00:07:27,356 --> 00:07:32,455
+Four oh three. Forbidden. A leaked deployer password cannot erase your releases.
+
+169
+00:07:33,005 --> 00:07:35,586
+Now production. We open the promote job.
+
+170
+00:07:39,936 --> 00:07:41,238
+Build with Parameters.
+
+171
+00:07:44,788 --> 00:07:46,601
+Version one point oh point three.
+
+172
+00:07:48,351 --> 00:07:49,418
+Target, prod.
+
+173
+00:07:52,168 --> 00:07:52,978
+And Build.
+
+174
+00:07:55,928 --> 00:07:57,443
+We open the stages view.
+
+175
+00:08:03,893 --> 00:08:05,170
+The pipeline stops,
+
+176
+00:08:05,170 --> 00:08:05,841
+and waits.
+
+177
+00:08:05,841 --> 00:08:06,446
+Approval.
+
+178
+00:08:06,446 --> 00:08:07,991
+This is the human gate.
+
+179
+00:08:07,991 --> 00:08:09,738
+The question is on screen.
+
+180
+00:08:10,288 --> 00:08:11,974
+We decide yes. Release.
+
+181
+00:08:13,824 --> 00:08:18,005
+Now the release runs. Blue green. First, the idle side, green.
+
+182
+00:08:18,555 --> 00:08:19,856
+We open the console.
+
+183
+00:08:24,706 --> 00:08:26,324
+Green gets the new version,
+
+184
+00:08:26,324 --> 00:08:28,302
+and the smoke test runs on green,
+
+185
+00:08:28,302 --> 00:08:30,040
+before any user can reach it.
+
+186
+00:08:34,290 --> 00:08:36,786
+It passes. Only now the router switches.
+
+187
+00:08:37,336 --> 00:08:38,122
+And once more,
+
+188
+00:08:38,122 --> 00:08:38,965
+the smoke test,
+
+189
+00:08:38,965 --> 00:08:40,032
+through the router,
+
+190
+00:08:40,032 --> 00:08:42,392
+to prove that users reach the new version.
+
+191
+00:08:42,942 --> 00:08:45,267
+In the terminal, production, through the router.
+
+192
+00:08:47,617 --> 00:08:50,220
+One point oh point three. And the two sides?
+
+193
+00:08:50,770 --> 00:08:56,188
+Blue still runs one point oh point one. That is the instant rollback, one switch away.
+
+194
+00:08:56,738 --> 00:09:00,344
+Now the bad release. An engineer renames the API path.
+
+195
+00:09:02,594 --> 00:09:06,092
+The change is small, and the unit tests do not look at web paths.
+
+196
+00:09:06,642 --> 00:09:07,325
+Commit.
+
+197
+00:09:10,575 --> 00:09:12,004
+Jenkins, Build Now.
+
+198
+00:09:15,854 --> 00:09:17,049
+The stages view.
+
+199
+00:09:21,499 --> 00:09:27,195
+Everything is green. Build, tests, publish, deploy to dev. And then, the smoke test. Red.
+
+200
+00:09:55,045 --> 00:09:55,962
+The console.
+
+201
+00:10:01,512 --> 00:10:02,821
+The health is right.
+
+202
+00:10:02,821 --> 00:10:04,260
+The home page answers.
+
+203
+00:10:04,260 --> 00:10:06,812
+But the product list says four oh four.
+
+204
+00:10:06,812 --> 00:10:09,428
+A real customer would see an empty shop.
+
+205
+00:10:09,428 --> 00:10:11,326
+Only a smoke test finds this.
+
+206
+00:10:11,876 --> 00:10:13,113
+And the team is told.
+
+207
+00:10:16,363 --> 00:10:19,688
+Now imagine someone pushes it to production anyway.
+
+208
+00:10:19,688 --> 00:10:20,731
+The promote job.
+
+209
+00:10:20,731 --> 00:10:22,166
+Build with Parameters.
+
+210
+00:10:26,616 --> 00:10:28,472
+Version one point oh point four.
+
+211
+00:10:30,122 --> 00:10:31,188
+Target, prod.
+
+212
+00:10:33,938 --> 00:10:34,664
+Build.
+
+213
+00:10:37,814 --> 00:10:40,864
+We open the stages view, and the approval is waiting.
+
+214
+00:10:45,814 --> 00:10:48,694
+A human says yes, hoping for the best. Release.
+
+215
+00:10:50,744 --> 00:10:53,155
+The release runs. This time, the console.
+
+216
+00:10:58,105 --> 00:11:03,566
+The smoke test fails on the idle side. The router never switched. Traffic stays on green.
+
+217
+00:11:08,216 --> 00:11:10,563
+In the terminal, production is still healthy.
+
+218
+00:11:12,813 --> 00:11:17,933
+Users never saw version one point oh point four. That is the value of blue green.
+
+219
+00:11:18,483 --> 00:11:19,331
+Now rollback.
+
+220
+00:11:19,331 --> 00:11:22,072
+Suppose a problem appears after a release.
+
+221
+00:11:22,072 --> 00:11:23,834
+We do not rebuild anything.
+
+222
+00:11:23,834 --> 00:11:26,966
+We promote an older version that already worked.
+
+223
+00:11:26,966 --> 00:11:28,467
+One point oh point one.
+
+224
+00:11:29,017 --> 00:11:31,428
+The same job. Build with Parameters.
+
+225
+00:11:34,578 --> 00:11:36,348
+Version one point oh point one.
+
+226
+00:11:38,198 --> 00:11:39,265
+Target, prod.
+
+227
+00:11:42,015 --> 00:11:42,740
+Build.
+
+228
+00:11:45,890 --> 00:11:48,344
+We open the stages view, and the approval.
+
+229
+00:11:53,994 --> 00:11:55,338
+We approve. Release.
+
+230
+00:11:56,788 --> 00:11:57,832
+The release runs.
+
+231
+00:11:57,832 --> 00:11:59,922
+Blue gets the old file from Nexus,
+
+232
+00:11:59,922 --> 00:12:01,397
+the checksum is checked,
+
+233
+00:12:01,397 --> 00:12:02,749
+the smoke test passes,
+
+234
+00:12:02,749 --> 00:12:04,532
+and the router switches back.
+
+235
+00:12:06,882 --> 00:12:10,935
+In the terminal. Production, through the router. One point oh point one.
+
+236
+00:12:11,485 --> 00:12:12,664
+That is a rollback,
+
+237
+00:12:12,664 --> 00:12:13,781
+in about a minute.
+
+238
+00:12:13,781 --> 00:12:14,464
+No rebuild,
+
+239
+00:12:14,464 --> 00:12:15,209
+no guessing,
+
+240
+00:12:15,209 --> 00:12:17,629
+and the same safe steps as any release.
+
+241
+00:12:19,179 --> 00:12:20,182
+Let us recap.
+
+242
+00:12:20,732 --> 00:12:21,109
+Gates.
+
+243
+00:12:21,109 --> 00:12:24,441
+Tests and quality checks stop the line automatically.
+
+244
+00:12:24,441 --> 00:12:26,641
+A human approval guards production.
+
+245
+00:12:27,191 --> 00:12:27,750
+Secrets.
+
+246
+00:12:27,750 --> 00:12:29,358
+In Jenkins credentials,
+
+247
+00:12:29,358 --> 00:12:30,267
+never in Git,
+
+248
+00:12:30,267 --> 00:12:31,245
+never printed,
+
+249
+00:12:31,245 --> 00:12:33,762
+and a deployer that can only upload.
+
+250
+00:12:34,312 --> 00:12:34,877
+Releases.
+
+251
+00:12:34,877 --> 00:12:38,333
+Blue green tested the new version before users arrived,
+
+252
+00:12:38,333 --> 00:12:41,224
+and rollback was a promotion of an older file.
+
+253
+00:12:41,774 --> 00:12:47,448
+Verification. A smoke test asks real questions, and a notification tells the team.
+
+254
+00:12:47,998 --> 00:12:48,717
+Next lesson,
+
+255
+00:12:48,717 --> 00:12:49,675
+the mastery lab.
+
+256
+00:12:49,675 --> 00:12:51,113
+We measure the pipeline,
+
+257
+00:12:51,113 --> 00:12:52,430
+troubleshoot failures,
+
+258
+00:12:52,430 --> 00:12:54,526
+and prove everything independently.
+
+259
+00:12:56,076 --> 00:12:58,167
+Your turn. On your own machine only.
+
+260
+00:12:58,717 --> 00:13:02,215
+One. Break a unit test on purpose, and watch the line stop.
+
+261
+00:13:02,765 --> 00:13:03,010
+Two.
+
+262
+00:13:03,010 --> 00:13:06,613
+Move a password out of a file and into Jenkins credentials.
+
+263
+00:13:06,613 --> 00:13:07,469
+Then print it,
+
+264
+00:13:07,469 --> 00:13:08,568
+and see the stars.
+
+265
+00:13:09,118 --> 00:13:13,790
+Three. Add a smoke test with three questions, and a notification when it fails.
+
+266
+00:13:14,340 --> 00:13:19,161
+Four. Add an approval step before production, and a second side for blue green.
+
+267
+00:13:19,711 --> 00:13:22,293
+Pause the video, and do it before you continue.
+
+268
+00:13:37,843 --> 00:13:39,486
+Quick check. Answer aloud.
+
+269
+00:13:40,036 --> 00:13:43,556
+Which gates stop a build automatically, and which needs a person?
+
+270
+00:13:44,106 --> 00:13:47,754
+Why must a secret never be printed, even if Jenkins hides it?
+
+271
+00:13:48,304 --> 00:13:50,842
+Why does blue green make rollback so fast?
+
+272
+00:13:51,392 --> 00:13:54,358
+Why is a green deploy not proof that the release works?
+
+273
+00:14:04,908 --> 00:14:06,883
+If you found this lesson useful,
+
+274
+00:14:06,883 --> 00:14:07,623
+please like,
+
+275
+00:14:07,623 --> 00:14:07,994
+share,
+
+276
+00:14:07,994 --> 00:14:08,858
+and subscribe.
+
+277
+00:14:08,858 --> 00:14:11,573
+It helps other engineers find these lessons,
+
+278
+00:14:11,573 --> 00:14:12,993
+and it keeps them free.

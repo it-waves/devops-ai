@@ -1,0 +1,33 @@
+Lesson 178 of the DevOps Engineering Bootcamp. A green build is not a safe release. In this lesson you watch a real Jenkins pipeline protect CloudCart: a failing test stops the line before anything is published, a smoke test checks the running application and not just the build, a manual approval guards production, and a blue-green switch moves users to the new version only after it has proved itself. You see a secret masked in the console, a deployer identity that can upload but not delete, a bad release that never reaches users, and a rollback done by promoting an older version, with no rebuild.
+
+Chapters
+0:00 Friday, four forty five
+0:40 What to expect
+1:13 Gates that stop the line
+1:56 Secrets and least privilege
+2:39 Rolling, blue green, canary
+3:26 Smoke tests and notifications
+4:03 Live: deploy without fear
+4:36 Live: a failing test stops the line
+5:52 Live: fix it, build 1.0.3 passes
+6:53 Live: secrets and a scoped identity
+7:33 Live: approval and a blue-green release
+8:56 Live: a bad release, stopped by the smoke test
+11:18 Live: rollback by promotion
+12:19 Recap
+12:56 Your turn
+13:37 Quick check
+
+Objectives covered: MC21-O04 (gates), MC21-O05 (secrets and least privilege), MC21-O06 (rolling, blue-green, canary and rollback) and MC21-O07 (smoke tests, verification and notifications).
+
+Honest notes: the browser and terminal are a real continuous recording of Jenkins 2.580.2, Sonatype Nexus Repository Community Edition 3.98.1 and Apache Tomcat 10.1 on a throwaway lab server, continuing from Lesson 177. Production is simulated by two Tomcat instances, blue and green, behind an nginx router. The team chat shown is a small stand-in service that receives the pipeline notification, not a real chat product. Passwords shown belong to that throwaway server. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, concept, your-turn and recap screens are labelled illustrations, not captures. Use your own machine only.
+
+Previous lesson: CI/CD Pipeline: Build Once, Promote Many with Jenkins, Nexus and Tomcat, Live | Lesson 177 https://youtu.be/WGOnniBJ73k
+Next: Lesson 179, the CI/CD mastery lab (link when published)
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+❤ If our lessons have helped you, consider buying us a coffee. Your support means more than you know and helps us keep education free. Thank you for being part of this journey!
+☕ https://ko-fi.com/devopssimplifiedhq
+
+#devops #cicd #jenkins #bluegreen #smoketest #rollback #devopsbootcamp
