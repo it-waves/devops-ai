@@ -21,7 +21,7 @@ Objectives covered: MC19-O06 (immutability, checksums and least-privilege access
 Honest notes: the browser and terminal are a real continuous recording of Sonatype Nexus Repository Community Edition 3.98.1 on a throwaway lab server, continuing from Lessons 173 and 174. Passwords shown belong to that throwaway server. In the terminal, a small helper named keep prints only the lines that matter from the Maven output, and nx is a short alias for curl with the deployer login. The coloured boxes and labels on top are overlays added for teaching. Because tasks finish in a few seconds on this tiny repository, the pauses while they run are real but short. The narration is synthetic speech. The plan, concept, mistakes, your-turn and recap screens are labelled illustrations, not captures. Use your own machine only.
 
 Previous lesson: Nexus Repository: Snapshot and Release Repos, a Safe Deployer and Maven Deploy, Live | Lesson 174 https://youtu.be/Rl7uCqRKrwA
-Next: Lesson 176, Break It, Fix It, Prove It (links when published)
+Next: Lesson 176, Nexus Repository: Break It, Fix It, Prove It (401, 403, 404, 503) and Mastery Lab https://youtu.be/OZpA1hpIxrQ
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 

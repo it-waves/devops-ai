@@ -25,7 +25,7 @@ Lab files: github.com/it-waves/devops-ai in the folder academy/lab: lab176.sh an
 Honest notes: the browser and terminal are a real continuous recording of Sonatype Nexus Repository Community Edition 3.98.1 on a throwaway lab server, continuing from Lessons 173 to 175. Passwords shown belong to that throwaway server. In the terminal, why prints only the lines that matter from the Maven output, and nx is a short alias for curl with the deployer login. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The plan, domain, scenario, mistakes, lab-info, your-turn and recap screens are labelled illustrations, not captures. Use your own machine only.
 
 Previous lesson: Nexus Repository: Checksums, Least-Privilege Roles, Cleanup Tasks and Backups, Live | Lesson 175 https://youtu.be/PJXl-Q-Ux30
-Next: MC20, GitHub Actions, where your code builds itself.
+Next: Lesson 177, CI/CD Pipeline: Build Once, Promote Many (link when published)
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
