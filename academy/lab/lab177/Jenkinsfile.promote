@@ -1,0 +1,13 @@
+pipeline {
+  agent any
+  parameters {
+    string(name: 'VERSION', defaultValue: '', description: 'a version that already exists in Nexus')
+    choice(name: 'TARGET', choices: ['stage', 'prod'], description: 'where to promote it')
+  }
+  environment { NEXUS = credentials('nexus-deployer') }
+  stages {
+    stage('Promote') {
+      steps { sh 'NEXUS_USER=$NEXUS_USR NEXUS_PASSWORD=$NEXUS_PSW scripts/deploy.sh $VERSION $TARGET' }
+    }
+  }
+}

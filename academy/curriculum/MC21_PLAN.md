@@ -13,3 +13,9 @@ Same rules as MC19: 12-20 min lessons, one continuous story with one live record
 Restructured 2026-11-27 on the owner's reminder that every domain may be restructured strategically: three comprehensive lessons instead of four. MC21 takes L177-L179.
 
 Status: planned. Next: inspect Jenkins lab state (/home/claude/jenkins-lab, Jenkinsfile172 is the latest) and write L177 body/scenes/steps.
+
+## L177 build notes (2026-11-27, verified working)
+- Lab assets in /home/claude/jenkins-lab: tc177.sh (3 Tomcat instances via CATALINA_BASE tc177/{dev,stage,prod}, ports 9101/9102/9103; Tomcat 10.1.34 at /tmp/cct, needs chmod -R a+rX), repo177 (CloudCart 1.0.0 pom with distributionManagement -> cloudcart-releases, settings-ci.xml with env creds, Jenkinsfile, Jenkinsfile.promote, scripts/deploy.sh), mkjobs177.sh (Jenkins credential nexus-deployer + jobs cloudcart-ci and cloudcart-promote with VERSION/TARGET parameters). Copies in devops-ai/academy/lab/lab177/.
+- Verified: cloudcart-ci build #1 = Version (versions:set 1.0.$BUILD_NUMBER) -> Build and test (32 tests) -> Publish to Nexus (deployer creds) -> Deploy to dev (download from Nexus, sha1 check, copy war, poll /cloudcart/health for the version). Then cloudcart-promote VERSION=1.0.1 TARGET=stage and prod: no rebuild, same checksum, health reports 1.0.1 on all three.
+- Needs running: Jenkins :8080 (run154.sh), Nexus :8081 (start line from reset173.sh without wiping), Tomcats (tc177.sh).
+- Next: reset177 (wipe published 1.0.x from Nexus, empty webapps, jobs fresh), body.py/scenes.py/steps.py, record. App health URL: /cloudcart/health returns {"status","version","shop"}.

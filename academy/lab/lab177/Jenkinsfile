@@ -1,0 +1,23 @@
+pipeline {
+  agent any
+  environment {
+    MVN = '/opt/maven/bin/mvn -B -ntp -Dmaven.repo.local=/home/claude/jenkins-lab/m2jenkins'
+    VERSION = "1.0.${BUILD_NUMBER}"
+    NEXUS = credentials('nexus-deployer')
+  }
+  stages {
+    stage('Version') {
+      steps { sh '$MVN versions:set -DnewVersion=$VERSION -DgenerateBackupPoms=false' }
+    }
+    stage('Build and test') {
+      steps { sh '$MVN verify' }
+      post { always { junit 'target/surefire-reports/*.xml' } }
+    }
+    stage('Publish to Nexus') {
+      steps { sh 'NEXUS_USER=$NEXUS_USR NEXUS_PASSWORD=$NEXUS_PSW $MVN -s settings-ci.xml deploy -DskipTests' }
+    }
+    stage('Deploy to dev') {
+      steps { sh 'NEXUS_USER=$NEXUS_USR NEXUS_PASSWORD=$NEXUS_PSW scripts/deploy.sh $VERSION dev' }
+    }
+  }
+}
