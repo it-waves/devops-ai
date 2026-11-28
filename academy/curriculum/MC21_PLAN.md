@@ -6,9 +6,10 @@ Same rules as MC19: 12-20 min lessons, one continuous story with one live record
 
 | Lesson | Objectives | Story |
 |---|---|---|
-| L177 | O01 end-to-end pipeline; O02 stages | "Commit to production, one picture": design the CloudCart pipeline on a board, then build it in real Jenkins as separate stages (build, test, scan, package, publish to Nexus, deploy, verify), watch each stage go green |
-| L178 | O03 immutable versioned artifacts and promotion; O04 quality, security, approval gates | "Build once, promote many": one versioned jar in Nexus, promoted dev to stage to prod without rebuilding; gates: failing test, quality threshold, dependency scan, manual approval input |
-| L179 | O05 secrets and least privilege; O06 rolling, blue-green, canary, rollback; O07 smoke tests, verification, notifications | "Deploy without fear": credentials binding, blue-green on two Tomcat instances with a switch, smoke test that fails and triggers rollback, notification |
-| L180 | O08 reliability and troubleshooting; O09 deliver CloudCart pipeline (mastery) | "Prove the pipeline": measure success rate and duration, break/fix four failures, lab180.sh up/check/down with independent checks, results, cleanup, lab info on screen |
+| L177 | O01 end-to-end pipeline; O02 stages; O03 immutable versioned artifacts and promotion | "Commit to production, built once": design the CloudCart pipeline on a board, build it in real Jenkins as separate stages (build, test, package, publish to Nexus, deploy, verify), then promote the same versioned artifact dev to stage to prod without rebuilding and prove the checksums match |
+| L178 | O04 gates; O05 secrets, least privilege; O06 rolling, blue-green, canary, rollback; O07 smoke tests, verification, notifications | "Deploy without fear": failing test and quality gate stop the line, manual approval, credentials binding with a scoped identity, blue-green switch, a smoke test that fails and rolls back, notification |
+| L179 | O08 reliability and troubleshooting; O09 deliver CloudCart pipeline (mastery) | "Prove the pipeline": measure success rate and duration, break/fix failures from the first error, lab179.sh up/check/down with independent checks, results, cleanup, lab info on screen |
+
+Restructured 2026-11-27 on the owner's reminder that every domain may be restructured strategically: three comprehensive lessons instead of four. MC21 takes L177-L179.
 
 Status: planned. Next: inspect Jenkins lab state (/home/claude/jenkins-lab, Jenkinsfile172 is the latest) and write L177 body/scenes/steps.
