@@ -1,0 +1,1223 @@
+1
+00:00:00,500 --> 00:00:00,946
+Friday,
+
+2
+00:00:00,946 --> 00:00:01,967
+four forty five.
+
+3
+00:00:01,967 --> 00:00:04,836
+The build is green on the developer's laptop,
+
+4
+00:00:04,836 --> 00:00:06,431
+so it goes to production.
+
+5
+00:00:06,981 --> 00:00:07,934
+Monday morning,
+
+6
+00:00:07,934 --> 00:00:09,270
+production is broken.
+
+7
+00:00:09,270 --> 00:00:10,605
+The code is the same.
+
+8
+00:00:10,605 --> 00:00:12,448
+But the build was made again,
+
+9
+00:00:12,448 --> 00:00:13,656
+on another machine,
+
+10
+00:00:13,656 --> 00:00:14,801
+with another Java,
+
+11
+00:00:14,801 --> 00:00:16,645
+and another set of downloads.
+
+12
+00:00:17,195 --> 00:00:19,947
+Same code. Different build. Different result.
+
+13
+00:00:20,497 --> 00:00:23,378
+Professional teams solve this with one rule.
+
+14
+00:00:23,378 --> 00:00:24,099
+Build once.
+
+15
+00:00:24,099 --> 00:00:26,129
+Then move that exact same file,
+
+16
+00:00:26,129 --> 00:00:28,225
+from environment to environment,
+
+17
+00:00:28,225 --> 00:00:29,862
+and never build it again.
+
+18
+00:00:30,412 --> 00:00:32,339
+Today we build that pipeline,
+
+19
+00:00:32,339 --> 00:00:32,937
+for real.
+
+20
+00:00:32,937 --> 00:00:34,067
+A commit goes in.
+
+21
+00:00:34,067 --> 00:00:34,665
+A tested,
+
+22
+00:00:34,665 --> 00:00:35,329
+versioned,
+
+23
+00:00:35,329 --> 00:00:37,123
+checksummed file comes out,
+
+24
+00:00:37,123 --> 00:00:38,718
+and it travels from dev,
+
+25
+00:00:38,718 --> 00:00:39,316
+to stage,
+
+26
+00:00:39,316 --> 00:00:40,247
+to production.
+
+27
+00:00:41,797 --> 00:00:43,226
+Here is what to expect.
+
+28
+00:00:43,776 --> 00:00:46,073
+One: the whole journey on one picture,
+
+29
+00:00:46,073 --> 00:00:47,645
+from commit to production,
+
+30
+00:00:47,645 --> 00:00:49,216
+and why each stage exists.
+
+31
+00:00:49,766 --> 00:00:52,604
+Two: the golden rule. Build once, promote many.
+
+32
+00:00:53,154 --> 00:00:55,632
+Three: a live demo in real Jenkins,
+
+33
+00:00:55,632 --> 00:00:56,411
+real Nexus,
+
+34
+00:00:56,411 --> 00:00:58,535
+and three real Tomcat servers.
+
+35
+00:00:58,535 --> 00:00:59,173
+We build,
+
+36
+00:00:59,173 --> 00:00:59,952
+we publish,
+
+37
+00:00:59,952 --> 00:01:01,155
+we deploy to dev,
+
+38
+00:01:01,155 --> 00:01:04,908
+and we promote the same file to stage and production.
+
+39
+00:01:05,458 --> 00:01:07,222
+Four: we ship a second version,
+
+40
+00:01:07,222 --> 00:01:10,578
+and we see why production can safely stay on the first one.
+
+41
+00:01:11,128 --> 00:01:16,312
+This lesson covers the first three objectives of the CI CD Engineering domain.
+
+42
+00:01:17,862 --> 00:01:23,281
+The journey, on one picture. It starts with a commit. A developer saves a change in Git.
+
+43
+00:01:23,831 --> 00:01:29,185
+Stage one: build. The code is compiled, on a clean machine, the same way every time.
+
+44
+00:01:29,735 --> 00:01:35,431
+Stage two: test. If one test fails, the line stops here. Nothing broken moves forward.
+
+45
+00:01:35,981 --> 00:01:40,739
+Stage three: package. The result is one file. For Cloud Cart, a war file.
+
+46
+00:01:41,289 --> 00:01:42,634
+Stage four: publish.
+
+47
+00:01:42,634 --> 00:01:44,652
+The file goes to a repository,
+
+48
+00:01:44,652 --> 00:01:45,392
+here Nexus,
+
+49
+00:01:45,392 --> 00:01:47,881
+with a version number and a checksum.
+
+50
+00:01:48,431 --> 00:01:54,297
+Stage five: deploy. The file goes to a server. First to dev, where developers look at it.
+
+51
+00:01:54,847 --> 00:01:56,046
+Stage six: verify.
+
+52
+00:01:56,046 --> 00:01:58,178
+Do not assume the deploy worked.
+
+53
+00:01:58,178 --> 00:02:01,375
+Ask the running application which version it is.
+
+54
+00:02:01,925 --> 00:02:03,267
+Why separate stages?
+
+55
+00:02:03,267 --> 00:02:05,279
+Because when something is red,
+
+56
+00:02:05,279 --> 00:02:07,559
+the stage tells you where to look.
+
+57
+00:02:07,559 --> 00:02:09,101
+Red at test means code.
+
+58
+00:02:09,101 --> 00:02:11,516
+Red at publish means the repository.
+
+59
+00:02:11,516 --> 00:02:13,595
+Red at verify means the server.
+
+60
+00:02:15,145 --> 00:02:17,918
+Now the golden rule. Build once, promote many.
+
+61
+00:02:18,468 --> 00:02:20,267
+The wrong way: build for dev,
+
+62
+00:02:20,267 --> 00:02:21,632
+build again for stage,
+
+63
+00:02:21,632 --> 00:02:23,307
+build again for production.
+
+64
+00:02:23,307 --> 00:02:25,726
+Three builds are three different files,
+
+65
+00:02:25,726 --> 00:02:27,215
+even from the same code.
+
+66
+00:02:27,765 --> 00:02:29,740
+The right way: build one time.
+
+67
+00:02:29,740 --> 00:02:31,847
+Give that file a unique version.
+
+68
+00:02:31,847 --> 00:02:33,032
+Store it in Nexus.
+
+69
+00:02:33,032 --> 00:02:36,192
+Then every environment downloads that same file.
+
+70
+00:02:36,742 --> 00:02:38,919
+Two protections make this safe.
+
+71
+00:02:38,919 --> 00:02:41,096
+One: a version is never reused.
+
+72
+00:02:41,096 --> 00:02:44,608
+Nexus refuses a second upload of the same version.
+
+73
+00:02:44,608 --> 00:02:46,083
+That is immutability,
+
+74
+00:02:46,083 --> 00:02:47,558
+from the last domain.
+
+75
+00:02:48,108 --> 00:02:49,193
+Two: a checksum.
+
+76
+00:02:49,193 --> 00:02:53,193
+Each download is compared with the checksum Nexus recorded.
+
+77
+00:02:53,193 --> 00:02:54,550
+If one byte differs,
+
+78
+00:02:54,550 --> 00:02:55,702
+the deploy stops.
+
+79
+00:02:56,252 --> 00:03:00,263
+That is promotion. Not a new build. The same file, moving forward.
+
+80
+00:03:01,813 --> 00:03:02,724
+Real Jenkins,
+
+81
+00:03:02,724 --> 00:03:04,617
+signed in as administrator.
+
+82
+00:03:04,617 --> 00:03:05,248
+Two jobs.
+
+83
+00:03:05,248 --> 00:03:07,701
+Cloud Cart CI builds and publishes.
+
+84
+00:03:07,701 --> 00:03:13,098
+Cloud Cart promote moves a finished version from one environment to the next.
+
+85
+00:03:13,648 --> 00:03:18,299
+First, the terminal. This is the Cloud Cart project, and its pipeline files.
+
+86
+00:03:18,849 --> 00:03:21,324
+Now the Jenkins file. Four stages.
+
+87
+00:03:21,874 --> 00:03:22,524
+Stage one,
+
+88
+00:03:22,524 --> 00:03:23,043
+Version.
+
+89
+00:03:23,043 --> 00:03:24,863
+The version is one point oh,
+
+90
+00:03:24,863 --> 00:03:25,123
+dot,
+
+91
+00:03:25,123 --> 00:03:26,228
+the build number.
+
+92
+00:03:26,228 --> 00:03:28,177
+Every build gets a new number,
+
+93
+00:03:28,177 --> 00:03:30,322
+and a number is never used twice.
+
+94
+00:03:30,872 --> 00:03:36,909
+Stage two, Build and test. Stage three, Publish to Nexus. Stage four, Deploy to dev.
+
+95
+00:03:37,459 --> 00:03:39,309
+Look at the environment block.
+
+96
+00:03:39,309 --> 00:03:41,962
+The password for Nexus is not in this file.
+
+97
+00:03:41,962 --> 00:03:43,010
+Jenkins keeps it,
+
+98
+00:03:43,010 --> 00:03:45,971
+and hands it to the pipeline only while it runs.
+
+99
+00:03:46,521 --> 00:03:51,897
+The settings file for the build asks for the user name and the password from the environment.
+
+100
+00:03:51,897 --> 00:03:53,689
+Nothing secret is written down.
+
+101
+00:03:54,239 --> 00:03:58,079
+And this is the deploy script. It downloads the war from Nexus.
+
+102
+00:03:58,629 --> 00:04:01,765
+It compares the checksum, and stops if it does not match.
+
+103
+00:04:02,315 --> 00:04:07,499
+Then it copies the file to Tomcat, and asks the running application which version it is.
+
+104
+00:04:08,049 --> 00:04:09,558
+Before we run anything,
+
+105
+00:04:09,558 --> 00:04:10,410
+where are we?
+
+106
+00:04:10,410 --> 00:04:11,657
+Three environments,
+
+107
+00:04:11,657 --> 00:04:11,919
+dev,
+
+108
+00:04:11,919 --> 00:04:13,296
+stage and production,
+
+109
+00:04:13,296 --> 00:04:14,805
+each one a real Tomcat.
+
+110
+00:04:14,805 --> 00:04:16,838
+We ask each one for its health.
+
+111
+00:04:17,388 --> 00:04:20,588
+Dev first. Not found. Nothing is deployed yet.
+
+112
+00:04:21,138 --> 00:04:22,482
+Stage. Not found.
+
+113
+00:04:23,932 --> 00:04:26,258
+Production. Not found. A clean start.
+
+114
+00:04:26,808 --> 00:04:29,709
+Back to Jenkins. We open Cloud Cart CI.
+
+115
+00:04:33,359 --> 00:04:34,532
+And click Build Now.
+
+116
+00:04:37,282 --> 00:04:41,016
+Jenkins puts the build in the queue, and starts it in a second or two.
+
+117
+00:04:43,066 --> 00:04:44,712
+This is the Stages view.
+
+118
+00:04:44,712 --> 00:04:46,427
+Each circle is one stage.
+
+119
+00:04:46,427 --> 00:04:47,113
+The first,
+
+120
+00:04:47,113 --> 00:04:47,730
+Checkout,
+
+121
+00:04:47,730 --> 00:04:49,719
+is Jenkins fetching the code.
+
+122
+00:04:49,719 --> 00:04:52,531
+The rest are the four stages of our file.
+
+123
+00:04:52,531 --> 00:04:53,903
+Watch them go green.
+
+124
+00:04:54,453 --> 00:04:58,933
+Version is done. The pipeline stamped this build, one point oh point one.
+
+125
+00:04:59,483 --> 00:05:03,963
+Build and test. This compiles the code and runs all thirty two tests.
+
+126
+00:05:04,513 --> 00:05:05,649
+Publish to Nexus.
+
+127
+00:05:05,649 --> 00:05:07,520
+The war file leaves Jenkins,
+
+128
+00:05:07,520 --> 00:05:09,324
+and goes to the repository,
+
+129
+00:05:09,324 --> 00:05:10,593
+with its checksums.
+
+130
+00:05:11,143 --> 00:05:12,090
+Deploy to dev.
+
+131
+00:05:12,090 --> 00:05:14,189
+The file comes back from Nexus,
+
+132
+00:05:14,189 --> 00:05:15,610
+the checksum matches,
+
+133
+00:05:15,610 --> 00:05:17,031
+and Tomcat starts it.
+
+134
+00:05:17,031 --> 00:05:19,941
+Notice what happens here: nothing is built.
+
+135
+00:05:19,941 --> 00:05:21,701
+The deploy only downloads,
+
+136
+00:05:21,701 --> 00:05:22,175
+checks,
+
+137
+00:05:22,175 --> 00:05:22,919
+and copies.
+
+138
+00:05:29,169 --> 00:05:31,772
+Green. Build number one. We open the build.
+
+139
+00:05:33,222 --> 00:05:34,608
+And the console output.
+
+140
+00:05:36,058 --> 00:05:39,322
+It is long, because Maven and Jenkins log everything.
+
+141
+00:05:40,572 --> 00:05:42,514
+Thirty two tests, no failures.
+
+142
+00:05:43,064 --> 00:05:44,367
+The checksum is ok,
+
+143
+00:05:44,367 --> 00:05:48,002
+and dev reports it is running one point oh point one.
+
+144
+00:05:48,002 --> 00:05:50,402
+That last line is the verify stage.
+
+145
+00:05:50,952 --> 00:05:54,515
+Now Nexus. This is where the file went. We open Browse.
+
+146
+00:05:58,165 --> 00:05:59,914
+The releases repository.
+
+147
+00:06:05,264 --> 00:06:06,288
+Then academy.
+
+148
+00:06:09,938 --> 00:06:11,069
+Then cloud cart.
+
+149
+00:06:14,519 --> 00:06:15,479
+And the version.
+
+150
+00:06:19,129 --> 00:06:20,622
+One point oh point one.
+
+151
+00:06:23,772 --> 00:06:25,031
+Here is the war file.
+
+152
+00:06:28,581 --> 00:06:29,707
+Next to the war,
+
+153
+00:06:29,707 --> 00:06:31,536
+Nexus keeps its checksums,
+
+154
+00:06:31,536 --> 00:06:32,943
+in a S H A one file,
+
+155
+00:06:32,943 --> 00:06:34,420
+and an M D five file.
+
+156
+00:06:34,420 --> 00:06:37,797
+This is the number every environment must match.
+
+157
+00:06:38,347 --> 00:06:41,248
+Back in the terminal. Is dev alive? Health, dev.
+
+158
+00:06:42,898 --> 00:06:45,522
+Status up, version one point oh point one.
+
+159
+00:06:46,072 --> 00:06:47,702
+And the real application,
+
+160
+00:06:47,702 --> 00:06:48,158
+on dev.
+
+161
+00:06:48,158 --> 00:06:49,397
+This is Cloud Cart,
+
+162
+00:06:49,397 --> 00:06:50,831
+built by the pipeline,
+
+163
+00:06:50,831 --> 00:06:51,939
+served by Tomcat.
+
+164
+00:06:54,389 --> 00:06:58,250
+The banner says free shipping over seventy five dollars. Remember that.
+
+165
+00:06:58,800 --> 00:07:01,915
+Stage and production are still empty. Health, stage.
+
+166
+00:07:04,765 --> 00:07:05,896
+Still not found.
+
+167
+00:07:06,446 --> 00:07:10,179
+Time to promote. In Jenkins, we open Cloud Cart promote.
+
+168
+00:07:13,729 --> 00:07:15,181
+This job has no build,
+
+169
+00:07:15,181 --> 00:07:15,775
+no tests,
+
+170
+00:07:15,775 --> 00:07:16,567
+no compiler.
+
+171
+00:07:16,567 --> 00:07:19,470
+It only moves a version that already exists.
+
+172
+00:07:19,470 --> 00:07:21,516
+We click Build with Parameters.
+
+173
+00:07:24,766 --> 00:07:29,118
+Two parameters. Version, and target. We type one point oh point one.
+
+174
+00:07:29,668 --> 00:07:31,076
+And the target is stage.
+
+175
+00:07:31,626 --> 00:07:32,351
+Build.
+
+176
+00:07:35,001 --> 00:07:35,596
+Remember,
+
+177
+00:07:35,596 --> 00:07:38,110
+this job has no compiler and no tests.
+
+178
+00:07:38,110 --> 00:07:39,896
+It only downloads the file,
+
+179
+00:07:39,896 --> 00:07:40,558
+checks it,
+
+180
+00:07:40,558 --> 00:07:41,550
+and deploys it.
+
+181
+00:07:42,100 --> 00:07:42,724
+One stage,
+
+182
+00:07:42,724 --> 00:07:43,223
+Promote.
+
+183
+00:07:43,223 --> 00:07:45,594
+It downloaded the same war from Nexus,
+
+184
+00:07:45,594 --> 00:07:46,905
+checked the checksum,
+
+185
+00:07:46,905 --> 00:07:47,903
+and deployed it.
+
+186
+00:07:48,453 --> 00:07:51,354
+Now production. We open the promote job again.
+
+187
+00:07:54,404 --> 00:07:56,090
+And click Build with Parameters.
+
+188
+00:07:59,240 --> 00:08:02,376
+Version one point oh point one. Target, prod.
+
+189
+00:08:05,126 --> 00:08:05,542
+Build.
+
+190
+00:08:05,542 --> 00:08:06,168
+Same job,
+
+191
+00:08:06,168 --> 00:08:06,862
+same file,
+
+192
+00:08:06,862 --> 00:08:07,766
+a new target.
+
+193
+00:08:07,766 --> 00:08:10,405
+Jenkins downloads it from Nexus again,
+
+194
+00:08:10,405 --> 00:08:11,795
+checks the checksum,
+
+195
+00:08:11,795 --> 00:08:12,837
+and deploys it.
+
+196
+00:08:12,837 --> 00:08:13,254
+Green.
+
+197
+00:08:19,304 --> 00:08:21,501
+Back in the terminal. Health, stage.
+
+198
+00:08:23,451 --> 00:08:26,374
+Version one point oh point one. And production.
+
+199
+00:08:27,924 --> 00:08:31,806
+Also one point oh point one. Three environments, one version.
+
+200
+00:08:32,356 --> 00:08:34,183
+But is it really the same file?
+
+201
+00:08:34,183 --> 00:08:35,832
+Not the same version number,
+
+202
+00:08:35,832 --> 00:08:36,716
+the same bytes.
+
+203
+00:08:36,716 --> 00:08:40,015
+We compute the checksum of the file in each environment.
+
+204
+00:08:40,565 --> 00:08:45,002
+Dev. Stage. Production. Look at the first few characters of each line.
+
+205
+00:08:45,552 --> 00:08:46,255
+Identical.
+
+206
+00:08:46,255 --> 00:08:46,958
+Same file,
+
+207
+00:08:46,958 --> 00:08:47,871
+three places.
+
+208
+00:08:47,871 --> 00:08:49,838
+Nobody built anything again.
+
+209
+00:08:49,838 --> 00:08:51,525
+That is the golden rule,
+
+210
+00:08:51,525 --> 00:08:52,016
+proven.
+
+211
+00:08:52,566 --> 00:08:53,984
+Now the advanced part.
+
+212
+00:08:53,984 --> 00:08:55,982
+A developer changes the banner.
+
+213
+00:08:55,982 --> 00:08:58,689
+Free shipping now starts at fifty dollars.
+
+214
+00:08:59,239 --> 00:09:01,330
+We make the change, with one command.
+
+215
+00:09:03,380 --> 00:09:05,428
+We look at the change. One line.
+
+216
+00:09:05,978 --> 00:09:06,916
+And commit it.
+
+217
+00:09:10,166 --> 00:09:13,110
+Back in Jenkins, we open Cloud Cart CI.
+
+218
+00:09:16,660 --> 00:09:17,834
+And click Build Now.
+
+219
+00:09:22,284 --> 00:09:23,967
+The pipeline runs again.
+
+220
+00:09:23,967 --> 00:09:25,159
+Same four stages.
+
+221
+00:09:25,159 --> 00:09:25,720
+Version,
+
+222
+00:09:25,720 --> 00:09:27,334
+one point oh point two.
+
+223
+00:09:27,334 --> 00:09:28,386
+Build and test,
+
+224
+00:09:28,386 --> 00:09:30,279
+all thirty two tests again.
+
+225
+00:09:30,279 --> 00:09:30,840
+Publish,
+
+226
+00:09:30,840 --> 00:09:32,944
+a new file with a new version.
+
+227
+00:09:32,944 --> 00:09:34,207
+And deploy to dev.
+
+228
+00:09:34,207 --> 00:09:37,644
+Notice that stage and production are not touched.
+
+229
+00:09:54,494 --> 00:09:55,381
+While it runs,
+
+230
+00:09:55,381 --> 00:09:57,027
+look at the version again.
+
+231
+00:09:57,027 --> 00:09:58,991
+It comes from the build number.
+
+232
+00:09:58,991 --> 00:09:59,625
+Build two,
+
+233
+00:09:59,625 --> 00:10:01,588
+version one point oh point two.
+
+234
+00:10:01,588 --> 00:10:02,602
+Nobody typed it,
+
+235
+00:10:02,602 --> 00:10:04,819
+and nobody can forget to change it.
+
+236
+00:10:05,369 --> 00:10:06,418
+Build number two.
+
+237
+00:10:06,418 --> 00:10:08,763
+The version is one point oh point two.
+
+238
+00:10:08,763 --> 00:10:09,565
+A new number,
+
+239
+00:10:09,565 --> 00:10:11,108
+because it is a new file.
+
+240
+00:10:11,658 --> 00:10:13,044
+Dev shows the new banner.
+
+241
+00:10:19,694 --> 00:10:21,998
+Free shipping now starts at fifty dollars.
+
+242
+00:10:22,548 --> 00:10:24,185
+And stage and production?
+
+243
+00:10:24,185 --> 00:10:26,673
+They still run one point oh point one.
+
+244
+00:10:26,673 --> 00:10:27,852
+Dev moved forward.
+
+245
+00:10:27,852 --> 00:10:29,095
+The others did not,
+
+246
+00:10:29,095 --> 00:10:30,143
+until we decide.
+
+247
+00:10:30,693 --> 00:10:32,442
+We decide that stage should get it.
+
+248
+00:10:36,892 --> 00:10:39,346
+In the promote job, Build with Parameters.
+
+249
+00:10:42,596 --> 00:10:45,710
+Version one point oh point two. Target, stage.
+
+250
+00:10:46,260 --> 00:10:46,682
+Build.
+
+251
+00:10:46,682 --> 00:10:48,858
+The same promote job as before.
+
+252
+00:10:48,858 --> 00:10:51,737
+It finds one point oh point two in Nexus,
+
+253
+00:10:51,737 --> 00:10:53,141
+checks the checksum,
+
+254
+00:10:53,141 --> 00:10:55,178
+and deploys it to stage only.
+
+255
+00:11:00,928 --> 00:11:04,480
+Now the three environments are on different versions,
+
+256
+00:11:04,480 --> 00:11:05,217
+on purpose.
+
+257
+00:11:05,217 --> 00:11:07,966
+Dev and stage run one point oh point two.
+
+258
+00:11:07,966 --> 00:11:10,848
+Production stays on one point oh point one.
+
+259
+00:11:11,398 --> 00:11:16,134
+That is what promotion gives you. Production changes only when someone chooses it.
+
+260
+00:11:16,684 --> 00:11:20,716
+One more thing. In Nexus, we open the releases repository.
+
+261
+00:11:25,366 --> 00:11:26,539
+First, academy.
+
+262
+00:11:29,989 --> 00:11:31,120
+Then cloud cart.
+
+263
+00:11:34,670 --> 00:11:36,014
+And cloud cart again.
+
+264
+00:11:39,464 --> 00:11:40,963
+Both versions are there.
+
+265
+00:11:40,963 --> 00:11:42,400
+One point oh point one,
+
+266
+00:11:42,400 --> 00:11:44,087
+and one point oh point two.
+
+267
+00:11:44,087 --> 00:11:45,586
+Nothing was overwritten.
+
+268
+00:11:46,136 --> 00:11:49,803
+Could someone upload a different file as one point oh point one?
+
+269
+00:11:49,803 --> 00:11:50,204
+We try,
+
+270
+00:11:50,204 --> 00:11:51,235
+from the terminal.
+
+271
+00:11:55,385 --> 00:11:56,298
+Four oh nine.
+
+272
+00:11:56,298 --> 00:11:56,930
+Conflict.
+
+273
+00:11:56,930 --> 00:11:57,913
+Nexus refuses.
+
+274
+00:11:57,913 --> 00:12:00,510
+A released version cannot be changed,
+
+275
+00:12:00,510 --> 00:12:03,038
+so production can always be rebuilt,
+
+276
+00:12:03,038 --> 00:12:04,091
+or rolled back,
+
+277
+00:12:04,091 --> 00:12:06,478
+from the exact file it ran before.
+
+278
+00:12:08,028 --> 00:12:09,031
+Let us recap.
+
+279
+00:12:09,581 --> 00:12:11,073
+A pipeline is stages.
+
+280
+00:12:11,073 --> 00:12:11,499
+Build,
+
+281
+00:12:11,499 --> 00:12:11,854
+test,
+
+282
+00:12:11,854 --> 00:12:12,423
+package,
+
+283
+00:12:12,423 --> 00:12:12,991
+publish,
+
+284
+00:12:12,991 --> 00:12:14,270
+deploy and verify.
+
+285
+00:12:14,270 --> 00:12:17,965
+Each one answers a different question when it fails.
+
+286
+00:12:18,515 --> 00:12:23,123
+Build once. Give the file a unique version, and keep it in a repository.
+
+287
+00:12:23,673 --> 00:12:29,006
+Promote the same file. Dev, then stage, then production. Check the checksum every time.
+
+288
+00:12:29,556 --> 00:12:34,121
+And verify by asking the running application, not by trusting the deploy.
+
+289
+00:12:34,671 --> 00:12:40,026
+Next lesson: the gates that stop a bad build, secrets, and safe deploys with rollback.
+
+290
+00:12:41,576 --> 00:12:43,667
+Your turn. On your own machine only.
+
+291
+00:12:44,217 --> 00:12:49,977
+One. Write a Jenkins file with four stages. Version, build and test, publish, deploy.
+
+292
+00:12:50,527 --> 00:12:53,129
+Two. Give every build a version from the build number.
+
+293
+00:12:53,679 --> 00:12:58,629
+Three. Make a second job that takes a version and a target, and deploys without building.
+
+294
+00:12:59,179 --> 00:13:03,232
+Four. Prove it: compute the checksum in two environments, and compare.
+
+295
+00:13:03,782 --> 00:13:06,363
+Pause the video, and do it before you continue.
+
+296
+00:13:21,913 --> 00:13:23,556
+Quick check. Answer aloud.
+
+297
+00:13:24,106 --> 00:13:25,748
+Why do we build only once?
+
+298
+00:13:26,298 --> 00:13:29,178
+What does promotion change, and what does it not change?
+
+299
+00:13:29,728 --> 00:13:33,163
+What stops someone replacing version one point oh point one?
+
+300
+00:13:33,713 --> 00:13:36,017
+Why verify by asking the application?
+
+301
+00:13:46,567 --> 00:13:48,542
+If you found this lesson useful,
+
+302
+00:13:48,542 --> 00:13:49,283
+please like,
+
+303
+00:13:49,283 --> 00:13:49,653
+share,
+
+304
+00:13:49,653 --> 00:13:50,517
+and subscribe.
+
+305
+00:13:50,517 --> 00:13:53,233
+It helps other engineers find these lessons,
+
+306
+00:13:53,233 --> 00:13:54,652
+and it keeps them free.

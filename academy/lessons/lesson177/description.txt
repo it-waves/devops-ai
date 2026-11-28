@@ -1,0 +1,33 @@
+Lesson 177 of the DevOps Engineering Bootcamp. A pipeline is the road from a commit to production, and the most important rule on that road is simple: build once, promote many. In this lesson you watch a real Jenkins pipeline build CloudCart a single time, publish the war file to Nexus as an immutable release, and deploy it to dev. A second job then promotes the very same file to stage and production, with no rebuild, and you prove it by comparing the SHA-1 checksum in each environment. Then you ship a change, a new banner, and see version 1.0.2 flow through while production stays on 1.0.1, on purpose.
+
+Chapters
+0:00 Friday, four forty five
+0:41 What to expect
+1:17 Commit to production
+2:14 Build once, promote many
+3:01 Live: build once, promote many
+3:13 Live: the Jenkinsfile and the deploy script
+4:26 Live: build once in Jenkins
+5:50 Live: the war file in Nexus
+6:38 Live: is dev alive?
+7:06 Live: promote to stage and production
+8:32 Live: the same bytes everywhere
+8:52 Live: ship a change and build version 1.0.2
+11:16 Live: both versions in Nexus
+12:07 Recap
+12:41 Your turn
+13:21 Quick check
+
+Objectives covered: MC21-O01 (what a pipeline is), MC21-O02 (stages) and MC21-O03 (immutable artifacts and promotion).
+
+Honest notes: the browser and terminal are a real continuous recording of Jenkins 2.580.2, Sonatype Nexus Repository Community Edition 3.98.1 and Apache Tomcat 10.1 on a throwaway lab server, continuing from the earlier Jenkins and Nexus lessons. Passwords shown belong to that throwaway server. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, concept, your-turn and recap screens are labelled illustrations, not captures. Use your own machine only.
+
+Previous lesson: Nexus Repository: Checksums, Least-Privilege Roles, Cleanup Tasks and Backups, Live | Lesson 175 https://youtu.be/PJXl-Q-Ux30 (Lesson 176 is published just before this one)
+Next: Lesson 178, Deploy without fear (links when published)
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+❤ If our lessons have helped you, consider buying us a coffee. Your support means more than you know and helps us keep education free. Thank you for being part of this journey!
+☕ https://ko-fi.com/devopssimplifiedhq
+
+#devops #cicd #jenkins #nexus #tomcat #pipeline #devopsbootcamp
