@@ -1,0 +1,35 @@
+Lesson 176 of the DevOps Engineering Bootcamp, the mastery lesson of the Nexus Repository domain. Four builds are red, with four different numbers, and the habit that fixes them all is reading the first error, not the last line. In this lesson we break our own Nexus Repository four ways, on a real server with a real browser and a real terminal, and fix each one: a wrong password (401), a role that is too small (403), a version that was never published (404, plus stale maven-metadata.xml and the task that rebuilds it), and a repository someone left offline (503). Then a script checks seven facts about your artifact pipeline, you fall into the trap of a password left in the code, remove it, reach seven of seven, keep the results as evidence, and clean up.
+
+Chapters
+0:00 Four red builds
+0:38 What to expect
+1:02 The Nexus domain on one page
+1:38 The scenario and the seven checks
+2:19 Live: break it, fix it, prove it
+2:45 Live: lab up and the first check
+3:01 Live: failure one, 401 wrong password (MC19-O08)
+3:44 Live: failure two, 403 role too small (MC19-O08)
+5:55 Live: failure three, 404 and stale metadata (MC19-O08)
+7:32 Live: failure four, 503 repository offline (MC19-O08)
+8:37 Live: the proof, a leaked password, seven of seven
+9:29 Live: results and cleanup
+9:49 When a check fails
+10:16 Where to find the lab
+11:02 Your turn
+11:49 Quick check and what is next
+
+Objectives covered: MC19-O08 (troubleshooting Nexus by reading the first error) and the mastery evidence for the whole Nexus Repository domain (independently verifiable scenario, results, troubleshooting and cleanup).
+
+Lab files: github.com/it-waves/devops-ai in the folder academy/lab: lab176.sh and shortcuts176.sh. Load the short names with source shortcuts176.sh, then run lab up, lab check and lab down. Set NEXUS_ADMIN (admin:password), NEXUS_USER and NEXUS_PASSWORD (your deployer) in your own shell, never in a file. Run lab check inside your project folder.
+
+Honest notes: the browser and terminal are a real continuous recording of Sonatype Nexus Repository Community Edition 3.98.1 on a throwaway lab server, continuing from Lessons 173 to 175. Passwords shown belong to that throwaway server. In the terminal, why prints only the lines that matter from the Maven output, and nx is a short alias for curl with the deployer login. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The plan, domain, scenario, mistakes, lab-info, your-turn and recap screens are labelled illustrations, not captures. Use your own machine only.
+
+Previous lesson: Nexus Repository: Checksums, Least-Privilege Roles, Cleanup Tasks and Backups, Live | Lesson 175 https://youtu.be/PJXl-Q-Ux30
+Next: MC20, GitHub Actions, where your code builds itself.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+❤ If our lessons have helped you, consider buying us a coffee. Your support means more than you know and helps us keep education free. Thank you for being part of this journey!
+☕ https://ko-fi.com/devopssimplifiedhq
+
+#devops #nexus #nexusrepository #maven #troubleshooting #devopsbootcamp #mastery
