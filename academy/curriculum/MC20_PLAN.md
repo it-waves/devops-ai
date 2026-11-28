@@ -16,3 +16,7 @@ Real runs need a throwaway public repository (free hosted minutes) in the owner'
 - Repo it-waves/cloudcart-actions-lab created (public), Claude GitHub App access granted for that one repo (owner approved via GitHub Mobile). Revoke access and delete the repo after MC20.
 - Clone at /home/claude/cloudcart-actions-lab, branch main holds cart-core (pom, Cart, CartTest) and no workflow yet. Push works (a "push negotiation failed" warning is harmless).
 - Next: L177 script, scenes, steps; record in the owner Chrome on github.com (signed in as it-waves).
+
+## Status note (2026-11-27)
+- GitHub asset hosts (github.githubassets.com, avatars/camo.githubusercontent.com, pipelines.actions.githubusercontent.com) still refused by the sandbox proxy even after the user said they were allowed. Headless Chrome in the workspace therefore renders GitHub unstyled.
+- Fallback for MC20 recordings: GitHub UI screens captured from the user's signed-in Chrome (sharp stills/zooms with highlights, narrated step by step); terminal parts (git, mvn, yaml editing) stay live in the workspace. Recheck the hosts before each lesson; if open, record live.
