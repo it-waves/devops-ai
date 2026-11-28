@@ -1,0 +1,1063 @@
+1
+00:00:00,500 --> 00:00:01,655
+You push your code.
+
+2
+00:00:01,655 --> 00:00:02,688
+Nobody builds it.
+
+3
+00:00:02,688 --> 00:00:03,661
+Nobody tests it.
+
+4
+00:00:03,661 --> 00:00:04,816
+It just sits there,
+
+5
+00:00:04,816 --> 00:00:06,153
+and you hope it works.
+
+6
+00:00:06,703 --> 00:00:07,612
+Two days later,
+
+7
+00:00:07,612 --> 00:00:09,369
+a teammate pulls your change,
+
+8
+00:00:09,369 --> 00:00:11,853
+and the build is broken on their machine.
+
+9
+00:00:11,853 --> 00:00:12,398
+On yours,
+
+10
+00:00:12,398 --> 00:00:13,125
+it was fine.
+
+11
+00:00:13,675 --> 00:00:16,937
+What if every push built your code and ran your tests,
+
+12
+00:00:16,937 --> 00:00:18,085
+on a fresh machine,
+
+13
+00:00:18,085 --> 00:00:18,689
+by itself,
+
+14
+00:00:18,689 --> 00:00:19,777
+in under a minute,
+
+15
+00:00:19,777 --> 00:00:21,227
+and told you the result?
+
+16
+00:00:21,777 --> 00:00:23,171
+That is GitHub Actions.
+
+17
+00:00:23,171 --> 00:00:25,355
+Today you build your first pipeline,
+
+18
+00:00:25,355 --> 00:00:27,174
+and you watch it run for real.
+
+19
+00:00:28,724 --> 00:00:30,153
+Here is what to expect.
+
+20
+00:00:30,703 --> 00:00:35,589
+One: six words you must know. Event, workflow, job, runner, step, and action.
+
+21
+00:00:36,139 --> 00:00:37,263
+Two: a live demo,
+
+22
+00:00:37,263 --> 00:00:39,579
+in real GitHub and a real terminal.
+
+23
+00:00:39,579 --> 00:00:41,630
+We write the smallest workflow,
+
+24
+00:00:41,630 --> 00:00:43,814
+then a real build for Cloud Cart,
+
+25
+00:00:43,814 --> 00:00:45,269
+and we watch both run.
+
+26
+00:00:45,819 --> 00:00:49,702
+Three: we break a test on purpose, find the first error, and fix it.
+
+27
+00:00:50,252 --> 00:00:53,900
+Four: the mistakes beginners make, and where to find the lab files.
+
+28
+00:00:55,450 --> 00:00:59,354
+Six words. Learn them once, and every Actions page will make sense.
+
+29
+00:00:59,904 --> 00:01:03,528
+An event is something that happens in your repository.
+
+30
+00:01:03,528 --> 00:01:03,998
+A push.
+
+31
+00:01:03,998 --> 00:01:05,005
+A pull request.
+
+32
+00:01:05,005 --> 00:01:05,877
+Even a timer.
+
+33
+00:01:06,427 --> 00:01:10,041
+A workflow is a file that says: when this event happens,
+
+34
+00:01:10,041 --> 00:01:10,880
+do this work.
+
+35
+00:01:10,880 --> 00:01:13,267
+It sits in a folder named dot github,
+
+36
+00:01:13,267 --> 00:01:14,299
+slash workflows.
+
+37
+00:01:14,849 --> 00:01:20,588
+A job is a group of steps that runs on one machine. A workflow can have one job, or many.
+
+38
+00:01:21,138 --> 00:01:22,694
+A runner is that machine.
+
+39
+00:01:22,694 --> 00:01:25,372
+GitHub gives you a fresh one for every job,
+
+40
+00:01:25,372 --> 00:01:27,239
+and throws it away afterwards.
+
+41
+00:01:27,789 --> 00:01:32,973
+A step is one small task inside a job. It is either a shell command, or an action.
+
+42
+00:01:33,523 --> 00:01:36,924
+And an action is a reusable step that someone else wrote,
+
+43
+00:01:36,924 --> 00:01:37,759
+like checkout,
+
+44
+00:01:37,759 --> 00:01:40,265
+which downloads your code onto the runner.
+
+45
+00:01:40,815 --> 00:01:41,190
+Event,
+
+46
+00:01:41,190 --> 00:01:41,754
+workflow,
+
+47
+00:01:41,754 --> 00:01:42,004
+job,
+
+48
+00:01:42,004 --> 00:01:42,442
+runner,
+
+49
+00:01:42,442 --> 00:01:42,756
+step,
+
+50
+00:01:42,756 --> 00:01:43,194
+action.
+
+51
+00:01:43,194 --> 00:01:44,634
+Say them in that order,
+
+52
+00:01:44,634 --> 00:01:46,575
+and you have the whole picture.
+
+53
+00:01:50,125 --> 00:01:51,818
+Let us build it for real.
+
+54
+00:01:51,818 --> 00:01:53,918
+This is a repository on GitHub,
+
+55
+00:01:53,918 --> 00:01:55,950
+called cloud cart actions lab.
+
+56
+00:01:55,950 --> 00:01:58,253
+It holds the Cloud Cart cart core,
+
+57
+00:01:58,253 --> 00:01:59,811
+our Java shopping cart,
+
+58
+00:01:59,811 --> 00:02:00,962
+and nothing else.
+
+59
+00:02:01,512 --> 00:02:03,362
+Across the top are the tabs.
+
+60
+00:02:03,362 --> 00:02:04,617
+Code is your files.
+
+61
+00:02:04,617 --> 00:02:07,392
+Issues and Pull requests are for teamwork.
+
+62
+00:02:07,392 --> 00:02:09,704
+And Actions is where pipelines run.
+
+63
+00:02:10,254 --> 00:02:11,337
+We open Actions.
+
+64
+00:02:11,337 --> 00:02:12,150
+It is empty,
+
+65
+00:02:12,150 --> 00:02:13,978
+so GitHub offers templates.
+
+66
+00:02:13,978 --> 00:02:15,467
+We will write our own,
+
+67
+00:02:15,467 --> 00:02:18,852
+because the smallest workflow is only a few lines.
+
+68
+00:02:19,402 --> 00:02:20,522
+Now the terminal,
+
+69
+00:02:20,522 --> 00:02:21,774
+inside the project.
+
+70
+00:02:21,774 --> 00:02:23,487
+A workflow is just a file,
+
+71
+00:02:23,487 --> 00:02:25,332
+so first we make its folder.
+
+72
+00:02:25,882 --> 00:02:30,640
+Then the file, called hello dot Y M L. We explain each line as we type it.
+
+73
+00:02:31,190 --> 00:02:35,200
+Name: Hello. This is the label you will see on the Actions page.
+
+74
+00:02:35,750 --> 00:02:40,934
+On: push. That is the event. Every push to this repository starts the workflow.
+
+75
+00:02:41,484 --> 00:02:44,343
+Jobs, and one job, which we name say hello.
+
+76
+00:02:44,893 --> 00:02:50,738
+Runs on ubuntu latest. That is the runner: a fresh Linux machine, owned by GitHub.
+
+77
+00:02:51,288 --> 00:02:55,896
+Steps. One step, and it runs a command: echo, hello from a GitHub machine.
+
+78
+00:02:58,146 --> 00:03:02,370
+Eight lines. Now git add, to stage the file, and git commit, to save it.
+
+79
+00:03:02,920 --> 00:03:06,888
+And git push. The push is the event, so GitHub starts the workflow.
+
+80
+00:03:12,438 --> 00:03:16,001
+Back in Chrome, the Actions tab. A run appeared by itself.
+
+81
+00:03:16,551 --> 00:03:21,052
+Yellow means it is waiting for a machine. Then a spinner, running. And then green.
+
+82
+00:03:23,102 --> 00:03:24,289
+Each row is one run.
+
+83
+00:03:24,289 --> 00:03:25,890
+It shows the workflow name,
+
+84
+00:03:25,890 --> 00:03:27,433
+the event that started it,
+
+85
+00:03:27,433 --> 00:03:28,085
+the branch,
+
+86
+00:03:28,085 --> 00:03:28,619
+the time,
+
+87
+00:03:28,619 --> 00:03:29,865
+and how long it took.
+
+88
+00:03:30,415 --> 00:03:31,354
+We open the run.
+
+89
+00:03:31,354 --> 00:03:33,466
+The summary shows what triggered it,
+
+90
+00:03:33,466 --> 00:03:34,111
+the status,
+
+91
+00:03:34,111 --> 00:03:34,874
+and the jobs,
+
+92
+00:03:34,874 --> 00:03:35,578
+on the left.
+
+93
+00:03:36,128 --> 00:03:37,222
+We open the job.
+
+94
+00:03:37,222 --> 00:03:38,042
+Three steps.
+
+95
+00:03:38,042 --> 00:03:38,795
+Set up job,
+
+96
+00:03:38,795 --> 00:03:39,957
+and Complete job,
+
+97
+00:03:39,957 --> 00:03:41,667
+which GitHub adds itself.
+
+98
+00:03:41,667 --> 00:03:42,897
+And in the middle,
+
+99
+00:03:42,897 --> 00:03:43,786
+our own step.
+
+100
+00:03:44,336 --> 00:03:47,715
+GitHub shows the log text only when you are signed in.
+
+101
+00:03:47,715 --> 00:03:48,904
+So in the terminal,
+
+102
+00:03:48,904 --> 00:03:50,843
+one command shows the same log.
+
+103
+00:03:51,393 --> 00:03:52,471
+Here is our line,
+
+104
+00:03:52,471 --> 00:03:55,260
+and the output: hello from a GitHub machine.
+
+105
+00:03:55,260 --> 00:03:58,936
+A machine that did not exist a minute ago ran our command,
+
+106
+00:03:58,936 --> 00:04:00,204
+and was thrown away.
+
+107
+00:04:00,754 --> 00:04:02,849
+That was the smallest workflow.
+
+108
+00:04:02,849 --> 00:04:06,026
+Now a real one: it builds and tests Cloud Cart.
+
+109
+00:04:06,026 --> 00:04:09,203
+We copy the new file into the workflows folder.
+
+110
+00:04:09,203 --> 00:04:11,163
+We remove the hello workflow,
+
+111
+00:04:11,163 --> 00:04:12,717
+because it did its job.
+
+112
+00:04:12,717 --> 00:04:13,326
+Then add,
+
+113
+00:04:13,326 --> 00:04:13,799
+commit,
+
+114
+00:04:13,799 --> 00:04:14,407
+and push.
+
+115
+00:04:17,857 --> 00:04:20,972
+On GitHub, we open the file. Only eighteen lines.
+
+116
+00:04:26,122 --> 00:04:28,298
+Line one: name. We call it CI.
+
+117
+00:04:28,848 --> 00:04:32,901
+Then on. We said: run on a push to main, and on every pull request.
+
+118
+00:04:33,451 --> 00:04:35,798
+Then jobs. One job, named build.
+
+119
+00:04:36,348 --> 00:04:40,124
+Runs on ubuntu latest. The same fresh Linux runner.
+
+120
+00:04:40,674 --> 00:04:43,852
+Then steps. A list. Each item starts with a dash.
+
+121
+00:04:44,402 --> 00:04:46,720
+Step one uses actions slash checkout.
+
+122
+00:04:46,720 --> 00:04:47,409
+Without it,
+
+123
+00:04:47,409 --> 00:04:48,662
+the runner is empty,
+
+124
+00:04:48,662 --> 00:04:50,290
+and has none of your code.
+
+125
+00:04:50,840 --> 00:04:52,749
+Step two uses setup java,
+
+126
+00:04:52,749 --> 00:04:54,352
+and asks for Temurin,
+
+127
+00:04:54,352 --> 00:04:55,725
+version seventeen.
+
+128
+00:04:55,725 --> 00:04:59,160
+The runner needs a Java before Maven can run.
+
+129
+00:04:59,710 --> 00:05:02,341
+Step three is a plain command: mvn,
+
+130
+00:05:02,341 --> 00:05:02,867
+dash B,
+
+131
+00:05:02,867 --> 00:05:03,393
+verify.
+
+132
+00:05:03,393 --> 00:05:05,196
+Dash B means batch mode,
+
+133
+00:05:05,196 --> 00:05:07,150
+which keeps the log clean.
+
+134
+00:05:07,150 --> 00:05:09,029
+Verify compiles the code,
+
+135
+00:05:09,029 --> 00:05:10,156
+runs the tests,
+
+136
+00:05:10,156 --> 00:05:11,358
+and packages it.
+
+137
+00:05:11,908 --> 00:05:14,476
+And indentation matters in Y A M L.
+
+138
+00:05:14,476 --> 00:05:15,282
+Two spaces,
+
+139
+00:05:15,282 --> 00:05:16,089
+never tabs.
+
+140
+00:05:16,089 --> 00:05:18,436
+Most first errors are an indent.
+
+141
+00:05:18,986 --> 00:05:24,341
+Back to the Actions tab. Two runs now: the hello run from before, and our new CI.
+
+142
+00:05:24,891 --> 00:05:26,260
+We open the CI run,
+
+143
+00:05:26,260 --> 00:05:27,486
+and then the job.
+
+144
+00:05:27,486 --> 00:05:29,432
+Now the steps do real work.
+
+145
+00:05:29,432 --> 00:05:30,369
+Get the code.
+
+146
+00:05:30,369 --> 00:05:31,234
+Set up Java.
+
+147
+00:05:31,234 --> 00:05:32,315
+Build and test.
+
+148
+00:05:34,465 --> 00:05:35,368
+While it runs,
+
+149
+00:05:35,368 --> 00:05:37,302
+think about what is happening.
+
+150
+00:05:37,302 --> 00:05:39,817
+GitHub started a fresh virtual machine.
+
+151
+00:05:39,817 --> 00:05:41,365
+It downloaded your code.
+
+152
+00:05:41,365 --> 00:05:42,526
+It installed Java.
+
+153
+00:05:42,526 --> 00:05:45,750
+And Maven is now downloading what the build needs,
+
+154
+00:05:45,750 --> 00:05:47,878
+because the machine starts empty,
+
+155
+00:05:47,878 --> 00:05:48,588
+every time.
+
+156
+00:05:49,138 --> 00:05:53,404
+Green. The whole pipeline, well under a minute, with no one touching a keyboard.
+
+157
+00:05:54,754 --> 00:05:59,277
+Let us see the test result. In the terminal, we show only the lines that matter.
+
+158
+00:06:00,727 --> 00:06:05,548
+Tests run: one. Failures: zero. And BUILD SUCCESS. That is the evidence.
+
+159
+00:06:06,098 --> 00:06:08,856
+Now the part that makes a pipeline useful.
+
+160
+00:06:08,856 --> 00:06:10,038
+A test that fails.
+
+161
+00:06:10,038 --> 00:06:12,731
+We change the expected total in our test,
+
+162
+00:06:12,731 --> 00:06:14,635
+from twenty nine ninety nine,
+
+163
+00:06:14,635 --> 00:06:15,817
+to three thousand.
+
+164
+00:06:15,817 --> 00:06:17,131
+A wrong expectation,
+
+165
+00:06:17,131 --> 00:06:17,853
+on purpose.
+
+166
+00:06:20,403 --> 00:06:24,798
+Git diff shows exactly what changed: one line. We commit, and we push.
+
+167
+00:06:27,348 --> 00:06:31,166
+In Chrome, the Actions tab. The run starts again by itself.
+
+168
+00:06:33,516 --> 00:06:34,405
+While we wait,
+
+169
+00:06:34,405 --> 00:06:36,309
+remember what GitHub is doing.
+
+170
+00:06:36,309 --> 00:06:38,213
+It starts a brand new machine.
+
+171
+00:06:38,213 --> 00:06:40,054
+It fetches this exact commit.
+
+172
+00:06:40,054 --> 00:06:41,513
+It runs the same steps,
+
+173
+00:06:41,513 --> 00:06:42,656
+in the same order.
+
+174
+00:06:42,656 --> 00:06:45,258
+Nothing is left over from the run before.
+
+175
+00:06:45,258 --> 00:06:48,114
+That is why a pipeline gives the same answer,
+
+176
+00:06:48,114 --> 00:06:48,812
+every time.
+
+177
+00:06:51,962 --> 00:06:53,690
+And this time, a red cross.
+
+178
+00:07:00,240 --> 00:07:01,255
+We open the job.
+
+179
+00:07:01,255 --> 00:07:02,650
+Build and test is red.
+
+180
+00:07:02,650 --> 00:07:04,933
+And the steps after it were skipped,
+
+181
+00:07:04,933 --> 00:07:07,216
+because a failed step stops the job.
+
+182
+00:07:10,366 --> 00:07:11,483
+Which test failed,
+
+183
+00:07:11,483 --> 00:07:11,979
+and why?
+
+184
+00:07:11,979 --> 00:07:13,405
+The log has the answer.
+
+185
+00:07:13,405 --> 00:07:14,398
+In the terminal,
+
+186
+00:07:14,398 --> 00:07:16,382
+we ask for the failed step only.
+
+187
+00:07:18,432 --> 00:07:21,585
+Here is the first error: expected three thousand,
+
+188
+00:07:21,585 --> 00:07:23,644
+but was twenty nine ninety nine.
+
+189
+00:07:23,644 --> 00:07:25,059
+The test names itself,
+
+190
+00:07:25,059 --> 00:07:26,539
+and shows both numbers.
+
+191
+00:07:27,089 --> 00:07:31,889
+That is the habit. Do not guess. Find the first error, read it, and change one thing.
+
+192
+00:07:32,439 --> 00:07:33,939
+We fix it the clean way.
+
+193
+00:07:33,939 --> 00:07:36,001
+Git revert undoes our bad commit,
+
+194
+00:07:36,001 --> 00:07:37,813
+and keeps the history honest.
+
+195
+00:07:37,813 --> 00:07:38,626
+Then we push.
+
+196
+00:07:39,876 --> 00:07:41,326
+In Chrome, the next run.
+
+197
+00:07:45,976 --> 00:07:47,015
+The same pipeline,
+
+198
+00:07:47,015 --> 00:07:48,457
+on another fresh machine.
+
+199
+00:07:48,457 --> 00:07:50,130
+It fetches the revert commit,
+
+200
+00:07:50,130 --> 00:07:50,880
+sets up Java,
+
+201
+00:07:50,880 --> 00:07:52,322
+and runs the tests again.
+
+202
+00:07:52,322 --> 00:07:55,264
+This time the test expects twenty nine ninety nine,
+
+203
+00:07:55,264 --> 00:07:56,302
+so it should pass.
+
+204
+00:07:56,302 --> 00:07:58,033
+And notice what we did not do.
+
+205
+00:07:58,033 --> 00:07:59,821
+We did not edit the old commit,
+
+206
+00:07:59,821 --> 00:08:01,783
+and we did not delete the red run.
+
+207
+00:08:01,783 --> 00:08:03,513
+The history keeps the mistake,
+
+208
+00:08:03,513 --> 00:08:04,205
+and the fix,
+
+209
+00:08:04,205 --> 00:08:04,955
+side by side.
+
+210
+00:08:04,955 --> 00:08:05,994
+Nothing is hidden,
+
+211
+00:08:05,994 --> 00:08:08,070
+and you can always see what changed,
+
+212
+00:08:08,070 --> 00:08:08,590
+and when.
+
+213
+00:08:10,140 --> 00:08:11,185
+And it is green.
+
+214
+00:08:16,435 --> 00:08:17,549
+Look at the list.
+
+215
+00:08:17,549 --> 00:08:17,942
+Green,
+
+216
+00:08:17,942 --> 00:08:18,531
+then red,
+
+217
+00:08:18,531 --> 00:08:19,252
+then green.
+
+218
+00:08:19,252 --> 00:08:20,824
+Every push has a result,
+
+219
+00:08:20,824 --> 00:08:24,755
+and every result is tied to the exact commit that caused it.
+
+220
+00:08:25,305 --> 00:08:27,232
+That is continuous integration.
+
+221
+00:08:27,232 --> 00:08:29,284
+Every change is built and tested,
+
+222
+00:08:29,284 --> 00:08:30,465
+on a clean machine,
+
+223
+00:08:30,465 --> 00:08:31,460
+within a minute,
+
+224
+00:08:31,460 --> 00:08:33,262
+and the team sees the answer.
+
+225
+00:08:34,812 --> 00:08:36,988
+Beginner mistakes, and how to spot them.
+
+226
+00:08:37,538 --> 00:08:41,594
+The workflow does not appear: the file must be inside dot github,
+
+227
+00:08:41,594 --> 00:08:42,593
+slash workflows,
+
+228
+00:08:42,593 --> 00:08:44,215
+and on the default branch.
+
+229
+00:08:44,765 --> 00:08:50,419
+The run fails at once with a syntax error: look at the indentation. Spaces, not tabs.
+
+230
+00:08:50,969 --> 00:08:56,067
+Maven says there is no pom: you forgot the checkout step, so the runner has no code.
+
+231
+00:08:56,617 --> 00:09:01,332
+Wrong Java version: set the version in setup java, to match your project.
+
+232
+00:09:01,882 --> 00:09:05,802
+And nothing runs on a push: check the branch name in the on section.
+
+233
+00:09:05,802 --> 00:09:07,877
+It must match the branch you pushed.
+
+234
+00:09:09,427 --> 00:09:12,222
+Where to find the lab. Pause here, and write it down.
+
+235
+00:09:12,772 --> 00:09:21,006
+One: the repository, github.com/it-waves/devops-ai, in the folder academy/lab.
+
+236
+00:09:21,556 --> 00:09:27,487
+Two: the files, hello dot Y M L, and CI dot Y M L, and the Cloud Cart cart core.
+
+237
+00:09:28,037 --> 00:09:32,624
+Three: make your own free GitHub repository, copy the files in, and push.
+
+238
+00:09:33,174 --> 00:09:36,156
+Four: public repositories get free runner minutes.
+
+239
+00:09:36,156 --> 00:09:38,720
+Private ones have a free monthly allowance.
+
+240
+00:09:39,270 --> 00:09:44,241
+Five: when you finish, delete the practice repository. Nothing here needs to stay.
+
+241
+00:09:44,791 --> 00:09:46,434
+The link is in the description.
+
+242
+00:09:47,984 --> 00:09:50,224
+Your turn, in your own repository.
+
+243
+00:09:50,774 --> 00:09:55,254
+One: write the hello workflow, push it, and find your run in the Actions tab.
+
+244
+00:09:55,804 --> 00:10:00,220
+Two: add the CI workflow for a Maven project, and get a green run.
+
+245
+00:10:00,770 --> 00:10:04,845
+Three: break a test on purpose. Find the first error in the failed step.
+
+246
+00:10:05,395 --> 00:10:09,192
+Four: fix it with git revert, push, and watch it turn green.
+
+247
+00:10:09,742 --> 00:10:12,387
+Five: delete the repository when you are done.
+
+248
+00:10:12,937 --> 00:10:14,665
+Pause the video, and do it now.
+
+249
+00:10:30,215 --> 00:10:31,090
+Quick check.
+
+250
+00:10:31,640 --> 00:10:33,453
+Which folder holds your workflows?
+
+251
+00:10:34,003 --> 00:10:36,136
+A step failed. Where do you look first?
+
+252
+00:10:36,686 --> 00:10:38,734
+Why does a workflow need the checkout step?
+
+253
+00:10:39,284 --> 00:10:41,887
+A runner finished the job. What happens to it?
+
+254
+00:10:42,437 --> 00:10:44,778
+Objectives covered: M C twenty,
+
+255
+00:10:44,778 --> 00:10:45,836
+objective one,
+
+256
+00:10:45,836 --> 00:10:46,591
+workflows,
+
+257
+00:10:46,591 --> 00:10:47,119
+events,
+
+258
+00:10:47,119 --> 00:10:47,497
+jobs,
+
+259
+00:10:47,497 --> 00:10:47,950
+steps,
+
+260
+00:10:47,950 --> 00:10:48,554
+actions,
+
+261
+00:10:48,554 --> 00:10:49,461
+and runners.
+
+262
+00:10:49,461 --> 00:10:50,820
+And objective two,
+
+263
+00:10:50,820 --> 00:10:52,784
+build and test Cloud Cart.
+
+264
+00:10:53,334 --> 00:10:55,403
+Pause the video, and answer out loud.
+
+265
+00:11:05,953 --> 00:11:10,540
+Next: faster and safer pipelines. Caching, artifacts, and a matrix.
+
+266
+00:11:11,090 --> 00:11:14,418
+If this helped, like, share and subscribe, so you do not miss it.
