@@ -1,0 +1,35 @@
+Lesson 179 of the DevOps Engineering Bootcamp, the CI/CD Engineering mastery lab. Reliability and troubleshooting, then proof. You measure the Cloud Cart pipeline (success rate and average duration), break it three ways on purpose, fix each failure from its first error, and then a script proves the whole domain with seven independent checks, saves the evidence, and cleans up.
+
+The three failures, all in real Jenkins: a stale deployer password gives a 401 at Publish to Nexus and is fixed in Jenkins Credentials; a mistyped version gives a 404 at Release and is fixed by asking Nexus which versions exist; a stopped dev Tomcat gives "no answer on port" at Deploy to dev and is fixed by starting the server. Then lab check finds a forgotten password in an old script (6 of 7), you remove it and treat the password as leaked, and lab check passes 7 of 7.
+
+Chapters
+0:00 A red pipeline
+0:32 What to expect
+0:56 The CI/CD domain
+1:39 The scenario
+2:24 Live: measure the pipeline
+3:22 Live: failure one, a stale password (401)
+5:59 Live: failure two, a mistyped version (404)
+7:52 Live: failure three, a stopped server
+10:23 Live: lab check, 6 of 7, then 7 of 7
+11:06 Live: evidence, stats and clean up
+11:42 When the pipeline fails
+12:11 Where to find the lab
+12:56 Your turn
+13:46 Quick check
+
+Objectives covered: MC21-O08 (reliability and troubleshooting) and MC21-O09 (deliver the Cloud Cart pipeline, mastery evidence).
+
+Lab files: github.com/it-waves/devops-ai, folder academy/lab (lab179.sh and shortcuts179.sh). Set JENKINS_AUTH, NEXUS_USER and NEXUS_PASSWORD, then use lab up, lab check, lab stats and lab down. Use your own machine only.
+
+Honest notes: the browser and terminal are a real continuous recording of Jenkins 2.580.2, Sonatype Nexus Repository Community Edition 3.98.1 and Apache Tomcat 10.1 on a throwaway lab server, continuing from Lessons 177 and 178. Production is simulated by two Tomcat instances behind an nginx router. Passwords shown belong to that throwaway server. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, domain, scenario, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: CI/CD Pipeline: Test Gates, Secrets, Blue-Green Releases and Rollback, Live | Lesson 178 https://youtu.be/mVLXbdvZn1I
+Next: a new domain, GitHub Actions.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+❤ If our lessons have helped you, consider buying us a coffee. Your support means more than you know and helps us keep education free. Thank you for being part of this journey!
+☕ https://ko-fi.com/devopssimplifiedhq
+
+#devops #cicd #jenkins #troubleshooting #devopsbootcamp

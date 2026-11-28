@@ -1,0 +1,943 @@
+1
+00:00:00,500 --> 00:00:04,959
+Monday, nine in the morning. The pipeline is red, and nobody knows why.
+
+2
+00:00:05,509 --> 00:00:10,543
+Three different people have three different theories. The code. The server. The password.
+
+3
+00:00:11,093 --> 00:00:15,210
+Here is the secret that experienced engineers share: they do not guess.
+
+4
+00:00:15,210 --> 00:00:16,718
+They measure the pipeline,
+
+5
+00:00:16,718 --> 00:00:18,226
+they read the first error,
+
+6
+00:00:18,226 --> 00:00:19,733
+and they change one thing.
+
+7
+00:00:20,283 --> 00:00:22,754
+Today we measure our Cloud Cart pipeline.
+
+8
+00:00:22,754 --> 00:00:24,441
+Then we break it three ways,
+
+9
+00:00:24,441 --> 00:00:25,104
+on purpose,
+
+10
+00:00:25,104 --> 00:00:26,129
+and fix each one.
+
+11
+00:00:26,679 --> 00:00:30,497
+And at the end, a script proves the whole domain. Prove the pipeline.
+
+12
+00:00:32,047 --> 00:00:33,476
+Here is what to expect.
+
+13
+00:00:34,026 --> 00:00:36,565
+One: the CI/CD domain, on one page.
+
+14
+00:00:37,115 --> 00:00:40,038
+Two: the scenario, and the seven checks that prove it.
+
+15
+00:00:40,588 --> 00:00:41,872
+Three: a live demo,
+
+16
+00:00:41,872 --> 00:00:44,305
+in real Jenkins and a real terminal.
+
+17
+00:00:44,305 --> 00:00:45,049
+We measure,
+
+18
+00:00:45,049 --> 00:00:45,657
+we break,
+
+19
+00:00:45,657 --> 00:00:46,130
+we fix,
+
+20
+00:00:46,130 --> 00:00:47,009
+and we prove.
+
+21
+00:00:47,559 --> 00:00:51,698
+Four: a short list of what to do when a check fails, and where to find the lab.
+
+22
+00:00:52,248 --> 00:00:55,384
+This is the mastery lesson of the CI/CD domain.
+
+23
+00:00:56,934 --> 00:01:01,393
+The CI/CD domain, on one page. Nine objectives, three lessons.
+
+24
+00:01:01,943 --> 00:01:05,002
+Lesson one seventy-seven: what a pipeline is,
+
+25
+00:01:05,002 --> 00:01:05,750
+its stages,
+
+26
+00:01:05,750 --> 00:01:06,770
+and build once,
+
+27
+00:01:06,770 --> 00:01:07,653
+promote many.
+
+28
+00:01:07,653 --> 00:01:09,421
+The artifact is immutable,
+
+29
+00:01:09,421 --> 00:01:13,228
+and the same file moves from dev to stage to production.
+
+30
+00:01:13,778 --> 00:01:17,074
+Lesson one seventy-eight: gates that stop the line,
+
+31
+00:01:17,074 --> 00:01:18,883
+secrets and least privilege,
+
+32
+00:01:18,883 --> 00:01:20,175
+blue green releases,
+
+33
+00:01:20,175 --> 00:01:20,757
+rollback,
+
+34
+00:01:20,757 --> 00:01:21,532
+smoke tests,
+
+35
+00:01:21,532 --> 00:01:22,695
+and notifications.
+
+36
+00:01:23,245 --> 00:01:25,571
+Today: reliability and troubleshooting,
+
+37
+00:01:25,571 --> 00:01:26,704
+and then the proof.
+
+38
+00:01:26,704 --> 00:01:27,599
+Two objectives,
+
+39
+00:01:27,599 --> 00:01:28,493
+eight and nine.
+
+40
+00:01:29,043 --> 00:01:33,665
+Reliability means two numbers you can measure: how often the pipeline succeeds,
+
+41
+00:01:33,665 --> 00:01:34,953
+and how long it takes.
+
+42
+00:01:35,503 --> 00:01:38,447
+Troubleshooting means one habit: read the first error.
+
+43
+00:01:39,997 --> 00:01:40,851
+The scenario.
+
+44
+00:01:40,851 --> 00:01:42,429
+The Cloud Cart pipeline,
+
+45
+00:01:42,429 --> 00:01:43,809
+delivered and proven.
+
+46
+00:01:43,809 --> 00:01:44,663
+Seven checks,
+
+47
+00:01:44,663 --> 00:01:45,714
+run by a script.
+
+48
+00:01:46,264 --> 00:01:47,567
+One: Jenkins is up,
+
+49
+00:01:47,567 --> 00:01:48,937
+and both jobs exist.
+
+50
+00:01:48,937 --> 00:01:50,925
+Two: the last build is green,
+
+51
+00:01:50,925 --> 00:01:52,707
+and it ran the smoke test.
+
+52
+00:01:53,257 --> 00:01:56,577
+Three: the release in Nexus matches its checksum.
+
+53
+00:01:56,577 --> 00:01:57,254
+Four: dev,
+
+54
+00:01:57,254 --> 00:01:59,422
+stage and production all answer.
+
+55
+00:01:59,972 --> 00:02:03,286
+Five: production runs a version that is in Nexus.
+
+56
+00:02:03,286 --> 00:02:04,976
+Six: a rollback is ready,
+
+57
+00:02:04,976 --> 00:02:07,140
+with two releases and two sides.
+
+58
+00:02:07,690 --> 00:02:09,518
+Seven: no password in the code.
+
+59
+00:02:09,518 --> 00:02:10,933
+That last one is a trap,
+
+60
+00:02:10,933 --> 00:02:12,938
+and we will fall in it on purpose.
+
+61
+00:02:13,488 --> 00:02:18,843
+Besides the checks, the script measures the pipeline: success rate, and average duration.
+
+62
+00:02:19,393 --> 00:02:23,297
+The script checks facts, not your word. Seven of seven is mastery.
+
+63
+00:02:24,847 --> 00:02:25,660
+Real Jenkins,
+
+64
+00:02:25,660 --> 00:02:28,349
+and the pipeline from the last two lessons.
+
+65
+00:02:28,349 --> 00:02:30,538
+Today we do not build anything new.
+
+66
+00:02:30,538 --> 00:02:31,413
+We measure it,
+
+67
+00:02:31,413 --> 00:02:32,164
+we break it,
+
+68
+00:02:32,164 --> 00:02:33,039
+and we fix it.
+
+69
+00:02:35,889 --> 00:02:36,294
+First,
+
+70
+00:02:36,294 --> 00:02:36,835
+measure.
+
+71
+00:02:36,835 --> 00:02:38,861
+This is the Cloud Cart CI job.
+
+72
+00:02:38,861 --> 00:02:39,672
+On the left,
+
+73
+00:02:39,672 --> 00:02:42,104
+the build history lists every build.
+
+74
+00:02:42,104 --> 00:02:43,388
+Green is a success,
+
+75
+00:02:43,388 --> 00:02:44,806
+and red is a failure.
+
+76
+00:02:45,356 --> 00:02:46,398
+Now the terminal.
+
+77
+00:02:46,398 --> 00:02:49,399
+Lab up checks that Jenkins and Nexus are running,
+
+78
+00:02:49,399 --> 00:02:51,543
+and says where the results will go.
+
+79
+00:02:52,093 --> 00:02:56,765
+Lab stats counts the history for us. Four builds. One red, and three green.
+
+80
+00:02:57,315 --> 00:02:59,562
+Success rate: seventy-five percent.
+
+81
+00:02:59,562 --> 00:03:02,322
+Average duration: well under half a minute.
+
+82
+00:03:02,322 --> 00:03:04,568
+Those two numbers are the baseline.
+
+83
+00:03:05,118 --> 00:03:06,235
+When the rate drops,
+
+84
+00:03:06,235 --> 00:03:07,239
+or the time grows,
+
+85
+00:03:07,239 --> 00:03:08,244
+something changed.
+
+86
+00:03:08,244 --> 00:03:09,304
+And you can see it,
+
+87
+00:03:09,304 --> 00:03:10,644
+before anyone complains.
+
+88
+00:03:11,194 --> 00:03:16,527
+And where does the time go? In Jenkins, the stages view shows the time of every stage.
+
+89
+00:03:22,477 --> 00:03:23,295
+Failure one.
+
+90
+00:03:23,295 --> 00:03:23,976
+Last week,
+
+91
+00:03:23,976 --> 00:03:27,382
+a teammate changed the deployer password in Nexus,
+
+92
+00:03:27,382 --> 00:03:29,767
+and typed the old one into Jenkins.
+
+93
+00:03:29,767 --> 00:03:30,789
+Nobody noticed.
+
+94
+00:03:30,789 --> 00:03:33,037
+Today a developer starts a build.
+
+95
+00:03:33,587 --> 00:03:36,510
+In Jenkins, we open the job, and click Build Now.
+
+96
+00:03:43,860 --> 00:03:45,374
+We open the stages view.
+
+97
+00:03:52,424 --> 00:03:52,691
+Red,
+
+98
+00:03:52,691 --> 00:03:54,024
+at Publish to Nexus.
+
+99
+00:03:54,024 --> 00:03:55,491
+Build and test passed,
+
+100
+00:03:55,491 --> 00:03:56,824
+so the code is fine.
+
+101
+00:03:56,824 --> 00:04:00,424
+The pipeline stopped at the stage that talks to Nexus.
+
+102
+00:04:08,274 --> 00:04:10,941
+We open the console, and we read the first error.
+
+103
+00:04:17,091 --> 00:04:18,682
+Status code four oh one,
+
+104
+00:04:18,682 --> 00:04:19,544
+Unauthorized.
+
+105
+00:04:19,544 --> 00:04:21,666
+Nexus does not know who this is.
+
+106
+00:04:21,666 --> 00:04:22,925
+It is not the code,
+
+107
+00:04:22,925 --> 00:04:24,450
+and it is not the role.
+
+108
+00:04:24,450 --> 00:04:25,710
+It is the password.
+
+109
+00:04:28,260 --> 00:04:31,822
+In Jenkins, a password lives in one place: Credentials.
+
+110
+00:04:36,672 --> 00:04:39,080
+We open the nexus deployer entry.
+
+111
+00:04:39,080 --> 00:04:39,955
+On the page,
+
+112
+00:04:39,955 --> 00:04:43,530
+Jenkins even lists where it was used: the CI job,
+
+113
+00:04:43,530 --> 00:04:44,332
+build five,
+
+114
+00:04:44,332 --> 00:04:44,843
+in red.
+
+115
+00:04:50,093 --> 00:04:53,122
+We click Update credential, and then Change Password.
+
+116
+00:05:01,472 --> 00:05:06,080
+And we replace the old dots with the right password. It stays hidden, as it should.
+
+117
+00:05:06,630 --> 00:05:07,484
+Then Save.
+
+118
+00:05:11,434 --> 00:05:13,546
+Back to the job, and Build Now again.
+
+119
+00:05:22,396 --> 00:05:27,878
+The stages view. Green, all the way. One cause, and one fix. We never touched the code.
+
+120
+00:05:59,728 --> 00:06:00,525
+Failure two.
+
+121
+00:06:00,525 --> 00:06:03,514
+A tired engineer promotes a version to stage,
+
+122
+00:06:03,514 --> 00:06:04,577
+and mistypes it.
+
+123
+00:06:04,577 --> 00:06:06,171
+We open the promote job.
+
+124
+00:06:12,421 --> 00:06:13,722
+Build with Parameters.
+
+125
+00:06:17,272 --> 00:06:19,320
+Version one point oh point thirty-three.
+
+126
+00:06:20,870 --> 00:06:22,598
+Target, stage. And Build.
+
+127
+00:06:29,148 --> 00:06:30,343
+The stages view.
+
+128
+00:06:37,093 --> 00:06:39,376
+Red, at Release. We open the console.
+
+129
+00:06:48,626 --> 00:06:49,697
+Download failed.
+
+130
+00:06:49,697 --> 00:06:52,508
+Nexus answered four oh four for that file.
+
+131
+00:06:52,508 --> 00:06:53,178
+Not found.
+
+132
+00:06:53,178 --> 00:06:54,584
+It is not a password,
+
+133
+00:06:54,584 --> 00:06:56,391
+and it is not a permission.
+
+134
+00:06:56,391 --> 00:06:58,332
+The file is simply not there.
+
+135
+00:07:00,882 --> 00:07:05,042
+We do not guess. In the terminal, we ask Nexus which versions exist.
+
+136
+00:07:05,592 --> 00:07:07,136
+One point oh point one,
+
+137
+00:07:07,136 --> 00:07:07,539
+three,
+
+138
+00:07:07,539 --> 00:07:07,875
+four,
+
+139
+00:07:07,875 --> 00:07:08,412
+and six.
+
+140
+00:07:08,412 --> 00:07:10,090
+There is no thirty-three.
+
+141
+00:07:10,090 --> 00:07:12,910
+The engineer meant one point oh point six.
+
+142
+00:07:13,460 --> 00:07:16,446
+So we run the promote job again, with the right version.
+
+143
+00:07:22,596 --> 00:07:23,898
+Build with Parameters.
+
+144
+00:07:27,448 --> 00:07:29,282
+Version one point oh point six.
+
+145
+00:07:31,032 --> 00:07:32,760
+Target, stage. And Build.
+
+146
+00:07:39,110 --> 00:07:42,097
+The stages view. Green. Failure two, fixed.
+
+147
+00:07:52,447 --> 00:07:53,333
+Failure three.
+
+148
+00:07:53,333 --> 00:07:56,750
+The machine of the dev server was restarted overnight,
+
+149
+00:07:56,750 --> 00:07:59,091
+and the dev Tomcat did not come back.
+
+150
+00:07:59,091 --> 00:08:00,103
+In the terminal,
+
+151
+00:08:00,103 --> 00:08:01,748
+we ask dev for its health.
+
+152
+00:08:02,298 --> 00:08:04,709
+Not found. Nothing answers on that port.
+
+153
+00:08:05,259 --> 00:08:08,246
+Now a developer builds. In Jenkins, Build Now.
+
+154
+00:08:18,496 --> 00:08:19,690
+The stages view.
+
+155
+00:08:27,540 --> 00:08:33,215
+Build and test: green. Publish to Nexus: green. Red, only at Deploy to dev.
+
+156
+00:09:12,265 --> 00:09:17,982
+The console. Verify failed. No answer on port ninety one oh one. Is Tomcat running?
+
+157
+00:09:26,632 --> 00:09:28,402
+The file is safe in Nexus.
+
+158
+00:09:28,402 --> 00:09:30,989
+Only the last mile failed: the server.
+
+159
+00:09:30,989 --> 00:09:32,691
+So the fix is the server.
+
+160
+00:09:33,241 --> 00:09:35,524
+In the terminal, we start the dev Tomcat.
+
+161
+00:09:38,074 --> 00:09:40,826
+And we ask dev for its health again. It answers.
+
+162
+00:09:41,376 --> 00:09:43,360
+Back to Jenkins, and Build Now.
+
+163
+00:09:53,510 --> 00:09:59,120
+The stages view. Green. Three failures, three different places, and three small fixes.
+
+164
+00:10:23,270 --> 00:10:25,702
+Now the proof. In the terminal, lab check.
+
+165
+00:10:33,752 --> 00:10:37,443
+Six pass. One fails: a password in the code. We will fix it.
+
+166
+00:10:37,993 --> 00:10:38,694
+Which file?
+
+167
+00:10:38,694 --> 00:10:39,458
+We ask grep,
+
+168
+00:10:39,458 --> 00:10:41,880
+and it names it: an old deploy script,
+
+169
+00:10:41,880 --> 00:10:43,791
+with a password in plain text.
+
+170
+00:10:43,791 --> 00:10:45,957
+A script from before the pipeline,
+
+171
+00:10:45,957 --> 00:10:47,550
+forgotten in the project.
+
+172
+00:10:48,100 --> 00:10:52,324
+We treat it as leaked. First, we remove the file, and we commit the change.
+
+173
+00:10:54,874 --> 00:10:56,470
+Removing is not enough.
+
+174
+00:10:56,470 --> 00:10:57,996
+Git keeps the history,
+
+175
+00:10:57,996 --> 00:11:01,118
+so the old password must be changed in Nexus,
+
+176
+00:11:01,118 --> 00:11:03,130
+as in lesson one seventy-six.
+
+177
+00:11:03,680 --> 00:11:06,347
+Lab check, one more time. Seven of seven.
+
+178
+00:11:06,897 --> 00:11:08,873
+Results are part of the mastery.
+
+179
+00:11:08,873 --> 00:11:10,849
+The script saved them in a file.
+
+180
+00:11:10,849 --> 00:11:11,405
+Print it.
+
+181
+00:11:11,405 --> 00:11:12,764
+This is your evidence.
+
+182
+00:11:13,314 --> 00:11:14,641
+And lab stats again.
+
+183
+00:11:14,641 --> 00:11:15,769
+Eight builds now.
+
+184
+00:11:15,769 --> 00:11:16,499
+Five green.
+
+185
+00:11:16,499 --> 00:11:17,429
+The rate fell,
+
+186
+00:11:17,429 --> 00:11:20,150
+because we broke the pipeline on purpose,
+
+187
+00:11:20,150 --> 00:11:22,274
+and the numbers say so honestly.
+
+188
+00:11:22,824 --> 00:11:23,167
+Last,
+
+189
+00:11:23,167 --> 00:11:23,991
+the cleanup.
+
+190
+00:11:23,991 --> 00:11:26,599
+Lab down keeps a copy of the evidence,
+
+191
+00:11:26,599 --> 00:11:28,796
+and removes the temporary files.
+
+192
+00:11:28,796 --> 00:11:29,345
+Jenkins,
+
+193
+00:11:29,345 --> 00:11:29,757
+Nexus,
+
+194
+00:11:29,757 --> 00:11:31,816
+the jobs and the servers stay.
+
+195
+00:11:31,816 --> 00:11:36,072
+And it reminds us: change any password we typed in plain text.
+
+196
+00:11:36,622 --> 00:11:41,315
+Measured, broken, fixed, proved, written down, and cleaned up. That is mastery.
+
+197
+00:11:42,865 --> 00:11:45,809
+When the pipeline fails, the stage tells you where to look.
+
+198
+00:11:46,359 --> 00:11:50,754
+Red at Publish, four oh one: the credential. Fix it in Jenkins, once.
+
+199
+00:11:51,304 --> 00:11:56,573
+Red at Release, four oh four: the version does not exist. Ask Nexus which ones do.
+
+200
+00:11:57,123 --> 00:12:01,667
+Red at Deploy, no answer: the server is down. Start it, then build again.
+
+201
+00:12:02,217 --> 00:12:06,164
+Red at Build and test: the code. Read the name of the failing test.
+
+202
+00:12:06,714 --> 00:12:09,679
+And a password in the code: remove it, and change it.
+
+203
+00:12:11,229 --> 00:12:14,024
+Where to find the lab. Pause here, and write it down.
+
+204
+00:12:14,574 --> 00:12:22,808
+One: the repository, github.com/it-waves/devops-ai, in the folder academy/lab.
+
+205
+00:12:23,358 --> 00:12:29,609
+Two: the files, lab179.sh and shortcuts179.sh.
+
+206
+00:12:30,159 --> 00:12:35,834
+Three: load the short names with source shortcuts179.sh. Then lab up.
+
+207
+00:12:36,384 --> 00:12:39,007
+Four: lab check runs the seven checks.
+
+208
+00:12:39,007 --> 00:12:41,216
+Lab stats measures the pipeline.
+
+209
+00:12:41,216 --> 00:12:42,528
+Lab down cleans up.
+
+210
+00:12:43,078 --> 00:12:47,167
+Five: you need the Jenkins and Nexus from the earlier lessons.
+
+211
+00:12:47,167 --> 00:12:49,740
+Set your Jenkins login in JENKINS_AUTH,
+
+212
+00:12:49,740 --> 00:12:53,104
+and your deployer in NEXUS_USER and NEXUS_PASSWORD.
+
+213
+00:12:53,654 --> 00:12:55,297
+The link is in the description.
+
+214
+00:12:56,847 --> 00:12:58,618
+Your turn, on your own machine.
+
+215
+00:12:59,168 --> 00:13:03,904
+One: lab up, then lab stats. Write down your success rate, and your average time.
+
+216
+00:13:04,454 --> 00:13:10,022
+Two: put a wrong password in Jenkins credentials. Build, read the four oh one, and fix it.
+
+217
+00:13:10,572 --> 00:13:13,404
+Three: promote a version that does not exist,
+
+218
+00:13:13,404 --> 00:13:15,041
+and read the four oh four.
+
+219
+00:13:15,041 --> 00:13:16,237
+Then stop a Tomcat,
+
+220
+00:13:16,237 --> 00:13:16,615
+build,
+
+221
+00:13:16,615 --> 00:13:18,252
+and read the verify error.
+
+222
+00:13:18,802 --> 00:13:20,920
+Four: plant a password in a script.
+
+223
+00:13:20,920 --> 00:13:22,312
+Lab check will find it.
+
+224
+00:13:22,312 --> 00:13:22,917
+Remove it,
+
+225
+00:13:22,917 --> 00:13:24,370
+and change the password.
+
+226
+00:13:24,920 --> 00:13:28,760
+Five: lab check, until you see seven of seven. Then lab down.
+
+227
+00:13:29,310 --> 00:13:31,038
+Pause the video, and do it now.
+
+228
+00:13:46,588 --> 00:13:47,463
+Quick check.
+
+229
+00:13:48,013 --> 00:13:52,173
+Red at Publish with four oh one: do you change the code, or the credential?
+
+230
+00:13:52,723 --> 00:13:55,517
+A promote says four oh four. What do you do first?
+
+231
+00:13:56,067 --> 00:13:58,009
+Which two numbers measure a pipeline?
+
+232
+00:13:58,559 --> 00:14:02,121
+A password was committed once, then removed. Is it safe now?
+
+233
+00:14:02,671 --> 00:14:07,706
+Objectives covered: CI/CD Engineering mastery. The whole domain, proved.
+
+234
+00:14:08,256 --> 00:14:10,325
+Pause the video, and answer out loud.
+
+235
+00:14:20,875 --> 00:14:25,014
+Next: a new domain. GitHub Actions, where your code builds itself.
+
+236
+00:14:25,564 --> 00:14:28,892
+If this helped, like, share and subscribe, so you do not miss it.

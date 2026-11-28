@@ -23,7 +23,7 @@ Objectives covered: MC21-O04 (gates), MC21-O05 (secrets and least privilege), MC
 Honest notes: the browser and terminal are a real continuous recording of Jenkins 2.580.2, Sonatype Nexus Repository Community Edition 3.98.1 and Apache Tomcat 10.1 on a throwaway lab server, continuing from Lesson 177. Production is simulated by two Tomcat instances, blue and green, behind an nginx router. The team chat shown is a small stand-in service that receives the pipeline notification, not a real chat product. Passwords shown belong to that throwaway server. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, concept, your-turn and recap screens are labelled illustrations, not captures. Use your own machine only.
 
 Previous lesson: CI/CD Pipeline: Build Once, Promote Many with Jenkins, Nexus and Tomcat, Live | Lesson 177 https://youtu.be/WGOnniBJ73k
-Next: Lesson 179, the CI/CD mastery lab (link when published)
+Next: Lesson 179, CI/CD Mastery Lab: Measure, Break, Fix and Prove a Real Jenkins Pipeline, Live | Lesson 179 https://youtu.be/l1UhZCL48vM
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 

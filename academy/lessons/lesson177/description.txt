@@ -23,7 +23,7 @@ Objectives covered: MC21-O01 (what a pipeline is), MC21-O02 (stages) and MC21-O0
 Honest notes: the browser and terminal are a real continuous recording of Jenkins 2.580.2, Sonatype Nexus Repository Community Edition 3.98.1 and Apache Tomcat 10.1 on a throwaway lab server, continuing from the earlier Jenkins and Nexus lessons. Passwords shown belong to that throwaway server. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, concept, your-turn and recap screens are labelled illustrations, not captures. Use your own machine only.
 
 Previous lesson: Nexus Repository: Break It, Fix It, Prove It (401, 403, 404, 503) and Mastery Lab | Lesson 176 https://youtu.be/OZpA1hpIxrQ
-Next: Lesson 178, Deploy without fear (links when published)
+Next: Lesson 178, CI/CD Pipeline: Test Gates, Secrets, Blue-Green Releases and Rollback, Live | Lesson 178 https://youtu.be/mVLXbdvZn1I
 
 If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
 
