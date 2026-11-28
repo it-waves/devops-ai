@@ -1,0 +1,30 @@
+pipeline {
+  agent any
+  parameters {
+    string(name: 'VERSION', defaultValue: '', description: 'a version that already exists in Nexus')
+    choice(name: 'TARGET', choices: ['stage', 'prod'], description: 'where to promote it')
+  }
+  environment {
+    NEXUS = credentials('nexus-deployer')
+    NEXUS_USER = "${NEXUS_USR}"
+    NEXUS_PASSWORD = "${NEXUS_PSW}"
+  }
+  stages {
+    stage('Approval') {
+      when { expression { params.TARGET == 'prod' } }
+      steps { input id: 'Release', message: "Release ${params.VERSION} to production?", ok: 'Release' }
+    }
+    stage('Release') {
+      steps {
+        script {
+          if (params.TARGET == 'prod') { sh 'scripts/bluegreen.sh $VERSION' }
+          else { sh 'scripts/deploy.sh $VERSION stage && scripts/smoke.sh 9102 $VERSION' }
+        }
+      }
+    }
+  }
+  post {
+    success { sh 'scripts/notify.sh "cloudcart-promote #$BUILD_NUMBER OK: $VERSION is live on $TARGET"' }
+    failure { sh 'scripts/notify.sh "cloudcart-promote #$BUILD_NUMBER FAILED: $VERSION was not released to $TARGET, details at $BUILD_URL"' }
+  }
+}

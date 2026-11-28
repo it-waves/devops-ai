@@ -19,3 +19,7 @@ Status: planned. Next: inspect Jenkins lab state (/home/claude/jenkins-lab, Jenk
 - Verified: cloudcart-ci build #1 = Version (versions:set 1.0.$BUILD_NUMBER) -> Build and test (32 tests) -> Publish to Nexus (deployer creds) -> Deploy to dev (download from Nexus, sha1 check, copy war, poll /cloudcart/health for the version). Then cloudcart-promote VERSION=1.0.1 TARGET=stage and prod: no rebuild, same checksum, health reports 1.0.1 on all three.
 - Needs running: Jenkins :8080 (run154.sh), Nexus :8081 (start line from reset173.sh without wiping), Tomcats (tc177.sh).
 - Next: reset177 (wipe published 1.0.x from Nexus, empty webapps, jobs fresh), body.py/scenes.py/steps.py, record. App health URL: /cloudcart/health returns {"status","version","shop"}.
+
+## L178 build notes (2026-11-28, flow verified end to end)
+- Lab in /home/claude/jenkins-lab: repo178 (tag start178), tc178.sh (green Tomcat prodg 9104 + nginx router 9100 with nginx178/live.conf + webhook178.py chat stand-in on 9300 logging /tmp/chat178.log), reset178.sh (CI #1 -> 1.0.1 on dev, 1.0.1 live on blue prod), mkjobs178.sh. Copies in devops-ai/academy/lab/lab178/.
+- Verified sequence: #2 off-by-one test breaks (>= to >) -> red at Build and test, no publish; revert -> #3 = 1.0.3 green + smoke; promote 1.0.3 stage; promote prod asks approval (input id Release) then blue-green to green; #4 urlPattern /api/* -> /apis/* passes tests, dev smoke FAILS (404 product list); promote 1.0.4 prod -> pre-switch smoke fails, traffic stays on 1.0.3; promote 1.0.1 prod = rollback by promotion.
