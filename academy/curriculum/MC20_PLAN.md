@@ -20,3 +20,8 @@ Real runs need a throwaway public repository (free hosted minutes) in the owner'
 ## Status note (2026-11-27)
 - GitHub asset hosts (github.githubassets.com, avatars/camo.githubusercontent.com, pipelines.actions.githubusercontent.com) still refused by the sandbox proxy even after the user said they were allowed. Headless Chrome in the workspace therefore renders GitHub unstyled.
 - Fallback for MC20 recordings: GitHub UI screens captured from the user's signed-in Chrome (sharp stills/zooms with highlights, narrated step by step); terminal parts (git, mvn, yaml editing) stay live in the workspace. Recheck the hosts before each lesson; if open, record live.
+
+## Status note (2026-11-28)
+- All four GitHub hosts now open. Headed Chrome on Xvfb renders github.com/it-waves/cloudcart-actions-lab/actions fully styled (public pages need no login). Real run CI #1 (green, 15s) exists. Headless --screenshot hangs on Actions pages; use the headed recorder.
+- Lesson numbers: MC20 lessons start at L180 (L177-L179 were used by MC21). Plan table L177..L180 maps to L180..L183.
+- Next: L180 script (draft in /home/claude/academy/mc20_draft), scenes, steps, dry-run, live record.
