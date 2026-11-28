@@ -1,0 +1,29 @@
+Lesson 180 of the DevOps Engineering Bootcamp, the first lesson of the GitHub Actions domain. You write a real workflow, push it, and watch GitHub run it on a fresh machine. Then you replace it with a real build that compiles and tests the Cloud Cart cart core with Maven, break a test on purpose, read the first error, and fix it with git revert.
+
+Six words to know: event, workflow, job, runner, step, action. We read the 18-line ci.yml line by line, then watch the same lines run as real steps on GitHub.
+
+Chapters
+0:00 Push. Then what?
+0:28 What to expect
+0:55 Six words to know
+1:48 Live: hello workflow, real CI build, a red run, the fix
+8:34 Beginner mistakes
+9:09 Where to find the lab
+9:47 Your turn
+10:30 Quick check
+
+Objectives covered: MC20-O01 and MC20-O02 (first pipeline).
+
+Lab files: github.com/it-waves/devops-ai, folder academy/lab/lab180 (hello.yml and ci.yml). Use a throwaway repository of your own, and delete it when you are done.
+
+Honest notes: the GitHub pages and terminal are a real recording of a public throwaway repository and real GitHub-hosted runners (ubuntu-latest, Temurin 17, Maven). GitHub asks you to sign in to view raw logs, so the logs shown in the terminal are read with the gh command line tool. The coloured boxes and labels on top are overlays added for teaching. The narration is synthetic speech. The hook, plan, vocabulary, mistakes, your-turn and recap screens are labelled illustrations, not captures.
+
+Previous lesson: CI/CD Mastery Lab: Measure, Break, Fix and Prove a Real Jenkins Pipeline, Live | Lesson 179 https://youtu.be/l1UhZCL48vM
+Next: faster and safer pipelines, with caching, artifacts, a build matrix and reusable workflows.
+
+If this helped, like, share and subscribe to DevOps Simplified so you do not miss the next lesson.
+
+❤ If our lessons have helped you, consider buying us a coffee. Your support means more than you know and helps us keep education free. Thank you for being part of this journey!
+☕ https://ko-fi.com/devopssimplifiedhq
+
+#devops #githubactions #cicd #maven #devopsbootcamp
